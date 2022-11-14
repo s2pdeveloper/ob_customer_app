@@ -1,0 +1,48 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="login"></ion-back-button>
+  </ion-buttons>
+  <ion-title> Forgot Password</ion-title>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div class="ion-text-center">
+        <img src="./assets/image/forgot-password.svg" alt="Logo" height="300" />
+      </div>
+      <ion-card-subtitle
+        >Enter the mobile associated with your account and we'll send an sms
+        with instructions to reset your password.</ion-card-subtitle
+      >
+      <form [formGroup]="forgetForm">
+        <ion-item
+          class="input-class"
+          [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
+        >
+          <ion-label position="stacked" class="font" color="">
+            Enter mobile
+            <ion-note color="danger">*</ion-note>
+          </ion-label>
+          <ion-input
+            class="font"
+            formControlName="mobile"
+            placeholder="Enter mobile number "
+          ></ion-input>
+        </ion-item>
+        <app-validation-messages [control]="form.mobile">
+        </app-validation-messages>
+
+        <div class="ion-text-center ion-margin-top">
+          <ion-button
+            color="primary"
+            expand="full"
+            shape="round"
+            (click)="forget()"
+            >Submit</ion-button
+          >
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

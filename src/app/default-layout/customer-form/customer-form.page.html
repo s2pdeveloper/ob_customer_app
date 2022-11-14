@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{ 'newCustomer' | translate}} </ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="shadow-none" routerLink="/landing-page">
+        <ion-icon name="close-circle" size="large" slot="end"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="loaded">
+  <form [formGroup]="customerForm">
+    <ion-item
+      class="input-class"
+      [class.invalid]="!form.name.valid && (form.name.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'fullName' | translate}}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        placeholder="{{ 'fullName' | translate}}"
+        formControlName="name"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.name">
+    </app-validation-messages>
+
+    <ion-item
+      class="input-class"
+      [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'mobileNumber' | translate}}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        maxlength="10"
+        pattern="[0-9]{10}"
+        type="text"
+        placeholder="{{ 'mobileNumber' | translate}}"
+        formControlName="mobile"
+        inputmode="numeric"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.mobile">
+    </app-validation-messages>
+    <!-- <ion-item
+      class="input-class"
+      [class.invalid]="!form.anotherMobile.valid && (form.anotherMobile.dirty || submitted)"
+    >
+      <ion-label position="stacked"> What's Up No. </ion-label>
+      <ion-input
+        maxlength="10"
+        pattern="[0-9]{10}"
+        type="text"
+        placeholder="Enter What's Up No."
+        formControlName="anotherMobile"
+        inputmode="numeric"
+      ></ion-input>
+    </ion-item> -->
+    <!-- <app-validation-messages
+      class="error-message"
+      [control]="form.anotherMobile"
+    >
+    </app-validation-messages> -->
+
+    <!-- <ion-item
+      class="input-class"
+      [class.invalid]="!form.email.valid && (form.email.dirty || submitted)"
+    >
+      <ion-label position="stacked"> Email </ion-label>
+      <ion-input
+        placeholder="Enter Email id"
+        formControlName="email"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.email">
+    </app-validation-messages> -->
+
+    <ion-item
+      class="input-class"
+      [class.invalid]="!form.address.valid && (form.address.dirty || submitted)"
+    >
+      <ion-label position="stacked"> {{ 'address' | translate}} </ion-label>
+      <ion-input
+        placeholder="Enter Address"
+        formControlName="address"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.address">
+    </app-validation-messages>
+    <!-- <ion-item
+      class="input-class"
+      [class.invalid]="!form.pinCode.valid && (form.pinCode.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        Pin Code
+      </ion-label>
+      <ion-input
+        placeholder="Enter Pin Code"
+        formControlName="pinCode"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.pinCode">
+    </app-validation-messages> -->
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button
+        color="primary"
+        expand="full"
+        shape="round"
+        class="btn"
+        (click)="submit()"
+      >
+        {{ 'submit' | translate}}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="!loaded">
+  <form>
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button color="primary" expand="full" shape="round" class="btn">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

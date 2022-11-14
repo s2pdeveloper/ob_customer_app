@@ -1,0 +1,49 @@
+.img-fluid {
+  width: 100%;
+  height: 100%;
+}
+
+.toast-success {
+  --background: var(--ion-color-success);
+  --color: white;
+  --button-color: var(--ion-color-primary);
+  font-weight: 500;
+}
+
+.toast-error {
+  --background: var(--ion-color-danger);
+  --color: white;
+  --button-color: var(--ion-color-primary);
+  font-weight: 500;
+}
+
+.toast-warning {
+  --background: var(--ion-color-warning);
+  --color: white;
+  --button-color: var(--ion-color-primary);
+  font-weight: 500;
+}
+
+.search-box {
+  --border-radius: 2em;
+  --box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+ion-skeleton-text {
+  line-height: 12px;
+}
+
+/* Custom Skeleton Line Height and Margin */
+.custom-skeleton ion-skeleton-text {
+  line-height: 13px;
+}
+
+.custom-skeleton ion-skeleton-text:last-child {
+  margin-bottom: 5px;
+}
+.agoDate{
+  position: absolute;
+    top: -8px;
+    right: -8px;
+}

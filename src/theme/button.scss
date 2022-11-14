@@ -1,0 +1,114 @@
+ion-button {
+    // border-radius: 5rem;
+    // --padding-top: 1.5rem;
+    // --padding-bottom: 1.2rem;
+    overflow: hidden;
+    font-weight: 700;
+    box-shadow:  rgba(196, 196, 196, 1) 0px 25px 20px -20px;
+}
+
+// ion-menu-button {
+//     --background: var(--ion-color-light) !important;
+//     --color: var(--ion-color-primary) !important;
+//     -webkit-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+//     -moz-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+//     box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+// }
+
+.my-custom-alert {
+    .secondary {
+        background: var(--ion-color-light) !important;
+        color: var(--ion-color-primary) !important;
+        border-radius: 1rem;
+        width: 5rem !important;
+        text-align: center;
+        -webkit-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+        -moz-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+        box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+
+        .alert-button-inner.sc-ion-alert-md {
+            -ms-flex-pack: end;
+            justify-content: center;
+        }
+    }
+
+    .primary {
+        background: var(--ion-color-primary) !important;
+        color: var(--ion-color-light) !important;
+        border-radius: 1rem;
+        width: 5rem;
+        text-align: center;
+        -webkit-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+        -moz-box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+        box-shadow: -2px 7px 32px -7px rgba(196, 196, 196, 1);
+
+        .alert-button-inner.sc-ion-alert-md {
+            -ms-flex-pack: end;
+            justify-content: center;
+        }
+    }
+}
+
+// .btn-color-outline-1 {
+//   --background: var(--ion-color-4);
+//   --color: var(--ion-color-1);
+//   --border-color: var(--ion-color-1);
+// }
+// .btn-color-2 {
+//   --background: var(--ion-color-2);
+//   --color: var(--ion-color-6);
+//   --border-color: var(--ion-color-2);
+// }
+// .btn-color-outline-2 {
+//   --background: var(--ion-color-6);
+//   --color: var(--ion-color-2);
+//   --border-color: var(--ion-color-2);
+// }
+// .btn-color-4 {
+//   --background: var(--ion-color-4);
+//   --color: var(--ion-color-1);
+//   --border-color: var(--ion-color-4);
+// }
+// .btn-color-5 {
+//   --background: var(--ion-color-5);
+//   --color: var(--ion-color-2);
+//   --border-color: var(--ion-color-5);
+// }
+// .btn-color-6 {
+//   --background: var(--ion-color-6);
+//   --border-color: none;
+//   --box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1),
+//     0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+// }
+
+// .btn-color-7 {
+//   --background: var(--ion-color-7);
+// }
+// .btn-color-8 {
+//   --background: var(--ion-color-8);
+//   --color: var(--ion-color-4);
+//   --border-color: var(--ion-color-8);
+// }
+// .btn-color-outline-8 {
+//   --background: var(--ion-color-6);
+//   --color: var(--ion-color-8);
+//   --border-color: var(--ion-color-8);
+// }
+// .btn-color-danger {
+//   --background: var(--ion-color-danger) !important;
+// }
+// .btn-color-transparent {
+//   --background: transparent !important;
+// }
+// .btn-height-large {
+//   height: 3.4em;
+// }
+
+// .btn-custom-padding-6 {
+//   --padding-end: 6px !important;
+//   --padding-start: 6px !important;
+// }
+// .btn-custom-margin-6 {
+//   margin-left: 6px !important;
+//   margin-right: 6px !important;
+// }

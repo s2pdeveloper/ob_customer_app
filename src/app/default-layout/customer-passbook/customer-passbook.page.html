@@ -1,0 +1,513 @@
+<ion-toolbar>
+  <ion-title class="ion-no-padding">
+    <ion-grid>
+      <ion-row class="ion-justify-content-between ion-align-items-center">
+        <ion-col> {{ 'passBook' | translate}} </ion-col>
+        <ion-col class="ion-text-right">
+          <ion-chip>
+            <ion-icon class="" name="wallet" color="light"></ion-icon>
+            <ion-text color="light" class="text-bold">
+              ₹ <b>{{ customerDetails?.balance }}</b>
+            </ion-text>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-title>
+  <!-- <ion-buttons slot="start">
+    <ion-back-button defaultHref="/landing-page"></ion-back-button>
+  </ion-buttons> -->
+  <ion-buttons slot="start">
+    <ion-menu-button menu="main-menu" icon="grid-outline"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content *ngIf="loaded">
+  <ion-grid>
+    <ion-row class="ion-justify-content-between ion-align-items-center">
+      <ion-col size="7">
+        <ion-text color="secondary" class="text-bold">
+          <ion-icon
+            class="text-larger ion-icon-btm"
+            name="person-circle"
+          ></ion-icon>
+          {{ customerDetails?.name }}
+        </ion-text>
+      </ion-col>
+      <ion-col class="ion-text-right" size="5">
+        <ion-text color="secondary" class="text-bold">
+          <ion-icon
+            class="text-larger ion-icon-btm"
+            name="phone-portrait"
+          ></ion-icon>
+          {{ customerDetails?.mobile }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- <ion-card class="ion-no-margin" color="primary">
+    <ion-item lines="none">
+      <ion-label slot="start">
+        <ion-text color="primary" class="text-bold">
+          <ion-icon
+            class="text-larger ion-icon-btm"
+            color="secondary"
+            name="person-circle"
+          ></ion-icon>
+          {{ customerDetails?.name }}
+        </ion-text>
+      </ion-label>
+      <ion-label slot="end">
+        <ion-text color="primary" class="text-bold">
+          <ion-icon
+            class="text-larger ion-icon-btm"
+            name="phone-portrait"
+            color="secondary"
+          ></ion-icon>
+          {{ customerDetails?.mobile }}
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-card> -->
+
+  <!-- search bar -->
+
+  <ion-searchbar
+    class="search-box ion-no-padding"
+    inputmode="search"
+    searchIcon
+    animated
+    type="text"
+    showCancelButton="never"
+    placeholder="{{ 'search' | translate}}"
+    autocomplete="on"
+    autocorrect="on"
+    #btn
+  >
+  </ion-searchbar>
+
+  <ion-card class="segment-card">
+    <ion-card-header>
+      <ion-segment (ionChange)="onSegmentChange()" [(ngModel)]="type">
+        <ion-segment-button [value]="''" layout="icon-start">
+          <ion-label>{{ 'all' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="'ADVANCE'" layout="icon-start">
+          <ion-label>{{ 'sale' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button [value]="'DEPOSIT'" layout="icon-start">
+          <ion-label>{{ 'deposit' | translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-header>
+
+    <ion-card-content
+      [ngSwitch]="type"
+      class="ion-no-padding"
+      *ngIf="passbookArr.length"
+    >
+      <div *ngSwitchDefault>
+        <ion-card *ngFor="let item of passbookArr;trackBy:trackBy">
+          <ion-card-content>
+            <ion-card-header class="ion-text-center" color="secondary">
+              <ion-text>
+                {{ item?.createdAt | date:' EEEE, d - MMM - y, h:mm a ' }}
+              </ion-text>
+            </ion-card-header>
+            <ion-row class="ion-align-items-center ion-justify-content-between">
+              <ion-col size="auto">
+                <ion-note color="danger">
+                  {{ 'balance' | translate}} &nbsp;</ion-note
+                >
+                <ion-text color="danger" class="text-bold">
+                  ₹ {{ item.currentBalance}}
+                </ion-text>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-chip color="primary" *ngIf="item.type == 'ADVANCE'">
+                  <ion-note class="text-small">
+                    {{ 'sale' | translate}}
+                  </ion-note>
+                </ion-chip>
+                <ion-chip color="success" *ngIf="item.type !== 'ADVANCE'">
+                  <ion-note class="text-small">
+                    {{ 'deposit' | translate}}</ion-note
+                  >
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-text color="primary" class="text-bold">
+                  {{ item?.particular }}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-between">
+              <ion-col size="auto">
+                <ng-container *ngIf="item.type == 'ADVANCE'">
+                  <ion-note color="secondary">
+                    {{ 'amount' | translate}} &nbsp;</ion-note
+                  >
+                  <ion-text color="secondary" class="text-bold">
+                    ₹ {{ item?.amount }}
+                  </ion-text>
+                </ng-container>
+              </ion-col>
+              <ion-col size="auto">
+                <ion-note color="secondary">
+                  {{ 'paid' | translate}} &nbsp;</ion-note
+                >
+                <ion-text color="secondary" class="text-bold">
+                  ₹ {{ item?.paid }}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-card-content>
+    <ion-card-content *ngIf="!passbookArr.length">
+      <div class="ion-text-center">
+        <img src="./assets/image/no-data.svg" alt="Logo" />
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll
+    threshold="100px"
+    (ionInfinite)="doInfinite($event)"
+    [disabled]="disabledScroll"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="!loaded">
+  <ion-row class="ion-justify-content-between ion-align-items-center">
+    <ion-col size="6">
+      <ion-item lines="none" class="text-bold">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-item>
+    </ion-col>
+    <ion-col class="ion-text-right" size="6">
+      <ion-item class="text-bold">
+        <ion-avatar slot="start">
+          <ion-skeleton-text animated></ion-skeleton-text>
+        </ion-avatar>
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- search bar -->
+  <ion-item lines="none" class="ion-margin-top">
+    <ion-skeleton-text
+      [animated]="true"
+      style="width: 100%; line-height: 16px"
+    ></ion-skeleton-text>
+  </ion-item>
+
+  <ion-card class="segment-card">
+    <ion-card-header>
+      <ion-segment [(ngModel)]="type">
+        <ion-segment-button [value]="''" layout="icon-start">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 50%"
+          ></ion-skeleton-text>
+        </ion-segment-button>
+        <ion-segment-button [value]="'ADVANCE'" layout="icon-start">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 50%"
+          ></ion-skeleton-text>
+        </ion-segment-button>
+        <ion-segment-button [value]="'DEPOSIT'" layout="icon-start">
+          <ion-skeleton-text
+            [animated]="true"
+            style="width: 50%"
+          ></ion-skeleton-text>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-header>
+
+    <ion-card-content [ngSwitch]="type" class="ion-no-padding">
+      <div *ngSwitchDefault>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-header class="ion-text-center" color="secondary">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="10">
+                  <ion-skeleton-text
+                    class="ion-text-center"
+                    [animated]="true"
+                  ></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+            </ion-card-header>
+            <ion-row class="">
+              <ion-col size="12">
+                <ion-item lines="none">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%"
+                  ></ion-skeleton-text>
+                  <ion-avatar slot="end">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 130%"
+                    ></ion-skeleton-text>
+                  </ion-avatar>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item lines="none" class="text-bold">
+                  <ion-label class="ion-no-margin">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 80%"
+                    ></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-header class="ion-text-center" color="secondary">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="10">
+                  <ion-skeleton-text
+                    class="ion-text-center"
+                    [animated]="true"
+                  ></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+            </ion-card-header>
+            <ion-row class="">
+              <ion-col size="12">
+                <ion-item lines="none">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%"
+                  ></ion-skeleton-text>
+                  <ion-avatar slot="end">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 130%"
+                    ></ion-skeleton-text>
+                  </ion-avatar>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item lines="none" class="text-bold">
+                  <ion-label class="ion-no-margin">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 80%"
+                    ></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-header class="ion-text-center" color="secondary">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="10">
+                  <ion-skeleton-text
+                    class="ion-text-center"
+                    [animated]="true"
+                  ></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+            </ion-card-header>
+            <ion-row class="">
+              <ion-col size="12">
+                <ion-item lines="none">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%"
+                  ></ion-skeleton-text>
+                  <ion-avatar slot="end">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 130%"
+                    ></ion-skeleton-text>
+                  </ion-avatar>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item lines="none" class="text-bold">
+                  <ion-label class="ion-no-margin">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 80%"
+                    ></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-header class="ion-text-center" color="secondary">
+              <ion-row class="ion-justify-content-center">
+                <ion-col size="10">
+                  <ion-skeleton-text
+                    class="ion-text-center"
+                    [animated]="true"
+                  ></ion-skeleton-text>
+                </ion-col>
+              </ion-row>
+            </ion-card-header>
+            <ion-row class="">
+              <ion-col size="12">
+                <ion-item lines="none">
+                  <ion-skeleton-text
+                    [animated]="true"
+                    style="width: 80%"
+                  ></ion-skeleton-text>
+                  <ion-avatar slot="end">
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 130%"
+                    ></ion-skeleton-text>
+                  </ion-avatar>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item lines="none" class="text-bold">
+                  <ion-label class="ion-no-margin">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text
+                      [animated]="true"
+                      style="width: 80%"
+                    ></ion-skeleton-text>
+                  </ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item lines="none">
+                  <ion-avatar>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                  </ion-avatar>
+                  <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

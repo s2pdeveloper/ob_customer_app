@@ -1,0 +1,174 @@
+<ion-toolbar color="primary">
+  <ion-buttons slot="start" class="">
+    <ion-back-button defaultHref="landing-page" mode="md"></ion-back-button>
+  </ion-buttons>
+  <ion-title class="ion-text-capitalize">
+    {{ 'changePassword' | translate}}
+  </ion-title>
+</ion-toolbar>
+
+<ion-content *ngIf="loaded">
+  <form [formGroup]="passForm">
+    <ion-item
+      class="input-class"
+      lines="none"
+      [class.invalid]="!form.oldPassword.valid && (form.oldPassword.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'oldPassword' | translate }}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        formControlName="oldPassword"
+        [type]="showOld ? 'password':'text'"
+        name="password"
+        placeholder="{{ 'oldPassword' | translate }}"
+        autocomplete="on"
+        clearInput
+      ></ion-input>
+      <ion-icon
+        class="input-icon eye-password"
+        slot="end"
+        name="eye"
+        *ngIf="!showOld"
+        (click)="showOld = !showOld"
+      >
+      </ion-icon>
+      <ion-icon
+        class="input-icon eye-password"
+        name="eye-off-outline"
+        slot="end"
+        *ngIf="showOld"
+        (click)="showOld = !showOld"
+      >
+      </ion-icon>
+    </ion-item>
+    <app-validation-messages [control]="form['oldPassword']">
+    </app-validation-messages>
+
+    <ion-item
+      class="input-class"
+      lines="none"
+      [class.invalid]="!form.newPassword.valid && (form.newPassword.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'newPassword' | translate }}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        formControlName="newPassword"
+        [type]="showNew ? 'password':'text'"
+        name="password"
+        placeholder="{{ 'newPassword' | translate }}"
+        autocomplete="on"
+        clearInput
+      ></ion-input>
+      <ion-icon
+        class="input-icon eye-password"
+        slot="end"
+        name="eye"
+        *ngIf="!showNew"
+        (click)="showNew = !showNew"
+      >
+      </ion-icon>
+      <ion-icon
+        class="input-icon eye-password"
+        name="eye-off-outline"
+        slot="end"
+        *ngIf="showNew"
+        (click)="showNew = !showNew"
+      >
+      </ion-icon>
+    </ion-item>
+    <app-validation-messages [control]="form['newPassword']">
+    </app-validation-messages>
+
+    <ion-item
+      class="input-class"
+      lines="none"
+      [class.invalid]="!form.confirmPass.valid && (form.confirmPass.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'confirmPassword' | translate }}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        formControlName="confirmPass"
+        [type]="showConfirm ? 'password':'text'"
+        name="password"
+        placeholder="{{ 'confirmPassword' | translate }}"
+        autocomplete="on"
+        clearInput
+      ></ion-input>
+      <ion-icon
+        class="input-icon eye-password"
+        slot="end"
+        name="eye"
+        *ngIf="!showConfirm"
+        (click)="showConfirm = !showConfirm"
+      >
+      </ion-icon>
+      <ion-icon
+        class="input-icon eye-password"
+        name="eye-off-outline"
+        slot="end"
+        *ngIf="showConfirm"
+        (click)="showConfirm = !showConfirm"
+      >
+      </ion-icon>
+    </ion-item>
+    <app-validation-messages [control]="form['confirmPass']">
+    </app-validation-messages>
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button
+        shape="round"
+        (click)="setPassword()"
+        color="primary"
+        id="btn-e1"
+        expand="block"
+        type="submit"
+      >
+        submit
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
+<ion-content *ngIf="!loaded">
+  <form >
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+    <ion-item class="input-class" lines="none">
+      <ion-label position="stacked">
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 50%"
+        ></ion-skeleton-text>
+      </ion-label>
+      <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+    </ion-item>
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button color="primary" expand="full" shape="round" class="btn">
+        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

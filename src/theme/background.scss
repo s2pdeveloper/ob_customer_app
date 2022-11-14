@@ -1,0 +1,30 @@
+body {
+  background: #f3f8fe !important;
+  color: var(--ion-color-primary) !important;
+}
+
+ion-toolbar {
+  --background: var(--ion-color-primary) !important;
+  --color: var(--ion-color-light);
+
+
+}
+
+ion-content {
+  --background: #e1eaf5 !important;
+  color: var(--ion-color-primary) !important;
+  --padding-bottom: 1rem !important;
+  --padding-top: .75rem !important;
+  --padding-start: .75rem !important;
+  --padding-end: .75rem !important;
+}
+
+@keyframes marquee {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}

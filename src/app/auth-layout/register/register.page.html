@@ -1,0 +1,102 @@
+<ion-content>
+  <ion-card>
+    <div class="ion-text-center ion-margin-top">
+      <img src="./assets/image/sign-up.svg" alt="Logo" height="250" />
+    </div>
+    <form [formGroup]="registerForm">
+      <ion-item
+        class="input-class"
+        [class.invalid]="!form.shopName.valid && (form.shopName.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'shopName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          placeholder="{{ 'shopName' | translate}}"
+          formControlName="shopName"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.shopName">
+      </app-validation-messages>
+
+      <ion-item
+        class="input-class"
+        [class.invalid]="!form.name.valid && (form.name.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'fullName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          placeholder="{{ 'fullName' | translate}}"
+          formControlName="name"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.name">
+      </app-validation-messages>
+
+      <ion-item
+        class="input-class"
+        [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'mobileNumber' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          maxlength="10"
+          pattern="[0-9]{10}"
+          type="text"
+          placeholder="{{ 'mobileNumber' | translate}}"
+          formControlName="mobile"
+          inputmode="numeric"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.mobile">
+      </app-validation-messages>
+
+      <ion-item
+        class="input-class"
+        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'password' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          maxlength="4"
+          pattern="[0-9]{10}"
+          type="text"
+          placeholder="Enter password"
+          formControlName="password"
+          inputmode="numeric"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.password">
+      </app-validation-messages>
+
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button
+          color="primary"
+          expand="full"
+          shape="round"
+          class="btn"
+          (click)="register()"
+        >
+          {{ 'register' | translate}}
+        </ion-button>
+      </div>
+    </form>
+    <div class="ion-text-center signup">
+      <h6>
+        Already have an account?
+        <a href="javascript:void()" routerLink="/login">
+          <ion-label color="medium">
+            <b>{{ 'login' | translate}} </b>
+          </ion-label>
+        </a>
+      </h6>
+    </div>
+  </ion-card>
+</ion-content>

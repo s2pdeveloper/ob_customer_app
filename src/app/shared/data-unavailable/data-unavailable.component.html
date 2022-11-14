@@ -1,0 +1,14 @@
+<ion-row class="ion-align-items-center" style="height: 70%;">
+  <ion-col size="12" class="ion-text-center">
+    <div class="clearfix">
+      <label class="ion-text-center ion-text-wrap text-color-5">
+        {{customText || 'No data available'}}
+      </label>
+    </div>
+    <div class="clearfix">
+      <ion-button (click)="navigateTo()" class="btn-color-2" type="submit" *ngIf="routingPath">
+        {{buttonText}}
+      </ion-button>
+    </div>
+  </ion-col>
+</ion-row>

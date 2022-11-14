@@ -1,0 +1,17 @@
+ion-content {
+    height: 85vh;
+
+    .no-data {
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border-radius: 2rem;
+        box-shadow: none;
+
+    }
+
+    ion-card {
+        margin-top: 10px;
+    }
+}

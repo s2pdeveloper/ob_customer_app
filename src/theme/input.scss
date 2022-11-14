@@ -1,0 +1,73 @@
+.input-class {
+  --border-radius: 1.5em;
+  overflow: hidden;
+  margin-top: 0.7rem;
+  box-shadow: #9fb1dc 0px 25px 20px -20px;
+    --padding-bottom : 0.5rem;
+    ion-label {
+      --color: var(--ion-color-secondary) !important;
+      // --padding-bottom : 0.5rem;
+
+    }
+    ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.label-stacked.hydrated {
+      // -webkit-transform: translateY(50%) scale(0.80);
+      padding-bottom: 0.7rem;
+  }
+ 
+}
+
+// .search-box {
+//   --border-radius: 2em;
+//   --box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1),
+//     0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+// }
+
+.eye-password {
+    font-size: 27px;
+    padding-top: 34px;
+    vertical-align: middle;
+    color: var(--ion-color-primary);
+}
+
+.invalid {
+  // --border-color: var(--ion-color-danger);
+  // --border-width: 2px;
+  ion-label {
+    --color: var(--ion-color-danger) !important;
+  }
+}
+
+/* Popover Interface: set color for the popover using Item's CSS variables */
+// .custom-options-color-1 .select-interface-option {
+//   --color: var(--ion-color-1) !important;
+//   --color-hover: var(--ion-color-1) !important;
+// }
+
+/* Action Sheet Interface: set color for the action sheet using its button CSS variables */
+// .custom-options-color-1 .select-interface-option {
+//   --button-color: var(--ion-color-1) !important;
+//   --button-color-hover: var(--ion-color-1);
+// }
+
+/* Alert Interface: set color for alert options (single selection) */
+// .custom-options-color-1 .select-interface-option .alert-radio-label {
+//   color: var(--ion-color-9) !important;
+// }
+
+/* Alert Interface: set color for alert options (multiple selection) */
+// .custom-options-color-1 .select-interface-option .alert-checkbox-label {
+//   color: var(--ion-color-9);
+// }
+
+// [aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+//   border-color: var(--ion-color-1) !important;
+// }
+// [aria-checked="true"].sc-ion-alert-ios .alert-radio-icon.sc-ion-alert-ios {
+//   border-color: var(--ion-color-1) !important;
+// }
+// .alert-radio-inner.sc-ion-alert-md {
+//   background-color: var(--ion-color-1) !important;
+// }
+// .alert-button {
+//   color: var(--ion-color-9) !important;
+// }

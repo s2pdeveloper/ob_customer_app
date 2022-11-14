@@ -1,0 +1,6 @@
+<ion-list>
+  <ion-item [lines]="i === dataList.length -1 ? 'none':'' " button *ngFor="let item of dataList;let i = index"
+    (click)="onDismiss(item)">
+    {{item.label | translate}}
+  </ion-item>
+</ion-list>

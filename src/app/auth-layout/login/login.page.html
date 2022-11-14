@@ -1,0 +1,106 @@
+<ion-content fullscreen>
+  <ion-card>
+    <div class="ion-text-center">
+      <img src="./assets/image/login.svg" alt="Logo" height="300" />
+    </div>
+    <form [formGroup]="loginForm">
+      <ion-item
+        class="input-class"
+        [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
+      >
+        <ion-label position="stacked" class="font" color="">
+          {{ 'mobileNumber' | translate }}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          formControlName="mobile"
+          autocomplete="on"
+          placeholder="{{ 'mobileNumber' | translate }}"
+          clearInput
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages [control]="form.mobile">
+      </app-validation-messages>
+
+      <ion-item
+        class="input-class"
+        lines="none"
+        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'password' | translate }}
+           <ion-note color="danger">*</ion-note>
+          </ion-label>
+        <ion-input
+          formControlName="password"
+          [type]="showEye ? 'password':'text'"
+          name="password"
+          placeholder="{{ 'password' | translate }}"
+          autocomplete="on"
+          clearInput
+        ></ion-input>
+        <ion-icon
+          class="input-icon eye-password"
+          slot="end"
+          name="eye"
+          *ngIf="!showEye"
+          (click)="showEye = !showEye"
+        >
+        </ion-icon>
+        <ion-icon
+          class="input-icon eye-password"
+          name="eye-off-outline"
+          slot="end"
+          *ngIf="showEye"
+          (click)="showEye = !showEye"
+        >
+        </ion-icon>
+      </ion-item>
+
+      <app-validation-messages [control]="form.password">
+      </app-validation-messages>
+
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button
+          color="primary"
+          expand="full"
+          shape="round"
+          class="btn"
+          (click)="login()"
+        >
+          Login to Udhari Book
+        </ion-button>
+      </div>
+      <div class="ion-text-center signup">
+        <h6>
+          Not have an account yet ?
+          <a href="javascript:void()" routerLink="/register">
+            <ion-label color="medium">
+              <b>Sign Up</b>
+            </ion-label>
+          </a>
+        </h6>
+      </div>
+      <!-- <ion-grid>
+        <ion-row>
+          <ion-col class="ion-text-left">
+            <a href="javascript:void()" routerLink="/register">
+              <ion-label color="medium">
+                <b>Sign Up</b>
+              </ion-label>
+            </a>
+          </ion-col>
+          <ion-col class="ion-text-right">
+            <a
+              href="javascript:void()"
+              routerLink="/forget-pwd"
+              routerLinkActive="active"
+            >
+              <ion-label color="medium"> <b>Forgot Password</b> </ion-label>?
+            </a>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </form>
+  </ion-card>
+</ion-content>

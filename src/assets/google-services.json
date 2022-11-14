@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "802817408471",
+    "project_id": "udhari-app",
+    "storage_bucket": "udhari-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802817408471:android:25b1b5ab6d8e0efbf2df92",
+        "android_client_info": {
+          "package_name": "com.s2p.udhari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802817408471-hiksekk3d77k5n3u63etc9jv0i17t8e3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaXCGZaNCRC7u8H-MDK_tj9zBDBN-DBfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802817408471-hiksekk3d77k5n3u63etc9jv0i17t8e3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

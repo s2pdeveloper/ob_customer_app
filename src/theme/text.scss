@@ -1,0 +1,53 @@
+.text-color-danger {
+  color: #e31b23 !important;
+  --color: #e31b23 !important;
+}
+
+.text-color-dark {
+  color: var(--ion-color-dark) !important;
+  --color: var(--ion-color-dark) !important;
+}
+
+.text-title {
+  font-size: large !important;
+}
+
+.text-sub-title {
+  font-size: medium !important;
+}
+
+.font-larger {
+  font-size: larger;
+}
+
+.font-24 {
+  font-size: 18px;
+}
+
+.font-size-small {
+  font-size: small;
+}
+
+.text-bold {
+  font-weight: bold !important;
+}
+
+.item-no-height {
+  --min-height: 0px !important;
+  min-height: 0px !important;
+}
+
+// .item-icon {
+//   background: var(--ion-color-4);
+//   padding: 10px;
+//   border-radius: 12%;
+//   border: 1px solid var(--ion-color-4);
+// }
+
+.text-decoration-line-through {
+  text-decoration: line-through;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
