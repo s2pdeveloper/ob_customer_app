@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+ <!-- <ion-header> -->
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu" icon="grid-outline"></ion-menu-button>
     </ion-buttons>
@@ -7,14 +7,14 @@
     <ion-buttons slot="end">
       <ion-button class="shadow-none" shape="round" routerLink="/customer-form">
         <ion-icon name="add-circle" size="large"></ion-icon>
-      </ion-button>
-      <!-- <ion-button
+      </ion-button> --> 
+<!-- <ion-button
         size="small"
         class="shadow-none"
         (click)="navigateTo('/search-customer',null)"
       >
         <ion-icon name="search-circle-sharp" size="large"></ion-icon>
-      </ion-button> -->
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -316,4 +316,141 @@
       </ion-card-content>
     </ion-card>
   </ng-container>
+</ion-content> -->
+
+
+<ion-header>
+  <ion-toolbar class="" color="light">
+        <ion-avatar slot="end"   >
+          
+          <img alt="Silhouette of a person's head" src="../../../assets/image/Profile-Male-PNG.png" />
+        </ion-avatar> 
+    
+    
+        <ion-card-title slot="start" >
+        <ion-icon name="location-outline"  size="small"  class=" ion-icon "  ></ion-icon>
+        <ion-p class="p" >Mumbai</ion-p> 
+        <!-- <h1 class="h1">Delhi</h1> -->
+        
+
+      </ion-card-title>    
+  </ion-toolbar> 
+</ion-header>
+<ion-buttons slot="start">
+  <ion-menu-button menu="main-menu" icon="grid-outline"></ion-menu-button>
+<ion-searchbar show-clear-button="focus" ></ion-searchbar></ion-buttons>
+
+<ion-content class="ion-content text-bold" color="light"   >
+ <ion-row  >
+  <!-- <ion-card> -->
+  <ion-label class="service" >Select service</ion-label>
+ 
+    <ion-label class="see">See all</ion-label>
+ 
+  <ion-slides>
+     <ion-slide> 
+  <ion-col size="3"  >
+    <ion-card class="card1">
+      <img src="../../../assets/image/clean.jpg"/>
+      <ion-row >
+        <ion-col size="12">    
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+     
+  <ion-col size="3" >
+    <ion-card class="card2">
+      <img alt="kids" src="../../../assets/image/kids.jpg" />
+      <ion-row>
+        <ion-col size="12" >
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+
+  <ion-col size="3" >
+    <ion-card class="card3">
+      <ion-row>
+        <ion-col size="12">
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+
+  <ion-col size="3" >
+    <ion-card class="card4">
+      <ion-row>
+        <ion-col size="12">
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+</ion-slide>
+<ion-slide>
+    <ion-col size="3"  >
+        <ion-card class="card5" >
+        <ion-row >
+          <ion-col size="12">    
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  
+  
+    <ion-col size="3" >
+      <ion-card class="card6">
+        <img alt="kids" src="../../../assets/image/food.png" />
+        <ion-row>
+          <ion-col size="12" >
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  
+    <ion-col size="3" >
+      <ion-card class="card7">
+        <ion-row>
+          <ion-col size="12">
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col size="3" >
+      <ion-card class="card8">
+        <ion-row>
+          <ion-col size="12">
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-slide>
+
+  </ion-slides>
+<!-- </ion-card>  -->
+</ion-row>
+
+<ion-label class="service" >Best Offers</ion-label>
+<ion-row> 
+  
+      
+  <ion-card class="abc ">
+    <img alt="salon" src="../../../assets/image/salon.jpg"/>
+    <ion-card-header>
+      <ion-card-title class="ion-card-title text-bold">Salon at home women Or men</ion-card-title>
+      <ion-card-subtitle>upto 50% off</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  
+  <ion-card class="abc" >
+    <img alt="toyes" src="../../../assets/image/toys.jpg" />
+    <ion-card-header>
+      <ion-card-title class="ion-card-title text-bold" >Kids toys</ion-card-title>
+      <ion-card-subtitle>upto 70% off</ion-card-subtitle>
+    </ion-card-header>
+  
+   
+  </ion-card>
+</ion-row>
+
 </ion-content>

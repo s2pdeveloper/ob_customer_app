@@ -30,7 +30,7 @@ export class LandingPagePage implements OnInit {
   ngOnInit() {}
   
   ionViewWillEnter() {
-    this.currentUser = this.localStorage.get('s2pUser');
+    this.currentUser = this.localStorage.get('OBUser');
     this.getAllCustomerDashBoard();
   }
   doRefresh(event) {
@@ -47,6 +47,7 @@ export class LandingPagePage implements OnInit {
         this.total = success.calculation[0].total ?? 0.0;
         this.count = success.calculation[0].count ?? 0;
         this.customerArr = success.rows;
+        
         // this.spinner.hideLoader();
         this.loaded = true;
       });
