@@ -1,81 +1,60 @@
-<ion-content fullscreen>
-  <ion-card>
+<ion-content class="" >
+  <ion-card class="">
+
     <div class="ion-text-center">
-      <img src="./assets/image/login.webp" alt="Logo" height="300" />
+      <img src="./assets/image/login2.jpg" alt="Logo" height="400" />
     </div>
+
     <form [formGroup]="loginForm">
-      <ion-item
-        
-        [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
-      >
+      <ion-item fill="solid  outline" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label position="floating" class="font" color="">
+
+          <ion-icon name="person-circle-outline"></ion-icon>&nbsp;
           {{ 'mobileNumber' | translate }}
+
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input
-          formControlName="mobile"
-          autocomplete="on"
-          placeholder="{{ 'mobileNumber' | translate }}"
-          clearInput
-        ></ion-input>
+
+
+        <ion-input formControlName="mobile" autocomplete="on" clearInput></ion-input>
       </ion-item>
       <app-validation-messages [control]="form.mobile">
       </app-validation-messages>
 
-      <ion-item
-        
-        lines="none"
-        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
-      >
-        <ion-label position="floating">
+      <ion-item fill="solid outline " [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
+
+        <ion-label position="floating" style=color:black>
+
+          <ion-icon name="bag-outline"></ion-icon>&nbsp;
           {{ 'password' | translate }}
-           <ion-note color="danger">*</ion-note>
-          </ion-label>
-        <ion-input
-          formControlName="password"
-          [type]="showEye ? 'password':'text'"
-          name="password"
-          placeholder="{{ 'password' | translate }}"
-          autocomplete="on"
-          clearInput
-        ></ion-input>
-        <ion-icon
-          class="input-icon eye-password"
-          slot="end"
-          name="eye"
-          *ngIf="!showEye"
-          (click)="showEye = !showEye"
-        >
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+
+        <ion-input formControlName="password" [type]="showEye ? 'password':'text'" name="password" autocomplete="on"
+          clearInput></ion-input>
+
+
+
+        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="showEye = !showEye">
         </ion-icon>
-        <ion-icon
-          class="input-icon eye-password"
-          name="eye-off-outline"
-          slot="end"
-          *ngIf="showEye"
-          (click)="showEye = !showEye"
-        >
+        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
+          (click)="showEye = !showEye">
         </ion-icon>
       </ion-item>
 
       <app-validation-messages [control]="form.password">
-      </app-validation-messages>
+      </app-validation-messages><br>
 
       <div class="ion-text-center ion-margin-vertical">
-        <ion-button
-          color="primary"
-          expand="full"
-          shape="round"
-          class="btn"
-          (click)="login()"
-        >
-          Login 
+        <ion-button expand="full" shape="round" class="" color="primary" (click)="login()">
+          Login To OB
         </ion-button>
-      </div>
+      </div><br>
       <div class="ion-text-center signup">
         <h6>
           Not have an account yet ?
           <a href="javascript:void()" routerLink="/register">
-            <ion-label color="medium">
+            <ion-label color="danger">
               <b>Sign Up</b>
             </ion-label>
           </a>
@@ -103,4 +82,4 @@
       </ion-grid> -->
     </form>
   </ion-card>
-</ion-content>
+  <!-- </ion-content>  -->

@@ -1,31 +1,54 @@
-// ion-content {
-//     height: 100vh;
+  
+    ion-content {
+        // --background:red !important;
+        height: 100vh;
+        --padding-bottom: 3rem 
+        --padding-top: .100rem 
+        --padding-start: .75rem 
+        --padding-end: .85rem
+     
+    ion-card {
+        width: 200px;
+        height: 200px;
+        margin: 2;
+        top: 30%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+         border-radius: 3rem;
+         background: transparent;
+        cursor: pointer;
+        font-size: 1.6rem;
+        
+        box: shadow 0;
+        ion-card-content {
+             padding-top: 5;
+            form {
+                padding: 0px 5px;
+                
+            }
+        }
 
-//     ion-card {
-//         margin: 0;
-//         top: 50%;
-//         left: 50%;
-//         -ms-transform: translate(-50%, -50%);
-//         transform: translate(-50%, -50%);
-//         border-radius: 2rem;
-//         --background: transparent;
-//         background: transparent;
-//         box-shadow: none;
-//         ion-card-content {
-//             padding-top: 0;
-//             form {
-//                 padding: 0 5px;
-//             }
-//         }
+        .forget-text {
+            text-align: center;
+            padding: 5rem 0;
+           
+        }
 
-//         .forget-text {
-//             text-align: end;
-//             padding: 1rem 0;
-//         }
-
-//         .sign-up-text {
-//             text-align: start;
-//             padding: 1rem 0;
-//         }
-//     }
-// }
+        .sign-up-text {
+            text-align: start;
+            padding: 1rem 0;
+            
+            }
+         }.btn{
+            --background: #066f63 !important;
+            margin: 32px;
+         }
+        
+         ion-button{
+            background: #066f63 !important;
+         }
+         
+    
+        
+}

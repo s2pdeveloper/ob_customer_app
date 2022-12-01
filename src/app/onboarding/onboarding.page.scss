@@ -11,7 +11,7 @@ ion-slides {
 
 #slides {
     .slide-image {
-        height: 60vh;
+        height: 45vh;
         // width: 70%;
         margin: 0px 4px;
         pointer-events: none;
@@ -30,7 +30,7 @@ ion-slides {
 }
 
 .slide-title {
-    margin-top: 0;
+    margin: top 8px;
     font-size: 1.5em;
     font-weight: bolder;
     color: var(--ion-color-primary);

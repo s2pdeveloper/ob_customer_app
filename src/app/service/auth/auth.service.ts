@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   routes: any = {
     register: 'user/signup',
-    login: 'user/login',
+    login: 'customer/login',
     getByIdPath: (id) => `user/profile?id=${id}`,
     updatePath: (id) => `user/update?id=${id}`,
     forget_password: 'user/forgot-password',

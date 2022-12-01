@@ -29,13 +29,14 @@ export class LoginPage implements OnInit {
   ) {}
 
   loginForm = new FormGroup({
-    mobile: new FormControl('9822570558', [Validators.required]),
-    password: new FormControl('1234', [Validators.required]),
+     
+     mobile: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   ngOnInit() {
     //  this.loginForm();
-    this.localStorage.remove('s2pUser');
+    //  this.localStorage.getItem('OBUser');
     // get return url from route parameters or default to "/"
     this.returnUrl =
       this.route.snapshot.queryParams[`returnUrl`] || '/landing-page';
@@ -53,9 +54,10 @@ export class LoginPage implements OnInit {
     this.spinner.showLoader();
     this.authService.login(this.loginForm.value).subscribe((success) => {
       if (typeof window !== 'undefined') {
-        this.localStorage.set('s2pUser', success);
+        this.localStorage.set('OBUser', success);
       }
-      this.router.navigateByUrl(this.returnUrl);
+       this.router.navigateByUrl(this.returnUrl);
+     
       this.saveDeviceToken(success.id);
       this.spinner.hideLoader();
     });
@@ -70,7 +72,7 @@ export class LoginPage implements OnInit {
     let newObj: any = Object.assign(
       {
         userId: id,
-        deviceId: this.localStorage.get('s2pUserDeviceId'),
+        deviceId: this.localStorage.get('OBUserDeviceId'),
       },
       this.deviceInfo
     );    
