@@ -1,80 +1,131 @@
 <ion-content>
   <ion-card>
     <div class="ion-text-center ion-margin-top">
-      <img src="./assets/image/sign-up.svg" alt="Logo" height="250" />
+      <img src="./assets/image/sign-up.webp" alt="Logo" height="250"  />
     </div>
+
     <form [formGroup]="registerForm">
       <ion-item
-        class="input-class"
-        [class.invalid]="!form.shopName.valid && (form.shopName.dirty || submitted)"
+      class="input"
+      fill="outline"
+        [class.invalid]="!form.fname.valid && (form.fname.dirty || submitted)"
       >
-        <ion-label position="stacked">
-          {{ 'shopName' | translate}}
+        <ion-label position="floating">
+          {{ 'First Name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input
-          placeholder="{{ 'shopName' | translate}}"
-          formControlName="shopName"
+          placeholder="{{ 'First Name' | translate}}"
+          formControlName="fname" 
         ></ion-input>
       </ion-item>
-      <app-validation-messages class="error-message" [control]="form.shopName">
-      </app-validation-messages>
 
       <ion-item
-        class="input-class"
-        [class.invalid]="!form.name.valid && (form.name.dirty || submitted)"
+      fill="outline"
+      class="input"
+        [class.invalid]="!form.lname.valid && (form.lname.dirty || submitted)"
       >
-        <ion-label position="stacked">
-          {{ 'fullName' | translate}}
+        <ion-label position="floating">
+          {{ 'Last Name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input
-          placeholder="{{ 'fullName' | translate}}"
-          formControlName="name"
+          placeholder="{{ 'Last Name' | translate}}"
+          formControlName="lname"
         ></ion-input>
       </ion-item>
-      <app-validation-messages class="error-message" [control]="form.name">
-      </app-validation-messages>
 
       <ion-item
-        class="input-class"
+      fill="outline"
+      class="input"
         [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
       >
-        <ion-label position="stacked">
-          {{ 'mobileNumber' | translate}}
+        <ion-label position="floating">
+          {{ 'Mobile Number' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input
           maxlength="10"
           pattern="[0-9]{10}"
-          type="text"
-          placeholder="{{ 'mobileNumber' | translate}}"
+          type="number"
+          placeholder="{{ 'Mobile Number' | translate}}"
           formControlName="mobile"
-          inputmode="numeric"
+          inputmode="number"
+          
         ></ion-input>
       </ion-item>
-      <app-validation-messages class="error-message" [control]="form.mobile">
-      </app-validation-messages>
-
+      
       <ion-item
-        class="input-class"
+      class="input"
+        fill="outline"
         [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
       >
-        <ion-label position="stacked">
-          {{ 'password' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
+        <ion-label position="floating">
+          {{ 'password' | translate }}
+           <ion-note color="danger">*</ion-note>
+          </ion-label>
         <ion-input
-          maxlength="4"
-          pattern="[0-9]{10}"
-          type="text"
-          placeholder="Enter password"
           formControlName="password"
-          inputmode="numeric"
+          [type]="showEye ? 'password':'text'"
+          name="password"
+          placeholder="{{ 'password' | translate }}"
+          autocomplete="on"
+          clearInput
         ></ion-input>
+        <ion-icon
+          class="input-icon eye-password"
+          slot="end"
+          name="eye"
+          *ngIf="!showEye"
+          (click)="showEye = !showEye"
+        >
+        </ion-icon>
+        <ion-icon
+          class="input-icon eye-password"
+          name="eye-off-outline"
+          slot="end"
+          *ngIf="showEye"
+          (click)="showEye = !showEye"
+        >
+        </ion-icon>
       </ion-item>
-      <app-validation-messages class="error-message" [control]="form.password">
-      </app-validation-messages>
+
+
+      <ion-item
+        fill="outline"
+        class="input"
+        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
+      >
+        <ion-label position="floating">
+          {{ 'Confirm password' | translate }}
+           <ion-note color="danger">*</ion-note>
+          </ion-label>
+        <ion-input
+          formControlName="confirmpassword"
+          [type]="showEye ? 'password':'text'"
+          name="Confirm Password"
+          placeholder="{{ 'Confirm Password' | translate }}"
+          autocomplete="on"
+          clearInput
+        ></ion-input>
+        <ion-icon
+          class="input-icon eye-password"
+          slot="end"
+          name="eye"
+          *ngIf="!showEye"
+          (click)="!showEye = showEye"
+        >
+        </ion-icon>
+        <ion-icon
+          class="input-icon eye-password"
+          name="eye-off-outline"
+          slot="end"
+          *ngIf="showEye"
+          (click)="showEye = !showEye"
+        >
+        </ion-icon>
+      </ion-item>
+      
 
       <div class="ion-text-center ion-margin-vertical">
         <ion-button

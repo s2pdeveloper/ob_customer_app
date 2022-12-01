@@ -1,38 +1,10 @@
-.menu-card {
-    padding: 0 1.1rem 1.1rem 1.1rem;
-    border-radius: 0;
-
-    ion-card-title {
-        font-size: 16px;
-    }
-
-    ion-card-subtitle {
-        font-size: 10px;
-    }
-
-    ion-row,
-    ion-col,
-    ion-title {
-        padding: 0;
-    }
-}
-
-.img-div-position {
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 40%;
-}
 
 ion-content {
     --padding-top: 0 !important;
-
-
-
     .card-pad {
         padding-bottom: 10px;
         height: 100%;
+      
 
         ion-row,
         ion-col {
@@ -40,17 +12,80 @@ ion-content {
         }
 
     }
-
-    ion-skeleton-text {
-        --border-radius: 9999px;
-    }
-    .toolbar-title {
-        display: block;
-        width: 100%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        pointer-events: auto;
-        border-radius: 10%;
-    }
+    
 }
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+  }
+  .sc-ion-searchbar-md-h {
+   
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    
+}
+
+.name{
+    
+    margin-left: 270px;
+    margin-top: -30px;
+    color: red;
+    display: flex;
+    align-items: flex-end;
+    justify-items: flex-end;
+    place-content: flex-end;
+}
+
+
+ion-searchbar{
+    --icon-color:red;	
+    --border-radius: 7px;
+
+    
+}
+
+.location{
+    font-size: 24px;
+    color: rgb(241, 42, 42);
+    margin-right: 46px;
+    margin-top: 22px;
+    margin-left: 9px;
+    margin-bottom: -2%;
+    padding: 0px
+    
+}
+.par{
+    
+        margin-left: -40px;
+        width: 60px;
+}  
+     
+    
+.avtar{
+    
+    width: 51px;
+    border-radius: 50%;
+    display: flex;
+    align-items: initial;
+    justify-content: center;
+    overflow: hidden;
+    margin-left: 268px;
+    margin-top: -41px;
+    margin-block-end: 2%;
+    border-color: red;
+    text-align: end;
+    
+}
+
+.offer-card{
+    margin-bottom: 10px;
+    border-radius: 0%;
+    width: auto;
+    height: auto;
+}
+.ion-toolbar{
+    color: transparent;
+}
+

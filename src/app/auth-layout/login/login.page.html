@@ -1,14 +1,14 @@
 <ion-content fullscreen>
   <ion-card>
     <div class="ion-text-center">
-      <img src="./assets/image/login.svg" alt="Logo" height="300" />
+      <img src="./assets/image/login.webp" alt="Logo" height="300" />
     </div>
     <form [formGroup]="loginForm">
       <ion-item
-        class="input-class"
+        
         [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
       >
-        <ion-label position="stacked" class="font" color="">
+        <ion-label position="floating" class="font" color="">
           {{ 'mobileNumber' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -23,11 +23,11 @@
       </app-validation-messages>
 
       <ion-item
-        class="input-class"
+        
         lines="none"
         [class.invalid]="!form.password.valid && (form.password.dirty || submitted)"
       >
-        <ion-label position="stacked">
+        <ion-label position="floating">
           {{ 'password' | translate }}
            <ion-note color="danger">*</ion-note>
           </ion-label>
@@ -68,7 +68,7 @@
           class="btn"
           (click)="login()"
         >
-          Login to Udhari Book
+          Login 
         </ion-button>
       </div>
       <div class="ion-text-center signup">

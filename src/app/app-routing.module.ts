@@ -108,7 +108,8 @@ const routes: Routes = [
       import('./auth-layout/change-pwd/change-pwd.module').then(
         (m) => m.ChangePwdPageModule
       ),
-  },  {
+  },
+  {
     path: 'edit-profile',
     loadChildren: () => import('./default-layout/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   },

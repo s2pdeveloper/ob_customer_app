@@ -18,40 +18,49 @@ export class LandingPagePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService
   ) {}
-  myCourse: any = '';
-  name: any = '';
-  currentUser: any = {};
-  customerArr: any = [];
-  total: number = 0;
-  count: number = 0;
-  pageSize: number = 5;
-  loaded: boolean = false;
+  // myCourse: any = '';
+  // name: any = '';
+  // currentUser: any = {};
+  // customerArr: any = [];
+  // total: number = 0;
+  // count: number = 0;
+  // pageSize: number = 5;
+  // loaded: boolean = false;
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
+  
 
   ngOnInit() {}
   
-  ionViewWillEnter() {
-    this.currentUser = this.localStorage.get('s2pUser');
-    this.getAllCustomerDashBoard();
-  }
-  doRefresh(event) {
-    this.getAllCustomerDashBoard();
-    event.target.complete();
-  }
-  getAllCustomerDashBoard() {
-    // this.spinner.showLoader();
-    this.loaded = false;
-    let params = { pageSize: this.pageSize };
-    this.customerService
-      .getAllCustomerDashBoard(params)
-      .subscribe((success) => {
-        this.total = success.calculation[0].total ?? 0.0;
-        this.count = success.calculation[0].count ?? 0;
-        this.customerArr = success.rows;
-        // this.spinner.hideLoader();
-        this.loaded = true;
-      });
-  }
-  navigateTo(path, id) {
-    this.router.navigate([path], { queryParams: { id } });
-  }
+  // ionViewWillEnter() {
+  //   this.currentUser = this.localStorage.get('s2pUser');
+  //   this.getAllCustomerDashBoard();
+  // }
+  // doRefresh(event) {
+  //   this.getAllCustomerDashBoard();
+  //   event.target.complete();
+  // }
+  // getAllCustomerDashBoard() {
+  //   // this.spinner.showLoader();
+  //   this.loaded = false;
+  //   let params = { pageSize: this.pageSize };
+  //   this.customerService
+  //     .getAllCustomerDashBoard(params)
+  //     .subscribe((success) => {
+  //       this.total = success.calculation[0].total ?? 0.0;
+  //       this.count = success.calculation[0].count ?? 0;
+  //       this.customerArr = success.rows;
+  //       // this.spinner.hideLoader();
+  //       this.loaded = true;
+  //     });
+  // }
+  // navigateTo(path, id) {
+  //   this.router.navigate([path], { queryParams: { id } });
+  // }
+
+  
+
+  
 }

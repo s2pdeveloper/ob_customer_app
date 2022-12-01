@@ -15,6 +15,7 @@ const { Device, Geolocation, Browser } = Plugins;
 })
 export class RegisterPage implements OnInit {
   submitted: boolean = false;
+  showEye: boolean = false;
   deviceInfo: any;
   constructor(
     private router: Router,
@@ -31,10 +32,11 @@ export class RegisterPage implements OnInit {
   }
   registerForm = new FormGroup({
     id: new FormControl(),
-    name: new FormControl(null, [Validators.required]),
+    fname: new FormControl(null, [Validators.required]),
+    lname: new FormControl(null, [Validators.required]),
     mobile: new FormControl(null, [Validators.required]),
-    shopName: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
+    confirmpassword: new FormControl(null, [Validators.required]),
     role: new FormControl('SHOP KEEPER'),
   });
 
@@ -43,6 +45,8 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
+    console.log(this.registerForm.value);
+    
     this.submitted = true;
     if (this.registerForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
@@ -58,8 +62,8 @@ export class RegisterPage implements OnInit {
     let formData: any = this.registerForm.value;
     this.storageService.set('mobile', formData.mobile);
     formData.role = 'SHOP KEEPER';
-    formData.deviceInfo = newObj;
-    this.authService.createUser(formData).subscribe((success: any) => {
+      formData.deviceInfo = newObj;
+      this.authService.createUser(formData).subscribe((success: any) => {
       this.spinner.hideLoader();
       this.registerForm.reset();
       this.submitted = false;
@@ -76,4 +80,9 @@ export class RegisterPage implements OnInit {
   async open() {
     await Browser.open({ url: '' });
   }
+
+  
+
+  
+  
 }
