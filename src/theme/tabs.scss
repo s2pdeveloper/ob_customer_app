@@ -6,7 +6,7 @@ ion-tab-bar {
   ion-tab-button {
     --background-focused: var(--ion-color-1);
     --color-selected: var(--ion-color-2);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 
     ion-icon {
       font-size: 1.5em;
@@ -15,7 +15,7 @@ ion-tab-bar {
 }
 
 ion-segment {
-  --background: var(--ion-color-light-shade);
+  --background: var(--ion-color-praimary-shade);
   padding: 5px !important;
   overflow: hidden;
   border-radius: 1rem;
@@ -32,8 +32,8 @@ ion-segment {
     --padding-bottom: 0;
     --padding-start: 0;
     --indicator-color: transparent;
-    --transition: var(--ion-color-light);
-    --indicator-box-shadow: 0 20px 15px -3px rgba(70, 66, 66, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --transition: var(--ion-color-primary);
+    --indicator-box-shadow: 0 20px 15px -3px rgba(71, 69, 69, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     ion-icon {
       margin-right: 3px;
     }
