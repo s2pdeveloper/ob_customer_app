@@ -11,7 +11,7 @@ export class AuthService {
   routes: any = {
     register: 'user/signup',
     login: 'customer/login',
-    getByIdPath: (id) => `user/profile?id=${id}`,
+    getByIdPath: (id) => `customer/getProfile/${id}`,
     updatePath: (id) => `user/update?id=${id}`,
     forget_password: 'user/forgot-password',
     reset_password: 'user/reset-password',

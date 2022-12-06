@@ -263,7 +263,7 @@
   <ion-toolbar color="light">
     <ion-tabs>
       <ion-tab-bar slot="bottom" >
-        <ion-tab-button tab="home">
+        <ion-tab-button tab="home" (click)="home()">
           <ion-icon name="home" color="primary" ></ion-icon>
           <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
@@ -283,7 +283,7 @@
           <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
     
-        <ion-tab-button tab="profile">
+        <ion-tab-button tab="profile" (click)="profile()">
           <ion-icon name="person" color="primary"  ></ion-icon>
           <!-- <ion-badge>5</ion-badge> -->
         </ion-tab-button>

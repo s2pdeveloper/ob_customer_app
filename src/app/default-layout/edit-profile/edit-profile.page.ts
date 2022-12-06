@@ -26,7 +26,7 @@ export class EditProfilePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.user = this.localStorage.get('s2pUser');
+    this.user = this.localStorage.get('OBUser');
     this.getById();
   }
 
@@ -43,10 +43,20 @@ export class EditProfilePage implements OnInit {
 
   registerForm = new FormGroup({
     id: new FormControl(),
-    name: new FormControl(null, [Validators.required]),
     mobile: new FormControl(null, [Validators.required]),
-    shopName: new FormControl(null, [Validators.required]),
-    address: new FormControl(null),
+    customerName: new FormControl(null, [Validators.required]),
+    line1: new FormControl(null),
+    key: new FormControl(null),
+  firstName: new FormControl(null,[Validators.required]),
+  lastName: new FormControl(null,[Validators.required]),
+  aboutUs: new FormControl(null,),
+  email: new FormControl(null,[Validators.required]),
+  password: new FormControl(null,[Validators.required]),
+  confirmPassword: new FormControl(null,[Validators.required]),
+  city: new FormControl(null,),
+  status: new FormControl(null,),
+  role: new FormControl(null,),
+image:new FormControl(null,)
   });
 
   get form() {
