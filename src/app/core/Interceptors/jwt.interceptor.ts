@@ -23,7 +23,7 @@ export class JwtInterceptor implements HttpInterceptor {
       if (OBUser && OBUser.token) {
         request = request.clone({
           setHeaders: {
-            authorization: `Bearer  ${OBUser.token}`,
+            authorization: `Bearer ${OBUser.token}`,
           },
         });
       }

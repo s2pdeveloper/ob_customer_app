@@ -12,7 +12,7 @@ export class AuthService {
     register: 'user/signup',
     login: 'customer/login',
     getByIdPath: (id) => `customer/getProfile/${id}`,
-    updatePath: (id) => `user/update?id=${id}`,
+    updatePath: (id) => `customer/update/${id}`,
     forget_password: 'user/forgot-password',
     reset_password: 'user/reset-password',
     set_password: 'user/set-password',

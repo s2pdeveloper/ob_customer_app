@@ -33,8 +33,8 @@ export class EditProfilePage implements OnInit {
   getById() {
     // this.spinner.showLoader();
     this.loaded = false;
-    this.authService.profile(this.user.id).subscribe((success) => {
-      // console.log('success', success);
+    this.authService.profile(this.user._id).subscribe((success) => {
+      console.log('success', success);
       this.registerForm.patchValue(success);
       // this.spinner.hideLoader();
       this.loaded = true;
@@ -42,21 +42,22 @@ export class EditProfilePage implements OnInit {
   }
 
   registerForm = new FormGroup({
-    id: new FormControl(),
-    mobile: new FormControl(null, [Validators.required]),
-    customerName: new FormControl(null, [Validators.required]),
-    line1: new FormControl(null),
-    key: new FormControl(null),
-  firstName: new FormControl(null,[Validators.required]),
-  lastName: new FormControl(null,[Validators.required]),
-  aboutUs: new FormControl(null,),
-  email: new FormControl(null,[Validators.required]),
-  password: new FormControl(null,[Validators.required]),
-  confirmPassword: new FormControl(null,[Validators.required]),
-  city: new FormControl(null,),
-  status: new FormControl(null,),
-  role: new FormControl(null,),
-image:new FormControl(null,)
+     id: new FormControl(),
+    mobile: new FormControl(''),
+    
+    // line1: new FormControl(null),
+    
+  firstName: new FormControl(''),
+  lastName: new FormControl(''),
+   email: new FormControl(),
+  // password: new FormControl(null,[Validators.required]),
+  // confirmPassword: new FormControl(null,[Validators.required]),
+  // city: new FormControl(null,),
+  // status: new FormControl(null,),
+  // role: new FormControl(null,),
+// image:new FormControl(null,)
+// customerName: new FormControl(null, [Validators.required]),
+// key: new FormControl(null),
   });
 
   get form() {
@@ -84,4 +85,6 @@ image:new FormControl(null,)
         this.router.navigate(['/profile-page']);
       });
   }
-}
+  
+  }
+

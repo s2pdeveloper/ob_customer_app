@@ -19,15 +19,14 @@ export class ProfilePagePage implements OnInit {
   customerName: string;
   firstName: string;
   lastName: string;
-  aboutUs: string;
   email: string;
   mobile: string;
-  password: string;
-  conformPassword: string;
+  // password: string;
+  // conformPassword: string;
   line1: string;
   city: string;
-  status: string;
-  role: string;
+  // status: string;
+  // role: string;
 
 
 
@@ -52,9 +51,12 @@ export class ProfilePagePage implements OnInit {
     // this.spinner.showLoader();
     this.loaded = false;
     this.authService.profile(this.user._id).subscribe((success) => {
+      console.log("success",success);
       this.userDetails = success;
+      
+      
       // this.spinner.hideLoader();
-      this.loaded = true;
+      this.loaded = false;
     });
   }
   navigateTo(path, _id) {

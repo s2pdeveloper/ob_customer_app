@@ -6,7 +6,11 @@
     </div>
 
     <form [formGroup]="loginForm">
-      <ion-item fill="solid  outline" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+
+      
+      <ion-item  
+      class="input-class" 
+      fill="outline" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label position="floating" class="font" color="">
 
           <ion-icon name="person-circle-outline"></ion-icon>&nbsp;
@@ -14,23 +18,29 @@
 
           <ion-note color="danger">*</ion-note>
         </ion-label>
+        <!-- <ion-input
+          placeholder="{{ 'mobileNumber' | translate}}"
+          formControlName="mobile" 
+        ></ion-input> -->
 
 
-        <ion-input formControlName="mobile" autocomplete="on" clearInput></ion-input>
+        <ion-input formControlName="mobile" autocomplete="on" clearInput></ion-input> 
       </ion-item>
       <app-validation-messages [control]="form.mobile">
       </app-validation-messages>
 
-      <ion-item fill="solid outline " [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
+      <ion-item 
+      class="input-class"
+       fill="outline" [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
 
         <ion-label position="floating" style=color:black>
 
-          <ion-icon name="bag-outline"></ion-icon>&nbsp;
+          <ion-icon  class="mobile" name="bag-outline"></ion-icon>&nbsp;
           {{ 'password' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
 
-        <ion-input formControlName="password" [type]="showEye ? 'password':'text'" name="password" autocomplete="on"
+        <ion-input  formControlName="password" [type]="showEye ? 'password':'text'" name="password" autocomplete="on"
           clearInput></ion-input>
 
 
