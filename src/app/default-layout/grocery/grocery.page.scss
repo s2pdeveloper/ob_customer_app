@@ -1,0 +1,40 @@
+.card{
+    width: 140px;
+    height:200px;
+    text-align: center; 
+    font-size: small;
+    background-color: transparent;
+}
+// .ion-card-title{
+//     font-size: small;
+// }
+.size{
+font-size: small;
+
+}
+ion-button{
+    border-radius: 10px;
+    margin: 2 8px;
+    margin-top: 0px;
+    margin-right: 4px;
+    margin-bottom: 0px;
+    margin-left: 4px;
+    min-width: auto;
+    
+    
+}
+ion-select{
+    margin: 2 8px;
+    margin-top: 0px;
+    margin-right: 4px;
+    margin-bottom: 0px;
+    margin-left: 4px;
+    min-width: auto;
+    background-color:rgb(24, 174, 174) ;
+    border-radius: 14px;
+    color:white;
+
+}
+ion-label{
+    color: whitesmoke;
+}

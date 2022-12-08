@@ -15,5 +15,8 @@ export class CategoryPage implements OnInit {
   description(){
     this.router.navigate(['/description'])
   }
+  grocery(){
+    this.router.navigate(['/grocery'])
+  }
 
 }

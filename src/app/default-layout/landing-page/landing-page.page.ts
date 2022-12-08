@@ -79,7 +79,7 @@ export class LandingPagePage implements OnInit {
      this.router.navigate(['/category'])
   }
   proCard(){
-    this.router.navigate(['/catagory'])
+    this.router.navigate(['/grocery'])
   }
   profile(){
     this.router.navigate(['/profile-page'])

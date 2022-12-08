@@ -124,6 +124,10 @@ const routes: Routes = [
     path: 'description',
     loadChildren: () => import('./default-layout/description/description.module').then( m => m.DescriptionPageModule)
   },
+  {
+    path: 'grocery',
+    loadChildren: () => import('./default-layout/grocery/grocery.module').then( m => m.GroceryPageModule)
+  },
 
 
 

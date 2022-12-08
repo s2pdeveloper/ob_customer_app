@@ -3,7 +3,7 @@ ion-content {
         border-radius: 2rem;
         --background: transparent;
         background: transparent;
-        box-shadow: none;
+        box-shadow:inset;
 
         ion-card-content {
             padding-top: 0;
@@ -23,8 +23,8 @@ ion-content {
             padding: 1rem 0;
         }
     }
-    .back{
-        color: azure !important;
-    }
+    // .back{
+    //     color: azure !important;
+    // }
 }
 
