@@ -24,20 +24,21 @@ export class RegisterPage implements OnInit {
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ionViewWillEnter(): void {
     this.getDeviceInfo();
   }
+
   registerForm = new FormGroup({
     id: new FormControl(),
-    fname: new FormControl(null, [Validators.required]),
-    lname: new FormControl(null, [Validators.required]),
-    mobile: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required]),
-    confirmpassword: new FormControl(null, [Validators.required]),
-    role: new FormControl('SHOP KEEPER'),
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    mobile: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+    role: new FormControl('CUSTOMER'),
   });
 
   get form() {
@@ -46,7 +47,6 @@ export class RegisterPage implements OnInit {
 
   register() {
     console.log(this.registerForm.value);
-    
     this.submitted = true;
     if (this.registerForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
@@ -55,15 +55,15 @@ export class RegisterPage implements OnInit {
     this.spinner.showLoader();
     let newObj: any = Object.assign(
       {
-        deviceId: this.storageService.get('s2pUserDeviceId'),
+        deviceId: this.storageService.get('OBUserDeviceId'),
       },
       this.deviceInfo
     );
     let formData: any = this.registerForm.value;
     this.storageService.set('mobile', formData.mobile);
-    formData.role = 'SHOP KEEPER';
-      formData.deviceInfo = newObj;
-      this.authService.createUser(formData).subscribe((success: any) => {
+    formData.role = 'CUSTOMER';
+    formData.deviceInfo = newObj;
+    this.authService.createUser(formData).subscribe((success: any) => {
       this.spinner.hideLoader();
       this.registerForm.reset();
       this.submitted = false;
@@ -81,8 +81,8 @@ export class RegisterPage implements OnInit {
     await Browser.open({ url: '' });
   }
 
-  
 
-  
-  
+
+
+
 }

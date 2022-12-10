@@ -48,7 +48,7 @@ export class ChangePwdPage implements OnInit {
 
   ngOnInit() {}
   ionViewWillEnter() {
-    this.passForm.controls.id.setValue(this.localStorage.get('s2pUser').id);
+    this.passForm.controls.id.setValue(this.localStorage.get('OBUser').id);
   }
   ngOnDestroy() {}
 

@@ -40,7 +40,7 @@ export class LandingPagePage implements OnInit {
   ngOnInit() {}
   
   // ionViewWillEnter() {
-  //   this.currentUser = this.localStorage.get('s2pUser');
+  //   this.currentUser = this.localStorage.get('OBUser');
   //   this.getAllCustomerDashBoard();
   // }
   // doRefresh(event) {

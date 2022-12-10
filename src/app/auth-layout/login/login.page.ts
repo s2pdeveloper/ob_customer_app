@@ -13,6 +13,7 @@ const { Device, Geolocation } = Plugins;
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
+
 export class LoginPage implements OnInit {
   submitted: boolean = false;
   returnUrl: string;
@@ -26,18 +27,14 @@ export class LoginPage implements OnInit {
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   loginForm = new FormGroup({
-     
-     mobile: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    mobile: new FormControl('7028874108', [Validators.required]),
+    password: new FormControl('admin@1234', [Validators.required]),
   });
 
   ngOnInit() {
-    //  this.loginForm();
-    //  this.localStorage.getItem('OBUser');
-    // get return url from route parameters or default to "/"
     this.returnUrl =
       this.route.snapshot.queryParams[`returnUrl`] || '/landing-page';
   }
@@ -56,9 +53,8 @@ export class LoginPage implements OnInit {
       if (typeof window !== 'undefined') {
         this.localStorage.set('OBUser', success);
       }
-       this.router.navigateByUrl(this.returnUrl);
-     
-      this.saveDeviceToken(success.id);
+      this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
+      this.saveDeviceToken(success._id);
       this.spinner.hideLoader();
     });
   }
@@ -75,7 +71,7 @@ export class LoginPage implements OnInit {
         deviceId: this.localStorage.get('OBUserDeviceId'),
       },
       this.deviceInfo
-    );    
+    );
     newObj.deviceId &&
       this.authService.createAndUpdateUserDevice(newObj).subscribe();
   }

@@ -1,0 +1,234 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="view-profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ 'editProfile' | translate}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="loaded">
+
+  <ion-card>
+    <div class="img">
+      <ion-avatar class="avatar">
+        <img  src="assets/images/placeholder_profile.png">
+        <img [src]="form.path.value" *ngIf="fileUploaded">
+      </ion-avatar>
+      <ion-text>
+        <ion-chip> {{ 'changeProfile' | translate}}</ion-chip>
+        <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+          (change)="uploadFile($event)" required>
+      </ion-text>
+    </div>
+
+
+    <form [formGroup]="profileForm">
+      <ion-item fill="outline" class="input"
+        [class.invalid]="!form.firstName.valid && (form.firstName.dirty || submitted)">
+        <ion-label position="floating">
+          {{ 'FirstName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input type="text" placeholder="{{ 'FirstName' | translate}}" formControlName="firstName"></ion-input>
+      </ion-item>
+      <app-validation-messages [control]="form.firstName">
+      </app-validation-messages>
+
+      <ion-item fill="outline" class="input"
+        [class.invalid]="!form.lastName.valid && (form.lastName.dirty || submitted)">
+        <ion-label position="floating">
+          {{ 'LastName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input type="text" placeholder="{{ 'LastName' | translate}}" formControlName="lastName"></ion-input>
+      </ion-item>
+      <app-validation-messages [control]="form.lastName">
+      </app-validation-messages>
+
+      <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+        <ion-label position="floating">
+          {{ 'mobileNumber' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input maxlength="10" minlength="10" type="number" placeholder="{{ 'mobile' | translate}}"
+          formControlName="mobile"></ion-input>
+      </ion-item>
+      <app-validation-messages [control]="form.mobile">
+      </app-validation-messages>
+
+      <ion-item fill="outline" class="input" [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
+        <ion-label position="floating">
+          {{ 'email' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input type="text" placeholder="{{ 'email' | translate}}" formControlName="email"></ion-input>
+      </ion-item>
+      <app-validation-messages [control]="form.email">
+      </app-validation-messages>
+      <div class="accordian">
+        <ion-accordion-group expand="inset">
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+              <ion-label>Address</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-label formGroupName="address">
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'address' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'address' | translate}}" formControlName="line1"></ion-input>
+                </ion-item>
+  
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'city' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'city' | translate}}" formControlName="city"></ion-input>
+                </ion-item>
+  
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'state' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'state' | translate}}" formControlName="state"></ion-input>
+                </ion-item>
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Country' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Country' | translate}}" formControlName="country"></ion-input>
+                </ion-item>
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'pinCode' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'pinCode' | translate}}" formControlName="pinCode"></ion-input>
+                </ion-item>
+              </ion-label>
+  
+  
+              <div class="ion-text-center ion-margin-vertical">
+                <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
+                  {{ 'submit' | translate}}
+                </ion-button>
+              </div>
+  
+              
+            </div>
+          </ion-accordion>
+          <ion-accordion value="second">
+            <ion-item slot="header" color="light">
+              <ion-label>Links</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+  
+              <ion-label formGroupName="links">
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Facebook' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Facebook' | translate}}" formControlName="facebook"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Instagram' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Instagram' | translate}}" formControlName="insta"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Youtube' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Youtube' | translate}}" formControlName="youtube"></ion-input>
+                </ion-item>
+              </ion-label>
+  
+              <div class="ion-text-center ion-margin-vertical">
+                <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
+                  {{ 'submit' | translate}}
+                </ion-button>
+              </div>
+  
+            </div>
+          </ion-accordion>
+          <ion-accordion value="third">
+            <ion-item slot="header" color="light">
+              <ion-label>Schedule</ion-label>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+              <ion-label formGroupName="schedule">
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Day' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Day' | translate}}" formControlName="day"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Open' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Open' | translate}}" formControlName="open"></ion-input>
+                </ion-item>
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Close' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Close' | translate}}" formControlName="close"></ion-input>
+                </ion-item>
+  
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'Start Time' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'Start Time' | translate}}" formControlName="startTime">
+                  </ion-input>
+                </ion-item>
+  
+                <ion-item fill="outline" class="input">
+                  <ion-label position="floating">
+                    {{ 'End Time' | translate}}
+                    <ion-note color="danger">*</ion-note>
+                  </ion-label>
+                  <ion-input type="text" placeholder="{{ 'End Time' | translate}}" formControlName="endTime"></ion-input>
+                </ion-item>
+              </ion-label>
+  
+              <div class="ion-text-center ion-margin-vertical">
+                <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
+                  {{ 'submit' | translate}}
+                </ion-button>
+              </div>
+  
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+
+
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button color="primary" expand="block" shape="round" class="btn" (click)="updateProfile()">
+          {{ 'submit' | translate}}
+        </ion-button>
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

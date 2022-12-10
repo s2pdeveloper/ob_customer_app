@@ -4,8 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'onboarding',
+    redirectTo: 'app/tabs/landing-page',
     pathMatch: 'full',
+  },
+  {
+    path:'app',
+    loadChildren:()=>import('./default-layout/tabs/tabs.module').then(m =>m.TabsPageModule)
   },
   {
     path: 'login',
@@ -26,13 +30,13 @@ const routes: Routes = [
         (m) => m.ForgetPwdPageModule
       ),
   },
-  {
-    path: 'landing-page',
-    loadChildren: () =>
-      import('./default-layout/landing-page/landing-page.module').then(
-        (m) => m.LandingPagePageModule
-      ),
-  },
+  // {
+  //   path: 'landing-page',
+  //   loadChildren: () =>
+  //     import('./default-layout/landing-page/landing-page.module').then(
+  //       (m) => m.LandingPagePageModule
+  //     ),
+  // },
   {
     path: 'profile-page',
     loadChildren: () =>
@@ -40,6 +44,17 @@ const routes: Routes = [
         (m) => m.ProfilePagePageModule
       ),
   },
+  {
+    path: 'view-profile',
+    // canLoad: [AuthGuard],
+    loadChildren: () => import('./default-layout/setting/view-profile/view-profile.module').then(m => m.ViewProfilePageModule)
+  },
+  {
+    path: 'edit-profile',
+    // canLoad: [AuthGuard],
+    loadChildren: () => import('./default-layout/setting/edit-profile/edit-profile.module').then(m => m.EditProfilePageModule)
+  },
+
   {
     path: 'change-pwd',
     loadChildren: () =>
@@ -111,7 +126,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
-    loadChildren: () => import('./default-layout/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+    loadChildren: () => import('./default-layout/setting/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   },
   {
     path: 'notification-list',
@@ -120,9 +135,14 @@ const routes: Routes = [
   {
     path: 'category',
     loadChildren: () => import('./default-layout/category/category.module').then( m => m.CategoryPageModule)
-  },  {
+  },
+  {
     path: 'description',
     loadChildren: () => import('./default-layout/description/description.module').then( m => m.DescriptionPageModule)
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('./default-layout/setting/setting.module').then( m => m.SettingPageModule)
   },
 
 

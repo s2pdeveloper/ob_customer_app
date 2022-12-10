@@ -1,0 +1,11 @@
+ion-fab-list {
+    width: 65vw !important;
+    background-color: var(--ion-color-6);
+
+    .text-toast {
+        padding: 5px;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ion-color-1);
+    }
+}
