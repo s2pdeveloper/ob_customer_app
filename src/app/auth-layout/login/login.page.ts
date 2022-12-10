@@ -79,4 +79,5 @@ export class LoginPage implements OnInit {
     newObj.deviceId &&
       this.authService.createAndUpdateUserDevice(newObj).subscribe();
   }
+  
 }

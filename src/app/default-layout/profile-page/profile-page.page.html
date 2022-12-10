@@ -27,7 +27,7 @@
 
       <ion-item class="ion-margin-top">
         <ion-icon color="secondary" name="customerName"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ customerName }} </ion-label> 
+         <!-- <ion-label class="ion-margin-start"> {{ customerName }} </ion-label>  -->
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
             {{ userDetails?.customerName  }}
@@ -36,7 +36,7 @@
       </ion-item>
       <ion-item>
         <ion-icon color="secondary" name="person-circle-sharp"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ firstName }} </ion-label>  
+         <!-- <ion-label class="ion-margin-start"> {{ firstName }} </ion-label>   -->
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
             {{ userDetails.firstName }} {{ userDetails.lastName }}
@@ -55,14 +55,14 @@
 
       <ion-item>
         <ion-icon class="" name="call" color="secondary"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ mobile }} </ion-label>  
+         <!-- <ion-label class="ion-margin-start"> {{ mobile }} </ion-label>   -->
         <ion-label class="ion-margin-start">
           {{ userDetails.mobile }}
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-icon class="" color="secondary" name="mail"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ email }} </ion-label> 
+         <!-- <ion-label class="ion-margin-start"> {{ email }} </ion-label>  -->
         <ion-label class="ion-margin-start" >
           {{ userDetails.email }}
         </ion-label>
@@ -78,7 +78,7 @@
 
       <ion-item>
         <ion-icon name="storefront-outline"></ion-icon> 
-        <ion-label class="ion-margin-start"> {{ address}} </ion-label> 
+        <!-- <ion-label class="ion-margin-start"> {{ address}} </ion-label>  -->
         <ion-label class="ion-margin-start" >
           {{ userDetails?.address?.line1 }} {{ userDetails?.address?.line2 }}
            {{ userDetails?.address?.city }} {{ userDetails?.address?.state}} {{ userDetails?.address?.contry}}
@@ -87,7 +87,7 @@
       <ion-item>
         <ion-icon name="toggle-outline"></ion-icon>
         <ion-icon class="" color="secondary" name="status"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ status }} </ion-label> 
+         <!-- <ion-label class="ion-margin-start"> {{ status }} </ion-label>  -->
         <ion-label class="ion-margin-start" >
           {{ userDetails.status }}
         </ion-label>
@@ -95,7 +95,7 @@
       <ion-item>
         
         <ion-icon color="secondary"  name="person-circle-sharp" ></ion-icon>
-        <ion-label class="ion-margin-start"> {{ role }} </ion-label>  
+        <!-- <ion-label class="ion-margin-start"> {{ role }} </ion-label>   -->
         <ion-label class="ion-margin-start" >
           {{ userDetails.role }}
         </ion-label>

@@ -1,6 +1,6 @@
 .card{
-    width: 140px;
-    height:200px;
+    width: 185px;
+    height:220px;
     text-align: center; 
     font-size: small;
     background-color: transparent;
@@ -19,9 +19,22 @@ ion-button{
     margin-right: 4px;
     margin-bottom: 0px;
     margin-left: 4px;
-    min-width: auto;
+    min-width: 70px;
     
     
+}
+.wrapper span{
+    width:100%;
+    text-align: center;
+    font-size:15px;
+    display:flexbox;
+    font-weight: 800;
+
+}
+.wrapper span.num{
+    border-right: 2px solid rgba(185, 183, 183, 0.3);
+    border-left: 2px solid rgba(185, 183, 183, 0.3);
+    font-size: medium;
 }
 ion-select{
     margin: 2 8px;
@@ -33,6 +46,7 @@ ion-select{
     background-color:rgb(24, 174, 174) ;
     border-radius: 14px;
     color:white;
+    min-width: 70px;
 
 }
 ion-label{
