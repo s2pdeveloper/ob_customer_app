@@ -12,6 +12,7 @@ export class CustomerService {
     getAllPath: `customer/getAll`,
     updatePath: (id) => `customer/update/${id}`,
     deletePath: (id) => `customer/delete/${id}`,
+    
   };
   constructor(private http: ApiService) {}
 
@@ -26,8 +27,8 @@ export class CustomerService {
   getAllCustomerDashBoard(params) {
     return this.http.get(this.routes.getAllCustomerDashBoardPath, params);
   }
-  updateCustomer(id, payload) {
-    return this.http.put(this.routes.updatePath(id), payload);
+  updateCustomer(id,payload) {
+    return this.http.put(this.routes.updatePath(id),payload);
   }
   getByCustomerId(id) {
     return this.http.get(this.routes.getByIdPath(id));

@@ -17,18 +17,19 @@
     <ion-button>Buisness</ion-button>
     <ion-button>Retail</ion-button> -->
     <ion-row>
-      <ion-col *ngFor="let b of businessDetails.rows" size="4">
+      <ion-col *ngFor="let b of businessDetails.rows  " size="4">
         
          <!-- <ion-card class="product-card" href="grocery" >  -->
-          <ion-card class="product-card" (click)="proCard()" > 
+          <ion-card class="product-card" (click)=" getByIdCategory(b._id)" > 
   
           <ion-card-header>
           <ion-row>
             <ion-col size="12">
-              
-              
+                           
               <img src="{{b.imageUrl}} ">
-               <ion-note>{{b.name}}</ion-note> 
+               <ion-note>{{b.name}}</ion-note>
+
+               
              
             </ion-col>
           </ion-row>
@@ -37,74 +38,31 @@
          </ion-card> 
       
       </ion-col>
-<!--       
-      <ion-col size="4">
-        <ion-card class="product-card">
-          <ion-row>
-            <ion-col size="12">
-              <img src="../../../assets/image/pharmacy.jpg">
-              
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card class="product-card">
-          <ion-row>
-            <ion-col size="12">
-              <img src="../../../assets/image/shop1.jpg">
-              <ion-note>Shop</ion-note>  
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card class="product-card">
-          <ion-row>
-            <ion-col size="12">
-              <img src="../../../assets/image/ecom.jpg">
-              <ion-note>e-commerce</ion-note>  
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </ion-col>
-      <ion-col size="4">
-        <ion-card class="product-card">
-          <ion-row>
-            <ion-col size="12">
-              <img src="../../../assets/image/parcel.jpg"> 
-              <ion-note>parcel</ion-note>  
-            </ion-col>
-          </ion-row>
-        </ion-card>
-      </ion-col> -->
     </ion-row>
-   
-  
-    <!-- <ion-note >Select Category</ion-note> -->
     <h6>Select Category</h6>
       <!-- <ion-note class="name">See all</ion-note> -->
 <h6 class="name" (click)="seeAll()" >See all</h6> 
     <!-- ------ slide one ---- -->
       <ion-slides autoplay="true">
         <ion-slide>
-            <ion-col size="3">
+            <ion-col *ngFor="let c of categoryDetails.rows " size="3" >
               <ion-card color="success">
                 <ion-row>
                   <ion-col size="12">
   
     <!-- <ion-button routerlink="../services"> -->
-                    <ion-icon name="construct-outline" size="large"  (click)="seeAll()"></ion-icon>
+                    <!-- <ion-icon name="construct-outline" size="large"  (click)="seeAll()"></ion-icon> -->
+                    <img src="{{c.imageUrl}} ">
                   <!-- </ion-button> -->
                   </ion-col>
                 </ion-row>
               </ion-card>
               
-              <ion-note>service</ion-note>
+              <ion-note>{{c.name}}</ion-note>
        
             </ion-col>
 
-            <ion-col size="3">
+            <!-- <ion-col size="3">
               <ion-card color="warning" >
                 <ion-row>
                   <ion-col size="12">
@@ -112,9 +70,9 @@
                   </ion-col>
                 </ion-row>
               </ion-card><ion-note>Food</ion-note>
-            </ion-col>
+            </ion-col> -->
   
-            <ion-col size="3">
+            <!-- <ion-col size="3">
               <ion-card color="dark">
                 <ion-row>
                   <ion-col size="12">
@@ -122,9 +80,9 @@
                   </ion-col>
                 </ion-row>
               </ion-card><ion-note>Cake</ion-note>
-            </ion-col>
+            </ion-col> -->
 
-            <ion-col size="3">
+            <!-- <ion-col size="3">
               <ion-card color="primary">
                 <ion-row>
                   <ion-col size="12">
@@ -133,10 +91,10 @@
                 </ion-row>
               </ion-card><ion-note>Car</ion-note>
             </ion-col>
-        </ion-slide>
+        </ion-slide> -->
 
         <!-- ---slide second--- -->
-        <ion-slide autoplay="true">
+        <!-- <ion-slide autoplay="true">
           <ion-col size="3">
             <ion-card color="success">
               <ion-row>
@@ -145,9 +103,9 @@
                 </ion-col>
               </ion-row>
             </ion-card><ion-note>service</ion-note>
-          </ion-col>
+          </ion-col> -->
   
-          <ion-col size="3">
+          <!-- <ion-col size="3">
             <ion-card color="warning">
               <ion-row>
                 <ion-col size="12">
@@ -156,8 +114,8 @@
               </ion-row>
             </ion-card><ion-note>food</ion-note>
           </ion-col>
-  
-          <ion-col size="3">
+   -->
+          <!-- <ion-col size="3">
             <ion-card color="dark">
               <ion-row>
                 <ion-col size="12">
@@ -165,9 +123,9 @@
                 </ion-col>
               </ion-row>
             </ion-card><ion-note>Cake</ion-note>
-          </ion-col>
+          </ion-col> -->
   
-          <ion-col size="3">
+          <!-- <ion-col size="3">
             <ion-card color="light">
               <ion-row>
                 <ion-col size="12">
@@ -175,7 +133,7 @@
                 </ion-col>
               </ion-row>
             </ion-card><ion-note>Car</ion-note>
-          </ion-col>
+          </ion-col> -->
         </ion-slide>
       </ion-slides>
 
@@ -282,6 +240,7 @@
 
         <ion-tab-button tab="setting" (click)="logout()">
           <ion-icon name="cog-outline" color="primary"></ion-icon>
+         
           <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
     
