@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { callCordovaPlugin } from '@ionic-native/core/decorators/common';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { CustomerService } from 'src/app/service/customer/customer.service';
+import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
+import { CategoryService } from 'src/app/service/category/category.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,73 +11,59 @@ import { CustomerService } from 'src/app/service/customer/customer.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
+
+  businessTypeId: any;
+  user: any;
+  businessArr: any = [];
+  BusinessWithCategoryArr:any=[];
+
   constructor(
     private router: Router,
-    private localStorage: StorageService,
-    private customerService: CustomerService,
+    private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
-    public translate: TranslateService
-  ) {}
-  services: any = {};
-  serviceDetails: any = {};
-  user:any;
-  // myCourse: any = '';
-  // name: any = '';
-  // currentUser: any = {};
-  // customerArr: any = [];
-  // total: number = 0;
-  // count: number = 0;
-  // pageSize: number = 5;
-   loaded: boolean = false;
-  slideOpts = {
-    initialSlide: 1,
-    speed: 400
-  };
-  
-  
+    public translate: TranslateService,
+    private categoryService: CategoryService
 
-  ngOnInit() {}
-  
-  // ionViewWillEnter() {
-  //   this.currentUser = this.localStorage.get('OBUser');
-  //   this.getAllCustomerDashBoard();
-  // }
-  // doRefresh(event) {
-  //   this.getAllCustomerDashBoard();
-  //   event.target.complete();
-  // }
-  // getAllCustomerDashBoard() {
-  //   // this.spinner.showLoader();
-  //   this.loaded = false;
-  //   let params = { pageSize: this.pageSize };
-  //   this.customerService
-  //     .getAllCustomerDashBoard(params)
-  //     .subscribe((success) => {
-  //       this.total = success.calculation[0].total ?? 0.0;
-  //       this.count = success.calculation[0].count ?? 0;
-  //       this.customerArr = success.rows;
-  //       // this.spinner.hideLoader();
-  //       this.loaded = true;
-  //     });
-  // }
-  // navigateTo(path, id) {
-  //   this.router.navigate([path], { queryParams: { id } });
-  // }
+  ) { }
 
-  // allService(){
-  //   this.loaded = false;
-  //   this.customerService.services(this.user.payload).subscribe((success) => {
-  //     this.serviceDetails = success;
-  //     // this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  
-  // this.router.navigate(['/services.page'])
-  // }
-  seeAll(){
-     this.router.navigate(['/category'])
+
+
+  ngOnInit() {
+    this.getAllBusinessType();
   }
-  proCard(){
-    this.router.navigate(['/catagory'])
+
+  getAllBusinessType() {
+    let obj = {};
+    this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
+      console.log('success', success);
+      this.businessArr = success.rows;
+    });
+  }
+
+
+
+  getBusinessAllCategory(ev) {
+    console.log("event", ev);
+    this.getCategoryByBusinessTypeId(ev)
+  }
+
+  getCategoryByBusinessTypeId(businessTypeId) {
+    let obj: any = {
+      businessTypeId: businessTypeId
+    };
+    this.categoryService
+      .getAll(obj)
+      .subscribe((success) => {
+        console.log("success------------", success);
+        this.BusinessWithCategoryArr=success.rows;
+      });
+  }
+
+
+  seeAll() {
+    this.router.navigate(['/category']);
+  }
+  proCard() {
+    this.router.navigate(['/category']);
   }
 }

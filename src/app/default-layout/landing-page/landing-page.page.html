@@ -1,81 +1,29 @@
 <ion-content>
 
   <ion-row>
-    <ion-col>
-      <ion-icon class="location" name="location"></ion-icon>
+    <ion-col><ion-icon class="location" name="location"></ion-icon>
       <ion-note class="par">Location</ion-note>
-      <!-- <ion-note>Nagpur</ion-note> -->
     </ion-col>
     <ion-col>
       <div class="avtar">
-        <img src="../../../assets/image/man.png" alt="prfile">
+        <img src="../../../assets/image/man.png" alt="profile">
       </div>
     </ion-col>
   </ion-row>
 
   <ion-searchbar show-clear-button="focus"></ion-searchbar>
-  <!-- <ion-button class="btn" color="tertiary" >Product</ion-button>
-    <ion-button>Trainding</ion-button>
-    <ion-button>Buisness</ion-button>
-    <ion-button>Retail</ion-button> -->
+
   <ion-row>
-    <ion-col size="4">
-
-      <ion-card class="product-card" href="category">
-
+    <ion-col *ngFor="let b of businessArr" size="4">
+      <ion-card class="product-card" (click)="getBusinessAllCategory(b._id)">
         <ion-card-header>
           <ion-row>
             <ion-col size="12">
-
-              <img src="../../../assets/image/grocery.jpg">
-              <ion-note>Grocery</ion-note>
-
+              <img src="{{b.imageUrl}} ">
+              <ion-note>{{b.name}}</ion-note>
             </ion-col>
           </ion-row>
         </ion-card-header>
-
-      </ion-card>
-
-    </ion-col>
-
-    <ion-col size="4">
-      <ion-card class="product-card">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../../assets/image/pharmacy.jpg">
-
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-col>
-    <ion-col size="4">
-      <ion-card class="product-card">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../../assets/image/shop1.jpg">
-            <ion-note>Shop</ion-note>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-col>
-    <ion-col size="4">
-      <ion-card class="product-card">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../../assets/image/ecom.jpg">
-            <ion-note>e-commerce</ion-note>
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </ion-col>
-    <ion-col size="4">
-      <ion-card class="product-card">
-        <ion-row>
-          <ion-col size="12">
-            <img src="../../../assets/image/parcel.jpg">
-            <ion-note>parcel</ion-note>
-          </ion-col>
-        </ion-row>
       </ion-card>
     </ion-col>
   </ion-row>
@@ -88,100 +36,15 @@
   <!-- ------ slide one ---- -->
   <ion-slides autoplay="true">
     <ion-slide>
-      <ion-col size="3">
-        <ion-card color="success">
+      <ion-col *ngFor="let b of BusinessWithCategoryArr" size="3">
+        <ion-card>
           <ion-row>
             <ion-col size="12">
-
-              <!-- <ion-button routerlink="../services"> -->
-              <ion-icon name="construct-outline" size="large"></ion-icon>
-              <!-- </ion-button> -->
+              <img src="{{b.imageUrl}} ">
             </ion-col>
           </ion-row>
         </ion-card>
-
-        <ion-note>service</ion-note>
-
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="warning">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="restaurant-outline" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>Food</ion-note>
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="dark">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="rocket-outline" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>Cake</ion-note>
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="primary">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="car-sport" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>Car</ion-note>
-      </ion-col>
-    </ion-slide>
-
-    <!-- ---slide second--- -->
-    <ion-slide autoplay="true">
-      <ion-col size="3">
-        <ion-card color="success">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="construct-outline" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>service</ion-note>
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="warning">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="restaurant-outline" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>food</ion-note>
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="dark">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="rocket-outline" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>Cake</ion-note>
-      </ion-col>
-
-      <ion-col size="3">
-        <ion-card color="light">
-          <ion-row>
-            <ion-col size="12">
-              <ion-icon name="car-sport" size="large"></ion-icon>
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>Car</ion-note>
+        <ion-note>{{b.name}}</ion-note>
       </ion-col>
     </ion-slide>
   </ion-slides>
@@ -228,8 +91,7 @@
             <ion-icon name="construct-outline" size="large"></ion-icon>
           </ion-col>
         </ion-row>
-      </ion-card>
-      <ion-note>service</ion-note>
+      </ion-card><ion-note>service</ion-note>
     </ion-col>
 
     <ion-col size="3">
@@ -239,8 +101,7 @@
             <ion-icon name="restaurant-outline" size="large"></ion-icon>
           </ion-col>
         </ion-row>
-      </ion-card>
-      <ion-note>food</ion-note>
+      </ion-card><ion-note>food</ion-note>
     </ion-col>
   </ion-row>
   <h6>Most Popular </h6>
@@ -254,8 +115,7 @@
 
           </ion-col>
         </ion-row>
-      </ion-card>
-      <ion-note>service</ion-note>
+      </ion-card><ion-note>service</ion-note>
     </ion-col>
 
     <ion-col size="3">
@@ -265,37 +125,8 @@
             <ion-icon name="restaurant-outline" size="large"></ion-icon>
           </ion-col>
         </ion-row>
-      </ion-card>
-      <ion-note>food</ion-note>
+      </ion-card><ion-note>food</ion-note>
     </ion-col>
   </ion-row>
 
 </ion-content>
-
-<!-- <ion-footer>
-  <ion-toolbar color="light">
-    <ion-tabs>
-      <ion-tab-bar slot="bottom" >
-        <ion-tab-button tab="home">
-          <ion-icon name="home" color="primary" ></ion-icon>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="booking">
-          <ion-icon name="calendar" color="primary" ></ion-icon>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="chat">
-          <ion-icon name="chatbox-ellipses" color="primary"  ></ion-icon>
-        </ion-tab-button>
-
-        <ion-tab-button tab="payment">
-          <ion-icon name="card" color="primary" ></ion-icon>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="Setting">
-          <ion-icon name="settings" color="primary"  routerLink=""></ion-icon>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
-  </ion-toolbar>
-</ion-footer> -->

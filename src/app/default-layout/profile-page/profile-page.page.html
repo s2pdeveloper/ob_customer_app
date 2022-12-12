@@ -1,8 +1,5 @@
 <ion-toolbar>
   <ion-title>Profile Details</ion-title>
-  <!-- <ion-buttons slot="start">
-    <ion-menu-button menu="main-menu" icon="grid-outline"></ion-menu-button>
-  </ion-buttons> -->
   <ion-buttons slot="start" class="">
     <ion-back-button defaultHref="landing-page" mode="md"></ion-back-button>
   </ion-buttons>
@@ -50,38 +47,16 @@
           {{ userDetails.mobile }}
         </ion-label>
       </ion-item>
-      <!-- <ion-item>
-        <ion-icon class="" color="secondary" name="mail"></ion-icon>
-        <ion-label class="ion-margin-start"> {{ 'Email' }} </ion-label>
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.email }}
-        </ion-label>
-      </ion-item> -->
+  
       <ion-item lines="none">
         <ion-icon class="" color="secondary" name="location"></ion-icon>
         <!-- <ion-label class="ion-margin-start"> {{ 'Address' }} </ion-label> -->
         <ion-label class="ion-margin-start">
-          {{ userDetails.address }}
+          {{ userDetails?.address?.line1 }}
         </ion-label>
       </ion-item>
 
-      <!-- <ion-item>
-        <ion-icon class="" name="logo-whatsapp" color="secondary"></ion-icon>
-        <ion-label class="ion-margin-start"> {{ 'WhatsAPP No ' }} </ion-label>
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.anotherMobile }}
-        </ion-label>
-      </ion-item> -->
 
-      <!-- <ion-item>
-        <ion-icon class="" name="location" color="secondary"></ion-icon>
-        <ion-label class="ion-margin-start"> {{ 'Balance' }} </ion-label>
-        <ion-label class="ion-margin-start" >
-          <ion-text color="primary" class="text-bold">
-            ₹ <b>{{ userDetails.balance }}</b>
-          </ion-text>
-        </ion-label>
-      </ion-item> -->
     </ion-card-content>
   </ion-card>
 </ion-content>
