@@ -35,8 +35,8 @@ export class AuthService {
   updateUser(id, payload) {
     return this.http.put(this.routes.updatePath(id), payload);
   }
-  profile(id) {
-    return this.http.get(this.routes.getByIdPath(id));
+  profile(_id) {
+    return this.http.get(this.routes.getByIdPath(_id));
   }
   getCurrentUser() {
     let x: any = localStorage.getItem('Student');

@@ -30,26 +30,7 @@
         <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
           (click)="showEye = !showEye">
         </ion-icon>
-      </ion-item>
-      <app-validation-messages [control]="form.password">
-      </app-validation-messages>
-
-      <div class="ion-text-center ion-margin-vertical">
-        <ion-button expand="full" shape="round" class="" color="primary" (click)="login()">
-          Login
-        </ion-button>
-      </div>
-      <div class="ion-text-center signup">
-        <h6>
-          Not have an account yet ?
-          <a href="javascript:void()" routerLink="/register">
-            <ion-label color="danger">
-              <b>Sign Up</b>
-            </ion-label>
-          </a>
-        </h6>
-      </div>
-
+        </ion-item>
     </form>
   </ion-card>
 </ion-content>

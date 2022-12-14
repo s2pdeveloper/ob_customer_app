@@ -1,0 +1,116 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start"  >
+      <ion-back-button defaultHref="profile-page" mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{ 'editProfile' | translate}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <form [formGroup]="registerForm">
+      <ion-item
+        class="input-class"
+        fill="outline" 
+        [class.invalid]="!form.firstName.valid && (form.firstName.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'firstName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          placeholder="{{ 'firstName' | translate}}"
+          formControlName="firstName"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.firstName">
+      </app-validation-messages>
+
+        <ion-item
+        class="input-class"
+        fill="outline"
+        
+        [class.invalid]="!form. lastName.valid && (form. lastName.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ ' lastName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+          placeholder="{{ ' lastName' | translate}}"
+          formControlName="lastName"
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.lastName">
+      </app-validation-messages>
+
+       <ion-item
+        class="input-class"
+        fill="outline"
+        [class.invalid]="!form.email.valid && (form.email.dirty || submitted)"
+      >
+        <ion-label position="stacked">
+          {{ 'email' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input
+        type="text"
+          placeholder="{{ 'emailNumber' | translate}}"
+          formControlName="email"
+       
+        ></ion-input>
+      </ion-item>
+      <app-validation-messages class="error-message" [control]="form.email">
+      </app-validation-messages>
+
+      <ion-item
+      class="input-class"
+      fill=" outline"
+      [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'mobile' | translate}}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        placeholder="{{ 'mobile' | translate}}"
+        formControlName="mobile"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.mobile">
+    </app-validation-messages> 
+    <!-- <ion-item
+      class="input-class"
+      [class.invalid]="!form.line1.valid && (form.line1.dirty || submitted)"
+    >
+      <ion-label position="stacked">
+        {{ 'line1' | translate}}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input
+        placeholder="{{ 'line1' | translate}}"
+        formControlName="line1"
+      ></ion-input>
+    </ion-item>
+    <app-validation-messages class="error-message" [control]="form.line1">
+    </app-validation-messages>   -->
+      
+   
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button
+          color="primary"
+          expand="full"
+          shape="round"
+          class="btn"
+          (click)="register()"
+        >
+          {{ 'submit' | translate}}
+        </ion-button>
+      </div>
+    </form>
+  
+  </ion-card>
+</ion-content>
+

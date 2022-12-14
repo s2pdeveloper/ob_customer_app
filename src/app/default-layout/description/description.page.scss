@@ -1,4 +1,22 @@
 
-.backColor{
-color: coral;
+// .backColor{
+// color: coral;
+//     }
+.container{
+    width: 100%;
+   
+    ion-thumbnail{
+        width: 120px !important;
+        height: 100px !important;
+        img{
+            border-radius: 10px;
+        
+        }
+       
     }
+    .card{
+        width:80px;
+        height:80px;
+    }
+    
+}
