@@ -9,8 +9,9 @@ import{catchError,map} from 'rxjs/operators'
 export class CategoryService {
   routes: any = {
     getAllPath: `business_type/getAll`,
-    getByIdPath: (id) => `category/getAllCategoryByBusinessTypeId/${id}`,
+    // getByIdPath: (id) => `category/getAllCategoryByBusinessTypeId/${id}`,
     getAllBusinessWithCategory:(obj)=>`category/getAll?${obj.businessTypeId}`,
+    getAllOfferPath: `offer/getAll`
   }
   constructor(
     private http: ApiService,
@@ -23,5 +24,7 @@ export class CategoryService {
     return this.http.get(this.routes.getAllBusinessWithCategory(params),params)
     .pipe(map((res:any)=>res));
   }
-  
+getAllOffer(payload){
+  return this.http.get(this.routes.getAllOfferPath,payload);
+}
 }

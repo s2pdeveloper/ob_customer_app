@@ -12,16 +12,18 @@ import { CategoryService } from 'src/app/service/category/category.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
+  
   constructor(
     private router: Router,
     private localStorage: StorageService,
     private categoryService: CategoryService,
     private spinner: LoaderService,
     public translate: TranslateService
+    
   ) { }
 
   businessDetails: any = {};
-
+  offerDetails: any = {};
   user: any;
   categoryDetails: any = {};
   loaded: boolean = false;
@@ -35,6 +37,8 @@ export class LandingPagePage implements OnInit {
   ngOnInit() {
     this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
+    this.getAllOffertype();
+    
     
   }
 
@@ -76,6 +80,20 @@ getByBusinessTypeCategory(businessTypeId){
   
  
 
+}
+getAllOffertype() {
+  // this.spinner.showLoader();
+  this.loaded = false;
+  let obj = {
+};
+  this.categoryService.getAllOffer(obj).subscribe((success) => {
+    console.log("success", success);
+    this.offerDetails = success;
+
+
+    // this.spinner.hideLoader();
+    this.loaded = true;
+  });
 }
 seeAll() {
   this.router.navigate(['/category'])

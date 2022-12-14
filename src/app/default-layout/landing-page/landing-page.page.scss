@@ -76,10 +76,15 @@ ion-searchbar{
 }
 
 .offer-card{
-    margin-bottom: 10px;
-    border-radius: 0%;
-    width: auto;
-    height: auto;
+    // margin-bottom: 10px;
+    // border-radius: 0%;
+    // width: auto;
+    // height: auto;
+    width: 100%;
+    height:100px;
+    text-align: center;
+    margin-left: 10px; 
+   
 }
 .ion-toolbar{
     color: transparent;
@@ -97,5 +102,10 @@ ion-searchbar{
     height:120px;
     text-align: center; 
    ;
+}
+.categoryCard{
+    width: 100px;
+    height:100px;
+    text-align: center;
 }
 

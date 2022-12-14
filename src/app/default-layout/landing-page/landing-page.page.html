@@ -24,119 +24,37 @@
   
           <ion-card-header>
           <ion-row>
-            <ion-col size="12">
-                           
+            <ion-col size="12">             
               <img src="{{b.imageUrl}} ">
                <ion-note>{{b.name}}</ion-note>
-
-               
-             
             </ion-col>
           </ion-row>
         </ion-card-header>
-        
-         </ion-card> 
-      
+         </ion-card>  
       </ion-col>
     </ion-row>
     <h6>Select Category</h6>
       <!-- <ion-note class="name">See all</ion-note> -->
 <h6 class="name" (click)="seeAll()" >See all</h6> 
     <!-- ------ slide one ---- -->
-      <ion-slides autoplay="true">
+    
+        <ion-slides autoplay="true">
+          <marquee width="100%" height="45%" behavior="scroll" loop=""> 
         <ion-slide>
-            <ion-col *ngFor="let c of categoryDetails.rows " size="3" >
-              <ion-card color="success">
-                <ion-row>
+          <ion-col *ngFor="let c of categoryDetails.rows " size="4" >
+              <ion-card class="categoryCard" color="success">
+              <ion-row>
                   <ion-col size="12">
-  
-    <!-- <ion-button routerlink="../services"> -->
-                    <!-- <ion-icon name="construct-outline" size="large"  (click)="seeAll()"></ion-icon> -->
                     <img src="{{c.imageUrl}} ">
-                  <!-- </ion-button> -->
                   </ion-col>
                 </ion-row>
-              </ion-card>
-              
+              </ion-card> 
               <ion-note>{{c.name}}</ion-note>
-       
             </ion-col>
-
-            <!-- <ion-col size="3">
-              <ion-card color="warning" >
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-icon name="restaurant-outline" size="large" (click)="seeAll()"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-card><ion-note>Food</ion-note>
-            </ion-col> -->
-  
-            <!-- <ion-col size="3">
-              <ion-card color="dark">
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-icon name="rocket-outline" size="large" (click)="seeAll()"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-card><ion-note>Cake</ion-note>
-            </ion-col> -->
-
-            <!-- <ion-col size="3">
-              <ion-card color="primary">
-                <ion-row>
-                  <ion-col size="12">
-                    <ion-icon name="car-sport" size="large" (click)="seeAll()" ></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-card><ion-note>Car</ion-note>
-            </ion-col>
-        </ion-slide> -->
-
-        <!-- ---slide second--- -->
-        <!-- <ion-slide autoplay="true">
-          <ion-col size="3">
-            <ion-card color="success">
-              <ion-row>
-                <ion-col size="12">
-                  <ion-icon name="construct-outline" size="large" (click)="seeAll()" ></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-card><ion-note>service</ion-note>
-          </ion-col> -->
-  
-          <!-- <ion-col size="3">
-            <ion-card color="warning">
-              <ion-row>
-                <ion-col size="12">
-                  <ion-icon name="restaurant-outline" size="large" (click)="seeAll()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-card><ion-note>food</ion-note>
-          </ion-col>
-   -->
-          <!-- <ion-col size="3">
-            <ion-card color="dark">
-              <ion-row>
-                <ion-col size="12">
-                  <ion-icon name="rocket-outline" size="large" (click)="seeAll()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-card><ion-note>Cake</ion-note>
-          </ion-col> -->
-  
-          <!-- <ion-col size="3">
-            <ion-card color="light">
-              <ion-row>
-                <ion-col size="12">
-                  <ion-icon name="car-sport" size="large"  (click)="seeAll()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-card><ion-note>Car</ion-note>
-          </ion-col> -->
-        </ion-slide>
-      </ion-slides>
-
+           </ion-slide >
+          </marquee>
+        </ion-slides> 
+   
       <ion-col size="3">
         <ion-card >
           <ion-row >
@@ -146,20 +64,29 @@
           </ion-row>
         </ion-card>
       </ion-col>
+    
+    
+    
 <h6>Best Offers</h6>
   <!-- <ion-note>Best Offers</ion-note> -->
-  <div class="offer-card">
-    <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/cake2.jpg" />
+  <!-- <div class="offer-card"> -->
+    <ion-slides autoplay="true">
+      <marquee width="100%" height="45%" behavior="scroll" loop=""> 
+    <ion-slide>
+    <ion-card  class="offer-card" *ngFor="let o of offerDetails.rows" >
+      <img src="{{o.imageUrl}}" />
       <ion-card-header>
-        <ion-card-title>Cake Homemade  </ion-card-title>
+        <ion-card-title>{{o.title}}  </ion-card-title>
         <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
       </ion-card-header>
     </ion-card> 
-  </div>
+    </ion-slide>
+      </marquee>
+    </ion-slides>
+  <!-- </div> -->
    
   
-<div class="offer-card">
+<!-- <div class="offer-card">
   <ion-card>
     <img alt="Silhouette of mountains" src="../../../assets/image/car-service.jpg" />
     <ion-card-header>
@@ -167,7 +94,7 @@
       <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
     </ion-card-header>
   </ion-card>
-</div>
+</div> -->
 
 <h6>Recent </h6>
 <h6 class="name" (click)="seeAll()" >view All</h6> 
