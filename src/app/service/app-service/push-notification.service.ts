@@ -35,7 +35,7 @@ export class PushNotificationService {
     PushNotifications.addListener(
       'registration',
       (token: PushNotificationToken) => {
-        this.storageService.set('s2pUserDeviceId', token.value);
+        this.storageService.set('OBUserDeviceId', token.value);
       }
     );
     // Show us the notification payload if the app is open on our device

@@ -1,0 +1,36 @@
+ion-content {
+    ion-card {
+        border-radius: 2rem;
+        --background: transparent;
+        background: transparent;
+        box-shadow: none;
+
+        ion-card-content {
+            padding-top: 0;
+
+            form {
+                padding: 0 5px;
+            }
+        }
+    }
+
+
+    .input {
+        margin: 22px 15px 15px 15px;
+    }
+
+    .img {
+        text-align: center;
+        margin: auto !important;
+       
+    }
+
+    .avatar {
+        margin: auto !important;
+    }
+
+    // .accordian {
+    //     padding-right: 15px !important;
+    //     padding-left: 15px !important;
+    // }
+}

@@ -1,32 +1,38 @@
-<ion-content>   
+<ion-content>
 
   <ion-row>
-    <ion-col><ion-icon class="location" name="location" ></ion-icon>
-      <ion-note class="par">Location</ion-note> 
-    <!-- <ion-note>Nagpur</ion-note> -->
-  </ion-col>
-    <ion-col><div class="avtar" >
-      <img src="../../../assets/image/man.png" alt="prfile">
-    </div>
-  </ion-col> 
+    <ion-col>
+      <ion-icon class="location" name="location"></ion-icon>
+      <ion-note class="par">Location</ion-note>
+      <!-- <ion-note>Nagpur</ion-note> -->
+    </ion-col>
+    <ion-col>
+      <div class="avtar">
+        <img src="../../../assets/image/man.png" alt="prfile">
+      </div>
+    </ion-col>
   </ion-row>
 
-    <ion-searchbar show-clear-button="focus"></ion-searchbar>
-    <!-- <ion-button class="btn" color="tertiary" >Product</ion-button>
+  <ion-searchbar show-clear-button="focus"></ion-searchbar>
+  <!-- <ion-button class="btn" color="tertiary" >Product</ion-button>
     <ion-button>Trainding</ion-button>
     <ion-button>Buisness</ion-button>
     <ion-button>Retail</ion-button> -->
-    <ion-row>
-      <ion-col *ngFor="let b of businessDetails.rows  " size="4">
-        
-         <!-- <ion-card class="product-card" href="grocery" >  -->
-          <ion-card class="product-card" (click)=" getByIdCategory(b._id)" > 
-  
-          <ion-card-header>
+  <ion-row>
+    <ion-col size="4">
+
+      <ion-card class="product-card" href="category">
+
+        <ion-card-header>
           <ion-row>
             <ion-col size="12">             
               <img src="{{b.imageUrl}} ">
                <ion-note>{{b.name}}</ion-note>
+            <ion-col size="12">
+
+              <img src="../../../assets/image/grocery.jpg">
+              <ion-note>Grocery</ion-note>
+
             </ion-col>
           </ion-row>
         </ion-card-header>
@@ -55,14 +61,160 @@
           </marquee>
         </ion-slides> 
    
+
+      </ion-card>
+
+    </ion-col>
+
+    <ion-col size="4">
+      <ion-card class="product-card">
+        <ion-row>
+          <ion-col size="12">
+            <img src="../../../assets/image/pharmacy.jpg">
+
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col size="4">
+      <ion-card class="product-card">
+        <ion-row>
+          <ion-col size="12">
+            <img src="../../../assets/image/shop1.jpg">
+            <ion-note>Shop</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col size="4">
+      <ion-card class="product-card">
+        <ion-row>
+          <ion-col size="12">
+            <img src="../../../assets/image/ecom.jpg">
+            <ion-note>e-commerce</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+    <ion-col size="4">
+      <ion-card class="product-card">
+        <ion-row>
+          <ion-col size="12">
+            <img src="../../../assets/image/parcel.jpg">
+            <ion-note>parcel</ion-note>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+
+  <!-- <ion-note >Select Category</ion-note> -->
+  <h6>Select Category</h6>
+  <!-- <ion-note class="name">See all</ion-note> -->
+  <h6 class="name" (click)="seeAll()">See all</h6>
+  <!-- ------ slide one ---- -->
+  <ion-slides autoplay="true">
+    <ion-slide>
       <ion-col size="3">
-        <ion-card >
-          <ion-row >
-            <ion-col size="6">
-              <img src="../../../assets/image/shoping.jpg" alt="shoping" >
+        <ion-card color="success">
+          <ion-row>
+            <ion-col size="12">
+
+              <!-- <ion-button routerlink="../services"> -->
+              <ion-icon name="construct-outline" size="large"></ion-icon>
+              <!-- </ion-button> -->
             </ion-col>
           </ion-row>
         </ion-card>
+
+        <ion-note>service</ion-note>
+
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="warning">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="restaurant-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>Food</ion-note>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="dark">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="rocket-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>Cake</ion-note>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="primary">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="car-sport" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>Car</ion-note>
+      </ion-col>
+    </ion-slide>
+
+    <!-- ---slide second--- -->
+    <ion-slide autoplay="true">
+      <ion-col size="3">
+        <ion-card color="success">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="construct-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>service</ion-note>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="warning">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="restaurant-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>food</ion-note>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="dark">
+          <ion-row>
+            <ion-col size="12">
+              <ion-icon name="rocket-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>Cake</ion-note>
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-card color="success">
+          <ion-row>
+            <ion-col size="12">
+
+              <!-- <ion-button routerlink="../services"> -->
+              <ion-icon name="construct-outline" size="large"></ion-icon>
+              <!-- </ion-button> -->
+            </ion-col>
+          </ion-row>
+        </ion-card>
+
+        <ion-note>service</ion-note>
+
       </ion-col>
     
     
@@ -96,86 +248,95 @@
   </ion-card>
 </div> -->
 
-<h6>Recent </h6>
-<h6 class="name" (click)="seeAll()" >view All</h6> 
-<ion-row>
-<ion-col size="3">
-<ion-card color="success">
-  <ion-row>
-    <ion-col size="12">
-      <ion-icon name="construct-outline" size="large" ></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-card><ion-note>service</ion-note>
-</ion-col>
 
-<ion-col size="3">
-<ion-card color="warning">
-  <ion-row>
-    <ion-col size="12">
-      <ion-icon name="restaurant-outline" size="large"></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-card><ion-note>food</ion-note>
-</ion-col>
-</ion-row>
-<h6>Most Popular </h6>
-<h6 class="name" (click)="seeAll()" >view All</h6> 
-<ion-row>
-<ion-col size="3">
-<ion-card color="success">
-  <ion-row>
-    <ion-col size="12">
-      <ion-icon name="construct-outline" size="large" ></ion-icon>
-      
-    </ion-col>
-  </ion-row>
-</ion-card><ion-note>service</ion-note>
-</ion-col>
+  <div class="offer-card">
+    <ion-card>
+      <img alt="Silhouette of mountains" src="../../../assets/image/car-service.jpg" />
+      <ion-card-header>
+        <ion-card-title>Car Services</ion-card-title>
+        <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div>
 
-<ion-col size="3">
-<ion-card color="warning">
+  <h6>Recent </h6>
+  <h6 class="name" (click)="seeAll()">view All</h6>
   <ion-row>
-    <ion-col size="12">
-      <ion-icon name="restaurant-outline" size="large"></ion-icon>
+    <ion-col size="3">
+      <ion-card color="success">
+        <ion-row>
+          <ion-col size="12">
+            <ion-icon name="construct-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-note>service</ion-note>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-card color="warning">
+        <ion-row>
+          <ion-col size="12">
+            <ion-icon name="restaurant-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-note>food</ion-note>
     </ion-col>
   </ion-row>
-</ion-card><ion-note>food</ion-note>
-</ion-col>
-</ion-row>
+  <h6>Most Popular </h6>
+  <h6 class="name" (click)="seeAll()">view All</h6>
+  <ion-row>
+    <ion-col size="3">
+      <ion-card color="success">
+        <ion-row>
+          <ion-col size="12">
+            <ion-icon name="construct-outline" size="large"></ion-icon>
+
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-note>service</ion-note>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-card color="warning">
+        <ion-row>
+          <ion-col size="12">
+            <ion-icon name="restaurant-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <ion-note>food</ion-note>
+    </ion-col>
+  </ion-row>
 
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar color="light">
     <ion-tabs>
       <ion-tab-bar slot="bottom" >
         <ion-tab-button tab="home" (click)="home()">
           <ion-icon name="home" color="primary" ></ion-icon>
-          <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
     
         <ion-tab-button tab="booking">
           <ion-icon name="calendar" color="primary" ></ion-icon>
-          <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
     
         <ion-tab-button tab="chat">
           <ion-icon name="chatbox-ellipses" color="primary"  ></ion-icon>
-          <!-- <ion-badge></ion-badge> -->
         </ion-tab-button>
 
-        <ion-tab-button tab="setting" (click)="logout()">
-          <ion-icon name="cog-outline" color="primary"></ion-icon>
-         
-          <!-- <ion-badge></ion-badge> -->
+        <ion-tab-button tab="payment">
+          <ion-icon name="card" color="primary" ></ion-icon>
         </ion-tab-button>
     
-        <ion-tab-button tab="profile" (click)="profile()">
-          <ion-icon name="person" color="primary"  ></ion-icon>
-          <!-- <ion-badge>5</ion-badge> -->
+        <ion-tab-button tab="Setting">
+          <ion-icon name="settings" color="primary"  routerLink=""></ion-icon>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

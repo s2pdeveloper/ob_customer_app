@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  //  apiEndpoint: 'http://109.106.255.69:2210/api/v1/admin/',
-  // url: 'http://109.106.255.69:2210'
+  apiEndpoint: 'http://13.231.64.114:2000/api/v1/customerApp/',
+  url: 'http://13.231.64.114:2000',
 };

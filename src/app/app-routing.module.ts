@@ -4,8 +4,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'onboarding',
+    redirectTo: 'app/tabs/landing-page',
     pathMatch: 'full',
+  },
+  {
+    path: 'app',
+    loadChildren: () =>
+      import('./default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
     path: 'login',
@@ -26,13 +31,13 @@ const routes: Routes = [
         (m) => m.ForgetPwdPageModule
       ),
   },
-  {
-    path: 'landing-page',
-    loadChildren: () =>
-      import('./default-layout/landing-page/landing-page.module').then(
-        (m) => m.LandingPagePageModule
-      ),
-  },
+  // {
+  //   path: 'landing-page',
+  //   loadChildren: () =>
+  //     import('./default-layout/landing-page/landing-page.module').then(
+  //       (m) => m.LandingPagePageModule
+  //     ),
+  // },
   {
     path: 'profile-page',
     loadChildren: () =>
@@ -40,6 +45,23 @@ const routes: Routes = [
         (m) => m.ProfilePagePageModule
       ),
   },
+  {
+    path: 'view-profile',
+    // canLoad: [AuthGuard],
+    loadChildren: () =>
+      import('./default-layout/setting/view-profile/view-profile.module').then(
+        (m) => m.ViewProfilePageModule
+      ),
+  },
+  {
+    path: 'edit-profile',
+    // canLoad: [AuthGuard],
+    loadChildren: () =>
+      import('./default-layout/setting/edit-profile/edit-profile.module').then(
+        (m) => m.EditProfilePageModule
+      ),
+  },
+
   {
     path: 'change-pwd',
     loadChildren: () =>
@@ -100,7 +122,8 @@ const routes: Routes = [
     path: 'change-language',
     loadChildren: () =>
       import('./default-layout/change-language/change-language.module').then(
-        m => m.ChangeLanguagePageModule)
+        (m) => m.ChangeLanguagePageModule
+      ),
   },
   {
     path: 'change-pwd',
@@ -111,27 +134,46 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
-    loadChildren: () => import('./default-layout/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+    loadChildren: () =>
+      import('./default-layout/setting/edit-profile/edit-profile.module').then(
+        (m) => m.EditProfilePageModule
+      ),
   },
   {
     path: 'notification-list',
-    loadChildren: () => import('./default-layout/notification-list/notification-list.module').then( m => m.NotificationListPageModule)
+    loadChildren: () =>
+      import(
+        './default-layout/notification-list/notification-list.module'
+      ).then((m) => m.NotificationListPageModule),
   },
   {
     path: 'category',
-    loadChildren: () => import('./default-layout/category/category.module').then( m => m.CategoryPageModule)
-  },  {
+    loadChildren: () =>
+      import('./default-layout/category/category.module').then(
+        (m) => m.CategoryPageModule
+      ),
+  },
+  {
     path: 'description',
-    loadChildren: () => import('./default-layout/description/description.module').then( m => m.DescriptionPageModule)
+    loadChildren: () =>
+      import('./default-layout/description/description.module').then(
+        (m) => m.DescriptionPageModule
+      ),
+  },
+  {
+    path: 'setting',
+    loadChildren: () =>
+      import('./default-layout/setting/setting.module').then(
+        (m) => m.SettingPageModule
+      ),
   },
   {
     path: 'grocery',
-    loadChildren: () => import('./default-layout/grocery/grocery.module').then( m => m.GroceryPageModule)
+    loadChildren: () =>
+      import('./default-layout/grocery/grocery.module').then(
+        (m) => m.GroceryPageModule
+      ),
   },
-
-
-
-
 ];
 
 @NgModule({
@@ -140,4 +182,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

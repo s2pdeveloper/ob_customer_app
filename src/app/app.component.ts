@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     public loadingController: LoadingController,
     private appUpdate: AppUpdateService,
     private appBackButton: AppBackButtonService,
-    private pushNotificationService: PushNotificationService,
+    // private pushNotificationService: PushNotificationService,
     public translate: TranslateService
   ) {
     this.languageService.getLang();
@@ -79,8 +79,8 @@ export class AppComponent implements OnInit {
       document.body.setAttribute('color-theme', 'light');
       // document.body.setAttribute('color-theme','dark')
       this.settingStyleAndSplashScreen();
-      this.appUpdate.checkUpdate();
-      this.pushNotificationService.registerForPushNotification();
+      // this.appUpdate.checkUpdate();
+      // this.pushNotificationService.registerForPushNotification();
       this.checkInternet();
       this.appBackButton.backButtonFunc();
     });
@@ -103,7 +103,7 @@ export class AppComponent implements OnInit {
 
   settingStyleAndSplashScreen = async () => {
     await StatusBar.setStyle({ style: StatusBarStyle.Dark });
-    await StatusBar.setBackgroundColor({ color: '#3f448a' });
+    await StatusBar.setBackgroundColor({ color: '#5b32a1' });
     await StatusBar.show();
   };
   navigateTo(page: any) {

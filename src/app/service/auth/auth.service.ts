@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   routes: any = {
-    register: 'user/signup',
+    register: 'customer/register',
     login: 'customer/login',
     getByIdPath: (id) => `customer/getProfile/${id}`,
     updatePath: (id) => `customer/update/${id}`,

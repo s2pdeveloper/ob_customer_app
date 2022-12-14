@@ -25,7 +25,7 @@ export class AssignmentPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    //  this.userDetails = this.storageService.get('s2pUser');
+    //  this.userDetails = this.storageService.get('OBUser');
     // this.getAllAssignmentByBatchId();
   }
   ionViewWillEnter() {
