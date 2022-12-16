@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute} from '@angular/router';
 import { callCordovaPlugin } from '@ionic-native/core/decorators/common';
+import { SelectValueAccessor } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -12,44 +13,46 @@ import { CategoryService } from 'src/app/service/category/category.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-  
+  selectedBusinessId: string;
+  selectedBusinessName:string;
   constructor(
     private router: Router,
     private localStorage: StorageService,
     private categoryService: CategoryService,
     private spinner: LoaderService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private actRoute:ActivatedRoute
+    
     
   ) { }
 
-  businessDetails: any = {};
-  offerDetails: any = {};
+   businessDetails: any = [];
+  offerDetails: any = [];
   user: any;
-  categoryDetails: any = {};
+ categoryDetails: any = [];
   loaded: boolean = false;
   slideOpts = {
     initialSlide: 1,
     speed: 400
   };
 
+  categoryTypeId:string;
+  
 
 
   ngOnInit() {
     this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
     this.getAllOffertype();
-    
-    
-  }
 
-  // ionViewWillEnter() {
-  //   this.currentUser = this.localStorage.get('OBUser');
-  //   this.getAllCustomerDashBoard();
-  // }
-  // doRefresh(event) {
-  //   this.getAllCustomerDashBoard();
-  //   event.target.complete();
-  // }
+    //  this.getByBusinessTypeCategory(''); 
+    // this.getByBusinessTypeCategory(success._id,success.name)
+  //    this.actRoute.queryParams.subscribe(success=>{
+  //     console.log("success",success);
+  //     //setting default first business      
+  // })
+}
+
   getAllbusinesstype() {
     // this.spinner.showLoader();
     this.loaded = false;
@@ -57,29 +60,32 @@ export class LandingPagePage implements OnInit {
  };
     this.categoryService.getAllcategory(obj).subscribe((success) => {
       console.log("success", success);
-      this.businessDetails = success;
+      this.businessDetails = success.rows;
 
-
+      //thisshould ideally be set in localstorage
+      this.selectedBusinessId = success.rows[0]._id;
+      this.selectedBusinessName = success.rows[0].name;
+      this.getByIdCategory(this.selectedBusinessId,this.selectedBusinessName);
+      console.log("this.selectedBusinessId",this.selectedBusinessId);
       // this.spinner.hideLoader();
       this.loaded = true;
     });
   }
-  getByIdCategory(ev) {
+  getByIdCategory(ev, name) {
     console.log("ev", ev);
-    this.getByBusinessTypeCategory(ev)
+
+    this.getByBusinessTypeCategory(ev,name);
+   
   };
-
-
-
-getByBusinessTypeCategory(businessTypeId){
+getByBusinessTypeCategory(businessTypeId,name){
+  this.selectedBusinessId = businessTypeId;
+  this.selectedBusinessName=name;
   let obj :any= {businessTypeId:businessTypeId}
   this.categoryService.getAll(obj).subscribe((success) => {
     console.log("success-----------", success);
-    this.categoryDetails=success;
-  });
-  
- 
-
+    this.categoryDetails=success.rows;
+    
+   });
 }
 getAllOffertype() {
   // this.spinner.showLoader();
@@ -88,19 +94,17 @@ getAllOffertype() {
 };
   this.categoryService.getAllOffer(obj).subscribe((success) => {
     console.log("success", success);
-    this.offerDetails = success;
-
-
+    this.offerDetails = success.rows;
     // this.spinner.hideLoader();
     this.loaded = true;
   });
 }
 seeAll() {
-  this.router.navigate(['/category'])
+  
+  console.log("success");
+  this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId, name: this.selectedBusinessName}}) 
 }
-// proCard(id) {
-//   this.router.navigate(['/category'])
-// }
+
 profile() {
   this.router.navigate(['/profile-page'])
 }

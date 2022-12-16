@@ -27,4 +27,7 @@ export class CategoryService {
 getAllOffer(payload){
   return this.http.get(this.routes.getAllOfferPath,payload);
 }
+// getAllcategory1(_id){
+//   return this.http.get(this.routes.getAllPath,_id);
+// }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {  } from 'src/app/service/customer/customer.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService, UtilitiesService } from 'src/app/core/services';
 import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
@@ -13,34 +12,34 @@ export class CategoryPage implements OnInit {
    categoryDetails: any = {};
    user:any;
    businessTypeId:any;
+   categoryTypeId:string;
   
   constructor(
     private router:Router,
+    private actRoute:ActivatedRoute,
     private categoryService:CategoryService ,
     private localStorage: StorageService
     ) { }
 
-  ngOnInit() {
-   
-     this.getByBusinessTypeCategory("");
-     this.user = this.localStorage.get('OBUser');
-  }
-  
-  //  getByIdCategory(ev) {
-  //    console.log("ev", ev);
-  //    this.getByBusinessTypeCategory(ev)
-  //  }
 
+businessName:string;
+ngOnInit() {
+    // this.getByBusinessTypeCategory(""); 
+  this.user = this.localStorage.get('OBUser');
+  this.actRoute.queryParams.subscribe(success=>{
+console.log("success",success);
+this.businessName = success.name;
+this. getByBusinessTypeCategory(success._id)
 
+  })
+}
 
 getByBusinessTypeCategory(businessTypeId){
-  let obj :any= {businessTypeId:businessTypeId}
-  this.categoryService.getAll(obj).subscribe((success) => {
-    console.log("success-----------", success);
-    this.categoryDetails=success;
-  });
+let obj :any= {businessTypeId:businessTypeId}
+this.categoryService.getAll(obj).subscribe((success) => {
+  console.log("success-----------", success);
+  this.categoryDetails=success;
   
- 
-
+});
 }
 }
