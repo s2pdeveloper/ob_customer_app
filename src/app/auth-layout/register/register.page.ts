@@ -32,12 +32,13 @@ export class RegisterPage implements OnInit {
   }
 
   registerForm = new FormGroup({
-    id: new FormControl(),
+    // id: new FormControl(),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     mobile: new FormControl(''),
     password: new FormControl(''),
-    confirmPassword: new FormControl(''),
+    // confirmPassword: new FormControl(''),
+    email: new FormControl(''),
     role: new FormControl('CUSTOMER'),
   });
 

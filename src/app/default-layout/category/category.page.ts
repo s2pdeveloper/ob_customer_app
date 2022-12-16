@@ -19,7 +19,7 @@ export class CategoryPage implements OnInit {
   ngOnInit() {
   }
   description(){
-    this.router.navigate(['/description'])
+    this.router.navigate(['/catalogue'])
   }
   grocery(){
     this.router.navigate(['/grocery'])

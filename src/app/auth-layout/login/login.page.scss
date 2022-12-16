@@ -1,6 +1,6 @@
 ion-content {
   height: 100vh;
-  --background: #df7e7e !important;
+  // --background: #a7139f !important;
 
   ion-card {
     margin: -2px;
@@ -25,6 +25,8 @@ ion-content {
   h6 {
     font-size: 17px;
     margin: -8px 0px 20px 0;
+    padding: 13px;
+    word-spacing: 3px;
   }
 
 }

@@ -154,13 +154,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'description',
-    loadChildren: () =>
-      import('./default-layout/description/description.module').then(
-        (m) => m.DescriptionPageModule
-      ),
-  },
-  {
     path: 'setting',
     loadChildren: () =>
       import('./default-layout/setting/setting.module').then(
@@ -174,6 +167,11 @@ const routes: Routes = [
         (m) => m.GroceryPageModule
       ),
   },
+  {
+    path: 'catalogue',
+    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
+  },
+
 ];
 
 @NgModule({

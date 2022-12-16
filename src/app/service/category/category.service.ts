@@ -9,6 +9,7 @@ import{catchError,map} from 'rxjs/operators'
 export class CategoryService {
   routes: any = {
     getAllPath: `business_type/getAll`,
+    getAllCataloguePath: 'catalogue/getAll',
     getByIdPath: (id) => `category/getAllCategoryByBusinessTypeId/${id}`,
     getAllBusinessWithCategory:(obj)=>`category/getAll?${obj.businessTypeId}`,
   }
@@ -24,4 +25,8 @@ export class CategoryService {
     .pipe(map((res:any)=>res));
   }
   
+  getAllCatalogue(payload){
+    return this.http.get(this.routes.getAllCataloguePath,payload);
+  }
+
 }

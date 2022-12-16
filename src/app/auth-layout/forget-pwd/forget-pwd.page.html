@@ -18,9 +18,10 @@
       <form [formGroup]="forgetForm">
         <ion-item
           class="input-class"
+          fill="outline"
           [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
         >
-          <ion-label position="stacked" class="font" color="">
+          <ion-label position="floating" class="font" color="">
             Enter mobile
             <ion-note color="danger">*</ion-note>
           </ion-label>
