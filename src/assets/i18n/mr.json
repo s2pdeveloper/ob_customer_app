@@ -124,5 +124,22 @@
   "fullName": "पूर्ण नाव",
   "shopName":"दुकानाचे नाव",
   "register": "नोंदणी करा",
-  "selectLanguage": "भाषा निवडा"
+  "selectLanguage": "भाषा निवडा",
+  "login to ob":"लॉगिन करा",
+  "not have an account yet ?":"अद्याप खाते नाही?",
+  "first Name":"पहिले नाव",
+  "last Name":"आडनाव",
+  "Already have an account?":"आधीपासूनच एक खाते आहे?",
+  "Location":"स्थान",
+  "Select Category":"श्रेणी निवडा",
+  "Best Offers":"सर्वोत्तम ऑफर",
+  "Recent":"अलीकडील",
+  "SeeAll":"सर्व पाहा",
+  "Profile Details":"प्रोफाइल तपशील",
+  "View Your Profile":"तुमचे प्रोफाइल पहा",
+  "change language":"भाषा बदला",
+  "My Profile":"माझे प्रोफाइल",
+  "Settings":"सेटिंग",
+  "SKIP":"वगळा",
+  "category":"श्रेणी"
 }

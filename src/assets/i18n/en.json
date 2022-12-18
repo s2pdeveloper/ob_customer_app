@@ -103,5 +103,21 @@
   "customer": "Customer",
   "fullName": "Full Name",
   "shopName": "Shop Name",
-  "register": "Register"
+  "register": "Register",
+  "login to ob":"Login To OB",
+  "not have an account yet ?": "Not have an account yet?",
+  "first Name":"first Name",
+  "last Name":"last Name",
+  "Already have an account?":"Already have an account?",
+  "Location":"Location",
+  "Select Category":"Select Category",
+  "Best Offers":"Best Offers",
+  "Recent":"Recent",
+  "SeeAll":"SeeAll",
+  "Profile Details":"Profile Details",
+  "View Your Profile":"View Your Profile",
+  "change language":"change language",
+  "Settings":"Settings",
+  "SKIP":"SKIP",
+  "category":"category"
 }

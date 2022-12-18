@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { StorageService } from '../core/services';
 import { Plugins, StatusBarStyle } from '@capacitor/core';
+import { TranslateService } from '@ngx-translate/core';
 const { StatusBar } = Plugins;
 @Component({
   selector: 'app-onboarding',

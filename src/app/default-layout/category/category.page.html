@@ -9,9 +9,9 @@
     
 
 <ion-content>
-  <span>{{businessName}}</span>
+   <span>{{businessName}}</span> 
   <ion-row>
-    <ion-col *ngFor="let c of categoryDetails.rows"size="4">
+    <ion-col *ngFor="let c of categoryDetails.rows" (click)="getByBusinessTypeCategory(c._id)" size="4">
     <ion-card color="success">
       <ion-row>
         <ion-col size="12">

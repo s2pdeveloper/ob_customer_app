@@ -125,5 +125,23 @@
   "customer": "ग्राहक",
   "fullName": "पूरा नाम",
   "shopName":"दुकान का नाम",
-  "register": "पंजीकरण करवाना"
+  "register": "पंजीकरण करवाना",
+  "login to ob":"लॉग इन करें",
+  "not have an account yet ?":"अभी तक कोई खाता नहीं है?",
+  "first Name":"पहेला नाम",
+  "last Name":"अंतिम नाम",
+  "Already have an account?":"क्या आपके पास पहले से एक खाता मौजूद है?",
+  "Location":"स्थान",
+  "Select Category":"श्रेणी चुनना",
+  "Best Offers":"सबसे अच्छा प्रस्ताव",
+"Recent":"हाल ही का",
+"SeeAll":"सभी देखें",
+"Profile Details":"प्रोफ़ाइल विवरण",
+"View Your Profile":"अपनी प्रोफ़ाइल देखें",
+"change language":"भाषा बदलें",
+"My Profile":"मेरी प्रोफाइल",
+"Settings":"सेटिंग",
+"SKIP":"छोड़ें",
+"category":"श्रेणी"
+
 }

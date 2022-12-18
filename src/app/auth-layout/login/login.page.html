@@ -8,7 +8,7 @@
     <form [formGroup]="loginForm">
       <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label position="floating">
-          {{ 'Mobile Number' | translate}}
+          {{ 'mobileNumber' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input maxlength="10" pattern="[0-9]{10}" type="number" placeholder="{{ 'Mobile Number' | translate}}"
@@ -31,6 +31,21 @@
           (click)="showEye = !showEye">
         </ion-icon>
         </ion-item>
+        <div class="ion-text-center ion-margin-vertical">
+          <ion-button expand="full" shape="round" class="" color="primary" (click)="login()">
+           {{'login to ob' | translate}} 
+          </ion-button>
+        </div><br>
+        <div class="ion-text-center signup">
+          <h6>
+           {{"not have an account yet ?" | translate}} 
+            <a href="javascript:void()" routerLink="/register">
+              <ion-label color="danger">
+                <b>{{'signUp' | translate}}</b>
+              </ion-label>
+            </a>
+          </h6>
+        </div>
     </form>
   </ion-card>
 </ion-content>

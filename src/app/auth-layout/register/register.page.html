@@ -9,7 +9,7 @@
       <ion-item class="input" fill="outline"
         [class.invalid]="!form.firstName.valid && (form.firstName.dirty || submitted)">
         <ion-label position="floating">
-          {{ 'First Name' | translate}}
+          {{ "first Name" | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input placeholder="{{ 'First Name' | translate}}" formControlName="firstName"></ion-input>
@@ -18,15 +18,15 @@
       <ion-item fill="outline" class="input"
         [class.invalid]="!form.lastName.valid && (form.lastName.dirty || submitted)">
         <ion-label position="floating">
-          {{ 'Last Name' | translate}}
+          {{ "last Name" | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input placeholder="{{ 'Last Name' | translate}}" formControlName="lastName"></ion-input>
+        <ion-input placeholder="{{ 'last Name' | translate}}" formControlName="lastName"></ion-input>
       </ion-item>
 
       <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label position="floating">
-          {{ 'Mobile Number' | translate}}
+          {{ "mobileNumber" | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input maxlength="10" pattern="[0-9]{10}" type="number" placeholder="{{ 'Mobile Number' | translate}}"
@@ -52,11 +52,11 @@
       <ion-item fill="outline" class="input"
         [class.invalid]="!form.confirmPassword.valid && (form.confirmPassword.dirty || submitted)">
         <ion-label position="floating">
-          {{ 'Confirm password' | translate }}
+          {{ "confirmPassword" | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input formControlName="confirmPassword" [type]="showEye ? 'password':'text'" name="Confirm Password"
-          placeholder="{{ 'Confirm Password' | translate }}" autocomplete="on" clearInput></ion-input>
+          placeholder="{{ 'confirmPassword' | translate }}" autocomplete="on" clearInput></ion-input>
         <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="!showEye = showEye">
         </ion-icon>
         <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
@@ -73,7 +73,7 @@
     </form>
     <div class="ion-text-center signup">
       <h6>
-        Already have an account?
+        {{"Already have an account?" | translate}}
         <a href="javascript:void()" routerLink="/login">
           <ion-label color="medium">
             <b>{{ 'login' | translate}} </b>

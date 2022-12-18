@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="bg-color-2">
     <ion-back-button class="text-color-4" slot="start"></ion-back-button>
-    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap">Settings</ion-title>
+    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap">{{"Settings"| translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -10,19 +10,28 @@
     <ion-item button="true" (click)="navigateTo('view-profile')">
       <ion-icon class="text-color-2" name="person-circle"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        My Profile
-        <p class="text-color-7">View Your Profile</p>
+        {{'My Profile'|translate}}
+        <p class="text-color-7">{{"View Your Profile" | translate}}</p>
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
 
+    <ion-item button="true" (click)="language()" lines="none">
+      <!-- <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp">
+      </ion-icon> -->
+      <ion-icon  class="text-color-2" name="language-outline" ></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{"change language"|translate}}
+        <p class="text-color-7">{{"change language"|translate}}</p>
+      </ion-label>
+    </ion-item>
 
     <ion-item button="true" (click)="logout()" lines="none">
       <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp">
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        logout
-        <p class="text-color-7">logout</p>
+        {{'logout'| translate}}
+        <p class="text-color-7">{{'logout'| translate}}</p>
       </ion-label>
     </ion-item>
 

@@ -3,7 +3,7 @@
   <ion-row>
     <ion-col>
       <ion-icon class="location" name="location"></ion-icon>
-      <ion-note class="par">Location</ion-note>
+      <ion-note class="par">{{ "Location" | translate}}</ion-note>
       <!-- <ion-note>Nagpur</ion-note> -->
     </ion-col>
     <ion-col>
@@ -15,25 +15,25 @@
 
   <ion-searchbar show-clear-button="focus"></ion-searchbar>
   
-  <ion-row>
-    <ion-col class="note" *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="4" >
-      <ion-card class="product-card"  >
+  <ion-row >  
+    <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >
+      <ion-card class="product-card">
         <ion-card-header>
           <ion-row>
             <ion-col  size="12">             
-              <img src="{{b.imageUrl}} ">
-               <ion-note  >{{b.name}}</ion-note>
+              <img src="{{b.imageUrl}}">    
             </ion-col>
           </ion-row>
         </ion-card-header>
-         </ion-card>  
-      </ion-col>
+         </ion-card> 
+         <ion-label class="note" >{{b.name}}</ion-label>  
+      </ion-col>  
   </ion-row>
   
+  
       
-    <h6>Select Category</h6>
-    <h6 class="name" (click)="seeAll()"  >SeeAll</h6>
-    
+    <h6>{{"Select Category" | translate}}</h6>
+    <h6 class="name" (click)="seeAll()">{{"SeeAll" | translate}}</h6>
         <ion-slides autoplay="true">
           <marquee width="100%" height="45%" behavior="scroll" loop=""> 
         <ion-slide>
@@ -53,7 +53,7 @@
       
       
     
-<h6>Best Offers</h6>
+<h6>{{"Best Offers" | translate}}</h6>
     <ion-slides autoplay="true">
       <marquee width="100%" height="45%" behavior="scroll" loop=""> 
     <ion-slide>
@@ -67,7 +67,7 @@
     </ion-slide>
       </marquee>
     </ion-slides>
-  <h6>Recent </h6>
+  <h6>{{"Recent" | translate}} </h6>
   <h6 class="name" (click)="seeAll()">view All</h6> 
 </ion-content>
 

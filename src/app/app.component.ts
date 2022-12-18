@@ -82,6 +82,8 @@ export class AppComponent implements OnInit {
       // this.appUpdate.checkUpdate();
       // this.pushNotificationService.registerForPushNotification();
       this.checkInternet();
+      // this.languageService.setLang("hi");
+      // this.languageService.setLang("mr")
       this.appBackButton.backButtonFunc();
     });
   }

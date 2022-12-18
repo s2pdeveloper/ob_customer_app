@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StorageService, UtilitiesService } from 'src/app/core/services';
 import { CategoryService } from 'src/app/service/category/category.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -13,7 +14,7 @@ export class CategoryPage implements OnInit {
    user:any;
    businessTypeId:any;
    categoryTypeId:string;
-  
+    selectedCategoryId:string;
   constructor(
     private router:Router,
     private actRoute:ActivatedRoute,
@@ -24,7 +25,7 @@ export class CategoryPage implements OnInit {
 
 businessName:string;
 ngOnInit() {
-    // this.getByBusinessTypeCategory(""); 
+    
   this.user = this.localStorage.get('OBUser');
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
@@ -33,13 +34,20 @@ this. getByBusinessTypeCategory(success._id)
 
   })
 }
+getByIdCatlogue(){
+
+}
 
 getByBusinessTypeCategory(businessTypeId){
 let obj :any= {businessTypeId:businessTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
   console.log("success-----------", success);
   this.categoryDetails=success;
-  
+  this.selectedCategoryId = success.rows[0]._id;
+      this.selectedCategoryId = success.rows[0].name;
+      // this.getByIdCatlogue(this.selectedCategoryId,this.selectedBusinessName);
+      console.log("this.selectedCategoryId",this.selectedCategoryId);
 });
 }
+
 }

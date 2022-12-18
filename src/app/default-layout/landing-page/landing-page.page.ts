@@ -45,12 +45,6 @@ export class LandingPagePage implements OnInit {
     this.user = this.localStorage.get('OBUser');
     this.getAllOffertype();
 
-    //  this.getByBusinessTypeCategory(''); 
-    // this.getByBusinessTypeCategory(success._id,success.name)
-  //    this.actRoute.queryParams.subscribe(success=>{
-  //     console.log("success",success);
-  //     //setting default first business      
-  // })
 }
 
   getAllbusinesstype() {
