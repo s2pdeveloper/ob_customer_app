@@ -11,7 +11,17 @@
     </ion-col>
   </ion-row>
 
-  <ion-searchbar show-clear-button="focus"></ion-searchbar>
+  <!-- <ion-searchbar show-clear-button="focus"></ion-searchbar> -->
+  <!-- <ion-searchbar debounce="800" mode="ios" [(ngModel)]="search" showCancelButton="focus"
+    (ionChange)="setFilteredLocations($event)">
+  </ion-searchbar> -->
+
+  <ion-searchbar class="search-box ion-no-padding ion-margin-top" inputmode="search" searchIcon animated type="text"
+    showCancelButton="never" placeholder="Search" autocomplete="on" autocorrect="on"
+    (ionFocus)="navigateTo('/search-shop',null)">
+  </ion-searchbar>
+
+
 
   <ion-row>
     <ion-col *ngFor="let b of businessArr" size="4">
@@ -36,15 +46,15 @@
   <!-- ------ slide one ---- -->
   <ion-slides autoplay="true">
     <ion-slide>
-      <ion-col *ngFor="let b of BusinessWithCategoryArr" size="3">
+      <ion-col *ngFor="let c of BusinessWithCategoryArr" size="3" (click)="getCategoryIdWithShop(c._id)">
         <ion-card>
           <ion-row>
             <ion-col size="12">
-              <img src="{{b.imageUrl}} ">
+              <img src="{{c.imageUrl}} ">
             </ion-col>
           </ion-row>
         </ion-card>
-        <ion-note>{{b.name}}</ion-note>
+        <ion-note>{{c.name}}</ion-note>
       </ion-col>
     </ion-slide>
   </ion-slides>

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
+import { ShopService } from 'src/app/service/shop/shop.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,14 +16,16 @@ export class LandingPagePage implements OnInit {
   businessTypeId: any;
   user: any;
   businessArr: any = [];
-  BusinessWithCategoryArr:any=[];
+  BusinessWithCategoryArr: any = [];
+  search: string = '';
 
   constructor(
     private router: Router,
     private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
     public translate: TranslateService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private shopService: ShopService,
 
   ) { }
 
@@ -40,8 +43,6 @@ export class LandingPagePage implements OnInit {
     });
   }
 
-
-
   getBusinessAllCategory(ev) {
     console.log("event", ev);
     this.getCategoryByBusinessTypeId(ev)
@@ -55,10 +56,14 @@ export class LandingPagePage implements OnInit {
       .getAll(obj)
       .subscribe((success) => {
         console.log("success------------", success);
-        this.BusinessWithCategoryArr=success.rows;
+        this.BusinessWithCategoryArr = success.rows;
       });
   }
 
+
+  navigateTo(path, _id) {
+    this.router.navigate([path], { queryParams: { _id } });
+  }
 
   seeAll() {
     this.router.navigate(['/category']);
@@ -66,4 +71,33 @@ export class LandingPagePage implements OnInit {
   proCard() {
     this.router.navigate(['/category']);
   }
+
+
+
+
+
+  getCategoryIdWithShop(ev) {
+    console.log("event--------------shop", ev);
+    let params = ev;
+    console.log(params);
+    this.router.navigate(['/search-shop'], { queryParams: { params }});
+  }
+
+  // getCategoryByShop(categoryId) {
+  //   let obj: any = {
+  //     categoryId: categoryId
+  //   };
+  //   this.shopService
+  //     .getByCategoryIdWithShop(obj)
+  //     .subscribe((success) => {
+  //       console.log("success------------shop", success);
+  //       this.BusinessWithCategoryArr = success.rows;
+  //     });
+  // }
+
+
+
+
+
+
 }

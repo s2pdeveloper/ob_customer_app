@@ -77,10 +77,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'search-customer',
+    path: 'search-shop',
     loadChildren: () =>
-      import('./default-layout/search-customer/search-customer.module').then(
-        (m) => m.SearchCustomerPageModule
+      import('./default-layout/search-shop/search-shop.module').then(
+        (m) => m.SearchShopPageModule
       ),
   },
   {
@@ -91,10 +91,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'customer-detail',
+    path: 'shop-detail',
     loadChildren: () =>
-      import('./default-layout/customer-detail/customer-detail.module').then(
-        (m) => m.CustomerDetailPageModule
+      import('./default-layout/shop-detail/shop-detail.module').then(
+        (m) => m.ShopDetailPageModule
       ),
   },
   {
