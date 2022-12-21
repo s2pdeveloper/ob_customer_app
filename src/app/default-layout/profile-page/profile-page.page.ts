@@ -23,8 +23,9 @@ export class ProfilePagePage implements OnInit {
   // conformPassword: string;
   line1: string;
   city: string;
-  // status: string;
-  // role: string;
+  status: string;
+  role: string;
+  G_map:any;
 
 
 

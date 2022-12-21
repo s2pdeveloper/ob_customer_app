@@ -10,11 +10,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CategoryPage implements OnInit {
    loaded:boolean= false;
-   categoryDetails: any = {};
+   categoryDetails: any = [];
    user:any;
    businessTypeId:any;
    categoryTypeId:string;
-    selectedCategoryId:string;
+   selectedCategoryId:string;
+   selectedBusinessName:string
   constructor(
     private router:Router,
     private actRoute:ActivatedRoute,
@@ -34,19 +35,20 @@ this. getByBusinessTypeCategory(success._id)
 
   })
 }
-getByIdCatlogue(){
+// getByIdCatlogue(){
 
-}
+// }
 
 getByBusinessTypeCategory(businessTypeId){
 let obj :any= {businessTypeId:businessTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
   console.log("success-----------", success);
-  this.categoryDetails=success;
+  this.categoryDetails=success.rows;
   this.selectedCategoryId = success.rows[0]._id;
       this.selectedCategoryId = success.rows[0].name;
-      // this.getByIdCatlogue(this.selectedCategoryId,this.selectedBusinessName);
       console.log("this.selectedCategoryId",this.selectedCategoryId);
+    // (this.selectedCategoryId,this.selectedBusinessName);
+        
 });
 }
 

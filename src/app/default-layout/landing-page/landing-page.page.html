@@ -13,18 +13,18 @@
     </ion-col>
   </ion-row>
 
-  <ion-searchbar show-clear-button="focus"></ion-searchbar>
+  <ion-searchbar show-clear-button="focus" (click)="getCatlogue()"></ion-searchbar>
   
   <ion-row >  
     <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >
-      <ion-card class="product-card">
-        <ion-card-header>
+      <ion-card class="product-card" fill="outline">
+        <ion-card-header> 
           <ion-row>
             <ion-col  size="12">             
               <img src="{{b.imageUrl}}">    
             </ion-col>
           </ion-row>
-        </ion-card-header>
+         </ion-card-header> 
          </ion-card> 
          <ion-label class="note" >{{b.name}}</ion-label>  
       </ion-col>  

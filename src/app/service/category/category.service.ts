@@ -11,7 +11,9 @@ export class CategoryService {
     getAllPath: `business_type/getAll`,
     // getByIdPath: (id) => `category/getAllCategoryByBusinessTypeId/${id}`,
     getAllBusinessWithCategory:(obj)=>`category/getAll?${obj.businessTypeId}`,
-    getAllOfferPath: `offer/getAll`
+    getAllOfferPath: `offer/getAll`,
+    getAllPath1:'customer/getAllShop',
+    getAllShopCatlogueById:(obj)=>'customer/getAllCatlogue1?${obj.catlogueTypeId}'
   }
   constructor(
     private http: ApiService,
@@ -27,7 +29,11 @@ export class CategoryService {
 getAllOffer(payload){
   return this.http.get(this.routes.getAllOfferPath,payload);
 }
-// getAllcategory1(_id){
-//   return this.http.get(this.routes.getAllPath,_id);
-// }
+getAllCatlogue(payload){
+  return this.http.get(this.routes.getAllPath1,payload);
+}
+getAllCatlogue1(params){
+  return this.http.get(this.routes.getAllShopCatlogueById(params),params)
+    .pipe(map((res:any)=>res));
+}
 }

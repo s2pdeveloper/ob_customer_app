@@ -1,16 +1,22 @@
-.input-class {
+// .input-class {
 
-    ion-row,
-    ion-col {
-        padding: 0;
-        margin: 0;
-    }
+//     ion-row,
+//     ion-col {
+//         padding: 0;
+//         margin: 0;
+//     }
 
-    ion-radio-group {
-        width: 100% !important;
-        ion-radio {
-            padding: 0;
-            margin: 10px;
-        }
-    }
+//     ion-radio-group {
+//         width: 100% !important;
+//         ion-radio {
+//             padding: 0;
+//             margin: 10px;
+//         }
+//     }
+// }
+
+ion-item{
+        height:100px;
+        width: 100px;
+    
 }

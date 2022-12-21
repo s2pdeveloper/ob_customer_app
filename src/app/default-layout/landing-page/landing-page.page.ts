@@ -15,6 +15,8 @@ import { CategoryService } from 'src/app/service/category/category.service';
 export class LandingPagePage implements OnInit {
   selectedBusinessId: string;
   selectedBusinessName:string;
+  selectedCatlogueId:string;
+  selectedCatlogueName:string;
   constructor(
     private router: Router,
     private localStorage: StorageService,
@@ -107,5 +109,8 @@ home() {
 }
 logout() {
   this.router.navigate(['/login'])
+}
+getCatlogue(){
+  this.router.navigate(['/Customer-Udari'],{queryParams:{_id:this.selectedCatlogueId, name: this.selectedCatlogueName}}) 
 }
 }

@@ -3,6 +3,7 @@ import { CustomerService } from 'src/app/service/customer/customer.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+// import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-search-customer',
   templateUrl: './search-customer.page.html',
@@ -22,33 +23,34 @@ export class SearchCustomerPage implements OnInit {
     private router: Router,
     private customerService: CustomerService,
     private spinner: LoaderService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    // private categoryService:CategoryService
   ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.getAllCustomers(false);
+    this.getAllCatlogue(false);
   }
 
   onSearch() {
     this.page = 1;
     this.customerArr = [];
-    this.getAllCustomers(false, '');
+    this.getAllCatlogue(false, '');
   }
   doRefresh(event) {
     this.page = 1;
     this.customerArr = [];
-    this.getAllCustomers(false);
+    this.getAllCatlogue(false);
     event.target.complete();
   }
   doInfinite(event) {
     this.page++;
-    this.getAllCustomers(true, event);
+    this.getAllCatlogue(true, event);
     event.target.complete();
   }
 
-  getAllCustomers(isFirstLoad: boolean, event?: any) {
+  getAllCatlogue(isFirstLoad: boolean, event?: any) {
     // this.spinner.showLoader();
     this.loaded = false;
     let obj = {
@@ -73,7 +75,7 @@ export class SearchCustomerPage implements OnInit {
       // this.spinner.hideLoader();
     });
   }
-  navigateTo(path, id) {
-    this.router.navigate([path], { queryParams: { id } });
+  navigateTo( path,id) {
+    this.router.navigate(['path'], { queryParams: { id } });
   }
 }
