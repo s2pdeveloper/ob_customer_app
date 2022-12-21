@@ -15,6 +15,7 @@ import { OPTIONS } from 'src/app/helpers';
   styleUrls: ['./edit-profile.page.scss'],
 })
 export class EditProfilePage implements OnInit {
+
   submitted: boolean = false;
   loaded: boolean = true;
   user: any;
@@ -22,32 +23,6 @@ export class EditProfilePage implements OnInit {
   fileUploaded: boolean = false;
   filePath: string = "";
 
-  constructor(
-    private router: Router,
-    private spinner: LoaderService,
-    private toaster: ToastService,
-    private localStorage: StorageService,
-    public authService: AuthService,
-    public translate: TranslateService,
-    private uploadService: UploadService,
-
-
-
-  ) { }
-
-  ngOnInit() {
-    this.user = this.localStorage.get('OBUser');
-    console.log("this.user", this.user);
-
-    this.getById();
-  }
-
-  getById() {
-    this.authService.profile(this.user._id).subscribe((success) => {
-      console.log('success profile', success);
-      this.profileForm.patchValue(success);
-    });
-  }
 
   profileForm = new FormGroup({
     id: new FormControl(),
@@ -83,8 +58,33 @@ export class EditProfilePage implements OnInit {
   });
 
 
+  constructor(
+    private router: Router,
+    private spinner: LoaderService,
+    private toaster: ToastService,
+    private localStorage: StorageService,
+    public authService: AuthService,
+    public translate: TranslateService,
+    private uploadService: UploadService,
+
+) { }
+
+  ngOnInit() {
+    this.user = this.localStorage.get('OBUser');
+    console.log("this.user", this.user);
+    this.getById();
+  }
+
   get form() {
     return this.profileForm.controls;
+  }
+
+
+  getById() {
+    this.authService.profile(this.user._id).subscribe((success) => {
+      console.log('success profile', success);
+      this.profileForm.patchValue(success);
+    });
   }
 
   // updateProfile() {
@@ -113,11 +113,8 @@ export class EditProfilePage implements OnInit {
     await this.spinner.hideLoader();
     this.authService.profile(this.user._id).subscribe(async success => {
       console.log("success----------", success);
-
       this.profileForm.patchValue(success);
-      if (success.imageUrl
-      ) {
-
+      if (success.image) {
         this.fileUploaded = true;
       }
       await this.spinner.hideLoader();
@@ -127,25 +124,17 @@ export class EditProfilePage implements OnInit {
     })
   }
 
-
-
-
-
-
   updateProfile() {
     if (this.profileForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
     }
     this.spinner.showLoader();
-    this.loaded = false;
     let formData = this.profileForm.value;
-    console.log("form data......", formData);
     this.authService.updateUser(formData.id, formData).subscribe((success: any) => {
       console.log('success', success);
       this.spinner.hideLoader();
       this.profileForm.reset();
-
       this.toaster.successToast('Profile updated successfully.');
       this.router.navigate(['/view-profile']);
     });
@@ -154,11 +143,8 @@ export class EditProfilePage implements OnInit {
 
 
 
-  async uploadFile($event, key) {
+  async uploadFile($event) {
     let file = $event.target.files[0];
-    console.log($event.target.files[0]);
-    console.log("file-------", file);
-
     // if (this.uploadService.checkFileSize(file)) {
     //   this.toaster.errorToast(OPTIONS.sizeLimit);
     //   this.spinner.hideLoader();
@@ -172,17 +158,10 @@ export class EditProfilePage implements OnInit {
     await this.spinner.showLoader();
     let formData = new FormData();
     formData.append('file', file);
-    console.log("formData-------", formData);
-
     this.uploadService.uploadFile(formData)
       .subscribe(
         async (data: any) => {
-          console.log("data------", data);
-
           this.filePath = data?.result?.url;
-
-          console.log("this.filePath----", this.filePath);
-
           this.profileForm.controls.image.setValue(this.filePath);
           this.fileUploaded = true;
           await this.spinner.hideLoader();
