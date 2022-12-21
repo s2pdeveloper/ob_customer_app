@@ -14,6 +14,9 @@ export class SearchShopPage implements OnInit {
   page: number = 1;
   pageSize: number = 10;
   search: string = '';
+  businessTypeId: string = '';
+  categoryId: string = '';
+  subCategoryId: string = '';
   collection: number = 0;
   shopArr: any = [];
   loaded: boolean = false;
@@ -62,7 +65,13 @@ export class SearchShopPage implements OnInit {
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       search: this.search,
+      businessTypeId:this.businessTypeId,
+      categoryId:this.categoryId,
+      subCategoryId:this.subCategoryId
+
     };
+    console.log("obj----",obj);
+    
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;
