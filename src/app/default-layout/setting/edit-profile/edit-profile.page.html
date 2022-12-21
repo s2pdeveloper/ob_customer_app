@@ -10,13 +10,27 @@
 <ion-content *ngIf="loaded">
 
   <ion-card>
-    <div class="img">
+    <!-- <div class="img">
       <ion-avatar class="avatar">
         <img  src="assets/images/placeholder_profile.png">
         <img [src]="form.path.value" *ngIf="fileUploaded">
       </ion-avatar>
       <ion-text>
         <ion-chip> {{ 'changeProfile' | translate}}</ion-chip>
+        <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+          (change)="uploadFile($event)" required>
+      </ion-text>
+    </div> -->
+
+
+    <div class="img">
+      <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
+        <img src="{{profileForm.value.image}}">
+      </ion-avatar>
+      <ion-text>
+        <ion-chip class="bg-color-5 text-color-2">
+          {{ 'changeProfile' | translate}}
+        </ion-chip>
         <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
           (change)="uploadFile($event)" required>
       </ion-text>

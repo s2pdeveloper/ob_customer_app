@@ -6,6 +6,8 @@ import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
+import { UploadService } from 'src/app/service/upload/upload.service';
+import { OPTIONS } from 'src/app/helpers';
 
 @Component({
   selector: 'app-edit-profile',
@@ -17,28 +19,33 @@ export class EditProfilePage implements OnInit {
   loaded: boolean = true;
   user: any;
   formBuilder: any;
+  fileUploaded: boolean = false;
+  filePath: string = "";
+
   constructor(
     private router: Router,
     private spinner: LoaderService,
     private toaster: ToastService,
     private localStorage: StorageService,
     public authService: AuthService,
-    public translate: TranslateService
-  ) {}
+    public translate: TranslateService,
+    private uploadService: UploadService,
+
+
+
+  ) { }
 
   ngOnInit() {
     this.user = this.localStorage.get('OBUser');
-    console.log("this.user",this.user);
-    
+    console.log("this.user", this.user);
+
     this.getById();
   }
 
   getById() {
-    this.loaded = false;
     this.authService.profile(this.user._id).subscribe((success) => {
       console.log('success profile', success);
       this.profileForm.patchValue(success);
-      this.loaded = true;
     });
   }
 
@@ -48,7 +55,7 @@ export class EditProfilePage implements OnInit {
     lastName: new FormControl(''),
     mobile: new FormControl(''),
     email: new FormControl(''),
-    // image: new FormControl(''),
+    image: new FormControl(''),
 
     address: new FormGroup({
       line1: new FormControl(''),
@@ -80,8 +87,52 @@ export class EditProfilePage implements OnInit {
     return this.profileForm.controls;
   }
 
+  // updateProfile() {
+  //   this.submitted = true;
+  //   if (this.profileForm.invalid) {
+  //     this.toaster.presentToast('warning', 'Please fill all valid field !');
+  //     return;
+  //   }
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   let formData = this.profileForm.value;
+  //   this.authService
+  //     .updateUser(formData.id, formData)
+  //     .subscribe((success: any) => {
+  //       // console.log('success', success);
+  //       this.spinner.hideLoader();
+  //       this.profileForm.reset();
+  //       this.submitted = false;
+  //       this.loaded = true;
+  //       this.toaster.successToast('Profile updated successfully.');
+  //       this.router.navigate(['/view-profile']);
+  //     });
+  // }
+
+  async getData() {
+    await this.spinner.hideLoader();
+    this.authService.profile(this.user._id).subscribe(async success => {
+      console.log("success----------", success);
+
+      this.profileForm.patchValue(success);
+      if (success.imageUrl
+      ) {
+
+        this.fileUploaded = true;
+      }
+      await this.spinner.hideLoader();
+    }, async error => {
+      await this.spinner.hideLoader();
+      this.toaster.errorToast(error);
+    })
+  }
+
+
+
+
+
+
   updateProfile() {
-    this.submitted = true;
     if (this.profileForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
@@ -89,19 +140,57 @@ export class EditProfilePage implements OnInit {
     this.spinner.showLoader();
     this.loaded = false;
     let formData = this.profileForm.value;
-    this.authService
-      .updateUser(formData.id, formData)
-      .subscribe((success: any) => {
-        // console.log('success', success);
-        this.spinner.hideLoader();
-        this.profileForm.reset();
-        this.submitted = false;
-        this.loaded = true;
-        this.toaster.successToast('Profile updated successfully.');
-        this.router.navigate(['/view-profile']);
-      });
+    console.log("form data......", formData);
+    this.authService.updateUser(formData.id, formData).subscribe((success: any) => {
+      console.log('success', success);
+      this.spinner.hideLoader();
+      this.profileForm.reset();
+
+      this.toaster.successToast('Profile updated successfully.');
+      this.router.navigate(['/view-profile']);
+    });
   }
 
 
-  uploadFile($event) {}
+
+
+  async uploadFile($event, key) {
+    let file = $event.target.files[0];
+    console.log($event.target.files[0]);
+    console.log("file-------", file);
+
+    // if (this.uploadService.checkFileSize(file)) {
+    //   this.toaster.errorToast(OPTIONS.sizeLimit);
+    //   this.spinner.hideLoader();
+    //   return;
+    // }
+    // if (this.uploadService.checkImageType(file)) {
+    //   this.toaster.errorToast(OPTIONS.imageType);
+    //   this.spinner.hideLoader();
+    //   return;
+    // }
+    await this.spinner.showLoader();
+    let formData = new FormData();
+    formData.append('file', file);
+    console.log("formData-------", formData);
+
+    this.uploadService.uploadFile(formData)
+      .subscribe(
+        async (data: any) => {
+          console.log("data------", data);
+
+          this.filePath = data?.result?.url;
+
+          console.log("this.filePath----", this.filePath);
+
+          this.profileForm.controls.image.setValue(this.filePath);
+          this.fileUploaded = true;
+          await this.spinner.hideLoader();
+        },
+        async (error: any) => {
+          await this.spinner.hideLoader();
+          this.toaster.errorToast(error);
+        }
+      );
+  }
 }
