@@ -13,8 +13,8 @@
     </ion-col>
   </ion-row>
 
-  <ion-searchbar show-clear-button="focus" (click)="navigateTo('/customer-details',s._id)"></ion-searchbar>
-  
+  <ion-searchbar
+    show-clear-button="focus" "navigateTo('/search-shop',null)"></ion-searchbar>
   <ion-row >  
     <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >
       <ion-card class="product-card" fill="outline">

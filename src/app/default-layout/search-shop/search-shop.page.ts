@@ -27,8 +27,8 @@ export class SearchShopPage implements OnInit {
 
   ngOnInit() {
   
-  // this.ionViewWillEnter();
-    this.user = this.localStorage.get('OBUser');
+  // this.getShopById("")
+  //    this.user = this.localStorage.get('OBUser');
 
 
   }
@@ -63,29 +63,32 @@ export class SearchShopPage implements OnInit {
 
 
   getAllShop(isFirstLoad: boolean, event?: any) {
-    // this.spinner.showLoader();
-    this.loaded = false;
+    
+    // this.loaded = false;
     let obj = {
       search: this.search,
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log("success", success);
       this.shopArr = success.rows;
-         this.loaded = true;
+        //  this.loaded = true;
 
 });
   }
   getShopById(_id){
+    //  this.spinner.showLoader();
+    console.log(_id);
     this.loaded=false;
-    this.shopService.getById(_id).subscribe((success) => {
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success) => {
           console.log("success-----------", success);
           this.shopArr=success.rows;
           this.loaded=true;
+          
 
   });
   }
-  navigateTo( path,_id) {
-         this.router.navigate([path],{ queryParams: { _id } });
+   navigateTo( path,_id) {
+    this.router.navigate(['/customer-details'],{ queryParams: { _id } });
        }
 }
 

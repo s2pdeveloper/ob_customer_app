@@ -110,10 +110,11 @@ home() {
 logout() {
   this.router.navigate(['/login'])
 }
-// getCatlogue(){
-//   this.router.navigate(['/search-shop']) 
-// }
-navigateTo( path,_id) {
-  this.router.navigate([path],{ queryParams: { _id } });
+getCategoryIdwithShop(ev){
+  console.log("event--shop",ev);
+  let params=ev;
+  console.log(params);
+  this.router.navigate(['/search-shop'],{ queryParams: { params} }) 
 }
+
 }
