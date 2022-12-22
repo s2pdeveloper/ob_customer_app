@@ -42,4 +42,5 @@ export class CustomerService {
 //   getCategory(id){
 // return this.http.get(this.routes.getCategory,id)
 //   }
+
 }

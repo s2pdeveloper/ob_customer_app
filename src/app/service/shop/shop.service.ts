@@ -9,16 +9,15 @@ import { HttpClient } from '@angular/common/http';
 export class ShopService {
   routes: any = {
     
-    getAllPath:'customer/getAllShop',
-    getAllShopCatlogueById:(_id)=>'/customer/getByIdShop/_id?${obj._id}'
+    getAllPath:(obj)=>'customer/getAllShop',
+    getByIDPath:(_id)=>'/customer/getByIdShop/${_id}',
   }
   constructor(  private http: ApiService) { }
 
 getAllShop(payload){
   return this.http.get(this.routes.getAllPath,payload);
 }
-getShopCatlogueById(params){
-  return this.http.get(this.routes.getAllBusinessWithCategory(params),params)
-  .pipe(map((res:any)=>res));
+getById(_id){
+  return this.http.get(this.routes.getByIDPath,(_id));
 }
 }

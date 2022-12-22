@@ -13,7 +13,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-searchbar show-clear-button="focus" (click)="getCatlogue()"></ion-searchbar>
+  <ion-searchbar show-clear-button="focus" (click)="navigateTo('/customer-details',s._id)"></ion-searchbar>
   
   <ion-row >  
     <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >

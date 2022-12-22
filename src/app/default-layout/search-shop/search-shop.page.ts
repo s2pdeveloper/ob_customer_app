@@ -77,7 +77,7 @@ export class SearchShopPage implements OnInit {
   }
   getShopById(_id){
     this.loaded=false;
-    this.shopService.getShopCatlogueById(_id).subscribe((success) => {
+    this.shopService.getById(_id).subscribe((success) => {
           console.log("success-----------", success);
           this.shopArr=success.rows;
           this.loaded=true;
@@ -85,7 +85,7 @@ export class SearchShopPage implements OnInit {
   });
   }
   navigateTo( path,_id) {
-         this.router.navigate(['path'],{ queryParams: { _id } });
+         this.router.navigate([path],{ queryParams: { _id } });
        }
 }
 

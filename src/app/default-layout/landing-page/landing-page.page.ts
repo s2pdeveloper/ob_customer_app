@@ -110,7 +110,10 @@ home() {
 logout() {
   this.router.navigate(['/login'])
 }
-getCatlogue(){
-  this.router.navigate(['/Customer-Udari'],{queryParams:{_id:this.selectedCatlogueId, name: this.selectedCatlogueName}}) 
+// getCatlogue(){
+//   this.router.navigate(['/search-shop']) 
+// }
+navigateTo( path,_id) {
+  this.router.navigate([path],{ queryParams: { _id } });
 }
 }
