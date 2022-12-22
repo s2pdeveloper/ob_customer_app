@@ -10,6 +10,7 @@ export class CategoryService {
   
     getAllPath: (obj) => `category/getAll?${obj.businessTypeId}`,
     getAllCategory: (obj) => `category/getAll`,
+    getAllCataloguePath:() => 'catalogue/getAll',
     // getAllCategoryByBusinessTypeId: (obj) => `category/getAllCategoryByBusinessTypeId/${obj.businessTypeId}`,
 
   };
@@ -27,6 +28,9 @@ export class CategoryService {
       .pipe(map((res: any) => res));
   }
 
+  getAllCatalogue(payload){
+    return this.http.get(this.routes.getAllCataloguePath,payload);
+  }
   // getAllCategoryByBusinessTypeId(businessTypeId) {
   //   return this.http.get(this.routes.getAllCategoryByBusinessTypeId(businessTypeId));
   // }

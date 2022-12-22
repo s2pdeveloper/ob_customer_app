@@ -12,7 +12,22 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 export class ProfilePagePage implements OnInit {
   user: any;
   userDetails: any = {};
- 
+  image: any;
+  key: string;
+  customerName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  // password: string;
+  // conformPassword: string;
+  line1: string;
+  city: string;
+  // status: string;
+  // role: string;
+
+
+
   loaded = false;
   constructor(
     private router: Router,
@@ -24,18 +39,23 @@ export class ProfilePagePage implements OnInit {
   ngOnInit() {}
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBUser');
+    console.log("this.user",this.user);
+    
     this.getById();
   }
   getById() {
     this.loaded = false;
-    this.authService.profile(this.user.id).subscribe((success) => {
+    this.authService.profile(this.user._id).subscribe((success) => {
+      console.log("success",success);
       this.userDetails = success;
-      this.loaded = true;
+      
+      
+      // this.spinner.hideLoader();
+      this.loaded = false;
     });
   }
-
-  navigateTo(path, id) {
-    this.router.navigate([path], { queryParams: { id } });
+  navigateTo(path, _id) {
+    this.router.navigate([path], { queryParams: { _id } });
   }
   goBack() {
     this.location.back();

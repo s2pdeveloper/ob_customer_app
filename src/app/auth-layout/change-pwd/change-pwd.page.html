@@ -10,11 +10,11 @@
 <ion-content *ngIf="loaded">
   <form [formGroup]="passForm">
     <ion-item
-      class="input-class"
-      lines="none"
+    class="input-class"
+      lines="outline"
       [class.invalid]="!form.oldPassword.valid && (form.oldPassword.dirty || submitted)"
     >
-      <ion-label position="stacked">
+      <ion-label position="floating">
         {{ 'oldPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>
@@ -47,11 +47,11 @@
     </app-validation-messages>
 
     <ion-item
-      class="input-class"
-      lines="none"
+    class="input-class"
+      lines="outline"
       [class.invalid]="!form.newPassword.valid && (form.newPassword.dirty || submitted)"
     >
-      <ion-label position="stacked">
+      <ion-label position="floating">
         {{ 'newPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>
@@ -84,11 +84,11 @@
     </app-validation-messages>
 
     <ion-item
-      class="input-class"
-      lines="none"
+    class="input-class"
+      lines="outline"
       [class.invalid]="!form.confirmPass.valid && (form.confirmPass.dirty || submitted)"
     >
-      <ion-label position="stacked">
+      <ion-label position="floating">
         {{ 'confirmPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>

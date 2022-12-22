@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="landing-page" mode="md"></ion-back-button>
+    <ion-title>Grocery</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar show-clear-button="focus"></ion-searchbar>
+
+  <ion-card class="card" (click)="proCard()" >  
+    <ion-row>
+      
+    
+<img src="../../../assets/image/rise.jpg"/>
+        <ion-card-title  class="size">Super Basmati Rice(1 kg) </ion-card-title>
+
+        <!-- <ion-button  >Add</ion-button> -->
+          
+          <ion-button>
+        <div class="wrapper">
+          <span class="minus" (click)="decrementQty()">-</span>&nbsp;
+          <span>{{item_qty}}</span>
+          <span class="num"> 01</span>&nbsp;
+          <span class="plus" (click)=" incrementQty()">+</span>
+        </div>
+      </ion-button>  
+      <!-- <ion-button>
+      <button class="add-btn" clear (click)="decrementQty()">
+        <ion-icon name="remove-circle" ></ion-icon></button>
+      <span>{{item_qty}}</span>
+      <button class="add-btn" clear (click)="incrementQty()">
+        <ion-icon name="add-circle" ></ion-icon></button>
+      </ion-button> -->
+        
+      
+         
+            <ion-select placeholder="1kg" okText="Choose kg" cancelText="Cancel Choice" >
+             
+              <ion-select-option value="1kg">1kg</ion-select-option>
+            <ion-select-option value="5kg">5kg</ion-select-option>
+            </ion-select> 
+            
+           
+       
+                
+             
+    </ion-row>  
+  </ion-card>
+ 
+
+</ion-content>

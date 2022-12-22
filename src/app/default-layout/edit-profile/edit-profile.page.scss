@@ -1,0 +1,30 @@
+ion-content {
+    ion-card {
+        border-radius: 2rem;
+        --background: transparent;
+        background: transparent;
+        box-shadow:inset;
+
+        ion-card-content {
+            padding-top: 0;
+
+            form {
+                padding: 0 5px;
+            }
+        }
+
+        .forget-text {
+            text-align: end;
+            padding: 1rem 0;
+        }
+
+        .sign-up-text {
+            text-align: start;
+            padding: 1rem 0;
+        }
+    }
+    // .back{
+    //     color: azure !important;
+    // }
+}
+
