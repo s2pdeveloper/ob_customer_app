@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>search-shop</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-col *ngIf="let s of shopArr">
+    <ion-card  (click)="navigateTo('/customer-details',s._id)">
+      <ion-row>
+        <ion-col size="12">
+          <img src="{{s.imageUrl}}">
+          <ion-note>{{s.shopName}}</ion-note>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+</ion-content>
+

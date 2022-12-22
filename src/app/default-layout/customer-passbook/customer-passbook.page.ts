@@ -52,27 +52,26 @@ this.shopName = success.name;
 
   })
   };
-  getByIdCatlogue(ev,name) {
-    console.log("ev", ev);
+  // getByIdCatlogue(ev,name) {
+  //   console.log("ev", ev);
   
-    this.getByCatlogueTypeCategory(ev,name);
-  }
+  //   this.getByCatlogueTypeCategory(ev,name);
+  // }
    
    
-  getByCatlogueTypeCategory(catlogueTypeId,name){
-  this.selectedCatlogueId = catlogueTypeId;
-  this.selectedCatlogueName=name;
-  let obj :any= {catlogueTypeId:catlogueTypeId}
-  this.categoryService.getAllCatlogue(obj).subscribe((success) => {
-    console.log("success-----------", success);
-    this.shopDetails=success.rows;
+  // getByCatlogueTypeCategory(catlogueTypeId,name){
+  // this.selectedCatlogueId = catlogueTypeId;
+  // this.selectedCatlogueName=name;
+  // let obj :any= {catlogueTypeId:catlogueTypeId}
+  // this.categoryService.getAllCatlogue(obj).subscribe((success) => {
+  //   console.log("success-----------", success);
+    // this.shopDetails=success.rows;
     // this.selectedCatlogueId = success.rows[0]._id;
     //   this.selectedCatlogueName = success.rows[0].name;
     //   console.log("this.selectedCatlogueId",this.selectedCatlogueId);
     
-   });
-  }
-  }
+   }
+  
   // ngAfterViewInit() {
   //   fromEvent(this.button.nativeElement, 'keyup')
   //       .subscribe(res => console.log(res));

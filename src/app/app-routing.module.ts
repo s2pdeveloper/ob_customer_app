@@ -31,13 +31,13 @@ const routes: Routes = [
         (m) => m.ForgetPwdPageModule
       ),
   },
-  // {
-  //   path: 'landing-page',
-  //   loadChildren: () =>
-  //     import('./default-layout/landing-page/landing-page.module').then(
-  //       (m) => m.LandingPagePageModule
-  //     ),
-  // },
+  {
+    path: 'landing-page',
+    loadChildren: () =>
+      import('./default-layout/landing-page/landing-page.module').then(
+        (m) => m.LandingPagePageModule
+      ),
+  },
   {
     path: 'profile-page',
     loadChildren: () =>
@@ -161,6 +161,12 @@ const routes: Routes = [
         (m) => m.SettingPageModule
       ),
   },
+  {
+    path: 'search-shop',
+    loadChildren: () => import('./default-layout/search-shop/search-shop.module').then(
+       m => m.SearchShopPageModule)
+  },
+
  
 ];
 

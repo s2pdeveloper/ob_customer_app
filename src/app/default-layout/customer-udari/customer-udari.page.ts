@@ -50,47 +50,47 @@ export class CustomerUdariPage implements OnInit {
   ) {}
 
   ngOnInit() {
-this.getAllCatlogueShop();
-this.user = this.localStorage.get('OBUser');
+// this.getAllCatlogueShop();
+// 
   }
 
-  getAllCatlogueShop(){
-    this.loaded=false;
-    let obj = {
-    };
-      this.categoryService.getAllCatlogue(obj).subscribe((success) => {
-        console.log("success", success);
-        this.shopDetails = success.rows;
-        // this.spinner.hideLoader();
-        this.selectedCatlogueId = success.rows[0]._id;
-        this.selectedCatlogueName = success.rows[0].name;
-        this.getByIdCatlogue(this.selectedCatlogueId,this.selectedCatlogueName);
-        console.log("this.selectedCatlogueId",this.selectedCatlogueId);
-        this.loaded = true;
-      });
-    }
-    getByIdCatlogue(ev,name) {
-      console.log("ev", ev);
+  // getAllCatlogueShop(){
+  //   this.loaded=false;
+  //   let obj = {
+  //   };
+  //     this.categoryService.getAllCatlogue(obj).subscribe((success) => {
+  //       console.log("success", success);
+  //       this.shopDetails = success.rows;
+  //       // this.spinner.hideLoader();
+  //       this.selectedCatlogueId = success.rows[0]._id;
+  //       this.selectedCatlogueName = success.rows[0].name;
+  //       this.getByIdCatlogue(this.selectedCatlogueId,this.selectedCatlogueName);
+  //       console.log("this.selectedCatlogueId",this.selectedCatlogueId);
+  //       this.loaded = true;
+  //     });
+  //   }
+  //   getByIdCatlogue(ev,name) {
+  //     console.log("ev", ev);
   
-      this.getByCatlogueTypeCategory(ev,name);
+  //     this.getByCatlogueTypeCategory(ev,name);
      
-    };
-  getByCatlogueTypeCategory(catlogueTypeId,name){
-    this.selectedCatlogueId = catlogueTypeId;
-    this.selectedCatlogueName=name;
-    let obj :any= {catlogueTypeId:catlogueTypeId}
-    this.categoryService.getAllCatlogue(obj).subscribe((success) => {
-      console.log("success-----------", success);
-      this.shopDetails=success.rows;
+  //   };
+  // getByCatlogueTypeCategory(catlogueTypeId,name){
+  //   this.selectedCatlogueId = catlogueTypeId;
+  //   this.selectedCatlogueName=name;
+  //   let obj :any= {catlogueTypeId:catlogueTypeId}
+  //   this.categoryService.getAllCatlogue(obj).subscribe((success) => {
+  //     console.log("success-----------", success);
+  //     this.shopDetails=success.rows;
       
-     });
-  }
-  }
+  //    });
+  // }
+  // }
   // ionViewWillEnter() {
   //   this.activatedRoute.queryParams.subscribe((params: any) => {
   //     if (params.id) this.customerId = +params.id;
   //   });
-  // }
+  }
 
   // checkValidation() {
   //   if (this.passbookForm.get('type').value !== 'DEPOSIT') {

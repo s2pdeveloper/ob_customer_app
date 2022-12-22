@@ -48,19 +48,19 @@
       <ion-label slot="end" color="primary">{{endPrice}}</ion-label>
     </ion-range>
   </ion-item> -->
-  <ion-card *ngIf="!customerArr.length" class="no-data">
+  <ion-card *ngIf="!shopArr.length" class="no-data">
     <div class="ion-text-center">
       <img src="./assets/image/no-data.svg" alt="Logo" />
     </div>
   </ion-card>
-  <ion-card *ngIf="customerArr.length">
+  <ion-card *ngIf="shopArr.length">
     <ion-card-content class="ion-no-padding">
       <ion-item
         lines="none"
         class="ion-margin-bottom"
         style="box-shadow: #9fb1dc 0px 25px 20px -20px"
-        *ngFor="let item of customerArr"
-    (click)="navigateTo('/customer-udari',item.id)" 
+        *ngFor="let item of shopArr"
+    (click)="navigateTo('/customer-details',item.id)" 
       >
         <ion-icon
           class="ion-margin-end"
