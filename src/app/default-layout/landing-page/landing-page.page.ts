@@ -32,41 +32,65 @@ export class LandingPagePage implements OnInit {
 
 
   ngOnInit() {
-    this.getAllBusinessType();
-  }
+    this.getAllbusinesstype();
+    this.user = this.localStorage.get('OBUser');
+    this.getAllOffertype();
 
-  getAllBusinessType() {
-    let obj = {};
-    this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
-      console.log('success', success);
-      this.businessArr = success.rows;
+}
+
+  getAllbusinesstype() {
+    // this.spinner.showLoader();
+    this.loaded = false;
+    let obj = {
+ };
+    this.categoryService.getAllcategory(obj).subscribe((success) => {
+      console.log("success", success);
+      this.businessDetails = success.rows;
+
+      //thisshould ideally be set in localstorage
+      this.selectedBusinessId = success.rows[0]._id;
+      this.selectedBusinessName = success.rows[0].name;
+      this.getByIdCategory(this.selectedBusinessId,this.selectedBusinessName);
+      console.log("this.selectedBusinessId",this.selectedBusinessId);
+      // this.spinner.hideLoader();
+      this.loaded = true;
     });
   }
+  getByIdCategory(ev, name) {
+    console.log("ev", ev);
 
-  getBusinessAllCategory(ev) {
-    console.log("event", ev);
-    this.getCategoryByBusinessTypeId(ev)
-  }
+    this.getByBusinessTypeCategory(ev,name);
+   
+  };
+getByBusinessTypeCategory(businessTypeId,name){
+  this.selectedBusinessId = businessTypeId;
+  this.selectedBusinessName=name;
+  let obj :any= {businessTypeId:businessTypeId}
+  this.categoryService.getAll(obj).subscribe((success) => {
+    console.log("success-----------", success);
+    this.categoryDetails=success.rows;
+    
+   });
+}
+getAllOffertype() {
+  // this.spinner.showLoader();
+  this.loaded = false;
+  let obj = {
+};
+  this.categoryService.getAllOffer(obj).subscribe((success) => {
+    console.log("success", success);
+    this.offerDetails = success.rows;
+    // this.spinner.hideLoader();
+    this.loaded = true;
+  });
+}
+seeAll() {
+  
+  console.log("success");
+  this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
+     name: this.selectedBusinessName}}) 
+}
 
-  getCategoryByBusinessTypeId(businessTypeId) {
-    let obj: any = {
-      businessTypeId: businessTypeId
-    };
-    this.categoryService
-      .getAll(obj)
-      .subscribe((success) => {
-        console.log("success------------", success);
-        this.BusinessWithCategoryArr = success.rows;
-      });
-  }
-
-
-  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
-  }
-
-  seeAll() {
-    this.router.navigate(['/category']);
   }
   proCard() {
     this.router.navigate(['/category']);
