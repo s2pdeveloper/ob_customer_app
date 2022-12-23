@@ -10,13 +10,13 @@ export class ShopService {
   routes: any = {
     
     getAllPath:(obj)=>'customer/getAllShop',
-    getByIDPath:(_id)=>'/customer/getByIdShop/${_id}',
-    getByCategoryIdWithShop:(_id)=>'/customer/getShopByCategoryId/${_id}'
+    getByIDPath:(_id)=>'customer/getByIdShop/${_id}',
+    getByCategoryIdWithShop:(_id)=>'customer/getShopByCategoryId/${_id}'
   }
   constructor(  private http: ApiService) { }
 
-getAllShop(payload){
-  return this.http.get(this.routes.getAllPath,payload);
+getAllShop(params){
+  return this.http.get(this.routes.getAllPath(params),params);
 }
 getById(_id){
   return this.http.get(this.routes.getByIDPath,(_id));

@@ -114,7 +114,11 @@ getCategoryIdwithShop(ev){
   console.log("event--shop",ev);
   let params=ev;
   console.log(params);
-  this.router.navigate(['/search-shop'],{ queryParams: { params} }) 
 }
+  navigateTo( path,params) {
+    this.router.navigate(['/search-shop'],{ queryParams: { params } });
+       }
+//   this.router.navigate(['/search-shop'],{ queryParams: { params} }) 
+// }
+      }
 
-}

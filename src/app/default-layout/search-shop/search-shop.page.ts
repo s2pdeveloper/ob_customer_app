@@ -15,7 +15,7 @@ export class SearchShopPage implements OnInit {
   page: number = 1;
   search: string = '';
   user:any;
-
+  _id:string;
   constructor(
     private shopService:ShopService,
     private router:Router,
@@ -41,7 +41,7 @@ export class SearchShopPage implements OnInit {
       }
       
     })
-    this.getAllShop(false);
+
   }
 
   onSearch() {
@@ -52,14 +52,14 @@ export class SearchShopPage implements OnInit {
   doRefresh(event) {
     this.page = 1;
     this.shopArr = [];
-    // this.getAllShop(false);
-    event.target.complete();
+    this.getAllShop(false);
+   
   }
-  doInfinite(event) {
-    this.page=1;
-    // this.getAllShop(true, event);
-    event.target.complete();
-  }
+  // doInfinite(event) {
+  //   this.page=1;
+  //   // this.getAllShop(true, event);
+  //   event.target.complete();
+  // }
 
 
   getAllShop(isFirstLoad: boolean, event?: any) {
@@ -68,28 +68,33 @@ export class SearchShopPage implements OnInit {
     let obj = {
       search: this.search,
     };
+
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log("success", success);
       this.shopArr = success.rows;
-        //  this.loaded = true;
-
-});
+      
+      // this.spinner.hideLoader();
+      this.loaded = true;
+    });
   }
+  
+  
   getShopById(_id){
-    //  this.spinner.showLoader();
+      this.spinner.showLoader();
     console.log(_id);
     this.loaded=false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success) => {
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success:any) => {
           console.log("success-----------", success);
-          this.shopArr=success.rows;
+          this.shopArr=success.payload.shop;
           this.loaded=true;
-          
+       this.spinner.hideLoader();   
 
   });
   }
    navigateTo( path,_id) {
-    this.router.navigate(['/customer-details'],{ queryParams: { _id } });
+    this.router.navigate([path],{ queryParams: { _id } });
        }
 }
+
 
   

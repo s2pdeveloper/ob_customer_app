@@ -97,13 +97,13 @@ const routes: Routes = [
         (m) => m.CustomerFormPageModule
       ),
   },
-  {
-    path: 'customer-detail',
-    loadChildren: () =>
-      import('./default-layout/customer-detail/customer-detail.module').then(
-        (m) => m.CustomerDetailPageModule
-      ),
-  },
+  // {
+  //   path: 'customer-detail',
+  //   loadChildren: () =>
+  //     import('./default-layout/customer-detail/customer-detail.module').then(
+  //       (m) => m.CustomerDetailPageModule
+  //     ),
+  // },
   {
     path: 'customer-passbook',
     loadChildren: () =>
@@ -111,13 +111,13 @@ const routes: Routes = [
         './default-layout/customer-passbook/customer-passbook.module'
       ).then((m) => m.CustomerPassbookPageModule),
   },
-  {
-    path: 'customer-udari',
-    loadChildren: () =>
-      import('./default-layout/customer-udari/customer-udari.module').then(
-        (m) => m.CustomerUdariPageModule
-      ),
-  },
+  // {
+  //   path: 'customer-udari',
+  //   loadChildren: () =>
+  //     import('./default-layout/customer-udari/customer-udari.module').then(
+  //       (m) => m.CustomerUdariPageModule
+  //     ),
+  // },
   {
     path: 'change-language',
     loadChildren: () =>
@@ -166,6 +166,11 @@ const routes: Routes = [
     loadChildren: () => import('./default-layout/search-shop/search-shop.module').then(
        m => m.SearchShopPageModule)
   },
+  {
+    path: 'shop-details',
+    loadChildren: () => import('./default-layout/shop-details/shop-details/shop-details.module').then( m => m.ShopDetailsPageModule)
+  },
+
 
  
 ];
