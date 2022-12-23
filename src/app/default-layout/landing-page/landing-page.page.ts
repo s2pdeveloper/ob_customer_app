@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
@@ -22,10 +22,13 @@ export class LandingPagePage implements OnInit {
   loaded : boolean = true;
   selectedBusinessId:string;
   selectedBusinessName:string;
+  selectedCatalogueId:string;
+  selectedCatalogueName:string;
   categoryDetails:any=[];
   offerDetails:any=[];
   constructor(
     private router: Router,
+    private activatedRoute:ActivatedRoute,
     private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
     public translate: TranslateService,

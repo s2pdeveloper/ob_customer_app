@@ -10,9 +10,9 @@ export class CategoryService {
   
     getAllPath: (obj) => `category/getAll?${obj.businessTypeId}`,
     getAllCategory: (obj) => `category/getAll`,
-    getAllpath1:(obj)=>'offer/getAll'
+    getAllpath1:(obj)=>'offer/getAll?${obj.'
     // getAllCataloguePath:() => 'catalogue/getAll',
-    // getAllCategoryByBusinessTypeId: (obj) => `category/getAllCategoryByBusinessTypeId/${obj.businessTypeId}`,
+    //  getAllCategoryByBusinessTypeId: (obj) => `category/getAllCategoryByBusinessTypeId/${obj.businessTypeId}`,
 
   };
   constructor(private http: ApiService) { }
