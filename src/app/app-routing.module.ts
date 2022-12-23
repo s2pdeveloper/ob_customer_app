@@ -168,7 +168,7 @@ const routes: Routes = [
   },
   {
     path: 'shop-details',
-    loadChildren: () => import('./default-layout/shop-details/shop-details/shop-details.module').then( m => m.ShopDetailsPageModule)
+    loadChildren: () => import('./default-layout/shop-details/shop-details.module').then( m => m.ShopDetailsPageModule)
   },
 
 

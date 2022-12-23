@@ -7,13 +7,13 @@
 </ion-toolbar>
 
 <ion-content class="ion-padding">
-  <ng-container class="container-img">
+  <!-- <ng-container class="container-img">
     <img [src]="shopDetails?.bannerImagesUrl" />
     <img class="logo-img" [src]="shopDetails?.imageUrl
     " />
-  </ng-container>
+  </ng-container> -->
 
-  <div>
+   <div>
     <ion-text>
       <h3 class="ion-text-capitalize ion-text-wrap center">
         {{shopDetails?.firstName}} {{shopDetails?.lastName}}
@@ -40,21 +40,21 @@
     </ion-col>
   </ion-row>
 
-  <!-- <div>
+   <div>
     <h6>About us :-</h6>
     <p>{{shopDetails?.aboutUs}}</p>
   </div> -->
 
 
-  <ion-item>
+   <ion-item>
     <ion-icon name="card-sharp" color="dark"></ion-icon>
     <ion-label class="ion-margin-start">
       {{ 'shopName' | translate}}
       <p>{{shopDetails?.shopName}}</p>
     </ion-label>
-  </ion-item>
+  </ion-item> -->
 
-  <ion-item>
+   <ion-item>
     <ion-icon name="mail" color="dark"></ion-icon>
     <ion-label class="ion-margin-start">
       {{ 'email' | translate}}
@@ -68,9 +68,9 @@
       {{ 'mobileNumber' | translate}}
       <p>{{shopDetails?.mobile}}</p>
     </ion-label>
-  </ion-item>
+  </ion-item> -->
 
-  <!-- <ion-item>
+   <ion-item>
       <ion-icon name="location"></ion-icon>
       <ion-label class="ion-margin-start">
         {{ 'address' | translate}}
@@ -80,9 +80,9 @@
           {{shopDetails?.address?.pinCode}}
         </p>
       </ion-label>
-    </ion-item> -->
+    </ion-item> 
 
-  <ion-accordion-group>
+   <ion-accordion-group>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
         <ion-icon name="location" color="dark"></ion-icon>
@@ -96,7 +96,7 @@
         </p>
       </div>
     </ion-accordion>
-  </ion-accordion-group>
+  </ion-accordion-group> 
   <h6>Catalogue</h6>
   <ion-slides autoplay="true">
     <ion-slide>
@@ -114,4 +114,4 @@
   </ion-slides>
 
 
-</ion-content>
+</ion-content> 
