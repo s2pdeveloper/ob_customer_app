@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/service/customer/customer.service';
+import { Router,ActivatedRoute } from '@angular/router';
 import { StorageService, UtilitiesService } from 'src/app/core/services';
+import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
