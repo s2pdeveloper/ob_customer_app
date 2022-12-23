@@ -4,6 +4,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
 
+
 @Component({
   selector: 'app-shop-details',
   templateUrl: './shop-details.page.html',

@@ -1,12 +1,117 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>shop-details</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
- <ion-col *ngFor="let c of catlogue" 
-       (click)="getCategoryIdwithShop(c._id)" size="3" >
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/search-shop"></ion-back-button>
+  </ion-buttons>
+  <ion-title> {{ 'Shop Details' | translate}}</ion-title>
+</ion-toolbar>
+
+<ion-content class="ion-padding">
+  <ng-container class="container-img">
+    <img [src]="shopDetails?.bannerImagesUrl" />
+    <img class="logo-img" [src]="shopDetails?.imageUrl
+    " />
+  </ng-container>
+
+  <div>
+    <ion-text>
+      <h3 class="ion-text-capitalize ion-text-wrap center">
+        {{shopDetails?.firstName}} {{shopDetails?.lastName}}
+      </h3>
+    </ion-text>
+  </div>
+
+  <div>
+    <p>{{shopDetails?.schedule?.day}} :- {{shopDetails?.schedule?.startTime}} AM to {{shopDetails?.schedule?.endTime
+      }} PM</p>
+  </div>
+
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <a href="{{shopDetails?.links?.facebook}}">
+        <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+      </a>
+      <a href="{{shopDetails?.links?.insta}}">
+        <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
+      </a>
+      <a href="{{shopDetails?.links?.youtube}}">
+        <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+      </a>
+    </ion-col>
+  </ion-row>
+
+  <!-- <div>
+    <h6>About us :-</h6>
+    <p>{{shopDetails?.aboutUs}}</p>
+  </div> -->
+
+
+  <ion-item>
+    <ion-icon name="card-sharp" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'shopName' | translate}}
+      <p>{{shopDetails?.shopName}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="mail" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'email' | translate}}
+      <p>{{shopDetails?.email}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="call" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'mobileNumber' | translate}}
+      <p>{{shopDetails?.mobile}}</p>
+    </ion-label>
+  </ion-item>
+
+  <!-- <ion-item>
+      <ion-icon name="location"></ion-icon>
+      <ion-label class="ion-margin-start">
+        {{ 'address' | translate}}
+        <p>
+          {{shopDetails?.address?.line1}} {{shopDetails?.address?.city}}
+          {{shopDetails?.address?.state}} {{shopDetails?.address?.country}}
+          {{shopDetails?.address?.pinCode}}
+        </p>
+      </ion-label>
+    </ion-item> -->
+
+  <ion-accordion-group>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-icon name="location" color="dark"></ion-icon>
+        <ion-label class="ion-padding">Address</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>
+          {{shopDetails?.address?.line1}} {{shopDetails?.address?.city}}
+          {{shopDetails?.address?.state}} {{shopDetails?.address?.country}}
+          {{shopDetails?.address?.pinCode}}
+        </p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+  <h6>Catalogue</h6>
+  <ion-slides autoplay="true">
+    <ion-slide>
+      <ion-col *ngFor="let c of catlogue" size="3" (click)="getCategoryIdWithShop(c._id)">
+        <ion-card>
+          <ion-row>
+            <ion-col size="12">
+              <img src="{{c.image}} ">
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <ion-note>{{c.title}}</ion-note>
       </ion-col>
-      <img src="{{c.image}}"> 
+    </ion-slide>
+  </ion-slides>
+
+
 </ion-content>
