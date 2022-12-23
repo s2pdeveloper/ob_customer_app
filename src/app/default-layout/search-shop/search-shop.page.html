@@ -25,9 +25,11 @@
       <ion-card (click)="navigateTo('/shop-detail',s._id)">
         <ion-card-header>
           <ion-row>
-            <ion-col size="12">
-              <img src="{{s.image}} " width="40%">
-              <ion-note>{{s.shopName}}</ion-note>
+            <ion-col size="6">
+              <img src="{{s.image}} " width="70%" height="70%">
+            </ion-col>
+            <ion-col size="6">
+              <h4>{{s.shopName}}</h4>
             </ion-col>
           </ion-row>
         </ion-card-header>

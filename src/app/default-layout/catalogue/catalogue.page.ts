@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryService } from 'src/app/service/category/category.service';
+import { CatalogueService } from 'src/app/service/catalogue/catalogue.service';
+import { ActivatedRoute } from '@angular/router';
+import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { StorageService } from 'src/app/core/services';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-catalogue',
@@ -11,62 +12,91 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
+
   loaded: boolean = false;
-  Cataloguelist: any = [];
+  // Cataloguelist: any = [];
   user: any;
+  shopId: any;
+  page: number = 1;
+  pageSize: number = 10;
+  search = '';
+  shopDetails: any;
+  catalogue: any;
 
   // start: number = 0;
   // limit: number = 100;
   // searchText: string;
-  
 
-  constructor(private routes:Router,
-    private category:CategoryService,
-    private localStorage: StorageService,) { }
+
+  constructor(
+    private routes: Router,
+    private activatedRoute: ActivatedRoute,
+    private catalogueService: CatalogueService,
+    private shopService: ShopService,
+    private spinner: LoaderService,
+
+  ) { }
 
   ngOnInit() {
-    this.getAllCatalogue();
-    this.user = this.localStorage.get('OBUser');
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      console.log(params);
+      this.getShopById(params._id);
+    });
+
   }
 
-  getAllCatalogue() {
-    // this.spinner.showLoader();
+  getShopById(_id) {
+    console.log(_id);
+    this.spinner.showLoader();
     this.loaded = false;
-    let obj = {
-    // start:this.start,limit:this.limit,
- };
- this.category.getAllCatalogue(obj).subscribe((success) => {
-  console.log("success", success);
-  this.Cataloguelist = success;
+    this.shopService.getByIdShop(_id).subscribe((success: any) => {
+      console.log('success shopby id', success);
+      this.shopDetails = success[0];
+      this.catalogue = success[0].shopWithCatalogue;
+      this.spinner.hideLoader();
+      this.loaded = true;
+    });
+  }
+
+  // getAllCatalogue() {
+  //   // this.spinner.showLoader();
+  //  let obj = {
+  //     page: this.page,
+  //     pageSize: this.pageSize,
+  //     search: this.search,
+  //     // shopId: this.shopId,
+  //   };
+  //     this.catalogueService.getAllCatalogue(obj).subscribe((success: any) => {
+  //     console.log("success--------------", success);
+  //     // this.Cataloguelist = success;
+  //     // this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
 
 
-  // this.spinner.hideLoader();
-  this.loaded = true;
-});
-}
+  // generateItems() {
+  //   const count = this.items.length + 1;
+  //   for (let i = 0; i < 50; i++) {
+  //     this.items.push(`Item ${count + i}`);
+  //   }
+  // }
 
-// generateItems() {
-//   const count = this.items.length + 1;
-//   for (let i = 0; i < 50; i++) {
-//     this.items.push(`Item ${count + i}`);
-//   }
-// }
-
-// onIonInfinite(ev) {
-//   this.generateItems();
-//   setTimeout(() => {
-//     (ev as InfiniteScrollCustomEvent).target.complete();
-//   }, 500);
-// }
+  // onIonInfinite(ev) {
+  //   this.generateItems();
+  //   setTimeout(() => {
+  //     (ev as InfiniteScrollCustomEvent).target.complete();
+  //   }, 500);
+  // }
 
 
-// doRefresh(event: any) {
-//   this.Cataloguelist = [];
-//   this.start = 0;
-//   this.getAllCatalogue();
-//   event.target.complete();
-// }
-  
+  // doRefresh(event: any) {
+  //   this.Cataloguelist = [];
+  //   this.start = 0;
+  //   this.getAllCatalogue();
+  //   event.target.complete();
+  // }
+
 }
 
 

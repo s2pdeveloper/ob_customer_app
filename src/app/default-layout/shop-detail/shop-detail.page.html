@@ -39,12 +39,6 @@
     </ion-col>
   </ion-row>
 
-  <!-- <div>
-    <h6>About us :-</h6>
-    <p>{{shopDetails?.aboutUs}}</p>
-  </div> -->
-
-
   <ion-item>
     <ion-icon name="card-sharp" color="dark"></ion-icon>
     <ion-label class="ion-margin-start">
@@ -69,18 +63,6 @@
     </ion-label>
   </ion-item>
 
-  <!-- <ion-item>
-      <ion-icon name="location"></ion-icon>
-      <ion-label class="ion-margin-start">
-        {{ 'address' | translate}}
-        <p>
-          {{shopDetails?.address?.line1}} {{shopDetails?.address?.city}}
-          {{shopDetails?.address?.state}} {{shopDetails?.address?.country}}
-          {{shopDetails?.address?.pinCode}}
-        </p>
-      </ion-label>
-    </ion-item> -->
-
   <ion-accordion-group>
     <ion-accordion value="third">
       <ion-item slot="header" color="light">
@@ -99,32 +81,26 @@
 
 
 
-  <h6>Catalogue</h6>
+  <!-- <h6>Catalogue</h6>
   <ion-slides autoplay="true">
     <ion-slide>
       <ion-col *ngFor="let c of catalogue" size="3" (click)="getCategoryIdWithShop(c._id)">
         <ion-card>
           <ion-row>
             <ion-col size="12">
-              <img src="{{c.image
-}} ">
+              <img src="{{c.image}} ">
             </ion-col>
           </ion-row>
         </ion-card>
         <ion-note>{{c.title}}</ion-note>
       </ion-col>
     </ion-slide>
-  </ion-slides>
+  </ion-slides> -->
 
-
-
-
-
-
-
-
-
-
-
+  <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top" 
+    (click)="navigateTo('/catalogue',shopDetails._id)">
+    <ion-icon name="eye"></ion-icon>
+    {{ 'View Catalogue' | translate}}
+  </ion-button>
 
 </ion-content>
