@@ -5,6 +5,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
+import { StorageService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,13 +13,17 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-
+  businessDetails:any[];
   businessTypeId: any;
   user: any;
   businessArr: any = [];
   BusinessWithCategoryArr: any = [];
   search: string = '';
-
+  loaded : boolean = true;
+  selectedBusinessId:string;
+  selectedBusinessName:string;
+  categoryDetails:any=[];
+  offerDetails:any=[];
   constructor(
     private router: Router,
     private businessTypeService: BusinessTypeService,
@@ -26,11 +31,11 @@ export class LandingPagePage implements OnInit {
     public translate: TranslateService,
     private categoryService: CategoryService,
     private shopService: ShopService,
+    private localStorage:StorageService
 
   ) { }
 
-
-
+  
   ngOnInit() {
     this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
@@ -43,7 +48,7 @@ export class LandingPagePage implements OnInit {
     this.loaded = false;
     let obj = {
  };
-    this.categoryService.getAllcategory(obj).subscribe((success) => {
+    this.categoryService.getAllCategory(obj).subscribe((success) => {
       console.log("success", success);
       this.businessDetails = success.rows;
 
@@ -91,14 +96,6 @@ seeAll() {
      name: this.selectedBusinessName}}) 
 }
 
-  }
-  proCard() {
-    this.router.navigate(['/category']);
-  }
-
-
-
-
 
   getCategoryIdWithShop(ev) {
     console.log("event--------------shop", ev);
@@ -107,17 +104,7 @@ seeAll() {
     this.router.navigate(['/search-shop'], { queryParams: { params }});
   }
 
-  // getCategoryByShop(categoryId) {
-  //   let obj: any = {
-  //     categoryId: categoryId
-  //   };
-  //   this.shopService
-  //     .getByCategoryIdWithShop(obj)
-  //     .subscribe((success) => {
-  //       console.log("success------------shop", success);
-  //       this.BusinessWithCategoryArr = success.rows;
-  //     });
-  // }
+  
 
 
 
