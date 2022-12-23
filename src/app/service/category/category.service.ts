@@ -28,9 +28,9 @@ export class CategoryService {
       .get(this.routes.getAllCategory(params), params)
       .pipe(map((res: any) => res));
   }
-  // getAllOffer(payload){
-  //   return this.http.post(this.routes., payload);
-  // }
+  getAllOffer(params){
+    return this.http.post(this.routes.getAllpath1, params);
+  }
 
   // getAllCatalogue(payload){
   //   return this.http.get(this.routes.getAllCataloguePath,payload);
