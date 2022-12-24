@@ -40,7 +40,7 @@ export class ShopDetailPage implements OnInit {
     this.loaded = false;
     this.shopService.getByIdShop(_id).subscribe((success: any) => {
       console.log('success shopby id', success);
-      // this.shopArr = success.payload.shop;
+      //  this.shopArr = success.payload.shop;
       this.shopDetails = success[0];
       this.catalogue = success[0].shopWithCatalogue;
       // console.log(" this.shopDetails", this.shopDetails);

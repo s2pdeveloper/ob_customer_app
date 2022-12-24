@@ -83,13 +83,7 @@ const routes: Routes = [
         (m) => m.OnboardingPageModule
       ),
   },
-  {
-    path: 'search-shop',
-    loadChildren: () =>
-      import('./default-layout/search-shop/search-shop.module').then(
-        (m) => m.SearchShopPageModule
-      ),
-  },
+  
   {
     path: 'customer-form',
     loadChildren: () =>
@@ -111,13 +105,7 @@ const routes: Routes = [
         './default-layout/customer-passbook/customer-passbook.module'
       ).then((m) => m.CustomerPassbookPageModule),
   },
-  {
-    path: 'customer-udari',
-    loadChildren: () =>
-      import('./default-layout/customer-udari/customer-udari.module').then(
-        (m) => m.CustomerUdariPageModule
-      ),
-  },
+  
   {
     path: 'change-language',
     loadChildren: () =>
@@ -160,17 +148,18 @@ const routes: Routes = [
         (m) => m.SettingPageModule
       ),
   },
-  {
-    path: 'grocery',
-    loadChildren: () =>
-      import('./default-layout/grocery/grocery.module').then(
-        (m) => m.GroceryPageModule
-      ),
-  },
+  
   {
     path: 'catalogue',
     loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
   },
+  
+ 
+  {
+    path: 'search-shop',
+    loadChildren: () => import('./default-layout/search-shop/search-shop.module').then( m => m.SearchShopPageModule)
+  },
+
 
 ];
 
