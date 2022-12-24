@@ -79,17 +79,17 @@ export class SearchShopPage implements OnInit {
   }
 
   getShopById(_id) {
-    console.log(_id);
+     console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      
-      this.shopArr = success.payload.shop;
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success:any)=>{
+      this.shopArr=success.payload.shop;
+    });
       console.log('shop by id----categoryId', this.shopArr);
       this.spinner.hideLoader();
       this.loaded = true;
-    });
-  }
+    };
+  
 
  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });

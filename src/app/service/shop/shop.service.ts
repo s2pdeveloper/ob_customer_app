@@ -15,8 +15,8 @@ export class ShopService {
   constructor(private http: ApiService) { }
 
   getAllShop(params) {
-    return this.http
-      .get(this.routes.getAllPath(params), params)
+   
+    return this.http.get(this.routes.getAllPath(params),params)
   }
 
   getByIdShop(_id) {
