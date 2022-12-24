@@ -47,7 +47,7 @@ export class SearchShopPage implements OnInit {
   doRefresh(event) {
     this.page = 1;
     this.shopArr = [];
-    // this.getAllShop(false);
+    //  this.getAllShop(false);
     event.target.complete();
   }
   
@@ -60,9 +60,12 @@ export class SearchShopPage implements OnInit {
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       search: this.search,
+      businessTypeId:this.businessTypeId,
+      categoryId:this.categoryId,
+      subCategoryId:this.subCategoryId
+
     };
     console.log("obj----",obj);
-    
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;
@@ -73,11 +76,11 @@ export class SearchShopPage implements OnInit {
     console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService. getByCategoryIdWithShop(_id).subscribe((success: any) => {
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
       this.shopArr = success.payload.shop;
-      console.log('shop by id----categoryId', this.shopArr);    
-   this.spinner.hideLoader();
+      console.log('shop by id----categoryId', this.shopArr); 
       this.loaded = true;
+      this.spinner.hideLoader();
     });
   }
 
