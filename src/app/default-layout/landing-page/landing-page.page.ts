@@ -51,7 +51,7 @@ export class LandingPagePage implements OnInit {
     this.loaded = false;
     let obj = {
  };
-    this.categoryService.getAllCategory(obj).subscribe((success) => {
+    this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
       console.log("success", success);
       this.businessDetails = success.rows;
 
@@ -104,9 +104,12 @@ seeAll() {
     console.log("event--------------shop", ev);
     let params = ev;
     console.log(params);
+
+    
+  }
+  navigateTo(params){
     this.router.navigate(['/search-shop'], { queryParams: { params }});
   }
-
   
 
 
