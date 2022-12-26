@@ -9,7 +9,7 @@ export class ShopService {
 
     getAllPath: (obj) => `customer/getAllShop`,
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
-    getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
+     getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
   };
   constructor(private http: ApiService) { }
