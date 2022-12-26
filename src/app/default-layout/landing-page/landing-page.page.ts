@@ -104,13 +104,14 @@ seeAll() {
     console.log("event--------------shop", ev);
     let params = ev;
     console.log(params);
-  }
   
-  navigateTo(params){
-    this.router.navigate(['/search-shop'], { queryParams: { params }});
-  }
-   
+(path, _id){
+  this.router.navigate([path], { queryParams: { _id} });
+}
     
+  
+   
+} 
   }
   
     

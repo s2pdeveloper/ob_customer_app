@@ -160,6 +160,10 @@ const routes: Routes = [
     loadChildren: () => import('./default-layout/search-shop/search-shop.module').then( m => m.SearchShopPageModule)
   },
 
+  {
+    path: 'chat-view',
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+  },
 
 ];
 
