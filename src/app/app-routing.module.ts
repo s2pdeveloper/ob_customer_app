@@ -171,6 +171,10 @@ const routes: Routes = [
     path: 'catalogue',
     loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
   },
+  {
+    path: 'chat-view',
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+  },
 
 ];
 
