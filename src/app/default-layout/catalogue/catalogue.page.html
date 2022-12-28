@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar> 
      
-   <ion-title>Catalogue</ion-title>
+   <ion-title>Product</ion-title>
    <ion-buttons slot="start">
      <ion-back-button defaultHref="category" mode="md"></ion-back-button>
    </ion-buttons>
@@ -17,10 +17,12 @@
     <div class="container"> 
    <ion-grid>
      <ion-row>
-       <ion-col *ngFor=" let c of catalogue">
+       <ion-col *ngFor=" let c of catalogueArr">
          <ion-list>  
          <ion-item>
+          <ion-checkbox slot="start"></ion-checkbox>
          <ion-thumbnail slot="start">
+         
            <img src="{{c.image}}" >
          </ion-thumbnail> 
           <ion-label >

@@ -72,10 +72,6 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/category']);
   }
 
-
-
-
-
   getCategoryIdWithShop(ev) {
     console.log("event--------------shop", ev);
     let params = ev;
@@ -94,10 +90,5 @@ export class LandingPagePage implements OnInit {
   //       this.BusinessWithCategoryArr = success.rows;
   //     });
   // }
-
-
-
-
-
 
 }
