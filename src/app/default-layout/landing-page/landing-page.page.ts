@@ -100,18 +100,12 @@ seeAll() {
 }
 
 
-  getCategoryIdWithShop(ev) {
-    console.log("event--------------shop", ev);
-    let params = ev;
-    console.log(params);
-  
-(path, _id){
-  this.router.navigate([path], { queryParams: { _id} });
+getCategoryIdWithShop(ev) {
+  console.log("event--------------shop", ev);
+  let params = ev;
+  console.log(params);
+  this.router.navigate(['/search-shop'], { queryParams: { params }});
 }
-    
-  
-   
-} 
   }
   
     

@@ -12,13 +12,13 @@
       </div>
     </ion-col>
   </ion-row>
-  <ion-searchbar class="search-box ion-no-padding ion-margin-top" inputmode="search" searchIcon animated type="text"
+  <!-- <ion-searchbar class="search-box ion-no-padding ion-margin-top" inputmode="search" searchIcon animated type="text"
   showCancelButton="never" placeholder="Search" autocomplete="on" autocorrect="on"
   (ionFocus)="navigateTo('/search-shop',null)"> 
-</ion-searchbar>
-  <!-- <ion-searchbar
-     show-clear-button="focus" (click)="getCategoryIdWithShop()"
-   ></ion-searchbar> -->
+</ion-searchbar> -->
+  <ion-searchbar
+     (click)="getCategoryIdWithShop()"
+   ></ion-searchbar>
   <ion-row >   
     <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >
       <ion-card class="product-card" fill="outline">

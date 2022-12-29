@@ -53,14 +53,14 @@ const routes: Routes = [
         (m) => m.ViewProfilePageModule
       ),
   },
-  {
-    path: 'edit-profile',
-    // canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./default-layout/setting/edit-profile/edit-profile.module').then(
-        (m) => m.EditProfilePageModule
-      ),
-  },
+  // {
+  //   path: 'edit-profile',
+  //   // canLoad: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./default-layout/setting/edit-profile/edit-profile.module').then(
+  //       (m) => m.EditProfilePageModule
+  //     ),
+  // },
 
   {
     path: 'change-pwd',
@@ -163,7 +163,11 @@ const routes: Routes = [
   {
     path: 'chat-view',
     loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+  },  {
+    path: 'subcategory',
+    loadChildren: () => import('./default-layout/subcategory/subcategory.module').then( m => m.SubcategoryPageModule)
   },
+
 
 ];
 

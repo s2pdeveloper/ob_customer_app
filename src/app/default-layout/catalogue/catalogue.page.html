@@ -19,7 +19,7 @@
      <ion-row>
        <ion-col *ngFor=" let c of catalogue">
          <ion-list>  
-         <ion-item>
+         <ion-item><ion-checkbox slot="start"></ion-checkbox>
          <ion-thumbnail slot="start">
            <img src="{{c.image}}" >
          </ion-thumbnail> 

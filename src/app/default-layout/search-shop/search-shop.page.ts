@@ -87,6 +87,7 @@ export class SearchShopPage implements OnInit {
  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id} });
   }
+  
 }
 
 

@@ -30,13 +30,10 @@ ngOnInit() {
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
 this.businessName = success.name;
-// this. getByBusinessTypeCategory(success._id)
+  // this. getByBusinessTypeCategory(success._id)
 
   })
 }
-// getByIdCatlogue(){
-
-// }
 
 // getByBusinessTypeCategory(categoryTypeId){
 // let obj :any= {businessTypeId:categoryTypeId}
@@ -46,9 +43,9 @@ this.businessName = success.name;
 //   this.selectedCategoryId = success.rows[0]._id;
 //       this.selectedCategoryId = success.rows[0].name;
 //       console.log("this.selectedCategoryId",this.selectedCategoryId);
-//     // (this.selectedCategoryId,this.selectedBusinessName);
+//     (this.selectedCategoryId,this.selectedBusinessName);
         
 // });
-// }
+//  }
 
 }

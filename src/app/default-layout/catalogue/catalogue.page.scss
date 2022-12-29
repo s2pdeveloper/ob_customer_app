@@ -11,8 +11,11 @@
        
     }
     .card{
-        width:80px;
+        width:100px;
         height:80px;
     }
-    
+    ion-checkbox::part(container) {
+        border-radius: 6px;
+        border: 1px solid #6815ec;
+      }
 }
