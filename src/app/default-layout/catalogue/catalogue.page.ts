@@ -4,6 +4,8 @@ import { CatalogueService } from 'src/app/service/catalogue/catalogue.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { SubcategoryService } from 'src/app/service/subcategory/subcategory.service';
+import { StorageService } from 'src/app/core/services';
 
 
 @Component({
@@ -23,6 +25,7 @@ export class CataloguePage implements OnInit {
   shopDetails: any;
   catalogue: any;
   catalogueArr: any;
+  subCategoryArr:any;
 
   // start: number = 0;
   // limit: number = 100;
@@ -35,18 +38,45 @@ export class CataloguePage implements OnInit {
     private catalogueService: CatalogueService,
     private shopService: ShopService,
     private spinner: LoaderService,
+    private subCategory:SubcategoryService,
+    private localStorage:StorageService
 
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log(params);
-      this.getCatalogueBySubCategoryId(params._id);
-    });
+    
+      
+    };
+    ionViewWillEnter() {
+      this.activatedRoute.queryParams.subscribe((params: any) => {
+        console.log(params);
+        this.getShopById(params._id);
+      });
+      // this.getCatalogueBySubCategoryId()
+    }
+  
+    getShopById(_id) {
+      console.log(_id);
+      this.spinner.showLoader();
+      this.loaded = false;
+      this.shopService.getByIdShop(_id).subscribe((success: any) => {
+        console.log('success shopby id', success);
+        this.shopDetails = success.rows[0];
+        this.subCategoryArr = success.data;
+        // this.shopDetails = success[0];
+        // this.catalogue = success[0].shopWithCatalogue;
+        // console.log(" this.shopDetails", this.shopDetails);
+        
+        this.spinner.hideLoader();
+        this.loaded = true;
+      });
+    }
+    
+    
+  
+  
 
-  }
-
-  // getShopById(_id) {
+  // getShopByCatalogueId(_id) {
   //   console.log(_id);
   //   this.spinner.showLoader();
   //   this.loaded = false;
@@ -60,61 +90,7 @@ export class CataloguePage implements OnInit {
   // }
 
 
-  getCatalogueBySubCategoryId(_id) {
-    console.log(_id);
-    this.spinner.showLoader();
-    this.loaded = false;
-    this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
-      console.log("success-------",success);
-      
-      this.catalogueArr = success.payload.shop;
-      // console.log('shop by id----categoryId', this.shopArr);
-      
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
-  }
-
-
-  // getAllCatalogue() {
-  //   // this.spinner.showLoader();
-  //  let obj = {
-  //     page: this.page,
-  //     pageSize: this.pageSize,
-  //     search: this.search,
-  //     // shopId: this.shopId,
-  //   };
-  //     this.catalogueService.getAllCatalogue(obj).subscribe((success: any) => {
-  //     console.log("success--------------", success);
-  //     // this.Cataloguelist = success;
-  //     // this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
-
-
-  // generateItems() {
-  //   const count = this.items.length + 1;
-  //   for (let i = 0; i < 50; i++) {
-  //     this.items.push(`Item ${count + i}`);
-  //   }
-  // }
-
-  // onIonInfinite(ev) {
-  //   this.generateItems();
-  //   setTimeout(() => {
-  //     (ev as InfiniteScrollCustomEvent).target.complete();
-  //   }, 500);
-  // }
-
-
-  // doRefresh(event: any) {
-  //   this.Cataloguelist = [];
-  //   this.start = 0;
-  //   this.getAllCatalogue();
-  //   event.target.complete();
-  // }
+  
+  
 
 }
-
-

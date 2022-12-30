@@ -35,7 +35,7 @@ export class SubcategoryPage implements OnInit {
 
     };
     console.log("obj----",obj);
-    this.subCategory.getAllSubCategory(obj).subscribe((success) => {
+    this.subCategory.getAll(obj).subscribe((success) => {
       console.log("success", success);
       this.SubCategoryDetails = success.rows;
   }

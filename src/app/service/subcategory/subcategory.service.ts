@@ -5,12 +5,12 @@ import { ApiService } from 'src/app/core/services';
 })
 export class SubcategoryService {
 routes:any={
-  getAllPath:(obj)=>'subCategory/getAll${obj.categoryTypeId}',
+  getAllPath:(obj)=>'subCategory/getAll',
     // getByIdPath(_id)=>'customer/getByIdShop/${_id}',
   // getBySubCategoryIdWithSubCategory: (_id) => `customer/getShopByCategoryId/${_id}`
 }
   constructor(private http:ApiService) { }
-  getAllSubCategory(params) {
+  getAll(params) {
    
     return this.http.get(this.routes.getAllPath(params),params)
   }

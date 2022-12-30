@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
 import { StorageService, UtilitiesService } from 'src/app/core/services';
 import { CategoryService } from 'src/app/service/category/category.service';
+import { SubcategoryService } from 'src/app/service/subcategory/subcategory.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -15,11 +16,13 @@ export class CategoryPage implements OnInit {
    categoryTypeId:string;
    selectedCategoryId:string;
    selectedBusinessName:string
+   subcategoryArr:any=[];
   constructor(
     private router:Router,
     private actRoute:ActivatedRoute,
     private categoryService:CategoryService ,
-    private localStorage: StorageService
+    private localStorage: StorageService,
+    private subCategory:SubcategoryService
     ) { }
 
 
@@ -49,10 +52,5 @@ this.categoryService.getAll(obj).subscribe((success) => {
         
 });
   }
-  getBySubCategoryIdWithSubCategory(ev){
-    console.log("event--------------subcategory", ev);
-    let params = ev;
-    console.log(params);
-    this.router.navigate(['/subcategory'], { queryParams: { params }});
-  }
+  
 }
