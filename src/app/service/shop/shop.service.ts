@@ -11,6 +11,8 @@ export class ShopService {
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
      getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
+    getCatalogueBySubCategoryId: (_id) => `customer/getCatalogueBySubCategoryId/${_id}`,
+
   };
   constructor(private http: ApiService) { }
 
@@ -25,5 +27,9 @@ export class ShopService {
 
   getByCategoryIdWithShop(_id) {
     return this.http.get(this.routes.getByCategoryIdWithShop(_id));
+  }
+
+  getCatalogueBySubCategoryId(_id) {
+    return this.http.get(this.routes.getCatalogueBySubCategoryId(_id));
   }
 }

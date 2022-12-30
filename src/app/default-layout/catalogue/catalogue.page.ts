@@ -22,6 +22,7 @@ export class CataloguePage implements OnInit {
   search = '';
   shopDetails: any;
   catalogue: any;
+  catalogueArr: any;
 
   // start: number = 0;
   // limit: number = 100;
@@ -40,23 +41,40 @@ export class CataloguePage implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log(params);
-      this.getShopById(params._id);
+      this.getCatalogueBySubCategoryId(params._id);
     });
 
   }
 
-  getShopById(_id) {
+  // getShopById(_id) {
+  //   console.log(_id);
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   this.shopService.getByIdShop(_id).subscribe((success: any) => {
+  //     console.log('success shopby id', success);
+  //     this.shopDetails = success[0];
+  //     this.catalogue = success[0].shopWithCatalogue;
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
+
+
+  getCatalogueBySubCategoryId(_id) {
     console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService.getByIdShop(_id).subscribe((success: any) => {
-      console.log('success shopby id', success);
-      this.shopDetails = success[0];
-      this.catalogue = success[0].shopWithCatalogue;
+    this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
+      console.log("success-------",success);
+      
+      this.catalogueArr = success.payload.shop;
+      // console.log('shop by id----categoryId', this.shopArr);
+      
       this.spinner.hideLoader();
       this.loaded = true;
     });
   }
+
 
   // getAllCatalogue() {
   //   // this.spinner.showLoader();

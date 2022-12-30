@@ -16,6 +16,7 @@ export class ShopDetailPage implements OnInit {
   loaded = false;
   shopDetails: any;
   catalogue:any=[];
+  subCategoryArr: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,6 +33,7 @@ export class ShopDetailPage implements OnInit {
       console.log(params);
       this.getShopById(params._id);
     });
+    // this.getCatalogueBySubCategoryId()
   }
 
   getShopById(_id) {
@@ -40,9 +42,10 @@ export class ShopDetailPage implements OnInit {
     this.loaded = false;
     this.shopService.getByIdShop(_id).subscribe((success: any) => {
       console.log('success shopby id', success);
-      //  this.shopArr = success.payload.shop;
-      this.shopDetails = success[0];
-      this.catalogue = success[0].shopWithCatalogue;
+      this.shopDetails = success.rows[0];
+      this.subCategoryArr = success.data;
+      // this.shopDetails = success[0];
+      // this.catalogue = success[0].shopWithCatalogue;
       // console.log(" this.shopDetails", this.shopDetails);
       
       this.spinner.hideLoader();
@@ -50,9 +53,26 @@ export class ShopDetailPage implements OnInit {
     });
   }
 
+
+  // getCatalogueBySubCategoryId(_id) {
+  //   console.log(_id);
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
+  //     console.log("success-------",success);
+      
+  //     // this.shopArr = success.payload.shop;
+  //     // console.log('shop by id----categoryId', this.shopArr);
+      
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
+
+
+
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
-
 
 }
