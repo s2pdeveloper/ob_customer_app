@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SubcategoryPageRoutingModule } from './subcategory-routing.module';
 
 import { SubcategoryPage } from './subcategory.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [

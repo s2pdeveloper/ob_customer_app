@@ -42,7 +42,7 @@ export class LandingPagePage implements OnInit {
   ngOnInit() {
     this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
-    this.getAllOffertype();
+    
 
 }
 
@@ -80,18 +80,18 @@ getByBusinessTypeCategory(businessTypeId,name){
     
    });
 }
-getAllOffertype() {
-  // this.spinner.showLoader();
-  this.loaded = false;
-  let obj = {
-};
-  this.categoryService.getAllOffer(obj).subscribe((success) => {
-    console.log("success", success);
-    this.offerDetails = success.rows;
-    // this.spinner.hideLoader();
-    this.loaded = true;
-  });
-}
+// getAllOffertype() {
+//   // this.spinner.showLoader();
+//   this.loaded = false;
+//   let obj = {
+// };
+//   this.categoryService.getAllOffer(obj).subscribe((success) => {
+//     console.log("success", success);
+//     this.offerDetails = success.rows;
+//     // this.spinner.hideLoader();
+//     this.loaded = true;
+//   });
+
 seeAll() {
   
   console.log("success");
@@ -106,7 +106,10 @@ getCategoryIdWithShop(ev) {
   console.log(params);
   this.router.navigate(['/search-shop'], { queryParams: { params }});
 }
-  }
+
+
+}
+  
   
     
   

@@ -25,27 +25,34 @@ export class CategoryPage implements OnInit {
 
 businessName:string;
 ngOnInit() {
-    
+    this.loaded=true;
   this.user = this.localStorage.get('OBUser');
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
-this.businessName = success.name;
-  // this. getByBusinessTypeCategory(success._id)
+this.businessName = success.name
+
+this.loaded=false;
+   this. getByBusinessTypeCategory(success._id)
 
   })
 }
 
-// getByBusinessTypeCategory(categoryTypeId){
-// let obj :any= {businessTypeId:categoryTypeId}
-// this.categoryService.getAll(obj).subscribe((success) => {
-//   console.log("success-----------", success);
-//   this.categoryDetails=success.rows;
-//   this.selectedCategoryId = success.rows[0]._id;
-//       this.selectedCategoryId = success.rows[0].name;
-//       console.log("this.selectedCategoryId",this.selectedCategoryId);
-//     (this.selectedCategoryId,this.selectedBusinessName);
+getByBusinessTypeCategory(categoryTypeId){
+let obj :any= {businessTypeId:categoryTypeId}
+this.categoryService.getAll(obj).subscribe((success) => {
+  console.log("success-----------", success);
+  this.categoryDetails=success.rows;
+  this.selectedCategoryId = success.rows[0]._id;
+      this.selectedCategoryId = success.rows[0].name;
+      console.log("this.selectedCategoryId",this.selectedCategoryId);
+    (this.selectedCategoryId,this.selectedBusinessName);
         
-// });
-//  }
-
+});
+  }
+  getBySubCategoryIdWithSubCategory(ev){
+    console.log("event--------------subcategory", ev);
+    let params = ev;
+    console.log(params);
+    this.router.navigate(['/subcategory'], { queryParams: { params }});
+  }
 }

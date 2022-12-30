@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class BusinessTypeService {
   routes: any = {
     getAllPath: `business_type/getAll`,
+    getAll:''
   }
   constructor(
     private http: ApiService,
@@ -16,5 +17,8 @@ export class BusinessTypeService {
 
   getAllBusinessType(payload) {
     return this.http.get(this.routes.getAllPath,payload);
+  }
+  getAllOffer(payload){
+    return this.http.get(this.routes.getAll,payload);
   }
 }
