@@ -66,47 +66,7 @@ export class LandingPagePage implements OnInit {
   }
   getByIdCategory(ev, name) {
     console.log("ev", ev);
-
-    this.getByBusinessTypeCategory(ev,name);
-   
-  };
-getByBusinessTypeCategory(businessTypeId,name){
-  this.selectedBusinessId = businessTypeId;
-  this.selectedBusinessName=name;
-  let obj :any= {businessTypeId:businessTypeId}
-  this.categoryService.getAll(obj).subscribe((success) => {
-    console.log("success-----------", success);
-    this.categoryDetails=success.rows;
-    
-   });
-}
-// getAllOffertype() {
-//   // this.spinner.showLoader();
-//   this.loaded = false;
-//   let obj = {
-// };
-//   this.categoryService.getAllOffer(obj).subscribe((success) => {
-//     console.log("success", success);
-//     this.offerDetails = success.rows;
-//     // this.spinner.hideLoader();
-//     this.loaded = true;
-//   });
-
-// seeAll() {
-  
-//   console.log("success");
-//   this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
-//      name: this.selectedBusinessName}}) 
-// }
-
-
-// getCategoryIdWithShop(ev) {
-//   console.log("event--------------shop", ev);
-//   let params = ev;
-//   console.log(params);
-//   this.router.navigate(['/search-shop'], { queryParams: { params }});
-// }
-
+  }
   getBusinessAllCategory(ev) {
     console.log("event", ev);
     this.getCategoryByBusinessTypeId(ev)
@@ -156,6 +116,7 @@ getByBusinessTypeCategory(businessTypeId,name){
   // }
 
 }
+
   
   
     
