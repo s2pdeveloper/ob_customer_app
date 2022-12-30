@@ -58,21 +58,21 @@ export class LandingPagePage implements OnInit {
       //thisshould ideally be set in localstorage
       this.selectedBusinessId = success.rows[0]._id;
       this.selectedBusinessName = success.rows[0].name;
-      this.getByIdCategory(this.selectedBusinessId,this.selectedBusinessName);
+      this.getBusinessAllCategory(this.selectedBusinessId,this.selectedBusinessName);
       console.log("this.selectedBusinessId",this.selectedBusinessId);
       // this.spinner.hideLoader();
       this.loaded = true;
     });
   }
-  getByIdCategory(ev, name) {
-    console.log("ev", ev);
-  }
-  getBusinessAllCategory(ev) {
+  // getByIdCategory(ev, name) {
+  //   console.log("ev", ev);
+  // }
+  getBusinessAllCategory(ev,name) {
     console.log("event", ev);
-    this.getCategoryByBusinessTypeId(ev)
+    this.getCategoryByBusinessTypeId(ev,name)
   }
 
-  getCategoryByBusinessTypeId(businessTypeId) {
+  getCategoryByBusinessTypeId(businessTypeId,name) {
     let obj: any = {
       businessTypeId: businessTypeId
     };
@@ -116,7 +116,6 @@ export class LandingPagePage implements OnInit {
   // }
 
 }
-
   
   
     

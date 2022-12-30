@@ -20,7 +20,7 @@
      (click)="getCategoryIdWithShop()"
    ></ion-searchbar>
   <ion-row >   
-    <ion-col *ngFor="let b of businessDetails" (click)="getByIdCategory(b._id,b.name)" size="3" >
+    <ion-col *ngFor="let b of businessDetails" (click)="getBusinessAllCategory(b._id,b.name)" size="3" >
       <ion-card class="product-card" fill="outline">
         <ion-card-header> 
           <ion-row>
@@ -41,7 +41,7 @@
         <ion-slides autoplay="true">
           <marquee width="100%" height="45%" behavior="scroll" loop=""> 
         <ion-slide>
-          <ion-col *ngFor="let c of categoryDetails"  size="4" >
+          <ion-col *ngFor="let c of BusinessWithCategoryArr"  size="4" >
               <ion-card class="categoryCard" color="success">
               <ion-row>
                   <ion-col size="12">
