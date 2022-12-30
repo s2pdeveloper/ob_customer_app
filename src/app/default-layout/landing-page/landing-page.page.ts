@@ -92,21 +92,68 @@ getByBusinessTypeCategory(businessTypeId,name){
 //     this.loaded = true;
 //   });
 
-seeAll() {
+// seeAll() {
   
-  console.log("success");
-  this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
-     name: this.selectedBusinessName}}) 
-}
+//   console.log("success");
+//   this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
+//      name: this.selectedBusinessName}}) 
+// }
 
 
-getCategoryIdWithShop(ev) {
-  console.log("event--------------shop", ev);
-  let params = ev;
-  console.log(params);
-  this.router.navigate(['/search-shop'], { queryParams: { params }});
-}
+// getCategoryIdWithShop(ev) {
+//   console.log("event--------------shop", ev);
+//   let params = ev;
+//   console.log(params);
+//   this.router.navigate(['/search-shop'], { queryParams: { params }});
+// }
 
+  getBusinessAllCategory(ev) {
+    console.log("event", ev);
+    this.getCategoryByBusinessTypeId(ev)
+  }
+
+  getCategoryByBusinessTypeId(businessTypeId) {
+    let obj: any = {
+      businessTypeId: businessTypeId
+    };
+    this.categoryService
+      .getAll(obj)
+      .subscribe((success) => {
+        console.log("success------------", success);
+        this.BusinessWithCategoryArr = success.rows;
+      });
+  }
+
+
+  navigateTo(path, _id) {
+    this.router.navigate([path], { queryParams: { _id } });
+  }
+
+  seeAll() {
+    this.router.navigate(['/category']);
+  }
+  proCard() {
+    this.router.navigate(['/category']);
+  }
+
+  getCategoryIdWithShop(ev) {
+    console.log("event--------------shop", ev);
+    let params = ev;
+    console.log(params);
+    this.router.navigate(['/search-shop'], { queryParams: { params }});
+  }
+
+  // getCategoryByShop(categoryId) {
+  //   let obj: any = {
+  //     categoryId: categoryId
+  //   };
+  //   this.shopService
+  //     .getByCategoryIdWithShop(obj)
+  //     .subscribe((success) => {
+  //       console.log("success------------shop", success);
+  //       this.BusinessWithCategoryArr = success.rows;
+  //     });
+  // }
 
 }
   
