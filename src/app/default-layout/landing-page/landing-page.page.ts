@@ -92,9 +92,9 @@ export class LandingPagePage implements OnInit {
   seeAll() {
     this.router.navigate(['/category']);
   }
-  proCard() {
-    this.router.navigate(['/category']);
-  }
+  // proCard() {
+  //   this.router.navigate(['/category']);
+  // }
 
   getCategoryIdWithShop(ev) {
     console.log("event--------------shop", ev);

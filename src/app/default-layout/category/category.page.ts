@@ -28,19 +28,20 @@ export class CategoryPage implements OnInit {
 
 businessName:string;
 ngOnInit() {
-    this.loaded=true;
-  this.user = this.localStorage.get('OBUser');
+    
+  //  this.user = this.localStorage.get('OBUser');
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
-this.businessName = success.name
+ this.businessName = success.name
 
-this.loaded=false;
+
    this. getByBusinessTypeCategory(success._id)
 
   })
 }
 
 getByBusinessTypeCategory(categoryTypeId){
+  this.loaded=false;
 let obj :any= {businessTypeId:categoryTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
   console.log("success-----------", success);
@@ -49,7 +50,7 @@ this.categoryService.getAll(obj).subscribe((success) => {
       this.selectedCategoryId = success.rows[0].name;
       console.log("this.selectedCategoryId",this.selectedCategoryId);
     (this.selectedCategoryId,this.selectedBusinessName);
-        
+    this.loaded=true; 
 });
   }
   

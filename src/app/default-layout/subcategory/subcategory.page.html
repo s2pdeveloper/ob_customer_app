@@ -4,16 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- (ionFocus)="navigateTo('/search-shop',null)">  -->
+
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor=" let s of subcategory">
-        <ion-list>  
+ <ion-row>
+  <ion-col *ngFor=" let s of SubCategoryDetails" (click)=" getSubCategory(s._id)" size="6">
+    <ion-card class="card" fill="outline">
+      <ion-row>
+        <ion-col size="12">
           <img src="{{s.image}}" >
-        </ion-thumbnail>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+           <ion-note>{{s.name}}</ion-note> 
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-col>
+ </ion-row>
    
 </ion-content>

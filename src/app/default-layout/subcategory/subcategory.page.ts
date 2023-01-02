@@ -41,19 +41,5 @@ export class SubcategoryPage implements OnInit {
   }
   
     )};
-    getShopById(_id) {
-      console.log(_id);
-      this.spinner.showLoader();
-      this.loaded = false;
-      this.subCategory.getBySubCategoryIdWithCategory(_id).subscribe((success: any) => {
-        this.SubCategoryDetails = success.rows;
-        console.log('shop by id----categoryId', this.SubCategoryDetails); 
-        this.loaded = true;
-        this.spinner.hideLoader();
-      });
-    }
-  
-   navigateTo(path, _id) {
-      this.router.navigate([path], { queryParams: { _id} });
-    }
+    
 }

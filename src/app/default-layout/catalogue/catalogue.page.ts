@@ -72,6 +72,11 @@ export class CataloguePage implements OnInit {
       });
     }
     
+      navigateTo(path, _id) {
+        this.routes.navigate([path], { queryParams: { _id } });
+      
+    }
+    
     
   
   
