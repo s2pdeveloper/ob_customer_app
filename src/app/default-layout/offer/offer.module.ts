@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OfferPageRoutingModule } from './offer-routing.module';
 
 import { OfferPage } from './offer.page';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,

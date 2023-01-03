@@ -18,7 +18,5 @@ export class BusinessTypeService {
   getAllBusinessType(payload) {
     return this.http.get(this.routes.getAllPath,payload);
   }
-  getAllOffer(payload){
-    return this.http.get(this.routes.getAll,payload);
-  }
+ 
 }

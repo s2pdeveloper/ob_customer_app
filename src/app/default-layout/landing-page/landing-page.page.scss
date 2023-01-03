@@ -96,6 +96,25 @@ ion-searchbar{
     width: 80px;
     height:80px;
     text-align: center; 
-   ;
+    // background-color: navajowhite;
+    background-color: burlywood;
+}
+.note{
+    font-size: 14px;
+    color: crimson;
+    // text-align: center;
+}
+
+img{
+    height: 50px;
+    width: 50px;
+}
+ion-card-header{
+    margin: 0px 0px 0px -20px;
+}
+.cat{
+    margin: 0px -18px 0px -42px;
+    height: 64px;
+    width: 85px;
 }
 

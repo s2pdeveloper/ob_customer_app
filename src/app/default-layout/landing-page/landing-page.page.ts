@@ -52,7 +52,7 @@ export class LandingPagePage implements OnInit {
     let obj = {
  };
     this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
-      console.log("success", success);
+      console.log("success---------", success);
       this.businessDetails = success.rows;
 
       //thisshould ideally be set in localstorage

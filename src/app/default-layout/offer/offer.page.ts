@@ -34,12 +34,13 @@ export class OfferPage implements OnInit {
     this.offer.getAll(obj).subscribe((success) => {
       console.log("success", success);
       this.offerDetails = success.rows;
+      this.router.navigate(['/landing-page'])
   }
   
     )};
-    navigateTo(path, _id) {
-      this.router.navigate([path], { queryParams: { _id } });
-    }
+    // navigateTo(path, _id) {
+    //   this.router.navigate([path], { queryParams: { _id } });
+    // }
     
   }
 
