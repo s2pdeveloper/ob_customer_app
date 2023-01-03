@@ -40,16 +40,16 @@ console.log("success",success);
   })
 }
 
-getByBusinessTypeCategory(categoryTypeId){
+getByBusinessTypeCategory(businessTypeId){
   this.loaded=false;
-let obj :any= {businessTypeId:categoryTypeId}
+let obj :any= {businessTypeId:businessTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
   console.log("success-----------", success);
   this.categoryDetails=success.rows;
   this.selectedCategoryId = success.rows[0]._id;
       this.selectedCategoryId = success.rows[0].name;
       console.log("this.selectedCategoryId",this.selectedCategoryId);
-    (this.selectedCategoryId,this.selectedBusinessName);
+    // (this.selectedCategoryId,this.selectedBusinessName);
     this.loaded=true; 
 });
   }
