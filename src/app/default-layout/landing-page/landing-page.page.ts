@@ -103,17 +103,7 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/search-shop'], { queryParams: { params }});
   }
 
-  // getCategoryByShop(categoryId) {
-  //   let obj: any = {
-  //     categoryId: categoryId
-  //   };
-  //   this.shopService
-  //     .getByCategoryIdWithShop(obj)
-  //     .subscribe((success) => {
-  //       console.log("success------------shop", success);
-  //       this.BusinessWithCategoryArr = success.rows;
-  //     });
-  // }
+  
 
 }
   

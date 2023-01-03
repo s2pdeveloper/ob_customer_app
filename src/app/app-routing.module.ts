@@ -163,9 +163,15 @@ const routes: Routes = [
   {
     path: 'chat-view',
     loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
-  },  {
+  },
+  {
     path: 'subcategory',
     loadChildren: () => import('./default-layout/subcategory/subcategory.module').then( m => m.SubcategoryPageModule)
+  },
+  
+  {
+    path: 'offer',
+    loadChildren: () => import('./default-layout/offer/offer.module').then( m => m.OfferPageModule)
   },
 
 
