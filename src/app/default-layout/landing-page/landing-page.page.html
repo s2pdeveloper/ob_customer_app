@@ -41,7 +41,7 @@
   <ion-slides autoplay="true">
     <marquee width="100%" height="45%" behavior="scroll" loop="">
       <ion-slide>
-        <ion-col *ngFor="let c of BusinessWithCategoryArr" (click)="getCategoryIdWithShop('/search-shop',c._id)">
+        <ion-col *ngFor="let c of BusinessWithCategoryArr" (click)="getCategoryIdWithShop(c._id)">
           <img class="cat" src="{{c.image}} " />
           <!-- <ion-label class="note" >{{c.name}}</ion-label>     -->
         </ion-col>
