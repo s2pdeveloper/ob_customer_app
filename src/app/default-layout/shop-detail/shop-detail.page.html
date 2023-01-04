@@ -21,7 +21,7 @@
   </div>
 
   <div>
-    <p>{{shopDetails?.schedule?.day}} :- {{shopDetails?.schedule?.startTime}} AM to {{shopDetails?.schedule?.endTime
+    <p class="px">{{shopDetails?.schedule?.day}} :- {{shopDetails?.schedule?.startTime}} AM to {{shopDetails?.schedule?.endTime
       }} PM</p>
   </div>
 
@@ -100,7 +100,7 @@
   <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top" 
     (click)="navigateTo('/catalogue',shopDetails._id)">
     <ion-icon name="eye"></ion-icon>
-    {{ 'View catalogue' | translate}}
+    {{ 'View Products' | translate}}
   </ion-button>
 
 </ion-content>

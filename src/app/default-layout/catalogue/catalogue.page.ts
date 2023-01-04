@@ -24,9 +24,10 @@ export class CataloguePage implements OnInit {
   search = '';
   shopDetails: any;
   catalogue: any;
-  catalogueArr: any;
+  ProductArr: any;
   subCategoryArr:any;
-
+  selectedSubCatId:string;
+  selectedSubCatName:string;
   // start: number = 0;
   // limit: number = 100;
   // searchText: string;
@@ -63,9 +64,11 @@ export class CataloguePage implements OnInit {
         console.log('success shopby id', success);
         this.shopDetails = success.rows[0];
         this.subCategoryArr = success.data;
-        // this.shopDetails = success[0];
-        // this.catalogue = success[0].shopWithCatalogue;
-        // console.log(" this.shopDetails", this.shopDetails);
+        this.selectedSubCatId = success.rows[0]._id;
+        this.selectedSubCatName = success.rows[0].name;
+      this.getProducts(this.selectedSubCatId,this.selectedSubCatName);
+        console.log("subcategory........." , this.selectedSubCatId );
+        
         
         this.spinner.hideLoader();
         this.loaded = true;
@@ -76,7 +79,21 @@ export class CataloguePage implements OnInit {
         this.routes.navigate([path], { queryParams: { _id } });
       
     }
-    
+    getProducts(ev,name) {
+      console.log("event", ev);
+      this.getproductbySubCat(ev)
+    }
+    getproductbySubCat(subCatTypeId) {
+      let obj: any = {
+        subCatTypeId: subCatTypeId
+      };
+      this.subCategory
+        .getByIdSubCategory(obj)
+        .subscribe((success) => {
+          console.log("success------------", success);
+          this.ProductArr = success.rows;
+        });
+    }
     
   
   
@@ -94,6 +111,10 @@ export class CataloguePage implements OnInit {
   //   });
   // }
 
+
+  selected(){ 
+
+  }
 
   
   

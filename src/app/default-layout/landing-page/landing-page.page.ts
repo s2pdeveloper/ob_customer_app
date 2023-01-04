@@ -90,7 +90,7 @@ export class LandingPagePage implements OnInit {
   }
 
   seeAll() {
-    this.router.navigate(['/category']{queryParams:{_id:this.selectedBusinessId,
+    this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
       name: this.selectedBusinessName}})
   }
   // proCard() {

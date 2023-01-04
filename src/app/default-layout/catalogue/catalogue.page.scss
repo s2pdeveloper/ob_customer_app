@@ -10,10 +10,14 @@
         }
        
     }
-    .card{
-        width:100px;
-        height:80px;
+   
+       
+        img {
+            max-width: 100%;
+            border: 0;
+            height: 138px;
     }
+
     ion-checkbox::part(container) {
         border-radius: 6px;
         border: 1px solid #6815ec;
@@ -22,4 +26,11 @@
         width:50px;
         height: 25px;
       }
+      
+      ion-card {
+        margin: 0;
+        border-radius: 1em;
+        height: 182px !important;
+        box-shadow: 0 4px 17px rgb(222 175 175 / 35%);
+    }
 }

@@ -16,7 +16,7 @@ export class CategoryPage implements OnInit {
    categoryTypeId:string;
    selectedCategoryId:string;
    selectedBusinessName:string
-   subcategoryArr:any=[];
+ 
   constructor(
     private router:Router,
     private actRoute:ActivatedRoute,
@@ -29,7 +29,7 @@ export class CategoryPage implements OnInit {
 businessName:string;
 ngOnInit() {
     
-  //  this.user = this.localStorage.get('OBUser');
+   this.user = this.localStorage.get('OBUser');
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
  this.businessName = success.name
@@ -41,7 +41,7 @@ console.log("success",success);
 }
 
 getByBusinessTypeCategory(businessTypeId){
-  this.loaded=false;
+   this.loaded=false;
 let obj :any= {businessTypeId:businessTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
   console.log("success-----------", success);
@@ -53,5 +53,7 @@ this.categoryService.getAll(obj).subscribe((success) => {
     this.loaded=true; 
 });
   }
+ 
+
   
 }
