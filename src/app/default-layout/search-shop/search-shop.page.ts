@@ -60,10 +60,7 @@ export class SearchShopPage implements OnInit {
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       search: this.search,
-      businessTypeId:this.businessTypeId,
-      categoryId:this.categoryId,
-      subCategoryId:this.subCategoryId
-
+    
     };
     console.log("obj----",obj);
     this.shopService.getAllShop(obj).subscribe((success) => {
@@ -81,6 +78,7 @@ export class SearchShopPage implements OnInit {
       console.log('shop by id----categoryId', this.shopArr); 
       this.loaded = true;
       this.spinner.hideLoader();
+      
     });
   }
 
@@ -89,5 +87,6 @@ export class SearchShopPage implements OnInit {
   }
   
 }
+
 
 
