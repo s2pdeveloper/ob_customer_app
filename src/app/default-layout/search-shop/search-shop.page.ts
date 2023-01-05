@@ -60,9 +60,7 @@ export class SearchShopPage implements OnInit {
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       search: this.search,
-    
     };
-    console.log("obj----",obj);
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;
@@ -74,18 +72,17 @@ export class SearchShopPage implements OnInit {
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      this.shopArr = success.payload.shop;
-      console.log('shop by id----categoryId', this.shopArr); 
-      this.loaded = true;
-      this.spinner.hideLoader();
       
+      this.shopArr = success.payload.shop;
+      console.log('shop by id----categoryId', this.shopArr);
+      this.spinner.hideLoader();
+      this.loaded = true;
     });
   }
 
  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id} });
+    this.router.navigate([path], { queryParams: { _id } });
   }
-  
 }
 
 
