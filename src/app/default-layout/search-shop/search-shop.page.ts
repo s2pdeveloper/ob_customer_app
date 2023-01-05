@@ -64,6 +64,8 @@ export class SearchShopPage implements OnInit {
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;
+      console.log("shopArr........",this.shopArr);
+      
       this.selectedCategoryId = success.rows[0]._id;
       // this.selectedBusinessName = success.rows[0].name;
       this.getShopById(this.selectedCategoryId);
@@ -76,20 +78,16 @@ export class SearchShopPage implements OnInit {
 
   getShopById(_id) {
     console.log(_id);
-    
-    
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      
-      this.shopArr = success.payload.shop;
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {  
+      // this.shopArr = success.payload.shop;
       console.log('shop by id----categoryId', success);
-      this.shopArr=success.rows;
+      this.shopArr=success.payload.shop;
       this.spinner.hideLoader();
       this.loaded = true;
     });
   }
-
  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }

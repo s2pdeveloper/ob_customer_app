@@ -29,7 +29,7 @@ export class CategoryPage implements OnInit {
 businessName:string;
 ngOnInit() {
     
-   this.user = this.localStorage.get('OBUser');
+  //  this.user = this.localStorage.get('OBUser');
   this.actRoute.queryParams.subscribe(success=>{
 console.log("success",success);
  this.businessName = success.name

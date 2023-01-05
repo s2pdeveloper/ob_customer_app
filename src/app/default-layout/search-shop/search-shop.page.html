@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>search-shop</ion-title>
+    <ion-buttons slot="start" >
+      <ion-back-button defaultHref="landing-page" mode="md"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
@@ -15,25 +18,9 @@
   </ion-searchbar>
 
   <!-- <ion-icon name="filter-sharp"></ion-icon> -->
-  <!-- <ion-item>
-  <ion-card>
-    <ion-col *ngFor="let s of shopArr" size="4">
-      <ion-card (click)="navigateTo('/shop-detail',s._id)">
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="6">
-              <img src="{{s.image}} " width="70%" height="70%">
-              <ion-note>{{s.shopName}}</ion-note>
-            </ion-col>
-            <ion-col size="6">
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card>
-    </ion-col>
-  </ion-card>
-</ion-item> -->
-  <ion-grid>
+   
+ 
+   <ion-grid>
     <ion-row>
       <ion-col *ngFor=" let s of shopArr" (click)="navigateTo('/shop-detail',s._id)">
         <ion-list>
@@ -42,26 +29,26 @@
               <img src="{{s.image}}">
             </ion-thumbnail>
 
-            <ion-label>
+          <ion-label>
               <h2>{{s.shopName}}
                 <h4> <ion-icon name="call-sharp"></ion-icon> {{s.mobile}}</h4>
               </h2>
               <h4><ion-icon name="chevron-forward-sharp"></ion-icon>Open</h4>
-              <!-- <p>{{c.description}}</p> -->
+              <p>{{c.description}}</p> 
               <h3 style="color: rgb(83, 7, 153);">
                 <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
                 <ion-icon name="star-outline"></ion-icon>
-              </h3>
+              </h3> 
 
             </ion-label>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid>  
   <ion-button expand="block" fill="clear" routerLink='/chat-view'>Order By
 
   </ion-button>
