@@ -13,7 +13,7 @@ export class SearchShopPage implements OnInit {
   pageSize: number = 10;
   search: string = '';
   businessTypeId: string = '';
-  categoryId: string = '';
+  selectedCategoryId: string = '';
   subCategoryId: string = '';
   collection: number = 0;
   shopArr: any = [];
@@ -64,17 +64,27 @@ export class SearchShopPage implements OnInit {
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;
+      this.selectedCategoryId = success.rows[0]._id;
+      // this.selectedBusinessName = success.rows[0].name;
+      this.getShopById(this.selectedCategoryId);
+      console.log("this.selectedCategoryId",this.selectedCategoryId);
     });
-  }
+  // } getBusinessAllCategory(ev) {
+  //   console.log("event", ev);
+  //   this.getShopById(ev)
+   }
 
   getShopById(_id) {
     console.log(_id);
+    
+    
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
       
       this.shopArr = success.payload.shop;
-      console.log('shop by id----categoryId', this.shopArr);
+      console.log('shop by id----categoryId', success);
+      this.shopArr=success.rows;
       this.spinner.hideLoader();
       this.loaded = true;
     });
@@ -83,6 +93,7 @@ export class SearchShopPage implements OnInit {
  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
+
 }
 
 

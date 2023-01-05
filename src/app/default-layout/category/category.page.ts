@@ -35,15 +35,13 @@ console.log("success",success);
  this.businessName = success.name
 
 
-    // this. getByBusinessTypeCategory(success._id)
+     this. getByBusinessTypeCategory(success._id)
 
   })
-} getBusinessAllCategory(ev,name) {
-    console.log("event", ev);
-    this.getByBusinessTypeCategory(ev,name)
+
   }
 
-getByBusinessTypeCategory(businessTypeId,name){
+getByBusinessTypeCategory(businessTypeId){
    this.loaded=false;
 let obj :any= {businessTypeId:businessTypeId}
 this.categoryService.getAll(obj).subscribe((success) => {
@@ -54,21 +52,9 @@ this.categoryService.getAll(obj).subscribe((success) => {
       console.log("this.selectedCategoryId",this.selectedCategoryId);
     // (this.selectedCategoryId,this.selectedBusinessName);
     this.loaded=true; 
+   
 });
   
-
-  // getCategoryByBusinessTypeId(businessTypeId,name) {
-  //   let obj: any = {
-  //     businessTypeId: businessTypeId
-  //   };
-  //   this.categoryService
-  //     .getAll(obj)
-  //     .subscribe((success) => {
-  //       console.log("success------------", success);
-  //       this.BusinessWithCategoryArr = success.rows;
-  //     });
-  // }
-
 }
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });

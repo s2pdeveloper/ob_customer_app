@@ -15,7 +15,7 @@
   </ion-searchbar>
 
   <!-- <ion-icon name="filter-sharp"></ion-icon> -->
-<!-- <ion-item>
+  <!-- <ion-item>
   <ion-card>
     <ion-col *ngFor="let s of shopArr" size="4">
       <ion-card (click)="navigateTo('/shop-detail',s._id)">
@@ -33,37 +33,38 @@
     </ion-col>
   </ion-card>
 </ion-item> -->
-<ion-grid>
-  <ion-row>
-    <ion-col *ngFor=" let s of shopArr">
-      <ion-list (click)="navigateTo('/shop-detail',s._id)" >  
-      <ion-item >
-      <ion-thumbnail slot="start"> 
-          <img src="{{s.image}}" > 
-      </ion-thumbnail> 
-      
-       <ion-label >
-         <h2>{{s.shopName}}
-          <h4> <ion-icon name="call-sharp"></ion-icon> {{s.mobile}}</h4>    </h2>
-          <h4><ion-icon name="chevron-forward-sharp"></ion-icon>Open</h4>
-        <!-- <p>{{c.description}}</p> -->
-         <h3 style="color: rgb(83, 7, 153);" >
-          <ion-icon name="star-outline"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon>
-          <ion-icon name="star-outline"></ion-icon>
-        </h3>
-         
-      </ion-label> 
-    </ion-item>
-      </ion-list>
-    </ion-col>
-  </ion-row>
-  </ion-grid> 
-<ion-button  expand="block" fill="clear" routerLink='/chat-view'>Order By
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor=" let s of shopArr" (click)="navigateTo('/shop-detail',s._id)">
+        <ion-list>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img src="{{s.image}}">
+            </ion-thumbnail>
 
-</ion-button>
+            <ion-label>
+              <h2>{{s.shopName}}
+                <h4> <ion-icon name="call-sharp"></ion-icon> {{s.mobile}}</h4>
+              </h2>
+              <h4><ion-icon name="chevron-forward-sharp"></ion-icon>Open</h4>
+              <!-- <p>{{c.description}}</p> -->
+              <h3 style="color: rgb(83, 7, 153);">
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+              </h3>
+
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button expand="block" fill="clear" routerLink='/chat-view'>Order By
+
+  </ion-button>
 
   <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">

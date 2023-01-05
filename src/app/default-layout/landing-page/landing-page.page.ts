@@ -70,9 +70,11 @@ export class LandingPagePage implements OnInit {
   getBusinessAllCategory(ev,name) {
     console.log("event", ev);
     this.getCategoryByBusinessTypeId(ev,name)
-  }
+  };
 
   getCategoryByBusinessTypeId(businessTypeId,name) {
+    this.selectedBusinessId=businessTypeId;
+    this.selectedBusinessName=name;
     let obj: any = {
       businessTypeId: businessTypeId
     };
@@ -93,9 +95,7 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
       name: this.selectedBusinessName}})
   }
-  // proCard() {
-  //   this.router.navigate(['/category']);
-  // }
+  
 
   getCategoryIdWithShop(ev) {
     console.log("event--------------shop", ev);
