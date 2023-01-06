@@ -16,21 +16,15 @@
     showCancelButton="never" placeholder="Search" autocomplete="on" autocorrect="on"
     (ionFocus)="navigateTo('/search-shop',null)">
   </ion-searchbar>
-  <!-- <ion-searchbar
-     (click)="getCategoryIdWithShop()"
-   ></ion-searchbar> -->
+ 
   <ion-row>
     <ion-col *ngFor="let b of businessDetails" (click)="getBusinessAllCategory(b._id,b.name)">
-      <!-- <ion-card class="product-card" fill="outline">   -->
-      <!-- <ion-card-header> -->
         <ion-row>
           <ion-col>
             <img src="{{b.image}}">
             <ion-label class="note">{{b.name}}</ion-label>
           </ion-col>
         </ion-row>
-      <!-- </ion-card-header> -->
-      <!-- </ion-card>   -->
     </ion-col>
   </ion-row>
 
@@ -43,7 +37,6 @@
       <ion-slide>
         <ion-col *ngFor="let c of BusinessWithCategoryArr" (click)="getCategoryIdWithShop(c._id)">
           <img class="cat" src="{{c.image}} " />
-          <!-- <ion-label class="note" >{{c.name}}</ion-label>     -->
         </ion-col>
       </ion-slide>
     </marquee>
