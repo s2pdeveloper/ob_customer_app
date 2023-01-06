@@ -28,6 +28,7 @@ export class CataloguePage implements OnInit {
   subCategoryArr:any;
   selectedSubCatId:string;
   selectedSubCatName:string;
+  productDetails :any=[];
   // start: number = 0;
   // limit: number = 100;
   // searchText: string;
@@ -45,15 +46,15 @@ export class CataloguePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-      
+   
     };
     ionViewWillEnter() {
       this.activatedRoute.queryParams.subscribe((params: any) => {
         console.log(params);
         this.getShopById(params._id);
       });
-      // this.getCatalogueBySubCategoryId()
+      
+      
     }
   
     getShopById(_id) {
@@ -84,6 +85,7 @@ export class CataloguePage implements OnInit {
       this.getproductbySubCat(ev)
     }
     getproductbySubCat(subCatTypeId) {
+      this.selectedSubCatId=subCatTypeId;
       let obj: any = {
         subCatTypeId: subCatTypeId
       };
@@ -94,29 +96,26 @@ export class CataloguePage implements OnInit {
           this.ProductArr = success.rows;
         });
     }
+
+    // getCategoryByBusinessTypeId(businessTypeId,name) {
+    //   this.selectedBusinessId=businessTypeId;
+    //   this.selectedBusinessName=name;
+    //   let obj: any = {
+    //     businessTypeId: businessTypeId
+    //   };
+    //   this.categoryService
+    //     .getAll(obj)
+    //     .subscribe((success) => {
+    //       console.log("success------------", success);
+    //       this.BusinessWithCategoryArr = success.rows;
+    //     });
+    // }
+  
     
-  
-  
-
-  // getShopByCatalogueId(_id) {
-  //   console.log(_id);
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   this.shopService.getByIdShop(_id).subscribe((success: any) => {
-  //     console.log('success shopby id', success);
-  //     this.shopDetails = success[0];
-  //     this.catalogue = success[0].shopWithCatalogue;
-  //     this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
-
-
-  selected(){ 
-
   }
 
+
+
   
   
 
-}

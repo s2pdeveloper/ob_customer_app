@@ -109,15 +109,13 @@ export class LandingPagePage implements OnInit {
   getAllOffer(){
     this.loaded=false;
     let obj={
-
     };
-    console.log("obj...",obj);
      this.offerService.getAll(obj).subscribe((success)=>{
      console.log("success....",success);
+     this.offerDetails=success.rows;
      this.loaded=true;
+     
      });
-  
-  // this.router.navigate(['/landing-page']);
    
 }
 

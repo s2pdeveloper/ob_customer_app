@@ -11,6 +11,7 @@ routes:any={
   getAllPath:(obj)=>'subCategory/getAll',
     getByIdPath:(obj)=>'customer/getCatalogueBySubCategoryId?${obj.subCategoryId}',
   // getBySubCategoryIdWithSubCategory: (_id) => `customer/getShopByCategoryId/${_id}`
+  // getProductIdPath:(obj)=>'customer/getCatalogueBySubCategoryId?${}'
 }
   constructor(private http:ApiService) { }
   getAll(params) {
@@ -29,4 +30,7 @@ routes:any={
       .get(this.routes.getByIdPath(params), params)
       .pipe(map((res: any) => res));
   }
+  // getProductBySubcategoryId(obj){
+  //   return this.http.get(this.routes. getByIdPath(obj));
+  // }
 }

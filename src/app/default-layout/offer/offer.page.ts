@@ -22,22 +22,10 @@ export class OfferPage implements OnInit {
     private localStorage:StorageService) { }
 
   ngOnInit() {
-    this.getAllOffer();
-    this.user = this.localStorage.get('OBUser');
+    
+   this.user = this.localStorage.get('OBUser');
+ 
   }
-  getAllOffer(){
-    this.loaded=false;
-    let obj={
-
-    };
-    console.log("obj...",obj);
-     this.offerService.getAll(obj).subscribe((success)=>{
-     console.log("success....",success);
-     this.loaded=true;
-     });
-  
-  this.router.navigate(['/landing-page']);
-   
-}
+ 
 
 }
