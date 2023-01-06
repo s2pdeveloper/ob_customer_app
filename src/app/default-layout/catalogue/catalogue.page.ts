@@ -64,11 +64,13 @@ export class CataloguePage implements OnInit {
       this.shopService.getByIdShop(_id).subscribe((success: any) => {
         console.log('success shopby id', success);
         this.shopDetails = success.rows[0];
+        console.log("this.shopDetails--xxx ",this.shopDetails );
+        
         this.subCategoryArr = success.data;
-        this.selectedSubCatId = success.rows[0]._id;
-        this.selectedSubCatName = success.rows[0].name;
-      this.getProducts(this.selectedSubCatId,this.selectedSubCatName);
-        console.log("subcategory........." , this.selectedSubCatId );
+      //   this.selectedSubCatId = success.rows[0]._id;
+      //   this.selectedSubCatName = success.rows[0].name;
+      // this.getProducts(this.selectedSubCatId,this.selectedSubCatName);
+      //   console.log("subcategory........." , this.selectedSubCatId );
         
         
         this.spinner.hideLoader();
@@ -87,7 +89,7 @@ export class CataloguePage implements OnInit {
     getproductbySubCat(subCatTypeId) {
       this.selectedSubCatId=subCatTypeId;
       let obj: any = {
-        subCatTypeId: subCatTypeId
+        selectedSubCatId: subCatTypeId
       };
       console.log("obj....",obj);
       

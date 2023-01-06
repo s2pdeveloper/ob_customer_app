@@ -20,7 +20,7 @@
   <ion-row>
     <ion-col size="6"  *ngFor="let s of subCategoryArr">
  <ion-segment value="buttons" >
-  <ion-segment-button (click)="getProducts(s._id,s.name)">
+  <ion-segment-button (click)=" navigateTo('/subcategory',s._id)">
     <img src="{{s.image}}" > 
     <ion-label>{{s.name}}</ion-label>
   </ion-segment-button>
