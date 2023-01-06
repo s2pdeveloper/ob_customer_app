@@ -23,24 +23,21 @@ export class OfferPage implements OnInit {
 
   ngOnInit() {
     this.getAllOffer();
-     this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBUser');
   }
   getAllOffer(){
     this.loaded=false;
     let obj={
+
     };
-    this.offerService.getAll(obj).subscribe((success) => {
-      console.log("success.........", success);
-      this.offerDetails = success.rows;
-      this.loaded=true;
-      
-    });
-    this.router.navigate(['/landing-page']);
-  }
-    // navigateTo(path,id) {
-    //   this.router.navigate([path], { queryParams: {id} });
-    // }
-    
-  }
+    console.log("obj...",obj);
+     this.offerService.getAll(obj).subscribe((success)=>{
+     console.log("success....",success);
+     this.loaded=true;
+     });
+  
+  this.router.navigate(['/landing-page']);
+   
+}
 
-
+}

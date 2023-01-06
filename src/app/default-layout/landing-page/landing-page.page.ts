@@ -6,6 +6,7 @@ import { BusinessTypeService } from 'src/app/service/businessType/businessType.s
 import { CategoryService } from 'src/app/service/category/category.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { StorageService } from 'src/app/core/services';
+import { OffersService } from 'src/app/service/offers/offers.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -34,7 +35,8 @@ export class LandingPagePage implements OnInit {
     public translate: TranslateService,
     private categoryService: CategoryService,
     private shopService: ShopService,
-    private localStorage:StorageService
+    private localStorage:StorageService,
+    private offerService:OffersService
 
   ) { }
 
@@ -42,7 +44,7 @@ export class LandingPagePage implements OnInit {
   ngOnInit() {
     this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
-    
+    this.getAllOffer();
 
 }
 
@@ -104,9 +106,25 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/search-shop'], { queryParams: { params }});
   }
 
+  getAllOffer(){
+    this.loaded=false;
+    let obj={
+
+    };
+    console.log("obj...",obj);
+     this.offerService.getAll(obj).subscribe((success)=>{
+     console.log("success....",success);
+     this.loaded=true;
+     });
   
+  // this.router.navigate(['/landing-page']);
+   
+}
 
 }
+
+
+
   
   
     
