@@ -9,8 +9,8 @@
   <ion-slides autoplay="true">
     <marquee width="100%" height="45%" behavior="scroll" loop=""> 
   <ion-slide>
-  <ion-card  class="offer-card" *ngFor="let o of offerDetails" (click)=" navigateTo('/landing-page',o._id)" >
-    <img src="{{o.imageUrl}}" />
+  <ion-card  class="offer-card" *ngFor="let o of offerDetails" (click)=" getAllOffer(o._id)" >
+    <img src="{{o.image}}" />
     <ion-card-header>
       <ion-card-title>{{o.title}}  </ion-card-title>
       <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>

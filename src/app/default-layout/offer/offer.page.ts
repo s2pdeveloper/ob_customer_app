@@ -16,30 +16,30 @@ export class OfferPage implements OnInit {
   offerDetails:any=[];
   constructor(private router: Router,
     private activatedRoute:ActivatedRoute,
-   private offer:OffersService,
+   private offerService:OffersService,
     private spinner: LoaderService,
     public translate: TranslateService,
     private localStorage:StorageService) { }
 
   ngOnInit() {
-   
-    this.user = this.localStorage.get('OBUser');
-    this.getAllOffer('');
+    this.getAllOffer();
+     this.user = this.localStorage.get('OBUser');
   }
-  getAllOffer(_id){
-    this.loaded = false;
-   
-    console.log(_id);
-    this.offer.getAll(_id).subscribe((success) => {
-      console.log("success", success);
+  getAllOffer(){
+    this.loaded=false;
+    let obj={
+    };
+    this.offerService.getAll(obj).subscribe((success) => {
+      console.log("success.........", success);
       this.offerDetails = success.rows;
-    
+      this.loaded=true;
+      
+    });
+    this.router.navigate(['/landing-page']);
   }
-  
-    )};
-    navigateTo(path, _id) {
-      this.router.navigate([path], { queryParams: { _id } });
-    }
+    // navigateTo(path,id) {
+    //   this.router.navigate([path], { queryParams: {id} });
+    // }
     
   }
 
