@@ -89,6 +89,8 @@ export class CataloguePage implements OnInit {
       let obj: any = {
         subCatTypeId: subCatTypeId
       };
+      console.log("obj....",obj);
+      
       this.subCategory
         .getByIdSubCategory(obj)
         .subscribe((success) => {
