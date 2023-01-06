@@ -4,6 +4,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SubcategoryService } from 'src/app/service/subcategory/subcategory.service';
 import { StorageService } from 'src/app/core/services';
+import { ShopService } from 'src/app/service/shop/shop.service';
 @Component({
   selector: 'app-subcategory',
   templateUrl: './subcategory.page.html',
@@ -21,25 +22,25 @@ export class SubcategoryPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private subCategory:SubcategoryService,
-    private localStorage:StorageService ) { }
+    private localStorage:StorageService ,
+    private shopService:ShopService) { }
 
   ngOnInit() {
-    this.getSubCategory();
+    this.getCatalogueBySubCategoryId('');
     this.user = this.localStorage.get('OBUser');
   }
-  getSubCategory(){
+  getCatalogueBySubCategoryId(_id) {
+    console.log(_id);
+    this.spinner.showLoader();
     this.loaded = false;
-    let obj = {
-      categoryId:this.categoryId,
-      subCategoryId:this.subCategoryId
-
-    };
-    console.log("obj----",obj);
-    this.subCategory.getAll(obj).subscribe((success) => {
-      console.log("success", success);
-      this.SubCategoryDetails = success.rows;
+    this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
+      console.log("success-------",success);
+      
+      this. SubCategoryDetails = success.payload.shop;
+      // console.log('shop by id----categoryId', this.shopArr);
+      
+      this.spinner.hideLoader();
+      this.loaded = true;
+    });
   }
-  
-    )};
-    
 }

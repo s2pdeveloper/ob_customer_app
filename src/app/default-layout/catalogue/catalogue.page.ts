@@ -29,6 +29,7 @@ export class CataloguePage implements OnInit {
   selectedSubCatId:string;
   selectedSubCatName:string;
   productDetails :any=[];
+  catalogueArr:any;
   // start: number = 0;
   // limit: number = 100;
   // searchText: string;
@@ -101,19 +102,8 @@ export class CataloguePage implements OnInit {
         });
     }
 
-    // getCategoryByBusinessTypeId(businessTypeId,name) {
-    //   this.selectedBusinessId=businessTypeId;
-    //   this.selectedBusinessName=name;
-    //   let obj: any = {
-    //     businessTypeId: businessTypeId
-    //   };
-    //   this.categoryService
-    //     .getAll(obj)
-    //     .subscribe((success) => {
-    //       console.log("success------------", success);
-    //       this.BusinessWithCategoryArr = success.rows;
-    //     });
-    // }
+    
+  
   
     
   }
