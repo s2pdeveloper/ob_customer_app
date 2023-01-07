@@ -13,12 +13,18 @@
   </ion-refresher> -->
 
   <!-- search bar -->
-  <ion-searchbar class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text"
-    showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
-    [(ngModel)]="search" (ionChange)="onSearch()">
-  </ion-searchbar>
+  <ion-row>
+    <ion-col size="10">
+      <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
+      showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
+      [(ngModel)]="search" (ionChange)="onSearch()">
+    </ion-searchbar>
+    </ion-col>
+    <ion-col size="2">
+      <ion-icon name="filter-outline" size="large"></ion-icon>
+    </ion-col>
+  </ion-row>
 
-  <!-- <ion-icon name="filter-sharp"></ion-icon> -->
 
   <ion-card>
     <ion-col *ngFor="let s of shopArr" size="4">

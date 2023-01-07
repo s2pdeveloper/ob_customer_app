@@ -6,19 +6,17 @@ import { ApiService } from 'src/app/core/services';
 })
 export class ShopService {
   routes: any = {
-
-    getAllPath: (obj) => `customer/getAllShop`,
+    getAllPath: `customer/getAllShop`,
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
     getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
-    getCatalogueBySubCategoryId: (_id) => `customer/getCatalogueBySubCategoryId/${_id}`,
-
+    getCatalogueBySubCategoryId: (_id) =>
+      `customer/getCatalogueBySubCategoryId/${_id}`,
   };
-  constructor(private http: ApiService) { }
+  constructor(private http: ApiService) {}
 
   getAllShop(params) {
-    return this.http
-      .get(this.routes.getAllPath(params), params)
+    return this.http.get(this.routes.getAllPath, params);
   }
 
   getByIdShop(_id) {

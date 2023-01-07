@@ -10,7 +10,6 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./search-shop.page.scss'],
 })
 export class SearchShopPage implements OnInit {
-
   page: number = 1;
   pageSize: number = 10;
   search: string = '';
@@ -22,27 +21,59 @@ export class SearchShopPage implements OnInit {
   loaded: boolean = false;
   shopDetails: any;
 
-
   constructor(
     private router: Router,
     private spinner: LoaderService,
     public translate: TranslateService,
     private shopService: ShopService,
-    private activatedRoute:ActivatedRoute
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      if(params.params){
-        this.getShopById(params.params);
-      }else{
-        this.getAllShop(false)
+      console.log('params-----', params);
+      if (params.shopId) {
+        this.getShopById(params.shopId);
+      } else {
+        this.businessTypeId = params.businessTypeId ?? "";
+        this.categoryId = params.categoryId ?? "";
+        this.getAllShop(false);
       }
     });
-   
   }
+
+  getAllShop(isFirstLoad: boolean, event?: any) {
+    let obj = {
+      search: this.search,
+      businessTypeId: this.businessTypeId,
+      categoryId: this.categoryId,
+      subCategoryId: this.subCategoryId,
+    };
+    console.log('obj----', obj);
+    this.shopService.getAllShop(obj).subscribe((success) => {
+      console.log('success shop', success);
+      this.shopArr = success.rows;
+    });
+  }
+
+  getShopById(_id) {
+    console.log(_id);
+    this.spinner.showLoader();
+    this.loaded = false;
+    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
+      this.shopArr = success.payload.shop;
+      console.log('shop by id----categoryId', this.shopArr);
+      this.spinner.hideLoader();
+      this.loaded = true;
+    });
+  }
+
+  navigateTo(path, _id) {
+    this.router.navigate([path], { queryParams: { _id } });
+  }
+
   onSearch() {
     this.page = 1;
     this.shopArr = [];
@@ -55,43 +86,12 @@ export class SearchShopPage implements OnInit {
     // this.getAllShop(false);
     event.target.complete();
   }
-  
+
   // doInfinite(event) {
   //   this.page++;
   //   this.getAllShop(true, event);
   //   event.target.complete();
   // }
 
-  getAllShop(isFirstLoad: boolean, event?: any) {
-    let obj = {
-      search: this.search,
-      businessTypeId:this.businessTypeId,
-      categoryId:this.categoryId,
-      subCategoryId:this.subCategoryId
 
-    };
-    console.log("obj----",obj);
-    
-    this.shopService.getAllShop(obj).subscribe((success) => {
-      console.log('success shop', success);
-      this.shopArr = success.rows;
-    });
-  }
-
-  getShopById(_id) {
-    console.log(_id);
-    this.spinner.showLoader();
-    this.loaded = false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      
-      this.shopArr = success.payload.shop;
-      console.log('shop by id----categoryId', this.shopArr);
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
-  }
-
- navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
-  }
 }
