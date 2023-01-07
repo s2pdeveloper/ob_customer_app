@@ -32,18 +32,10 @@ export class SubCategoryPage implements OnInit {
   getShopById(_id) {
     console.log(_id);
     this.spinner.showLoader();
-    // this.loaded = false;
     this.shopService.getByIdShop(_id).subscribe((success: any) => {
       console.log('success >>>>>>', success);
-      // this.shopDetails = success.rows;
-      // this.shopDetails = success.rows[0];
-      this.subCategoryArr = success.data;
-      // this.shopDetails = success[0];
-      // this.catalogue = success[0].shopWithCatalogue;
-      // console.log(" this.shopDetails", this.shopDetails);
-      
-      this.spinner.hideLoader();
-      // this.loaded = true;
+     this.subCategoryArr = success.data;
+     this.spinner.hideLoader();
     });
   }
 }
