@@ -175,6 +175,11 @@ const routes: Routes = [
     path: 'chat-view',
     loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
   },
+  {
+    path: 'sub-category',
+    loadChildren: () => import('./default-layout/sub-category/sub-category.module').then( m => m.SubCategoryPageModule)
+  },
+
 
 ];
 

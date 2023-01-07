@@ -15,8 +15,14 @@ export class LandingPagePage implements OnInit {
   businessTypeId: any;
   user: any;
   businessArr: any = [];
+<<<<<<< Updated upstream
   BusinessWithCategoryArr: any = [];
   search: string = '';
+=======
+  shopArr:any=[];
+  BusinessWithCategoryArr:any=[];
+  search: any;
+>>>>>>> Stashed changes
 
   constructor(
     private router: Router,
@@ -24,10 +30,18 @@ export class LandingPagePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
+<<<<<<< Updated upstream
     private shopService: ShopService
   ) {}
+=======
+private shopService:ShopService
+  ) { }
+
+
+>>>>>>> Stashed changes
 
   ngOnInit() {
+    this. getAllShop();
     this.getAllBusinessType();
   }
 
@@ -46,6 +60,7 @@ export class LandingPagePage implements OnInit {
     });
   }
 
+<<<<<<< Updated upstream
   getBusinessAllCategory(businessTypeId) {
     this.businessArr = this.businessArr.map((x) => {
       x.isActive = false;
@@ -56,6 +71,36 @@ export class LandingPagePage implements OnInit {
       return x;
     });
     this.getCategoryByBusinessTypeId(businessTypeId);
+=======
+  getAllShop() {
+    let obj = {};
+    this.shopService.getAllShop(obj).subscribe((success) => {
+      console.log('success shop', success);
+      this.shopArr = success.rows;
+    });
+  }
+
+  setFilteredLocations(ev: any) {
+    let val = ev.target.value;
+    this.search = val;
+    if (val && val.trim() !== '') {
+      return this.getAllShop();
+    }
+    if (this.search == '') {
+      this.clearFilter();
+    }
+  }
+  
+  clearFilter() {
+    this.search = '';
+    this.getAllShop();
+  }
+
+
+  getBusinessAllCategory(ev) {
+    console.log("event", ev);
+    this.getCategoryByBusinessTypeId(ev)
+>>>>>>> Stashed changes
   }
 
   getCategoryByBusinessTypeId(businessTypeId) {
@@ -99,3 +144,5 @@ export class LandingPagePage implements OnInit {
   //     });
   // }
 }
+
+

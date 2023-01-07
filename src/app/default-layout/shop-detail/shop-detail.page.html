@@ -183,7 +183,7 @@
     </ion-accordion-group>
 
 
-    <h3>SubCategory </h3>
+    <!-- <h3>SubCategory </h3>
 
     <ion-row>
       <ion-col *ngFor="let s of subCategoryArr" size="4">
@@ -198,7 +198,15 @@
           </ion-card-header>
         </ion-card>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ng-container>
-
+  <div *ngFor="let item of subCategoryArr">
+    <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top" 
+    (click)="navigateTo(item)">
+    <ion-icon name="eye"></ion-icon>
+    {{ 'View Products' | translate}}
+    </ion-button>
+  </div>
 </ion-content>
+
+

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sub Category</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <h3>Sub Category </h3>
+
+    <ion-row>
+      <ion-col *ngFor="let s of subCategoryArr" size="4">
+        <ion-card class="product-card" (click)="navigateTo('/catalogue',s._id)">
+          <ion-card-header>
+            <ion-row>
+              <ion-col size="12">
+                <img src="{{s.image}} ">
+                <ion-note>{{s.name}}</ion-note>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+</ion-content>

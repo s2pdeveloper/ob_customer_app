@@ -12,6 +12,7 @@
   </ion-row>
 
   <!-- <ion-searchbar show-clear-button="focus"></ion-searchbar> -->
+<<<<<<< Updated upstream
   <!-- <ion-searchbar debounce="800" mode="ios" [(ngModel)]="search" showCancelButton="focus"
     (ionChange)="setFilteredLocations($event)">
   </ion-searchbar> -->
@@ -28,6 +29,10 @@
     autocorrect="on"
     (ionFocus)="navigateTo('/search-shop',null)"
   >
+=======
+  <ion-searchbar debounce="800" mode="ios" [(ngModel)]="search" showCancelButton="focus"
+    (ionChange)="setFilteredLocations($event)">
+>>>>>>> Stashed changes
   </ion-searchbar>
 
   <ion-row>
@@ -49,11 +54,13 @@
     </ion-col>
   </ion-row>
 
+<<<<<<< Updated upstream
   <!-- <ion-note >Select Category</ion-note> -->
+=======
+
+>>>>>>> Stashed changes
   <h6>Select Category</h6>
-  <!-- <ion-note class="name">See all</ion-note> -->
   <h6 class="name" (click)="seeAll()">See all</h6>
-  <!-- ------ slide one ---- -->
   <ion-slides autoplay="true">
     <ion-slide>
       <ion-col
@@ -72,6 +79,36 @@
       </ion-col>
     </ion-slide>
   </ion-slides>
+
+
+  <!-- <ion-note >Select Category</ion-note> -->
+  <!-- <h6>Shops</h6> -->
+  <!-- <ion-note class="name">See all</ion-note> -->
+  <!-- <h6 class="name" (click)="seeAll()">See all</h6> -->
+  <!-- ------ slide one ---- -->
+  <h6>Shops</h6>
+  <ion-card>
+   <ion-slides autoplay="true">
+      <ion-slide>
+        <ion-col *ngFor="let m of shopArr" size="3">
+          <ion-card>
+            <ion-row>
+              <ion-col size="12">
+                <img src="{{m.imageUrl}} ">
+              </ion-col>
+            </ion-row>
+          </ion-card>
+          <ion-note>{{m?.shopName
+            }}</ion-note>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </ion-card>
+
+
+
+
+
 
   <ion-col size="3">
     <ion-card>
