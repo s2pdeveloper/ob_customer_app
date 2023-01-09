@@ -24,8 +24,8 @@ export class CataloguePage implements OnInit {
   search = '';
   shopDetails: any;
   catalogue: any;
-  ProductArr: any;
-  subCategoryArr:any;
+  shopArr: any;
+  SubCategoryDetails:any;
   selectedSubCatId:string;
   selectedSubCatName:string;
   productDetails :any=[];
@@ -47,60 +47,24 @@ export class CataloguePage implements OnInit {
   ) { }
 
   ngOnInit() {
-   
-    };
-    ionViewWillEnter() {
-      this.activatedRoute.queryParams.subscribe((params: any) => {
-        console.log(params);
-        this.getShopById(params._id);
-      });
+   this.getCatalogueBySubCategoryId('');
+   this.user = this.localStorage.get('OBUser');
+     };
+     
+      getCatalogueBySubCategoryId(_id) {
+   console.log(_id);
+    this.spinner.showLoader();
+    this.loaded = false;
+   this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
+     console.log("success-------",success);
       
+       this. SubCategoryDetails = success.payload.shop;
+       console.log('shop by id----categoryId', this.shopArr);
       
-    }
-  
-    getShopById(_id) {
-      console.log(_id);
-      this.spinner.showLoader();
-      this.loaded = false;
-      this.shopService.getByIdShop(_id).subscribe((success: any) => {
-        console.log('success shopby id', success);
-        this.shopDetails = success.rows[0];
-        console.log("this.shopDetails--xxx ",this.shopDetails );
-        
-        this.subCategoryArr = success.data;
-      //   this.selectedSubCatId = success.rows[0]._id;
-      //   this.selectedSubCatName = success.rows[0].name;
-      // this.getProducts(this.selectedSubCatId,this.selectedSubCatName);
-      //   console.log("subcategory........." , this.selectedSubCatId );
-        
-        
-        this.spinner.hideLoader();
-        this.loaded = true;
-      });
-    }
-    
-      navigateTo(path, _id) {
-        this.routes.navigate([path], { queryParams: { _id } });
-      
-    }
-    getProducts(ev,name) {
-      console.log("event", ev);
-      this.getproductbySubCat(ev)
-    }
-    getproductbySubCat(subCatTypeId) {
-      this.selectedSubCatId=subCatTypeId;
-      let obj: any = {
-        selectedSubCatId: subCatTypeId
-      };
-      console.log("obj....",obj);
-      
-      this.subCategory
-        .getByIdSubCategory(obj)
-        .subscribe((success) => {
-          console.log("success------------", success);
-          this.ProductArr = success.rows;
-        });
-    }
+      this.spinner.hideLoader();
+       this.loaded = true;
+     });
+   }
 
     
   
