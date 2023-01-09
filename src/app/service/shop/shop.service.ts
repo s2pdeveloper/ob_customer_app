@@ -11,7 +11,7 @@ export class ShopService {
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
      getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
-     getCatalogueBySubCategoryId: (_id) => `customer/getCatalogueBySubCategoryId?${_id}`,
+     getCatalogueBySubCategoryId: (_id) => `customer/getCatalogueBySubCategoryId/${_id}`,
 
   };
   constructor(private http: ApiService) { }

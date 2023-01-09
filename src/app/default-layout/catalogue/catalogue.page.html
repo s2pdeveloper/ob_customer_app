@@ -18,20 +18,32 @@
  <ion-content>
   <ion-grid>
   <ion-row>
-    <ion-col size="6"  *ngFor="let s of SubCategoryDetails ">
- <ion-segment value="buttons" >
-  <ion-segment-button (click)=" navigateTo(s._id)">
-    <img src="{{s.image}}" > 
-    <ion-label>{{s.name}}</ion-label>
-  </ion-segment-button>
-</ion-segment>
+    <ion-col size="6"  *ngFor="let c of catalogueArr"  (click)=" navigateTo(c._id)">
+        <ion-segment value="buttons" >
+  <ion-segment-button >  
+       <ion-list> 
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img src="{{c.image}}" > 
+          </ion-thumbnail>
+          <ion-label>
+            <h4>{{c.title}}</h4>
+            <h4>{{c.description}}</h4>
+            <h4>&#x20B9;{{c.price}}</h4>
+          </ion-label>
+        </ion-item>
+       </ion-list>
+        </ion-segment-button>
+</ion-segment> 
+
+ 
+    
+    
+  
+
 </ion-col>
 </ion-row>
-<ion-row>
-  <ion-col>
-    
-  </ion-col>
-</ion-row>
+
 </ion-grid>
 <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top" 
 routerLink='/chat-view'>

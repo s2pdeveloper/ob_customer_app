@@ -46,25 +46,32 @@ export class CataloguePage implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-   this.getCatalogueBySubCategoryId('');
-   this.user = this.localStorage.get('OBUser');
-     };
+  ngOnInit() {}
+    ionViewWillEnter() {
+      this.activatedRoute.queryParams.subscribe((params: any) => {
+        console.log(params);
+        this.getCatalogueBySubCategoryId(params._id);
+      });
+      // this.getCatalogueBySubCategoryId()
+    }
+  
      
-      getCatalogueBySubCategoryId(_id) {
-   console.log(_id);
-    this.spinner.showLoader();
-    this.loaded = false;
-   this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
-     console.log("success-------",success);
-      
-       this. SubCategoryDetails = success.payload.shop;
-       console.log('shop by id----categoryId', this.shopArr);
-      
-      this.spinner.hideLoader();
-       this.loaded = true;
-     });
-   }
+     getCatalogueBySubCategoryId(_id) {
+      console.log(_id);
+      this.spinner.showLoader();
+      this.loaded = false;
+      this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
+        console.log("success-------",success);
+        
+        this.catalogueArr = success.payload.shop;
+        // console.log('shop by id----categoryId', this.shopArr);
+        
+        this.spinner.hideLoader();
+        this.loaded = true;
+      });
+    }
+  
+  
 
     
   
