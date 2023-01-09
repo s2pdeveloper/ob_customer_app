@@ -7,9 +7,7 @@ import {debounceTime,distinctUntilChanged} from 'rxjs/operators'
 export class ChatService {
   routes: any = {
     createPath: `chat/create`,
-
     getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
-
   };
 
   constructor(private http: ApiService) {}
