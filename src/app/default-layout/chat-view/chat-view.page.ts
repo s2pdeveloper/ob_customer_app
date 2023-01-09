@@ -12,6 +12,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./chat-view.page.scss'],
 })
 export class ChatViewPage implements OnInit {
+  shopId: any;
+  msgArr: any;
 
   constructor(
     private router: Router,
@@ -32,17 +34,25 @@ export class ChatViewPage implements OnInit {
   })
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log("params", params);
-      if (params.shopId)
-        this.chatForm.controls.shopId.setValue(params.shopId);
-      this.getMsgByCustomerId(params.shopId)
-    
+    // this.activatedRoute.queryParams.subscribe((params: any) => {
+    //   console.log("params", params);
+    //   if (params.shopId)
+    //     this.chatForm.controls.shopId.setValue(params.shopId);
+    //   this.getMsgByCustomerId(params.shopId)
+    // });
+    this.activatedRoute.queryParams.subscribe((params) => {
+      console.log('params', params);
+      if (params.shopId) {
+        this.shopId = params.shopId;
+      }
     });
+    this.getMsgByCustomerId();
   }
+
 
   sendMessage() {
     console.log("this.chatForm.value", this.chatForm.value);
+    this.chatForm.controls.shopId.setValue(this.shopId);
     this.chatService.create(this.chatForm.value).subscribe(success => {
       console.log("success", success);
       this.chatForm.reset();
@@ -53,12 +63,11 @@ export class ChatViewPage implements OnInit {
     });
   }
 
-  getMsgByCustomerId(_id) {
-    console.log("getMsgByCustomerId>>>>>>>>>");
+  getMsgByCustomerId() {
     this.spinner.showLoader();
-    this.chatService.getMsgByCustomerId(_id).subscribe((success: any) => {
+    this.chatService.getMsgByCustomerId(this.shopId).subscribe((success: any) => {
       console.log("getMsgByCustomerId-------", success);
-      //  this.catalogueArr = success.payload.shop;
+      this.msgArr = success.payload.rows;
       this.spinner.hideLoader();
     });
   }

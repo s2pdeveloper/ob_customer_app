@@ -12,6 +12,12 @@
   <h3 class="msg">hii</h3>
   <h3 class="msg1">hello</h3>
 
+
+  <ion-item *ngFor="let msg of msgArr" >
+<h3>{{msg.message}}</h3>
+  </ion-item>
+
+
   <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [disabled]="messages.length === 0" position="top">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
