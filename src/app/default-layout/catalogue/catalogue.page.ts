@@ -30,7 +30,7 @@ export class CataloguePage implements OnInit {
 
 
   constructor(
-    private routes: Router,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private catalogueService: CatalogueService,
     private shopService: ShopService,
@@ -46,51 +46,29 @@ export class CataloguePage implements OnInit {
 
   }
 
-  // getShopById(_id) {
-  //   console.log(_id);
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   this.shopService.getByIdShop(_id).subscribe((success: any) => {
-  //     console.log('success shopby id', success);
-  //     this.shopDetails = success[0];
-  //     this.catalogue = success[0].shopWithCatalogue;
-  //     this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
-
-
   getCatalogueBySubCategoryId(_id) {
     console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
       console.log("success-------",success);
-      
-      this.catalogueArr = success.payload.shop;
-      // console.log('shop by id----categoryId', this.shopArr);
+     this.catalogueArr = success.payload.shop;
       
       this.spinner.hideLoader();
       this.loaded = true;
     });
   }
 
+  navigateTo(c) {
+    console.log('_id--------------', c);
+    this.router.navigate(['/chat-view'], {
+      queryParams: {
+        _id: c._id,
+        shopId: c.userId,
+      },
+    });
+  }
 
-  // getAllCatalogue() {
-  //   // this.spinner.showLoader();
-  //  let obj = {
-  //     page: this.page,
-  //     pageSize: this.pageSize,
-  //     search: this.search,
-  //     // shopId: this.shopId,
-  //   };
-  //     this.catalogueService.getAllCatalogue(obj).subscribe((success: any) => {
-  //     console.log("success--------------", success);
-  //     // this.Cataloguelist = success;
-  //     // this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
 
 
   // generateItems() {

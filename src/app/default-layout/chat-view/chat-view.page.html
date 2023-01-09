@@ -1,37 +1,35 @@
 <ion-header>
-  <ion-toolbar> 
-   <ion-title>Chat</ion-title>
-   <ion-buttons slot="start">
-     <ion-back-button defaultHref="catalogue"></ion-back-button>
-   </ion-buttons>
- </ion-toolbar> 
- </ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="catalogue"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
 
-<h3 class="msg">hii</h3>
-<h3 class="msg1">hello</h3>
+  <h3 class="msg">hii</h3>
+  <h3 class="msg1">hello</h3>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [disabled]="messages.length === 0" position="top">
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [disabled]="messages.length === 0" position="top">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-item lines="none" id="chatInput">
-      <ion-textarea spellcheck="true" rows="1" autoComplete=" true" autocorrect="true" maxlength="500" type="text"
-        (keyup.enter)="sendMessage()" placeholder="Type your message..." [(ngModel)]="message">
-      </ion-textarea>
-      <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-        (change)="uploadFileAWS($event)" required>
-      <ion-button fill="clear" (click)="fileInput1.click()">
-        <ion-icon class="text-color-1" size="large" name="attach"></ion-icon>
-      </ion-button>
-      <ion-button class="btn-color-2" (click)="sendMessage()" [disabled]="!message">
-        <ion-icon name="send"></ion-icon>
-      </ion-button>
-    </ion-item>
+    <form [formGroup]="chatForm">
+      <ion-item lines="none" id="chatInput">
+        <ion-textarea  formControlName="message" spellcheck="true" rows="1" autoComplete=" true" autocorrect="true" maxlength="500" type="text"
+          placeholder="Type your message..." >
+        </ion-textarea>
+        <ion-button class="btn-color-2" (click)="sendMessage()" >
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </form>
+
   </ion-toolbar>
 </ion-footer>
