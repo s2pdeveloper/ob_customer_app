@@ -15,6 +15,7 @@
         <ion-col *ngFor=" let c of catalogueArr">
           <ion-list>
             <ion-item >
+              <div></div>
               <ion-checkbox slot="start" (click)="navigateTo(c)"></ion-checkbox>
               <ion-thumbnail slot="start">
                 <img src="{{c.image}}">
@@ -41,10 +42,10 @@
 
 
 
-  <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top"
+  <!-- <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top"
     routerLink='/chat-view'>
     Place Order
-  </ion-button>
+  </ion-button> -->
 
 
 </ion-content>

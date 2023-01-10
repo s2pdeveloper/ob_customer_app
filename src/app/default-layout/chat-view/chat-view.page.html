@@ -9,9 +9,22 @@
 
 <ion-content>
 
-  <ion-item *ngFor="let msg of msgArr">
-    <h3>{{msg.message}}</h3>
-  </ion-item>
+  <div *ngFor="let msg of msgArr">
+    <div [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
+      <ion-chip [color]="msg.createdBy == user._id ? 'dark' :'primary'">{{msg.message}}
+        <div class="clearfix text-right size">
+          <span style="opacity: 0.5">
+            {{msg?.createdAt | date:'shortTime'}}</span>
+        </div>
+      </ion-chip>
+    </div>
+  </div>
+
+ 
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>
 
