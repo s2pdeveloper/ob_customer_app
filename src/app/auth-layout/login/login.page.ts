@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
   saveDeviceToken(id) {
     let newObj: any = Object.assign(
       {
-        userId: id,
+        shopId: id,
         deviceId: this.localStorage.get('OBUserDeviceId'),
       },
       this.deviceInfo

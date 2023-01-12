@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CatalogueService } from 'src/app/service/catalogue/catalogue.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-
+import { ToastService } from 'src/app/core/services';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-catalogue',
@@ -12,9 +12,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
-
   loaded: boolean = false;
-  // Cataloguelist: any = [];
   user: any;
   shopId: any;
   page: number = 1;
@@ -23,19 +21,15 @@ export class CataloguePage implements OnInit {
   shopDetails: any;
   catalogue: any;
   catalogueArr: any;
-
-  // start: number = 0;
-  // limit: number = 100;
-  // searchText: string;
-
+  selectAll: boolean;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private catalogueService: CatalogueService,
+    private toaster: ToastService,
     private shopService: ShopService,
     private spinner: LoaderService,
-
+    private socket:Socket
   ) { }
 
   ngOnInit() {
@@ -43,56 +37,46 @@ export class CataloguePage implements OnInit {
       console.log(params);
       this.getCatalogueBySubCategoryId(params._id);
     });
-
   }
 
   getCatalogueBySubCategoryId(_id) {
-    console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
-      console.log("success-------",success);
-     this.catalogueArr = success.payload.shop;
-      
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
+    this.shopService
+      .getCatalogueBySubCategoryId(_id)
+      .subscribe((success: any) => {
+        console.log('success catalogue----', success);
+        this.catalogueArr = success.payload.rows.map((x) => {
+          x.isChecked = false;
+          return x;
+        });
+        this.spinner.hideLoader();
+        this.loaded = true;
+      });
   }
 
-  navigateTo(c) {
-    console.log('_id--------------', c);
+  navigateTo() {
+    let msg = '';
+    let arr = this.catalogueArr.filter((x) => x.isChecked == true);
+    if (arr.length < 1) {
+      this.toaster.errorToast('Plz select at least one catalogue');
+      return;
+    }
+    msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
+    for (let i = 0; i < arr.length; i++) {
+      const catTitle = arr[i].title;
+      msg += `${catTitle}`;
+      if (i != arr.length - 1) {
+        msg += `,`;
+      }
+    }
+    // this.socket.emit('join', {room : data.data.bankName, user : data.data._id});
     this.router.navigate(['/chat-view'], {
       queryParams: {
-        _id: c._id,
-        shopId: c.userId,
+        msg: msg,
+        shopId: arr[0].shopId._id,
+        shopName:arr[0].shopId.shopName
       },
     });
   }
-
-
-
-  // generateItems() {
-  //   const count = this.items.length + 1;
-  //   for (let i = 0; i < 50; i++) {
-  //     this.items.push(`Item ${count + i}`);
-  //   }
-  // }
-
-  // onIonInfinite(ev) {
-  //   this.generateItems();
-  //   setTimeout(() => {
-  //     (ev as InfiniteScrollCustomEvent).target.complete();
-  //   }, 500);
-  // }
-
-
-  // doRefresh(event: any) {
-  //   this.Cataloguelist = [];
-  //   this.start = 0;
-  //   this.getAllCatalogue();
-  //   event.target.complete();
-  // }
-
 }
-
-

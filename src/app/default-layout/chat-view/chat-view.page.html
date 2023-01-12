@@ -1,6 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Chat</ion-title>
+    <!-- <ion-title>Chat</ion-title> -->
+    <ion-title>{{shopName}}</ion-title>
+
     <ion-buttons slot="start">
       <ion-back-button defaultHref="catalogue"></ion-back-button>
     </ion-buttons>
@@ -11,7 +13,7 @@
 
   <div *ngFor="let msg of msgArr">
     <div [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
-      <ion-chip [color]="msg.createdBy == user._id ? 'dark' :'primary'">{{msg.message}}
+      <ion-chip [color]="msg.createdBy == user._id ? 'dark' :'primary'" class="ion-text-wrap">{{msg.message}}
         <div class="clearfix text-right size">
           <span style="opacity: 0.5">
             {{msg?.createdAt | date:'shortTime'}}</span>

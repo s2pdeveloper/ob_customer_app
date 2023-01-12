@@ -28,7 +28,6 @@ export class LandingPagePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this. getAllShop();
     this.getAllBusinessType();
   }
 

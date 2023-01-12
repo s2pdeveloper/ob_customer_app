@@ -31,6 +31,7 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "cordova-plugin-file-opener2": "^3.0.5",
     "ngx-ionic-image-viewer": "^0.7.4",
+    "ngx-socket-io": "^3.2.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

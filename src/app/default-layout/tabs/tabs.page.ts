@@ -20,6 +20,12 @@ export class TabsPage {
       tab: 'landing-page',
       icon: 'home',
     },
+    {
+      title: 'Chat',
+      value: 'chat',
+      tab: 'chat-list',
+      icon: 'chatbubble-sharp'
+    },
    
     {
       title: 'Trade',

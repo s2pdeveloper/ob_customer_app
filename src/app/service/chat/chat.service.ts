@@ -8,6 +8,8 @@ export class ChatService {
   routes: any = {
     createPath: `chat/create`,
     getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
+    getChatShopByCustomerId: `chat/getChatShopByCustomerId`,
+
   };
 
   constructor(private http: ApiService) {}
@@ -19,8 +21,9 @@ export class ChatService {
   getMsgByCustomerId(_id) {
     return this.http.get(this.routes.getMsgByCustomerId(_id));
   }
-
-
-
+// shop list
+  getChatShopByCustomerId() {
+    return this.http.get(this.routes.getChatShopByCustomerId);
+  }
  
 }
