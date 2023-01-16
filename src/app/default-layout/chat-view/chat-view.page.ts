@@ -12,7 +12,7 @@ import { Socket } from 'ngx-socket-io';
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit ,OnDestroy{
+export class ChatViewPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -27,6 +27,9 @@ export class ChatViewPage implements OnInit ,OnDestroy{
   customerId: any;
   message: string;
   shopName: any;
+  room: any;
+  roomName: any;
+  userId: any;
 
   constructor(
     private router: Router,
@@ -54,11 +57,18 @@ export class ChatViewPage implements OnInit ,OnDestroy{
     this.user = this.localStorage.get('OBUser');
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.shopName) this.shopName = params.shopName;
-      if (params.shopId && params.msg) {
+      if (params.roomName) this.roomName = params.roomName;
+      console.log("this.roomName",this.roomName);
+      
+      if (params.roomName && params.msg && params.roomName) {
         let message = {
           shopId: params.shopId,
           message: params.msg,
+          roomName: params.roomName,
         };
+        console.log("message",message);
+        console.log("message.roomName",message.roomName);
+        
         this.chatService.create(message).subscribe((success) => {
           this.getMsgByCustomerId(false);
           this.router.navigate(['/chat-view'], {
@@ -78,11 +88,13 @@ export class ChatViewPage implements OnInit ,OnDestroy{
       }
     });
     // socket 
+    console.log("getAll latest data");
+
     this.socket.on(
       'latest-data',
       function (data: any) {
         console.log(data);
-        console.log('latest-data called');
+        console.log('latest-data called in customerApp');
         this.getMsgByCustomerId(false);
       }.bind(this)
     );
@@ -93,20 +105,26 @@ export class ChatViewPage implements OnInit ,OnDestroy{
     this.socket.removeListener('latest-data');
   }
 
-
-
   sendMessage() {
-    this.chatService.create(this.chatForm.value).subscribe(
+
+    // let roomName = {
+    //   roomName: this.roomName,
+    // }
+    // this roomName = this.chatForm.value.roomName[0];
+    // console.log("let roomName",this.roomName.roomName);
+    console.log('this.chatForm.value', this.chatForm.value);
+ 
+    this.chatService.create(this.chatForm.value,).subscribe(
       (success) => {
         console.log('success', success);
         this.getMsgByCustomerId(false);
-        // let roomName = 'shopId' + ' ' + 'CustomerId';
-        // console.log("roomName",roomName);
-        
+
+        // emit 
         this.socket.emit('latestdata', {
-          room: "shopIdCustomerId",
-          userId: "xyz"
+          room: this.roomName,
+          userId: this.user._id
         });
+
         this.chatForm.reset();
         this.spinner.hideLoader();
       },
@@ -124,7 +142,7 @@ export class ChatViewPage implements OnInit ,OnDestroy{
     this.chatService
       .getMsgByCustomerId(this.user._id)
       .subscribe((success: any) => {
-        console.log('getMsgByCustomer----', success);
+        // console.log('getMsgByCustomer----', success);
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { ToastService } from 'src/app/core/services';
+import { StorageService, ToastService } from 'src/app/core/services';
 import { Socket } from 'ngx-socket-io';
 
 @Component({
@@ -28,11 +28,14 @@ export class CataloguePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private shopService: ShopService,
+    private localStorage:StorageService,
     private spinner: LoaderService,
     private socket:Socket
   ) { }
 
   ngOnInit() {
+    this.user = this.localStorage.get('OBUser');
+
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log(params);
       this.getCatalogueBySubCategoryId(params._id);
@@ -70,12 +73,16 @@ export class CataloguePage implements OnInit {
         msg += `,`;
       }
     }
-    // this.socket.emit('join', {room : data.data.bankName, user : data.data._id});
+    // join 
+    let customerIdShopId = this.user._id +  arr[0].shopId._id;
+    this.socket.emit('join', {room : customerIdShopId, user : this.user._id});
+    
     this.router.navigate(['/chat-view'], {
       queryParams: {
         msg: msg,
         shopId: arr[0].shopId._id,
-        shopName:arr[0].shopId.shopName
+        shopName:arr[0].shopId.shopName,
+        roomName:customerIdShopId        //join
       },
     });
   }
