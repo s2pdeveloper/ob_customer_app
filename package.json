@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@capacitor-community/barcode-scanner": "^3.0.1",
     "@capacitor-community/date-picker": "^0.2.3",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "^2.4.7",

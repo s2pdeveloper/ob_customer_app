@@ -44,7 +44,6 @@ export class ChatListPage implements OnInit {
   getAllShop() {
     this.spinner.showLoader();
     this.chatService.getChatShopByCustomerId().subscribe((success) => {
-      console.log('success shop conversationList--------', success);
       // this.conversationList = success.rows;
       this.shopConversationList = success.data;
       this.spinner.hideLoader();
@@ -57,7 +56,7 @@ export class ChatListPage implements OnInit {
   navigateTo(item) {
 
     // join
-    let customerIdShopId = this.user._id + item._id;
+    let customerIdShopId = item._id + this.user._id;
     this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
 
     this.router.navigate(['/chat-view'],
@@ -65,7 +64,7 @@ export class ChatListPage implements OnInit {
         queryParams: {
           shopId: item._id,
           shopName: item.shopName,
-          roomName: customerIdShopId
+          // roomName: customerIdShopId
         },
       });
   }

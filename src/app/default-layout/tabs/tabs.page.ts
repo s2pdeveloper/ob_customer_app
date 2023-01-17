@@ -28,10 +28,10 @@ export class TabsPage {
     },
    
     {
-      title: 'Trade',
-      value: 'trade',
-      tab: 'trade',
-      icon: 'server',
+      title: 'QR Code',
+      value: 'qr-code',
+      tab: 'qr-code',
+      icon: 'qr-code-sharp'
     },
     {
       title: 'Setting',
