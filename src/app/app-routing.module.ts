@@ -161,13 +161,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'grocery',
-    loadChildren: () =>
-      import('./default-layout/grocery/grocery.module').then(
-        (m) => m.GroceryPageModule
-      ),
-  },
-  {
     path: 'catalogue',
     loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
   },
