@@ -64,7 +64,7 @@ export class ChatListPage implements OnInit {
         queryParams: {
           shopId: item._id,
           shopName: item.shopName,
-          // roomName: customerIdShopId
+          roomName: customerIdShopId
         },
       });
   }

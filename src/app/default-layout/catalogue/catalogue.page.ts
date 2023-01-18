@@ -82,7 +82,7 @@ export class CataloguePage implements OnInit {
         msg: msg,
         shopId: arr[0].shopId._id,
         shopName:arr[0].shopId.shopName,
-        // roomName:customerIdShopId        //join
+        roomName:customerIdShopId        //join
       },
     });
   }

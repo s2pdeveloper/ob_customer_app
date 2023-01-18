@@ -53,6 +53,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user = this.localStorage.get('OBUser');
+    console.log(" this.user-----", this.user);
+    
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.shopName) this.shopName = params.shopName;
       if (params.roomName && params.msg) {
@@ -97,7 +99,10 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this.roomName = this.shopId + this.user._id;
+    if (this.user.role=="CUSTOMER") {
+      this.roomName = this.shopId + this.user._id; 
+    }
+    // this.roomName = this.shopId + this.user._id;
     this.chatForm.controls.roomName.setValue(this.roomName);
     this.chatForm.controls.shopId.setValue(this.shopId);
     this.chatService.create(this.chatForm.value).subscribe(
@@ -123,8 +128,10 @@ export class ChatViewPage implements OnInit, OnDestroy {
   getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
     this.spinner.showLoader();
     this.chatService
-      .getMsgByCustomerId(this.user._id)
+      .getMsgByCustomerId(this.roomName)
       .subscribe((success: any) => {
+        console.log("success",success);
+        
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });
