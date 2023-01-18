@@ -7,18 +7,12 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content
   [fullscreen]="true"
   [style.--background]="scanActive?'#00000000':'#ffffff'"
 >
-  <ion-button expand="full" (click)="startScanner()" [hidden]="scanActive">
-    SCAN
-  </ion-button>
-  <ion-row class="scan-button" [hidden]="!scanActive">
-    <ion-col class="ion-no-padding">
-      <ion-button expand="full" (click)="stopScanner()">Stop</ion-button>
-    </ion-col>
+  <ion-button expand="full" (click)="scan()"> SCAN </ion-button>
+  <ion-row class="scan-button">
+    <ion-col class="ion-no-padding"> {{data | json}} </ion-col>
   </ion-row>
-  <div class="scan-box" [hidden]="!scanActive"></div>
 </ion-content>
