@@ -12,7 +12,9 @@
   [style.--background]="scanActive?'#00000000':'#ffffff'"
 >
   <ion-button expand="full" (click)="scan()"> SCAN </ion-button>
+  <ion-button expand="full" (click)="createBarcode()"> createBarcode </ion-button>
   <ion-row class="scan-button">
     <ion-col class="ion-no-padding"> {{data | json}} </ion-col>
+    <!-- <ion-col class="ion-no/-padding"> {{encodedData}}</ion-col> -->
   </ion-row>
 </ion-content>
