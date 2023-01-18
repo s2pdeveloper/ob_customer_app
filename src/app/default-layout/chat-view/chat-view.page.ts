@@ -53,7 +53,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user = this.localStorage.get('OBUser');
-    console.log(" this.user-----", this.user);
     
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.shopName) this.shopName = params.shopName;
@@ -91,6 +90,28 @@ export class ChatViewPage implements OnInit, OnDestroy {
         this.getMsgByCustomerId(false);
       }.bind(this)
     );
+    this.socket.fromEvent('latest-data').subscribe(data=>{
+      console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+      
+    });
+  
+  }
+
+  ionViewWillEnter() {
+      // socket
+      this.socket.on(
+        'latest-data',
+        function (data: any) {
+          console.log(data);
+          console.log('latest-data called in customerApp');
+          this.getMsgByCustomerId(false);
+        }.bind(this)
+      );
+      this.socket.fromEvent('latest-data').subscribe(data=>{
+        console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+        
+      });
+
   }
 
   ngOnDestroy(): void {
@@ -126,6 +147,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
+    this.roomName = this.shopId + this.user._id; 
+    
     this.spinner.showLoader();
     this.chatService
       .getMsgByCustomerId(this.roomName)
