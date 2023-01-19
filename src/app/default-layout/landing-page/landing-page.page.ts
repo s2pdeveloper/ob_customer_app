@@ -27,10 +27,10 @@ export class LandingPagePage implements OnInit {
     private shopService: ShopService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  ionViewWillEnter() {
     this.getAllBusinessType();
   }
-
   getAllBusinessType() {
     let obj = {};
     this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
@@ -99,5 +99,3 @@ export class LandingPagePage implements OnInit {
   //     });
   // }
 }
-
-

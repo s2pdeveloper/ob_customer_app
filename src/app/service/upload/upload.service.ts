@@ -14,7 +14,7 @@ export class UploadService {
 
   constructor(private jwtService: StorageService, handler: HttpBackend) {
     this.httpClient = new HttpClient(handler);
-    this.token = this.jwtService.get('OBUser').token;
+    this.token = this.jwtService.get('OBCustomer').token;
 
   }
 

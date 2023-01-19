@@ -38,7 +38,7 @@ export class ProfilePagePage implements OnInit {
 
   ngOnInit() {}
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
     console.log("this.user",this.user);
     
     this.getById();

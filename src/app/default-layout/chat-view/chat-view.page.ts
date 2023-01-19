@@ -52,7 +52,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
   });
 
   ngOnInit() {
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
     
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.shopName) this.shopName = params.shopName;

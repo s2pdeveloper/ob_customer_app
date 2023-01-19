@@ -37,7 +37,7 @@ export class ChatListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
     this.getAllShop();
   }
 

@@ -34,7 +34,7 @@ export class CataloguePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
 
     this.activatedRoute.queryParams.subscribe((params: any) => {
       console.log(params);

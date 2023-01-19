@@ -19,11 +19,11 @@ export class JwtInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
     if (typeof window !== 'undefined') {
-      const OBUser = this.storageService.get('OBUser');
-      if (OBUser && OBUser.token) {
+      const OBCustomer = this.storageService.get('OBCustomer');
+      if (OBCustomer && OBCustomer.token) {
         request = request.clone({
           setHeaders: {
-            authorization: `Bearer ${OBUser.token}`,
+            authorization: `Bearer ${OBCustomer.token}`,
           },
         });
       }

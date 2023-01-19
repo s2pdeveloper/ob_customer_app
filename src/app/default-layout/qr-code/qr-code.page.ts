@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 @Component({
   selector: 'app-qr-code',
@@ -9,13 +10,10 @@ export class QrCodePage implements OnInit {
   scanActive: boolean = false;
   data: any;
   encodedData: any;
-  url: any = 'http://localhost:8100/shop-detail?_id=';
 
-  constructor(private barcodeScanner: BarcodeScanner) {}
+  constructor(private barcodeScanner: BarcodeScanner, private router: Router) {}
 
-  ngOnInit() {
-    // this.scan();
-  }
+  ngOnInit() {}
 
   scan() {
     this.data = null;
@@ -33,23 +31,11 @@ export class QrCodePage implements OnInit {
       .then((barcodeData) => {
         console.log('Barcode data', barcodeData);
         this.data = barcodeData;
+        let _id = barcodeData.text.split('?_id=')[1];
+        this.router.navigate(['/shop-detail'], { queryParams: { _id } });
       })
       .catch((err) => {
         console.log('Error', err);
       });
-  }
-
-  createBarcode() {
-    this.barcodeScanner
-      .encode(this.barcodeScanner.Encode.TEXT_TYPE, this.url)
-      .then(
-        (encodedData) => {
-          console.log(encodedData);
-          this.encodedData = encodedData;
-        },
-        (err) => {
-          console.log('Error occured : ' + err);
-        }
-      );
   }
 }
