@@ -14,5 +14,21 @@
         width:80px;
         height:80px;
     }
-    
+//   .subCatImage{
+//     width: 20px;
+//     height: 20px;
+//   }
 }
+
+.swiper-slide img {
+    width: auto;
+    max-width: 40%;
+    height: auto;
+    max-height: 40%;
+}
+
+.subCategoryActive {
+    ion-note {
+      color: red;
+    }
+  }

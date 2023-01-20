@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{ 'Shop List' | translate}} </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content> </ion-refresher-content>
+  </ion-refresher> -->
+
+  <!-- search bar -->
+  <ion-row>
+    <ion-col size="12">
+      <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
+      showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
+      [(ngModel)]="search" (ionChange)="onSearch()">
+    </ion-searchbar>
+    </ion-col>
+
+
+    <!-- filter -->
+    <!-- <ion-col size="2">
+      <ion-icon name="filter-outline" size="large" (click)="openSubCategoryModel()"></ion-icon>
+    </ion-col> -->
+  </ion-row>
+
+
+  <!-- <ion-card> -->
+    <ion-col *ngFor="let s of shopArr">
+      <ion-card (click)="navigateTo('/shop-detail',s._id)">
+        <ion-card-header>
+          <ion-row>
+            <ion-col size="4">
+              <img src="{{s.image}} " width="100%" height="100%">
+            </ion-col>
+            <ion-col size="8">
+             <h6><b>{{s.shopName}}</b></h6> 
+              <h6>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <ion-icon name="star-outline"></ion-icon>
+              <b style="margin-left: 7%;">4.5</b>
+              </h6>
+              <h6>{{s.address.line1 }}, {{ s.address.city}}.</h6>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  <!-- </ion-card> -->
+
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+</ion-content>

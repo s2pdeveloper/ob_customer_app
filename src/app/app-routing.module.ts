@@ -84,10 +84,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'search-customer',
+    path: 'search-shop',
     loadChildren: () =>
-      import('./default-layout/search-customer/search-customer.module').then(
-        (m) => m.SearchCustomerPageModule
+      import('./default-layout/search-shop/search-shop.module').then(
+        (m) => m.SearchShopPageModule
       ),
   },
   {
@@ -98,10 +98,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'customer-detail',
+    path: 'shop-detail',
     loadChildren: () =>
-      import('./default-layout/customer-detail/customer-detail.module').then(
-        (m) => m.CustomerDetailPageModule
+      import('./default-layout/shop-detail/shop-detail.module').then(
+        (m) => m.ShopDetailPageModule
       ),
   },
   {
@@ -161,16 +161,16 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'grocery',
-    loadChildren: () =>
-      import('./default-layout/grocery/grocery.module').then(
-        (m) => m.GroceryPageModule
-      ),
-  },
-  {
     path: 'catalogue',
     loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
   },
+  {
+    path: 'chat-view',
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+  },
+ 
+
+
 
 ];
 

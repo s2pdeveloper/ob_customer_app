@@ -4,10 +4,13 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://13.231.64.114:2000/api/v1/customerApp/',
-  url: 'http://13.231.64.114:2000',
-  // apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
-  // url: 'http://localhost:2000',
+  apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
+  s3Endpoint: 'http://localhost:2000/api/v1/shared/',
+  url: 'http://localhost:2000',
+
+  // apiEndpoint: 'http://13.231.64.114:2000/api/v1/customerApp/',
+  // url: 'http://13.231.64.114:2000',
+  // s3Endpoint: 'http://13.231.64.114:2000/api/v1/shared/',
 };
 
 /*

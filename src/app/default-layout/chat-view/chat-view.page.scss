@@ -1,0 +1,33 @@
+ button,
+ input,
+ optgroup,
+ select,
+ textarea {
+   font-weight: 300;
+   padding-top: 0px !important;
+ }
+
+ #chatInput {
+   align-items: center !important;
+ }
+
+ ion-textarea {
+   --padding-top: 0px !important;
+
+   textarea {
+     padding-top: 0px !important;
+   }
+ }
+
+ .end {
+   text-align: end;
+ }
+
+ .start {
+   text-align: start;
+ }
+
+ .size {
+   font-size: 10px;
+   margin: 8px 0px 0px 7px; 
+ }

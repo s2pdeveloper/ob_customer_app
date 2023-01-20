@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
   async ngOnInit() {
-    this.currentUser = this.storageService.get('OBUser');
+    this.currentUser = this.storageService.get('OBCustomer');
     if (this.currentUser) {
       // this.router.navigate(['/landing-page']);
     }

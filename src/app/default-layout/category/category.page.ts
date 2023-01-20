@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {  } from 'src/app/service/customer/customer.service';
-import { StorageService, UtilitiesService } from 'src/app/core/services';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-category',
@@ -9,38 +7,52 @@ import { CategoryService } from 'src/app/service/category/category.service';
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-   loaded:boolean= false;
-   categoryDetails: any = {};
-   user:any;
-   businessTypeId:any;
-  
+  categoryDetails: any = [];
+  businessTypeId: any;
+  categoryTypeId: string;
+  businessName: string;
+  search: string = '';
+
   constructor(
-    private router:Router,
-    private categoryService:CategoryService ,
-    private localStorage: StorageService
-    ) { }
+    private router: Router,
+    private actRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+  ) { }
+
 
   ngOnInit() {
-   
-     this.getByBusinessTypeCategory("");
-     this.user = this.localStorage.get('OBUser');
+    this.actRoute.queryParams.subscribe(params => {
+      this.getByBusinessTypeCategory(params.businessTypeId)
+    })
+
   }
+
+  getByBusinessTypeCategory(businessTypeId) {
+    let obj = {
+      businessTypeId: businessTypeId,
+    }
+    this.categoryService.getAll(obj).subscribe((success) => {
+      this.categoryDetails = success.rows;
+      console.log("   this.categoryDetails@@@@@@@@@@@@@@@@@",   this.categoryDetails);
+      
+    });
+  }
+
+
+  navigateTo(path, c) {
+    let params = {
+      businessTypeId: c.businessTypeId,
+      categoryId: c._id,
+    };
+    this.router.navigate([path], { queryParams: params });
+  }
+
   
-  //  getByIdCategory(ev) {
-  //    console.log("ev", ev);
-  //    this.getByBusinessTypeCategory(ev)
-  //  }
+  onSearch() {
+    console.log("search call");
+    // this.page = 1;
+    this.categoryDetails = [];
+    // this.getByBusinessTypeCategory(this.businessTypeId);
+  }
 
-
-
-getByBusinessTypeCategory(businessTypeId){
-  let obj :any= {businessTypeId:businessTypeId}
-  this.categoryService.getAll(obj).subscribe((success) => {
-    console.log("success-----------", success);
-    this.categoryDetails=success;
-  });
-  
- 
-
-}
 }

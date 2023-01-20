@@ -22,7 +22,7 @@ export class OnboardingPage implements OnInit {
   async ionViewWillEnter() {
     await StatusBar.setStyle({ style: StatusBarStyle.Light });
     await StatusBar.setBackgroundColor({ color: '#e1eaf5' });
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
   }
 
   @ViewChild('slides', { static: true }) slides: IonSlides;

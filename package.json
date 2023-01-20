@@ -24,6 +24,7 @@
     "@capacitor-community/date-picker": "^0.2.3",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "^2.4.7",
+    "@ionic-native/barcode-scanner": "^5.36.0",
     "@ionic-native/core": "^5.36.0",
     "@ionic-native/file-opener": "^5.36.0",
     "@ionic/angular": "^6.1.9",
@@ -31,6 +32,8 @@
     "@ngx-translate/http-loader": "^7.0.0",
     "cordova-plugin-file-opener2": "^3.0.5",
     "ngx-ionic-image-viewer": "^0.7.4",
+    "ngx-socket-io": "^3.2.0",
+    "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

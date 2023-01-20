@@ -11,12 +11,13 @@
 
   <ion-card>
     <div class="img">
-      <ion-avatar class="avatar">
-        <img  src="assets/images/placeholder_profile.png">
-        <img [src]="form.path.value" *ngIf="fileUploaded">
+      <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
+        <img src="{{profileForm.value.image}}">
       </ion-avatar>
       <ion-text>
-        <ion-chip> {{ 'changeProfile' | translate}}</ion-chip>
+        <ion-chip class="bg-color-5 text-color-2">
+          {{ 'changeProfile' | translate}}
+        </ion-chip>
         <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
           (change)="uploadFile($event)" required>
       </ion-text>
@@ -81,8 +82,8 @@
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'address' | translate}}" formControlName="line1"></ion-input>
                 </ion-item>
-  
-  
+
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'city' | translate}}
@@ -90,8 +91,8 @@
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'city' | translate}}" formControlName="city"></ion-input>
                 </ion-item>
-  
-  
+
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'state' | translate}}
@@ -99,7 +100,7 @@
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'state' | translate}}" formControlName="state"></ion-input>
                 </ion-item>
-  
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'Country' | translate}}
@@ -107,7 +108,7 @@
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Country' | translate}}" formControlName="country"></ion-input>
                 </ion-item>
-  
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'pinCode' | translate}}
@@ -116,15 +117,15 @@
                   <ion-input type="text" placeholder="{{ 'pinCode' | translate}}" formControlName="pinCode"></ion-input>
                 </ion-item>
               </ion-label>
-  
-  
-              <div class="ion-text-center ion-margin-vertical">
+
+
+              <!-- <div class="ion-text-center ion-margin-vertical">
                 <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
                   {{ 'submit' | translate}}
                 </ion-button>
-              </div>
-  
-              
+              </div> -->
+
+
             </div>
           </ion-accordion>
           <ion-accordion value="second">
@@ -132,14 +133,15 @@
               <ion-label>Links</ion-label>
             </ion-item>
             <div class="ion-padding" slot="content">
-  
+
               <ion-label formGroupName="links">
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'Facebook' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
-                  <ion-input type="text" placeholder="{{ 'Facebook' | translate}}" formControlName="facebook"></ion-input>
+                  <ion-input type="text" placeholder="{{ 'Facebook' | translate}}"
+                    formControlName="facebook"></ion-input>
                 </ion-item>
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
@@ -156,13 +158,13 @@
                   <ion-input type="text" placeholder="{{ 'Youtube' | translate}}" formControlName="youtube"></ion-input>
                 </ion-item>
               </ion-label>
-  
+<!-- 
               <div class="ion-text-center ion-margin-vertical">
                 <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
                   {{ 'submit' | translate}}
                 </ion-button>
-              </div>
-  
+              </div> -->
+
             </div>
           </ion-accordion>
           <ion-accordion value="third">
@@ -192,8 +194,8 @@
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Close' | translate}}" formControlName="close"></ion-input>
                 </ion-item>
-  
-  
+
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'Start Time' | translate}}
@@ -202,22 +204,23 @@
                   <ion-input type="text" placeholder="{{ 'Start Time' | translate}}" formControlName="startTime">
                   </ion-input>
                 </ion-item>
-  
+
                 <ion-item fill="outline" class="input">
                   <ion-label position="floating">
                     {{ 'End Time' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
-                  <ion-input type="text" placeholder="{{ 'End Time' | translate}}" formControlName="endTime"></ion-input>
+                  <ion-input type="text" placeholder="{{ 'End Time' | translate}}"
+                    formControlName="endTime"></ion-input>
                 </ion-item>
               </ion-label>
-  
-              <div class="ion-text-center ion-margin-vertical">
+
+              <!-- <div class="ion-text-center ion-margin-vertical">
                 <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
                   {{ 'submit' | translate}}
                 </ion-button>
-              </div>
-  
+              </div> -->
+
             </div>
           </ion-accordion>
         </ion-accordion-group>

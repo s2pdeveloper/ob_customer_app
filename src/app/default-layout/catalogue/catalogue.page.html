@@ -1,60 +1,60 @@
 <ion-header>
-  <ion-toolbar> 
-     
-   <ion-title>Catalogue</ion-title>
-   <ion-buttons slot="start">
-     <ion-back-button defaultHref="category" mode="md"></ion-back-button>
-   </ion-buttons>
- </ion-toolbar> 
- </ion-header>
- 
- <ion-content>
+  <ion-toolbar>
+    <ion-title>Product</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="category" mode="md"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
+<ion-content>
 
-    <div class="container"> 
-   <ion-grid>
-     <ion-row>
-       <ion-col *ngFor=" let c of Cataloguelist.rows">
-         <ion-list>  
-         <ion-item>
-         <ion-thumbnail slot="start">
-           <img src="{{c.image}}" >
-         </ion-thumbnail> 
-          <ion-label >
-           <h2>{{c.title}}<span style="float:right">&#8377;
-             {{c.price}}</span>
-           </h2>
-           <p>{{c.description}}</p>
-           <h3 style="color: rgb(83, 7, 153);" >
-             <ion-icon name="star-outline"></ion-icon>
-             <ion-icon name="star-outline"></ion-icon>
-             <ion-icon name="star-outline"></ion-icon>
-             <ion-icon name="star-outline"></ion-icon>
-             <ion-icon name="star-outline"></ion-icon>
-           </h3>
-         </ion-label> 
-       </ion-item>
-         </ion-list>
-       </ion-col>
-     </ion-row>
-     </ion-grid>
-   </div> 
- 
-   <!-- <ion-list>
-     <ion-item *ngFor="let item of items; let index">
-       
-       <ion-label>{{ item }}</ion-label>
-     </ion-item>
-   </ion-list>
-   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-     <ion-infinite-scroll-content></ion-infinite-scroll-content>
-   </ion-infinite-scroll> -->
- 
- 
-   
-   
- </ion-content>
- 
+  <div>
+    <ion-slides autoplay="true">
+      <ion-slide>
+        <ion-card *ngFor="let item of subCategoryArr;let i=index">
+          <ion-item [ngClass]="item.isActive ? 'subCategoryActive':null"  (click)="getCatalogueBySubCategoryId(item._id,i)">
+            <img class="subCatImage" src="{{item.image}} "  >
+            <ion-note class="sub-heading">{{item.name}}</ion-note>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <div class="container">
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor=" let c of catalogueArr">
+          <ion-list>
+            <ion-item>
+              <div></div>
+              <ion-checkbox slot="start" [(ngModel)]="c.isChecked"></ion-checkbox>
+              <ion-thumbnail slot="start">
+                <img src="{{c.image}}" />
+              </ion-thumbnail>
+              <ion-label>
+                <h2>
+                  {{c.title}}<span style="float: right">&#8377; {{c.price}}</span>
+                </h2>
+                <p>{{c.description}}</p>
+                <h3 style="color: rgb(83, 7, 153)">
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                  <ion-icon name="star-outline"></ion-icon>
+                </h3>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top"
+    (click)="navigateTo()">
+    Place Order
+  </ion-button>
+</ion-content>

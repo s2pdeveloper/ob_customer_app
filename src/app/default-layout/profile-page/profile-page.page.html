@@ -1,8 +1,5 @@
 <ion-toolbar>
   <ion-title>Profile Details</ion-title>
-  <!-- <ion-buttons slot="start">
-    <ion-menu-button menu="main-menu" icon="grid-outline"></ion-menu-button>
-  </ion-buttons> -->
   <ion-buttons slot="start" class="">
     <ion-back-button defaultHref="landing-page" mode="md"></ion-back-button>
   </ion-buttons>
@@ -60,55 +57,14 @@
           {{ userDetails.mobile }}
         </ion-label>
       </ion-item>
-      <ion-item>
-        <ion-icon class="" color="secondary" name="mail"></ion-icon>
-         <!-- <ion-label class="ion-margin-start"> {{ email }} </ion-label>  -->
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.email }}
+  
+      <ion-item lines="none">
+        <ion-icon class="" color="secondary" name="location"></ion-icon>
+        <!-- <ion-label class="ion-margin-start"> {{ 'Address' }} </ion-label> -->
+        <ion-label class="ion-margin-start">
+          {{ userDetails?.address?.line1 }}
         </ion-label>
       </ion-item>
-      <!-- <ion-item>
-
-        <ion-icon class="" color="secondary" name="line1"></ion-icon>
-         <ion-label class="ion-margin-start"> {{ line1 }} </ion-label> 
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.line1 }}
-        </ion-label>
-      </ion-item>  -->
-
-      <ion-item>
-        <ion-icon name="storefront-outline"></ion-icon> 
-        <!-- <ion-label class="ion-margin-start"> {{ address}} </ion-label>  -->
-        <ion-label class="ion-margin-start" >
-          {{ userDetails?.address?.line1 }} {{ userDetails?.address?.line2 }}
-           {{ userDetails?.address?.city }} {{ userDetails?.address?.state}} {{ userDetails?.address?.contry}}
-        </ion-label>
-      </ion-item> 
-      <ion-item>
-        <ion-icon name="toggle-outline"></ion-icon>
-        <ion-icon class="" color="secondary" name="status"></ion-icon>
-         <!-- <ion-label class="ion-margin-start"> {{ status }} </ion-label>  -->
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.status }}
-        </ion-label>
-      </ion-item> 
-      <ion-item>
-        
-        <ion-icon color="secondary"  name="person-circle-sharp" ></ion-icon>
-        <!-- <ion-label class="ion-margin-start"> {{ role }} </ion-label>   -->
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.role }}
-        </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon class="" color="secondary" name="key"></ion-icon>
-        <!-- <ion-label class="ion-margin-start"> {{ 'Email' }} </ion-label> -->
-        <ion-label class="ion-margin-start" >
-          {{ userDetails.key }}
-        </ion-label>
-      </ion-item>
-      
-      
 
 
     </ion-card-content>

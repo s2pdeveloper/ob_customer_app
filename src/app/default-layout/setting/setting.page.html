@@ -17,6 +17,17 @@
     </ion-item>
 
 
+    <ion-item button="true" (click)="navigateTo('change-language')">
+      <ion-icon class="text-color-2" name="language"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'Change Language' }}
+        <p class="text-color-7">{{'Set App Language' }}</p>
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+
+
+
     <ion-item button="true" (click)="logout()" lines="none">
       <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp">
       </ion-icon>

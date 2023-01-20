@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryService } from 'src/app/service/category/category.service';
+import { ActivatedRoute } from '@angular/router';
+import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { StorageService } from 'src/app/core/services';
-import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { StorageService, ToastService } from 'src/app/core/services';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-catalogue',
@@ -12,61 +13,106 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 })
 export class CataloguePage implements OnInit {
   loaded: boolean = false;
-  Cataloguelist: any = [];
   user: any;
+  shopId: any;
+  page: number = 1;
+  pageSize: number = 10;
+  search = '';
+  shopDetails: any;
+  catalogue: any;
+  catalogueArr: any;
+  selectAll: boolean;
+  subCategoryArr: any;
 
-  // start: number = 0;
-  // limit: number = 100;
-  // searchText: string;
-  
-
-  constructor(private routes:Router,
-    private category:CategoryService,
-    private localStorage: StorageService,) { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private toaster: ToastService,
+    private shopService: ShopService,
+    private localStorage: StorageService,
+    private spinner: LoaderService,
+    private socket: Socket
+  ) { }
 
   ngOnInit() {
-    this.getAllCatalogue();
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.getShopById(params._id)
+    });
   }
 
-  getAllCatalogue() {
-    // this.spinner.showLoader();
+
+  getCatalogueBySubCategoryId(_id, index) {
+    this.spinner.showLoader();
     this.loaded = false;
-    let obj = {
-    // start:this.start,limit:this.limit,
- };
- this.category.getAllCatalogue(obj).subscribe((success) => {
-  console.log("success", success);
-  this.Cataloguelist = success;
+    this.shopService
+      .getCatalogueBySubCategoryId(_id)
+      .subscribe((success: any) => {
+        console.log('success catalogue----', success);
+        this.catalogueArr = success.payload.rows.map((x) => {
+          x.isChecked = false;
+          return x;
+        });
+        // ----------------------------------- //
+        this.subCategoryArr.forEach(x => {
+          if (x.id === _id) {
+            x.isActive = true
+          } else {
+            x.isActive = false
+          }
+        });
+        this.spinner.hideLoader();
+        this.loaded = true;
+      });
+  }
 
 
-  // this.spinner.hideLoader();
-  this.loaded = true;
-});
+
+
+  getShopById(_id) {
+    this.shopService.getByIdShop(_id).subscribe((success: any) => {
+      console.log('success shop by id@@@@@@@@', success);
+      // this.subCategoryArr = success.data;
+
+      this.subCategoryArr = success.data.map((y, i) => {
+        y.isActive = false;
+        if (i == 0) {
+          y.isActive = true;
+          this.getCatalogueBySubCategoryId(y._id, null);
+        }
+        return y;
+      })
+      console.log("this.subCategoryArr88888888888888888", this.subCategoryArr);
+    });
+  }
+
+
+  navigateTo() {
+    let msg = '';
+    let arr = this.catalogueArr.filter((x) => x.isChecked == true);
+    if (arr.length < 1) {
+      this.toaster.errorToast('Plz select at least one product');
+      return;
+    }
+    msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
+    for (let i = 0; i < arr.length; i++) {
+      const catTitle = arr[i].title;
+      msg += `${catTitle}`;
+      if (i != arr.length - 1) {
+        msg += `,`;
+      }
+    }
+    // join 
+    let customerIdShopId = this.user._id + arr[0].shopId._id;
+    this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
+
+    this.router.navigate(['/chat-view'], {
+      queryParams: {
+        msg: msg,
+        shopId: arr[0].shopId._id,
+        shopName: arr[0].shopId.shopName,
+        roomName: customerIdShopId        //join
+      },
+    });
+  }
 }
-
-// generateItems() {
-//   const count = this.items.length + 1;
-//   for (let i = 0; i < 50; i++) {
-//     this.items.push(`Item ${count + i}`);
-//   }
-// }
-
-// onIonInfinite(ev) {
-//   this.generateItems();
-//   setTimeout(() => {
-//     (ev as InfiniteScrollCustomEvent).target.complete();
-//   }, 500);
-// }
-
-
-// doRefresh(event: any) {
-//   this.Cataloguelist = [];
-//   this.start = 0;
-//   this.getAllCatalogue();
-//   event.target.complete();
-// }
-  
-}
-
-

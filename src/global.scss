@@ -11,6 +11,8 @@
 
 /* Core CSS required for Ionic components to work properly */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -30,6 +32,7 @@
 @import "./theme/custom.scss";
 
 * {
+    // font-family: 'Poppins', sans-serif !important;
     font-family: 'Times New Roman', Times, serif !important;
 }
 

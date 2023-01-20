@@ -50,9 +50,7 @@ export class LoginPage implements OnInit {
     }
     this.spinner.showLoader();
     this.authService.login(this.loginForm.value).subscribe((success) => {
-      if (typeof window !== 'undefined') {
-        this.localStorage.set('OBUser', success);
-      }
+      this.localStorage.set('OBCustomer', success);
       this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
       this.saveDeviceToken(success._id);
       this.spinner.hideLoader();
@@ -67,7 +65,7 @@ export class LoginPage implements OnInit {
   saveDeviceToken(id) {
     let newObj: any = Object.assign(
       {
-        userId: id,
+        shopId: id,
         deviceId: this.localStorage.get('OBUserDeviceId'),
       },
       this.deviceInfo

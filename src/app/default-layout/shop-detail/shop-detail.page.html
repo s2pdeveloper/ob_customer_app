@@ -1,0 +1,212 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/search-shop"></ion-back-button>
+  </ion-buttons>
+  <ion-title> {{ 'Shop Details' | translate}}</ion-title>
+</ion-toolbar>
+
+<!-- <ion-content class="ion-padding" >
+
+
+
+
+
+  <ng-container class="container-img">
+    <img [src]="s?.bannerImages" />
+    <img class="logo-img" [src]="s?.image
+    " />
+  </ng-container>
+
+  <div>
+    <ion-text>
+      <h3 class="ion-text-capitalize ion-text-wrap center">
+        {{s?.firstName}} {{s?.lastName}}
+      </h3>
+    </ion-text>
+  </div>
+
+  <div>
+    <p>{{s?.schedule?.day}} :- {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
+      }} PM</p>
+  </div>
+
+  <ion-row>
+    <ion-col class="ion-text-center">
+      <a href="{{s?.links?.facebook}}">
+        <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+      </a>
+      <a href="{{s?.links?.insta}}">
+        <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
+      </a>
+      <a href="{{s?.links?.youtube}}">
+        <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+      </a>
+    </ion-col>
+  </ion-row>
+
+  <ion-item>
+    <ion-icon name="card-sharp" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'shopName' | translate}}
+      <p>{{s?.shopName}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="mail" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'email' | translate}}
+      <p>{{s?.email}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="call" color="dark"></ion-icon>
+    <ion-label class="ion-margin-start">
+      {{ 'mobileNumber' | translate}}
+      <p>{{s?.mobile}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-accordion-group>
+    <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-icon name="location" color="dark"></ion-icon>
+        <ion-label class="ion-padding">Address</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <p>
+          {{s?.address?.line1}} {{s?.address?.city}}
+          {{s?.address?.state}} {{s?.address?.country}}
+          {{s?.address?.pinCode}}
+        </p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
+<h3>SubCategory </h3>
+
+  <ion-row>
+    <ion-col *ngFor="let s of subCategoryArr" size="4">
+      <ion-card class="product-card"  (click)="navigateTo('/catalogue',s._id)">
+        <ion-card-header>
+          <ion-row>
+            <ion-col size="12">
+              <img src="{{s.image}} ">
+              <ion-note>{{s.name}}</ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+
+
+
+</ion-content> -->
+
+<ion-content>
+  <ng-container *ngFor="let s of shopDetails">
+    <ng-container class="container-img">
+      <img [src]="s?.bannerImages" />
+      <img class="logo-img" [src]="s?.image
+      " />
+    </ng-container>
+
+    <div>
+      <ion-text>
+        <h3 class="ion-text-capitalize ion-text-wrap center">
+          {{s?.firstName}} {{s?.lastName}}
+        </h3>
+      </ion-text>
+    </div>
+
+    <div>
+      <p>{{s?.schedule?.day}} :- {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
+        }} PM</p>
+    </div>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <a href="{{s?.links?.facebook}}">
+          <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+        </a>
+        <a href="{{s?.links?.insta}}">
+          <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
+        </a>
+        <a href="{{s?.links?.youtube}}">
+          <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+        </a>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-icon name="card-sharp" color="dark"></ion-icon>
+      <ion-label class="ion-margin-start">
+        {{ 'shopName' | translate}}
+        <p>{{s?.shopName}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="mail" color="dark"></ion-icon>
+      <ion-label class="ion-margin-start">
+        {{ 'email' | translate}}
+        <p>{{s?.email}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="call" color="dark"></ion-icon>
+      <ion-label class="ion-margin-start">
+        {{ 'mobileNumber' | translate}}
+        <p>{{s?.mobile}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-accordion-group>
+      <ion-accordion value="third">
+        <ion-item slot="header" color="light">
+          <ion-icon name="location" color="dark"></ion-icon>
+          <ion-label class="ion-padding">Address</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <p>
+            {{s?.address?.line1}} {{s?.address?.city}}
+            {{s?.address?.state}} {{s?.address?.country}}
+            {{s?.address?.pinCode}}
+          </p>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+        {{ 'View Product' | translate}}
+      </ion-button>
+    </div>
+
+
+
+    <!-- <h3>SubCategory </h3>
+    <ion-row>
+      <ion-col *ngFor="let s of subCategoryArr" size="4">
+        <ion-card class="product-card" (click)="navigateTo('/catalogue',s._id)">
+          <ion-card-header>
+            <ion-row>
+              <ion-col size="12">
+                <img src="{{s.image}} ">
+                <ion-note>{{s.name}}</ion-note>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row> -->
+  </ng-container>
+
+</ion-content>

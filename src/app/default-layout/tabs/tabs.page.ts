@@ -10,8 +10,8 @@ const { Device, Geolocation } = Plugins;
   styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage {
-  user: any;
   public selectedIndex: number = 0;
+  deviceInfo: any;
 
   public tabPages = [
     {
@@ -20,12 +20,18 @@ export class TabsPage {
       tab: 'landing-page',
       icon: 'home',
     },
+    {
+      title: 'Chat',
+      value: 'chat',
+      tab: 'chat-list',
+      icon: 'chatbubble-sharp'
+    },
    
     {
-      title: 'Trade',
-      value: 'trade',
-      tab: 'trade',
-      icon: 'server',
+      title: 'QR Code',
+      value: 'qr-code',
+      tab: 'qr-code',
+      icon: 'qr-code-sharp'
     },
     {
       title: 'Setting',
@@ -35,36 +41,18 @@ export class TabsPage {
     },
   ];
 
-  deviceInfo: any;
+ 
   constructor(
     private router: Router,
-    // private userService: UserService,
-    // private spinnerService: SpinnerService,
-    // private toastService: ToastService,
-    // public translate: TranslateService,
-    // private languageService: LanguageService,
-    // private cartService: CartService
-  ) {
-    // this.userService.refreshTable.subscribe(() => {
-    //   this.cartQuantity();
-    // });
-  }
+
+  ) {}
 
   async ngOnInit() {
     this.deviceInfo = await Device.getInfo();
     console.log('device info', this.deviceInfo);
   }
 
-  // get shopId() {
-  //  return JSON.parse(localStorage.getItem('shopId'));
-  // }
-  ionViewDidEnter() {
-    // this.user = this.userService.getCurrentUser();
-    // this.cartQuantity();
-  }
-
  
-  
   /**
    * navigate to provided page url
    * @param page
@@ -73,38 +61,4 @@ export class TabsPage {
     this.router.navigate([`${page?.url}`]);
   }
 
-  /**
-   * to logout user
-   */
-  // async logout() {
-  //   await this.spinnerService.presentLoading();
-  //   let payload = {
-  //     deviceToken: localStorage.getItem('deviceToken'),
-  //     platform: this.deviceInfo.platform,
-  //   };
-  //   this.userService.removeDeviceToken(payload).subscribe(
-  //     async (result) => {
-  //       this.userService.purgeAuth();
-  //       this.navigateTo(`/auth/login`);
-  //       await this.spinnerService.dismissLoading();
-  //     },
-  //     async (error) => {
-  //       this.userService.purgeAuth();
-  //       this.navigateTo(`/auth/login`);
-  //       await this.spinnerService.dismissLoading();
-  //     }
-  //   );
-  // }
-
-  // getSelectedLanguage() {
-  //   this.subscription = this.languageService.updatedLang$.subscribe((l) => {
-  //     this.translate.use(l);
-  //     for (let i = 0; i < this.tabPages.length; i++) {
-  //       const element = this.tabPages[i];
-  //       this.translate.get(`${element.title}`).subscribe((value) => {
-  //         element.value = value;
-  //       });
-  //     }
-  //   });
-  // }
 }
