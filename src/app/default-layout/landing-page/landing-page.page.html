@@ -25,6 +25,9 @@
 
         <ion-card-header>
           <ion-row>
+            <ion-col size="12">             
+              <img src="{{b.imageUrl}} ">
+               <ion-note>{{b.name}}</ion-note>
             <ion-col size="12">
 
               <img src="../../../assets/image/grocery.jpg">
@@ -33,6 +36,31 @@
             </ion-col>
           </ion-row>
         </ion-card-header>
+         </ion-card>  
+      </ion-col>
+    </ion-row>
+    <h6>Select Category</h6>
+      <!-- <ion-note class="name">See all</ion-note> -->
+<h6 class="name" (click)="seeAll()" >See all</h6> 
+    <!-- ------ slide one ---- -->
+    
+        <ion-slides autoplay="true">
+          <marquee width="100%" height="45%" behavior="scroll" loop=""> 
+        <ion-slide>
+          <ion-col *ngFor="let c of categoryDetails.rows " size="4" >
+              <ion-card class="categoryCard" color="success">
+              <ion-row>
+                  <ion-col size="12">
+                    <img src="{{c.imageUrl}} ">
+                  </ion-col>
+                </ion-row>
+              </ion-card> 
+              <ion-note>{{c.name}}</ion-note>
+            </ion-col>
+           </ion-slide >
+          </marquee>
+        </ion-slides> 
+   
 
       </ion-card>
 
@@ -174,38 +202,51 @@
       </ion-col>
 
       <ion-col size="3">
-        <ion-card color="light">
+        <ion-card color="success">
           <ion-row>
             <ion-col size="12">
-              <ion-icon name="car-sport" size="large"></ion-icon>
+
+              <!-- <ion-button routerlink="../services"> -->
+              <ion-icon name="construct-outline" size="large"></ion-icon>
+              <!-- </ion-button> -->
             </ion-col>
           </ion-row>
         </ion-card>
-        <ion-note>Car</ion-note>
-      </ion-col>
-    </ion-slide>
-  </ion-slides>
 
-  <ion-col size="3">
-    <ion-card>
-      <ion-row>
-        <ion-col size="6">
-          <img src="../../../assets/image/shoping.jpg" alt="shoping">
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </ion-col>
-  <h6>Best Offers</h6>
+        <ion-note>service</ion-note>
+
+      </ion-col>
+    
+    
+    
+<h6>Best Offers</h6>
   <!-- <ion-note>Best Offers</ion-note> -->
-  <div class="offer-card">
-    <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/cake2.jpg" />
+  <!-- <div class="offer-card"> -->
+    <ion-slides autoplay="true">
+      <marquee width="100%" height="45%" behavior="scroll" loop=""> 
+    <ion-slide>
+    <ion-card  class="offer-card" *ngFor="let o of offerDetails.rows" >
+      <img src="{{o.imageUrl}}" />
       <ion-card-header>
-        <ion-card-title>Cake Homemade </ion-card-title>
+        <ion-card-title>{{o.title}}  </ion-card-title>
         <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
       </ion-card-header>
-    </ion-card>
-  </div>
+    </ion-card> 
+    </ion-slide>
+      </marquee>
+    </ion-slides>
+  <!-- </div> -->
+   
+  
+<!-- <div class="offer-card">
+  <ion-card>
+    <img alt="Silhouette of mountains" src="../../../assets/image/car-service.jpg" />
+    <ion-card-header>
+      <ion-card-title>Car Services</ion-card-title>
+      <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+</div> -->
 
 
   <div class="offer-card">
