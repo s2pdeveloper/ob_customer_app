@@ -19,6 +19,7 @@ export class LandingPagePage implements OnInit {
   search: string = '';
   selectedBusinessName: any;
   selectedBusinessId: any;
+  offerDetails: any =[];
 
   constructor(
     private router: Router,
