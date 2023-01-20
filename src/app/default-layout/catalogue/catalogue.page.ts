@@ -62,7 +62,7 @@ export class CataloguePage implements OnInit {
     let msg = '';
     let arr = this.catalogueArr.filter((x) => x.isChecked == true);
     if (arr.length < 1) {
-      this.toaster.errorToast('Plz select at least one catalogue');
+      this.toaster.errorToast('Plz select at least one product');
       return;
     }
     msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;

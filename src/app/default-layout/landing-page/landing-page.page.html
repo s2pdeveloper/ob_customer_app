@@ -1,7 +1,8 @@
-<ion-content>
+<ion-content class="font-poppins">
   <ion-row>
-    <ion-col><ion-icon class="location" name="location"></ion-icon>
-      <ion-note class="par">Location</ion-note>
+    <ion-col
+      ><ion-icon class="location" name="location"></ion-icon>
+      <ion-note class="location-heading">Location</ion-note>
     </ion-col>
     <ion-col>
       <div class="avtar">
@@ -10,20 +11,40 @@
     </ion-col>
   </ion-row>
 
-  <!-- <ion-searchbar show-clear-button="focus"></ion-searchbar> -->
-  <!-- <ion-searchbar debounce="800" mode="ios" [(ngModel)]="search" showCancelButton="focus"
-    (ionChange)="setFilteredLocations($event)">
-  </ion-searchbar> -->
-
-  <ion-searchbar class="search-box ion-no-padding ion-margin-top" inputmode="search" searchIcon animated type="text"
-    showCancelButton="never" placeholder="Search" autocomplete="on" autocorrect="on"
-    (ionFocus)="navigateTo('/search-shop',null)">
+  <ion-searchbar
+    class="search-box ion-no-padding size"
+    inputmode="search"
+    searchIcon
+    animated
+    type="text"
+    showCancelButton="never"
+    placeholder="{{ 'Search' | translate}}"
+    autocomplete="on"
+    autocorrect="on"
+    (ionFocus)="navigateToSearchShop('/search-shop',null)"
+  >
   </ion-searchbar>
 
   <ion-row>
-    <ion-col *ngFor="let b of businessArr;" size="4">
-      <ion-card class="product-card" [ngClass]="b.isActive ? 'businessTypeActive':null"
-        (click)="getBusinessAllCategory(b._id)">
+    <ion-col *ngFor="let b of businessArr;" size="3" class="business">
+      <div
+        [ngClass]="b.isActive ? 'businessTypeActive':null"
+        (click)="getBusinessAllCategory(b._id)"
+      >
+        <!-- <img src="{{b.image}} " /> -->
+        <ion-row>
+          <ion-col size="12">
+            <img src="{{b.image}} " width="50px" />
+            <!-- <img src="../../../assets/icon/facebook.png"  /> -->
+            <ion-note class="business-font-size">{{b.name}}</ion-note>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- <ion-card
+        class="product-card"
+        [ngClass]="b.isActive ? 'businessTypeActive':null"
+        (click)="getBusinessAllCategory(b._id)"
+      >
         <ion-card-header>
           <ion-row>
             <ion-col size="12">
@@ -32,29 +53,25 @@
             </ion-col>
           </ion-row>
         </ion-card-header>
-      </ion-card>
+      </ion-card> -->
     </ion-col>
   </ion-row>
 
-  <h6>Select Category</h6>
-  <h6 class="name" (click)="seeAll()">See all</h6>
+  <h6>{{"Select Category" | translate}}</h6>
+  <h6 class="name" (click)="seeAllCategory()">{{"See all" | translate}}</h6>
   <ion-slides autoplay="true">
-    <ion-slide>
-      <ion-col *ngFor="let c of BusinessWithCategoryArr" size="3" (click)="getCategoryIdWithShop(c._id)">
-        <ion-card>
-          <ion-row>
-            <ion-col size="12">
-              <img src="{{c.image}} " />
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>{{c.name}}</ion-note>
-      </ion-col>
-    </ion-slide>
+    <marquee width="100%" height="45%" behavior="scroll" loop="">
+      <ion-slide>
+        <ion-col
+          *ngFor="let c of BusinessWithCategoryArr"
+          (click)="getCategoryIdWithShop(c._id)"
+        >
+          <img class="catImage" src="{{c.image}} " /><br />
+          <ion-note class="sub-heading">{{c.name}}</ion-note>
+        </ion-col>
+      </ion-slide>
+    </marquee>
   </ion-slides>
-
-
-
 
   <ion-col size="3">
     <ion-card>
@@ -69,7 +86,10 @@
   <!-- <ion-note>Best Offers</ion-note> -->
   <div class="offer-card">
     <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/cake2.jpg" />
+      <img
+        alt="Silhouette of mountains"
+        src="../../../assets/image/cake2.jpg"
+      />
       <ion-card-header>
         <ion-card-title>Cake Homemade </ion-card-title>
         <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
@@ -79,7 +99,10 @@
 
   <div class="offer-card">
     <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/car-service.jpg" />
+      <img
+        alt="Silhouette of mountains"
+        src="../../../assets/image/car-service.jpg"
+      />
       <ion-card-header>
         <ion-card-title>Car Services</ion-card-title>
         <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
@@ -96,7 +119,8 @@
           <ion-col size="12">
             <ion-icon name="construct-outline" size="large"></ion-icon>
           </ion-col>
-        </ion-row> </ion-card><ion-note>service</ion-note>
+        </ion-row> </ion-card
+      ><ion-note>service</ion-note>
     </ion-col>
 
     <ion-col size="3">
@@ -105,7 +129,8 @@
           <ion-col size="12">
             <ion-icon name="restaurant-outline" size="large"></ion-icon>
           </ion-col>
-        </ion-row> </ion-card><ion-note>food</ion-note>
+        </ion-row> </ion-card
+      ><ion-note>food</ion-note>
     </ion-col>
   </ion-row>
   <h6>Most Popular</h6>
@@ -117,7 +142,8 @@
           <ion-col size="12">
             <ion-icon name="construct-outline" size="large"></ion-icon>
           </ion-col>
-        </ion-row> </ion-card><ion-note>service</ion-note>
+        </ion-row> </ion-card
+      ><ion-note>service</ion-note>
     </ion-col>
 
     <ion-col size="3">
@@ -126,7 +152,8 @@
           <ion-col size="12">
             <ion-icon name="restaurant-outline" size="large"></ion-icon>
           </ion-col>
-        </ion-row> </ion-card><ion-note>food</ion-note>
+        </ion-row> </ion-card
+      ><ion-note>food</ion-note>
     </ion-col>
   </ion-row>
 </ion-content>

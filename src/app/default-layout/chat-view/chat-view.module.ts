@@ -8,6 +8,7 @@ import { ChatViewPageRoutingModule } from './chat-view-routing.module';
 
 import { ChatViewPage } from './chat-view.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UploadService } from 'src/app/service/upload/upload.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ChatViewPageRoutingModule,
     SharedModule
   ],
-  declarations: [ChatViewPage]
+  declarations: [ChatViewPage],
+  providers: [ UploadService],
 })
 export class ChatViewPageModule {}

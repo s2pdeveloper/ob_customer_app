@@ -8,6 +8,7 @@ import { SearchShopPageRoutingModule } from './search-shop-routing.module';
 
 import { SearchShopPage } from './search-shop.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SubCategoryComponent } from 'src/app/modal/sub-category/sub-category.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SearchShopPageRoutingModule,
     SharedModule
   ],
-  declarations: [SearchShopPage]
+  declarations: [SearchShopPage,SubCategoryComponent]
 })
 export class SearchShopPageModule {}

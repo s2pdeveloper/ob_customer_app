@@ -7,6 +7,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
+import { UploadService } from 'src/app/service/upload/upload.service';
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
@@ -30,6 +31,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
   room: any;
   roomName: any;
   userId: any;
+  fileUploaded: boolean = false;
+  filePath: string = "";
 
   constructor(
     private router: Router,
@@ -39,6 +42,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     private toaster: ToastService,
     private spinner: LoaderService,
     private localStorage: StorageService,
+    private uploadService: UploadService,
     private socket: Socket
   ) { }
 
@@ -49,11 +53,11 @@ export class ChatViewPage implements OnInit, OnDestroy {
     roomName: new FormControl(''),
     message: new FormControl(''),
     createdBy: new FormControl(),
+    image: new FormControl(''),
   });
 
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
-    
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.shopName) this.shopName = params.shopName;
       if (params.roomName && params.msg) {
@@ -158,6 +162,31 @@ export class ChatViewPage implements OnInit, OnDestroy {
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });
+  }
+
+
+  async uploadFileAWS($event) {
+    console.log("upload call");
+    
+    let file = $event.target.files[0];
+    await this.spinner.showLoader();
+    let formData = new FormData();
+    formData.append('file', file);
+    this.uploadService.uploadFile(formData)
+      .subscribe(
+        async (data: any) => {
+          this.filePath = data?.result?.url;
+          this.chatForm.controls.image.setValue(this.filePath);
+          this.fileUploaded = true;
+          await this.spinner.hideLoader();
+          this.sendMessage();
+        },
+      
+        async (error: any) => {
+          await this.spinner.hideLoader();
+          this.toaster.errorToast(error);
+        }
+      );
   }
 
   doInfinite(event) {
