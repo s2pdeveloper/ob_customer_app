@@ -22,27 +22,27 @@ export class CataloguePage implements OnInit {
   catalogue: any;
   catalogueArr: any;
   selectAll: boolean;
+  subCategoryArr: any;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private shopService: ShopService,
-    private localStorage:StorageService,
+    private localStorage: StorageService,
     private spinner: LoaderService,
-    private socket:Socket
+    private socket: Socket
   ) { }
 
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
-
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log(params);
-      this.getCatalogueBySubCategoryId(params._id);
+      this.getShopById(params._id)
     });
   }
 
-  getCatalogueBySubCategoryId(_id) {
+
+  getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService
@@ -53,10 +53,39 @@ export class CataloguePage implements OnInit {
           x.isChecked = false;
           return x;
         });
+        // ----------------------------------- //
+        this.subCategoryArr.forEach(x => {
+          if (x.id === _id) {
+            x.isActive = true
+          } else {
+            x.isActive = false
+          }
+        });
         this.spinner.hideLoader();
         this.loaded = true;
       });
   }
+
+
+
+
+  getShopById(_id) {
+    this.shopService.getByIdShop(_id).subscribe((success: any) => {
+      console.log('success shop by id@@@@@@@@', success);
+      // this.subCategoryArr = success.data;
+
+      this.subCategoryArr = success.data.map((y, i) => {
+        y.isActive = false;
+        if (i == 0) {
+          y.isActive = true;
+          this.getCatalogueBySubCategoryId(y._id, null);
+        }
+        return y;
+      })
+      console.log("this.subCategoryArr88888888888888888", this.subCategoryArr);
+    });
+  }
+
 
   navigateTo() {
     let msg = '';
@@ -74,15 +103,15 @@ export class CataloguePage implements OnInit {
       }
     }
     // join 
-    let customerIdShopId = this.user._id +  arr[0].shopId._id;
-    this.socket.emit('join', {room : customerIdShopId, user : this.user._id});
-    
+    let customerIdShopId = this.user._id + arr[0].shopId._id;
+    this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
+
     this.router.navigate(['/chat-view'], {
       queryParams: {
         msg: msg,
         shopId: arr[0].shopId._id,
-        shopName:arr[0].shopId.shopName,
-        roomName:customerIdShopId        //join
+        shopName: arr[0].shopId.shopName,
+        roomName: customerIdShopId        //join
       },
     });
   }

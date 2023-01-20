@@ -60,6 +60,7 @@ export class LandingPagePage implements OnInit {
     });
     this.getCategoryByBusinessTypeId(businessTypeId);
   }
+  
 
   getCategoryByBusinessTypeId(businessTypeId) {
     let obj: any = {
