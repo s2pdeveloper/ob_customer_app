@@ -14,7 +14,9 @@ export class QrCodePage implements OnInit {
   constructor(private barcodeScanner: BarcodeScanner, private router: Router) {}
 
   ngOnInit() {}
-
+  ionViewWillEnter() {
+    this.scan();
+  }
   scan() {
     this.data = null;
     this.barcodeScanner
