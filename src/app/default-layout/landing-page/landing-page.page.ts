@@ -17,6 +17,8 @@ export class LandingPagePage implements OnInit {
   businessArr: any = [];
   BusinessWithCategoryArr: any = [];
   search: string = '';
+  selectedBusinessName: any;
+  selectedBusinessId: any;
 
   constructor(
     private router: Router,
@@ -25,12 +27,13 @@ export class LandingPagePage implements OnInit {
     public translate: TranslateService,
     private categoryService: CategoryService,
     private shopService: ShopService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ionViewWillEnter() {
     this.getAllBusinessType();
   }
+
   getAllBusinessType() {
     let obj = {};
     this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
@@ -60,30 +63,32 @@ export class LandingPagePage implements OnInit {
 
   getCategoryByBusinessTypeId(businessTypeId) {
     let obj: any = {
-      businessTypeId: businessTypeId,
+      businessTypeId: businessTypeId
     };
     this.categoryService.getAll(obj).subscribe((success) => {
       this.BusinessWithCategoryArr = success.rows;
     });
   }
 
-  navigateTo(path, _id) {
+  navigateToSearchShop(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 
-  seeAll() {
-    this.router.navigate(['/category']);
+  seeAllCategory() {
+    this.router.navigate(['/category'], {
+      queryParams: {
+        businessTypeId: this.businessTypeId
+      }
+    })
   }
-  proCard() {
-    this.router.navigate(['/category']);
-  }
+
+  seeAll() { }
 
   getCategoryIdWithShop(categoryId) {
     let params = {
       businessTypeId: this.businessTypeId,
       categoryId: categoryId,
     };
-    console.log(params);
     this.router.navigate(['/search-shop'], { queryParams: params });
   }
 }

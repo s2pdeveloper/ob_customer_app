@@ -19,7 +19,7 @@ ion-card-header.ios {
 .name {
   margin-left: 270px;
   margin-top: -30px;
-font-size: 15px;
+  font-size: 15px;
   display: flex;
   align-items: flex-end;
   justify-items: flex-end;
@@ -32,7 +32,6 @@ font-size: 15px;
   }
 }
 
-
 .location {
   font-size: 24px;
   color: rgb(241, 42, 42);
@@ -42,9 +41,11 @@ font-size: 15px;
   margin-bottom: -2%;
   padding: 0px;
 }
-.par {
+.location-heading {
   margin-left: -40px;
   width: 60px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 }
 
 .avtar {
@@ -76,19 +77,28 @@ font-size: 15px;
 //     font-weight: lighter;
 
 // }
-.product-card {
-  width: 95px;
-  height: 85px;
-  text-align: center;
-  padding: 0px;
-}
+// .product-card {
+//   // width: 95px;
+//   height: 85px;
+//   text-align: center;
+//   padding: 0px;
+// }
 
-.catImage{
+.catImage {
   margin: 0px -18px 0px -42px;
   height: 64px;
   width: 85px;
 }
-.ion-note{
+.ion-note {
   text-align: center;
 }
+.business{
+  text-align: center;
+}
+.business-font-size{
+  font-size: smaller;
+}
 
+.sub-heading{
+  text-align: center;
+}

@@ -1,0 +1,24 @@
+img{
+    width: 163px;
+    height: 138px;
+}
+
+
+.category{
+    .card{
+      padding: 15px;
+      height: 200px;
+
+      img{
+        width: 300px;
+        // border-radius: 10px;
+      }
+    }
+    .card-body{
+        .card-heading{
+            text-align: center !important;
+            font-size: medium;
+            margin: -1px 0px 10px 0px;
+        }
+    }
+  }

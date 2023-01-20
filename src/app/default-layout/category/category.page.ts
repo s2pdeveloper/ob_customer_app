@@ -1,39 +1,47 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/service/customer/customer.service';
-import { StorageService, UtilitiesService } from 'src/app/core/services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  // loaded = false;
-  // categoryDetails: any = {};
-  // service: any;
+  categoryDetails: any = [];
+  businessTypeId: any;
+  categoryTypeId: string;
+  businessName: string;
+
   constructor(
-    private router:Router,
-    private customer:CustomerService
-    ) { }
+    private router: Router,
+    private actRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+  ) { }
+
 
   ngOnInit() {
+    this.actRoute.queryParams.subscribe(params => {
+      this.getByBusinessTypeCategory(params.businessTypeId)
+    })
+
   }
-  description(){
-    this.router.navigate(['/catalogue'])
+
+  getByBusinessTypeCategory(businessTypeId) {
+    let obj = {
+      businessTypeId: businessTypeId,
+    }
+    this.categoryService.getAll(obj).subscribe((success) => {
+      this.categoryDetails = success.rows;
+    });
   }
-  grocery(){
-    this.router.navigate(['/grocery'])
+
+
+  navigateTo(path, c) {
+    let params = {
+      businessTypeId: c.businessTypeId,
+      categoryId: c._id,
+    };
+    this.router.navigate([path], { queryParams: params });
   }
-  // category(){
-  //   this.loaded = false;
-  //   this.customer.getCategory(this.service._id).subscribe((success) => {
-  //     console.log("success",success);
-  //     this.categoryDetails = success;
-      
-      
-  //     // this.spinner.hideLoader();
-  //     this.loaded = false;
-  //   });
-  // }
 
 }
