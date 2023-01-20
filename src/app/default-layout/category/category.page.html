@@ -8,6 +8,11 @@
 </ion-header>
 
 
+<ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
+showCancelButton="never" placeholder="{{ 'Search'}}" autocomplete="on" autocorrect="on"
+[(ngModel)]="search" (ionChange)="onSearch()" >
+</ion-searchbar>
+
 <ion-content class="category">
   <ion-grid>
     <ion-row>

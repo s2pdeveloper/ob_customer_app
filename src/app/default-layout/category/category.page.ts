@@ -11,6 +11,7 @@ export class CategoryPage implements OnInit {
   businessTypeId: any;
   categoryTypeId: string;
   businessName: string;
+  search: string = '';
 
   constructor(
     private router: Router,
@@ -32,6 +33,8 @@ export class CategoryPage implements OnInit {
     }
     this.categoryService.getAll(obj).subscribe((success) => {
       this.categoryDetails = success.rows;
+      console.log("   this.categoryDetails@@@@@@@@@@@@@@@@@",   this.categoryDetails);
+      
     });
   }
 
@@ -42,6 +45,14 @@ export class CategoryPage implements OnInit {
       categoryId: c._id,
     };
     this.router.navigate([path], { queryParams: params });
+  }
+
+  
+  onSearch() {
+    console.log("search call");
+    // this.page = 1;
+    this.categoryDetails = [];
+    // this.getByBusinessTypeCategory(this.businessTypeId);
   }
 
 }

@@ -14,15 +14,18 @@
 
   <!-- search bar -->
   <ion-row>
-    <ion-col size="10">
+    <ion-col size="12">
       <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
       showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
       [(ngModel)]="search" (ionChange)="onSearch()">
     </ion-searchbar>
     </ion-col>
-    <ion-col size="2">
-      <ion-icon name="filter-outline" size="large"></ion-icon>
-    </ion-col>
+
+
+    <!-- filter -->
+    <!-- <ion-col size="2">
+      <ion-icon name="filter-outline" size="large" (click)="openSubCategoryModel()"></ion-icon>
+    </ion-col> -->
   </ion-row>
 
 

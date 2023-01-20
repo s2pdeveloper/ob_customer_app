@@ -3,7 +3,8 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
-
+import { ModalController, } from '@ionic/angular';
+import { SubCategoryComponent } from 'src/app/modal/sub-category/sub-category.component';
 @Component({
   selector: 'app-search-shop',
   templateUrl: './search-shop.page.html',
@@ -25,20 +26,22 @@ export class SearchShopPage implements OnInit {
     private router: Router,
     private spinner: LoaderService,
     public translate: TranslateService,
+    public modelController: ModalController,
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log('params-----', params);
+      this.subCategoryId = params._id ?? "";
       if (params.shopId) {
         this.getShopById(params.shopId);
       } else {
         this.businessTypeId = params.businessTypeId ?? "";
         this.categoryId = params.categoryId ?? "";
+        // this.subCategoryId = params.subCategoryId ?? "";
         this.getAllShop(false);
       }
     });
@@ -92,6 +95,16 @@ export class SearchShopPage implements OnInit {
   //   this.getAllShop(true, event);
   //   event.target.complete();
   // }
+
+
+  async openSubCategoryModel() {
+   let model = await this.modelController.create({
+      component: SubCategoryComponent,
+    });
+    await model.present();
+
+  }
+
 
 
 }
