@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-no-padding">
+<ion-content>
   <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
     <ion-segment-button [id]="'new'" value="new" layout="icon-end">
       <ion-label>{{ 'new' }}</ion-label>
@@ -19,7 +19,6 @@
       <ion-label>{{ 'completed' }}</ion-label>
     </ion-segment-button>
   </ion-segment>
-
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -28,30 +27,36 @@
     autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()" placeholder="{{ 'search'}}">
   </ion-searchbar>
 
-  <!-- conversation -->
-  <ion-list>
-    <ion-item *ngFor="let item of shopConversationList">
-      <ion-item (click)="navigateTo(item)">
-        <ion-avatar slot="start">
-          <img class="" [src]="item?.image || 'assets/image/placeholder_profile.png'" alt="" />
-        </ion-avatar>
-        <ion-label class="ion-text-wrap">
-          <ion-text class="ion-text-wrap">
-            <h2 class="ion-text-wrap ion-text-capitalize">
-              {{item?.shopName}} 
-            </h2>
-          </ion-text>
-        </ion-label>
+  <ng-container>
+    <ion-card class="card">
+      <!-- conversation -->
+      <ion-card-content (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
+          <div class="main">
+            <div class="img-box">
+              <img class="img-icon" [src]="item?.image || 'assets/image/placeholder_profile.png'" alt="" />
+            </div>
+            <ion-label class="ion-text-wrap">
+              <ion-text class="ion-text-wrap">
+                <h2 class="ion-text-wrap ion-text-capitalize shop-name">
+                  {{item?.shopName}}
+                </h2>
+              </ion-text>
+            </ion-label>
 
-        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
-      </ion-item>
-    </ion-item>
-  </ion-list>
+            <ion-icon name="chevron-forward-outline" class="next-icon" slot="end"></ion-icon>
+          </div>
+       
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+      </ion-card-content>
+    </ion-card>
 
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+
+  </ng-container>
 
 </ion-content>

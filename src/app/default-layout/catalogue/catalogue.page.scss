@@ -1,23 +1,77 @@
-.container{
+.container {
     width: 100%;
-   
-    ion-thumbnail{
-        width: 100px !important;
-        height: 100px !important;
-        img{
-            border-radius: 10px;
-        
+    padding: 0%;
+    margin: 0%;
+
+    ion-card {
+        --background: #FAF4F0;
+        width: 100%;
+        --border-radius: 5px solid #D0CED1;
+        border: 1px solid #D0CED1;
+        // --padding-top
+
+        ion-thumbnail {
+            width: 110px !important;
+            height: 80px !important;
+
+    
+            img {
+                right: 1px;
+                border-radius: 5px;
+                border: 1px solid #8A898A;
+            }
+    
         }
-       
+        ion-icon{
+            margin-right: 2px;
+        }
+
+        ion-row{
+            display: flex;
+        }
+
+        .title{
+            font-size: 13px;
+            font-weight: bolder;
+            color: #000015;
+            word-break: break-all ;
+            
+        }
+        .discription{
+            font-size: 10px;
+            font-weight: bolder;
+            color: #A6A1A3;
+        }
+        .price{
+            font-size: 13px;
+            font-weight: bolder;
+            color: #000015;
+        }
+        .amount{
+            float: right;
+            font-weight: bolder;
+            color: #010F84;
+
+        }
     }
-    .card{
-        width:80px;
-        height:80px;
+
+
+    // .card {
+    //     width: 80px;
+    //     height: 80px;
+    // }
+
+    //   .subCatImage{
+    //     width: 20px;
+    //     height: 20px;
+    //   }
+    .checkbox {
+        --border-radius: 3px;
+        border: 1px solid #D0CED1;
+        --background: #FFFFFF;
+
     }
-//   .subCatImage{
-//     width: 20px;
-//     height: 20px;
-//   }
+
 }
 
 .swiper-slide img {
@@ -29,6 +83,6 @@
 
 .subCategoryActive {
     ion-note {
-      color: red;
+        color: red;
     }
-  }
+}

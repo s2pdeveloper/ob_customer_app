@@ -110,86 +110,91 @@
 <ion-content>
   <ng-container *ngFor="let s of shopDetails">
     <ng-container class="container-img">
-      <img [src]="s?.bannerImages" />
-      <img class="logo-img" [src]="s?.image
-      " />
-    </ng-container>
-
-    <div>
-      <ion-text>
-        <h3 class="ion-text-capitalize ion-text-wrap center">
-          {{s?.firstName}} {{s?.lastName}}
-        </h3>
-      </ion-text>
-    </div>
-
-    <div>
-      <p>{{s?.schedule?.day}} :- {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
-        }} PM</p>
-    </div>
-
-    <ion-row>
-      <ion-col class="ion-text-center">
-        <a href="{{s?.links?.facebook}}">
-          <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-        </a>
-        <a href="{{s?.links?.insta}}">
-          <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
-        </a>
-        <a href="{{s?.links?.youtube}}">
-          <ion-icon name="logo-youtube" class="font yt"></ion-icon>
-        </a>
-      </ion-col>
-    </ion-row>
-
-    <ion-item>
-      <ion-icon name="card-sharp" color="dark"></ion-icon>
-      <ion-label class="ion-margin-start">
-        {{ 'shopName' | translate}}
-        <p>{{s?.shopName}}</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="mail" color="dark"></ion-icon>
-      <ion-label class="ion-margin-start">
-        {{ 'email' | translate}}
-        <p>{{s?.email}}</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="call" color="dark"></ion-icon>
-      <ion-label class="ion-margin-start">
-        {{ 'mobileNumber' | translate}}
-        <p>{{s?.mobile}}</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-accordion-group>
-      <ion-accordion value="third">
-        <ion-item slot="header" color="light">
-          <ion-icon name="location" color="dark"></ion-icon>
-          <ion-label class="ion-padding">Address</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">
-          <p>
-            {{s?.address?.line1}} {{s?.address?.city}}
-            {{s?.address?.state}} {{s?.address?.country}}
-            {{s?.address?.pinCode}}
-          </p>
+      <ion-card class="card">
+        <div class="img-box">
+          <img alt="Silhouette of mountains" [src]="s?.bannerImages" class="banner" /> 
         </div>
-      </ion-accordion>
-    </ion-accordion-group>
 
+        <ion-card-header>
+          <ion-card-title>{{s?.firstName}} {{s?.lastName}}</ion-card-title>
+          <ion-card-subtitle>{{s?.schedule?.day}} : {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
+            }} PM</ion-card-subtitle>
 
+          <div class="social-media">
+            <ul>
+              <li>
+                <a href="{{s?.links?.facebook}}">
+                  <i><img src="../../../assets/icon/facebook.png" class="facebook" alt="facebook img"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{s?.links?.insta}}">
+                  <i><img src="../../../assets/icon/instagram.png" class="instagram" alt="instagram img"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{s?.links?.youtube}}">
+                  <i><img src="../../../assets/icon/youtube.png" class="youtube" alt="youtube img"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ion-card-header>
 
-    <div class="ion-text-center ion-margin-vertical">
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
-        {{ 'View Product' | translate}}
-      </ion-button>
-    </div>
+        <ion-card-content>
+          <ion-card class="user-info">
+            <ion-item>
+              <i><img src="../../../assets/icon/shopping-cart.png" width="45px" alt="shopping-cart img"></i>
+              <ion-label class="ion-margin-start shop-name" >
+                {{ 'shopName' | translate}}
+                <p>{{s?.shopName}}</p>
+              </ion-label>
+            </ion-item>
 
+            <ion-item>
+              <i><img src="../../../assets/icon/message.png" width="45px" alt="message img"></i>
+              <ion-label class="ion-margin-start email">
+                {{ 'email' | translate}}
+                <p>{{s?.email}}</p>
+              </ion-label>
+            </ion-item>
+
+            <ion-item>
+              <i><img src="../../../assets/icon/phone-call.png" width="45px" alt="phone-call img"></i>
+              <ion-label class="ion-margin-start mobile-number">
+                {{ 'mobileNumber' | translate}}
+                <p>{{s?.mobile}}</p>
+              </ion-label>
+            </ion-item>
+
+            <ion-accordion-group>
+              <ion-accordion value="third">
+                <ion-item slot="header" color="light">
+                  <i><img src="../../../assets/icon/address.png" width="45px" alt="address img"></i>
+                  <ion-label class="ion-padding address">Address</ion-label>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  <p>
+                    {{s?.address?.line1}} {{s?.address?.city}}
+                    {{s?.address?.state}} {{s?.address?.country}}
+                    {{s?.address?.pinCode}}
+                  </p>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+            
+            <div class="ion-text-center ion-margin-vertical">
+              <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+                {{ 'View Product' | translate}}
+              </ion-button>
+            </div>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <div class="img-logo">
+        <img [src]="s?.image" />
+      </div>
+    </ng-container>
 
 
     <!-- <h3>SubCategory </h3>

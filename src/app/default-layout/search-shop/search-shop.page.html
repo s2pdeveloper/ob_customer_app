@@ -30,27 +30,25 @@
 
 
   <!-- <ion-card> -->
-    <ion-col *ngFor="let s of shopArr">
+    <ion-col *ngFor="let s of shopArr" class="shop-list">
       <ion-card (click)="navigateTo('/shop-detail',s._id)">
-        <ion-card-header>
           <ion-row>
-            <ion-col size="4">
-              <img src="{{s.image}} " width="100%" height="100%">
+            <ion-col size="5">
+              <img src="{{s.image}}" class="img">
             </ion-col>
-            <ion-col size="8">
-             <h6><b>{{s.shopName}}</b></h6> 
-              <h6>
+            <ion-col size="7" class="col-7">
+             <p class="shop-name"><b>{{s.shopName}}</b></p> 
+             <p>{{s.address.line1 }}, {{ s.address.city}}.</p>
+              <h5 class="star">
               <ion-icon name="star-outline"></ion-icon>
               <ion-icon name="star-outline"></ion-icon>
               <ion-icon name="star-outline"></ion-icon>
               <ion-icon name="star-outline"></ion-icon>
               <ion-icon name="star-outline"></ion-icon>
               <b style="margin-left: 7%;">4.5</b>
-              </h6>
-              <h6>{{s.address.line1 }}, {{ s.address.city}}.</h6>
+              </h5>
             </ion-col>
           </ion-row>
-        </ion-card-header>
       </ion-card>
     </ion-col>
   <!-- </ion-card> -->
