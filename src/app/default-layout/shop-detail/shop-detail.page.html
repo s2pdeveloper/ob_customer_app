@@ -116,7 +116,7 @@
         </div>
 
         <ion-card-header>
-          <ion-card-title>{{s?.firstName}} {{s?.lastName}}</ion-card-title>
+          <ion-card-title>{{s?.shopName}} </ion-card-title>
           <ion-card-subtitle>{{s?.schedule?.day}} : {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
             }} PM</ion-card-subtitle>
 
@@ -144,10 +144,10 @@
         <ion-card-content>
           <ion-card class="user-info">
             <ion-item>
-              <i><img src="../../../assets/icon/shopping-cart.png" width="45px" alt="shopping-cart img"></i>
+              <i><img src="../../../assets/images/placeholder_profile.png" width="45px" alt="shopping-cart img"></i>
               <ion-label class="ion-margin-start shop-name" >
-                {{ 'shopName' | translate}}
-                <p>{{s?.shopName}}</p>
+                {{ 'Shop Owner Name' | translate}}
+                <p> {{s?.firstName}} {{s?.lastName}}</p>
               </ion-label>
             </ion-item>
 

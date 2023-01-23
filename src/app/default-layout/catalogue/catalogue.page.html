@@ -9,16 +9,17 @@
 
 <ion-content>
 
+  
   <div>
-    <ion-slides autoplay="true">
+    <ion-slides>
       <ion-slide>
-        <ion-card *ngFor="let item of subCategoryArr;let i=index">
+        <div *ngFor="let item of subCategoryArr;let i=index">
           <ion-item [ngClass]="item.isActive ? 'subCategoryActive':null"
             (click)="getCatalogueBySubCategoryId(item._id,i)">
             <img class="subCatImage" src="{{item.image}} ">
             <ion-note class="sub-heading">{{item.name}}</ion-note>
           </ion-item>
-        </ion-card>
+        </div>
       </ion-slide>
     </ion-slides>
   </div>
@@ -60,27 +61,6 @@
                   </ion-row>
                 </ion-grid>
               </ion-card>
-
-
-
-
-              <!-- <ion-thumbnail slot="start">
-                <img src="{{c.image}}" />
-              </ion-thumbnail>
-
-              <ion-label>
-                <h2>
-                  {{c.title}}<span style="float: right">&#8377; {{c.price}}</span>
-                </h2>
-                <p>{{c.description}}</p>
-                <h3 style="color: rgb(83, 7, 153)">
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                </h3>
-              </ion-label> -->
             </ion-item>
           </ion-list>
         </ion-col>

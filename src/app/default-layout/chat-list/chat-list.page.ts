@@ -24,7 +24,6 @@ export class ChatListPage implements OnInit {
   shopConversationList: any = [];
   start: number = 0;
   limit: number = 20;
-  searchText: string;
   user: any;
 
   constructor(
@@ -38,12 +37,15 @@ export class ChatListPage implements OnInit {
 
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
-    this.getAllShop();
+    this.getAllShopList(false);
   }
 
-  getAllShop() {
+  getAllShopList(isFirstLoad: boolean, event?: any) {
     this.spinner.showLoader();
-    this.chatService.getChatShopByCustomerId().subscribe((success) => {
+    let obj = {
+      search: this.search,
+    };
+    this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
       // this.conversationList = success.rows;
       this.shopConversationList = success.data;
       this.spinner.hideLoader();
@@ -77,14 +79,14 @@ export class ChatListPage implements OnInit {
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.start = 0;
-    // this.getAllCustomer(false, "");
+    this.getAllShopList(false, "");
     event.target.complete();
   }
 
   doInfinite(event) {
     console.log('In do');
     this.page++;
-    // this.getAllCustomer(true, event);
+    this.getAllShopList(true, event);
     event.target.disabled = true;
     this.infiniteScroll.disabled = true;
     event.target.complete();
@@ -93,7 +95,7 @@ export class ChatListPage implements OnInit {
   onSearch() {
     this.shopConversationList = [];
     this.start = 0;
-    // this.getAllCustomer(false, "");
+    this.getAllShopList(false, '');
   }
 
 }

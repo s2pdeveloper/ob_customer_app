@@ -21,8 +21,8 @@ export class ChatService {
     return this.http.get(this.routes.getMsgByCustomerId(_id));
   }
 // shop list
-  getChatShopByCustomerId() {
-    return this.http.get(this.routes.getChatShopByCustomerId);
+  getChatShopByCustomerId(obj) {
+    return this.http.get(this.routes.getChatShopByCustomerId,obj);
   }
  
 }

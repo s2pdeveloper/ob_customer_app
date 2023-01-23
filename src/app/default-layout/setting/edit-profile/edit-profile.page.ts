@@ -71,7 +71,6 @@ export class EditProfilePage implements OnInit {
 
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
-    console.log("this.user", this.user);
     this.getById();
   }
 

@@ -24,7 +24,7 @@
   </ion-refresher>
 
   <ion-searchbar class="search-box" inputmode="search" searchIcon animated type="text" showCancelButton="never"
-    autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()" placeholder="{{ 'search'}}">
+    autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()" placeholder="{{ 'search'}}">
   </ion-searchbar>
 
   <ng-container>
@@ -33,7 +33,7 @@
       <ion-card-content (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
           <div class="main">
             <div class="img-box">
-              <img class="img-icon" [src]="item?.image || 'assets/image/placeholder_profile.png'" alt="" />
+              <img class="img-icon" [src]="item?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
             </div>
             <ion-label class="ion-text-wrap">
               <ion-text class="ion-text-wrap">
@@ -43,7 +43,7 @@
               </ion-text>
             </ion-label>
 
-            <ion-icon name="chevron-forward-outline" class="next-icon" slot="end"></ion-icon>
+            <!-- <ion-icon name="chevron-forward-outline" class="next-icon" slot="end"></ion-icon> -->
           </div>
        
 
@@ -54,9 +54,6 @@
 
       </ion-card-content>
     </ion-card>
-
-
-
-  </ng-container>
+ </ng-container>
 
 </ion-content>
