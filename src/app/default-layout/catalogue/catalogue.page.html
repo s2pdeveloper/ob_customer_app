@@ -11,14 +11,16 @@
 
   <div>
     <ion-slides autoplay="true">
-      <ion-slide>
-        <ion-card *ngFor="let item of subCategoryArr;let i=index">
-          <ion-item [ngClass]="item.isActive ? 'subCategoryActive':null"
-            (click)="getCatalogueBySubCategoryId(item._id,i)">
-            <img class="subCatImage" src="{{item.image}} ">
-            <ion-note class="sub-heading">{{item.name}}</ion-note>
-          </ion-item>
-        </ion-card>
+      <ion-slide *ngFor="let item of subCategoryArr;let i=index">
+        <div class="card">
+          <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
+            <div class="img-box">
+              <img [src]="item.image" />
+              <!-- <img class="subCatImage" src="{{item.image}} "> -->
+            </div>
+            <div class="sub-heading">{{item.name}}</div>
+          </div>
+        </div>
       </ion-slide>
     </ion-slides>
   </div>
@@ -35,7 +37,7 @@
                   <ion-row>
                     <ion-col size="5">
                       <ion-thumbnail>
-                        <img src="{{c.image}}" class="img-fluid"/>
+                        <img src="{{c.image}}" class="img-fluid" />
                       </ion-thumbnail>
                     </ion-col>
                     <ion-col size="7">
