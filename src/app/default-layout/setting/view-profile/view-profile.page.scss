@@ -8,3 +8,16 @@
 .center{
     text-align: center;
 }
+
+
+.user-info {
+    .shop-name, .email, .mobile-number, .address {
+        --color: #0D276B;
+        color: #0D276B;
+        font-weight: bold;
+        
+        // p{
+        //     color: #0D276B
+        // }
+    }
+}

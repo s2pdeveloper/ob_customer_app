@@ -12,14 +12,14 @@
   
   <div>
     <ion-slides autoplay="true">
-      <ion-slide *ngFor="let item of subCategoryArr;let i=index">
-        <div class="card">
+      <ion-slide >
+        <div class="card" *ngFor="let item of subCategoryArr;let i=index">
           <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
             <div class="img-box">
               <img [src]="item.image" />
               <!-- <img class="subCatImage" src="{{item.image}} "> -->
             </div>
-            <div class="sub-heading">{{item.name}}</div>
+            <div class="sub-heading ion-text-capitalize">{{item.name}}</div>
           </div>
         </div>
       </ion-slide>
@@ -43,7 +43,7 @@
                     </ion-col>
                     <ion-col size="7">
                       <ion-label>
-                        <p class="title">
+                        <p class="title ion-text-capitalize">
                           {{c.title}}
                         </p>
                         <p class="discription">{{c.description}}</p>

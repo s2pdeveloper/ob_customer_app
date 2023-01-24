@@ -24,6 +24,8 @@ export class CataloguePage implements OnInit {
   selectAll: boolean;
   subCategoryArr: any;
 
+
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
