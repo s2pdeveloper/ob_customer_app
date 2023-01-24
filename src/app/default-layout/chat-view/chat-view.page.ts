@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  OnChanges,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
@@ -13,7 +19,7 @@ import { UploadService } from 'src/app/service/upload/upload.service';
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, OnDestroy {
+export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -32,7 +38,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
   roomName: any;
   userId: any;
   fileUploaded: boolean = false;
-  filePath: string = "";
+  filePath: string = '';
+  data: any = {};
 
   constructor(
     private router: Router,
@@ -44,7 +51,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     private localStorage: StorageService,
     private uploadService: UploadService,
     private socket: Socket
-  ) { }
+  ) {}
 
   chatForm = new FormGroup({
     _id: new FormControl(),
@@ -56,6 +63,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
     image: new FormControl(''),
   });
 
+
+
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -66,6 +75,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
           message: params.msg,
           roomName: params.shopId + this.user._id,
         };
+        this.data = message;
 
         this.chatService.create(message).subscribe((success) => {
           this.getMsgByCustomerId(false);
@@ -85,47 +95,112 @@ export class ChatViewPage implements OnInit, OnDestroy {
       }
     });
 
+    this.socket.connect();
+    console.log('this.socket.connect()', this.socket.connect());
+
+    this.socket.on('connect', function () {
+      console.log('connect customer');
+
+      // Connected, let's sign-up for to receive messages for this room
+    });
+    this.socket.emit('room', this.data);
+
     // socket
-    this.socket.on(
-      'latest-data',
+    this.socket.on('latest',
       function (data: any) {
         console.log(data);
-        console.log('latest-data called in customerApp');
+        console.log('latest-data called in shopApp@@@@');
         this.getMsgByCustomerId(false);
       }.bind(this)
     );
-    this.socket.fromEvent('latest-data').subscribe(data=>{
-      console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+
+    this.socket.fromEvent('latest').subscribe(message => {
+      // this.messages.push(message);
+      console.log("qqqqqqqqqqqqqqqqqq");
       
-    });
-  
+      this.getMsgByCustomerId(false);
+
+    },err=>{
+      console.log("err",err);
+      
+    }
+    );
+
+    // this.socket.fromEvent('latest-data').subscribe(data=>{
+    //   console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+
+    // });
+  }
+  ngOnChanges(): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.socket.on(
+      'latest',
+      function (data: any) {
+        console.log(data);
+        console.log('latest-data called in customerApp----------------');
+        this.getMsgByCustomerId(false);
+      }.bind(this)
+    );
+
+    this.socket.fromEvent('latest').subscribe(message => {
+      // this.messages.push(message);
+      console.log("qqqqqqqqqqqqqqqqqq");
+      
+      this.getMsgByCustomerId(false);
+
+    },err=>{
+      console.log("err",err);
+      
+    }
+    );
   }
 
   ionViewWillEnter() {
-      // socket
-      this.socket.on(
-        'latest-data',
-        function (data: any) {
-          console.log(data);
-          console.log('latest-data called in customerApp');
-          this.getMsgByCustomerId(false);
-        }.bind(this)
-      );
-      this.socket.fromEvent('latest-data').subscribe(data=>{
-        console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
-        
-      });
+    // socket
+    // this.socket.on(
+    //   'latest-data',
+    //   function (data: any) {
+    //     console.log(data);
+    //     console.log('latest-data called in customerApp');
+    //     this.getMsgByCustomerId(false);
+    //   }.bind(this)
+    // );
+    // this.socket.fromEvent('latest-data').subscribe(data=>{
+    //   console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
 
+    // });
+    this.socket.on(
+      'latest',
+      function (data: any) {
+        console.log(data);
+        console.log('latest-data called in shopApp@@@@');
+        this.getMsgByCustomerId(false);
+      }.bind(this)
+    );
+
+    this.socket.fromEvent('latest').subscribe(message => {
+      // this.messages.push(message);
+      console.log("qqqqqqqqqqqqqqqqqq");
+      
+      this.getMsgByCustomerId(false);
+
+    },err=>{
+      console.log("err",err);
+      
+    }
+    );
   }
 
   ngOnDestroy(): void {
     console.log('destroy');
-    this.socket.removeListener('latest-data');
+    // this.socket.removeListener('latest-data');
+    this.socket.disconnect();
   }
 
   sendMessage() {
-    if (this.user.role=="CUSTOMER") {
-      this.roomName = this.shopId + this.user._id; 
+    if (this.user.role == 'CUSTOMER') {
+      this.roomName = this.shopId + this.user._id;
     }
     // this.roomName = this.shopId + this.user._id;
     this.chatForm.controls.roomName.setValue(this.roomName);
@@ -137,8 +212,9 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
         // emit
         this.socket.emit('latestdata', {
-          room: this.roomName,
+          roomName: this.roomName,
           userId: this.user._id,
+          data: this.chatForm.value,
         });
         this.chatForm.reset();
         this.spinner.hideLoader();
@@ -151,42 +227,40 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.roomName = this.shopId + this.user._id; 
-    
+    this.roomName = this.shopId + this.user._id;
+
     this.spinner.showLoader();
     this.chatService
       .getMsgByCustomerId(this.roomName)
       .subscribe((success: any) => {
-        console.log("success",success);
-        
+        console.log('success', success);
+
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });
   }
 
-
   async uploadFileAWS($event) {
-    console.log("upload call");
-    
+    console.log('upload call');
+
     let file = $event.target.files[0];
     await this.spinner.showLoader();
     let formData = new FormData();
     formData.append('file', file);
-    this.uploadService.uploadFile(formData)
-      .subscribe(
-        async (data: any) => {
-          this.filePath = data?.result?.url;
-          this.chatForm.controls.image.setValue(this.filePath);
-          this.fileUploaded = true;
-          await this.spinner.hideLoader();
-          this.sendMessage();
-        },
-      
-        async (error: any) => {
-          await this.spinner.hideLoader();
-          this.toaster.errorToast(error);
-        }
-      );
+    this.uploadService.uploadFile(formData).subscribe(
+      async (data: any) => {
+        this.filePath = data?.result?.url;
+        this.chatForm.controls.image.setValue(this.filePath);
+        this.fileUploaded = true;
+        await this.spinner.hideLoader();
+        this.sendMessage();
+      },
+
+      async (error: any) => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      }
+    );
   }
 
   doInfinite(event) {

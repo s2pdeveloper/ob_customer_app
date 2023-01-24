@@ -48,7 +48,6 @@ export class CataloguePage implements OnInit {
     this.shopService
       .getCatalogueBySubCategoryId(_id)
       .subscribe((success: any) => {
-        console.log('success catalogue----', success);
         this.catalogueArr = success.payload.rows.map((x) => {
           x.isChecked = false;
           return x;
@@ -66,15 +65,9 @@ export class CataloguePage implements OnInit {
       });
   }
 
-
-
-
   getShopById(_id) {
     this.shopService.getByIdShop(_id).subscribe((success: any) => {
-      console.log('success shop by id@@@@@@@@', success);
-      // this.subCategoryArr = success.data;
-
-      this.subCategoryArr = success.data.map((y, i) => {
+     this.subCategoryArr = success.data.map((y, i) => {
         y.isActive = false;
         if (i == 0) {
           y.isActive = true;
@@ -82,7 +75,6 @@ export class CataloguePage implements OnInit {
         }
         return y;
       })
-      console.log("this.subCategoryArr88888888888888888", this.subCategoryArr);
     });
   }
 

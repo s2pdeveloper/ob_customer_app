@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
+import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
+  
   businessTypeId: any;
   user: any;
   businessArr: any = [];
@@ -19,6 +21,8 @@ export class LandingPagePage implements OnInit {
   search: string = '';
   selectedBusinessName: any;
   selectedBusinessId: any;
+  offerArr: any;
+
 
   constructor(
     private router: Router,
@@ -26,11 +30,12 @@ export class LandingPagePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
-    private shopService: ShopService
+    private offerService:OfferService
   ) { }
 
   ngOnInit() { }
   ionViewWillEnter() {
+    this.getAllOffer()
     this.getAllBusinessType();
   }
 
@@ -92,4 +97,17 @@ export class LandingPagePage implements OnInit {
     };
     this.router.navigate(['/search-shop'], { queryParams: params });
   }
+
+  navigateToProfilePage(){
+    this.router.navigate(['/view-profile'])
+  }
+
+
+  getAllOffer() {
+    let obj = { };
+    this.offerService.getAll(obj).subscribe((success) => {
+      this.offerArr=success.rows
+   });
+  }
+
 }

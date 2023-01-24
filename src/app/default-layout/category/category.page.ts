@@ -33,7 +33,6 @@ export class CategoryPage implements OnInit {
     }
     this.categoryService.getAll(obj).subscribe((success) => {
       this.categoryDetails = success.rows;
-      console.log("   this.categoryDetails@@@@@@@@@@@@@@@@@",   this.categoryDetails);
       
     });
   }
