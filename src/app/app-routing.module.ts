@@ -167,7 +167,11 @@ const routes: Routes = [
   {
     path: 'chat-view',
     loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+  },  {
+    path: 'map',
+    loadChildren: () => import('./default-layout/map/map.module').then( m => m.MapPageModule)
   },
+
  
 
 

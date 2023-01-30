@@ -69,7 +69,7 @@ export class CataloguePage implements OnInit {
 
   getShopById(_id) {
     this.shopService.getByIdShop(_id).subscribe((success: any) => {
-     this.subCategoryArr = success.data.map((y, i) => {
+      this.subCategoryArr = success.data.map((y, i) => {
         y.isActive = false;
         if (i == 0) {
           y.isActive = true;
@@ -88,21 +88,33 @@ export class CataloguePage implements OnInit {
       this.toaster.errorToast('Plz select at least one product');
       return;
     }
+
+    let amount = 0;
+    let description = '';
     msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
     for (let i = 0; i < arr.length; i++) {
       const catTitle = arr[i].title;
+      const catPrice = arr[i].price;
       msg += `${catTitle}`;
       if (i != arr.length - 1) {
         msg += `,`;
       }
+      description += `${catTitle}`;
+      if (i != arr.length - 1) {
+        description += `,`;
+      }
+      amount += catPrice;
     }
+
     // join 
-    let customerIdShopId = this.user._id + arr[0].shopId._id;
+    let customerIdShopId = this.user._id + arr[0].shopId._id + new Date().toISOString().split("T")[0];
     this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
 
     this.router.navigate(['/chat-view'], {
       queryParams: {
         msg: msg,
+        description: description,
+        amount: amount,
         shopId: arr[0].shopId._id,
         shopName: arr[0].shopId.shopName,
         roomName: customerIdShopId        //join

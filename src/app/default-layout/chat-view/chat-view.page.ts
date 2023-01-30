@@ -14,6 +14,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
@@ -50,6 +52,7 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     private spinner: LoaderService,
     private localStorage: StorageService,
     private uploadService: UploadService,
+    private alertCtrl: AlertController,
     private socket: Socket
   ) {}
 
@@ -63,34 +66,41 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     image: new FormControl(''),
   });
 
-
-
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
+      if (params.shopId) {
+        this.shopId = params.shopId;
+      }
       if (params.shopName) this.shopName = params.shopName;
-      if (params.roomName && params.msg) {
+      if (
+        params.roomName &&
+        params.msg &&
+        params.description &&
+        params.amount
+      ) {
         let message = {
-          shopId: params.shopId,
+          shopId: this.shopId,
           message: params.msg,
-          roomName: params.shopId + this.user._id,
+          description: params.description,
+          amount: params.amount,
+          roomName:
+            this.shopId +
+            this.user._id +
+            new Date().toISOString().split('T')[0],
         };
         this.data = message;
-
         this.chatService.create(message).subscribe((success) => {
           this.getMsgByCustomerId(false);
           this.router.navigate(['/chat-view'], {
             queryParams: {
-              shopId: params.shopId,
+              shopId: this.shopId,
             },
           });
           this.chatForm.reset();
           this.spinner.hideLoader();
         });
       } else {
-        if (params.shopId) {
-          this.shopId = params.shopId;
-        }
         this.getMsgByCustomerId(false);
       }
     });
@@ -106,7 +116,8 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     this.socket.emit('room', this.data);
 
     // socket
-    this.socket.on('latest',
+    this.socket.on(
+      'latest',
       function (data: any) {
         console.log(data);
         console.log('latest-data called in shopApp@@@@');
@@ -114,16 +125,16 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
       }.bind(this)
     );
 
-    this.socket.fromEvent('latest').subscribe(message => {
-      // this.messages.push(message);
-      console.log("qqqqqqqqqqqqqqqqqq");
-      
-      this.getMsgByCustomerId(false);
+    this.socket.fromEvent('latest').subscribe(
+      (message) => {
+        // this.messages.push(message);
+        console.log('qqqqqqqqqqqqqqqqqq');
 
-    },err=>{
-      console.log("err",err);
-      
-    }
+        this.getMsgByCustomerId(false);
+      },
+      (err) => {
+        console.log('err', err);
+      }
     );
 
     // this.socket.fromEvent('latest-data').subscribe(data=>{
@@ -143,16 +154,16 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
       }.bind(this)
     );
 
-    this.socket.fromEvent('latest').subscribe(message => {
-      // this.messages.push(message);
-      console.log("qqqqqqqqqqqqqqqqqq");
-      
-      this.getMsgByCustomerId(false);
+    this.socket.fromEvent('latest').subscribe(
+      (message) => {
+        // this.messages.push(message);
+        console.log('qqqqqqqqqqqqqqqqqq');
 
-    },err=>{
-      console.log("err",err);
-      
-    }
+        this.getMsgByCustomerId(false);
+      },
+      (err) => {
+        console.log('err', err);
+      }
     );
   }
 
@@ -179,16 +190,16 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
       }.bind(this)
     );
 
-    this.socket.fromEvent('latest').subscribe(message => {
-      // this.messages.push(message);
-      console.log("qqqqqqqqqqqqqqqqqq");
-      
-      this.getMsgByCustomerId(false);
+    this.socket.fromEvent('latest').subscribe(
+      (message) => {
+        // this.messages.push(message);
+        console.log('qqqqqqqqqqqqqqqqqq');
 
-    },err=>{
-      console.log("err",err);
-      
-    }
+        this.getMsgByCustomerId(false);
+      },
+      (err) => {
+        console.log('err', err);
+      }
     );
   }
 
@@ -200,7 +211,8 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
 
   sendMessage() {
     if (this.user.role == 'CUSTOMER') {
-      this.roomName = this.shopId + this.user._id;
+      this.roomName =
+        this.shopId + this.user._id + new Date().toISOString().split('T')[0];
     }
     // this.roomName = this.shopId + this.user._id;
     this.chatForm.controls.roomName.setValue(this.roomName);
@@ -269,5 +281,33 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     event.target.disabled = true;
     this.infiniteScroll.disabled = true;
     event.target.complete();
+  }
+
+  async addOrder(item: any, event: Event) {
+    if (event) {
+      event.stopPropagation();
+    }
+    const alert = await this.alertCtrl.create({
+      header: 'Confirm Order',
+      message: '',
+      subHeader: '',
+      cssClass: 'alert-warning',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            console.log('Ok clicked');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

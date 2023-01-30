@@ -9,6 +9,9 @@ import { CoreModule } from './core/core.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+// map
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 // qr code
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
@@ -44,6 +47,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     FileOpener,
     BarcodeScanner,
+    Geolocation,
+    NativeGeocoder
   ],
   bootstrap: [AppComponent],
 })
