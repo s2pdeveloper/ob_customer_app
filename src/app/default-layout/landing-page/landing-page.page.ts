@@ -102,12 +102,16 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/view-profile'])
   }
 
+  navigateToMap(){
+    this.router.navigate(['/map'])
 
+  }
   getAllOffer() {
     let obj = { };
     this.offerService.getAll(obj).subscribe((success) => {
       this.offerArr=success.rows
    });
   }
+
 
 }
