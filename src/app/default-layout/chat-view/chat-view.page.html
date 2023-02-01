@@ -37,8 +37,11 @@
             <div class="msg-info">
               <p>{{message?.createdAt | date:'shortTime'}}</p>
             </div>
-            <div class="msg-content">
+            <div class="msg-content ion-text-wrap">
               <p>{{message.message}}</p>
+            </div>
+            <div>
+              <!-- <img src="{{message.image}}" alt="" width="60%" height="60%"> -->
             </div>
           </div>
           <div *ngIf="message.userIsSender" class="msg-status">

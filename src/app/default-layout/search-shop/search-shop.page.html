@@ -15,19 +15,9 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar
-        class="search-box ion-no-padding size"
-        inputmode="search"
-        searchIcon
-        animated
-        type="text"
-        showCancelButton="never"
-        placeholder="{{ 'Search Shop' | translate}}"
-        autocomplete="on"
-        autocorrect="on"
-        [(ngModel)]="search"
-        (ionChange)="onSearch()"
-      >
+      <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
+        showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
+        [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
 
@@ -63,35 +53,26 @@
     <ion-row>
       <ion-col size="12">
         <ion-list appAnimateItems className="fadeInLeft">
-          <ion-item
-            lines="full"
-            *ngFor="let s of shopArr"
-            (click)="navigateTo('/shop-detail',s._id)"
-            class="animation-normal opacity-0 ion-no-padding"
-          >
+          <ion-item lines="full" *ngFor="let s of shopArr" (click)="navigateTo('/shop-detail',s._id)"
+            class="animation-normal  ion-no-padding">
             <ion-thumbnail slot="start">
               <img [src]="s.image" />
             </ion-thumbnail>
             <div class="">
-              <ion-title class="shop-name ion-no-padding" color="primary"
-                >{{s.shopName}}</ion-title
-              >
-              <ion-label class="shop-name"
-                >{{s.firstName}} {{s.lastName}}</ion-label
-              >
+              <ion-title class="shop-name ion-no-padding" color="primary">{{s.shopName}}</ion-title>
+              <ion-label class="shop-name">{{s.firstName}} {{s.lastName}}</ion-label>
               <ion-label color="medium" class="star">
-                <!-- <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
                   <ion-icon name="star-outline"></ion-icon>
                   <ion-icon name="star-outline"></ion-icon>
                   <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon> -->
-                Rating <b class="ion-margin-left">4.5</b>
+                  <ion-icon name="star-outline"></ion-icon>
+                <!-- Rating <b class="ion-margin-left">4.5</b> -->
               </ion-label>
               <ion-note>
                 {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
                 s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode
-                : "" }}.</ion-note
-              >
+                : "" }}.</ion-note>
             </div>
           </ion-item>
         </ion-list>

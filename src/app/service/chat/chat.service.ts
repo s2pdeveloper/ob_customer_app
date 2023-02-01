@@ -7,7 +7,8 @@ export class ChatService {
   routes: any = {
     createPath: `chat/create`,
     getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
-    getChatShopByCustomerId: `chat/getChatShopByCustomerId`,
+    // getChatShopByCustomerId: `chat/getChatShopByCustomerId`,
+    getChatShopByOrderId: `order/getChatShopByOrderId`,
 
   };
 
@@ -22,7 +23,7 @@ export class ChatService {
   }
 // shop list
   getChatShopByCustomerId(obj) {
-    return this.http.get(this.routes.getChatShopByCustomerId,obj);
+    return this.http.get(this.routes.getChatShopByOrderId,obj);
   }
  
 }

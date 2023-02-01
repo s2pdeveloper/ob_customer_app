@@ -31,9 +31,10 @@ ion-content {
 
     .star {
       position: absolute;
-      top: 79px;
+      top: 85px;
       left: 79px;
       white-space: nowrap;
+      color: gold;
 
       ion-icon {
         margin-right: 1px;
@@ -57,11 +58,12 @@ ion-list {
   ion-item {
     margin-bottom: 1rem !important;
     box-shadow: rgba(242, 121, 121, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 10px !important;
   }
   ion-thumbnail {
     margin: 0.5rem 1rem .5rem .5rem !important;
-    height: 5rem;
-    width: 5rem;
+    height: 6rem;
+    width: 6rem;
     img {
       border-radius: 10%;
     }

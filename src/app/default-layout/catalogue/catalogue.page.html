@@ -8,28 +8,40 @@
 </ion-header>
 
 <ion-content>
+  <!-- <ion-item lines="none">
+    <ion-title class="ion-no-padding " color="primary"> Sub Category</ion-title>
+  </ion-item> -->
+  <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
+    <ion-slide *ngFor="let item of subCategoryArr;let i=index">
+      <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
+        <img class="img-box" src="{{item.image}} "><br />
+        <ion-note class="sub-heading ion-text-capitalize">{{item.name}}</ion-note>
+      </div>
+    </ion-slide>
+  </ion-slides>
 
-  
-  <div>
+
+
+
+  <!-- <div>
     <ion-slides autoplay="true">
       <ion-slide >
         <div class="card" *ngFor="let item of subCategoryArr;let i=index">
           <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
             <div class="img-box">
               <img [src]="item.image" />
-              <!-- <img class="subCatImage" src="{{item.image}} "> -->
             </div>
             <div class="sub-heading ion-text-capitalize">{{item.name}}</div>
           </div>
         </div>
       </ion-slide>
     </ion-slides>
-  </div>
+  </div> -->
 
   <div class="container">
     <ion-grid>
-      <ion-row>
-        <ion-col *ngFor=" let c of catalogueArr">
+      <ion-row appAnimateItems className="bounceIn">
+        <ion-col *ngFor=" let c of catalogueArr" class="animation-normal">
           <ion-list lines="none">
             <ion-item class="ion-no-padding">
               <ion-checkbox slot="start" [(ngModel)]="c.isChecked"></ion-checkbox>
@@ -47,13 +59,13 @@
                           {{c.title}}
                         </p>
                         <p class="discription">{{c.description}}</p>
-                        <h5 style="color: #010F84">
+                        <!-- <h5 style="color: #010F84">
                           <ion-icon name="star-outline"></ion-icon>
                           <ion-icon name="star-outline"></ion-icon>
                           <ion-icon name="star-outline"></ion-icon>
                           <ion-icon name="star-outline"></ion-icon>
                           <ion-icon name="star-outline"></ion-icon>
-                        </h5>
+                        </h5> -->
                         <div>
                           <span class="amount">&#8377; {{c.price}}</span>
                         </div>

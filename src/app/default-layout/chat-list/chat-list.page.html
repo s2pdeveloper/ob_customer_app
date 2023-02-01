@@ -33,12 +33,12 @@
       <ion-card-content (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
         <div class="main">
           <div class="img-box">
-            <img class="img-icon" [src]="item?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
+            <img class="img-icon" [src]="item?.shopId?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
           </div>
           <ion-label class="ion-text-wrap">
             <ion-text class="ion-text-wrap">
               <h2 class="ion-text-wrap ion-text-capitalize shop-name">
-                {{item?.shopName}}
+                {{item?.shopId?.shopName}}
               </h2>
             </ion-text>
           </ion-label>

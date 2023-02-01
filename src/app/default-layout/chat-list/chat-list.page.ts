@@ -46,7 +46,7 @@ export class ChatListPage implements OnInit {
       search: this.search,
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
-      this.shopConversationList = success.data;
+      this.shopConversationList = success.rows;
       this.spinner.hideLoader();
     });
   }
@@ -64,7 +64,7 @@ export class ChatListPage implements OnInit {
       {
         queryParams: {
           shopId: item._id,
-          shopName: item.shopName,
+          shopName: item.shopId?.shopName,
           roomName: customerIdShopId
         },
       });

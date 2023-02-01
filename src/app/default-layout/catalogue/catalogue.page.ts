@@ -20,10 +20,22 @@ export class CataloguePage implements OnInit {
   pageSize: number = 10;
   search = '';
   shopDetails: any;
-  catalogue: any;
-  catalogueArr: any;
+  catalogueArr: any=[];
   selectAll: boolean;
-  subCategoryArr: any;
+  subCategoryArr: any=[];
+
+
+  buttonSlide = {
+    slidesPerView: 4,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 3,
+  };
 
   constructor(
     private router: Router,
@@ -36,12 +48,15 @@ export class CataloguePage implements OnInit {
     private chatService: ChatService
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.getShopById(params._id);
     });
   }
+  
 
   getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
@@ -95,7 +110,7 @@ export class CataloguePage implements OnInit {
       const catPrice = arr[i].price;
       msg += `${catTitle}`;
       if (i != arr.length - 1) {
-        msg += `,`;
+        msg += ` , `;
       }
       description += `${catTitle}`;
       if (i != arr.length - 1) {

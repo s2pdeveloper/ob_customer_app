@@ -20,11 +20,12 @@ export class CategoryPage implements OnInit {
   ) { }
 
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
     this.actRoute.queryParams.subscribe(params => {
       this.getByBusinessTypeCategory(params.businessTypeId)
     })
-
   }
 
   getByBusinessTypeCategory(businessTypeId) {

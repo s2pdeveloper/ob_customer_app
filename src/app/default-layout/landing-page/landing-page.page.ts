@@ -41,7 +41,7 @@ export class LandingPagePage implements OnInit {
     autoplay: {
       delay: 5000,
     },
-    spaceBetween: 30,
+    spaceBetween: 25,
   };
 
   constructor(

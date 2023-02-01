@@ -3,7 +3,6 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
-  OnChanges,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,7 +20,7 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
+export class ChatViewPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -57,8 +56,8 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
 
   chatForm = new FormGroup({
     _id: new FormControl(),
-    shopId: new FormControl(),
-    customerId: new FormControl(),
+    // shopId: new FormControl(),
+    // customerId: new FormControl(),
     roomName: new FormControl(''),
     message: new FormControl(''),
     createdBy: new FormControl(),
@@ -66,31 +65,6 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
   });
 
   ngOnInit() {}
-  ngOnChanges(): void {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    this.socket.on(
-      'latest',
-      function (data: any) {
-        console.log(data);
-        console.log('latest-data called in customerApp----------------');
-        this.getMsgByCustomerId(false);
-      }.bind(this)
-    );
-
-    this.socket.fromEvent('latest').subscribe(
-      (message) => {
-        // this.messages.push(message);
-        console.log('qqqqqqqqqqqqqqqqqq');
-
-        this.getMsgByCustomerId(false);
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
-  }
-
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -126,7 +100,7 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     }
     // this.roomName = this.shopId + this.user._id;
     this.chatForm.controls.roomName.setValue(this.roomName);
-    this.chatForm.controls.shopId.setValue(this.shopId);
+    // this.chatForm.controls.shopId.setValue(this.shopId);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
         console.log('success', success);
