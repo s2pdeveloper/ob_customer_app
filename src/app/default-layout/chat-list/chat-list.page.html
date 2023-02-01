@@ -31,21 +31,19 @@
     <ion-card class="card">
       <!-- conversation -->
       <ion-card-content (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
-          <div class="main">
-            <div class="img-box">
-              <img class="img-icon" [src]="item?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
-            </div>
-            <ion-label class="ion-text-wrap">
-              <ion-text class="ion-text-wrap">
-                <h2 class="ion-text-wrap ion-text-capitalize shop-name">
-                  {{item?.shopName}}
-                </h2>
-              </ion-text>
-            </ion-label>
-
-            <!-- <ion-icon name="chevron-forward-outline" class="next-icon" slot="end"></ion-icon> -->
+        <div class="main">
+          <div class="img-box">
+            <img class="img-icon" [src]="item?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
           </div>
-       
+          <ion-label class="ion-text-wrap">
+            <ion-text class="ion-text-wrap">
+              <h2 class="ion-text-wrap ion-text-capitalize shop-name">
+                {{item?.shopName}}
+              </h2>
+            </ion-text>
+          </ion-label>
+        </div>
+
 
         <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
           <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
@@ -54,6 +52,13 @@
 
       </ion-card-content>
     </ion-card>
- </ng-container>
+
+
+
+
+
+
+
+  </ng-container>
 
 </ion-content>

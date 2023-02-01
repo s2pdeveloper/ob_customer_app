@@ -36,7 +36,6 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
   customerId: any;
   message: string;
   shopName: any;
-  room: any;
   roomName: any;
   userId: any;
   fileUploaded: boolean = false;
@@ -66,82 +65,7 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
     image: new FormControl(''),
   });
 
-  ngOnInit() {
-    this.user = this.localStorage.get('OBCustomer');
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (params.shopId) {
-        this.shopId = params.shopId;
-      }
-      if (params.shopName) this.shopName = params.shopName;
-      if (
-        params.roomName &&
-        params.msg &&
-        params.description &&
-        params.amount
-      ) {
-        let message = {
-          shopId: this.shopId,
-          message: params.msg,
-          description: params.description,
-          amount: params.amount,
-          roomName:
-            this.shopId +
-            this.user._id +
-            new Date().toISOString().split('T')[0],
-        };
-        this.data = message;
-        this.chatService.create(message).subscribe((success) => {
-          this.getMsgByCustomerId(false);
-          this.router.navigate(['/chat-view'], {
-            queryParams: {
-              shopId: this.shopId,
-            },
-          });
-          this.chatForm.reset();
-          this.spinner.hideLoader();
-        });
-      } else {
-        this.getMsgByCustomerId(false);
-      }
-    });
-
-    this.socket.connect();
-    console.log('this.socket.connect()', this.socket.connect());
-
-    this.socket.on('connect', function () {
-      console.log('connect customer');
-
-      // Connected, let's sign-up for to receive messages for this room
-    });
-    this.socket.emit('room', this.data);
-
-    // socket
-    this.socket.on(
-      'latest',
-      function (data: any) {
-        console.log(data);
-        console.log('latest-data called in shopApp@@@@');
-        this.getMsgByCustomerId(false);
-      }.bind(this)
-    );
-
-    this.socket.fromEvent('latest').subscribe(
-      (message) => {
-        // this.messages.push(message);
-        console.log('qqqqqqqqqqqqqqqqqq');
-
-        this.getMsgByCustomerId(false);
-      },
-      (err) => {
-        console.log('err', err);
-      }
-    );
-
-    // this.socket.fromEvent('latest-data').subscribe(data=>{
-    //   console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
-
-    // });
-  }
+  ngOnInit() {}
   ngOnChanges(): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
@@ -168,19 +92,17 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
   }
 
   ionViewWillEnter() {
-    // socket
-    // this.socket.on(
-    //   'latest-data',
-    //   function (data: any) {
-    //     console.log(data);
-    //     console.log('latest-data called in customerApp');
-    //     this.getMsgByCustomerId(false);
-    //   }.bind(this)
-    // );
-    // this.socket.fromEvent('latest-data').subscribe(data=>{
-    //   console.log("wwwwwwwwwwwwwwwwwwwwwwwwwww");
+    this.user = this.localStorage.get('OBCustomer');
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params.shopId) {
+        this.shopId = params.shopId;
+      }
+      if (params.shopName) this.shopName = params.shopName;
+      if (params.roomName) this.roomName = params.roomName;
+      this.getMsgByCustomerId(false);
+    });
 
-    // });
+    // socket
     this.socket.on(
       'latest',
       function (data: any) {
@@ -188,18 +110,6 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
         console.log('latest-data called in shopApp@@@@');
         this.getMsgByCustomerId(false);
       }.bind(this)
-    );
-
-    this.socket.fromEvent('latest').subscribe(
-      (message) => {
-        // this.messages.push(message);
-        console.log('qqqqqqqqqqqqqqqqqq');
-
-        this.getMsgByCustomerId(false);
-      },
-      (err) => {
-        console.log('err', err);
-      }
     );
   }
 
@@ -211,8 +121,8 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
 
   sendMessage() {
     if (this.user.role == 'CUSTOMER') {
-      this.roomName =
-        this.shopId + this.user._id + new Date().toISOString().split('T')[0];
+      this.roomName = this.shopId + this.user._id;
+      // + new Date().toISOString().split('T')[0];
     }
     // this.roomName = this.shopId + this.user._id;
     this.chatForm.controls.roomName.setValue(this.roomName);
@@ -239,14 +149,11 @@ export class ChatViewPage implements OnInit, OnDestroy, OnChanges {
   }
 
   getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.roomName = this.shopId + this.user._id;
-
     this.spinner.showLoader();
     this.chatService
       .getMsgByCustomerId(this.roomName)
       .subscribe((success: any) => {
         console.log('success', success);
-
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });

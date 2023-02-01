@@ -7,20 +7,35 @@
   </ion-toolbar>
 </ion-header>
 
-
-<ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
-showCancelButton="never" placeholder="{{ 'Search'}}" autocomplete="on" autocorrect="on"
-[(ngModel)]="search" (ionChange)="onSearch()" >
+<ion-searchbar
+  class="search-box ion-no-padding size"
+  inputmode="search"
+  searchIcon
+  animated
+  type="text"
+  showCancelButton="never"
+  placeholder="{{ 'Search'}}"
+  autocomplete="on"
+  autocorrect="on"
+  [(ngModel)]="search"
+  (ionChange)="onSearch()"
+>
 </ion-searchbar>
 
-<ion-content class="category">
+<ion-content class="category ion-margin-top ion-margin-botton">
   <ion-grid>
     <ion-row>
-      <ion-col *ngFor="let c of categoryDetails" (click)="navigateTo('/search-shop',c)" size="6">
-        <ion-card class="card">
-          <img src="{{c.image}}">
+      <ion-col
+        *ngFor="let c of categoryDetails"
+        (click)="navigateTo('/search-shop',c)"
+        size="4"
+      >
+        <ion-card class="card ion-text-center">
+          <img src="{{c.image}}" />
           <div class="card-body">
-            <h5 class="card-heading">{{c.name}}</h5>
+            <ion-label class="card-heading ion-text-capitalize"
+              >{{c.name}}</ion-label
+            >
           </div>
         </ion-card>
       </ion-col>

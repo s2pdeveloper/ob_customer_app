@@ -87,7 +87,19 @@
         </ion-label>
       </ion-item>
 
-      <ion-accordion-group>
+      <ion-item>
+        <i><img src="../../../assets/icon/address.png" width="45px" alt="address img"></i>
+        <ion-label class="ion-margin-start address">
+          {{ 'Address' | translate}}
+          <p>
+            {{userDetails?.address?.line1}} {{userDetails?.address?.city}}
+            {{userDetails?.address?.state}} {{userDetails?.address?.country}}
+            {{userDetails?.address?.pinCode}}
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <!-- <ion-accordion-group>
         <ion-accordion value="third">
           <ion-item slot="header" color="light">
             <i><img src="../../../assets/icon/address.png" width="45px" alt="address img"></i>
@@ -101,7 +113,7 @@
             </p>
           </div>
         </ion-accordion>
-      </ion-accordion-group>
+      </ion-accordion-group> -->
       
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round"

@@ -9,12 +9,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PopoverComponent } from './popover/popover.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
+import { AnimateItemsDirective } from '../directives/animate-items.directive';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 const PIPES = [TruncatePipe, CapitalizePipe,DateAgoPipe];
-const COMPONENTS = [DataUnavailableComponent, PopoverComponent];
+const COMPONENTS = [AnimateItemsDirective,DataUnavailableComponent, PopoverComponent];
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES],
   imports: [

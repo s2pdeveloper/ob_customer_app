@@ -108,11 +108,16 @@ ion-card-header.ios {
 .sub-heading{
   text-align: center;
 }
-
+.swiper-slide img {
+  width: 60px;
+  border-radius: 25%;
+  height: 60px;
+}
 .offerImage{
   margin: 0px -18px 0px -42px;
-  height: 64px;
-  width: 85px;
+  border-radius: 5% !important;
+  height: auto !important;
+  width: auto !important;
 }
 
 

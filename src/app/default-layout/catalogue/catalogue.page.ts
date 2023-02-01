@@ -5,6 +5,7 @@ import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService, ToastService } from 'src/app/core/services';
 import { Socket } from 'ngx-socket-io';
+import { ChatService } from 'src/app/service/chat/chat.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -24,8 +25,6 @@ export class CataloguePage implements OnInit {
   selectAll: boolean;
   subCategoryArr: any;
 
-
-
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -33,16 +32,16 @@ export class CataloguePage implements OnInit {
     private shopService: ShopService,
     private localStorage: StorageService,
     private spinner: LoaderService,
-    private socket: Socket
-  ) { }
+    private socket: Socket,
+    private chatService: ChatService
+  ) {}
 
   ngOnInit() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.getShopById(params._id)
+      this.getShopById(params._id);
     });
   }
-
 
   getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
@@ -55,11 +54,11 @@ export class CataloguePage implements OnInit {
           return x;
         });
         // ----------------------------------- //
-        this.subCategoryArr.forEach(x => {
+        this.subCategoryArr.forEach((x) => {
           if (x.id === _id) {
-            x.isActive = true
+            x.isActive = true;
           } else {
-            x.isActive = false
+            x.isActive = false;
           }
         });
         this.spinner.hideLoader();
@@ -76,10 +75,9 @@ export class CataloguePage implements OnInit {
           this.getCatalogueBySubCategoryId(y._id, null);
         }
         return y;
-      })
+      });
     });
   }
-
 
   navigateTo() {
     let msg = '';
@@ -106,19 +104,25 @@ export class CataloguePage implements OnInit {
       amount += catPrice;
     }
 
-    // join 
-    let customerIdShopId = this.user._id + arr[0].shopId._id + new Date().toISOString().split("T")[0];
-    this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
+    let message = {
+      shopId: arr[0].shopId._id,
+      message: msg,
+      description: description,
+      amount: amount,
+    };
+    this.chatService.create(message).subscribe((success) => {
+      console.log('success', success);
 
-    this.router.navigate(['/chat-view'], {
-      queryParams: {
-        msg: msg,
-        description: description,
-        amount: amount,
-        shopId: arr[0].shopId._id,
-        shopName: arr[0].shopId.shopName,
-        roomName: customerIdShopId        //join
-      },
+      this.spinner.hideLoader();
+      // join
+      this.socket.emit('join', { room: success.orderId, user: this.user._id });
+      this.router.navigate(['/chat-view'], {
+        queryParams: {
+          shopId: arr[0].shopId._id,
+          shopName: arr[0].shopId.shopName,
+          roomName: success.orderId, //join
+        },
+      });
     });
   }
 }

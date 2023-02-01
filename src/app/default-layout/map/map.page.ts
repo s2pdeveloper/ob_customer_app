@@ -41,15 +41,12 @@ export class MapPage implements OnInit {
     //FIRST GET THE LOCATION FROM THE DEVICE.
     if (navigator.geolocation) {
       this.geolocation.getCurrentPosition().then((resp) => {
-        console.log("resp,resp", resp);
-
         let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
         let mapOptions = {
           center: latLng,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        console.log("V@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", latLng);
 
         //LOAD THE MAP WITH THE PREVIOUS VALUES AS PARAMETERS.
         this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
@@ -94,7 +91,6 @@ export class MapPage implements OnInit {
 
   //FUNCTION SHOWING THE COORDINATES OF THE POINT AT THE CENTER OF THE MAP
   ShowCords() {
-
     alert('lat' + this.lat + ', long' + this.long)
   }
 
@@ -117,32 +113,29 @@ export class MapPage implements OnInit {
 
   //wE CALL THIS FROM EACH ITEM.
   SelectSearchResult(item) {
-    console.log(item);
-
     ///WE CAN CONFIGURE MORE COMPLEX FUNCTIONS SUCH AS UPLOAD DATA TO FIRESTORE OR LINK IT TO SOMETHING
     // alert(JSON.stringify(item))      
     // this.placeid = item.place_id
-    // this.GoTo()
-      // this.clearMarkers();
-      this.autocompleteItems = [];
-      this.geocoder = new google.maps.Geocoder;
-      this.markers = [];
+  
+    this.autocompleteItems = [];
+    this.geocoder = new google.maps.Geocoder;
+    this.markers = [];
 
-      this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
-        if (status === 'OK' && results[0]) {
-          let position = {
-            lat: results[0].geometry.location.lat,
-            lng: results[0].geometry.location.lng
-          };
-          let marker = new google.maps.Marker({
-            position: results[0].geometry.location,
-            map: this.map,
-          });
-          this.markers.push(marker);
-          this.map.setCenter(results[0].geometry.location);
-        }
-      })
-    
+    this.geocoder.geocode({ 'placeId': item.place_id }, (results, status) => {
+      if (status === 'OK' && results[0]) {
+        let position = {
+          lat: results[0].geometry.location.lat,
+          lng: results[0].geometry.location.lng
+        };
+        let marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: this.map,
+        });
+        this.markers.push(marker);
+        this.map.setCenter(results[0].geometry.location);
+      }
+    })
+
   }
 
 

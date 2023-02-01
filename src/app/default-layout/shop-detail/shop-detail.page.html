@@ -167,7 +167,20 @@
               </ion-label>
             </ion-item>
 
-            <ion-accordion-group>
+
+            <ion-item>
+              <i><img src="../../../assets/icon/address.png" width="45px" alt="phone-call img"></i>
+              <ion-label class="ion-margin-start address">
+                {{ 'Address' | translate}}
+                <p>
+                  {{s?.address?.line1}} {{s?.address?.city}}
+                  {{s?.address?.state}} {{s?.address?.country}}
+                  {{s?.address?.pinCode}}
+                </p>
+              </ion-label>
+            </ion-item>
+
+            <!-- <ion-accordion-group>
               <ion-accordion value="third">
                 <ion-item slot="header" color="light">
                   <i><img src="../../../assets/icon/address.png" width="45px" alt="address img"></i>
@@ -181,7 +194,7 @@
                   </p>
                 </div>
               </ion-accordion>
-            </ion-accordion-group>
+            </ion-accordion-group> -->
             
             <div class="ion-text-center ion-margin-vertical">
               <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">

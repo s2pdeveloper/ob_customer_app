@@ -13,7 +13,6 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-  
   businessTypeId: any;
   user: any;
   businessArr: any = [];
@@ -22,7 +21,28 @@ export class LandingPagePage implements OnInit {
   selectedBusinessName: any;
   selectedBusinessId: any;
   offerArr: any;
-
+  buttonSlide = {
+    slidesPerView: 4,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 10,
+  };
+  buttonSlide1 = {
+    slidesPerView: 1,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 30,
+  };
 
   constructor(
     private router: Router,
@@ -30,12 +50,12 @@ export class LandingPagePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
-    private offerService:OfferService
-  ) { }
+    private offerService: OfferService
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
   ionViewWillEnter() {
-    this.getAllOffer()
+    this.getAllOffer();
     this.getAllBusinessType();
   }
 
@@ -65,11 +85,10 @@ export class LandingPagePage implements OnInit {
     });
     this.getCategoryByBusinessTypeId(businessTypeId);
   }
-  
 
   getCategoryByBusinessTypeId(businessTypeId) {
     let obj: any = {
-      businessTypeId: businessTypeId
+      businessTypeId: businessTypeId,
     };
     this.categoryService.getAll(obj).subscribe((success) => {
       this.BusinessWithCategoryArr = success.rows;
@@ -83,12 +102,12 @@ export class LandingPagePage implements OnInit {
   seeAllCategory() {
     this.router.navigate(['/category'], {
       queryParams: {
-        businessTypeId: this.businessTypeId
-      }
-    })
+        businessTypeId: this.businessTypeId,
+      },
+    });
   }
 
-  seeAll() { }
+  seeAll() {}
 
   getCategoryIdWithShop(categoryId) {
     let params = {
@@ -98,20 +117,17 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/search-shop'], { queryParams: params });
   }
 
-  navigateToProfilePage(){
-    this.router.navigate(['/view-profile'])
+  navigateToProfilePage() {
+    this.router.navigate(['/view-profile']);
   }
 
-  navigateToMap(){
-    this.router.navigate(['/map'])
-
+  navigateToMap() {
+    this.router.navigate(['/map']);
   }
   getAllOffer() {
-    let obj = { };
+    let obj = {};
     this.offerService.getAll(obj).subscribe((success) => {
-      this.offerArr=success.rows
-   });
+      this.offerArr = success.rows;
+    });
   }
-
-
 }

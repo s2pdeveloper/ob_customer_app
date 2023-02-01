@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let msg of msgArr">
-    <div  *ngIf="msg.message"  [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
+  <!-- <div *ngFor="let msg of msgArr">
+    <div *ngIf="msg.message" [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
       <ion-chip [color]="msg.createdBy == user._id ? 'dark' :'primary'" class="ion-text-wrap">{{msg.message}}
         <div class="clearfix text-right size">
           <span style="opacity: 0.5">
@@ -24,81 +24,70 @@
         <span style="opacity: 0.5">
           {{msg?.createdAt | date:'shortTime'}}</span>
       </div>
-    </div><br>
-  </div>
+    </div>
+  </div>    -->
 
-<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
-    <ion-fab-button class="bg-color-2" (click)="addOrder()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
-
-
-  <!-- <div class="chat-screen">
-    <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll;"
+  <div class="chat-screen">
+    <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
       [scrollTop]="scrollMe?.scrollHeight">
-      <ion-item-sliding *ngFor="let item of msgArr;let i = index" #slidingItem>
-        <ion-item lines="none" class="ion-no-padding">
-          <div class="media media-chat media-chat-reverse">
-            <div class="media-body">
-              <div class="d-flex comment align-self-center flex-column">
-                <div class="d-flex flex-row">
 
-                  <div class="d-flex justify-content-start align-self-center flex-column px-2">
-                    <div class="d-flex clearfix">
-                      <p class="mb-0">
-                        {{item?.message}}
-                      </p>
-                    </div>
-                    <div class="d-flex clearfix text-right size">
-                      <span class="text-color-4" style="opacity:0.5">
-                        {{item?.createdAt | date:'shortTime'}}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div class="message-wrap">
+        <div *ngFor="let message of msgArr" class="message" [class.right]=" message.createdBy === user._id">
+          <div class="msg-detail">
+            <div class="msg-info">
+              <p>{{message?.createdAt | date:'shortTime'}}</p>
+            </div>
+            <div class="msg-content">
+              <p>{{message.message}}</p>
             </div>
           </div>
-
-        </ion-item>
-
-      </ion-item-sliding>
-      <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
-        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+          <div *ngIf="message.userIsSender" class="msg-status">
+            <div *ngIf="message.status === 'pending';else sent">
+              pending
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <ng-template #sent>
+              <div *ngIf="message.status === 'sent';else seen">
+                sent
+                <ion-icon name="checkmark-circle-outline"></ion-icon>
+              </div>
+            </ng-template>
+            <ng-template #seen>
+              <div *ngIf="message.status === 'seen'">
+                seen
+                <ion-icon name="checkmark"></ion-icon>
+              </div>
+            </ng-template>
+          </div>
+        </div>
       </div>
-      <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
-        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+      <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
+        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px"></div>
+      </div>
+      <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px">
+        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px"></div>
       </div>
     </div>
-  </div> -->
-
+  </div>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <form [formGroup]="chatForm">
-      <ion-item lines="none" id="chatInput">
-        <ion-textarea formControlName="message" spellcheck="true" rows="1" autoComplete=" true" autocorrect="true"
-          maxlength="500" type="text" placeholder="Type your message...">
+      <ion-item lines="none" id="chatInput" class="ion-align-items-center">
+        <ion-textarea class="ion-no-padding" formControlName="message" spellcheck="true" rows="1" autoComplete=" true"
+          autocorrect="true" maxlength="500" type="text" placeholder="Type your message...">
         </ion-textarea>
         <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-          (change)="uploadFileAWS($event)" required>
+          (change)="uploadFileAWS($event)" required />
         <ion-button fill="clear" (click)="fileInput1.click()">
           <ion-icon class="text-color-1" size="large" name="attach"></ion-icon>
         </ion-button>
-
-
-        <!-- <ion-button class="btn-color-2" (click)="sendMessage()">
-          <ion-icon name="camera-outline"></ion-icon>
-        </ion-button> -->
-
         <ion-button class="btn-color-2" (click)="sendMessage()">
           <ion-icon name="send"></ion-icon>
         </ion-button>

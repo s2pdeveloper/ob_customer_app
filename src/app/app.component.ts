@@ -20,38 +20,7 @@ export class AppComponent implements OnInit {
   returnUrl: string;
   public selectedIndex: number = 0;
   currentUser: any = {};
-  public menuPages = [
-    {
-      title: 'Home',
-      url: '/landing-page',
-      icon: 'home',
-    },
-    {
-      title: 'Profile',
-      url: '/profile-page',
-      icon: 'person',
-    },
-    {
-      title: 'Change Language',
-      url: '/change-language',
-      icon: 'language',
-    },
-    {
-      title: 'Change Password',
-      url: '/change-pwd',
-      icon: 'lock-open',
-    },
-    // {
-    //   title: 'Notifications',
-    //   url: '/notification-list',
-    //   icon: 'chatbubbles-outline',
-    // },
-    {
-      title: 'Logout',
-      url: '/login',
-      icon: 'log-out',
-    },
-  ];
+ 
   constructor(
     private router: Router,
     private languageService: LanguageService,

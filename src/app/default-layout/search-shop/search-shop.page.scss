@@ -1,57 +1,72 @@
 ion-content {
-    height: 85vh;
+  height: 85vh;
 
-    .no-data {
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        border-radius: 2rem;
-        box-shadow: none;
+  .no-data {
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 2rem;
+    box-shadow: none;
+  }
 
-    }
-
-
-    .size {
-        width: 97%;
-    }
+  .size {
+    width: 97%;
+  }
 }
 
 .shop-list {
-    .shop-name{
-        // line-height: 3px;
-        font-weight: bold;
+  .shop-name {
+    // line-height: 3px;
+    font-weight: bold;
+  }
+
+  ion-card {
+    ---border-color: #f0f0f0;
+  }
+
+  .col-7 {
+    position: relative;
+    left: -16px;
+
+    .star {
+      position: absolute;
+      top: 79px;
+      left: 79px;
+      white-space: nowrap;
+
+      ion-icon {
+        margin-right: 1px;
+      }
     }
+  }
 
-    ion-card{
-        ---border-color: #F0F0F0;
+  .img {
+    display: flex;
+    flex-direction: column;
+    // width: 9rem;
+    // height: 7.5rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px;
+    padding: 8px;
+  }
+}
+
+ion-list {
+  ion-item {
+    margin-bottom: 1rem !important;
+    box-shadow: rgba(242, 121, 121, 0.15) 1.95px 1.95px 2.6px;
+  }
+  ion-thumbnail {
+    margin: 0.5rem 1rem .5rem .5rem !important;
+    height: 5rem;
+    width: 5rem;
+    img {
+      border-radius: 10%;
     }
-
-    .col-7 {
-        position: relative;
-        left: -16px;
-
-        .star {
-            position: absolute;
-            top: 79px;
-            left: 79px; 
-            white-space: nowrap;
-
-            ion-icon {
-                margin-right: 1px;
-            }
-
-        }
-    }
-
-    .img {
-        display: flex;
-        flex-direction: column;
-        width: 9rem;
-        height: 7.5rem;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 15px;
-        padding: 8px;
-    }
+  }
+  .span-small {
+    text-decoration: line-through;
+  }
 }

@@ -21,7 +21,7 @@ export class ChatListPage implements OnInit {
   search = '';
   item: any;
   segment: any;
-  shopConversationList: any = [];
+  shopConversationList: any =[]
   start: number = 0;
   limit: number = 20;
   user: any;
@@ -46,7 +46,6 @@ export class ChatListPage implements OnInit {
       search: this.search,
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
-      // this.conversationList = success.rows;
       this.shopConversationList = success.data;
       this.spinner.hideLoader();
     });
