@@ -13,34 +13,21 @@
       </div>
       <p class="center">Enter your registered mobile number below to receive password reset instruction.
       </p>
-      
+
       <form [formGroup]="forgetForm">
-        <ion-item
-          class="input-class"
-          fill="outline"
-          [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)"
-        >
+        <ion-item class="input-class" fill="outline"
+          [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
           <ion-label position="floating" class="font" color="">
             Enter mobile
             <ion-note color="danger">*</ion-note>
           </ion-label>
-          <ion-input
-            class="font"
-            formControlName="mobile"
-            placeholder="Enter mobile number "
-          ></ion-input>
+          <ion-input class="font" formControlName="mobile" placeholder="Enter mobile number "></ion-input>
         </ion-item>
         <app-validation-messages [control]="form.mobile">
         </app-validation-messages>
 
         <div class="ion-text-center ion-margin-top">
-          <ion-button
-            color="primary"
-            expand="full"
-            shape="round"
-            (click)="forget()"
-            >Submit</ion-button
-          >
+          <ion-button color="primary" expand="full" shape="round" (click)="forget()">Submit</ion-button>
         </div>
       </form>
     </ion-card-content>
