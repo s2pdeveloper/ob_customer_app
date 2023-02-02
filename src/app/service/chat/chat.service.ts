@@ -25,5 +25,9 @@ export class ChatService {
   getChatShopByCustomerId(obj) {
     return this.http.get(this.routes.getChatShopByOrderId,obj);
   }
+
+  downloadImage(imageUrl: string): any {
+    return this.http.getDownloadImage(imageUrl);
+  }
  
 }

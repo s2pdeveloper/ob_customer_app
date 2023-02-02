@@ -33,7 +33,7 @@
         width: auto;
         max-width: 70%;
         // background-color: #fff;
-        background-color:  #0090D0;
+        background-color: #0090d0;
       }
     }
 
@@ -56,6 +56,11 @@
     min-height: 100%;
     position: relative;
     padding: 7px 0;
+
+    .download{
+      position: relative;
+      float: right;
+    }
 
     .msg-detail {
       width: 100%;
@@ -92,11 +97,14 @@
       color: #888;
       padding-right: 1%;
     }
+    img{
+      float: right;
+     
+    }
   }
 }
 
 ion-footer {
-
   .footer-msg {
     padding: 10px;
 
@@ -113,7 +121,12 @@ ion-footer {
 
     ion-button {
       margin-top: 13px;
-
     }
   }
+}
+
+img {
+  height: 6rem !important;
+  width: 7rem !important;
+  object-fit: cover;
 }

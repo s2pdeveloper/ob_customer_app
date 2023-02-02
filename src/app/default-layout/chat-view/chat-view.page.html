@@ -30,19 +30,17 @@
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
       [scrollTop]="scrollMe?.scrollHeight">
-
       <div class="message-wrap">
         <div *ngFor="let message of msgArr" class="message" [class.right]=" message.createdBy === user._id">
           <div class="msg-detail">
             <div class="msg-info">
               <p>{{message?.createdAt | date:'shortTime'}}</p>
             </div>
-            <div class="msg-content ion-text-wrap">
+            <div class="msg-content ion-text-wrap" *ngIf="message.message">
               <p>{{message.message}}</p>
             </div>
-            <div>
-              <!-- <img src="{{message.image}}" alt="" width="60%" height="60%"> -->
-            </div>
+            <img src="{{message.image}}" *ngIf="message.image" />
+            <!-- <ion-icon name="cloud-download-outline" *ngIf="message.image" class="download"></ion-icon> -->
           </div>
           <div *ngIf="message.userIsSender" class="msg-status">
             <div *ngIf="message.status === 'pending';else sent">

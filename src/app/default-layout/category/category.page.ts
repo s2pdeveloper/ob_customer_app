@@ -20,21 +20,23 @@ export class CategoryPage implements OnInit {
   ) { }
 
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.actRoute.queryParams.subscribe(params => {
-      this.getByBusinessTypeCategory(params.businessTypeId)
+      this.businessTypeId = params.businessTypeId
+      this.getByBusinessTypeCategory(false)
     })
   }
 
-  getByBusinessTypeCategory(businessTypeId) {
+  getByBusinessTypeCategory(isFirstLoad: boolean, event?: any) {
     let obj = {
-      businessTypeId: businessTypeId,
+      businessTypeId: this.businessTypeId,
+      search: this.search,
     }
     this.categoryService.getAll(obj).subscribe((success) => {
       this.categoryDetails = success.rows;
-      
+
     });
   }
 
@@ -47,12 +49,10 @@ export class CategoryPage implements OnInit {
     this.router.navigate([path], { queryParams: params });
   }
 
-  
+
   onSearch() {
-    console.log("search call");
-    // this.page = 1;
     this.categoryDetails = [];
-    // this.getByBusinessTypeCategory(this.businessTypeId);
+    this.getByBusinessTypeCategory(false, '');
   }
 
 }

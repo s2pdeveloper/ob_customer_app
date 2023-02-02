@@ -94,18 +94,12 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    if (this.user.role == 'CUSTOMER') {
-      this.roomName = this.shopId + this.user._id;
-      // + new Date().toISOString().split('T')[0];
-    }
-    // this.roomName = this.shopId + this.user._id;
+  
     this.chatForm.controls.roomName.setValue(this.roomName);
-    // this.chatForm.controls.shopId.setValue(this.shopId);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
         console.log('success', success);
         this.getMsgByCustomerId(false);
-
         // emit
         this.socket.emit('latestdata', {
           roomName: this.roomName,
@@ -190,5 +184,20 @@ export class ChatViewPage implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+
+   // image download
+   downloadImage(u: any) {
+    console.log('downloadLink', u);
+
+    this.chatService.downloadImage(u.image).subscribe(
+      (response: any) => {
+        // saveAs(response, u?.AdmissionWithEnquiry?.name);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 }

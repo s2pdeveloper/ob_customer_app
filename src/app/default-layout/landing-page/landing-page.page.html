@@ -26,7 +26,7 @@
 
   <!-- category -->
   <ion-item lines="none">
-    <ion-title class="ion-no-padding " color="primary">Category</ion-title>
+    <ion-title class="ion-no-padding heading" color="primary">Category</ion-title>
     <ion-label (click)="seeAllCategory()" slot="end">See all</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
@@ -37,11 +37,12 @@
       </div>
     </ion-slide>
   </ion-slides>
-  <ion-item lines="none">
-    <ion-title class="ion-no-padding" color="primary">Offers</ion-title>
-  </ion-item>
+ 
 
   <!-- offers -->
+  <ion-item lines="none">
+    <ion-title class="ion-no-padding heading" color="primary">Offers</ion-title>
+  </ion-item>
   <ion-slides [options]="buttonSlide1" class="ion-margin-bottom">
     <ion-slide *ngFor="let o of offerArr">
       <div class="" (click)="getCategoryIdWithShop(c._id)">

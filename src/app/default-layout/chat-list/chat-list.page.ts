@@ -20,8 +20,8 @@ export class ChatListPage implements OnInit {
   pageSize: number = 10;
   search = '';
   item: any;
-  segment: any;
-  shopConversationList: any =[]
+  segment: any = 'new';
+  shopConversationList: any = [];
   start: number = 0;
   limit: number = 20;
   user: any;
@@ -35,7 +35,9 @@ export class ChatListPage implements OnInit {
     public translate: TranslateService
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.getAllShopList(false);
   }
@@ -44,6 +46,7 @@ export class ChatListPage implements OnInit {
     this.spinner.showLoader();
     let obj = {
       search: this.search,
+      status: this.segment,
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
       this.shopConversationList = success.rows;
@@ -51,34 +54,29 @@ export class ChatListPage implements OnInit {
     });
   }
 
-  async segmentChanged(event) { }
+
 
   // navigate to chat view
   navigateTo(item) {
-
     // join
-    let customerIdShopId = item._id + this.user._id;
-    this.socket.emit('join', { room: customerIdShopId, user: this.user._id });
-
-    this.router.navigate(['/chat-view'],
-      {
-        queryParams: {
-          shopId: item._id,
-          shopName: item.shopId?.shopName,
-          roomName: customerIdShopId
-        },
-      });
+    this.socket.emit('join', { room: item._id, user: this.user._id });
+    this.router.navigate(['/chat-view'], {
+      queryParams: {
+        shopId: item.shopId._id,
+        shopName: item.shopId?.shopName,
+        roomName: item._id,
+      },
+    });
   }
 
-
   /**
- * refresh page content
- * @param event
- */
+   * refresh page content
+   * @param event
+   */
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.start = 0;
-    this.getAllShopList(false, "");
+    this.getAllShopList(false, '');
     event.target.complete();
   }
 
@@ -96,5 +94,4 @@ export class ChatListPage implements OnInit {
     this.start = 0;
     this.getAllShopList(false, '');
   }
-
 }

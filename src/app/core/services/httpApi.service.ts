@@ -12,12 +12,11 @@ export class ApiService {
     headers: new HttpHeaders().set('Content-Type', 'application/json'),
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   private getBaseUrl() {
-    return `${location.protocol}//${
-      location.hostname + (location.port ? ':' + location.port : '')
-    }/`;
+    return `${location.protocol}//${location.hostname + (location.port ? ':' + location.port : '')
+      }/`;
   }
 
   public get(
@@ -49,6 +48,20 @@ export class ApiService {
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     });
   }
+
+  // image download
+  public getDownloadImage(
+    path: string,
+    params: HttpParams = new HttpParams()
+  ): Observable<any> {
+    console.log("path", path);
+    return this.httpClient.get(path, { responseType: "blob" })
+      .pipe(
+        map((res: any) => res),
+        catchError(this.formatErrors)
+      );
+  }
+
 
   public formatErrors(error: any): Observable<any> {
     return throwError(error.error);

@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+  <ion-segment [(ngModel)]="segment" (ionChange)="getAllShopList(false)">
     <ion-segment-button [id]="'new'" value="new" layout="icon-end">
       <ion-label>{{ 'new' }}</ion-label>
     </ion-segment-button>
     <ion-segment-button [id]="'active'" value="active" layout="icon-end">
       <ion-label>{{ 'active' }}</ion-label>
     </ion-segment-button>
-    <ion-segment-button [id]="'past'" value="past" layout="icon-end">
+    <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
       <ion-label>{{ 'completed' }}</ion-label>
     </ion-segment-button>
   </ion-segment>
