@@ -270,7 +270,6 @@ export class SearchShopPage implements OnInit {
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
     };
-    console.log('obj----', obj);
     this.shopService.getAllShop(obj).subscribe((success) => {
       console.log('success shop', success);
       this.shopArr = success.rows;

@@ -124,5 +124,7 @@
   "fullName": "पूर्ण नाव",
   "shopName":"दुकानाचे नाव",
   "register": "नोंदणी करा",
-  "selectLanguage": "भाषा निवडा"
+  "selectLanguage": "भाषा निवडा",
+
+  "Location":"स्थान"
 }

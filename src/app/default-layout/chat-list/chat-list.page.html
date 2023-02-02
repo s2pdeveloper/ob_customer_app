@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar class="bg-color-2">
     <ion-buttons shape="round" slot="start">
       <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
@@ -29,7 +29,6 @@
 
   <ng-container>
     <ion-card class="card">
-      <!-- conversation -->
       <ion-card-content (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
         <div class="main">
           <div class="img-box">
@@ -52,13 +51,61 @@
 
       </ion-card-content>
     </ion-card>
+ </ng-container>
+
+</ion-content> -->
 
 
+<ion-header>
+  <ion-toolbar class="bg-color-2">
+    <ion-buttons shape="round" slot="start">
+      <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'chats'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content class="ion-no-padding">
+  <ion-segment [(ngModel)]="segment" (ionChange)="getAllShopList(false)">
+    <ion-segment-button [id]="'new'" value="new" layout="icon-end">
+      <ion-label>{{ 'new' }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [id]="'active'" value="active" layout="icon-end">
+      <ion-label>{{ 'active' }}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
+      <ion-label>{{ 'completed' }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
+  <ion-searchbar class="search-box" inputmode="search" searchIcon animated type="text" showCancelButton="never"
+    autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()" placeholder="{{ 'search'}}">
+  </ion-searchbar>
 
+  <ion-list>
+    <ion-item  lines="none" (click)="navigateTo(item)" *ngFor="let item of shopConversationList">
+      <ion-item  lines="none" (click)="navigateTo(item)">
+        <ion-avatar slot="start">
+          <img class="img-icon" [src]="item?.shopId?.image || 'assets/bannerImages/placeholder_profile.png'" alt="" />
 
-  </ng-container>
+        </ion-avatar>
+        <ion-label class="ion-text-wrap">
+          <ion-text class="ion-text-wrap">
+            <h2 class="ion-text-wrap ion-text-capitalize name">
+              {{item?.shopId?.shopName}}
+            </h2>
+          </ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-item>
+  </ion-list>
 
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

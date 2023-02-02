@@ -17,11 +17,11 @@ export class ChangeLanguagePage implements OnInit {
       value: 'en',
     },
     {
-      label: 'Hindi',
+      label: 'हिंदी',
       value: 'hi',
     },
     {
-      label: 'Marathi',
+      label: 'मराठी',
       value: 'mr',
     },
   ];
