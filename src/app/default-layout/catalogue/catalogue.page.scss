@@ -37,8 +37,9 @@
 
             .title {
                 font-size: 19px;
-                font-weight: bolder;
-                color: #000015;
+                margin-right: 20px !important;
+                // font-weight: bolder;
+                color: #ff0000;
                 word-break: break-all;
 
             }
@@ -89,7 +90,7 @@ ion-slide {
     }
 
     .img-box {
-        width: 80px !important;
+        width: 73px !important;
         left: 20px !important;
         border-radius: 50% !important;
         height: 70px !important;

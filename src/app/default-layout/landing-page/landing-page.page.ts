@@ -32,17 +32,17 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 10,
   };
-  buttonSlide1 = {
-    slidesPerView: 1,
-    slideShadows: true,
-    initialSlide: 0,
-    speed: 400,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-    },
-    spaceBetween: 25,
-  };
+    buttonSlide1 = {
+      slidesPerView: 1,
+      slideShadows: true,
+      initialSlide: 0,
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      spaceBetween: 25,
+    };
 
   constructor(
     private router: Router,
