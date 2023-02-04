@@ -6,6 +6,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService, ToastService } from 'src/app/core/services';
 import { Socket } from 'ngx-socket-io';
 import { ChatService } from 'src/app/service/chat/chat.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-catalogue',
@@ -45,7 +46,9 @@ export class CataloguePage implements OnInit {
     private localStorage: StorageService,
     private spinner: LoaderService,
     private socket: Socket,
-    private chatService: ChatService
+    private chatService: ChatService,
+    public translate: TranslateService
+
   ) {}
 
   ngOnInit() {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-setting',
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 export class SettingPage implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    public translate: TranslateService,
+
   ) { }
 
   ngOnInit() {

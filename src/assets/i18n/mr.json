@@ -9,7 +9,7 @@
   "hello": "नमस्कार",
   "email": "इमेल",
   "password": "पासवर्ड",
-  "changePassword": "Change पासवर्ड",
+  "changePassword": "परिवर्तन पासवर्ड",
   "placeholderEmail": "इमेल",
   "placeholderPassword": "पासवर्ड",
   "forgotPassword": "पासवर्ड विसरलात",
@@ -125,6 +125,34 @@
   "shopName":"दुकानाचे नाव",
   "register": "नोंदणी करा",
   "selectLanguage": "भाषा निवडा",
+  "Location":"स्थान",
+  "Category": "श्रेणी",
+  "Search": "शोधा",
+  "Offers": "ऑफर",
+  "See all": "सर्व पाहा",
+  "Product": "उत्पादन",
+  "Place Order": "मागणी नोंद करा",
+  "Type your message...": "तुमचा संदेश टाइप करा...",
+  "Settings": "सेटिंग्ज",
+  "My Profile": "माझे प्रोफाइल",
+  "View Your Profile": "तुमचे प्रोफाइल पहा",
+  "Change Language": "भाषा बदला",
+  "Set App Language": "अॅप भाषा सेट करा",
+  "chats": "गप्पा",
+  "new": "नवीन",
+  "completed":"पूर्ण",
+  "Shop List": "दुकानाची यादी",
+  "Shop Details": "दुकान तपशील",
+  "Search Shop": "दुकान शोधा",
+  "Shop Owner Name":"दुकान मालकाचे नाव",
+  "Address": "पत्ता",
+  "View Product":"उत्पादन पहा"
 
-  "Location":"स्थान"
+
+
+
+
+
+
+
 }

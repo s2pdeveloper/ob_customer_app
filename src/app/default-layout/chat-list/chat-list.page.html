@@ -56,7 +56,7 @@
     <ion-buttons shape="round" slot="start">
       <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
     </ion-buttons>
-    <ion-title class="text-color-4 ion-text-capitalize">{{ 'chats'}}</ion-title>
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'chats' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -64,13 +64,13 @@
 
   <ion-segment [(ngModel)]="segment" (ionChange)="getAllShopList(false)">
     <ion-segment-button [id]="'new'" value="new" layout="icon-end">
-      <ion-label>{{ 'new' }}</ion-label>
+      <ion-label>{{ 'new' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button [id]="'active'" value="active" layout="icon-end">
-      <ion-label>{{ 'active' }}</ion-label>
+      <ion-label>{{ 'active' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
-      <ion-label>{{ 'completed' }}</ion-label>
+      <ion-label>{{ 'completed' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
@@ -79,7 +79,7 @@
   </ion-refresher>
 
   <ion-searchbar class="search-box" inputmode="search" searchIcon animated type="text" showCancelButton="never"
-    autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()" placeholder="{{ 'search'}}">
+    autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()" placeholder="{{ 'Search' | translate}}">
   </ion-searchbar>
 
   <ion-grid class="ion-no-padding">

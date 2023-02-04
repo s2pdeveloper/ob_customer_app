@@ -125,5 +125,37 @@
   "customer": "ग्राहक",
   "fullName": "पूरा नाम",
   "shopName":"दुकान का नाम",
-  "register": "पंजीकरण करवाना"
+  "register": "पंजीकरण करवाना",
+  "Category": "वर्ग",
+  "Location": "जगह",
+  "Search": "खोज",
+  "Offers": "ऑफर",
+  "See all": "सभी देखें",
+  "Product": "उत्पाद",
+  "Place Order": "आदेश देना",
+  "Type your message...": "अपना संदेश टाइप करें...",
+  "Settings": "समायोजन",
+  "My Profile": "मेरी प्रोफाइल",
+  "View Your Profile": "अपनी प्रोफ़ाइल देखें",
+  "Change Language": "भाषा बदलें",
+  "Set App Language": "ऐप भाषा सेट करें",
+  "chats": "चैट",
+  "new": "नया",
+  "completed":"पुरा होना",
+  "Shop List": "दुकान सूची",
+  "Search Shop": "दुकान खोजें",
+  "Shop Details": "दुकान विवरण",
+  "Shop Owner Name":"दुकान मालिक का नाम",
+  "Address": "पता",
+  "View Product":"उत्पाद देखें"
+
+  
+
+
+
+
+
+
+
+
 }

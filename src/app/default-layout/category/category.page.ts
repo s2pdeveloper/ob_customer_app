@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-category',
@@ -17,6 +18,8 @@ export class CategoryPage implements OnInit {
     private router: Router,
     private actRoute: ActivatedRoute,
     private categoryService: CategoryService,
+    public translate: TranslateService
+
   ) { }
 
 

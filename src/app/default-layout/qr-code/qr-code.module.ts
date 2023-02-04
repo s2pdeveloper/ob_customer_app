@@ -8,6 +8,7 @@ import { QrCodePage } from './qr-code.page';
 
 
 
+
 @NgModule({
   imports: [
     CommonModule,

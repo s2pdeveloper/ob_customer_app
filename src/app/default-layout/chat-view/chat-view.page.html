@@ -83,7 +83,7 @@
       <form [formGroup]="chatForm">
         <ion-item lines="none" id="chatInput" class="ion-align-items-center">
           <ion-textarea class="ion-no-padding" formControlName="message" spellcheck="true" rows="1" autoComplete=" true"
-            autocorrect="true" maxlength="500" type="text" placeholder="Type your message...">
+            autocorrect="true" maxlength="500" type="text" placeholder="{{'Type your message...'| translate}}">
           </ion-textarea>
           <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
             (change)="uploadFileAWS($event)" required />

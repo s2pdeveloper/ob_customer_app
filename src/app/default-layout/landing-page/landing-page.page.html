@@ -26,8 +26,8 @@
 
   <!-- category -->
   <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">Category</ion-title>
-    <ion-label (click)="seeAllCategory()" slot="end">See all</ion-label>
+    <ion-title class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>
+    <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
     <ion-slide *ngFor="let c of BusinessWithCategoryArr">
@@ -41,7 +41,7 @@
 
   <!-- offers -->
   <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">Offers</ion-title>
+    <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
   </ion-item>
   <ion-slides [options]="buttonSlide1" class="ion-margin-bottom">
     <ion-slide *ngFor="let o of offerArr">

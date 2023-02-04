@@ -103,5 +103,29 @@
   "customer": "Customer",
   "fullName": "Full Name",
   "shopName": "Shop Name",
-  "register": "Register"
+  "register": "Register",
+  "Category": "Category",
+  "Location": "Location",
+  "Search": "Search",
+  "Offers": "Offers",
+  "See all": "See all",
+  "Product": "Product",
+  "Place Order": "Place Order",
+  "Type your message...": "Type your message...",
+  "Settings": "Settings",
+  "My Profile": "My Profile",
+  "View Your Profile": "View Your Profile",
+  "Change Language": "Change Language",
+  "Set App Language": "Set App Language",
+  "chats": "chats",
+  "new": "new",
+  "completed":"completed",
+  "Shop List": "Shop List",
+  "Search Shop": "Search Shop",
+  "Shop Details": "Shop Detail",
+  "Shop Owner Name": "Shop Owner Name",
+  "Address": "Address",
+  "View Product":"View Product"
+
+
 }

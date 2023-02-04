@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Category</ion-title>
+    <ion-title>{{'Category' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="app/tabs/landing-page"></ion-back-button>
     </ion-buttons>
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
-  showCancelButton="never" placeholder="{{ 'Search'}}" autocomplete="on" autocorrect="on" [(ngModel)]="search"
+  showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on" [(ngModel)]="search"
   (ionChange)="onSearch()">
 </ion-searchbar>
 
