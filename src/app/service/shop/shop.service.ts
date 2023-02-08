@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/core/services';
 export class ShopService {
   routes: any = {
     getAllPath: `customer/getAllShop`,
+    addFavorites: `favorite/create`,
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
     getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
@@ -29,5 +30,8 @@ export class ShopService {
 
   getCatalogueBySubCategoryId(_id) {
     return this.http.get(this.routes.getCatalogueBySubCategoryId(_id));
+  }
+  createOrRemoveFavorite(payload: object){
+      return this.http.post(this.routes.addFavorites, payload);
   }
 }

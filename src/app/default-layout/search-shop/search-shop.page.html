@@ -53,20 +53,19 @@
     <ion-row>
       <ion-col size="12">
         <ion-list appAnimateItems className="fadeInLeft">
-          <ion-item lines="full" *ngFor="let s of shopArr" (click)="navigateTo('/shop-detail',s._id)"
-            class="animation-normal  ion-no-padding">
-            <ion-thumbnail slot="start">
+          <ion-item lines="full" *ngFor="let s of shopArr" class="animation-normal  ion-no-padding">
+            <ion-thumbnail slot="start" (click)="navigateTo('/shop-detail',s._id)">
               <img [src]="s.image" />
             </ion-thumbnail>
-            <div class="content">
+            <div class="content" (click)="navigateTo('/shop-detail',s._id)">
               <ion-title class="shop-name ion-no-padding" color="primary">{{s.shopName}}</ion-title>
               <ion-label class="shop-name">{{s.firstName}} {{s.lastName}}</ion-label>
               <ion-label color="medium" class="star">
                 <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
                 <!-- Rating <b class="ion-margin-left">4.5</b> -->
               </ion-label>
               <ion-note>
@@ -74,6 +73,12 @@
                 s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode
                 : "" }}.</ion-note>
             </div>
+            <ion-col size="2" class="ion-text-center ion-no-padding" slot="end">
+              <ion-icon *ngIf="!s?.shopFavorite.length
+               " (click)="addToFavorite(s)" name="heart-outline" size="large"> </ion-icon>
+              <ion-icon *ngIf="s?.shopFavorite.length
+              " (click)="addToFavorite(s)" class="text-color-danger" name="heart"></ion-icon>
+            </ion-col>
           </ion-item>
         </ion-list>
       </ion-col>

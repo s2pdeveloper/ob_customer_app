@@ -162,20 +162,20 @@ const routes: Routes = [
   },
   {
     path: 'catalogue',
-    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
+    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then(m => m.CataloguePageModule)
   },
   {
     path: 'chat-view',
-    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
-  },  {
-    path: 'map',
-    loadChildren: () => import('./default-layout/map/map.module').then( m => m.MapPageModule)
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then(m => m.ChatViewPageModule)
   },
-
- 
-
-
-
+  {
+    path: 'map',
+    loadChildren: () => import('./default-layout/map/map.module').then(m => m.MapPageModule)
+  },
+  {
+    path: 'favorite',
+    loadChildren: () => import('./default-layout/favorite/favorite.module').then(m => m.FavoritePageModule)
+  },
 ];
 
 @NgModule({
@@ -184,4 +184,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

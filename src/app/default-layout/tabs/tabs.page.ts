@@ -34,9 +34,9 @@ export class TabsPage {
       icon: 'qr-code-sharp'
     },
     {
-      title: 'favorites',
-      value: 'favorites',
-      tab: 'favorites',
+      title: 'favorite',
+      value: 'favorite',
+      tab: 'favorite',
       icon: 'heart'
     },
     {

@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { ModalController, } from '@ionic/angular';
 import { SubCategoryComponent } from 'src/app/modal/sub-category/sub-category.component';
+import { StorageService, ToastService } from 'src/app/core/services';
 @Component({
   selector: 'app-search-shop',
   templateUrl: './search-shop.page.html',
@@ -21,6 +22,7 @@ export class SearchShopPage implements OnInit {
   shopArr: any = [];
   loaded: boolean = false;
   shopDetails: any;
+  user: number;
 
   constructor(
     private router: Router,
@@ -28,10 +30,14 @@ export class SearchShopPage implements OnInit {
     public translate: TranslateService,
     public modelController: ModalController,
     private shopService: ShopService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private toaster: ToastService,
+    private localStorage: StorageService,
+
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -65,6 +71,7 @@ export class SearchShopPage implements OnInit {
     this.loaded = false;
     this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
       this.shopArr = success.payload.shop;
+
       console.log('shop by id----categoryId', this.shopArr);
       this.spinner.hideLoader();
       this.loaded = true;
@@ -88,21 +95,27 @@ export class SearchShopPage implements OnInit {
     event.target.complete();
   }
 
-  // doInfinite(event) {
-  //   this.page++;
-  //   this.getAllShop(true, event);
-  //   event.target.complete();
-  // }
-
-
   async openSubCategoryModel() {
-   let model = await this.modelController.create({
+    let model = await this.modelController.create({
       component: SubCategoryComponent,
     });
     await model.present();
 
   }
 
+  async addToFavorite(item) {
+    this.user = this.localStorage.get('OBCustomer')._id;
+    let payload = {
+      _id: this.user,
+      action: item.shopFavorite.length ? 'remove' : 'add',
+      shopId: item._id,
+    }
+    this.shopService.createOrRemoveFavorite(payload).subscribe(
+      async success => {
+        this.getAllShop(false);
+        this.toaster.successToast(success.message);
+      })
+  }
 
 
 }
