@@ -1,18 +1,111 @@
-.container{
+.container {
     width: 100%;
-   
-    ion-thumbnail{
-        width: 100px !important;
-        height: 100px !important;
-        img{
-            border-radius: 10px;
-        
+    padding: 0%;
+    margin: 0%;
+
+    ion-grid {
+
+        ion-card {
+            // --background: #f9f7f4;
+            // -moz-background: white;
+            width: 100%;
+            // --border-radius: 5px solid #D0CED1;
+            border: 1px solid #D0CED1;
+            // border: 2px solid white;
+            padding: auto !important;
+            box-shadow: rgb(0 0 0 / 35%) 0px -50px 36px -58px inset;
+            // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+            border-radius: 8px;
+
+            ion-thumbnail {
+                width: 110px !important;
+                height: 80px !important;
+
+
+                img {
+                    right: 1px;
+                    border-radius: 5px;
+                    border: 1px solid white;
+                }
+
+            }
+
+            ion-icon {
+                margin-right: 2px;
+            }
+
+            ion-row {
+                display: flex;
+            }
+
+            .title {
+                position: absolute;
+                left: 16px;
+                font-size: 19px;
+                margin-right: 20px !important;
+                font-weight: bolder;
+                color: #ff0000;
+                word-break: break-all;
+
+            }
+
+            .discription {
+                position: absolute;
+                left: 16px;
+                font-size: 16px;
+                margin-top: 10px;
+                color: #623a48;
+                top: 17px;
+            }
+
+            .amount {
+                position: absolute;
+                left: 17px;
+                top: 65px;
+                float: right;
+                font-size: 17px;
+                font-weight: bolder;
+                color: #2B1877;
+
+            }
+
+
         }
-       
+
+        ion-icon {
+            margin-right: 2px;
+        }
+
     }
-    .card{
-        width:80px;
-        height:80px;
+
+    .checkbox {
+        --border-radius: 3px;
+        border: 1px solid #D0CED1;
+        --background: #FFFFFF;
     }
-    
+}
+
+
+.subCategoryActive {
+    ion-note {
+        color: red;
+    }
+}
+
+ion-slide {
+
+    .sub-heading {
+        text-align: center !important;
+        font-weight: bolder;
+    }
+
+    .img-box {
+        width: 73px !important;
+        left: 20px !important;
+        border-radius: 50% !important;
+        height: 70px !important;
+        background: #ffff;
+
+    }
+
 }

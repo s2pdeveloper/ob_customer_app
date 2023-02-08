@@ -9,12 +9,19 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PopoverComponent } from './popover/popover.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
+import { ParallaxHeader } from '../directives/parallax-header';
+import { GalleryListComponent } from './gallery-list/gallery-list.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
-const PIPES = [TruncatePipe, CapitalizePipe,DateAgoPipe];
-const COMPONENTS = [DataUnavailableComponent, PopoverComponent];
+const PIPES = [TruncatePipe, CapitalizePipe, DateAgoPipe];
+const COMPONENTS = [
+  ParallaxHeader,
+  GalleryListComponent,
+  DataUnavailableComponent,
+  PopoverComponent
+];
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES],
   imports: [
@@ -30,4 +37,4 @@ const COMPONENTS = [DataUnavailableComponent, PopoverComponent];
   ],
   exports: [...COMPONENTS, ...PIPES, TranslateModule],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -1,51 +1,55 @@
 ion-content {
-      height: 100vh;
+    height: 100vh;
+
     // --background: #df7e7e !important;
-    ion-card {  
+    ion-card {
         margin: -2px;
         border-radius: 1em;
-       
+
     }
-    
-        .eye-password {
-            font-size: 25px;
-            padding-top: 0px;
-            vertical-align: middle;
-            color:#030c0b;
-        }
-    
-    
-    .input{
+
+    .eye-password {
+        font-size: 25px;
+        padding-top: 0px;
+        vertical-align: middle;
+        color: #030c0b;
+    }
+
+
+    .input {
         margin-left: 15px;
         margin-bottom: 15px;
         margin-right: 15px;
-        
-        
+
+
     }
+
     ion-button {
         // --background: #069b8e !important;
         margin: 30px;
-        
-       
+
+
     }
-    
+
     h6 {
         font-size: 17px;
         margin-bottom: 20px;
         margin-top: -8px;
         padding: 13px;
-    word-spacing: 3px;
+        word-spacing: 3px;
     }
-    
-    
-            
-    
-        
-    
+
+    h5 {
+        font-size: 17px;
+        margin-bottom: 20px;
+        margin-top: -18px;
+        padding: 13px;
+        word-spacing: 3px;
+    }
+
+
+
+
+
+
 }
-
-
-
-
-
- 

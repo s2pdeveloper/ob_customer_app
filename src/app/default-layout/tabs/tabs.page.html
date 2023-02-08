@@ -1,12 +1,10 @@
 <!-- tab bar -->
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button
-      *ngFor="let item of tabPages"
-      tab="{{ item?.tab}}"
-    >
+    <ion-tab-button *ngFor="let item of tabPages" [ngClass]="item.value == 'qr-code' ? 'ion-margin-bottom':null"
+      tab="{{ item?.tab}}">
       <ion-icon [ios]="item.icon + '-outline'" [md]="item.icon"></ion-icon>
-      <ion-label>{{ item?.title }}</ion-label>
+      <ion-label>{{ item?.title |translate}}</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

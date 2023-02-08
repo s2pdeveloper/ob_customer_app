@@ -1,30 +1,40 @@
 <ion-header>
-  <ion-toolbar class="bg-color-2">
+  <ion-toolbar class="">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="landing-page"></ion-back-button>
+      <ion-back-button defaultHref="app/tabs/settings"></ion-back-button>
     </ion-buttons>
-    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap"
-      >{{ 'selectLanguage' | translate}}
+    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap">{{ 'selectLanguage' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card class="ion-padding">
-    <ion-radio-group
-      [(ngModel)]="selectedLanguage"
-      (ionChange)="setLanguage($event)"
-    >
-      <ion-item *ngFor="let item of languages" >
+  <!-- <ion-card class="ion-padding">
+    <ion-radio-group [(ngModel)]="selectedLanguage" (ionChange)="setLanguage($event)">
+      <ion-item *ngFor="let item of languages">
         <ion-label class="ion-text-capitalize ion-text-wrap">
           {{item.label}}
         </ion-label>
-        <ion-radio
-          slot="end"
-          class="btn-radio-color-1"
-          [value]="item.value"
-          color="secondary"
-        ></ion-radio>
+        <ion-radio slot="end" class="btn-radio-color-1" [value]="item.value" color="secondary"></ion-radio>
       </ion-item>
     </ion-radio-group>
-  </ion-card>
+  </ion-card> -->
+
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="none" appAnimateItems className="fadeInLeft">
+          <ion-item class="animation-normal">
+            <ion-radio-group [(ngModel)]="selectedLanguage" (ionChange)="setLanguage($event)">
+              <ion-item *ngFor="let item of languages">
+                <ion-label class="ion-text-capitalize ion-text-wrap" color="black">
+                  {{item.label}}
+                </ion-label>
+                <ion-radio slot="start" class="btn-radio-color-1" [value]="item.value" color="primary"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

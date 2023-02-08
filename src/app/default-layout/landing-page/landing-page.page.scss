@@ -1,101 +1,94 @@
-
 ion-content {
-    --padding-top: 0 !important;
-    .card-pad {
-        padding-bottom: 10px;
-        height: 100%;
-      
-
-
-    }
-    
-}
-ion-card-header.ios {
-    display: flex;
-    flex-flow: column-reverse;
+  --padding-top: 0 !important;
+  .card-pad {
+    padding-bottom: 10px;
+    height: 100%;
   }
-  .sc-ion-searchbar-md-h {
-   
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    
 }
 
-.name{
-    
-    margin-left: 270px;
-    margin-top: -30px;
+.sc-ion-searchbar-md-h {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.name {
+  margin-left: 270px;
+  margin-top: -30px;
+  font-size: 15px;
+  display: flex;
+  align-items: flex-end;
+  justify-items: flex-end;
+  place-content: flex-end;
+}
+
+.heading{
+  font-weight: bold;
+}
+
+.businessTypeActive {
+  ion-note {
     color: red;
-    display: flex;
-    align-items: flex-end;
-    justify-items: flex-end;
-    place-content: flex-end;
+  }
 }
 
-
-ion-searchbar{
-    --icon-color:red;	
-    --border-radius: 7px;
-
-    
+.location {
+  font-size: 24px;
+  color: rgb(241, 42, 42);
+  margin-right: 46px;
+  margin-top: 22px;
+  margin-left: 9px;
+  margin-bottom: -2%;
+  padding: 0px;
 }
+.location-heading {
+  margin-left: -40px;
+  width: 60px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
 
-.location{
-    font-size: 24px;
-    color: rgb(241, 42, 42);
-    margin-right: 46px;
-    margin-top: 22px;
-    margin-left: 9px;
-    margin-bottom: -2%;
-    padding: 0px
-    
-}
-.par{
-    
-        margin-left: -40px;
-        width: 60px;
-}  
-     
-    
-.avtar{
-    
-    width: 46px;
-    border-radius: 50%;
-    display: flex;
-    align-items: initial;
-    justify-content: center;
-    overflow: hidden;
-    margin-left: 268px;
-    margin-top: -41px;
-    margin-block-end: -2%;
-    border-color: red;
-    
-    
 }
 
-.offer-card{
-    margin-bottom: 10px;
-    border-radius: 0%;
-    width: auto;
-    height: auto;
-}
-.ion-toolbar{
-    color: transparent;
+.avtar {
+  width: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: initial;
+  justify-content: center;
+  overflow: hidden;
+  margin-left: 317px;
+  margin-top: -41px;
+  margin-block-end: -2%;
+  border-color: red;
 }
 
-// .btn{
-//     size: inherit;
-//     font-size: initial;
-//     font-weight: lighter;
-    
-   
-// }
-.product-card{
-    width: 100px;
-    height:120px;
-    text-align: center; 
-   ;
+.ion-note {
+  text-align: center;
 }
+.business{
+  text-align: center;
+}
+.business-font-size{
+  font-size: smaller;
+  font-weight: bold;
+
+}
+
+.sub-heading{
+  text-align: center;
+  font-weight: bold !important;
+}
+.swiper-slide img {
+  width: 60px;
+  border-radius: 25%;
+  height: 60px;
+}
+
+.offerImage{
+  border-radius: 5% !important;
+  height: auto !important;
+  width: 90% !important;
+}
+
 

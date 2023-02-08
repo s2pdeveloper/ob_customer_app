@@ -33,7 +33,7 @@ export class ViewProfilePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBUser');
+    this.user = this.localStorage.get('OBCustomer');
     this.getById();
   }
 

@@ -11,6 +11,10 @@
 
 /* Core CSS required for Ionic components to work properly */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -30,9 +34,17 @@
 @import "./theme/custom.scss";
 
 * {
-    font-family: 'Times New Roman', Times, serif !important;
+    --ion-font-family: 'Open Sans', sans-serif !important;
 }
 
 .header-md ion-toolbar:last-of-type {
     --border-width: 0 0 0;
+}
+
+
+ion-margin-bottom {
+    --margin-bottom: var(--ion-margin, 20px);
+    margin-bottom: var(--ion-margin, 20px);
+    contain: none;
+    background-color: blue;
 }

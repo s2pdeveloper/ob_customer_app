@@ -1,142 +1,114 @@
-<ion-content>
+<ion-content class="font-poppins">
 
-  <ion-row>
-    <ion-col><ion-icon class="location" name="location"></ion-icon>
-      <ion-note class="par">Location</ion-note>
-    </ion-col>
-    <ion-col>
+  <ion-item lines="none">
+    <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
+    <!-- <ion-label  (click)="navigateToMap()">{{ 'Location' | translate}}</ion-label> -->
+    <ion-avatar slot="end">
+      <img
+      src="../../../assets/image/Profile-Male-PNG.png"
+      alt="profile"
+      (click)="navigateToProfilePage()"
+    />
+    </ion-avatar>
+  </ion-item>
+
+  <!-- <ion-item lines="none">
+    <ion-label>
+      <ion-icon class="location" name="location"></ion-icon>
+      <ion-note class="location-heading" (click)="navigateToMap()">
+        {{ 'Location' | translate}}
+      </ion-note>
+    </ion-label>
+    <ion-label slot="end">
       <div class="avtar">
-        <img src="../../../assets/image/man.png" alt="profile">
+        <img
+          src="../../../assets/image/Profile-Male-PNG.png"
+          alt="profile"
+          (click)="navigateToProfilePage()"
+        />
       </div>
-    </ion-col>
-  </ion-row>
+    </ion-label>
+  </ion-item> -->
 
-  <!-- <ion-searchbar show-clear-button="focus"></ion-searchbar> -->
-  <!-- <ion-searchbar debounce="800" mode="ios" [(ngModel)]="search" showCancelButton="focus"
-    (ionChange)="setFilteredLocations($event)">
-  </ion-searchbar> -->
-
-  <ion-searchbar class="search-box ion-no-padding ion-margin-top" inputmode="search" searchIcon animated type="text"
-    showCancelButton="never" placeholder="Search" autocomplete="on" autocorrect="on"
-    (ionFocus)="navigateTo('/search-shop',null)">
+  <ion-searchbar
+    class="search-box ion-no-padding size"
+    inputmode="search"
+    searchIcon
+    animated
+    type="text"
+    showCancelButton="never"
+    placeholder="{{ 'Search' | translate}}"
+    autocomplete="on"
+    autocorrect="on"
+    (ionFocus)="navigateToSearchShop('/search-shop',null)"
+  >
   </ion-searchbar>
 
+  <!-- <ion-item lines="none">
+    <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
+  </ion-item>
+  <ion-slides [options]="buttonSlide2" class="ion-margin-bottom">
+    <ion-slide *ngFor="let a of advertiseArr">
+      <div class="">
+        <img class="advertiseImage" src="{{a.image}} " /><br />
+        <ion-note class="sub-heading ion-text-capitalize">{{a.title}}</ion-note>
+      </div>
+    </ion-slide>
+  </ion-slides> -->
 
-
-  <ion-row>
-    <ion-col *ngFor="let b of businessArr" size="4">
-      <ion-card class="product-card" (click)="getBusinessAllCategory(b._id)">
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="12">
-              <img src="{{b.image}} ">
-              <ion-note>{{b.name}}</ion-note>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-
-  <!-- <ion-note >Select Category</ion-note> -->
-  <h6>Select Category</h6>
-  <!-- <ion-note class="name">See all</ion-note> -->
-  <h6 class="name" (click)="seeAll()">See all</h6>
-  <!-- ------ slide one ---- -->
-  <ion-slides autoplay="true">
-    <ion-slide>
-      <ion-col *ngFor="let c of BusinessWithCategoryArr" size="3" (click)="getCategoryIdWithShop(c._id)">
-        <ion-card>
-          <ion-row>
-            <ion-col size="12">
-              <img src="{{c.imageUrl}} ">
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>{{c.name}}</ion-note>
-      </ion-col>
+  <!-- businessType -->
+  <ion-slides
+    class="ion-margin-bottom"
+    autoplay="true"
+    pager="false"
+    scrollbar="false"
+    [options]="buttonSlide"
+  >
+    <ion-slide *ngFor="let b of businessArr;">
+      <div
+        [ngClass]="b.isActive ? 'businessTypeActive':null"
+        (click)="getBusinessAllCategory(b._id)"
+      >
+        <img src="{{b.image}} " /><br />
+        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap"
+          >{{b.name }}</ion-note
+        >
+      </div>
     </ion-slide>
   </ion-slides>
 
-  <ion-col size="3">
-    <ion-card>
-      <ion-row>
-        <ion-col size="6">
-          <img src="../../../assets/image/shoping.jpg" alt="shoping">
-        </ion-col>
-      </ion-row>
-    </ion-card>
-  </ion-col>
-  <h6>Best Offers</h6>
-  <!-- <ion-note>Best Offers</ion-note> -->
-  <div class="offer-card">
-    <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/cake2.jpg" />
-      <ion-card-header>
-        <ion-card-title>Cake Homemade </ion-card-title>
-        <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-  </div>
+  <!-- category -->
+  <ion-item lines="none">
+    <ion-title class="ion-no-padding heading" color="primary"
+      >{{'Category' | translate}}</ion-title
+    >
+    <ion-label (click)="seeAllCategory()" slot="end"
+      >{{'See all' | translate}}</ion-label
+    >
+  </ion-item>
+  <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
+    <ion-slide *ngFor="let c of BusinessWithCategoryArr">
+      <div class="" (click)="getCategoryIdWithShop(c._id)">
+        <img src="{{c.image}} " /><br />
+        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap"
+          >{{c.name}}</ion-note
+        >
+      </div>
+    </ion-slide>
+  </ion-slides>
 
-
-  <div class="offer-card">
-    <ion-card>
-      <img alt="Silhouette of mountains" src="../../../assets/image/car-service.jpg" />
-      <ion-card-header>
-        <ion-card-title>Car Services</ion-card-title>
-        <ion-card-subtitle>Upto 50% Off</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-  </div>
-
-  <h6>Recent </h6>
-  <h6 class="name" (click)="seeAll()">view All</h6>
-  <ion-row>
-    <ion-col size="3">
-      <ion-card color="success">
-        <ion-row>
-          <ion-col size="12">
-            <ion-icon name="construct-outline" size="large"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-card><ion-note>service</ion-note>
-    </ion-col>
-
-    <ion-col size="3">
-      <ion-card color="warning">
-        <ion-row>
-          <ion-col size="12">
-            <ion-icon name="restaurant-outline" size="large"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-card><ion-note>food</ion-note>
-    </ion-col>
-  </ion-row>
-  <h6>Most Popular </h6>
-  <h6 class="name" (click)="seeAll()">view All</h6>
-  <ion-row>
-    <ion-col size="3">
-      <ion-card color="success">
-        <ion-row>
-          <ion-col size="12">
-            <ion-icon name="construct-outline" size="large"></ion-icon>
-
-          </ion-col>
-        </ion-row>
-      </ion-card><ion-note>service</ion-note>
-    </ion-col>
-
-    <ion-col size="3">
-      <ion-card color="warning">
-        <ion-row>
-          <ion-col size="12">
-            <ion-icon name="restaurant-outline" size="large"></ion-icon>
-          </ion-col>
-        </ion-row>
-      </ion-card><ion-note>food</ion-note>
-    </ion-col>
-  </ion-row>
-
+  <!-- offers -->
+  <ion-item lines="none">
+    <ion-title class="ion-no-padding heading" color="primary"
+      >{{'Offers' | translate}}</ion-title
+    >
+  </ion-item>
+  <ion-slides [options]="buttonSlide1" class="ion-margin-bottom">
+    <ion-slide *ngFor="let o of offerArr">
+      <div class="">
+        <img class="offerImage" src="{{o.image}} " /><br />
+        <ion-note class="sub-heading ion-text-capitalize">{{o.title}}</ion-note>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

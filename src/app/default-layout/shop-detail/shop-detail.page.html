@@ -2,124 +2,184 @@
   <ion-buttons slot="start">
     <ion-back-button defaultHref="/search-shop"></ion-back-button>
   </ion-buttons>
-  <ion-title> {{ 'Shop Details' | translate}}</ion-title>
+  <ion-buttons slot="end" class="ion-margin-right">
+    <ion-icon name="chatbubble-sharp" size="large" (click)="goToChat()"></ion-icon>
+  </ion-buttons>
+  <ion-title> {{ 'shopDetails' | translate}}</ion-title>
 </ion-toolbar>
 
-<ion-content class="ion-padding">
-  <ng-container class="container-img">
-    <img [src]="shopDetails?.bannerImages" />
-    <img class="logo-img" [src]="shopDetails?.image
-    " />
+<!-- 
+<ion-content>
+  <ng-container *ngFor="let s of shopDetails">
+    <ng-container class="container-img">
+      <ion-card class="card">
+        <div class="img-box">
+          <img alt="Silhouette of mountains" [src]="s?.bannerImages" class="banner" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{s?.shopName}} </ion-card-title>
+          <ion-card-subtitle>{{s?.schedule?.day}} : {{s?.schedule?.startTime}} AM to {{s?.schedule?.endTime
+            }} PM</ion-card-subtitle>
+
+          <div class="social-media">
+            <ul>
+              <li>
+                <a href="{{s?.links?.facebook}}">
+                  <i><img class="ion-margin-start" src="../../../assets/icon/facebook.png" class="facebook"
+                      alt="facebook img"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{s?.links?.insta}}">
+                  <i><img class="ion-margin-end" src="../../../assets/icon/instagram.png" class="instagram"
+                      alt="instagram img"></i>
+                </a>
+              </li>
+              <li>
+                <a href="{{s?.links?.youtube}}">
+                  <i><img class="ion-margin-end" src="../../../assets/icon/youtube.png" class="youtube"
+                      alt="youtube img"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-card class="transparent box-shadow ion-padding user-info">
+            <ion-item lines="none">
+              <ion-icon name="person-circle-outline" class="icon ion-margin-right" color="primary"></ion-icon>
+              <p class="text-size-p ion-padding-start">
+                {{s?.firstName}} {{s?.lastName}}
+              </p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="call" class="icon ion-margin-right" color="primary"></ion-icon>
+              <p class="text-size-p ion-padding-start">{{s?.mobile}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="mail" class="icon ion-margin-right" color="primary"></ion-icon>
+              <p class="text-size-p ion-padding-start">{{s?.email}}</p>
+            </ion-item>
+
+            <ion-item lines="none">
+              <ion-icon name="compass" class="icon ion-margin-right" color="primary" (click)="goToMap()"></ion-icon>
+              <p class="text-size-p ion-padding-start"> {{s?.address?.line1}} {{s?.address?.city}}
+                {{s?.address?.state}} {{s?.address?.country}}
+                {{s?.address?.pinCode}}
+              </p>
+            </ion-item>
+          </ion-card>
+        </ion-card-content>
+      </ion-card>
+      <div class="img-logo">
+        <img [src]="s?.image" />
+      </div>
+
+    </ng-container>
   </ng-container>
 
-  <div>
-    <ion-text>
-      <h3 class="ion-text-capitalize ion-text-wrap center">
-        {{shopDetails?.firstName}} {{shopDetails?.lastName}}
-      </h3>
-    </ion-text>
-  </div>
+</ion-content> -->
 
-  <div>
-    <p>{{shopDetails?.schedule?.day}} :- {{shopDetails?.schedule?.startTime}} AM to {{shopDetails?.schedule?.endTime
-      }} PM</p>
-  </div>
 
-  <ion-row>
-    <ion-col class="ion-text-center">
-      <a href="{{shopDetails?.links?.facebook}}">
-        <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-      </a>
-      <a href="{{shopDetails?.links?.insta}}">
-        <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
-      </a>
-      <a href="{{shopDetails?.links?.youtube}}">
-        <ion-icon name="logo-youtube" class="font yt"></ion-icon>
-      </a>
-    </ion-col>
-  </ion-row>
-
-  <ion-item>
-    <ion-icon name="card-sharp" color="dark"></ion-icon>
-    <ion-label class="ion-margin-start">
-      {{ 'shopName' | translate}}
-      <p>{{shopDetails?.shopName}}</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="mail" color="dark"></ion-icon>
-    <ion-label class="ion-margin-start">
-      {{ 'email' | translate}}
-      <p>{{shopDetails?.email}}</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-icon name="call" color="dark"></ion-icon>
-    <ion-label class="ion-margin-start">
-      {{ 'mobileNumber' | translate}}
-      <p>{{shopDetails?.mobile}}</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-accordion-group>
-    <ion-accordion value="third">
-      <ion-item slot="header" color="light">
-        <ion-icon name="location" color="dark"></ion-icon>
-        <ion-label class="ion-padding">Address</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <p>
-          {{shopDetails?.address?.line1}} {{shopDetails?.address?.city}}
-          {{shopDetails?.address?.state}} {{shopDetails?.address?.country}}
-          {{shopDetails?.address?.pinCode}}
-        </p>
+<ion-content scrollEvents="true" parallax-header>
+  <ng-container *ngFor="let s of shopDetails">
+    <ion-grid>
+      <div class="image">
+        <img [src]="s.bannerImages" alt="" class="banner-img ion-margin-bottom background-size header-image" />
       </div>
-    </ion-accordion>
-  </ion-accordion-group>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="box-shadow ion-text-center card">
+            <ion-avatar class="logo-img">
+              <img [src]="s.image" alt="" />
+            </ion-avatar>
+            <ion-card-content>
+              <h1 class="text-size-md ion-text-capitalize ion-text-wrap ion-no-padding">
+                {{s.shopName}}
+              </h1>
+              <!-- <p class="text-size-sm text-wrap">
+                {{s?.address?.line1}} {{s?.address?.city}}
+                {{s?.address?.state}} {{s?.address?.country}}
+                {{s?.address?.pinCode}}
+              </p> -->
+            </ion-card-content>
+          </ion-card>
+          <div class="social-share">
+            <ion-item lines="none">
+              <ion-label class="ion-text-center">
+                <span class="span-small"><b>{{'shopTiming'|translate}} :-</b>
+                  {{s?.schedule?.day}}:{{s?.schedule?.startTime}}
+                  AM to {{s?.schedule?.endTime }} PM</span>
+              </ion-label>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col size="12" class="ion-text-center">
+          <ion-button fill="clear">
+            <a href="{{s?.links?.facebook}}">
+              <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+            </a>
+          </ion-button>
+          <ion-button fill="clear">
+            <a href="{{s?.links?.insta}}">
+              <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
+            </a>
+          </ion-button>
+          <ion-button fill="clear">
+            <a href="{{s?.links?.youtube}}">
+              <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+            </a>
+          </ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-card class="transparent box-shadow ion-padding">
+
+            <ion-item lines="none">
+              <ion-icon name="person-circle-outline" class="icon"></ion-icon>
+              <p class="text-size-p ion-padding-start">
+                {{s?.firstName}} {{s?.lastName}}
+              </p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="mail" class="icon"></ion-icon>
+              <p class="text-size-p ion-padding-start">{{s?.email}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="call" class="icon"></ion-icon>
+              <p class="text-size-p ion-padding-start">{{s?.mobile}}</p>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-icon name="location" class="icon" (click)="goToMap()"></ion-icon>
+              <p class="text-size-p ion-padding-start"> {{s?.address?.line1}} {{s?.address?.city}}
+                {{s?.address?.state}} {{s?.address?.country}}
+                {{s?.address?.pinCode}}</p>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+        {{ 'viewCatalogue' | translate}}
+      </ion-button>
+    </div>
 
 
+    <ion-item lines="none">
+      <ion-title class=" ion-margin-top font-bold ">{{'gallery' | translate}}</ion-title>
+    </ion-item>
 
-  <!-- <h6>Catalogue</h6>
-  <ion-slides autoplay="true">
-    <ion-slide>
-      <ion-col *ngFor="let c of catalogue" size="3" (click)="getCategoryIdWithShop(c._id)">
-        <ion-card>
-          <ion-row>
-            <ion-col size="12">
-              <img src="{{c.image}} ">
-            </ion-col>
-          </ion-row>
-        </ion-card>
-        <ion-note>{{c.title}}</ion-note>
-      </ion-col>
-    </ion-slide>
-  </ion-slides> -->
-
-  <!-- <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top" 
-    (click)="navigateTo('/catalogue',shopDetails._id)">
-    <ion-icon name="eye"></ion-icon>
-    {{ 'View SubCategory' | translate}}
-  </ion-button> -->
-<h3>SubCategory </h3>
-
-  <ion-row>
-    <ion-col *ngFor="let s of subCategoryArr" size="4">
-      <ion-card class="product-card"  (click)="navigateTo('/catalogue',s._id)">
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="12">
-              <img src="{{s.image}} ">
-              <ion-note>{{s.name}}</ion-note>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-
-
-
+    <ion-slides [options]="buttonSlide" class="ion-margin-bottom" *ngFor="let gallery of shopDetails">
+      <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
+        <div class="ion-margin-top">
+          <ion-item (click)="navigateToViewGalleryImages(gallery)">
+            <img class="gallery" src="{{galleryImg}}">
+          </ion-item>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ng-container>
 </ion-content>

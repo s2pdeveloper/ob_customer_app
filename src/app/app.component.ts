@@ -20,38 +20,7 @@ export class AppComponent implements OnInit {
   returnUrl: string;
   public selectedIndex: number = 0;
   currentUser: any = {};
-  public menuPages = [
-    {
-      title: 'Home',
-      url: '/landing-page',
-      icon: 'home',
-    },
-    {
-      title: 'Profile',
-      url: '/profile-page',
-      icon: 'person',
-    },
-    {
-      title: 'Change Language',
-      url: '/change-language',
-      icon: 'language',
-    },
-    {
-      title: 'Change Password',
-      url: '/change-pwd',
-      icon: 'lock-open',
-    },
-    // {
-    //   title: 'Notifications',
-    //   url: '/notification-list',
-    //   icon: 'chatbubbles-outline',
-    // },
-    {
-      title: 'Logout',
-      url: '/login',
-      icon: 'log-out',
-    },
-  ];
+ 
   constructor(
     private router: Router,
     private languageService: LanguageService,
@@ -68,7 +37,7 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
   async ngOnInit() {
-    this.currentUser = this.storageService.get('OBUser');
+    this.currentUser = this.storageService.get('OBCustomer');
     if (this.currentUser) {
       // this.router.navigate(['/landing-page']);
     }
@@ -103,7 +72,7 @@ export class AppComponent implements OnInit {
 
   settingStyleAndSplashScreen = async () => {
     await StatusBar.setStyle({ style: StatusBarStyle.Dark });
-    await StatusBar.setBackgroundColor({ color: '#5b32a1' });
+    await StatusBar.setBackgroundColor({ color: '#ff0000' });
     await StatusBar.show();
   };
   navigateTo(page: any) {

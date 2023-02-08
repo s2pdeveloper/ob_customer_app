@@ -1,39 +1,61 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CustomerService } from 'src/app/service/customer/customer.service';
-import { StorageService, UtilitiesService } from 'src/app/core/services';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  // loaded = false;
-  // categoryDetails: any = {};
-  // service: any;
-  constructor(
-    private router:Router,
-    private customer:CustomerService
-    ) { }
+  categoryDetails: any = [];
+  businessTypeId: any;
+  categoryTypeId: string;
+  businessName: string;
+  search: string = '';
 
-  ngOnInit() {
+  constructor(
+    private router: Router,
+    private actRoute: ActivatedRoute,
+    private categoryService: CategoryService,
+    public translate: TranslateService
+
+  ) { }
+
+
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.actRoute.queryParams.subscribe(params => {
+      this.businessTypeId = params.businessTypeId
+      this.getByBusinessTypeCategory(false)
+    })
   }
-  description(){
-    this.router.navigate(['/catalogue'])
+
+  getByBusinessTypeCategory(isFirstLoad: boolean, event?: any) {
+    let obj = {
+      businessTypeId: this.businessTypeId,
+      search: this.search,
+    }
+    this.categoryService.getAll(obj).subscribe((success) => {
+      this.categoryDetails = success.rows;
+
+    });
   }
-  grocery(){
-    this.router.navigate(['/grocery'])
+
+
+  navigateTo(path, c) {
+    let params = {
+      businessTypeId: c.businessTypeId,
+      categoryId: c._id,
+    };
+    this.router.navigate([path], { queryParams: params });
   }
-  // category(){
-  //   this.loaded = false;
-  //   this.customer.getCategory(this.service._id).subscribe((success) => {
-  //     console.log("success",success);
-  //     this.categoryDetails = success;
-      
-      
-  //     // this.spinner.hideLoader();
-  //     this.loaded = false;
-  //   });
-  // }
+
+
+  onSearch() {
+    this.categoryDetails = [];
+    this.getByBusinessTypeCategory(false, '');
+  }
 
 }

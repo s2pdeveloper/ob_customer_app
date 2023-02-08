@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
+import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 
 @Component({
@@ -12,12 +14,48 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-
   businessTypeId: any;
-  user: any;
   businessArr: any = [];
   BusinessWithCategoryArr: any = [];
   search: string = '';
+  offerArr: any=[];
+  advertiseArr:any=[];
+  buttonSlide = {
+    slidesPerView: 4,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 10,
+  };
+
+    buttonSlide1 = {
+      slidesPerView: 1,
+      slideShadows: true,
+      initialSlide: 0,
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      spaceBetween: 25,
+    };
+
+    buttonSlide2 = {
+      slidesPerView: 1,
+      slideShadows: true,
+      initialSlide: 0,
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      spaceBetween: 25,
+    };
+
 
   constructor(
     private router: Router,
@@ -25,70 +63,97 @@ export class LandingPagePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
-    private shopService: ShopService,
+    private offerService: OfferService,
+    private advertiseService:AdvertiseService
+  ) {}
 
-  ) { }
-
-
-
-  ngOnInit() {
+  ngOnInit() {}
+  ionViewWillEnter() {
+    this.getAllOffer();
+    this.getAllAdvertise();
     this.getAllBusinessType();
   }
 
   getAllBusinessType() {
     let obj = {};
     this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
-      console.log('success', success);
-      this.businessArr = success.rows;
+      this.businessArr = success.rows.map((x, i) => {
+        x.isActive = false;
+        if (i == 0) {
+          x.isActive = true;
+          this.getCategoryByBusinessTypeId(x._id);
+          this.businessTypeId = x._id;
+        }
+        return x;
+      });
     });
   }
 
-  getBusinessAllCategory(ev) {
-    console.log("event", ev);
-    this.getCategoryByBusinessTypeId(ev)
+  getBusinessAllCategory(businessTypeId) {
+    this.businessArr = this.businessArr.map((x) => {
+      x.isActive = false;
+      if (x._id == businessTypeId) {
+        x.isActive = true;
+        this.businessTypeId = businessTypeId;
+      }
+      return x;
+    });
+    this.getCategoryByBusinessTypeId(businessTypeId);
   }
 
   getCategoryByBusinessTypeId(businessTypeId) {
     let obj: any = {
-      businessTypeId: businessTypeId
+      businessTypeId: businessTypeId,
     };
-    this.categoryService
-      .getAll(obj)
-      .subscribe((success) => {
-        console.log("success------------", success);
-        this.BusinessWithCategoryArr = success.rows;
-      });
+    this.categoryService.getAll(obj).subscribe((success) => {
+      this.BusinessWithCategoryArr = success.rows;
+    });
   }
 
-
-  navigateTo(path, _id) {
+  navigateToSearchShop(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 
-  seeAll() {
-    this.router.navigate(['/category']);
-  }
-  proCard() {
-    this.router.navigate(['/category']);
-  }
-
-  getCategoryIdWithShop(ev) {
-    console.log("event--------------shop", ev);
-    let params = ev;
-    console.log(params);
-    this.router.navigate(['/search-shop'], { queryParams: { params }});
+  seeAllCategory() {
+    this.router.navigate(['/category'], {
+      queryParams: {
+        businessTypeId: this.businessTypeId,
+      },
+    });
   }
 
-  // getCategoryByShop(categoryId) {
-  //   let obj: any = {
-  //     categoryId: categoryId
-  //   };
-  //   this.shopService
-  //     .getByCategoryIdWithShop(obj)
-  //     .subscribe((success) => {
-  //       console.log("success------------shop", success);
-  //       this.BusinessWithCategoryArr = success.rows;
-  //     });
-  // }
 
+
+  getCategoryIdWithShop(categoryId) {
+    let params = {
+      businessTypeId: this.businessTypeId,
+      categoryId: categoryId,
+    };
+    this.router.navigate(['/search-shop'], { queryParams: params });
+  }
+
+  navigateToProfilePage() {
+    this.router.navigate(['/view-profile']);
+  }
+
+  navigateToMap() {
+    this.router.navigate(['/map']);
+  }
+
+
+  getAllOffer() {
+    let obj = {};
+    this.offerService.getAll(obj).subscribe((success) => {
+      this.offerArr = success.rows;
+    });
+  }
+
+  getAllAdvertise() {
+    let obj = {};
+    this.advertiseService.getAll(obj).subscribe((success) => {
+      this.advertiseArr = success.rows;
+      console.log("this.advertiseArr@@@@@@@@@@@@@",this.advertiseArr);
+      
+    });
+  }
 }

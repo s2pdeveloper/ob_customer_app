@@ -1,0 +1,24 @@
+.category {
+  .card {
+    padding: 10px;
+    height: 100% !important;
+    img {
+      width: 80px;
+      height: 50px;
+    }
+  }
+  .card-body {
+    .card-heading {
+      text-align: center !important;
+      font-size: medium;
+      margin: -1px 0px 10px 0px;
+    }
+  }
+}
+
+.sc-ion-searchbar-md-h {
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

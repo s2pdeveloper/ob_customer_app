@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CatalogueService } from 'src/app/service/catalogue/catalogue.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-
+import { StorageService, ToastService } from 'src/app/core/services';
+import { Socket } from 'ngx-socket-io';
+import { ChatService } from 'src/app/service/chat/chat.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-catalogue',
@@ -12,109 +14,133 @@ import { LoaderService } from 'src/app/core/services/loader.service';
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
-
   loaded: boolean = false;
-  // Cataloguelist: any = [];
   user: any;
   shopId: any;
   page: number = 1;
   pageSize: number = 10;
   search = '';
   shopDetails: any;
-  catalogue: any;
-  catalogueArr: any;
+  catalogueArr: any=[];
+  selectAll: boolean;
+  subCategoryArr: any=[];
 
-  // start: number = 0;
-  // limit: number = 100;
-  // searchText: string;
 
+  buttonSlide = {
+    slidesPerView: 4,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 3,
+  };
 
   constructor(
-    private routes: Router,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private catalogueService: CatalogueService,
+    private toaster: ToastService,
     private shopService: ShopService,
+    private localStorage: StorageService,
     private spinner: LoaderService,
+    private socket: Socket,
+    private chatService: ChatService,
+    public translate: TranslateService
 
-  ) { }
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log(params);
-      this.getCatalogueBySubCategoryId(params._id);
+      this.getShopById(params._id);
     });
-
   }
+  
 
-  // getShopById(_id) {
-  //   console.log(_id);
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   this.shopService.getByIdShop(_id).subscribe((success: any) => {
-  //     console.log('success shopby id', success);
-  //     this.shopDetails = success[0];
-  //     this.catalogue = success[0].shopWithCatalogue;
-  //     this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
-
-
-  getCatalogueBySubCategoryId(_id) {
-    console.log(_id);
+  getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
     this.loaded = false;
-    this.shopService.getCatalogueBySubCategoryId(_id).subscribe((success: any) => {
-      console.log("success-------",success);
-      
-      this.catalogueArr = success.payload.shop;
-      // console.log('shop by id----categoryId', this.shopArr);
-      
-      this.spinner.hideLoader();
-      this.loaded = true;
+    this.shopService
+      .getCatalogueBySubCategoryId(_id)
+      .subscribe((success: any) => {
+        this.catalogueArr = success.payload.rows.map((x) => {
+          x.isChecked = false;
+          return x;
+        });
+        // ----------------------------------- //
+        this.subCategoryArr.forEach((x) => {
+          if (x.id === _id) {
+            x.isActive = true;
+          } else {
+            x.isActive = false;
+          }
+        });
+        this.spinner.hideLoader();
+        this.loaded = true;
+      });
+  }
+
+  getShopById(_id) {
+    this.shopService.getByIdShop(_id).subscribe((success: any) => {
+      this.subCategoryArr = success.data.map((y, i) => {
+        y.isActive = false;
+        if (i == 0) {
+          y.isActive = true;
+          this.getCatalogueBySubCategoryId(y._id, null);
+        }
+        return y;
+      });
     });
   }
 
+  navigateTo() {
+    let msg = '';
+    let arr = this.catalogueArr.filter((x) => x.isChecked == true);
+    if (arr.length < 1) {
+      this.toaster.errorToast('Plz select at least one product');
+      return;
+    }
 
-  // getAllCatalogue() {
-  //   // this.spinner.showLoader();
-  //  let obj = {
-  //     page: this.page,
-  //     pageSize: this.pageSize,
-  //     search: this.search,
-  //     // shopId: this.shopId,
-  //   };
-  //     this.catalogueService.getAllCatalogue(obj).subscribe((success: any) => {
-  //     console.log("success--------------", success);
-  //     // this.Cataloguelist = success;
-  //     // this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
+    let amount = 0;
+    let description = '';
+    msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
+    for (let i = 0; i < arr.length; i++) {
+      const catTitle = arr[i].title;
+      const catPrice = arr[i].price;
+      msg += `${catTitle}`;
+      if (i != arr.length - 1) {
+        msg += ` , `;
+      }
+      description += `${catTitle}`;
+      if (i != arr.length - 1) {
+        description += `,`;
+      }
+      amount += catPrice;
+    }
 
+    let message = {
+      shopId: arr[0].shopId._id,
+      message: msg,
+      description: description,
+      amount: amount,
+    };
+    this.chatService.create(message).subscribe((success) => {
+      console.log('success', success);
 
-  // generateItems() {
-  //   const count = this.items.length + 1;
-  //   for (let i = 0; i < 50; i++) {
-  //     this.items.push(`Item ${count + i}`);
-  //   }
-  // }
-
-  // onIonInfinite(ev) {
-  //   this.generateItems();
-  //   setTimeout(() => {
-  //     (ev as InfiniteScrollCustomEvent).target.complete();
-  //   }, 500);
-  // }
-
-
-  // doRefresh(event: any) {
-  //   this.Cataloguelist = [];
-  //   this.start = 0;
-  //   this.getAllCatalogue();
-  //   event.target.complete();
-  // }
-
+      this.spinner.hideLoader();
+      // join
+      this.socket.emit('join', { room: success.orderId, user: this.user._id });
+      this.router.navigate(['/chat-view'], {
+        queryParams: {
+          shopId: arr[0].shopId._id,
+          shopName: arr[0].shopId.shopName,
+          roomName: success.orderId, //join
+        },
+      });
+    });
+  }
 }
-
-

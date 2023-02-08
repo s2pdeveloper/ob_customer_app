@@ -16,15 +16,22 @@ const routes: Routes = [
         path: 'landing-page',
         loadChildren: () => import('../../default-layout/landing-page/landing-page.module').then(m => m.LandingPagePageModule)
       },
-      // {
-      //   path: 'orders',
-      //   loadChildren: () => import('../orders/orders.module').then(m => m.OrdersPageModule)
-      // },
+      {
+        path: 'qr-code',
+        loadChildren: () => import('../../default-layout/qr-code/qr-code.module').then(m => m.QrCodePageModule)
+      },
+      {
+        path: 'chat-list',
+        loadChildren: () => import('../chat-list/chat-list.module').then(m => m.ChatListPageModule)
+      },
       // {
       //   path: 'cart',
       //   loadChildren: () => import('../cart/cart.module').then(m => m.CartPageModule)
       // },
-     
+      {
+        path: 'favorite',
+        loadChildren: () => import('../favorite/favorite.module').then(m => m.FavoritePageModule)
+      },
       {
         path: 'settings',
         loadChildren: () => import('../../default-layout/setting/setting.module').then(m => m.SettingPageModule)

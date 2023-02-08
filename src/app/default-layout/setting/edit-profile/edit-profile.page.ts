@@ -70,8 +70,7 @@ export class EditProfilePage implements OnInit {
 ) { }
 
   ngOnInit() {
-    this.user = this.localStorage.get('OBUser');
-    console.log("this.user", this.user);
+    this.user = this.localStorage.get('OBCustomer');
     this.getById();
   }
 
@@ -87,27 +86,6 @@ export class EditProfilePage implements OnInit {
     });
   }
 
-  // updateProfile() {
-  //   this.submitted = true;
-  //   if (this.profileForm.invalid) {
-  //     this.toaster.presentToast('warning', 'Please fill all valid field !');
-  //     return;
-  //   }
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   let formData = this.profileForm.value;
-  //   this.authService
-  //     .updateUser(formData.id, formData)
-  //     .subscribe((success: any) => {
-  //       // console.log('success', success);
-  //       this.spinner.hideLoader();
-  //       this.profileForm.reset();
-  //       this.submitted = false;
-  //       this.loaded = true;
-  //       this.toaster.successToast('Profile updated successfully.');
-  //       this.router.navigate(['/view-profile']);
-  //     });
-  // }
 
   async getData() {
     await this.spinner.hideLoader();
