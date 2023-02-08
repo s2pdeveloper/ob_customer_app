@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>favorite-list</ion-title>
+    <ion-title> {{ 'favoritesShop' | translate}} </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,47 +17,49 @@
     <ion-col size="12">
       <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
         showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
-       >
+        [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
-
-    <!-- filter -->
-    <!-- <ion-col size="2">
-      <ion-icon name="filter-outline" size="large" (click)="openSubCategoryModel()"></ion-icon>
-    </ion-col> -->
   </ion-row>
 
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col size="12">
-        <ion-list appAnimateItems className="fadeInLeft">
-          <ion-item lines="full" 
-            class="animation-normal  ion-no-padding">
-            <ion-thumbnail slot="start">
-              <img [src]="" />
+        <ion-list appAnimateItems className="fadeInLeft" *ngFor="let s of shopArr">
+          <ion-item lines="full" class="animation-normal ion-no-padding" *ngIf="s?.shopFavorite.length>0">
+            <ion-thumbnail slot="start" (click)="navigateTo('/shop-detail',s._id)">
+              <img [src]="s.image" />
             </ion-thumbnail>
-            <div class="content">
-              <ion-title class="shop-name ion-no-padding" color="primary"></ion-title>
-              <ion-label class="shop-name"></ion-label>
+            <div class="content" (click)="navigateTo('/shop-detail',s._id)">
+              <ion-title class="shop-name ion-no-padding" color="primary">{{s.shopName}}</ion-title>
+              <ion-label class="shop-name">{{s.firstName}} {{s.lastName}}</ion-label>
               <ion-label color="medium" class="star">
                 <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                  <ion-icon name="star-outline"></ion-icon>
-                <!-- Rating <b class="ion-margin-left">4.5</b> -->
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="star-outline"></ion-icon>
               </ion-label>
               <ion-note>
-               </ion-note>
+                {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
+                s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode
+                : "" }}.</ion-note>
             </div>
+            <ion-col size="2" class="ion-text-center ion-no-padding" slot="end">
+              <ion-icon *ngIf="!s?.shopFavorite.length
+               " (click)="addToFavorite(s)" name="heart-outline" size="large">
+              </ion-icon>
+              <ion-icon *ngIf="s?.shopFavorite.length
+              " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"></ion-icon>
+            </ion-col>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+  </ion-infinite-scroll>
 </ion-content>
