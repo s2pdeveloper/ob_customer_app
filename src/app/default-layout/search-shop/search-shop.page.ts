@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
-import { ModalController, } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { SubCategoryComponent } from 'src/app/modal/sub-category/sub-category.component';
 import { StorageService, ToastService } from 'src/app/core/services';
 @Component({
@@ -12,6 +12,9 @@ import { StorageService, ToastService } from 'src/app/core/services';
   styleUrls: ['./search-shop.page.scss'],
 })
 export class SearchShopPage implements OnInit {
+  @ViewChild(IonInfiniteScroll, { static: false })
+  infiniteScroll: IonInfiniteScroll;
+  disabledScroll = false;
   page: number = 1;
   pageSize: number = 10;
   search: string = '';
@@ -32,21 +35,19 @@ export class SearchShopPage implements OnInit {
     private shopService: ShopService,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
-    private localStorage: StorageService,
+    private localStorage: StorageService
+  ) {}
 
-  ) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.subCategoryId = params._id ?? "";
+      this.subCategoryId = params._id ?? '';
       if (params.shopId) {
         this.getShopById(params.shopId);
       } else {
-        this.businessTypeId = params.businessTypeId ?? "";
-        this.categoryId = params.categoryId ?? "";
+        this.businessTypeId = params.businessTypeId ?? '';
+        this.categoryId = params.categoryId ?? '';
         this.getAllShop(false);
       }
     });
@@ -81,7 +82,10 @@ export class SearchShopPage implements OnInit {
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
-
+  getUrl(url) {
+    let path = `url(${url})`;
+    return path;
+  }
   onSearch() {
     this.page = 1;
     this.shopArr = [];
@@ -100,7 +104,6 @@ export class SearchShopPage implements OnInit {
       component: SubCategoryComponent,
     });
     await model.present();
-
   }
 
   async addToFavorite(item) {
@@ -109,13 +112,22 @@ export class SearchShopPage implements OnInit {
       _id: this.user,
       action: item.shopFavorite.length ? 'remove' : 'add',
       shopId: item._id,
-    }
-    this.shopService.createOrRemoveFavorite(payload).subscribe(
-      async success => {
+    };
+    this.shopService
+      .createOrRemoveFavorite(payload)
+      .subscribe(async (success) => {
         this.getAllShop(false);
         this.toaster.successToast(success.message);
-      })
+      });
   }
 
+  doInfinite(event) {
+    console.log('In do');
+    this.page++;
+    this.getAllShop(true, event);
+    event.target.disabled = true;
+    this.infiniteScroll.disabled = true;
+    event.target.complete();
+  }
 
 }

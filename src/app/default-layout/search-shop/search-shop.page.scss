@@ -79,7 +79,7 @@ img{
 .right{
   position: absolute;
   top:6px;
-left: 80%;
+left: 85%;
 }
 .center{
   position: absolute;
@@ -109,7 +109,21 @@ ion-card{
   .center1{
     position: absolute;
     bottom:8px;
-    // top:50%;
-    // font-size:x-large;
-    // transform: translate(-50%,-50%);
+    background-color:transparent;
+    // background-color: rgb(201, 220, 229);
+  }
+
+  .shop-card{
+    margin-bottom: 1rem;
+    .heart-icon{
+      margin-left: 1rem !important;
+    }
+    b{
+    background-color:transparent;
+
+    }
+    .heart-icon{
+   text-align: end !important;
+
+    }
   }
