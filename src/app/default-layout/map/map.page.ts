@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
@@ -25,6 +26,7 @@ export class MapPage implements OnInit {
   markers: any[];
   constructor(
     private geolocation: Geolocation,
+    private activatedRoute: ActivatedRoute,
     private nativeGeocoder: NativeGeocoder,
     public zone: NgZone,
   ) {
@@ -34,9 +36,15 @@ export class MapPage implements OnInit {
   }
 
   ngOnInit() {
+
     this.loadMap();
   }
-
+  ionViewWillEnter() {
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      console.log("adreeeeeeeeeeeeeeeeeees",params);
+    
+    });
+  }
   loadMap() {
     //FIRST GET THE LOCATION FROM THE DEVICE.
     if (navigator.geolocation) {
@@ -106,6 +114,8 @@ export class MapPage implements OnInit {
         this.zone.run(() => {
           predictions.forEach((prediction) => {
             this.autocompleteItems.push(prediction);
+            console.log("this.autocompleteItems",this.autocompleteItems);
+            
           });
         });
       });
@@ -113,6 +123,8 @@ export class MapPage implements OnInit {
 
   //wE CALL THIS FROM EACH ITEM.
   SelectSearchResult(item) {
+    console.log("item",item);
+    
     ///WE CAN CONFIGURE MORE COMPLEX FUNCTIONS SUCH AS UPLOAD DATA TO FIRESTORE OR LINK IT TO SOMETHING
     // alert(JSON.stringify(item))      
     // this.placeid = item.place_id

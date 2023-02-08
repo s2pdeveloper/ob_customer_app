@@ -135,6 +135,7 @@
   "Place Order": "आदेश देना",
   "Type your message...": "अपना संदेश टाइप करें...",
   "Settings": "समायोजन",
+  "Setting": "समायोजन",
   "My Profile": "मेरी प्रोफाइल",
   "View Your Profile": "अपनी प्रोफ़ाइल देखें",
   "Change Language": "भाषा बदलें",
@@ -144,10 +145,19 @@
   "completed":"पुरा होना",
   "Shop List": "दुकान सूची",
   "Search Shop": "दुकान खोजें",
-  "Shop Details": "दुकान विवरण",
+  "shopDetails": "दुकान विवरण",
   "Shop Owner Name":"दुकान मालिक का नाम",
   "Address": "पता",
-  "View Product":"उत्पाद देखें"
+  "View Product":"उत्पाद देखें",
+  "chat":"चैट",
+  "QR Code":"QR कोड",
+  "favorites":"पसंदीदा",
+  "galleryImages": "गैलरी छवियाँ",
+  "shopTiming": "दुकान का समय"
+
+
+
+
 
   
 

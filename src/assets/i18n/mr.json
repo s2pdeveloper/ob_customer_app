@@ -134,6 +134,7 @@
   "Place Order": "मागणी नोंद करा",
   "Type your message...": "तुमचा संदेश टाइप करा...",
   "Settings": "सेटिंग्ज",
+  "Setting": "सेटिंग्ज",
   "My Profile": "माझे प्रोफाइल",
   "View Your Profile": "तुमचे प्रोफाइल पहा",
   "Change Language": "भाषा बदला",
@@ -142,11 +143,23 @@
   "new": "नवीन",
   "completed":"पूर्ण",
   "Shop List": "दुकानाची यादी",
-  "Shop Details": "दुकान तपशील",
+  "shopDetails": "दुकान तपशील",
   "Search Shop": "दुकान शोधा",
   "Shop Owner Name":"दुकान मालकाचे नाव",
   "Address": "पत्ता",
-  "View Product":"उत्पादन पहा"
+  "View Product":"उत्पादन पहा",
+  "chat":"गप्पा",
+  "QR Code":"QR कोड",
+  "favorites":"आवडते",
+"galleryImages":"गॅलरी प्रतिमा",
+"shopTiming":"दुकानाची वेळ"
+
+
+
+
+
+
+
 
 
 

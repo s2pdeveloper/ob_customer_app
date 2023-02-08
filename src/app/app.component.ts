@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
 
   settingStyleAndSplashScreen = async () => {
     await StatusBar.setStyle({ style: StatusBarStyle.Dark });
-    await StatusBar.setBackgroundColor({ color: '#5b32a1' });
+    await StatusBar.setBackgroundColor({ color: '#ff0000' });
     await StatusBar.show();
   };
   navigateTo(page: any) {

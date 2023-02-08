@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
@@ -14,13 +15,11 @@ import { ShopService } from 'src/app/service/shop/shop.service';
 })
 export class LandingPagePage implements OnInit {
   businessTypeId: any;
-  user: any;
   businessArr: any = [];
   BusinessWithCategoryArr: any = [];
   search: string = '';
-  selectedBusinessName: any;
-  selectedBusinessId: any;
-  offerArr: any;
+  offerArr: any=[];
+  advertiseArr:any=[];
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -32,6 +31,7 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 10,
   };
+
     buttonSlide1 = {
       slidesPerView: 1,
       slideShadows: true,
@@ -44,18 +44,33 @@ export class LandingPagePage implements OnInit {
       spaceBetween: 25,
     };
 
+    buttonSlide2 = {
+      slidesPerView: 1,
+      slideShadows: true,
+      initialSlide: 0,
+      speed: 400,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+      },
+      spaceBetween: 25,
+    };
+
+
   constructor(
     private router: Router,
     private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
-    private offerService: OfferService
+    private offerService: OfferService,
+    private advertiseService:AdvertiseService
   ) {}
 
   ngOnInit() {}
   ionViewWillEnter() {
     this.getAllOffer();
+    this.getAllAdvertise();
     this.getAllBusinessType();
   }
 
@@ -107,7 +122,7 @@ export class LandingPagePage implements OnInit {
     });
   }
 
-  seeAll() {}
+
 
   getCategoryIdWithShop(categoryId) {
     let params = {
@@ -124,10 +139,21 @@ export class LandingPagePage implements OnInit {
   navigateToMap() {
     this.router.navigate(['/map']);
   }
+
+
   getAllOffer() {
     let obj = {};
     this.offerService.getAll(obj).subscribe((success) => {
       this.offerArr = success.rows;
+    });
+  }
+
+  getAllAdvertise() {
+    let obj = {};
+    this.advertiseService.getAll(obj).subscribe((success) => {
+      this.advertiseArr = success.rows;
+      console.log("this.advertiseArr@@@@@@@@@@@@@",this.advertiseArr);
+      
     });
   }
 }

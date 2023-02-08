@@ -8,7 +8,7 @@
 
   <ion-list>
     <ion-item button="true" (click)="navigateTo('view-profile')">
-      <ion-icon class="text-color-2" name="person-circle"></ion-icon>
+      <ion-icon class="text-color-2" name="person-circle" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"My Profile" | translate}}
         <p class="text-color-7">{{"View Your Profile" | translate}}</p>
@@ -18,7 +18,7 @@
 
 
     <ion-item button="true" (click)="navigateTo('change-language')">
-      <ion-icon class="text-color-2" name="text"></ion-icon>
+      <ion-icon class="text-color-2" name="text" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'Change Language' | translate }}
         <p class="text-color-7">{{'Set App Language' | translate}}</p>
@@ -29,7 +29,7 @@
 
 
     <ion-item button="true" (click)="logout()" lines="none">
-      <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp">
+      <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp" color="primary">
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"logout" | translate}}

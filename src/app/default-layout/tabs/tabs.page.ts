@@ -15,13 +15,13 @@ export class TabsPage {
 
   public tabPages = [
     {
-      title: 'Home',
+      title: 'home',
       value: 'landing-page',
       tab: 'landing-page',
       icon: 'home',
     },
     {
-      title: 'Chat',
+      title: 'chat',
       value: 'chat',
       tab: 'chat-list',
       icon: 'chatbubble-sharp'
@@ -32,6 +32,12 @@ export class TabsPage {
       value: 'qr-code',
       tab: 'qr-code',
       icon: 'qr-code-sharp'
+    },
+    {
+      title: 'favorites',
+      value: 'favorites',
+      tab: 'favorites',
+      icon: 'heart'
     },
     {
       title: 'Setting',

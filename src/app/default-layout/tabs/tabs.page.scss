@@ -9,3 +9,39 @@ ion-fab-list {
         color: var(--ion-color-1);
     }
 }
+
+
+
+// for selected tab 
+ion-tab-button {
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
+
+    &::before {
+        background-color: transparent;
+        display: block;
+        content: "";
+        margin: 0 auto;
+        width: 20px;
+        height: 2px;
+    }
+
+    &.tab-selected::before {
+        background-color: var(--ion-color-primary);
+    }
+}
+
+// #tab-button-qr-code{
+//     position: absolute !important;
+//     bottom: 20px !important;
+// }
+// .place-button-wrapper{
+//     position: absolute;
+//     bottom: 20px;
+// }
+
+ion-margin-bottom{
+    margin-bottom: 30px !important;
+    border: 50px !important;
+}
+

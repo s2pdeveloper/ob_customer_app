@@ -113,6 +113,7 @@
   "Place Order": "Place Order",
   "Type your message...": "Type your message...",
   "Settings": "Settings",
+  "Setting": "Setting",
   "My Profile": "My Profile",
   "View Your Profile": "View Your Profile",
   "Change Language": "Change Language",
@@ -122,10 +123,19 @@
   "completed":"completed",
   "Shop List": "Shop List",
   "Search Shop": "Search Shop",
-  "Shop Details": "Shop Detail",
+  "shopDetails": "Shop Detail",
   "Shop Owner Name": "Shop Owner Name",
   "Address": "Address",
-  "View Product":"View Product"
+  "View Product":"View Product",
+  "chat":"Chat",
+  "QR Code":"QR Code",
+  "favorites":"Favorites",
+  "galleryImages":"Gallery Images",
+  "shopTiming":"Shop Timing"
+
+
+  
+  
 
 
 }

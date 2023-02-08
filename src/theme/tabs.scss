@@ -14,6 +14,14 @@ ion-tab-bar {
   }
 }
 
+ion-margin-bottom {
+  --margin-bottom: var(--ion-margin, 20px);
+  margin-bottom: var(--ion-margin, 20px);
+  contain: none;
+}
+
+
+
 // ion-segment {
 //   --background: var(--ion-color-praimary-shade);
 //   padding: 5px !important;
