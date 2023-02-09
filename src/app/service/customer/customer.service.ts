@@ -36,10 +36,5 @@ export class CustomerService {
   deleteCustomer(id) {
     return this.http.delete(this.routes.deletePath(id));
   }
-  // services(payload){
-  //   return this .http. get(this.routes.services,payload);
-  // }
-//   getCategory(id){
-// return this.http.get(this.routes.getCategory,id)
-//   }
+  
 }

@@ -151,9 +151,7 @@ export class LandingPagePage implements OnInit {
   getAllAdvertise() {
     let obj = {};
     this.advertiseService.getAll(obj).subscribe((success) => {
-      this.advertiseArr = success.rows;
-      console.log("this.advertiseArr@@@@@@@@@@@@@",this.advertiseArr);
-      
+      this.advertiseArr = success.rows;      
     });
   }
 }
