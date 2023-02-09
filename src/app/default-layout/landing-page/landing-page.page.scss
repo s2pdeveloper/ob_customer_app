@@ -1,5 +1,6 @@
 ion-content {
   --padding-top: 0 !important;
+
   .card-pad {
     padding-bottom: 10px;
     height: 100%;
@@ -23,7 +24,7 @@ ion-content {
   place-content: flex-end;
 }
 
-.heading{
+.heading {
   font-weight: bold;
 }
 
@@ -42,6 +43,7 @@ ion-content {
   margin-bottom: -2%;
   padding: 0px;
 }
+
 .location-heading {
   margin-left: -40px;
   width: 60px;
@@ -66,29 +68,43 @@ ion-content {
 .ion-note {
   text-align: center;
 }
-.business{
+
+.business {
   text-align: center;
 }
-.business-font-size{
+
+.business-font-size {
   font-size: smaller;
   font-weight: bold;
 
 }
 
-.sub-heading{
+.sub-heading {
   text-align: center;
   font-weight: bold !important;
 }
+
 .swiper-slide img {
   width: 60px;
   border-radius: 25%;
   height: 60px;
 }
 
-.offerImage{
+
+
+.offerImage {
   border-radius: 5% !important;
-  height: auto !important;
-  width: 90% !important;
+    height: 9rem !important;
+    width: 22rem!important;
+    object-fit: cover !important;
+  // height: auto !important;
+  // height: 7rem !important;
+  // width: 90% !important;
 }
 
-
+.advertiseImage {
+    border-radius: 5% !important;
+    height: 9rem !important;
+    width: 22rem!important;
+    object-fit: cover !important;
+  }

@@ -44,17 +44,15 @@
   >
   </ion-searchbar>
 
-  <!-- <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
-  </ion-item>
+<!-- advertise -->
   <ion-slides [options]="buttonSlide2" class="ion-margin-bottom">
     <ion-slide *ngFor="let a of advertiseArr">
-      <div class="">
+      <div class="advertise">
         <img class="advertiseImage" src="{{a.image}} " /><br />
         <ion-note class="sub-heading ion-text-capitalize">{{a.title}}</ion-note>
       </div>
     </ion-slide>
-  </ion-slides> -->
+  </ion-slides>
 
   <!-- businessType -->
   <ion-slides
@@ -105,7 +103,7 @@
   </ion-item>
   <ion-slides [options]="buttonSlide1" class="ion-margin-bottom">
     <ion-slide *ngFor="let o of offerArr">
-      <div class="">
+      <div class="offer">
         <img class="offerImage" src="{{o.image}} " /><br />
         <ion-note class="sub-heading ion-text-capitalize">{{o.title}}</ion-note>
       </div>
