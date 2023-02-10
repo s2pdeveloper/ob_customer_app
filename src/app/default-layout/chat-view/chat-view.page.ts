@@ -14,7 +14,8 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
 import { AlertController } from '@ionic/angular';
-
+import { Plugins } from '@capacitor/core';
+const { App, Geolocation } = Plugins;
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
@@ -200,4 +201,24 @@ export class ChatViewPage implements OnInit, OnDestroy {
       }
     );
   }
+
+  async locationShare() {
+    let geoLocation = await (await Geolocation.getCurrentPosition()).coords;
+    console.log('geoLocation', geoLocation);
+    let msg = `http://maps.google.com/?ie=UTF8&hq=&ll=${geoLocation.latitude},${geoLocation.longitude}&z=18`;
+    this.chatForm.controls.message.setValue(msg);
+    this.sendMessage();
+  }
+  async openUrl(url) {
+    console.log(url.includes('http'),'url', url);
+    if (!url.includes('http')) {
+      return;
+    }
+    let ret = await App.openUrl({
+      url: url,
+    });
+    console.log('ret', ret);
+  }
+
+
 }
