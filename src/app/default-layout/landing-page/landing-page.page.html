@@ -2,7 +2,6 @@
 
   <ion-item lines="none">
     <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
-    <!-- <ion-label  (click)="navigateToMap()">{{ 'Location' | translate}}</ion-label> -->
     <ion-avatar slot="end">
       <img
       src="../../../assets/image/Profile-Male-PNG.png"
@@ -43,6 +42,13 @@
     (ionFocus)="navigateToSearchShop('/search-shop',null)"
   >
   </ion-searchbar>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
 
 <!-- advertise -->
   <ion-slides [options]="buttonSlide2" class="ion-margin-bottom">

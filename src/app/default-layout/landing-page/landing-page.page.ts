@@ -154,4 +154,14 @@ export class LandingPagePage implements OnInit {
       this.advertiseArr = success.rows;      
     });
   }
+
+  doRefresh(event: any) {
+    this.advertiseArr = [];
+    // this.start = 0;
+    this.getAllAdvertise();
+    event.target.complete();
+  }
+
+ 
+
 }
