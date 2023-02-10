@@ -95,7 +95,7 @@ export class SearchShopPage implements OnInit {
   doRefresh(event) {
     this.page = 1;
     this.shopArr = [];
-    // this.getAllShop(false);
+    this.getAllShop(false);
     event.target.complete();
   }
 
