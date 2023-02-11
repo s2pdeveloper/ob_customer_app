@@ -88,7 +88,8 @@ export class ShopDetailPage implements OnInit {
   }
 
   async navigateToViewGalleryImages(item) {
-
+    console.log("gallery call",);
+    
     let galleryArr = item.galleryImages
     const modal = await this.modalController.create({
       component: GalleryListComponent,

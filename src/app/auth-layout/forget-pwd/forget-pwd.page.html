@@ -9,15 +9,15 @@
   <ion-card>
     <ion-card-content>
       <div class="ion-text-center">
-        <img src="./assets/image/forgot-password.svg" alt="Logo" height="360" />
+        <img src="./assets/image/forgot password.svg" alt="Logo" height="360" />
       </div>
 
       <p class="center">Enter your registered mobile number below to receive password reset instruction.
       </p>
 
       <form [formGroup]="forgetForm">
-        <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
-          <ion-label position="floating">
+        <ion-item   class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+          <ion-label position="stacked">
             Enter mobile
             <ion-note color="danger">*</ion-note>
           </ion-label>

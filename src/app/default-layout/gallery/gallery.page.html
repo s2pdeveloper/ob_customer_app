@@ -1,0 +1,21 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="profile-page"></ion-back-button>
+  </ion-buttons>
+  <ion-title class="text-bold font-30 ion-margin-vertical"
+    >{{'gallery'|translate}}</ion-title
+  >
+</ion-toolbar>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="4" *ngFor="let gallery of galleryArr;let i=index">
+      <!-- <h5 class=" ion-text-center">{{i + 1}}/{{galleryArr.length}}</h5> -->
+      <img
+        src="{{gallery}}"
+        class="gallery"
+        (click)="navigateToViewGalleryImages(gallery)"
+      />
+    </ion-col>
+  </ion-row>
+</ion-content>

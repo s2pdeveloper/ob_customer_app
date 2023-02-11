@@ -31,13 +31,7 @@ const routes: Routes = [
         (m) => m.ForgetPwdPageModule
       ),
   },
-  // {
-  //   path: 'landing-page',
-  //   loadChildren: () =>
-  //     import('./default-layout/landing-page/landing-page.module').then(
-  //       (m) => m.LandingPagePageModule
-  //     ),
-  // },
+
   {
     path: 'profile-page',
     loadChildren: () =>
@@ -69,13 +63,7 @@ const routes: Routes = [
         (m) => m.ChangePwdPageModule
       ),
   },
-  {
-    path: 'assignment',
-    loadChildren: () =>
-      import('./default-layout/assignment/assignment.module').then(
-        (m) => m.AssignmentPageModule
-      ),
-  },
+
   {
     path: 'onboarding',
     loadChildren: () =>
@@ -91,31 +79,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'customer-form',
-    loadChildren: () =>
-      import('./default-layout/customer-form/customer-form.module').then(
-        (m) => m.CustomerFormPageModule
-      ),
-  },
-  {
     path: 'shop-detail',
     loadChildren: () =>
       import('./default-layout/shop-detail/shop-detail.module').then(
         (m) => m.ShopDetailPageModule
-      ),
-  },
-  {
-    path: 'customer-passbook',
-    loadChildren: () =>
-      import(
-        './default-layout/customer-passbook/customer-passbook.module'
-      ).then((m) => m.CustomerPassbookPageModule),
-  },
-  {
-    path: 'customer-udari',
-    loadChildren: () =>
-      import('./default-layout/customer-udari/customer-udari.module').then(
-        (m) => m.CustomerUdariPageModule
       ),
   },
   {
@@ -162,19 +129,28 @@ const routes: Routes = [
   },
   {
     path: 'catalogue',
-    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then(m => m.CataloguePageModule)
+    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then
+      (m => m.CataloguePageModule)
   },
   {
     path: 'chat-view',
-    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then(m => m.ChatViewPageModule)
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then
+      (m => m.ChatViewPageModule)
   },
   {
     path: 'map',
-    loadChildren: () => import('./default-layout/map/map.module').then(m => m.MapPageModule)
+    loadChildren: () => import('./default-layout/map/map.module').then
+      (m => m.MapPageModule)
   },
   {
     path: 'favorite',
-    loadChildren: () => import('./default-layout/favorite/favorite.module').then(m => m.FavoritePageModule)
+    loadChildren: () => import('./default-layout/favorite/favorite.module').then
+      (m => m.FavoritePageModule)
+  },
+  {
+    path: 'gallery',
+    loadChildren: () => import('./default-layout/gallery/gallery.module').then
+    ( m => m.GalleryPageModule)
   },
 ];
 

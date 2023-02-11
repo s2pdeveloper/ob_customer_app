@@ -8,9 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-item lines="none">
-    <ion-title class="ion-no-padding " color="primary"> Sub Category</ion-title>
-  </ion-item> -->
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
     <ion-slide *ngFor="let item of subCategoryArr;let i=index">
       <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
@@ -20,20 +17,6 @@
     </ion-slide>
   </ion-slides>
 
-  <!-- <div>
-    <ion-slides autoplay="true">
-      <ion-slide >
-        <div class="card" *ngFor="let item of subCategoryArr;let i=index">
-          <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
-            <div class="img-box">
-              <img [src]="item.image" />
-            </div>
-            <div class="sub-heading ion-text-capitalize">{{item.name}}</div>
-          </div>
-        </div>
-      </ion-slide>
-    </ion-slides>
-  </div> -->
 
   <div class="container">
     <ion-grid>
@@ -71,7 +54,7 @@
     </ion-grid>
   </div>
 
-  <ion-button color="primary" expand="block" fill="outline" strong="true" shape="round" class="ion-margin-top"
+  <ion-button color="primary" expand="block"  strong="true" shape="round" class="ion-margin-top"
     (click)="navigateTo()">
     {{'Place Order' | translate}}
   </ion-button>

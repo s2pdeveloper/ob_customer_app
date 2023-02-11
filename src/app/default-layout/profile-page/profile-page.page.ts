@@ -14,12 +14,6 @@ export class ProfilePagePage implements OnInit {
   user: any;
   userDetails: any = {};
   image: any;
- 
-
-  
-
-
-
   loaded = false;
   constructor(
     private router: Router,

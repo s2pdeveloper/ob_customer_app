@@ -81,7 +81,6 @@ export class ChatListPage implements OnInit {
   }
 
   doInfinite(event) {
-    console.log('In do');
     this.page++;
     this.getAllShopList(true, event);
     event.target.disabled = true;

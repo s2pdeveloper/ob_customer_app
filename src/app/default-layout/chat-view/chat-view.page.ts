@@ -28,16 +28,15 @@ export class ChatViewPage implements OnInit, OnDestroy {
   page: number = 1;
   pageSize: number = 10;
   search = '';
-
-  shopId: any;
+  shopId: number;
   msgArr: any = [];
   user: any = {};
-  msg: any;
-  customerId: any;
-  message: string;
-  shopName: any;
-  roomName: any;
-  userId: any;
+  msg: any = "";
+  customerId: number;
+  message: string = "";
+  shopName: string = "";;
+  roomName: string = "";;
+  userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
   data: any = {};
@@ -53,7 +52,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     private uploadService: UploadService,
     private alertCtrl: AlertController,
     private socket: Socket
-  ) {}
+  ) { }
 
   chatForm = new FormGroup({
     _id: new FormControl(),
@@ -65,7 +64,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     image: new FormControl(''),
   });
 
-  ngOnInit() {}
+  ngOnInit() { }
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -90,12 +89,11 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('destroy');
-    // this.socket.removeListener('latest-data');
     this.socket.disconnect();
   }
 
   sendMessage() {
-  
+
     this.chatForm.controls.roomName.setValue(this.roomName);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
@@ -129,8 +127,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   async uploadFileAWS($event) {
-    console.log('upload call');
-
     let file = $event.target.files[0];
     await this.spinner.showLoader();
     let formData = new FormData();
@@ -143,7 +139,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
         await this.spinner.hideLoader();
         this.sendMessage();
       },
-
       async (error: any) => {
         await this.spinner.hideLoader();
         this.toaster.errorToast(error);
@@ -188,10 +183,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
 
-   // image download
-   downloadImage(u: any) {
-    console.log('downloadLink', u);
-
+  // image download
+  downloadImage(u: any) {
     this.chatService.downloadImage(u.image).subscribe(
       (response: any) => {
         // saveAs(response, u?.AdmissionWithEnquiry?.name);
@@ -202,6 +195,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     );
   }
 
+  // location share
   async locationShare() {
     let geoLocation = await (await Geolocation.getCurrentPosition()).coords;
     console.log('geoLocation', geoLocation);
@@ -210,7 +204,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.sendMessage();
   }
   async openUrl(url) {
-    console.log(url.includes('http'),'url', url);
+    console.log(url.includes('http'), 'url', url);
     if (!url.includes('http')) {
       return;
     }

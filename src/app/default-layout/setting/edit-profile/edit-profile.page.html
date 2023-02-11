@@ -25,9 +25,9 @@
 
 
     <form [formGroup]="profileForm">
-      <ion-item fill="outline" class="input"
+      <ion-item   class="input-class"
         [class.invalid]="!form.firstName.valid && (form.firstName.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'FirstName' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -36,9 +36,9 @@
       <app-validation-messages [control]="form.firstName">
       </app-validation-messages>
 
-      <ion-item fill="outline" class="input"
+      <ion-item   class="input-class"
         [class.invalid]="!form.lastName.valid && (form.lastName.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'LastName' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -47,8 +47,8 @@
       <app-validation-messages [control]="form.lastName">
       </app-validation-messages>
 
-      <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
-        <ion-label position="floating">
+      <ion-item   class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+        <ion-label position="stacked">
           {{ 'mobileNumber' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -58,8 +58,8 @@
       <app-validation-messages [control]="form.mobile">
       </app-validation-messages>
 
-      <ion-item fill="outline" class="input" [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
-        <ion-label position="floating">
+      <ion-item   class="input-class" [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
+        <ion-label position="stacked">
           {{ 'email' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -75,8 +75,8 @@
             </ion-item>
             <div class="ion-padding" slot="content">
               <ion-label formGroupName="address">
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'address' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -84,8 +84,8 @@
                 </ion-item>
 
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'city' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -93,24 +93,24 @@
                 </ion-item>
 
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'state' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'state' | translate}}" formControlName="state"></ion-input>
                 </ion-item>
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Country' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Country' | translate}}" formControlName="country"></ion-input>
                 </ion-item>
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'pinCode' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -135,23 +135,23 @@
             <div class="ion-padding" slot="content">
 
               <ion-label formGroupName="links">
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Facebook' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Facebook' | translate}}"
                     formControlName="facebook"></ion-input>
                 </ion-item>
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Instagram' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Instagram' | translate}}" formControlName="insta"></ion-input>
                 </ion-item>
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Youtube' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -173,22 +173,22 @@
             </ion-item>
             <div class="ion-padding" slot="content">
               <ion-label formGroupName="schedule">
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Day' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Day' | translate}}" formControlName="day"></ion-input>
                 </ion-item>
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Open' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
                   <ion-input type="text" placeholder="{{ 'Open' | translate}}" formControlName="open"></ion-input>
                 </ion-item>
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Close' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -196,8 +196,8 @@
                 </ion-item>
 
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'Start Time' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>
@@ -205,8 +205,8 @@
                   </ion-input>
                 </ion-item>
 
-                <ion-item fill="outline" class="input">
-                  <ion-label position="floating">
+                <ion-item   class="input-class">
+                  <ion-label position="stacked">
                     {{ 'End Time' | translate}}
                     <ion-note color="danger">*</ion-note>
                   </ion-label>

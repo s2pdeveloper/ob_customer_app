@@ -12,7 +12,7 @@
         <img src="./assets/image/profile.svg" alt="Logo" height="250" />
         <ion-button
           color="primary"
-          fill="outline"
+          
           strong="true"
           shape="round"
           (click)="navigateTo('/edit-profile',null)"
@@ -71,72 +71,56 @@
   </ion-card>
 </ion-content>
 
-<!-- <ion-content *ngIf="!loaded">
+<ion-content *ngIf="loaded">
   <ion-card>
     <ion-card-content>
       <div class="ion-text-center">
-        <ion-thumbnail slot="start" class="thumbnail-lg">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-thumbnail>
+        <img src="./assets/image/profile.svg" alt="Logo" height="250" />
+        <ion-button
+          color="primary"
+          
+          strong="true"
+          shape="round"
+          (click)="navigateTo('/edit-profile',null)"
+        >
+          <ion-icon name="create" class="ion-margin-end"></ion-icon>
+          {{ 'editProfile' | translate}}
+        </ion-button>
       </div>
-      <ion-grid class="ion-margin-vertical">
-        <ion-row class="ion-justify-content-center">
-          <ion-col size="8">
-            <ion-button
-              color="primary"
-              fill="outline"
-              expand="block"
-              strong="true"
-              shape="round"
-            >
-              <ion-avatar slot="start">
-                <ion-skeleton-text
-                  animated
-                  style="width: 50%"
-                ></ion-skeleton-text>
-              </ion-avatar>
-              <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
+
+      <ion-item class="ion-margin-top">
+        <ion-icon color="secondary" name="storefront-sharp"></ion-icon>
+        <!-- <ion-label class="ion-margin-start"> {{ 'Name' }} </ion-label> -->
         <ion-label class="ion-margin-start">
-          <ion-text color="primary" class="text-bold">
-            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          <ion-text color="primary" class="text-bold ion-text-capitalize">
+            {{ userDetails?.shopName  }}
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
+        <ion-icon color="secondary" name="person-circle-sharp"></ion-icon>
+        <!-- <ion-label class="ion-margin-start"> {{ 'Name' }} </ion-label> -->
         <ion-label class="ion-margin-start">
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          <ion-text color="primary" class="text-bold ion-text-capitalize">
+            {{ userDetails.name  }}
+          </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
+        <ion-icon class="" name="call" color="secondary"></ion-icon>
+        <!-- <ion-label class="ion-margin-start"> {{ 'Mobile No' }} </ion-label> -->
         <ion-label class="ion-margin-start">
-          <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          {{ userDetails.mobile }}
+        </ion-label>
+      </ion-item>
+     
+      <ion-item lines="none">
+        <ion-icon class="" color="secondary" name="location"></ion-icon>
+        <ion-label class="ion-margin-start">
+          {{ userDetails.address }}
         </ion-label>
       </ion-item>
 
-      <ion-item lines="none">
-        <ion-avatar slot="start">
-          <ion-skeleton-text animated></ion-skeleton-text>
-        </ion-avatar>
-        <ion-label class="ion-margin-start">
-          <ion-text color="primary" class="text-bold">
-            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-          </ion-text>
-        </ion-label>
-      </ion-item>
     </ion-card-content>
   </ion-card>
-</ion-content> -->
+</ion-content>

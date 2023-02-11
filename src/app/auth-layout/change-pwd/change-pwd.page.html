@@ -14,7 +14,7 @@
       lines="outline"
       [class.invalid]="!form.oldPassword.valid && (form.oldPassword.dirty || submitted)"
     >
-      <ion-label position="floating">
+      <ion-label position="stacked">
         {{ 'oldPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>
@@ -51,7 +51,7 @@
       lines="outline"
       [class.invalid]="!form.newPassword.valid && (form.newPassword.dirty || submitted)"
     >
-      <ion-label position="floating">
+      <ion-label position="stacked">
         {{ 'newPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>
@@ -88,7 +88,7 @@
       lines="outline"
       [class.invalid]="!form.confirmPass.valid && (form.confirmPass.dirty || submitted)"
     >
-      <ion-label position="floating">
+      <ion-label position="stacked">
         {{ 'confirmPassword' | translate }}
         <ion-note color="danger">*</ion-note>
       </ion-label>

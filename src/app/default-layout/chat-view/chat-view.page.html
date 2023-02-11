@@ -8,25 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div *ngFor="let msg of msgArr">
-    <div *ngIf="msg.message" [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
-      <ion-chip [color]="msg.createdBy == user._id ? 'dark' :'primary'" class="ion-text-wrap">{{msg.message}}
-        <div class="clearfix text-right size">
-          <span style="opacity: 0.5">
-            {{msg?.createdAt | date:'shortTime'}}</span>
-        </div>
-      </ion-chip>
-    </div>
-
-    <div *ngIf="msg.image" class="left" [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
-      <img src="{{msg.image}}" width="60%" height="60%" [ngClass]="msg.createdBy == user._id ? 'ion-text-end':null">
-      <div class="clearfix text-right size">
-        <span style="opacity: 0.5">
-          {{msg?.createdAt | date:'shortTime'}}</span>
-      </div>
-    </div>
-  </div>    -->
-
+  
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
       [scrollTop]="scrollMe?.scrollHeight">
