@@ -19,6 +19,7 @@ ion-content {
   .shop-name {
     // line-height: 3px;
     font-weight: bold;
+    margin: 0px 0px 0px 0px;
   }
 
   ion-card {
@@ -98,22 +99,26 @@ img {
   margin-left: 15px;
 }
 ion-card {
-  width: 361px;
-  height: 175px;
+  width:100%;
+    height: 154px;
 }
 .middle {
   position: absolute;
-  right: 90px;
+  right: 80px;
   bottom: 27px;
 }
 
 .shop-card {
-  margin-bottom: 1rem;
+  margin-bottom: -1px;
+  padding-right: 5px;
+  //  left:-16px;
+ 
   .heart-icon {
     margin-left: 1rem !important;
   }
   b {
     background-color: transparent;
+   
   }
   .heart-icon {
     text-align: end !important;
@@ -121,8 +126,11 @@ ion-card {
   .address {
     position: absolute;
     bottom: 0.5rem;
-    margin-left: 1.4rem;
+     margin-left: 1.4rem;
     background-color: transparent;
    
   }
+
+
 }
+

@@ -18,6 +18,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 // socket
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+import { ParallaxHeaderDirective } from './directives/parallax-header.directive';
 const config: SocketIoConfig = { url: environment.url, options: {} };
 
 
@@ -26,7 +27,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ParallaxHeaderDirective],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
