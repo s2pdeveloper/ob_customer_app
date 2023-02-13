@@ -1,84 +1,3 @@
-// ion-content {
-//     height: 85vh;
-  
-//     .no-data {
-//       top: 50%;
-//       left: 50%;
-//       -ms-transform: translate(-50%, -50%);
-//       transform: translate(-50%, -50%);
-//       border-radius: 2rem;
-//       box-shadow: none;
-//     }
-  
-//     .size {
-//       width: 97%;
-//     }
-//   }
-  
-//   .shop-list {
-//     .shop-name {
-//       // line-height: 3px;
-//       font-weight: bold;
-//     }
-  
-//     ion-card {
-//       ---border-color: #f0f0f0;
-//     }
-  
-//     .col-7 {
-//       position: relative;
-//       left: -16px;
-  
-//       .star {
-//         position: absolute;
-//         top: 85px;
-//         left: 79px;
-//         white-space: nowrap;
-//         color: gold;
-  
-//         ion-icon {
-//           margin-right: 1px;
-//         }
-//       }
-//     }
-  
-//     .img {
-//       display: flex;
-//       flex-direction: column;
-//       // width: 9rem;
-//       // height: 7.5rem;
-//       object-fit: cover;
-//       object-position: center;
-//       border-radius: 15px;
-//       padding: 8px;
-//     }
-//   }
-  
-//   ion-list {
-//     ion-item {
-//       margin-bottom: 1rem !important;
-//       box-shadow: rgba(242, 121, 121, 0.15) 1.95px 1.95px 2.6px;
-//       border-radius: 10px !important;
-//     }
-//     ion-thumbnail {
-//       margin: 0.5rem 1rem .5rem .5rem !important;
-//       height: 6rem;
-//       width: 6rem;
-//       img {
-//         border-radius: 10%;
-//       }
-//     }
-//     .span-small {
-//       text-decoration: line-through;
-//     }
-//   }
-  
-  
-//   .content{
-//     margin-left: 15px;
-//   }
-
-
 
 ion-content {
   height: 85vh;
@@ -99,7 +18,6 @@ ion-content {
 
 .shop-list {
   .shop-name {
-    // line-height: 3px;
     font-weight: bold;
   }
 
@@ -127,8 +45,6 @@ ion-content {
   .img {
     display: flex;
     flex-direction: column;
-    // width: 9rem;
-    // height: 7.5rem;
     object-fit: cover;
     object-position: center;
     border-radius: 15px;
@@ -136,24 +52,6 @@ ion-content {
   }
 }
 
-// ion-list {
-//   ion-item {
-//     margin-bottom: 1rem !important;
-//     box-shadow: rgba(242, 121, 121, 0.15) 1.95px 1.95px 2.6px;
-//     border-radius: 10px !important;
-//   }
-//   ion-thumbnail {
-//     margin: 0.5rem 1rem .5rem .5rem !important;
-//     height: 6rem;
-//     width: 6rem;
-//     img {
-//       border-radius: 10%;
-//     }
-//   }
-//   .span-small {
-//     text-decoration: line-through;
-//   }
-// }
 img {
   border-radius: 16px;
   width: 370px;
@@ -168,7 +66,6 @@ img {
   bottom: -5%;
   top: 50%;
   font-size: x-large;
-  // transform: translate(-50%,-50%);
 }
 .rating {
   position: absolute;

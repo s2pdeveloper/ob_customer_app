@@ -11,6 +11,7 @@ import { PopoverComponent } from './popover/popover.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
 import { ParallaxHeader } from '../directives/parallax-header';
 import { GalleryListComponent } from './gallery-list/gallery-list.component';
+import { ViewGalleryImagesComponent } from './view-gallery-images/view-gallery-images.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -19,6 +20,7 @@ const PIPES = [TruncatePipe, CapitalizePipe, DateAgoPipe];
 const COMPONENTS = [
   ParallaxHeader,
   GalleryListComponent,
+  ViewGalleryImagesComponent,
   DataUnavailableComponent,
   PopoverComponent
 ];

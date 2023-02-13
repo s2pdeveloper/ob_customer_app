@@ -147,11 +147,7 @@ const routes: Routes = [
     loadChildren: () => import('./default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
   },
-  {
-    path: 'gallery',
-    loadChildren: () => import('./default-layout/gallery/gallery.module').then
-    ( m => m.GalleryPageModule)
-  },
+ 
 ];
 
 @NgModule({

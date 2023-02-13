@@ -2,7 +2,7 @@
   <ion-card>
 
     <div class="ion-text-center">
-      <img src="./assets/image/login.svg" alt="Logo" height="290" />
+      <img src="./assets/image/login.svg" alt="Logo" height="350" />
     </div>
 
     <form [formGroup]="loginForm">
@@ -30,30 +30,27 @@
           (click)="showEye = !showEye">
         </ion-icon>
       </ion-item>
+
+      <ion-row>
+        <ion-col size="12" class="ion-text-end">
+          <a href="javascript:void()" routerLink="/forget-pwd" routerLinkActive="active">
+            <strong>{{'forgotPassword'|translate}}</strong>
+          </a>
+        </ion-col>
+      </ion-row>
+      <div class="ion-text-center">
+        <ion-button expand="full" shape="round" class="" color="primary" (click)="login()">
+          {{'login'|translate}}
+        </ion-button>
+        <h5 class="ion-no-padding">
+          Not have an account Yet?
+          <a href="javascript:void()" routerLink="/register">
+            <ion-label>
+              {{ 'SignUp' | translate}}
+            </ion-label>
+          </a>
+        </h5>
+      </div>
     </form>
-
-    <!-- <div> -->
-    <a href="javascript:void()" routerLink="/forget-pwd">
-      <h6> <span style="float:right"> {{ 'Forgot Password ?' | translate}}
-        </span></h6>
-    </a>
-    <!-- </div> <br> -->
-    <div class="ion-text-center ion-margin-vertical">
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="login()">
-        {{ 'Login' | translate}}
-      </ion-button>
-    </div>
-
-    <div class="ion-text-center signup">
-      <h5>
-        Not have an account Yet?
-        <a href="javascript:void()" routerLink="/register">
-          <ion-label>
-            {{ 'SignUp' | translate}}
-          </ion-label>
-        </a>
-      </h5>
-    </div>
-
   </ion-card>
 </ion-content>

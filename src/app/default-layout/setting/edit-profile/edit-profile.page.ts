@@ -18,7 +18,6 @@ export class EditProfilePage implements OnInit {
   submitted: boolean = false;
   loaded: boolean = true;
   user: any;
-  formBuilder: any;
   fileUploaded: boolean = false;
   filePath: string = "";
 
@@ -53,7 +52,6 @@ export class EditProfilePage implements OnInit {
       endTime: new FormControl(''),
     }),
   });
-  logoImageUpdate: any;
 
 
   constructor(
@@ -106,11 +104,7 @@ export class EditProfilePage implements OnInit {
     this.spinner.showLoader();
     let formData = this.profileForm.value;
     this.authService.updateUser(formData.id, formData).subscribe((success: any) => {
-      console.log('success', success);
-     
-  
-      
-      this.spinner.hideLoader();
+   this.spinner.hideLoader();
       this.profileForm.reset();
       this.toaster.successToast('Profile updated successfully.');
       this.router.navigate(['/view-profile']);

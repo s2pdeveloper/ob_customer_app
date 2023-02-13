@@ -1,0 +1,17 @@
+ <ion-header>
+  <ion-toolbar class="bg-color-2">
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'galleryImages' | translate}}</ion-title>
+    <ion-buttons slot="end">
+    <ion-button class="text-color-4" (click)="dismissModal(true)">{{ 'close' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
+    <ion-slide *ngFor="let item of galleryImage;let i=index" >
+      <!-- <h5 class=" ion-text-center">{{i + 1}}/{{data.length}}</h5> -->
+      <img class="image ion-text-center" src="{{item}} " />
+    </ion-slide>
+  </ion-slides>
+</ion-content> 

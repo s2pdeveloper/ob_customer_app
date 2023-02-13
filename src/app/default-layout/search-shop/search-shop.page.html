@@ -15,9 +15,20 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
-        showCancelButton="never" placeholder="{{ 'Search Shop' | translate}}" autocomplete="on" autocorrect="on"
-        [(ngModel)]="search" (ionChange)="onSearch()">
+      <ion-searchbar
+        class="search-box ion-no-padding size"
+        inputmode="search"
+        searchIcon
+        animated
+        type="text"
+        debounce="600"
+        showCancelButton="never"
+        placeholder="{{ 'Search Shop' | translate}}"
+        autocomplete="on"
+        autocorrect="on"
+        [(ngModel)]="search"
+        (ionChange)="onSearch()"
+      >
       </ion-searchbar>
     </ion-col>
 
@@ -30,29 +41,57 @@
   <ion-grid>
     <ion-row *ngFor="let s of shopArr">
       <ion-col size="12">
-        <ion-card class="shop-card" [ngStyle]="{ 
+        <ion-card
+          class="shop-card"
+          [ngStyle]="{ 
           'background-image': getUrl(s.image), 
           'background-repeat': no-repeat, 
           'object-fit':cover
-         }">
-          <ion-title class="shop-name ion-no-padding" color="primary" class="center" color="light"
-            (click)="navigateTo('/shop-detail',s._id)">
+         }"
+        >
+          <ion-title
+            class="shop-name ion-no-padding"
+            color="primary"
+            class="center"
+            color="light"
+            (click)="navigateTo('/shop-detail',s._id)"
+          >
             <b class="name">{{s.shopName}}</b>
           </ion-title>
           <div class="ion-text-end ion-margin-end ion-margin-top">
-            <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
-               " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
+            <ion-icon
+              *ngIf="s && s.shopFavorite && !s.shopFavorite.length
+               "
+              (click)="addToFavorite(s)"
+              name="heart-outline"
+              size="large"
+              slot="end"
+            >
             </ion-icon>
-            <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-                 " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"
-              slot="end"></ion-icon>
+            <ion-icon
+              *ngIf="s && s.shopFavorite && s.shopFavorite.length
+                 "
+              (click)="addToFavorite(s)"
+              class="text-color-danger"
+              name="heart"
+              size="large"
+              slot="end"
+            ></ion-icon>
           </div>
-          <ion-badge color="success" class="rating ion-text-end" (click)="navigateTo('/shop-detail',s._id)">
+          <ion-badge
+            color="success"
+            class="rating ion-text-end"
+            (click)="navigateTo('/shop-detail',s._id)"
+          >
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
-          <ion-note (click)="navigateTo('/shop-detail',s._id)" class="address ion-margin-start" color="
-            light">
+          <ion-note
+            (click)="navigateTo('/shop-detail',s._id)"
+            class="address ion-margin-start"
+            color="
+            light"
+          >
             {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
             s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
             "" }}.
@@ -63,7 +102,10 @@
   </ion-grid>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

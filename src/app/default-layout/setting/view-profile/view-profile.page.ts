@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { Plugins } from '@capacitor/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { StorageService } from 'src/app/core/services';
@@ -14,9 +13,8 @@ import { StorageService } from 'src/app/core/services';
 })
 export class ViewProfilePage implements OnInit {
   user: any;
-  image: any;
   loaded = false;
-  userDetails: any;
+  userDetails: any={};
 
 
   constructor(
@@ -24,13 +22,10 @@ export class ViewProfilePage implements OnInit {
     private router: Router,
     private spinner: LoaderService,
     private localStorage: StorageService,
-    private toaster: ToastService,
     public translate: TranslateService
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
@@ -40,7 +35,6 @@ export class ViewProfilePage implements OnInit {
   getById() {
     this.loaded = false;
     this.authService.profile(this.user._id).subscribe((success: any) => {
-      console.log("success profile", success);
       this.userDetails = success;
       this.spinner.hideLoader();
       this.loaded = true;

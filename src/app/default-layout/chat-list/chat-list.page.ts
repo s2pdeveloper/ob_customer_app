@@ -69,10 +69,7 @@ export class ChatListPage implements OnInit {
     });
   }
 
-  /**
-   * refresh page content
-   * @param event
-   */
+ 
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.start = 0;

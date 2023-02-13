@@ -14,8 +14,10 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
 import { AlertController } from '@ionic/angular';
-import { Plugins } from '@capacitor/core';
 const { App, Geolocation } = Plugins;
+import { Plugins, FilesystemDirectory } from '@capacitor/core';
+const { Filesystem } = Plugins;
+
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
@@ -56,8 +58,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   chatForm = new FormGroup({
     _id: new FormControl(),
-    // shopId: new FormControl(),
-    // customerId: new FormControl(),
     roomName: new FormControl(''),
     message: new FormControl(''),
     createdBy: new FormControl(),
@@ -93,7 +93,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-
     this.chatForm.controls.roomName.setValue(this.roomName);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
@@ -183,17 +182,35 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
 
-  // image download
-  downloadImage(u: any) {
-    this.chatService.downloadImage(u.image).subscribe(
-      (response: any) => {
-        // saveAs(response, u?.AdmissionWithEnquiry?.name);
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+  private convertBlobToBase64 = (blob: Blob) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
+
+
+  downloadImage(message) {
+    console.log("message@@@@@", message);
+    this.spinner.showLoader();
+    this.uploadService.downloadSignUrl(message.image).subscribe(async (success) => {
+        console.log("success-----------------", success);
+        // await Filesystem.writeFile({
+        //   path: `${message.image} `,
+        //   data: (await this.convertBlobToBase64(success)) as string,
+        //   directory: FilesystemDirectory.Documents,
+        // });
+        this.toaster.presentToast(
+          'success',
+          'Image Downloaded successfully. Please check your Documents folder.'
+        );
+        this.spinner.hideLoader();
+      });
   }
+
 
   // location share
   async locationShare() {
