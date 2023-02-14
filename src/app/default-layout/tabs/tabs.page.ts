@@ -26,7 +26,6 @@ export class TabsPage {
       tab: 'chat-list',
       icon: 'chatbubble-sharp'
     },
-   
     {
       title: 'QR Code',
       value: 'qr-code',
@@ -50,15 +49,13 @@ export class TabsPage {
  
   constructor(
     private router: Router,
-
-  ) {}
+ ) {}
 
   async ngOnInit() {
     this.deviceInfo = await Device.getInfo();
     console.log('device info', this.deviceInfo);
   }
 
- 
   /**
    * navigate to provided page url
    * @param page

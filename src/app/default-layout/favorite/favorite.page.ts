@@ -43,14 +43,91 @@ export class FavoritePage implements OnInit {
   ngOnInit() {
   }
 
+  // ionViewWillEnter() {
+  //   this.activatedRoute.queryParams.subscribe((params: any) => {
+  //     this.subCategoryId = params._id ?? "";
+  //     if (params.shopId) {
+  //       this.getShopById(params.shopId);
+  //     } else {
+  //       this.businessTypeId = params.businessTypeId ?? "";
+  //       this.categoryId = params.categoryId ?? "";
+  //       this.getAllShop(false);
+  //     }
+  //   });
+  // }
+
+  // getAllShop(isFirstLoad: boolean, event?: any) {
+  //   let obj = {
+  //     search: this.search,
+  //     businessTypeId: this.businessTypeId,
+  //     categoryId: this.categoryId,
+  //     subCategoryId: this.subCategoryId,
+  //   };
+  //   this.shopService.getAllShop(obj).subscribe((success) => {
+  //     this.shopArr = success.rows;
+  //   });
+  // }
+
+  // getShopById(_id) {
+  //   console.log(_id);
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
+  //     this.shopArr = success.payload.shop;
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
+
+  // navigateTo(path, _id) {
+  //   this.router.navigate([path], { queryParams: { _id } });
+  // }
+
+  // doRefresh(event) {
+  //   this.page = 1;
+  //   this.shopArr = [];
+  //   this.getAllShop(false);
+  //   event.target.complete();
+  // }
+
+  // async addToFavorite(item) {
+  //   this.user = this.localStorage.get('OBCustomer')._id;
+  //   let payload = {
+  //     _id: this.user,
+  //     action: item.shopFavorite.length ? 'remove' : 'add',
+  //     shopId: item._id,
+  //   }
+  //   this.shopService.createOrRemoveFavorite(payload).subscribe(
+  //     async success => {
+  //       this.getAllShop(false);
+  //       this.toaster.successToast(success.message);
+  //     })
+  // }
+
+  // onSearch() {
+  //   this.page = 1;
+  //   this.shopArr = [];
+  //   this.getAllShop(false, '');
+  // }
+
+  // doInfinite(event) {
+  //   this.page++;
+  //   this.getAllShop(true, event);
+  //   event.target.disabled = true;
+  //   this.infiniteScroll.disabled = true;
+  //   event.target.complete();
+  // }
+
+
+
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.subCategoryId = params._id ?? "";
+      this.subCategoryId = params._id ?? '';
       if (params.shopId) {
         this.getShopById(params.shopId);
       } else {
-        this.businessTypeId = params.businessTypeId ?? "";
-        this.categoryId = params.categoryId ?? "";
+        this.businessTypeId = params.businessTypeId ?? '';
+        this.categoryId = params.categoryId ?? '';
         this.getAllShop(false);
       }
     });
@@ -82,6 +159,15 @@ export class FavoritePage implements OnInit {
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
+  getUrl(url) {
+    let path = `url(${url})`;
+    return path;
+  }
+  onSearch() {
+    this.page = 1;
+    this.shopArr = [];
+    this.getAllShop(false, '');
+  }
 
   doRefresh(event) {
     this.page = 1;
@@ -96,18 +182,13 @@ export class FavoritePage implements OnInit {
       _id: this.user,
       action: item.shopFavorite.length ? 'remove' : 'add',
       shopId: item._id,
-    }
-    this.shopService.createOrRemoveFavorite(payload).subscribe(
-      async success => {
+    };
+    this.shopService
+      .createOrRemoveFavorite(payload)
+      .subscribe(async (success) => {
         this.getAllShop(false);
         this.toaster.successToast(success.message);
-      })
-  }
-
-  onSearch() {
-    this.page = 1;
-    this.shopArr = [];
-    this.getAllShop(false, '');
+      });
   }
 
   doInfinite(event) {

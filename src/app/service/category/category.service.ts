@@ -10,8 +10,11 @@ export class CategoryService {
   
     getAllPath: (obj) => `category/getAll?${obj.businessTypeId}`,
     getAllCategory: (obj) => `category/getAll`,
-    // getAllCataloguePath:() => 'catalogue/getAll',
-    // getAllCategoryByBusinessTypeId: (obj) => `category/getAllCategoryByBusinessTypeId/${obj.businessTypeId}`,
+
+    getAllCategoryWithSubCategory: (obj) => `category/getAllCategoryWithSubCategory`,
+    getSubCategoryBySubCategory: (obj) => `subCategory/getAll?${obj.categoryId}`,
+
+   
 
   };
   constructor(private http: ApiService) { }
@@ -28,11 +31,16 @@ export class CategoryService {
       .pipe(map((res: any) => res));
   }
 
-  // getAllCatalogue(payload){
-  //   return this.http.get(this.routes.getAllCataloguePath,payload);
-  // }
-  // getAllCategoryByBusinessTypeId(businessTypeId) {
-  //   return this.http.get(this.routes.getAllCategoryByBusinessTypeId(businessTypeId));
-  // }
+  getSubCategoryBySubCategory(params) {
+    return this.http
+      .get(this.routes.getSubCategoryBySubCategory(params), params)
+      .pipe(map((res: any) => res));
+  }
+
+  getAllCategoryWithSubCategory(params) {
+    return this.http
+      .get(this.routes.getAllCategoryWithSubCategory(params), params)
+      .pipe(map((res: any) => res));
+  }
 
 }

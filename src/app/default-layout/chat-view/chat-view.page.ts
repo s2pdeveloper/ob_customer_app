@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
@@ -14,8 +9,10 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
 import { AlertController } from '@ionic/angular';
-import { Plugins } from '@capacitor/core';
 const { App, Geolocation } = Plugins;
+import { Plugins, FilesystemDirectory } from '@capacitor/core';
+const { Filesystem } = Plugins;
+
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
@@ -28,16 +25,15 @@ export class ChatViewPage implements OnInit, OnDestroy {
   page: number = 1;
   pageSize: number = 10;
   search = '';
-
-  shopId: any;
+  shopId: number;
   msgArr: any = [];
   user: any = {};
-  msg: any;
-  customerId: any;
-  message: string;
-  shopName: any;
-  roomName: any;
-  userId: any;
+  msg: any = '';
+  customerId: number;
+  message: string = '';
+  shopName: string = '';
+  roomName: string = '';
+  userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
   data: any = {};
@@ -57,8 +53,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   chatForm = new FormGroup({
     _id: new FormControl(),
-    // shopId: new FormControl(),
-    // customerId: new FormControl(),
     roomName: new FormControl(''),
     message: new FormControl(''),
     createdBy: new FormControl(),
@@ -90,12 +84,10 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     console.log('destroy');
-    // this.socket.removeListener('latest-data');
     this.socket.disconnect();
   }
 
   sendMessage() {
-  
     this.chatForm.controls.roomName.setValue(this.roomName);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
@@ -129,8 +121,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   async uploadFileAWS($event) {
-    console.log('upload call');
-
     let file = $event.target.files[0];
     await this.spinner.showLoader();
     let formData = new FormData();
@@ -143,7 +133,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
         await this.spinner.hideLoader();
         this.sendMessage();
       },
-
       async (error: any) => {
         await this.spinner.hideLoader();
         this.toaster.errorToast(error);
@@ -183,25 +172,29 @@ export class ChatViewPage implements OnInit, OnDestroy {
         },
       ],
     });
-
     await alert.present();
   }
 
-
-   // image download
-   downloadImage(u: any) {
-    console.log('downloadLink', u);
-
-    this.chatService.downloadImage(u.image).subscribe(
-      (response: any) => {
-        // saveAs(response, u?.AdmissionWithEnquiry?.name);
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
+  downloadImage(message) {
+    this.spinner.showLoader();
+    this.uploadService
+      .downloadImage(message.image)
+      .subscribe(async (success: any) => {
+        console.log('success-----------------', success);
+        await Filesystem.writeFile({
+          path: `${message.image} `,
+          data: success.result.src as string,
+          directory: FilesystemDirectory.Documents,
+        });
+        this.toaster.presentToast(
+          'Success',
+          'Image Downloaded successfully. Please check your Documents folder.'
+        );
+        this.spinner.hideLoader();
+      });
   }
 
+  // location share
   async locationShare() {
     let geoLocation = await (await Geolocation.getCurrentPosition()).coords;
     console.log('geoLocation', geoLocation);
@@ -210,15 +203,18 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.sendMessage();
   }
   async openUrl(url) {
-    console.log(url.includes('http'),'url', url);
+    console.log(url.includes('http'), 'url', url);
     if (!url.includes('http')) {
       return;
     }
     let ret = await App.openUrl({
       url: url,
     });
-    console.log('ret', ret);
   }
 
-
+  doRefresh(event: any) {
+    this.msgArr = [];
+    this.getMsgByCustomerId(false, '');
+    event.target.complete();
+  }
 }

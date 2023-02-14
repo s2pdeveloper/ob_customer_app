@@ -59,7 +59,7 @@ export class AppUpdateService {
     private fileOpener: FileOpener,
     private toastController: ToastController,
     private loadingController: LoadingController
-  ) {}
+  ) { }
 
   async checkUpdate() {
     this.http.get(this.updateUrl).subscribe(async (info: AppUpdate) => {

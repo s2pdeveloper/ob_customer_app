@@ -1,8 +1,11 @@
 
 .avatar{
-    margin: auto;
-    width: 5em;
-    height: 5em;
+    // margin: auto;
+    width: 6em;
+    height: 50%;
+     margin-top: 10px;
+    margin-left: 111px;
+
 }
 
 .center{
@@ -20,4 +23,24 @@
         //     color: #0D276B
         // }
     }
+}
+.imglogo {
+    max-width: 100%;
+    border: 0;
+    height: 116%;
+}
+.background{
+    bottom: 15px;
+// background-color: rgb(71, 63, 63);
+width: 100%;
+height: 250px !important;
+}
+h2 {
+    margin-bottom: 21px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+ .address{
+margin-top: 10px;
+    
 }

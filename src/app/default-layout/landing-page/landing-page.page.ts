@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
@@ -14,12 +17,19 @@ import { ShopService } from 'src/app/service/shop/shop.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-  businessTypeId: any;
+  @ViewChild(IonInfiniteScroll, { static: false })
+  infiniteScroll: IonInfiniteScroll;
+  disabledScroll = false;
+  businessTypeId: number;
   businessArr: any = [];
   BusinessWithCategoryArr: any = [];
   search: string = '';
-  offerArr: any=[];
-  advertiseArr:any=[];
+  offerArr: any = [];
+  advertiseArr: any = [];
+  user: any ='';
+  loaded: boolean;
+  userDetails: any=[];
+
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -32,29 +42,30 @@ export class LandingPagePage implements OnInit {
     spaceBetween: 10,
   };
 
-    buttonSlide1 = {
-      slidesPerView: 1,
-      slideShadows: true,
-      initialSlide: 0,
-      speed: 400,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-      },
-      spaceBetween: 25,
-    };
+  buttonSlide1 = {
+    slidesPerView: 1,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 25,
+  };
 
-    buttonSlide2 = {
-      slidesPerView: 1,
-      slideShadows: true,
-      initialSlide: 0,
-      speed: 400,
-      loop: true,
-      autoplay: {
-        delay: 5000,
-      },
-      spaceBetween: 25,
-    };
+  buttonSlide2 = {
+    slidesPerView: 1,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 25,
+  };
+  
 
 
   constructor(
@@ -64,14 +75,28 @@ export class LandingPagePage implements OnInit {
     public translate: TranslateService,
     private categoryService: CategoryService,
     private offerService: OfferService,
-    private advertiseService:AdvertiseService
-  ) {}
+    private advertiseService: AdvertiseService,
+    private localStorage: StorageService,
+    private authService: AuthService,
 
-  ngOnInit() {}
+
+  ) { }
+
+  ngOnInit() { }
   ionViewWillEnter() {
-    this.getAllOffer();
-    this.getAllAdvertise();
+    this.user = this.localStorage.get('OBCustomer');
+    this.getById();
     this.getAllBusinessType();
+  }
+
+  getById() {
+    this.loaded = false;
+    this.authService.profile(this.user._id).subscribe((success: any) => {
+      this.userDetails = success;
+      this.getAllOffer();
+      this.spinner.hideLoader();
+      this.loaded = true;
+    });
   }
 
   getAllBusinessType() {
@@ -145,23 +170,29 @@ export class LandingPagePage implements OnInit {
     let obj = {};
     this.offerService.getAll(obj).subscribe((success) => {
       this.offerArr = success.rows;
+      this.getAllAdvertise();
     });
   }
 
   getAllAdvertise() {
     let obj = {};
     this.advertiseService.getAll(obj).subscribe((success) => {
-      this.advertiseArr = success.rows;      
+      this.advertiseArr = success.rows;
+      this.getAllBusinessType();
+
     });
   }
 
   doRefresh(event: any) {
     this.advertiseArr = [];
     // this.start = 0;
+    this.getById();
     this.getAllAdvertise();
     event.target.complete();
   }
 
- 
+  doInfinite($event){
+
+  }
 
 }

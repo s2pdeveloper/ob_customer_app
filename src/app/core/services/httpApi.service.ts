@@ -43,25 +43,13 @@ export class ApiService {
   }
 
   public getFile(path: string) {
+    console.log("path++++++++++++++",path);
     return this.httpClient.get(path, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     });
   }
-
-  // image download
-  public getDownloadImage(
-    path: string,
-    params: HttpParams = new HttpParams()
-  ): Observable<any> {
-    console.log("path", path);
-    return this.httpClient.get(path, { responseType: "blob" })
-      .pipe(
-        map((res: any) => res),
-        catchError(this.formatErrors)
-      );
-  }
-
+  
 
   public formatErrors(error: any): Observable<any> {
     return throwError(error.error);

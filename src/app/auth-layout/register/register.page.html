@@ -6,35 +6,35 @@
 
     <form [formGroup]="registerForm">
       
-      <ion-item class="input" fill="outline"
+      <ion-item  class="input-class" 
         [class.invalid]="!form.firstName.valid && (form.firstName.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'First Name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input placeholder="{{ 'First Name' | translate}}" formControlName="firstName"></ion-input>
       </ion-item>
 
-      <ion-item fill="outline" class="input"
+      <ion-item   class="input-class"
         [class.invalid]="!form.lastName.valid && (form.lastName.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'Last Name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input placeholder="{{ 'Last Name' | translate}}" formControlName="lastName"></ion-input>
       </ion-item>
 
-      <ion-item fill="outline" class="input"
+      <ion-item   class="input-class"
         [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'Email' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input placeholder="{{ 'Email' | translate}}" formControlName="email"></ion-input>
       </ion-item>
 
-      <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
-        <ion-label position="floating">
+      <ion-item   class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+        <ion-label position="stacked">
           {{ 'Mobile Number' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -42,9 +42,9 @@
           formControlName="mobile" inputmode="number"></ion-input>
       </ion-item>
 
-      <ion-item class="input" fill="outline"
+      <ion-item  class="input-class" 
         [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'password' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
@@ -58,9 +58,9 @@
       </ion-item>
 
 
-      <!-- <ion-item fill="outline" class="input"
+      <!-- <ion-item   class="input-class"
         [class.invalid]="!form.confirmPassword.valid && (form.confirmPassword.dirty || submitted)">
-        <ion-label position="floating">
+        <ion-label position="stacked">
           {{ 'Confirm password' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>

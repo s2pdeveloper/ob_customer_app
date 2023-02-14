@@ -18,6 +18,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 // socket
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
+
+
+
+
 const config: SocketIoConfig = { url: environment.url, options: {} };
 
 

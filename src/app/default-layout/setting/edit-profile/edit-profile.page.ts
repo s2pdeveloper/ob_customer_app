@@ -7,7 +7,6 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { UploadService } from 'src/app/service/upload/upload.service';
-import { OPTIONS } from 'src/app/helpers';
 
 @Component({
   selector: 'app-edit-profile',
@@ -19,7 +18,6 @@ export class EditProfilePage implements OnInit {
   submitted: boolean = false;
   loaded: boolean = true;
   user: any;
-  formBuilder: any;
   fileUploaded: boolean = false;
   filePath: string = "";
 
@@ -53,8 +51,6 @@ export class EditProfilePage implements OnInit {
       startTime: new FormControl(''),
       endTime: new FormControl(''),
     }),
-
-
   });
 
 
@@ -81,7 +77,6 @@ export class EditProfilePage implements OnInit {
 
   getById() {
     this.authService.profile(this.user._id).subscribe((success) => {
-      console.log('success profile', success);
       this.profileForm.patchValue(success);
     });
   }
@@ -90,7 +85,6 @@ export class EditProfilePage implements OnInit {
   async getData() {
     await this.spinner.hideLoader();
     this.authService.profile(this.user._id).subscribe(async success => {
-      console.log("success----------", success);
       this.profileForm.patchValue(success);
       if (success.image) {
         this.fileUploaded = true;
@@ -110,8 +104,7 @@ export class EditProfilePage implements OnInit {
     this.spinner.showLoader();
     let formData = this.profileForm.value;
     this.authService.updateUser(formData.id, formData).subscribe((success: any) => {
-      console.log('success', success);
-      this.spinner.hideLoader();
+   this.spinner.hideLoader();
       this.profileForm.reset();
       this.toaster.successToast('Profile updated successfully.');
       this.router.navigate(['/view-profile']);

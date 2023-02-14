@@ -8,6 +8,9 @@ import { ShopDetailPageRoutingModule } from './shop-detail-routing.module';
 
 import { ShopDetailPage } from './shop-detail.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.directive';
+
+ 
 
 @NgModule({
   imports: [
@@ -17,6 +20,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ShopDetailPageRoutingModule,
     SharedModule
   ],
-  declarations: [ShopDetailPage]
+  declarations: [ShopDetailPage,ParallaxHeaderDirective],
 })
 export class ShopDetailPageModule {}

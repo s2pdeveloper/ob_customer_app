@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services';
+import {  map } from 'rxjs/operators';
+import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
+const { Filesystem, Storage, LocalNotifications } = Plugins;
+
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
   routes: any = {
     createPath: `chat/create`,
-    getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
-    // getChatShopByCustomerId: `chat/getChatShopByCustomerId`,
-    getChatShopByOrderId: `order/getChatShopByOrderId`,
 
+    getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
+
+    getChatShopByOrderId: `order/getChatShopByOrderId`,
+    
   };
 
-  constructor(private http: ApiService) {}
+  constructor(private http: ApiService,private fileOpener: FileOpener,) {}
 
   create(payload) {
     return this.http.post(this.routes.createPath, payload);
@@ -26,8 +32,6 @@ export class ChatService {
     return this.http.get(this.routes.getChatShopByOrderId,obj);
   }
 
-  downloadImage(imageUrl: string): any {
-    return this.http.getDownloadImage(imageUrl);
-  }
- 
+
+
 }

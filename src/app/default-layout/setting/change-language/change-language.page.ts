@@ -37,7 +37,6 @@ export class ChangeLanguagePage implements OnInit {
   }
 
   async setLanguage($event) {
-    // console.log($event.target.value);
     this.selectedLanguage = $event.target.value;
     if (this.selectedLanguage != this.langService.getLang()) {
       await this.toastService.successToast('Language Change Successfully');

@@ -69,10 +69,7 @@ export class ChatListPage implements OnInit {
     });
   }
 
-  /**
-   * refresh page content
-   * @param event
-   */
+ 
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.start = 0;
@@ -81,7 +78,6 @@ export class ChatListPage implements OnInit {
   }
 
   doInfinite(event) {
-    console.log('In do');
     this.page++;
     this.getAllShopList(true, event);
     event.target.disabled = true;
