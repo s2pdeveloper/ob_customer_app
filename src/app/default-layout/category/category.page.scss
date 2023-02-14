@@ -1,10 +1,10 @@
-
 ion-content {
   --padding-bottom: 0 !important;
   --padding-top: 0 !important;
   --padding-start: 0 !important;
   --padding-end: 0 !important;
 }
+
 .category-list {
 
   ion-row,
@@ -12,7 +12,13 @@ ion-content {
     padding: 0;
     margin: 0;
   }
+
   .category-section {
+    .cat-container {
+      max-width: 90vh !important;
+      height: 90vh !important;
+      overflow: auto !important;
+    }
 
     ion-card {
       border: none;
@@ -20,22 +26,26 @@ ion-content {
       border-bottom: 1px solid grey;
       background-color: #ededed;
       padding: 0.5rem 0;
+
       .cat-img {
         border-radius: 5%;
         height: 3.5rem;
         width: 3.5rem;
         object-fit: cover;
       }
+
       .cat-head {
         font-size: 0.8rem;
         text-transform: capitalize;
       }
     }
+
     .active {
       border-bottom: 1px solid rgb(255, 3, 3);
       background-color: #ffffff;
       border-bottom-right-radius: 5%;
       border-bottom-left-radius: 5%;
+
       .cat-head {
         font-size: 0.8rem;
         color: red;
@@ -43,24 +53,45 @@ ion-content {
         text-transform: capitalize;
       }
     }
+
+    *::-webkit-scrollbar {
+      width: 2px;
+      height: 5px;
+      cursor: pointer !important;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: var(--ion-color-light);
+      cursor: pointer !important;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: var(--ion-color-secondary);
+      border-radius: 5px;
+      cursor: pointer !important;
+    }
   }
+
   .subcategory-section {
-    
-    ion-col{
+
+    ion-col {
       margin-bottom: 0.6rem;
     }
+
     ion-card {
       border-radius: 5%;
       box-shadow: none;
       background-color: transparent;
       margin: 0.2rem;
       height: 100%;
+
       .cat-img {
         border-radius: 5%;
         height: 3.5rem;
         width: 3.5rem;
         object-fit: cover;
       }
+
       .cat-head {
         font-size: 0.7rem;
         text-transform: capitalize;

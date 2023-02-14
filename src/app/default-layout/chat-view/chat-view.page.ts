@@ -180,16 +180,14 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.uploadService
       .downloadImage(message.image)
       .subscribe(async (success: any) => {
-        console.log('success-----------------', success);
+        this.toaster.successToast(
+      'Image Downloaded successfully. Please check your Documents folder.'
+        );
         await Filesystem.writeFile({
-          path: `${message.image} `,
+          path: `${message.image.split('post/')[1]}`,
           data: success.result.src as string,
           directory: FilesystemDirectory.Documents,
         });
-        this.toaster.presentToast(
-          'Success',
-          'Image Downloaded successfully. Please check your Documents folder.'
-        );
         this.spinner.hideLoader();
       });
   }
@@ -210,6 +208,8 @@ export class ChatViewPage implements OnInit, OnDestroy {
     let ret = await App.openUrl({
       url: url,
     });
+    console.log("ret",ret);
+    
   }
 
   doRefresh(event: any) {
