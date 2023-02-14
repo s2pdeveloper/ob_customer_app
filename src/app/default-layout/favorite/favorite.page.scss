@@ -1,4 +1,3 @@
-
 ion-content {
   height: 85vh;
 
@@ -18,7 +17,9 @@ ion-content {
 
 .shop-list {
   .shop-name {
+    // line-height: 3px;
     font-weight: bold;
+    margin: 0px 0px 0px 0px;
   }
 
   ion-card {
@@ -45,6 +46,8 @@ ion-content {
   .img {
     display: flex;
     flex-direction: column;
+    // width: 9rem;
+    // height: 7.5rem;
     object-fit: cover;
     object-position: center;
     border-radius: 15px;
@@ -66,10 +69,11 @@ img {
   bottom: -5%;
   top: 50%;
   font-size: x-large;
+  // transform: translate(-50%,-50%);
 }
 .rating {
   position: absolute;
-  right: 1.1rem;
+  right: 1.5rem;
   bottom: 21px;
 }
 
@@ -77,22 +81,27 @@ img {
   margin-left: 15px;
 }
 ion-card {
-  width: 361px;
-  height: 175px;
+  width:100%;
+    height: 154px;
 }
 .middle {
   position: absolute;
-  right: 90px;
+  right: 80px;
   bottom: 27px;
 }
 
-.shop-card {
-  margin-bottom: 1rem;
+.shop-card{
+  margin-bottom: 6px;
+    padding-right: 5px;
+    margin-top: 0px;
+ 
   .heart-icon {
     margin-left: 1rem !important;
   }
   b {
     background-color: transparent;
+    margin-top: 1rem !important;
+   
   }
   .heart-icon {
     text-align: end !important;
@@ -100,8 +109,11 @@ ion-card {
   .address {
     position: absolute;
     bottom: 0.5rem;
-    margin-left: 1.4rem;
+     margin-left: 1.4rem;
     background-color: transparent;
    
   }
+
+
 }
+

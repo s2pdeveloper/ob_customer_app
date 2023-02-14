@@ -44,15 +44,6 @@
           'object-fit':cover
          }"
         >
-          <ion-title
-            class="shop-name ion-no-padding"
-            color="primary"
-            class="center"
-            color="light"
-            (click)="navigateTo('/shop-detail',s._id)"
-          >
-            <b class="name">{{s.shopName}}</b>
-          </ion-title>
           <div class="ion-text-end ion-margin-end ion-margin-top">
             <ion-icon
               *ngIf="s && s.shopFavorite && !s.shopFavorite.length
@@ -81,17 +72,22 @@
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
-          <ion-note
+        </ion-card>
+         <b  class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</b> 
+        <ion-label
             (click)="navigateTo('/shop-detail',s._id)"
-            class="address ion-margin-start"
+            class="address ion-margin-top "
             color="
             light"
           >
-            {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
-            s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
-            "" }}.
-          </ion-note>
-        </ion-card>
+         
+          <ion-text class="ion-margin-start ion-margin-bottom">
+              <h4>{{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
+                 s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
+                "" }}.</h4>
+            
+          </ion-text>
+        </ion-label> 
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -104,3 +100,4 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+

@@ -98,7 +98,7 @@ ion-card {
   .heart-icon {
     margin-left: 1rem !important;
   }
-  b {
+  ion-label{
     background-color: transparent;
     margin-top: 1rem !important;
    
@@ -111,6 +111,7 @@ ion-card {
     bottom: 0.5rem;
      margin-left: 1.4rem;
     background-color: transparent;
+    color: gray;
    
   }
 
