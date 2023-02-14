@@ -62,6 +62,8 @@ export class SearchShopPage implements OnInit {
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       this.shopArr = success.rows;
+      console.log("    this.shopArr",    this.shopArr);
+      
     });
   }
 

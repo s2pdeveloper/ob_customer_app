@@ -122,10 +122,10 @@
   "newCustomer": "नवीन ग्राहक",
   "customer": "ग्राहक",
   "fullName": "पूर्ण नाव",
-  "shopName":"दुकानाचे नाव",
+  "shopName": "दुकानाचे नाव",
   "register": "नोंदणी करा",
   "selectLanguage": "भाषा निवडा",
-  "Location":"स्थान",
+  "Location": "स्थान",
   "Category": "श्रेणी",
   "Search": "शोधा",
   "Offers": "ऑफर",
@@ -141,33 +141,18 @@
   "Set App Language": "अॅप भाषा सेट करा",
   "chats": "गप्पा",
   "new": "नवीन",
-  "completed":"पूर्ण",
-  "Shop List": "दुकानाची यादी",
+  "completed": "पूर्ण",
+  "shopList": "दुकानाची यादी",
   "shopDetails": "दुकान तपशील",
-  "Search Shop": "दुकान शोधा",
-  "shopOwnerName":"दुकान मालकाचे नाव",
+  "searchShop": "दुकान शोधा",
+  "shopOwnerName": "दुकान मालकाचे नाव",
   "Address": "पत्ता",
-  "viewCatalogue":"कॅटलॉग पहा",
-  "chat":"गप्पा",
-  "QR Code":"QR कोड",
-  "favorites":"आवडते",
-"galleryImages":"गॅलरी प्रतिमा",
-"shopTiming":"दुकानाची वेळ",
-"favoritesShop":"आवडते दुकान"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "viewCatalogue": "कॅटलॉग पहा",
+  "chat": "गप्पा",
+  "gallery": "गॅलरी",
+  "QR Code": "QR कोड",
+  "favorites": "आवडते",
+  "galleryImages": "गॅलरी प्रतिमा",
+  "shopTiming": "दुकानाची वेळ",
+  "favoritesShop": "आवडते दुकान"
 }

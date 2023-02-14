@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
@@ -33,11 +28,11 @@ export class ChatViewPage implements OnInit, OnDestroy {
   shopId: number;
   msgArr: any = [];
   user: any = {};
-  msg: any = "";
+  msg: any = '';
   customerId: number;
-  message: string = "";
-  shopName: string = "";;
-  roomName: string = "";;
+  message: string = '';
+  shopName: string = '';
+  roomName: string = '';
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
@@ -54,7 +49,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     private uploadService: UploadService,
     private alertCtrl: AlertController,
     private socket: Socket
-  ) { }
+  ) {}
 
   chatForm = new FormGroup({
     _id: new FormControl(),
@@ -64,7 +59,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
     image: new FormControl(''),
   });
 
-  ngOnInit() { }
+  ngOnInit() {}
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -177,40 +172,27 @@ export class ChatViewPage implements OnInit, OnDestroy {
         },
       ],
     });
-
     await alert.present();
   }
 
-
-  private convertBlobToBase64 = (blob: Blob) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onerror = reject;
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.readAsDataURL(blob);
-    });
-
-
   downloadImage(message) {
-    console.log("message@@@@@", message);
     this.spinner.showLoader();
-    this.uploadService.downloadSignUrl(message.image).subscribe(async (success) => {
-        console.log("success-----------------", success);
-        // await Filesystem.writeFile({
-        //   path: `${message.image} `,
-        //   data: (await this.convertBlobToBase64(success)) as string,
-        //   directory: FilesystemDirectory.Documents,
-        // });
+    this.uploadService
+      .downloadImage(message.image)
+      .subscribe(async (success: any) => {
+        console.log('success-----------------', success);
+        await Filesystem.writeFile({
+          path: `${message.image} `,
+          data: success.result.src as string,
+          directory: FilesystemDirectory.Documents,
+        });
         this.toaster.presentToast(
-          'success',
+          'Success',
           'Image Downloaded successfully. Please check your Documents folder.'
         );
         this.spinner.hideLoader();
       });
   }
-
 
   // location share
   async locationShare() {
@@ -228,8 +210,11 @@ export class ChatViewPage implements OnInit, OnDestroy {
     let ret = await App.openUrl({
       url: url,
     });
-    console.log('ret', ret);
   }
 
-
+  doRefresh(event: any) {
+    this.msgArr = [];
+    this.getMsgByCustomerId(false, '');
+    event.target.complete();
+  }
 }

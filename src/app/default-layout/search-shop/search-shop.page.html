@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{ 'Shop List' | translate}} </ion-title>
+    <ion-title> {{ 'shopList' | translate}} </ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
     </ion-buttons>
@@ -23,7 +23,7 @@
         type="text"
         debounce="600"
         showCancelButton="never"
-        placeholder="{{ 'Search Shop' | translate}}"
+        placeholder="{{ 'searchShop' | translate}}"
         autocomplete="on"
         autocorrect="on"
         [(ngModel)]="search"
@@ -49,14 +49,6 @@
           'object-fit':cover
          }"
         >
-          <!-- <ion-title
-            class="shop-name ion-no-padding"
-            color="primary"
-            class="center"
-            color="light"
-            (click)="navigateTo('/shop-detail',s._id)"
-          >
-          </ion-title> -->
           <div class="ion-text-end ion-margin-end ion-margin-top">
             <ion-icon
               *ngIf="s && s.shopFavorite && !s.shopFavorite.length
@@ -85,18 +77,8 @@
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
-          <!-- <ion-note
-            (click)="navigateTo('/shop-detail',s._id)"
-            class="address ion-margin-start"
-            color="
-            light"
-          >
-            {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
-            s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
-            "" }}.
-          </ion-note> -->
         </ion-card>
-         <b  class="text-bold font-larger shade-color">{{s.shopName}}</b> 
+         <b  class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</b> 
         <ion-label
             (click)="navigateTo('/shop-detail',s._id)"
             class="address ion-margin-top "

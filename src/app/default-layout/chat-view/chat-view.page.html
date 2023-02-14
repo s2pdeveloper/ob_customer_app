@@ -9,6 +9,13 @@
 
 <ion-content>
   
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
       [scrollTop]="scrollMe?.scrollHeight">

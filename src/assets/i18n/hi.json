@@ -143,8 +143,8 @@
   "chats": "चैट",
   "new": "नया",
   "completed":"पुरा होना",
-  "Shop List": "दुकान सूची",
-  "Search Shop": "दुकान खोजें",
+  "shopList": "दुकान सूची",
+  "searchShop": "दुकान खोजें",
   "shopDetails": "दुकान विवरण",
   "shopOwnerName":"दुकान मालिक का नाम",
   "Address": "पता",
@@ -152,6 +152,7 @@
   "chat":"चैट",
   "QR Code":"QR कोड",
   "favorites":"पसंदीदा",
+  "gallery": "गेलरी",
   "galleryImages": "गैलरी छवियाँ",
   "shopTiming": "दुकान का समय",
   "favoritesShop":"पसंदीदा दुकान"

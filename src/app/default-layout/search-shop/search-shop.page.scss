@@ -55,24 +55,6 @@ ion-content {
   }
 }
 
-// ion-list {
-//   ion-item {
-//     margin-bottom: 1rem !important;
-//     box-shadow: rgba(242, 121, 121, 0.15) 1.95px 1.95px 2.6px;
-//     border-radius: 10px !important;
-//   }
-//   ion-thumbnail {
-//     margin: 0.5rem 1rem .5rem .5rem !important;
-//     height: 6rem;
-//     width: 6rem;
-//     img {
-//       border-radius: 10%;
-//     }
-//   }
-//   .span-small {
-//     text-decoration: line-through;
-//   }
-// }
 img {
   border-radius: 16px;
   width: 370px;
@@ -91,7 +73,7 @@ img {
 }
 .rating {
   position: absolute;
-  right: 1.1rem;
+  right: 1.5rem;
   bottom: 21px;
 }
 
@@ -118,6 +100,7 @@ ion-card {
   }
   b {
     background-color: transparent;
+    margin-top: 1rem !important;
    
   }
   .heart-icon {

@@ -42,7 +42,8 @@ export class UploadService {
       );
   }
 
-  downloadSignUrl(imageUrl: any) {
+  
+  downloadImage(imageUrl: any) {
     const httpHeaders = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.token}`,
@@ -53,7 +54,7 @@ export class UploadService {
         filePath: imageUrl,
       },
     };
-    let url = `url`;
+    let url = `convertToBase64`;
     return this.httpClient
       .get(`${environment.s3Endpoint}${url}`, httpHeaders)
       .pipe(
@@ -66,6 +67,9 @@ export class UploadService {
         })
       );
   }
+
+
+  
 
   /**
    * check th file size
