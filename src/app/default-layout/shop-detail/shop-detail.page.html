@@ -1,50 +1,49 @@
-
 <ion-item lines="none" class="ion-no-padding bg-transparent">
   <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
 </ion-item>
 
-<ion-content style="padding: 0;" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvent]="true">
-  <ng-container *ngFor="let s of shopDetails" >
- <img [src]="s.bannerImages" class="header-image">
+<ion-content style="padding: 0;" class="shadow-none ion-no-padding" [scrollEvents]="true"
+appParallaxHeader>
+  <ng-container *ngFor="let s of shopDetails">
+    <img [src]="s.bannerImages" class="header-image">
 
-  <div class="main-content ion-padding" >
-    <ion-card>
-      <ion-card-content>
-        <ion-list>
-          <ion-item lines="none">
-            <ion-avatar class="ion-margin-end">
-              <img alt="Silhouette of a person's head" *ngIf="s.image" [src]="s.image"
-                alt="profile-picture" />
-              
-            </ion-avatar>
-            <ion-label>
-              <ion-row class="ion-justify-content-between">
-                <ion-col>
-                  <h2>
-                    <span class="text-bold font-larger shade-color">{{s.shopName}}</span>
-                  </h2>
-                  <p class="font-larger"> {{s?.firstName}} {{s?.lastName}}</p>
-                  <ion-label class=" text-color-9">
-                    <ion-text class="ion-text-wrap">
-                      <h4>{{s?.address?.city}}, {{s?.address?.state}} -
-                        {{s?.address?.pinCode}}</h4>
-                    </ion-text>
-                    <p>
-                      <span>{{s?.address?.line1}}</span>
-                    </p>
-                    <p>
-                      <span class="ion-padding-top">
-                        <!-- <b>{{'shopTiming'|translate}} :-</b> -->
-                        {{s?.schedule?.day}}:{{s?.schedule?.startTime}}
-                        AM to {{s?.schedule?.endTime }} PM</span>
-                    </p>
-                  </ion-label>
-                </ion-col>
-              </ion-row>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-        <!-- <ion-col class="ion-text-center logo-margin" >
+    <div class="main-content ion-padding">
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item lines="none">
+              <ion-avatar class="ion-margin-end">
+                <img alt="Silhouette of a person's head" *ngIf="s.image" [src]="s.image" alt="profile-picture" />
+
+              </ion-avatar>
+              <ion-label>
+                <ion-row class="ion-justify-content-between">
+                  <ion-col>
+                    <h2>
+                      <span class="text-bold font-larger shade-color">{{s.shopName}}</span>
+                    </h2>
+                    <p class="font-larger"> {{s?.firstName}} {{s?.lastName}}</p>
+                    <ion-label class=" text-color-9">
+                      <ion-text class="ion-text-wrap">
+                        <h4>{{s?.address?.city}}, {{s?.address?.state}} -
+                          {{s?.address?.pinCode}}</h4>
+                      </ion-text>
+                      <p>
+                        <span>{{s?.address?.line1}}</span>
+                      </p>
+                      <p>
+                        <span class="ion-padding-top">
+                          <!-- <b>{{'shopTiming'|translate}} :-</b> -->
+                          {{s?.schedule?.day}}:{{s?.schedule?.startTime}}
+                          AM to {{s?.schedule?.endTime }} PM</span>
+                      </p>
+                    </ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          <!-- <ion-col class="ion-text-center logo-margin" >
           <ion-button fill="clear">
             <a>
               <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
@@ -80,131 +79,103 @@
             </a>
           </ion-button>
         </ion-col> -->
-        <ion-grid>
-          <ion-row class="ion-text-center">
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a>
-                  <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
-                    (click)="navigateToChat()"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="tel:+91{{userDetails?.mobile}}">
-                  <ion-icon name="call" size="large" class="ct"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a>
-                  <ion-icon name="location-outline" size="large" class="ct"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-text-center">
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.facebook}}">
-                  <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.insta}}">
-                  <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.youtube}}">
-                  <ion-icon name="logo-youtube" class="font yt"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+          <ion-grid>
+            <ion-row class="ion-text-center">
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a>
+                    <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
+                      (click)="navigateToChat()"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a href="tel:+91{{userDetails?.mobile}}">
+                    <ion-icon name="call" size="large" class="ct"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a>
+                    <ion-icon name="location-outline" size="large" class="ct"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-text-center">
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a href="{{userDetails?.links?.facebook}}">
+                    <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a href="{{userDetails?.links?.insta}}">
+                    <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button fill="clear">
+                  <a href="{{userDetails?.links?.youtube}}">
+                    <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+                  </a>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
 
-        <ion-item>
-          <ion-row>
-            <ion-col>
-              <b>{{ 'aboutUs' | translate}}</b>
-              <p class="ion-text-wrap">
-                {{s.aboutUs
-                }}
+          <ion-item>
+            <ion-row>
+              <ion-col>
+                <b>{{ 'aboutUs' | translate}}</b>
+                <p class="ion-text-wrap">
+                  {{s.aboutUs
+                  }}
                 </p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
 
-    <div class="ion-text-center ion-margin-vertical">
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
-        {{ 'viewCatalogue' | translate}}
-      </ion-button>
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+          {{ 'viewCatalogue' | translate}}
+        </ion-button>
+      </div>
+
+
+      <ion-card class="ion-margin-top ">
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-title class="ion-margin-top ion-margin-bottom title ">
+              <b class="ion-text-wrap "> {{'gallery' | translate}}</b>
+            </ion-title>
+
+            <!-- <ion-icon color="primary" name="eye-sharp" size="large" slot="end" (click)="navigateToViewGalleryImages()"></ion-icon> -->
+          </ion-item>
+
+          <ion-slides [options]="buttonSlide" class="ion-margin-bottom" *ngFor="let gallery of shopDetails">
+            <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
+              <div class="ion-margin-top">
+                <ion-item (click)="navigateToViewGalleryImages(gallery.galleryImages)">
+                  <img class="gallery" src="{{galleryImg}}">
+                </ion-item>
+              </div>
+            </ion-slide>
+          </ion-slides>
+        </ion-card-content>
+      </ion-card>
     </div>
 
+  </ng-container>
 
-    <ion-card class="ion-margin-top ">
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-title class="ion-margin-top ion-margin-bottom title ">
-           <b class="ion-text-wrap "> {{'gallery' | translate}}</b>
-          </ion-title>
 
-          <!-- <ion-icon color="primary" name="eye-sharp" size="large" slot="end" (click)="navigateToViewGalleryImages()"></ion-icon> -->
-        </ion-item>
-     
-        <ion-slides [options]="buttonSlide" class="ion-margin-bottom" *ngFor="let gallery of shopDetails">
-          <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
-            <div class="ion-margin-top">
-              <ion-item (click)="navigateToViewGalleryImages(gallery.galleryImages)">
-                <img class="gallery" src="{{galleryImg}}">
-              </ion-item>
-            </div>
-          </ion-slide>
-        </ion-slides>
-      </ion-card-content>
-    </ion-card>
-  </div>
-   
-  </ng-container> 
-  
- 
- 
-   
+
+
 </ion-content>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

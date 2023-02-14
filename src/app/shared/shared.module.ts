@@ -9,16 +9,17 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { PopoverComponent } from './popover/popover.component';
 import { DateAgoPipe } from '../pipes/date-ago.pipe';
-import { ParallaxHeader } from '../directives/parallax-header';
 import { GalleryListComponent } from './gallery-list/gallery-list.component';
 import { ViewGalleryImagesComponent } from './view-gallery-images/view-gallery-images.component';
+// import { ParallaxHeaderDirective } from '../directives/parallax-header.directive';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 const PIPES = [TruncatePipe, CapitalizePipe, DateAgoPipe];
 const COMPONENTS = [
-  ParallaxHeader,
+  // ParallaxHeaderDirective,
   GalleryListComponent,
   ViewGalleryImagesComponent,
   DataUnavailableComponent,
