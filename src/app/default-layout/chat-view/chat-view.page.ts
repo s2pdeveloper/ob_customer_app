@@ -191,7 +191,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
   }
 
   confirmOrder() {
-    this.chatForm.controls.message.setValue('👍');
+    this.chatForm.controls.message.setValue('Confirm Order 👍');
     this.sendMessage();
   }
 }
