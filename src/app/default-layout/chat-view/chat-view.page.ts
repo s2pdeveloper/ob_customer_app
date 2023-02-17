@@ -148,40 +148,13 @@ export class ChatViewPage implements OnInit, OnDestroy {
     event.target.complete();
   }
 
-  async addOrder(item: any, event: Event) {
-    if (event) {
-      event.stopPropagation();
-    }
-    const alert = await this.alertCtrl.create({
-      header: 'Confirm Order',
-      message: '',
-      subHeader: '',
-      cssClass: 'alert-warning',
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          },
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            console.log('Ok clicked');
-          },
-        },
-      ],
-    });
-    await alert.present();
-  }
-
   downloadImage(message) {
     this.spinner.showLoader();
     this.uploadService
       .downloadImage(message.image)
       .subscribe(async (success: any) => {
         this.toaster.successToast(
-      'Image Downloaded successfully. Please check your Documents folder.'
+          'Image Downloaded successfully. Please check your Documents folder.'
         );
         await Filesystem.writeFile({
           path: `${message.image.split('post/')[1]}`,
@@ -208,13 +181,17 @@ export class ChatViewPage implements OnInit, OnDestroy {
     let ret = await App.openUrl({
       url: url,
     });
-    console.log("ret",ret);
-    
+    console.log('ret', ret);
   }
 
   doRefresh(event: any) {
     this.msgArr = [];
     this.getMsgByCustomerId(false, '');
     event.target.complete();
+  }
+
+  confirmOrder() {
+    this.chatForm.controls.message.setValue('👍');
+    this.sendMessage();
   }
 }

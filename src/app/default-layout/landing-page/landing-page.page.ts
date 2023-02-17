@@ -36,9 +36,9 @@ export class LandingPagePage implements OnInit {
     initialSlide: 0,
     speed: 400,
     loop: true,
-    autoplay: {
-      delay: 5000,
-    },
+    // autoplay: {
+    //   delay: 5000,
+    // },
     spaceBetween: 10,
   };
 

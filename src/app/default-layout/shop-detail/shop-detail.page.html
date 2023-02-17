@@ -7,7 +7,6 @@ appParallaxHeader>
   <ng-container *ngFor="let s of shopDetails">
     <img [src]="s.bannerImages" class="header-image">
 
-<<<<<<< Updated upstream
     <div class="main-content ion-padding">
       <ion-card>
         <ion-card-content>
@@ -86,7 +85,7 @@ appParallaxHeader>
                 <ion-button fill="clear">
                   <a>
                     <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
-                      (click)="navigateToChat()"></ion-icon>
+                      (click)="goToChat()"></ion-icon>
                   </a>
                 </ion-button>
               </ion-col>
@@ -129,93 +128,6 @@ appParallaxHeader>
               </ion-col>
             </ion-row>
           </ion-grid>
-=======
-  <div class="main-content ion-padding" >
-    <ion-card>
-      <ion-card-content>
-        <ion-list>
-          <ion-item lines="none">
-            <ion-avatar class="ion-margin-end">
-              <img alt="Silhouette of a person's head" *ngIf="s.image" [src]="s.image"
-                alt="profile-picture" />
-              
-            </ion-avatar>
-            <ion-label>
-              <ion-row class="ion-justify-content-between">
-                <ion-col>
-                  <h2>
-                    <span class="text-bold font-larger shade-color">{{s.shopName}}</span>
-                  </h2>
-                  <p class="font-larger"> {{s?.firstName}} {{s?.lastName}}</p>
-                  <ion-label class=" text-color-9">
-                    <ion-text class="ion-text-wrap">
-                      <h4>{{s?.address?.city}}, {{s?.address?.state}} -
-                        {{s?.address?.pinCode}}</h4>
-                    </ion-text>
-                    <p>
-                      <span>{{s?.address?.line1}}</span>
-                    </p>
-                    <p>
-                      <span class="ion-padding-top">
-                        {{s?.schedule?.day}}:{{s?.schedule?.startTime}}
-                        AM to {{s?.schedule?.endTime }} PM</span>
-                    </p>
-                  </ion-label>
-                </ion-col>
-              </ion-row>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-        <ion-grid>
-          <ion-row class="ion-text-center">
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a>
-                  <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
-                    (click)="navigateToChat()"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="tel:+91{{userDetails?.mobile}}">
-                  <ion-icon name="call" size="large" class="ct"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a>
-                  <ion-icon name="location-outline" size="large" class="ct"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-text-center">
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.facebook}}">
-                  <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.insta}}">
-                  <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-            <ion-col size="4">
-              <ion-button fill="clear">
-                <a href="{{userDetails?.links?.youtube}}">
-                  <ion-icon name="logo-youtube" class="font yt"></ion-icon>
-                </a>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
->>>>>>> Stashed changes
 
           <ion-item>
             <ion-row>
