@@ -52,7 +52,7 @@
     <ion-slide *ngFor="let c of BusinessWithCategoryArr">
       <div class="" (click)="getCategoryIdWithShop(c._id)">
         <img src="{{c.image}} " /><br />
-        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{c.name}}</ion-note>
+        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap"><b>{{c.name}}</b></ion-note>
       </div>
     </ion-slide>
   </ion-slides>
