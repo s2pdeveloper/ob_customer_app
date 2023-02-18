@@ -10,7 +10,7 @@ import { BusinessTypeService } from 'src/app/service/businessType/businessType.s
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
-
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -75,23 +75,24 @@ export class LandingPagePage implements OnInit {
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
     private authService: AuthService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
-    this.getById();
+    // this.getById();
+    this.getAllDataParallel();
   }
 
-  getById() {
-    this.loaded = false;
-    this.authService.profile(this.user._id).subscribe((success: any) => {
-      this.userDetails = success;
-      this.getAllCategory();
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
-  }
+  // getById() {
+  //   this.loaded = false;
+  //   this.authService.profile(this.user._id).subscribe((success: any) => {
+  //     this.userDetails = success;
+  //     // this.getAllCategory();
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
 
   // getAllBusinessType() {
   //   let obj = {};
@@ -120,12 +121,25 @@ export class LandingPagePage implements OnInit {
   //   // this.getCategoryByBusinessTypeId(businessTypeId);
   // }
 
-  getAllCategory() {
-    this.categoryService.getAll({}).subscribe((success) => {
-      this.categoryArr = success.rows;
-      this.getAllOffer();
+
+  getAllDataParallel() {
+    let response1 = this.categoryService.getAll({});
+    let response2 = this.offerService.getAll({});
+    let response3 = this.advertiseService.getAll({});
+    let response4 = this.authService.profile(this.user._id);
+    return forkJoin([response1, response2, response3, response4]).subscribe(succ => {
+      this.categoryArr = succ[0].rows;
+      this.offerArr = succ[1].rows;
+      this.advertiseArr = succ[2].rows;
+      this.userDetails = succ[3];
     });
   }
+  // getAllCategory() {
+  //   this.categoryService.getAll({}).subscribe((success) => {
+  //     this.categoryArr = success.rows;
+  //     this.getAllOffer();
+  //   });
+  // }
 
   navigateToSearchShop(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
@@ -155,28 +169,28 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/map']);
   }
 
-  getAllOffer() {
-    let obj = {};
-    this.offerService.getAll(obj).subscribe((success) => {
-      this.offerArr = success.rows;
-      this.getAllAdvertise();
-    });
-  }
+  // getAllOffer() {
+  //   let obj = {};
+  //   this.offerService.getAll(obj).subscribe((success) => {
+  //     this.offerArr = success.rows;
+  //     this.getAllAdvertise();
+  //   });
+  // }
 
-  getAllAdvertise() {
-    let obj = {};
-    this.advertiseService.getAll(obj).subscribe((success) => {
-      this.advertiseArr = success.rows;
-    });
-  }
+  // getAllAdvertise() {
+  //   this.advertiseService.getAll({}).subscribe((success) => {
+  //     this.advertiseArr = success.rows;
+  //   });
+  // }
 
   doRefresh(event: any) {
     this.advertiseArr = [];
     // this.start = 0;
-    this.getById();
-    this.getAllAdvertise();
+    // this.getById();
+    this.getAllDataParallel();
+    // this.getAllAdvertise();
     event.target.complete();
   }
 
-  doInfinite($event) {}
+  doInfinite($event) { }
 }
