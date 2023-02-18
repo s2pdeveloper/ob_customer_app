@@ -49,7 +49,7 @@
     <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
-    <ion-slide *ngFor="let c of BusinessWithCategoryArr">
+    <ion-slide *ngFor="let c of categoryArr">
       <div class="" (click)="getCategoryIdWithShop(c._id)">
         <img src="{{c.image}} " /><br />
         <ion-note class="business-font-size ion-text-capitalize ion-text-wrap"><b>{{c.name}}</b></ion-note>

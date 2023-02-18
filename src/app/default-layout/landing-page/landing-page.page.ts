@@ -22,14 +22,13 @@ export class LandingPagePage implements OnInit {
   disabledScroll = false;
   businessTypeId: number;
   businessArr: any = [];
-  BusinessWithCategoryArr: any = [];
+  categoryArr: any = [];
   search: string = '';
   offerArr: any = [];
   advertiseArr: any = [];
-  user: any ='';
+  user: any = '';
   loaded: boolean;
-  userDetails: any=[];
-
+  userDetails: any = [];
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -65,8 +64,6 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 25,
   };
-  
-
 
   constructor(
     private router: Router,
@@ -77,61 +74,56 @@ export class LandingPagePage implements OnInit {
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
-    private authService: AuthService,
+    private authService: AuthService
+  ) {}
 
-
-  ) { }
-
-  ngOnInit() { }
+  ngOnInit() {}
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.getById();
-    this.getAllBusinessType();
   }
 
   getById() {
     this.loaded = false;
     this.authService.profile(this.user._id).subscribe((success: any) => {
       this.userDetails = success;
-      this.getAllOffer();
+      this.getAllCategory();
       this.spinner.hideLoader();
       this.loaded = true;
     });
   }
 
-  getAllBusinessType() {
-    let obj = {};
-    this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
-      this.businessArr = success.rows.map((x, i) => {
-        x.isActive = false;
-        if (i == 0) {
-          x.isActive = true;
-          this.getCategoryByBusinessTypeId(x._id);
-          this.businessTypeId = x._id;
-        }
-        return x;
-      });
-    });
-  }
+  // getAllBusinessType() {
+  //   let obj = {};
+  //   this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
+  //     this.businessArr = success.rows.map((x, i) => {
+  //       x.isActive = false;
+  //       if (i == 0) {
+  //         x.isActive = true;
+  //         // this.getCategoryByBusinessTypeId(x._id);
+  //         this.businessTypeId = x._id;
+  //       }
+  //       return x;
+  //     });
+  //   });
+  // }
 
-  getBusinessAllCategory(businessTypeId) {
-    this.businessArr = this.businessArr.map((x) => {
-      x.isActive = false;
-      if (x._id == businessTypeId) {
-        x.isActive = true;
-        this.businessTypeId = businessTypeId;
-      }
-      return x;
-    });
-    this.getCategoryByBusinessTypeId(businessTypeId);
-  }
+  // getBusinessAllCategory(businessTypeId) {
+  //   this.businessArr = this.businessArr.map((x) => {
+  //     x.isActive = false;
+  //     if (x._id == businessTypeId) {
+  //       x.isActive = true;
+  //       this.businessTypeId = businessTypeId;
+  //     }
+  //     return x;
+  //   });
+  //   // this.getCategoryByBusinessTypeId(businessTypeId);
+  // }
 
-  getCategoryByBusinessTypeId(businessTypeId) {
-    let obj: any = {
-      businessTypeId: businessTypeId,
-    };
-    this.categoryService.getAll(obj).subscribe((success) => {
-      this.BusinessWithCategoryArr = success.rows;
+  getAllCategory() {
+    this.categoryService.getAll({}).subscribe((success) => {
+      this.categoryArr = success.rows;
+      this.getAllOffer();
     });
   }
 
@@ -146,8 +138,6 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
-
-
 
   getCategoryIdWithShop(categoryId) {
     let params = {
@@ -165,7 +155,6 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/map']);
   }
 
-
   getAllOffer() {
     let obj = {};
     this.offerService.getAll(obj).subscribe((success) => {
@@ -178,8 +167,6 @@ export class LandingPagePage implements OnInit {
     let obj = {};
     this.advertiseService.getAll(obj).subscribe((success) => {
       this.advertiseArr = success.rows;
-      this.getAllBusinessType();
-
     });
   }
 
@@ -191,8 +178,5 @@ export class LandingPagePage implements OnInit {
     event.target.complete();
   }
 
-  doInfinite($event){
-
-  }
-
+  doInfinite($event) {}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { ShopService } from 'src/app/service/shop/shop.service';
 @Component({
   selector: 'app-qr-code',
   templateUrl: './qr-code.page.html',
@@ -11,7 +12,11 @@ export class QrCodePage implements OnInit {
   data: any;
   encodedData: any;
 
-  constructor(private barcodeScanner: BarcodeScanner, private router: Router, ) {}
+  constructor(
+    private barcodeScanner: BarcodeScanner,
+    private shopService: ShopService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
   ionViewWillEnter() {
@@ -31,10 +36,21 @@ export class QrCodePage implements OnInit {
         orientation: 'portrait',
       })
       .then((barcodeData) => {
-        console.log('Barcode data', barcodeData);
-        this.data = barcodeData;
         let _id = barcodeData.text.split('?_id=')[1];
-        this.router.navigate(['/shop-detail'], { queryParams: { _id } });
+        if (_id.includes('=')) {
+          this.shopService
+            .getByIdShopUPI({ UPI: _id })
+            .subscribe((success: any) => {
+              console.log('success', success);
+              this.router.navigate(['/shop-detail'], {
+                queryParams: { _id: success?._id },
+              });
+            });
+        } else {
+          this.router.navigate(['/shop-detail'], {
+            queryParams: { _id },
+          });
+        }
       })
       .catch((err) => {
         console.log('Error', err);
