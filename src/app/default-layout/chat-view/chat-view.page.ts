@@ -54,7 +54,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
   chatForm = new FormGroup({
     _id: new FormControl(),
     roomName: new FormControl(''),
-    message: new FormControl(''),
+    message: new FormControl('',[Validators.required]),
     createdBy: new FormControl(),
     image: new FormControl(''),
   });

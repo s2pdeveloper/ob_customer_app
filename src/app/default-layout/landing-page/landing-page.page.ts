@@ -29,6 +29,7 @@ export class LandingPagePage implements OnInit {
   user: any = '';
   loaded: boolean;
   userDetails: any = [];
+
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,

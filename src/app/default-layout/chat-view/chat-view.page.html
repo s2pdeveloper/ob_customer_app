@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  
+
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -85,21 +85,19 @@
       <form [formGroup]="chatForm">
         <ion-item lines="none" id="chatInput" class="ion-align-items-center">
           <ion-textarea class="ion-no-padding" formControlName="message" spellcheck="true" rows="1" autoComplete=" true"
-            autocorrect="true" maxlength="500" type="text" placeholder="{{'Type your message...'| translate}}">
+            autocorrect="true" maxlength="500" type="text" placeholder="{{'Type your message...'| translate}}" (keyup.enter)="sendMessage()">
           </ion-textarea>
           <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
             (change)="uploadFileAWS($event)" required />
-            <ion-icon color="primary"
-            class="ion-padding-start"
-             class="text-color-1" size="large" name="attach"
-              (click)="fileInput1.click()"></ion-icon>
-  
-            <ion-icon name="location" 
-            class="ion-padding-start"
-            color="primary" (click)="locationShare()"></ion-icon>
-  
-            <ion-icon name="send" class="ion-padding-start"
-             color="primary" (click)="sendMessage()"></ion-icon>
+          <ion-icon color="primary" class="ion-padding-start" class="text-color-1" size="large" name="attach"
+            (click)="fileInput1.click()"></ion-icon>
+
+          <ion-icon name="location" class="ion-padding-start" color="primary" (click)="locationShare()"></ion-icon>
+
+          <ion-button  (click)="sendMessage()" [disabled]="chatForm.invalid">
+            <ion-icon name="send-sharp"></ion-icon>
+          </ion-button>
+          <!-- <ion-icon name="send" class="ion-padding-start" color="primary" (click)="sendMessage()"></ion-icon> -->
         </ion-item>
       </form>
     </ion-toolbar>
