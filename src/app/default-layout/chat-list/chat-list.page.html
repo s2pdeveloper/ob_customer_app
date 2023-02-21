@@ -61,6 +61,10 @@
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize"
               >{{item?.shopId?.shopName}}</ion-label
             >
+            <ion-label class="ion-text-wrap shade-color " slot="end">
+              <p class="ion-padding-start">{{item.createdAt  | date:'shortTime'}}</p>
+              <!-- <p class="ion-padding-start">{{item.createdAt | date: "dd.MM.yyyy" }}</p> -->
+            </ion-label>
           </ion-item>
         </ion-list>
       </ion-col>

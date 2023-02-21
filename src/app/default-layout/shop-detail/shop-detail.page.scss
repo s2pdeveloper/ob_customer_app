@@ -10,9 +10,6 @@
   padding: 0px 0px 0px 0px;
 }
 
- 
-
-
 .fb {
   color: #3b5998;
   width: 2.5rem;
@@ -43,10 +40,6 @@
 }
 
 
-
-:host {
-  --cs-size-avatar: 120px;
-}
 
 .card::before {
   content: "";
@@ -131,24 +124,14 @@ ion-card {
   }
 }
 
-.edit {
-  margin-left: 10px !important;
-  margin-right: 10px !important;
-}
+
 
 .gallery {
   border-radius: 5% !important;
   height: 5rem !important;
   width: 100% !important;
-  
- 
-
 }
 
-.head-image {
-  height: 350px;
-  width: 100%;
-}
 
 ion-content {
   --padding-bottom: 0 !important;

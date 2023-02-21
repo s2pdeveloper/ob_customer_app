@@ -154,13 +154,13 @@ export class LandingPagePage implements OnInit {
     });
   }
 
-  getCategoryIdWithShop(categoryId) {
-    let params = {
-      businessTypeId: this.businessTypeId,
-      categoryId: categoryId,
-    };
-    this.router.navigate(['/search-shop'], { queryParams: params });
-  }
+  // getCategoryIdWithShop(categoryId) {
+  //   let params = {
+  //     businessTypeId: this.businessTypeId,
+  //     categoryId: categoryId,
+  //   };
+  //   this.router.navigate(['/search-shop'], { queryParams: params });
+  // }
 
   navigateToProfilePage() {
     this.router.navigate(['/view-profile']);

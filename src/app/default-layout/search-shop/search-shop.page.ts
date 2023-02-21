@@ -62,6 +62,8 @@ export class SearchShopPage implements OnInit {
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       this.shopArr = success.rows;
+      console.log("this.shopArr@@@@@@@@@@@@@@@@@", this.shopArr);
+      
       
     });
   }
@@ -72,6 +74,7 @@ export class SearchShopPage implements OnInit {
     this.loaded = false;
     this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
       this.shopArr = success.payload.shop;
+      console.log("this.shopArr88888888888888888888", this.shopArr);
       this.spinner.hideLoader();
       this.loaded = true;
     });
@@ -80,7 +83,7 @@ export class SearchShopPage implements OnInit {
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
-  getUrl(url) {
+    getUrl(url) {
     let path = `url(${url})`;
     return path;
   }

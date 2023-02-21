@@ -26,7 +26,7 @@ export class ShopDetailPage implements OnInit {
     autoplay: {
       delay: 4000,
     },
-    spaceBetween: 1,
+    spaceBetween: 0,
   };
   constructor(
     private activatedRoute: ActivatedRoute,

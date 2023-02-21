@@ -31,7 +31,7 @@
                 <ion-row class="ion-justify-content-between">
                   <ion-col>
                     <h2>
-                      <span class="text-bold font-larger shade-color"
+                      <span class="text-bold font-larger shade-color ion-text-wrap"
                         >{{s.shopName}}</span
                       >
                     </h2>
@@ -44,13 +44,12 @@
                         </h4>
                       </ion-text>
                       <p>
-                        <span>{{s?.address?.line1}}</span>
+                        <span class="ion-text-wrap">{{s?.address?.line1}}</span>
                       </p>
                       <p>
-                        <span class="ion-padding-top">
-                          <!-- <b>{{'shopTiming'|translate}} :-</b> -->
-                          {{s?.schedule?.day}}:{{s?.schedule?.startTime}} AM to
-                          {{s?.schedule?.endTime }} PM</span
+                        <span class="ion-padding-top ion-text-wrap">
+                          {{s?.schedule?.day}}:{{s?.schedule?.startTime}} to
+                          {{s?.schedule?.endTime }}</span
                         >
                       </p>
                     </ion-label>
@@ -195,7 +194,7 @@
             *ngFor="let gallery of shopDetails"
           >
             <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
-              <div class="ion-margin-top">
+              <div class="ion-margin-top ion-no-padding">
                 <ion-item
                   (click)="navigateToViewGalleryImages(gallery.galleryImages)"
                 >

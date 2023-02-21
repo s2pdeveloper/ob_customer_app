@@ -8,6 +8,12 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 const { Device, Geolocation } = Plugins;
+import {
+  LocalNotificationActionPerformed,
+  PushNotification,
+  PushNotificationActionPerformed,
+  PushNotificationToken,
+} from '@capacitor/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -56,13 +62,17 @@ export class LoginPage implements OnInit {
       this.spinner.hideLoader();
     });
   }
+
   getDeviceInfo = async () => {
     this.deviceInfo = await Device.getInfo();
     this.deviceInfo.geoLocation = await (
       await Geolocation.getCurrentPosition()
     ).coords;
   };
+
   saveDeviceToken(id) {
+    console.log("id********************",id);
+    
     let newObj: any = Object.assign(
       {
         shopId: id,
@@ -73,5 +83,6 @@ export class LoginPage implements OnInit {
     newObj.deviceId &&
       this.authService.createAndUpdateUserDevice(newObj).subscribe();
   }
-  
+
+ 
 }
