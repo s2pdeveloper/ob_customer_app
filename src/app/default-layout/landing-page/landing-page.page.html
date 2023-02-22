@@ -14,6 +14,37 @@
     (ionFocus)="navigateToSearchShop('/search-shop',null)">
   </ion-searchbar>
 
+  <ion-row>
+    <ion-col *ngFor="let b of businessArr;" size="3" class="business">
+      <div [ngClass]="b.isActive ? 'businessTypeActive':null" (click)="getBusinessAllCategory(b._id)">
+        <!-- <img src="{{b.image}} " /> -->
+        <ion-row>
+          <ion-col size="12">
+            <img src="{{b.image}} " width="50px" />
+            <!-- <img src="../../../assets/icon/facebook.png"  /> -->
+            <ion-note class="business-font-size">{{b.name}}</ion-note>
+          </ion-col>
+        </ion-row>
+      </div>
+      <!-- <ion-card
+        class="product-card"
+        [ngClass]="b.isActive ? 'businessTypeActive':null"
+        (click)="getBusinessAllCategory(b._id)"
+      >
+        <ion-card-header>
+          <ion-row>
+            <ion-col size="12">             
+              <img src="{{b.imageUrl}} ">
+               <ion-note>{{b.name}}</ion-note>
+            <ion-col size="12">
+              <img src="{{b.image}} " />
+              <ion-note>{{b.name}}</ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+      </ion-card> -->
+    </ion-col>
+  </ion-row>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>

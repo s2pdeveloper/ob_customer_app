@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule ,OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -19,4 +19,4 @@ import { SharedModule } from 'src/app/shared/shared.module';
   ],
   declarations: [CategoryPage]
 })
-export class CategoryPageModule {}
+export class CategoryPageModule  {}
