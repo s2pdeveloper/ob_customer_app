@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
 import { StorageService, ToastService } from 'src/app/core/services';
@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
-import { AlertController } from '@ionic/angular';
 const { App, Geolocation } = Plugins;
 import { Plugins, FilesystemDirectory } from '@capacitor/core';
 const { Filesystem } = Plugins;
@@ -39,7 +38,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
   data: any = {};
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     public translate: TranslateService,
     private chatService: ChatService,
@@ -47,7 +45,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
     private spinner: LoaderService,
     private localStorage: StorageService,
     private uploadService: UploadService,
-    private alertCtrl: AlertController,
     private socket: Socket
   ) {}
 
@@ -91,7 +88,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.chatForm.controls.roomName.setValue(this.roomName);
     this.chatService.create(this.chatForm.value).subscribe(
       (success) => {
-        console.log('success', success);
         this.getMsgByCustomerId(false);
         // emit
         this.socket.emit('latestdata', {
@@ -114,7 +110,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.chatService
       .getMsgByCustomerId(this.roomName)
       .subscribe((success: any) => {
-        console.log('success', success);
         this.msgArr = success.payload.rows;
         this.spinner.hideLoader();
       });
@@ -181,7 +176,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
     let ret = await App.openUrl({
       url: url,
     });
-    console.log('ret', ret);
   }
 
   doRefresh(event: any) {

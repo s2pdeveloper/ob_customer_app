@@ -1,5 +1,4 @@
 <ion-content class="font-poppins">
-
   <ion-item lines="none">
     <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
     <ion-avatar slot="end">
@@ -8,71 +7,24 @@
     </ion-avatar>
   </ion-item>
 
-
   <ion-searchbar class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text"
     showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on"
     (ionFocus)="navigateToSearchShop('/search-shop',null)">
   </ion-searchbar>
 
-  <ion-row>
-    <ion-col *ngFor="let b of businessArr;" size="3" class="business">
-      <div [ngClass]="b.isActive ? 'businessTypeActive':null" (click)="getBusinessAllCategory(b._id)">
-        <!-- <img src="{{b.image}} " /> -->
-        <ion-row>
-          <ion-col size="12">
-            <img src="{{b.image}} " width="50px" />
-            <!-- <img src="../../../assets/icon/facebook.png"  /> -->
-            <ion-note class="business-font-size">{{b.name}}</ion-note>
-          </ion-col>
-        </ion-row>
-      </div>
-      <!-- <ion-card
-        class="product-card"
-        [ngClass]="b.isActive ? 'businessTypeActive':null"
-        (click)="getBusinessAllCategory(b._id)"
-      >
-        <ion-card-header>
-          <ion-row>
-            <ion-col size="12">             
-              <img src="{{b.imageUrl}} ">
-               <ion-note>{{b.name}}</ion-note>
-            <ion-col size="12">
-              <img src="{{b.image}} " />
-              <ion-note>{{b.name}}</ion-note>
-            </ion-col>
-          </ion-row>
-        </ion-card-header>
-      </ion-card> -->
-    </ion-col>
-  </ion-row>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
-
   <!-- advertise -->
-  <ion-slides [options]="buttonSlide2" class="ion-margin-bottom"  loop="true" pager>
+  <ion-slides [options]="buttonSlide2" class="ion-margin-bottom" autoplay="true" loop="true" pager>
     <ion-slide *ngFor="let a of advertiseArr">
       <div class="advertise ion-no-padding">
         <img class="advertiseImage" src="{{a.image}} " /><br />
       </div>
     </ion-slide>
   </ion-slides>
-
-  <!-- businessType -->
-  <!-- <ion-slides class="ion-margin-bottom" autoplay="true" pager="false" scrollbar="false" [options]="buttonSlide">
-    <ion-slide *ngFor="let b of businessArr;">
-      <div [ngClass]="b.isActive ? 'businessTypeActive':null" (click)="getBusinessAllCategory(b._id)">
-        <img src="{{b.image}} " /><br />
-        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{b.name }}</ion-note>
-      </div>
-    </ion-slide>
-  </ion-slides> -->
 
   <!-- category -->
   <ion-item lines="none">
@@ -81,8 +33,7 @@
   </ion-item>
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
     <ion-slide *ngFor="let c of categoryArr">
-      <div class="" >
-        <!-- (click)="getCategoryIdWithShop(c._id)" -->
+      <div class="">
         <img src="{{c.image}} " /><br />
         <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{c.name}}</ion-note>
       </div>
@@ -93,7 +44,7 @@
   <ion-item lines="none">
     <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
   </ion-item>
-  <ion-slides [options]="buttonSlide1" class="ion-margin-bottom" pager>
+  <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
     <ion-slide *ngFor="let o of offerArr">
       <div class="offer">
         <img class="offerImage" src="{{o.image}} " /><br />

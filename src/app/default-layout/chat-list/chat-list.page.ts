@@ -54,9 +54,6 @@ export class ChatListPage implements OnInit {
     });
   }
 
-
-
-  // navigate to chat view
   navigateTo(item) {
     // join
     this.socket.emit('join', { room: item._id, user: this.user._id });
