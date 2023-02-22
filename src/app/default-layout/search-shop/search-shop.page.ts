@@ -41,17 +41,17 @@ export class SearchShopPage implements OnInit {
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log("params@@@@@@@@@@@@@@@@@@@@@@@@",params);
-      
-      this.subCategoryId = params._id ?? '';
-      if (params.shopId) {
-        this.getShopById(params.shopId);
-      } else {
+    //  if (params.shopId) {
+    //     this.getShopById(params.shopId);
+    //   }
+    //    else {
         this.businessTypeId = params.businessTypeId ?? '';
         this.categoryId = params.categoryId ?? '';
+        this.subCategoryId = params.subCategoryId ?? '';
         this.getAllShop(false);
       }
-    });
+    // }
+    );
   }
 
   getAllShop(isFirstLoad: boolean, event?: any) {
@@ -66,15 +66,15 @@ export class SearchShopPage implements OnInit {
  });
   }
 
-  getShopById(_id) {
-    this.spinner.showLoader();
-    this.loaded = false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      this.shopArr = success.payload.shop;
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
-  }
+  // getShopById(_id) {
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
+  //     this.shopArr = success.payload.shop;
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
 
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });

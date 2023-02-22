@@ -51,7 +51,6 @@ export class LandingPagePage implements OnInit {
     slideShadows: true,
     initialSlide: 0,
     speed: 300,
-    loop: true,
     autoplay: {
       delay: 5000,
     },
@@ -63,7 +62,6 @@ export class LandingPagePage implements OnInit {
     slideShadows: true,
     initialSlide: 0,
     speed: 400,
-    loop: true,
     autoplay: {
       delay: 3000,
     },
@@ -125,7 +123,6 @@ export class LandingPagePage implements OnInit {
       console.log("error.....", error);
     });
   }
-
   // getById() {
   //   this.loaded = false;
   //   this.authService.profile(this.user._id).subscribe((success: any) => {

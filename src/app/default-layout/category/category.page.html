@@ -7,66 +7,25 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <ion-searchbar
-  class="search-box ion-no-padding size"
-  inputmode="search"
-  searchIcon
-  animated
-  type="text"
-  showCancelButton="never"
-  placeholder="{{ 'Search' | translate}}"
-  autocomplete="on"
-  autocorrect="on"
-  [(ngModel)]="search"
-  (ionChange)="onSearch()"
->
-</ion-searchbar> -->
-
 <ion-content>
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let c of categoryDetails" (click)="navigateTo('/search-shop',c)" size="4">
-        <ion-card class="card ion-text-center">
-          <img src="{{c.image}}" />
-          <div class="card-body">
-            <ion-label class="card-heading ion-text-capitalize">{{c.name}}</ion-label>
-          </div>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 
   <ion-grid class="category-list">
     <ion-row>
       <ion-col size="3" class="category-section">
-      
-       <div class="cat-container">
-        <ion-card
-        class="ion-text-center"
-        [ngClass]="c.active ? 'active':null "
-        *ngFor="let c of categoryArr;let i =index;"
-        (click)="getCategoryAllSubCategory(i)"
-      >
-        <img alt="Category Image" class="cat-img" src="{{c.image}}" />
-        <ion-card-subtitle class="cat-head">{{c.name}}</ion-card-subtitle>
-      </ion-card>
-       </div>
+        <div class="cat-container">
+          <ion-card class="ion-text-center" [ngClass]="c.active ? 'active':null "
+            *ngFor="let c of categoryArr;let i =index;" (click)="getCategoryAllSubCategory(i)">
+            <img alt="Category Image" class="cat-img" src="{{c.image}}" />
+            <ion-card-subtitle class="cat-head">{{c.name}}</ion-card-subtitle>
+          </ion-card>
+        </div>
       </ion-col>
       <ion-col size="9" class="subcategory-section">
         <ion-row class="ion-margin">
           <ion-col size="4" *ngFor="let subCategory of subCategoryArr">
-            <ion-card
-              class="ion-text-center"
-              (click)="navigateTo('/search-shop',subCategory._id)"
-            >
-              <img
-                alt="Category Image"
-                class="cat-img"
-                src="{{subCategory.image}}"
-              />
-              <ion-card-subtitle class="cat-head"
-                >{{subCategory.name}}</ion-card-subtitle
-              >
+            <ion-card class="ion-text-center" (click)="navigateTo('/search-shop',subCategory._id)">
+              <img alt="Category Image" class="cat-img" src="{{subCategory.image}}" />
+              <ion-card-subtitle class="cat-head">{{subCategory.name}}</ion-card-subtitle>
             </ion-card>
           </ion-col>
         </ion-row>

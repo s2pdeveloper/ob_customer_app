@@ -14,8 +14,6 @@ ion-content {
   padding-bottom: 20px;
 }
 
-
-
 .heading {
   font-weight: bold;
 }
@@ -48,7 +46,7 @@ ion-content {
 }
 
 .business-font-size {
-  font-size:small;
+  font-size: small;
   font-weight: bold;
 }
 
@@ -58,23 +56,17 @@ ion-content {
   height: 60px;
 }
 
-
-
 .offerImage {
-  // border-radius: 10% !important;
   border-radius: 1rem !important;
   height: 9.5rem !important;
   width: 22rem !important;
   object-fit: cover !important;
-
 }
 
 .advertiseImage {
   border-radius: 1rem !important;
   height: 7rem !important;
-  // width: 100vw !important;
   width: 22rem !important;
   object-fit: cover !important;
   padding: 0px !important;
 }
-
