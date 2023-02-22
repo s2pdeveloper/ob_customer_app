@@ -1,5 +1,5 @@
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
@@ -12,8 +12,9 @@ import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { forkJoin } from 'rxjs';
 import { Platform } from '@ionic/angular';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Plugins } from '@capacitor/core';
+const { Geolocation } = Plugins;
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -68,11 +69,13 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 25,
   };
+  deviceInfo: any;
+  currentLocation: any={};
+  geolocation: { latitude: number; longitude: number; accuracy: number; altitudeAccuracy?: number; altitude?: number; speed?: number; heading?: number; };
 
   constructor(
     public zone: NgZone,
     private platform: Platform,
-    public geolocation: Geolocation,
     private router: Router,
     private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
@@ -81,16 +84,46 @@ export class LandingPagePage implements OnInit {
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
-    private authService: AuthService
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute,
+
   ) {
-    this.initializeApp();
+    // this.initializeApp();
   }
 
-  ngOnInit() {}
-  ionViewWillEnter() {
+  ngOnInit() { }
+  async ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
-    // this.getById();
     this.getAllDataParallel();
+    // console.log("device info..................", await (
+    //   await Geolocation.getCurrentPosition()
+    // ).coords);
+    this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
+    console.log("geolocation", this.geolocation);
+    this.cureeentLocation();
+
+
+    // this.currentLocation=`https://maps.googleapis.com/maps/api/geocode/json?latlng=${geolocation?.latitude},${geolocation?.longitude}&key=AIzaSyAp92DF5Vk3CokhTVKskaGA174iSX7o2Cs`
+    // console.log("currentLocation@@@@@@@@@@@@@@@@@@@@@@",this.currentLocation);
+
+
+
+  }
+
+  doInfinite($event) { }
+
+  cureeentLocation() {
+    let obj = {
+      latitude: this.geolocation.latitude,
+      longitude: this.geolocation.longitude
+    }
+    console.log("obj1111", obj);
+    this.authService.getCurrentLocation(obj).subscribe((success:any) => {
+      this.currentLocation = success.results[0];
+      console.log("currentLocation", this.currentLocation);
+    }, (error) => {
+      console.log("error.....", error);
+    });
   }
 
   // getById() {
@@ -173,25 +206,5 @@ export class LandingPagePage implements OnInit {
     event.target.complete();
   }
 
-  doInfinite($event) {}
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.getUserLocation();
-    });
-  }
-
-  getUserLocation() {
-    this.geolocation
-      .getCurrentPosition()
-      .then((resp) => {})
-      .catch((error) => {});
-    let watch = this.geolocation.watchPosition();
-    watch.subscribe((data) => {
-      console.log('data@@@@@@@@@@@@@@@@@@', data);
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-    });
-  }
 }

@@ -30,6 +30,17 @@ export class ApiService {
     );
   }
 
+  public getMap(
+    path: string,
+    params: HttpParams = new HttpParams()
+  ): Observable<any> {
+    return this.httpClient.get(path, { params }).pipe(
+      map((res: any) => res),
+      // tap((_) => this.log(path)),
+      // shareReplay()
+    );
+  }
+
   public put(path: string, body: object = {}): Observable<any> {
     return this.httpClient.put(path, body).pipe(map((res: any) => res.result));
   }

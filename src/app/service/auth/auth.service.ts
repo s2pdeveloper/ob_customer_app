@@ -38,6 +38,12 @@ export class AuthService {
   profile(_id) {
     return this.http.get(this.routes.getByIdPath(_id));
   }
+  getCurrentLocation(params:any) {
+    console.log("params",params);
+    
+    let x:any = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${params.latitude},${params.longitude}&key=AIzaSyAp92DF5Vk3CokhTVKskaGA174iSX7o2Cs`
+    return this.http.getMap(x); 
+  }
   getCurrentUser() {
     let x: any = localStorage.getItem('Student');
     return JSON.parse(x);

@@ -2,6 +2,7 @@
 
   <ion-item lines="none">
     <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
+    <p>{{currentLocation?.formatted_address}}</p>
     <ion-avatar slot="end">
       <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
         (click)="navigateToProfilePage()" />

@@ -20,7 +20,8 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     if (typeof window !== 'undefined') {
       const OBCustomer = this.storageService.get('OBCustomer');
-      if (OBCustomer && OBCustomer.token) {
+      if (OBCustomer && OBCustomer.token && !request.url.includes('https://maps.googleapis.com') ) {
+
         request = request.clone({
           setHeaders: {
             authorization: `Bearer ${OBCustomer.token}`,
