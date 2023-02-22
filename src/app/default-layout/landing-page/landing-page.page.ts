@@ -47,7 +47,7 @@ export class LandingPagePage implements OnInit {
     slidesPerView: 1,
     slideShadows: true,
     initialSlide: 0,
-    speed: 400,
+    speed: 300,
     loop: true,
     autoplay: {
       delay: 5000,
@@ -62,7 +62,7 @@ export class LandingPagePage implements OnInit {
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 5000,
+      delay: 3000,
     },
     spaceBetween: 25,
   };
