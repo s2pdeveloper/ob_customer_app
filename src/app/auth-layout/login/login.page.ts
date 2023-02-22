@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
     
     let newObj: any = Object.assign(
       {
-        shopId: id,
+        customerId: id,
         deviceId: this.localStorage.get('OBUserDeviceId'),
       },
       this.deviceInfo

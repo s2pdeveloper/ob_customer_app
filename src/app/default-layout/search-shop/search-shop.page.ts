@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { SubCategoryComponent } from 'src/app/modal/sub-category/sub-category.component';
 import { StorageService, ToastService } from 'src/app/core/services';
 @Component({
   selector: 'app-search-shop',
@@ -42,6 +41,8 @@ export class SearchShopPage implements OnInit {
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      console.log("params@@@@@@@@@@@@@@@@@@@@@@@@",params);
+      
       this.subCategoryId = params._id ?? '';
       if (params.shopId) {
         this.getShopById(params.shopId);
@@ -62,19 +63,14 @@ export class SearchShopPage implements OnInit {
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       this.shopArr = success.rows;
-      console.log("this.shopArr@@@@@@@@@@@@@@@@@", this.shopArr);
-      
-      
-    });
+ });
   }
 
   getShopById(_id) {
-    console.log(_id);
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
       this.shopArr = success.payload.shop;
-      console.log("this.shopArr88888888888888888888", this.shopArr);
       this.spinner.hideLoader();
       this.loaded = true;
     });
@@ -83,8 +79,9 @@ export class SearchShopPage implements OnInit {
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
+
     getUrl(url) {
-    let path = `url(${url})`;
+    let path = `url('${url}')`;    
     return path;
   }
   onSearch() {
@@ -98,13 +95,6 @@ export class SearchShopPage implements OnInit {
     this.shopArr = [];
     this.getAllShop(false);
     event.target.complete();
-  }
-
-  async openSubCategoryModel() {
-    let model = await this.modelController.create({
-      component: SubCategoryComponent,
-    });
-    await model.present();
   }
 
   async addToFavorite(item) {

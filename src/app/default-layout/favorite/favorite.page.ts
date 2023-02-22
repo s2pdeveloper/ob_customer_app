@@ -160,7 +160,7 @@ export class FavoritePage implements OnInit {
     this.router.navigate([path], { queryParams: { _id } });
   }
   getUrl(url) {
-    let path = `url(${url})`;
+    let path = `url('${url}')`;
     return path;
   }
   onSearch() {

@@ -37,7 +37,7 @@
             .title {
                 position: absolute;
                 left: 16px;
-                font-size: 19px;
+                font-size: 12px !important;
                 margin-right: 20px !important;
                 font-weight: bolder;
                 color: #ff0000;
@@ -103,5 +103,8 @@ ion-slide {
         background: #ffff;
 
     }
+    
 
 }
+
+

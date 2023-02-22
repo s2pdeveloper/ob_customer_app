@@ -11,6 +11,7 @@ import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { forkJoin } from 'rxjs';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -65,8 +66,11 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 25,
   };
+  platform: any;
 
   constructor(
+    // public zone: NgZone,
+     public geolocation: Geolocation,
     private router: Router,
     private businessTypeService: BusinessTypeService,
     private spinner: LoaderService,
@@ -76,7 +80,9 @@ export class LandingPagePage implements OnInit {
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
     private authService: AuthService
-  ) { }
+  ) { 
+    // this.initializeApp();
+  }
 
   ngOnInit() { }
   ionViewWillEnter() {
@@ -128,11 +134,11 @@ export class LandingPagePage implements OnInit {
     let response2 = this.offerService.getAll({});
     let response3 = this.advertiseService.getAll({});
     let response4 = this.authService.profile(this.user._id);
-    return forkJoin([response1, response2, response3, response4]).subscribe(succ => {
-      this.categoryArr = succ[0].rows;
-      this.offerArr = succ[1].rows;
-      this.advertiseArr = succ[2].rows;
-      this.userDetails = succ[3];
+    return forkJoin([response1, response2, response3, response4]).subscribe(success => {
+      this.categoryArr = success[0].rows;
+      this.offerArr = success[1].rows;
+      this.advertiseArr = success[2].rows;
+      this.userDetails = success[3];
     });
   }
   // getAllCategory() {
@@ -194,4 +200,26 @@ export class LandingPagePage implements OnInit {
   }
 
   doInfinite($event) { }
+
+  // initializeApp() {
+  //   this.platform.ready().then(() => {
+  //     this.getUserLocation();
+  //   });
+  // }
+
+  // getUserLocation() {
+  //   this.geolocation.getCurrentPosition().then((resp) => {
+    
+  //   }).catch((error) => {
+  //   });
+  //   let watch = this.geolocation.watchPosition();
+  //   watch.subscribe((data) => {
+  //     console.log("data@@@@@@@@@@@@@@@@@@",data);
+      
+  //     // data can be a set of coordinates, or an error (if an error occurred).
+  //     // data.coords.latitude
+  //     // data.coords.longitude
+  
+  //   });
+  // }
 }
