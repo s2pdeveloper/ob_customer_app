@@ -8,19 +8,24 @@
 </ion-header>
 
 <ion-content>
-
-
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-
-
   <div class="chat-screen">
-    <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
-      [scrollTop]="scrollMe?.scrollHeight">
+    <div
+      #scrollMe
+      class="ps-container ps-theme-default ps-active-y"
+      id="chat-content"
+      style="overflow: scroll"
+      [scrollTop]="scrollMe?.scrollHeight"
+    >
       <div class="message-wrap">
-        <div *ngFor="let message of msgArr" class="message" [class.right]=" message.createdBy === user._id">
+        <div
+          *ngFor="let message of msgArr"
+          class="message"
+          [class.right]=" message.createdBy === user._id"
+        >
           <div class="msg-detail">
             <div class="msg-info">
               <p>{{message?.createdAt | date:'shortTime'}}</p>
@@ -31,8 +36,12 @@
 
             <div class="msg-info">
               <img src="{{message.image}}" *ngIf="message.image" />
-              <ion-icon name="cloud-download-outline" *ngIf="message.image" class="download"
-                (click)="downloadImage(message)"></ion-icon>
+              <ion-icon
+                name="cloud-download-outline"
+                *ngIf="message.image"
+                class="download"
+                (click)="downloadImage(message)"
+              ></ion-icon>
             </div>
           </div>
           <div *ngIf="message.userIsSender" class="msg-status">
@@ -56,14 +65,24 @@
         </div>
       </div>
       <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
-        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px"></div>
+        <div
+          class="ps-scrollbar-x"
+          tabindex="0"
+          style="left: 0px; width: 0px"
+        ></div>
       </div>
-      <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px">
-        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px"></div>
+      <div
+        class="ps-scrollbar-y-rail"
+        style="top: 0px; height: 0px; right: 2px"
+      >
+        <div
+          class="ps-scrollbar-y"
+          tabindex="0"
+          style="top: 0px; height: 2px"
+        ></div>
       </div>
     </div>
   </div>
-
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
     <ion-fab-button class="bg-color-2" (click)="confirmOrder()">
@@ -71,10 +90,15 @@
     </ion-fab-button>
   </ion-fab>
 
-
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+  <ion-infinite-scroll
+    threshold="100px"
+    (ionInfinite)="doInfinite($event)"
+    [disabled]="disabledScroll"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
@@ -84,19 +108,42 @@
     <ion-toolbar>
       <form [formGroup]="chatForm">
         <ion-item lines="none" id="chatInput" class="ion-align-items-center">
-          <ion-textarea class="ion-no-padding" formControlName="message" spellcheck="true" rows="1" autoComplete=" true"
-            autocorrect="true" maxlength="500" type="text" placeholder="{{'Type your message...'| translate}}" (keyup.enter)="sendMessage()">
+          <ion-textarea
+            class="ion-no-padding"
+            formControlName="message"
+            spellcheck="true"
+            rows="1"
+            autoComplete=" true"
+            autocorrect="true"
+            maxlength="500"
+            type="text"
+            placeholder="{{'Type your message...'| translate}}"
+            (keyup.enter)="sendMessage()"
+          >
           </ion-textarea>
-          <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-            (change)="uploadFileAWS($event)" required />
-          <ion-icon color="primary" class="ion-padding-start" class="text-color-1" size="large" name="attach"
-            (click)="fileInput1.click()"></ion-icon>
+          <input
+            hidden
+            autocapitalize="on"
+            #fileInput1
+            autocomplete="on"
+            type="file"
+            name="file"
+            (change)="uploadFileAWS($event)"
+            required
+          />
 
-          <ion-icon name="location" class="ion-padding-start" color="primary" (click)="locationShare()"></ion-icon>
+         <ng-container class="footer-btns">
+          <ion-button (click)="fileInput1.click()">
+            <ion-icon name="attach"></ion-icon>
+          </ion-button>
+          <ion-button (click)="locationShare()">
+            <ion-icon name="location"></ion-icon>
+          </ion-button>
 
-          <ion-button  (click)="sendMessage()" [disabled]="chatForm.invalid">
+          <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
             <ion-icon name="send-sharp"></ion-icon>
           </ion-button>
+         </ng-container>
           <!-- <ion-icon name="send" class="ion-padding-start" color="primary" (click)="sendMessage()"></ion-icon> -->
         </ion-item>
       </form>

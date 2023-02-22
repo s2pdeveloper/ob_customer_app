@@ -8,18 +8,12 @@ import { AuthService } from 'src/app/service/auth/auth.service';
 import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 const { Device, Geolocation } = Plugins;
-import {
-  LocalNotificationActionPerformed,
-  PushNotification,
-  PushNotificationActionPerformed,
-  PushNotificationToken,
-} from '@capacitor/core';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-
 export class LoginPage implements OnInit {
   submitted: boolean = false;
   returnUrl: string;
@@ -33,14 +27,20 @@ export class LoginPage implements OnInit {
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService
-  ) { }
+  ) {}
 
   loginForm = new FormGroup({
     mobile: new FormControl('7028874108', [Validators.required]),
     password: new FormControl('admin@1234', [Validators.required]),
   });
 
-  ngOnInit() {
+  async ngOnInit() {
+    console.log(
+      ' this.deviceInfo',
+      await (
+        await Geolocation.getCurrentPosition()
+      )
+    );
     this.returnUrl =
       this.route.snapshot.queryParams[`returnUrl`] || '/landing-page';
   }
@@ -71,8 +71,6 @@ export class LoginPage implements OnInit {
   };
 
   saveDeviceToken(id) {
-    console.log("id********************",id);
-    
     let newObj: any = Object.assign(
       {
         customerId: id,
@@ -83,6 +81,4 @@ export class LoginPage implements OnInit {
     newObj.deviceId &&
       this.authService.createAndUpdateUserDevice(newObj).subscribe();
   }
-
- 
 }

@@ -58,7 +58,7 @@
     position: relative;
     padding: 7px 0;
 
-    .download{
+    .download {
       position: relative;
       float: right;
     }
@@ -98,9 +98,10 @@
       color: #888;
       padding-right: 1%;
     }
-    img{
+
+    img {
       float: right;
-     
+
     }
   }
 }
@@ -122,6 +123,9 @@ ion-footer {
 
     ion-button {
       margin-top: 13px;
+      margin-left: 10px !important;
+      margin-right: 0 !important;
+
     }
   }
 }
@@ -131,3 +135,4 @@ img {
   width: 7rem !important;
   object-fit: cover;
 }
+

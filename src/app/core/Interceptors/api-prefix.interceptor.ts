@@ -26,7 +26,8 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
       !request.url.includes('assets/i18n/hi.json') &&
       !request.url.includes('assets/i18n/mr.json') &&
       !request.url.includes('/apk') &&
-      !request.url.includes('obhaiya-assets.s3.ap-south-1.amazonaws.com')
+      !request.url.includes('obhaiya-assets.s3.ap-south-1.amazonaws.com') &&
+      !request.url.includes('https://maps.googleapis.com') 
     ) {
       request = request.clone({
         url: environment.apiEndpoint + request.url,
