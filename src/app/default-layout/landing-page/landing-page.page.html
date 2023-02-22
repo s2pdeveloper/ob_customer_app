@@ -25,7 +25,7 @@
   </ion-infinite-scroll> -->
 
   <!-- advertise -->
-  <ion-slides [options]="buttonSlide2" class="ion-margin-bottom" pager>
+  <ion-slides [options]="buttonSlide2" class="ion-margin-bottom"  loop="true" pager>
     <ion-slide *ngFor="let a of advertiseArr">
       <div class="advertise ion-no-padding">
         <img class="advertiseImage" src="{{a.image}} " /><br />

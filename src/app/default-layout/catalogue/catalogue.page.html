@@ -61,17 +61,17 @@
                   <ion-label>
                     <ion-row class="ion-justify-content-between">
                       <ion-col>
-                        <h2 class="title ion-text-capitalize ion-text-wrap">
+                        <h6 class="title ion-text-capitalize ion-text-wrap">
                           <span class="text-bold">{{c.title}}</span>
-                        </h2>
-                        <p class="text-color-2">{{c.description}}</p>
+                        </h6>
+                        <p class="text-color-2">{{c.description | truncate:25}}</p>
                         <p class="text-color-7 ion-text-wrap">₹ {{c.price}}</p>
                       </ion-col>
 
                     </ion-row>
 
                   </ion-label>
-                </ion-item>
+                </ion-item> 
           
 
 
