@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { forkJoin } from 'rxjs';
+import { Platform } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 @Component({
   selector: 'app-landing-page',
@@ -66,10 +67,9 @@ export class LandingPagePage implements OnInit {
     },
     spaceBetween: 25,
   };
-  platform: any;
 
   constructor(
-    // public zone: NgZone,
+    public zone: NgZone,private platform: Platform,
      public geolocation: Geolocation,
     private router: Router,
     private businessTypeService: BusinessTypeService,
@@ -81,7 +81,7 @@ export class LandingPagePage implements OnInit {
     private localStorage: StorageService,
     private authService: AuthService
   ) { 
-    // this.initializeApp();
+    this.initializeApp();
   }
 
   ngOnInit() { }
@@ -141,12 +141,7 @@ export class LandingPagePage implements OnInit {
       this.userDetails = success[3];
     });
   }
-  // getAllCategory() {
-  //   this.categoryService.getAll({}).subscribe((success) => {
-  //     this.categoryArr = success.rows;
-  //     this.getAllOffer();
-  //   });
-  // }
+ 
 
   navigateToSearchShop(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
@@ -159,15 +154,6 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
-
-  // getCategoryIdWithShop(categoryId) {
-  //   let params = {
-  //     businessTypeId: this.businessTypeId,
-  //     categoryId: categoryId,
-  //   };
-  //   this.router.navigate(['/search-shop'], { queryParams: params });
-  // }
-
   navigateToProfilePage() {
     this.router.navigate(['/view-profile']);
   }
@@ -175,20 +161,6 @@ export class LandingPagePage implements OnInit {
   navigateToMap() {
     this.router.navigate(['/map']);
   }
-
-  // getAllOffer() {
-  //   let obj = {};
-  //   this.offerService.getAll(obj).subscribe((success) => {
-  //     this.offerArr = success.rows;
-  //     this.getAllAdvertise();
-  //   });
-  // }
-
-  // getAllAdvertise() {
-  //   this.advertiseService.getAll({}).subscribe((success) => {
-  //     this.advertiseArr = success.rows;
-  //   });
-  // }
 
   doRefresh(event: any) {
     this.advertiseArr = [];
@@ -201,25 +173,25 @@ export class LandingPagePage implements OnInit {
 
   doInfinite($event) { }
 
-  // initializeApp() {
-  //   this.platform.ready().then(() => {
-  //     this.getUserLocation();
-  //   });
-  // }
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.getUserLocation();
+    });
+  }
 
-  // getUserLocation() {
-  //   this.geolocation.getCurrentPosition().then((resp) => {
+  getUserLocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
     
-  //   }).catch((error) => {
-  //   });
-  //   let watch = this.geolocation.watchPosition();
-  //   watch.subscribe((data) => {
-  //     console.log("data@@@@@@@@@@@@@@@@@@",data);
+    }).catch((error) => {
+    });
+    let watch = this.geolocation.watchPosition();
+    watch.subscribe((data) => {
+      console.log("data@@@@@@@@@@@@@@@@@@",data);
       
-  //     // data can be a set of coordinates, or an error (if an error occurred).
-  //     // data.coords.latitude
-  //     // data.coords.longitude
+      // data can be a set of coordinates, or an error (if an error occurred).
+      // data.coords.latitude
+      // data.coords.longitude
   
-  //   });
-  // }
+    });
+  }
 }
