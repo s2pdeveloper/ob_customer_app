@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/service/category/category.service';
 @Component({
@@ -21,13 +21,22 @@ export class CategoryPage implements OnInit {
   constructor(
     private router: Router,
     private categoryService: CategoryService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {}
 
   ionViewWillEnter() {
     this.getAllCategoryWithSubCategory();
+    this.activatedRoute.queryParams.subscribe((params) => {
+      console.log("params",params);
+      
+      if (params.categoryId) {
+        this.categoryId = params.categoryId;
+     }
+    
+    });
  }
 
   getAllCategoryWithSubCategory() {
@@ -35,9 +44,7 @@ export class CategoryPage implements OnInit {
     this.categoryService
       .getAllCategoryWithSubCategory(obj)
       .subscribe((success) => {
-        console.log("success@@@@@@@@@@@@@@@@@@",success);
-        
-        this.categoryArr = success.rows.map((x, i) => {
+       this.categoryArr = success.rows.map((x, i) => {
           if (i == 0) {
             this.categoryId = x._id;
             this.businessTypeId = x.businessTypeId;

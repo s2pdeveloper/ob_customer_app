@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
@@ -121,19 +121,16 @@ export class LandingPagePage implements OnInit {
   }
 
   seeAllCategory() {
-    this.router.navigate(['/category'], {
-      queryParams: {
-        businessTypeId: this.businessTypeId,
-      },
-    });
+    this.router.navigate(['/category']);
   }
+
   navigateToProfilePage() {
     this.router.navigate(['/view-profile']);
   }
 
-  // navigateToMap() {
-  //   this.router.navigate(['/map']);
-  // }
+  navigateToMap() {
+    this.router.navigate(['/map']);
+  }
 
   doRefresh(event: any) {
     this.advertiseArr = [];
@@ -141,5 +138,12 @@ export class LandingPagePage implements OnInit {
     event.target.complete();
   }
 
-
+  categoryToCategoryPage(c) {
+    console.log(c);
+    this.router.navigate(['/category'], {
+      queryParams: {
+        categoryId: c,
+      },
+    });
+  }
 }

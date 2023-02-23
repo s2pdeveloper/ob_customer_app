@@ -24,18 +24,6 @@ ion-content {
   }
 }
 
-.avtar {
-  width: 46px;
-  border-radius: 50%;
-  display: flex;
-  align-items: initial;
-  justify-content: center;
-  overflow: hidden;
-  margin-left: 317px;
-  margin-top: -41px;
-  margin-block-end: -2%;
-  border-color: red;
-}
 
 .ion-note {
   text-align: center;
@@ -72,6 +60,7 @@ ion-content {
 }
 .location{
   font-size: 0.7rem !important;
-  margin-top: 5px !important;
-  padding-left: 0px !important;
+  // margin-top: 7px !important;
+  // padding-left: 0px !important;
+  // margin-right: 3rem !important;
 }

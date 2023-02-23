@@ -4,8 +4,10 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
     </ion-buttons>
+    <ion-icon name="home" size="large" slot="end" routerLink="/app/tabs/landing-page" class="home-icon ion-margin-end"></ion-icon>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
@@ -51,7 +53,7 @@
           </ion-badge>
         </ion-card>
         <strong class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</strong>
-    
+
         <ion-label (click)="navigateTo('/shop-detail',s._id)" class="address ion-margin-top" color="
             light">
           <ion-text class="ion-margin-start ion-margin-bottom">

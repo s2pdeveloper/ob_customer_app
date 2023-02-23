@@ -1,7 +1,7 @@
 <ion-content class="font-poppins">
   <ion-item lines="none">
-    <ion-icon color="primary" name="location" slot="start"></ion-icon>
-    <p class="location">{{currentLocation?.formatted_address}}</p>
+    <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
+    <span class="location ">{{currentLocation?.formatted_address}}</span>
     <ion-avatar slot="end">
       <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
         (click)="navigateToProfilePage()" />
@@ -31,10 +31,10 @@
     <ion-title class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>
     <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
   </ion-item>
-  <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
+  <ion-slides [options]="buttonSlide" >
     <ion-slide *ngFor="let c of categoryArr">
       <div class="">
-        <img src="{{c.image}} " /><br />
+        <img src="{{c.image}} " (click)="categoryToCategoryPage(c._id)"><br />
         <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{c.name}}</ion-note>
       </div>
     </ion-slide>

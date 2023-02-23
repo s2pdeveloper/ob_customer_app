@@ -21,9 +21,9 @@ export class CataloguePage implements OnInit {
   pageSize: number = 10;
   search = '';
   shopDetails: any;
-  catalogueArr: any=[];
+  catalogueArr: any = [];
   selectAll: boolean;
-  subCategoryArr: any=[];
+  subCategoryArr: any = [];
 
 
   buttonSlide = {
@@ -49,9 +49,9 @@ export class CataloguePage implements OnInit {
     private chatService: ChatService,
     public translate: TranslateService
 
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
@@ -59,7 +59,7 @@ export class CataloguePage implements OnInit {
       this.getShopById(params._id);
     });
   }
-  
+
 
   getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
@@ -119,18 +119,16 @@ export class CataloguePage implements OnInit {
       if (i != arr.length - 1) {
         description += `,`;
       }
-      amount += catPrice;
+      // amount += catPrice;
     }
 
     let message = {
       shopId: arr[0].shopId._id,
       message: msg,
       description: description,
-      amount: amount,
+      // amount: amount,
     };
     this.chatService.create(message).subscribe((success) => {
-      console.log('success', success);
-
       this.spinner.hideLoader();
       // join
       this.socket.emit('join', { room: success.orderId, user: this.user._id });

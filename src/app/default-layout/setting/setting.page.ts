@@ -15,8 +15,7 @@ export class SettingPage implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 
   navigateTo(page:string) {

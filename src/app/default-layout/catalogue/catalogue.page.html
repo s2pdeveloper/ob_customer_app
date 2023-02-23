@@ -10,14 +10,9 @@
 <ion-content>
   <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
     <ion-slide *ngFor="let item of subCategoryArr;let i=index">
-      <div
-        [ngClass]="item.isActive ? 'subCategoryActive':null"
-        (click)="getCatalogueBySubCategoryId(item._id,i)"
-      >
+      <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
         <img class="img-box" src="{{item.image}} " /><br />
-        <ion-note class="sub-heading ion-text-capitalize"
-          >{{item.name}}</ion-note
-        >
+        <ion-note class="sub-heading ion-text-capitalize">{{item.name}}</ion-note>
       </div>
     </ion-slide>
   </ion-slides>
@@ -28,10 +23,7 @@
         <ion-col *ngFor=" let c of catalogueArr" class="animation-normal">
           <ion-list lines="none">
             <ion-item class="ion-no-padding">
-              <ion-checkbox
-                slot="start"
-                [(ngModel)]="c.isChecked"
-              ></ion-checkbox>
+              <ion-checkbox slot="start" [(ngModel)]="c.isChecked"></ion-checkbox>
               <!-- <ion-card>
                 <ion-grid>
                   <ion-row>
@@ -57,18 +49,9 @@
 
               <ion-item>
                 <ion-thumbnail slot="start">
-                  <img
-                    class="img-fluid"
-                    *ngIf="c.image"
-                    [src]="c.image"
-                    alt="product-image"
-                  />
-                  <img
-                    class="img-fluid"
-                    *ngIf="!c.image"
-                    src="assets/images/placeholder_profile.png"
-                    alt="product-image"
-                  />
+                  <img class="img-fluid" *ngIf="c.image" [src]="c.image">
+                  <img class="img-fluid" *ngIf="!c.image" src="assets/image/noImagePlaceholder.webp"
+                    alt="product-image" />
                 </ion-thumbnail>
                 <ion-label>
                   <ion-row class="ion-justify-content-between">
@@ -91,14 +74,7 @@
     </ion-grid>
   </div>
 
-  <ion-button
-    color="primary"
-    expand="block"
-    strong="true"
-    shape="round"
-    class="ion-margin-top"
-    (click)="navigateTo()"
-  >
+  <ion-button color="primary" expand="block" strong="true" shape="round" class="ion-margin-top" (click)="navigateTo()">
     {{'Place Order' | translate}}
   </ion-button>
 </ion-content>
