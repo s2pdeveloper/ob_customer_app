@@ -12,11 +12,12 @@ export class ApiService {
     headers: new HttpHeaders().set('Content-Type', 'application/json'),
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   private getBaseUrl() {
-    return `${location.protocol}//${location.hostname + (location.port ? ':' + location.port : '')
-      }/`;
+    return `${location.protocol}//${
+      location.hostname + (location.port ? ':' + location.port : '')
+    }/`;
   }
 
   public get(
@@ -24,23 +25,11 @@ export class ApiService {
     params: HttpParams = new HttpParams()
   ): Observable<any> {
     return this.httpClient.get(path, { params }).pipe(
-      map((res: any) => res.result),
+      map((res: any) => res.result)
       // tap((_) => this.log(path)),
       // shareReplay()
     );
   }
-
-  public getMap(
-    path: string,
-    params: HttpParams = new HttpParams()
-  ): Observable<any> {
-    return this.httpClient.get(path, { params }).pipe(
-      map((res: any) => res),
-      // tap((_) => this.log(path)),
-      // shareReplay()
-    );
-  }
-
   public put(path: string, body: object = {}): Observable<any> {
     return this.httpClient.put(path, body).pipe(map((res: any) => res.result));
   }
@@ -54,13 +43,12 @@ export class ApiService {
   }
 
   public getFile(path: string) {
-    console.log("path++++++++++++++",path);
+    console.log('path++++++++++++++', path);
     return this.httpClient.get(path, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     });
   }
-  
 
   public formatErrors(error: any): Observable<any> {
     return throwError(error.error);

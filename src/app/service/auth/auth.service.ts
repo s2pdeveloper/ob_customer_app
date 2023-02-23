@@ -17,6 +17,7 @@ export class AuthService {
     reset_password: 'user/reset-password',
     set_password: 'user/set-password',
     createAndUpdateUserDevice: 'user/createAndUpdateUserDevice',
+    getCurrentLocation:'customer/getUserCurrentLocation'
   };
 
   constructor(
@@ -39,10 +40,7 @@ export class AuthService {
     return this.http.get(this.routes.getByIdPath(_id));
   }
   getCurrentLocation(params:any) {
-    console.log("params",params);
-    
-    let x:any = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${params.latitude},${params.longitude}&key=AIzaSyAp92DF5Vk3CokhTVKskaGA174iSX7o2Cs`
-    return this.http.getMap(x); 
+    return this.http.get(this.routes.getCurrentLocation,params); 
   }
   getCurrentUser() {
     let x: any = localStorage.getItem('Student');

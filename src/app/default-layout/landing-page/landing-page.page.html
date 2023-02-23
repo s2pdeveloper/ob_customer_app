@@ -1,7 +1,7 @@
 <ion-content class="font-poppins">
   <ion-item lines="none">
-    <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
-    <p>{{currentLocation?.formatted_address}}</p>
+    <ion-icon color="primary" name="location" slot="start"></ion-icon>
+    <p class="location">{{currentLocation?.formatted_address}}</p>
     <ion-avatar slot="end">
       <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
         (click)="navigateToProfilePage()" />
@@ -12,7 +12,6 @@
     showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on"
     (ionFocus)="navigateToSearchShop('/search-shop',null)">
   </ion-searchbar>
-
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
