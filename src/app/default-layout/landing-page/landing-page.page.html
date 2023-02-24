@@ -1,6 +1,6 @@
 <ion-content class="font-poppins">
   <ion-item lines="none">
-    <ion-icon color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
+    <ion-icon  class="location-icon" color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
     <span class="location ">{{currentLocation?.formatted_address}}</span>
     <ion-avatar slot="end">
       <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
