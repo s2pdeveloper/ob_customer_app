@@ -40,6 +40,7 @@ export class SearchShopPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
+    // this.user = this.localStorage.get('OBCustomer')._id;
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.search) {
         this.search=params.search
@@ -59,6 +60,7 @@ export class SearchShopPage implements OnInit {
 
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
+      // customerId:this.user,
       search: this.search,
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,

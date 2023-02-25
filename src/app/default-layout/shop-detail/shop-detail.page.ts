@@ -24,9 +24,9 @@ export class ShopDetailPage implements OnInit {
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 4000,
+      delay: 300,
     },
-    spaceBetween: 0,
+    spaceBetween: 1,
   };
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,6 +51,8 @@ export class ShopDetailPage implements OnInit {
     this.loaded = false;
     this.shopService.getByIdShop(this.shopId).subscribe((success: any) => {
       this.shopDetails = success.rows;
+      console.log(" this.shopDetails", this.shopDetails);
+      
       this.spinner.hideLoader();
       this.loaded = true;
     });
@@ -71,7 +73,7 @@ export class ShopDetailPage implements OnInit {
     this.router.navigate(['/chat-view'], { queryParams: params });
   }
 
-  async navigateToViewGalleryImages(galleryImg) {
+  async navigateToViewGalleryImages(galleryImg) {    
     const modal = await this.modalController.create({
       component: GalleryListComponent,
       componentProps: {

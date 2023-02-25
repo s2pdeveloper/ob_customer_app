@@ -2,9 +2,9 @@
   <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
 </ion-item>
 
-<ion-content style="padding: 0" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvents]="true" >
+<ion-content style="padding: 0" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvents]="true">
   <ng-container *ngFor="let s of shopDetails">
-    <img [src]="s.bannerImages" class="header-image" >
+    <img [src]="s.bannerImages" class="header-image">
 
     <div class="main-content ion-padding">
       <ion-card>
@@ -12,7 +12,7 @@
           <ion-list>
             <ion-item lines="none">
               <ion-avatar class="ion-margin-end">
-                <img alt="logo-image" *ngIf="s.image" [src]="s.image" >
+                <img alt="logo-image" *ngIf="s.image" [src]="s.image">
               </ion-avatar>
               <ion-label>
                 <ion-row class="ion-justify-content-between">
@@ -42,42 +42,7 @@
               </ion-label>
             </ion-item>
           </ion-list>
-          <!-- <ion-col class="ion-text-center logo-margin" >
-          <ion-button fill="clear">
-            <a>
-              <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
-                (click)="goToChat()"></ion-icon>
-            </a>
-          </ion-button>
-          <ion-button fill="clear">
-            <a href="tel:+91{{s?.mobile}}">
-              <ion-icon name="call" size="large" class="ct"></ion-icon>
-            </a>
-          </ion-button>
-          <ion-button fill="clear">
-            <a>
-              <ion-icon name="location-outline" size="large" class="ct"></ion-icon>
-            </a>
-          </ion-button>
-        </ion-col>
 
-        <ion-col class="ion-text-center">
-          <ion-button fill="clear">
-            <a href="{{s?.links?.facebook}}">
-              <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-            </a>
-          </ion-button>
-          <ion-button fill="clear">
-            <a href="{{s?.links?.insta}}">
-              <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
-            </a>
-          </ion-button>
-          <ion-button fill="clear">
-            <a href="{{s?.links?.youtube}}">
-              <ion-icon name="logo-youtube" class="font yt"></ion-icon>
-            </a>
-          </ion-button>
-        </ion-col> -->
           <ion-grid>
             <ion-row class="ion-text-center">
               <ion-col size="4">
@@ -144,28 +109,28 @@
           {{ 'viewCatalogue' | translate}}
         </ion-button>
       </div>
-
-      <ion-card class="ion-margin-top">
-        <ion-card-content>
-          <ion-item lines="none">
-            <ion-title class="ion-margin-top ion-margin-bottom title">
-              <b class="ion-text-wrap"> {{'gallery' | translate}}</b>
-            </ion-title>
-
-            <!-- <ion-icon color="primary" name="eye-sharp" size="large" slot="end" (click)="navigateToViewGalleryImages()"></ion-icon> -->
-          </ion-item>
-
-          <ion-slides [options]="buttonSlide" class="ion-margin-bottom" *ngFor="let gallery of shopDetails">
-            <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
-              <div class="ion-margin-top ion-no-padding">
-                <ion-item (click)="navigateToViewGalleryImages(gallery.galleryImages)">
-                  <img class="gallery" src="{{galleryImg}}" />
-                </ion-item>
-              </div>
-            </ion-slide>
-          </ion-slides>
-        </ion-card-content>
-      </ion-card>
+      
     </div>
   </ng-container>
+<!-- gallery -->
+<ion-card >
+  <ion-card-content>
+    <ion-item lines="none">
+      <ion-title class=" ion-margin-bottom title">
+        <b class="ion-text-wrap"> {{'gallery' | translate}}</b>
+      </ion-title>
+      <ion-icon color="primary" name="eye" (click)="navigateToViewGalleryImages(shopDetails[0]?.galleryImages)"></ion-icon>
+    </ion-item>
+    <ion-slides [options]="buttonSlide" class="ion-margin-bottom" >
+      <ion-slide *ngFor="let galleryImg of shopDetails[0]?.galleryImages">
+        <div class="ion-margin-top ion-no-padding" >
+          <ion-item (click)="navigateToViewGalleryImages(shopDetails[0]?.galleryImages)">
+            <img class="gallery ion-no-padding" src="{{galleryImg}}" />
+          </ion-item>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </ion-card-content>
+</ion-card>
+
 </ion-content>

@@ -44,21 +44,23 @@ export class FavoritePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    // this.user = this.localStorage.get('OBCustomer')._id;
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      // this.subCategoryId = params._id ?? '';
-      if (params.shopId) {
-        this.getShopById(params.shopId);
-      } else {
+      // if (params.shopId) {
+      //   this.getShopById(params.shopId);
+      // } 
+      // else {
         this.businessTypeId = params.businessTypeId ?? '';
         this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params._id ?? '';
         this.getAllShop(false);
-      }
+      // }
     });
   }
 
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
+      // customerId:this.user,
       search: this.search,
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,
@@ -69,16 +71,16 @@ export class FavoritePage implements OnInit {
     });
   }
 
-  getShopById(_id) {
-    console.log(_id);
-    this.spinner.showLoader();
-    this.loaded = false;
-    this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-      this.shopArr = success.payload.shop;
-      this.spinner.hideLoader();
-      this.loaded = true;
-    });
-  }
+  // getShopById(_id) {
+  //   console.log(_id);
+  //   this.spinner.showLoader();
+  //   this.loaded = false;
+  //   this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
+  //     this.shopArr = success.payload.shop;
+  //     this.spinner.hideLoader();
+  //     this.loaded = true;
+  //   });
+  // }
 
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
