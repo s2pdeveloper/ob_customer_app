@@ -1,18 +1,10 @@
 <ion-item lines="none" class="ion-no-padding bg-transparent">
-  <ion-back-button
-    color="primary"
-    defaultHref="app/tabs/landing-page"
-  ></ion-back-button>
+  <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
 </ion-item>
 
-<ion-content
-  style="padding: 0"
-  class="shadow-none ion-no-padding"
-  [scrollEvents]="true"
-  appParallaxHeader
->
+<ion-content style="padding: 0" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvents]="true" >
   <ng-container *ngFor="let s of shopDetails">
-    <img [src]="s.bannerImages" class="header-image" />
+    <img [src]="s.bannerImages" class="header-image" >
 
     <div class="main-content ion-padding">
       <ion-card>
@@ -20,21 +12,13 @@
           <ion-list>
             <ion-item lines="none">
               <ion-avatar class="ion-margin-end">
-                <img
-                  alt="Silhouette of a person's head"
-                  *ngIf="s.image"
-                  [src]="s.image"
-                  alt="profile-picture"
-                />
+                <img alt="logo-image" *ngIf="s.image" [src]="s.image" >
               </ion-avatar>
               <ion-label>
                 <ion-row class="ion-justify-content-between">
                   <ion-col>
                     <h2>
-                      <span
-                        class="text-bold font-larger shade-color ion-text-wrap"
-                        >{{s.shopName}}</span
-                      >
+                      <span class="text-bold font-larger shade-color ion-text-wrap">{{s.shopName}}</span>
                     </h2>
                     <p class="font-larger">{{s?.firstName}} {{s?.lastName}}</p>
                     <ion-label class="text-color-9">
@@ -50,8 +34,7 @@
                       <p>
                         <span class="ion-padding-top ion-text-wrap">
                           {{s?.schedule?.day}}:{{s?.schedule?.startTime}} to
-                          {{s?.schedule?.endTime }}</span
-                        >
+                          {{s?.schedule?.endTime }}</span>
                       </p>
                     </ion-label>
                   </ion-col>
@@ -100,12 +83,8 @@
               <ion-col size="4">
                 <ion-button fill="clear">
                   <a>
-                    <ion-icon
-                      name="chatbubble-ellipses-outline"
-                      size="large"
-                      class="ct"
-                      (click)="goToChat()"
-                    ></ion-icon>
+                    <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
+                      (click)="goToChat()"></ion-icon>
                   </a>
                 </ion-button>
               </ion-col>
@@ -119,11 +98,7 @@
               <ion-col size="4">
                 <ion-button fill="clear">
                   <a>
-                    <ion-icon
-                      name="location-outline"
-                      size="large"
-                      class="ct"
-                    ></ion-icon>
+                    <ion-icon name="location-outline" size="large" class="ct"></ion-icon>
                   </a>
                 </ion-button>
               </ion-col>
@@ -139,10 +114,7 @@
               <ion-col size="4">
                 <ion-button fill="clear">
                   <a href="{{userDetails?.links?.insta}}">
-                    <ion-icon
-                      name="logo-instagram"
-                      class="left font insta"
-                    ></ion-icon>
+                    <ion-icon name="logo-instagram" class="left font insta"></ion-icon>
                   </a>
                 </ion-button>
               </ion-col>
@@ -168,13 +140,7 @@
       </ion-card>
 
       <div class="ion-text-center ion-margin-vertical">
-        <ion-button
-          color="primary"
-          expand="full"
-          shape="round"
-          class="btn"
-          (click)="navigateTo('/catalogue')"
-        >
+        <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
           {{ 'viewCatalogue' | translate}}
         </ion-button>
       </div>
@@ -189,16 +155,10 @@
             <!-- <ion-icon color="primary" name="eye-sharp" size="large" slot="end" (click)="navigateToViewGalleryImages()"></ion-icon> -->
           </ion-item>
 
-          <ion-slides
-            [options]="buttonSlide"
-            class="ion-margin-bottom"
-            *ngFor="let gallery of shopDetails"
-          >
+          <ion-slides [options]="buttonSlide" class="ion-margin-bottom" *ngFor="let gallery of shopDetails">
             <ion-slide *ngFor="let galleryImg of gallery.galleryImages">
               <div class="ion-margin-top ion-no-padding">
-                <ion-item
-                  (click)="navigateToViewGalleryImages(gallery.galleryImages)"
-                >
+                <ion-item (click)="navigateToViewGalleryImages(gallery.galleryImages)">
                   <img class="gallery" src="{{galleryImg}}" />
                 </ion-item>
               </div>

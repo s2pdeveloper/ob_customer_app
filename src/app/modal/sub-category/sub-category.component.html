@@ -12,7 +12,7 @@
 
   <ion-card>
     <ion-item *ngFor="let item of subCategoryArr">
-      <ion-row (click)="navigateTo('/search-shop',item._id)">
+      <ion-row (click)="navigateTo('/app/tabs/search-shop',item._id)">
         <ion-col size="5">
           <img [src]="item.image" width="110px" height="100px">
         </ion-col>

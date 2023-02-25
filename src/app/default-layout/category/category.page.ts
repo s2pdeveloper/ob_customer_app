@@ -14,45 +14,49 @@ export class CategoryPage implements OnInit {
   categoryTypeId: string;
   businessName: string;
   search: string = '';
-  categoryArr: any=[];
-  subCategoryArr: any=[];
-  subCatArr: any=[];
+  categoryArr: any = [];
+  subCategoryArr: any = [];
+  subCatArr: any = [];
 
   constructor(
     private router: Router,
     private categoryService: CategoryService,
     public translate: TranslateService,
     public activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.getAllCategoryWithSubCategory();
     this.activatedRoute.queryParams.subscribe((params) => {
-      console.log("params",params);
-      
       if (params.categoryId) {
         this.categoryId = params.categoryId;
-     }
-    
+      }
     });
- }
+  }
 
   getAllCategoryWithSubCategory() {
     let obj = {};
     this.categoryService
       .getAllCategoryWithSubCategory(obj)
       .subscribe((success) => {
-       this.categoryArr = success.rows.map((x, i) => {
-          if (i == 0) {
-            this.categoryId = x._id;
+        this.categoryArr = success.rows.map((x, i) => {
+          if (this.categoryId && x._id == this.categoryId) {
             this.businessTypeId = x.businessTypeId;
             x.active = true;
             this.subCategoryArr = x?.categoryWithSubCategory;
           } else {
-            x.active = false;
+            if (!this.categoryId && i == 0) {
+              this.categoryId = this.categoryId ? this.categoryId : x._id;
+              this.businessTypeId = x.businessTypeId;
+              x.active = true;
+              this.subCategoryArr = x?.categoryWithSubCategory;
+            } else {
+              x.active = false;
+            }
           }
+
           return x;
         });
       });

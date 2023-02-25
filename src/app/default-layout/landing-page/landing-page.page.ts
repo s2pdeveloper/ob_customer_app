@@ -70,8 +70,6 @@ export class LandingPagePage implements OnInit {
 
   constructor(
     private router: Router,
-    private businessTypeService: BusinessTypeService,
-    private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
     private offerService: OfferService,
@@ -83,6 +81,7 @@ export class LandingPagePage implements OnInit {
 
   ngOnInit() { }
   async ionViewWillEnter() {
+    this.search='';
     this.user = this.localStorage.get('OBCustomer');
     this.getAllDataParallel();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
@@ -116,8 +115,12 @@ export class LandingPagePage implements OnInit {
     );
   }
 
-  navigateToSearchShop(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
+  navigateToSearchShop(search) {
+    this.router.navigate(['/app/tabs/search-shop'], {
+      queryParams: {
+        search: this.search,
+      },
+    });
   }
 
   seeAllCategory() {
@@ -139,7 +142,6 @@ export class LandingPagePage implements OnInit {
   }
 
   categoryToCategoryPage(c) {
-    console.log(c);
     this.router.navigate(['/category'], {
       queryParams: {
         categoryId: c,

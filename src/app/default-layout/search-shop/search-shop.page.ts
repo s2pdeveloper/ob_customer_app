@@ -41,6 +41,9 @@ export class SearchShopPage implements OnInit {
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      if (params.search) {
+        this.search=params.search
+      }
     //  if (params.shopId) {
     //     this.getShopById(params.shopId);
     //   }
