@@ -12,8 +12,8 @@ export class FavoriteService {
   };
   constructor(private http: ApiService) { }
 
-  getFavoriteByCustomerId(_id) {
-    return this.http.get(this.routes.getFavoriteByCustomerId(_id));
+  getFavoriteByCustomerId(_id,payload) {
+    return this.http.get(this.routes.getFavoriteByCustomerId(_id),payload);
   }
 
 

@@ -84,4 +84,11 @@ export class CategoryPage implements OnInit {
     };
     this.router.navigate([path], { queryParams: params });
   }
+
+
+  onSearch() {
+    this.categoryArr = [];
+    // this.start = 0;
+   this. getAllCategoryWithSubCategory();
+  }
 }

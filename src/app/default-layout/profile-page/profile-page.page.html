@@ -5,14 +5,13 @@
   </ion-buttons>
 </ion-toolbar>
 
- <ion-content>
+<ion-content>
   <ion-card>
     <ion-card-content>
       <div class="ion-text-center">
         <img src="./assets/image/profile.svg" alt="Logo" height="250" />
         <ion-button
           color="primary"
-          
           strong="true"
           shape="round"
           (click)="navigateTo('/edit-profile',null)"
@@ -24,54 +23,46 @@
 
       <ion-item class="ion-margin-top">
         <ion-icon color="secondary" name="customerName"></ion-icon>
-        
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
-            {{ userDetails?.customerName  }}
+            {{ userDetails?.customerName }}
           </ion-text>
         </ion-label>
       </ion-item>
-      <ion-item> 
+
+      <ion-item>
         <ion-icon color="secondary" name="person-circle-sharp"></ion-icon>
-        
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
             {{ userDetails.firstName }} {{ userDetails.lastName }}
           </ion-text>
         </ion-label>
       </ion-item>
-       
-      
 
       <ion-item>
         <ion-icon class="" name="call" color="secondary"></ion-icon>
-        
         <ion-label class="ion-margin-start">
           {{ userDetails.mobile }}
         </ion-label>
       </ion-item>
-  
+
       <ion-item lines="none">
         <ion-icon class="" color="secondary" name="location"></ion-icon>
-      
         <ion-label class="ion-margin-start">
           {{ userDetails?.address?.line1 }}
         </ion-label>
       </ion-item>
-
-
     </ion-card-content>
   </ion-card>
-</ion-content> 
+</ion-content>
 
- <ion-content *ngIf="loaded">
+<ion-content *ngIf="loaded">
   <ion-card>
     <ion-card-content>
       <div class="ion-text-center">
         <img src="./assets/image/profile.svg" alt="Logo" height="250" />
         <ion-button
           color="primary"
-          
           strong="true"
           shape="round"
           (click)="navigateTo('/edit-profile',null)"
@@ -82,41 +73,34 @@
       </div>
 
       <ion-item class="ion-margin-top">
-        <ion-icon color="secondary" name="storefront-sharp"></ion-icon> 
-
+        <ion-icon color="secondary" name="storefront-sharp"></ion-icon>
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
-            {{ userDetails?.shopName  }}
+            {{ userDetails?.shopName }}
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-icon color="secondary" name="person-circle-sharp"></ion-icon>
-      
         <ion-label class="ion-margin-start">
           <ion-text color="primary" class="text-bold ion-text-capitalize">
-            {{ userDetails.name  }}
+            {{ userDetails.name }}
           </ion-text>
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-icon class="" name="call" color="secondary"></ion-icon>
-       
         <ion-label class="ion-margin-start">
           {{ userDetails.mobile }}
         </ion-label>
       </ion-item>
-     
+
       <ion-item lines="none">
         <ion-icon class="" color="secondary" name="location"></ion-icon>
         <ion-label class="ion-margin-start">
           {{ userDetails.address }}
         </ion-label>
       </ion-item>
-
     </ion-card-content>
   </ion-card>
-</ion-content> 
-
-
-
+</ion-content>

@@ -192,7 +192,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
 
   navigateTo(shopId){
-    console.log("shopId",shopId);
     this.router.navigate(['/shop-detail'], {
       queryParams: {
         shopId: this.shopId,

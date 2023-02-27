@@ -53,9 +53,11 @@ export class FavoritePage implements OnInit {
   getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
     this.user = this.localStorage.get('OBCustomer');
     this.spinner.showLoader();
+    let obj = {
+      search: this.search,
+    };
     this.loaded = false;
-    this.favoriteService.getFavoriteByCustomerId(this.user._id).subscribe((success: any) => {
-      console.log("success", success);
+    this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe((success: any) => {
       this.shopFavorites = success.rows;
       this.spinner.hideLoader();
       this.loaded = true;
@@ -64,6 +66,8 @@ export class FavoritePage implements OnInit {
 
 
   navigateTo(path, _id) {
+    console.log(_id);
+    
     this.router.navigate([path], { queryParams: { _id } });
   }
   getUrl(url) {
