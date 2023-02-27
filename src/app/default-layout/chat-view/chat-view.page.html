@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>{{shopName}}</ion-title>
+  <ion-toolbar >
+    <ion-title (click)="navigateTo(shopId)">{{shopName}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="catalogue"></ion-back-button>
     </ion-buttons>

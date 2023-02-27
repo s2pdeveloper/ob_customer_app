@@ -52,11 +52,12 @@
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
+
         <strong class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</strong>
 
         <ion-label (click)="navigateTo('/shop-detail',s._id)" class="address ion-margin-top" color="
             light">
-          <ion-text class="ion-margin-start ion-margin-bottom">
+          <ion-text class="ion-margin-start">
             <h4>
               {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
               s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :

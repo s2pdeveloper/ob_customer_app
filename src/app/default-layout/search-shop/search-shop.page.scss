@@ -68,7 +68,10 @@ ion-card {
   ion-label {
     background-color: transparent;
     margin-top: 1rem !important;
- }
+   
+  }
+
+ 
 
   .heart-icon {
     text-align: end !important;
@@ -80,11 +83,11 @@ ion-card {
     margin-left: 1.4rem;
     background-color: transparent;
     color: gray;
-
+    margin-bottom: 16px !important;
   }
 
-.home-icon{
-  width: 2.5rem;
-  height: 2rem;
-}
+  .home-icon {
+    width: 2.5rem;
+    height: 2rem;
+  }
 }

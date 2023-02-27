@@ -4,6 +4,7 @@ import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService, ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { FavoriteService } from 'src/app/service/favourite/favourite.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 
 @Component({
@@ -23,10 +24,10 @@ export class FavoritePage implements OnInit {
   categoryId: string = '';
   subCategoryId: string = '';
   collection: number = 0;
-  shopArr: any = [];
+  shopFavorites: any = [];
   loaded: boolean = false;
   shopDetails: any;
-  user: number;
+  user: any;
   isFavorite: any = {};
 
   constructor(
@@ -35,6 +36,7 @@ export class FavoritePage implements OnInit {
     public translate: TranslateService,
     public modelController: ModalController,
     private shopService: ShopService,
+    private favoriteService: FavoriteService,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private localStorage: StorageService,
@@ -44,43 +46,22 @@ export class FavoritePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    // this.user = this.localStorage.get('OBCustomer')._id;
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      // if (params.shopId) {
-      //   this.getShopById(params.shopId);
-      // } 
-      // else {
-        this.businessTypeId = params.businessTypeId ?? '';
-        this.categoryId = params.categoryId ?? '';
-      this.subCategoryId = params._id ?? '';
-        this.getAllShop(false);
-      // }
+    this.getFavoriteByCustomerId(false)
+  }
+
+
+  getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
+    this.user = this.localStorage.get('OBCustomer');
+    this.spinner.showLoader();
+    this.loaded = false;
+    this.favoriteService.getFavoriteByCustomerId(this.user._id).subscribe((success: any) => {
+      console.log("success", success);
+      this.shopFavorites = success.rows;
+      this.spinner.hideLoader();
+      this.loaded = true;
     });
   }
 
-  getAllShop(isFirstLoad: boolean, event?: any) {
-    let obj = {
-      // customerId:this.user,
-      search: this.search,
-      businessTypeId: this.businessTypeId,
-      categoryId: this.categoryId,
-      subCategoryId: this.subCategoryId,
-    };
-    this.shopService.getAllShop(obj).subscribe((success) => {
-      this.shopArr = success.rows;
-    });
-  }
-
-  // getShopById(_id) {
-  //   console.log(_id);
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-  //     this.shopArr = success.payload.shop;
-  //     this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
 
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
@@ -91,35 +72,31 @@ export class FavoritePage implements OnInit {
   }
   onSearch() {
     this.page = 1;
-    this.shopArr = [];
-    this.getAllShop(false, '');
+    this.shopFavorites = [];
+    this.getFavoriteByCustomerId(false);
   }
 
   doRefresh(event) {
     this.page = 1;
-    this.shopArr = [];
-    this.getAllShop(false);
+    this.shopFavorites = [];
+    this.getFavoriteByCustomerId(true, event);
     event.target.complete();
   }
 
   async addToFavorite(item) {
-    this.user = this.localStorage.get('OBCustomer')._id;
     let payload = {
-      _id: this.user,
-      action: item.shopFavorite.length ? 'remove' : 'add',
-      shopId: item._id,
+      action: 'remove',
+      shopId: item.shopId._id,
     };
-    this.shopService
-      .createOrRemoveFavorite(payload)
-      .subscribe(async (success) => {
-        this.getAllShop(false);
-        this.toaster.successToast(success.message);
-      });
+    this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
+      this.getFavoriteByCustomerId(false);
+      this.toaster.successToast(success.message);
+    });
   }
 
   doInfinite(event) {
     this.page++;
-    this.getAllShop(true, event);
+    this.getFavoriteByCustomerId(false, '');
     event.target.disabled = true;
     this.infiniteScroll.disabled = true;
     event.target.complete();
