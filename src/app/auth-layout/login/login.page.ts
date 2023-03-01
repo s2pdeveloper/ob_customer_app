@@ -30,17 +30,11 @@ export class LoginPage implements OnInit {
   ) {}
 
   loginForm = new FormGroup({
-    mobile: new FormControl('7028874108', [Validators.required]),
-    password: new FormControl('admin@1234', [Validators.required]),
+    mobile: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   async ngOnInit() {
-    console.log(
-      ' this.deviceInfo',
-      await (
-        await Geolocation.getCurrentPosition()
-      )
-    );
     this.returnUrl =
       this.route.snapshot.queryParams[`returnUrl`] || '/landing-page';
   }

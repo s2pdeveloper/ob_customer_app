@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
 import { StorageService, ToastService } from 'src/app/core/services';
@@ -39,6 +39,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router:Router,
     public translate: TranslateService,
     private chatService: ChatService,
     private toaster: ToastService,
@@ -187,5 +188,14 @@ export class ChatViewPage implements OnInit, OnDestroy {
   confirmOrder() {
     this.chatForm.controls.message.setValue('Confirm Order 👍');
     this.sendMessage();
+  }
+
+
+  navigateTo(shopId){
+    this.router.navigate(['/shop-detail'], {
+      queryParams: {
+        shopId: this.shopId,
+     },
+    }); 
   }
 }

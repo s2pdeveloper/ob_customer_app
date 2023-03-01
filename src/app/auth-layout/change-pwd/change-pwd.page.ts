@@ -18,7 +18,7 @@ export class ChangePwdPage implements OnInit {
   showNew = false;
   showConfirm = false;
   submitted: boolean = false;
-  loaded : boolean = true;
+  loaded: boolean = true;
   passForm = this.formBuilder.group(
     {
       oldPassword: new FormControl(null, [Validators.required]),
@@ -31,9 +31,6 @@ export class ChangePwdPage implements OnInit {
     }
   );
 
-
-
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -44,13 +41,13 @@ export class ChangePwdPage implements OnInit {
     private localStorage: StorageService,
     public translate: TranslateService,
     private validationService: ValidationService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   ionViewWillEnter() {
     this.passForm.controls.id.setValue(this.localStorage.get('OBCustomer').id);
   }
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 
   get form() {
     return this.passForm.controls;
@@ -61,9 +58,9 @@ export class ChangePwdPage implements OnInit {
   // directly update password -- only for super admin
   setPassword() {
     // if (!this.isMatch) {
-      // this.translate.get('changePassPage.error.notMatch').subscribe((msg) => {
-      //   this.errorMsg = msg;
-      // });
+    // this.translate.get('changePassPage.error.notMatch').subscribe((msg) => {
+    //   this.errorMsg = msg;
+    // });
     //   return;
     // }
     this.submitted = true;
@@ -71,11 +68,9 @@ export class ChangePwdPage implements OnInit {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
     }
-    // this.spinner.showLoader();
-    this.loaded  = false;
+    this.loaded = false;
     this.auth.resetPassword(this.passForm.value).subscribe((success: any) => {
-      // this.spinner.hideLoader();
-      this.loaded= true;
+      this.loaded = true;
       this.passForm.reset();
       this.toaster.successToast('Password Change done successfully !!');
       this.router.navigate(['/login']);

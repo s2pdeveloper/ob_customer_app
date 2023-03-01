@@ -130,6 +130,7 @@ ion-card {
   border-radius: 5% !important;
   height: 4rem !important;
   width: 100% !important;
+  background-image: no-repeat !important;
 }
 
 
@@ -177,5 +178,8 @@ ion-button {
 }
 .header-image{
   width: 100%;
+  height: 350px;
   object-fit: cover;
 }
+
+

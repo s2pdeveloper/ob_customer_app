@@ -24,9 +24,9 @@ export class ShopDetailPage implements OnInit {
     speed: 400,
     loop: true,
     autoplay: {
-      delay: 4000,
+      delay: 300,
     },
-    spaceBetween: 0,
+    spaceBetween: 1,
   };
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,13 +35,21 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalController: ModalController
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.shopId = params._id;
+    this.activatedRoute.queryParams.subscribe((params: any) => {      
+        // when we navigate to search shop to shop details
+      if (params._id) {
+        this.shopId = params._id;
+      }
+
+      // when we navigate to chat view to shop details
+      if (params.shopId) {
+        this.shopId = params.shopId;
+      }
       this.getShopById();
     });
   }
@@ -67,7 +75,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   goToChat() {
-    let params = {shopName: this.shopDetails[0].shopName};
+    let params = { shopName: this.shopDetails[0].shopName };
     this.router.navigate(['/chat-view'], { queryParams: params });
   }
 

@@ -107,13 +107,14 @@ export class CataloguePage implements OnInit {
 
     let amount = 0;
     let description = '';
-    msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
+    // msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
+    msg += `Dear merchant,\n would like to buy \n`;
     for (let i = 0; i < arr.length; i++) {
       const catTitle = arr[i].title;
-      const catPrice = arr[i].price;
+      // const catPrice = arr[i].price;
       msg += `${catTitle}`;
       if (i != arr.length - 1) {
-        msg += ` , `;
+        msg += ` , \n `;
       }
       description += `${catTitle}`;
       if (i != arr.length - 1) {

@@ -20,6 +20,9 @@ import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.dire
     ShopDetailPageRoutingModule,
     SharedModule
   ],
-  declarations: [ShopDetailPage,ParallaxHeaderDirective],
+  declarations: [
+    ShopDetailPage,
+    ParallaxHeaderDirective
+  ],
 })
 export class ShopDetailPageModule {}

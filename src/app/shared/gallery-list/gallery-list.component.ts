@@ -37,7 +37,6 @@ export class GalleryListComponent implements OnInit {
     const modal = await this.modalController.create({
       component: ViewGalleryImagesComponent,
       componentProps: {
-        // url: gallery,
         galleryImage: data
       }
     });

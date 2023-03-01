@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false, 
+  production: false,
+
   // apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
   // s3Endpoint: 'http://localhost:2000/api/v1/shared/',
   // url: 'http://localhost:2000',

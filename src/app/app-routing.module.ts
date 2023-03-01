@@ -71,13 +71,7 @@ const routes: Routes = [
         (m) => m.OnboardingPageModule
       ),
   },
-  {
-    path: 'search-shop',
-    loadChildren: () =>
-      import('./default-layout/search-shop/search-shop.module').then(
-        (m) => m.SearchShopPageModule
-      ),
-  },
+
   {
     path: 'shop-detail',
     loadChildren: () =>

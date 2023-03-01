@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
-import { LoaderService } from 'src/app/core/services/loader.service';
 import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { forkJoin } from 'rxjs';
@@ -70,8 +68,6 @@ export class LandingPagePage implements OnInit {
 
   constructor(
     private router: Router,
-    private businessTypeService: BusinessTypeService,
-    private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
     private offerService: OfferService,
@@ -83,6 +79,7 @@ export class LandingPagePage implements OnInit {
 
   ngOnInit() { }
   async ionViewWillEnter() {
+    this.search='';
     this.user = this.localStorage.get('OBCustomer');
     this.getAllDataParallel();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
@@ -116,8 +113,12 @@ export class LandingPagePage implements OnInit {
     );
   }
 
-  navigateToSearchShop(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
+  navigateToSearchShop(search) {
+    this.router.navigate(['/app/tabs/search-shop'], {
+      queryParams: {
+        search: this.search,
+      },
+    });
   }
 
   seeAllCategory() {
@@ -139,7 +140,6 @@ export class LandingPagePage implements OnInit {
   }
 
   categoryToCategoryPage(c) {
-    console.log(c);
     this.router.navigate(['/category'], {
       queryParams: {
         categoryId: c,
