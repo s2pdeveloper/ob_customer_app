@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-title (click)="navigateTo(shopId)">{{shopName}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="catalogue"></ion-back-button>
@@ -60,10 +60,25 @@
     </div>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
     <ion-fab-button class="bg-color-2" (click)="confirmOrder()">
       <ion-icon name="checkmark-done-circle-sharp"></ion-icon>
     </ion-fab-button>
+  </ion-fab> -->
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
+    <ion-fab-button size="small">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button>
+        <ion-icon name="checkmark-done-circle-sharp" color="primary" (click)="confirmOrder()"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="star" color="primary"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">

@@ -30,7 +30,7 @@
         <ion-row class="ion-margin">
           <ion-col size="4" *ngFor="let subCategory of subCategoryArr">
             <ion-card class="ion-text-center" (click)="navigateTo('/app/tabs/search-shop',subCategory._id)">
-              <img alt="Category Image" class="cat-img" src="{{subCategory.imageUrl}}" />
+              <img alt="Category Image" class="cat-img" src="{{subCategory.subCatImageUrl}}" />
               <ion-card-subtitle class="cat-head">{{subCategory.name}}</ion-card-subtitle>
             </ion-card>
           </ion-col>
