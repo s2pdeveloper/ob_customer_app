@@ -34,16 +34,13 @@ export class AppComponent implements OnInit {
     public translate: TranslateService
   ) {
 
-    if (this.storageService.get('OBCustomer')) {
-      this.router.navigate(['/app/tabs/landing-page']);
-    }
     this.languageService.getLang();
     this.initializeApp();
   }
   async ngOnInit() {
     this.currentUser = this.storageService.get('OBCustomer');
     if (this.currentUser) {
-      // this.router.navigate(['/landing-page']);
+      this.router.navigate(['/app/tabs/landing-page']);
     }
   }
 
