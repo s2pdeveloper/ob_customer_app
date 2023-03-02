@@ -10,9 +10,9 @@
 
   <ion-item lines="none">
     <ion-searchbar class="search-box ion-no-padding" [(ngModel)]="search" searchIcon animated type="text"
-      showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on">
+      showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on" (keyup.enter)="navigateToSearchShop(search)">
     </ion-searchbar>
-    <ion-icon name="checkmark-done-circle-outline" slot="end" (click)="navigateToSearchShop(search)"></ion-icon>
+    <!-- <ion-icon name="checkmark-done-circle-outline" slot="end" (click)="navigateToSearchShop(search)"></ion-icon> -->
   </ion-item>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">

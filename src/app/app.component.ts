@@ -33,6 +33,10 @@ export class AppComponent implements OnInit {
     // private pushNotificationService: PushNotificationService,
     public translate: TranslateService
   ) {
+
+    if (this.storageService.get('OBCustomer')) {
+      this.router.navigate(['/app/tabs/landing-page']);
+    }
     this.languageService.getLang();
     this.initializeApp();
   }
