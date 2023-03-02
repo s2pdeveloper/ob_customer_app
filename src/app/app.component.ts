@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   returnUrl: string;
   public selectedIndex: number = 0;
   currentUser: any = {};
- 
+
   constructor(
     private router: Router,
     private languageService: LanguageService,
@@ -33,7 +33,6 @@ export class AppComponent implements OnInit {
     // private pushNotificationService: PushNotificationService,
     public translate: TranslateService
   ) {
-
     this.languageService.getLang();
     this.initializeApp();
   }

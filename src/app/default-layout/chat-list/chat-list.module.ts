@@ -6,15 +6,14 @@ import { ChatListPageRoutingModule } from './chat-list-routing.module';
 import { ChatListPage } from './chat-list.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     ChatListPageRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  declarations: [ChatListPage]
+  declarations: [ChatListPage],
 })
 export class ChatListPageModule {}

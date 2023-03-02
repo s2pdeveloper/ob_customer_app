@@ -19,11 +19,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 
-
-
-
 const config: SocketIoConfig = { url: environment.url, options: {} };
-
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -52,7 +48,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FileOpener,
     BarcodeScanner,
     Geolocation,
-    NativeGeocoder
+    NativeGeocoder,
   ],
   bootstrap: [AppComponent],
 })

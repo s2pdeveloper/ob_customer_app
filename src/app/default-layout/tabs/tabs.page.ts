@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Plugins } from '@capacitor/core';
 
-
 const { Device, Geolocation } = Plugins;
 @Component({
   selector: 'app-tabs',
@@ -24,19 +23,19 @@ export class TabsPage {
       title: 'chat',
       value: 'chat',
       tab: 'chat-list',
-      icon: 'chatbubble-sharp'
+      icon: 'chatbubble-sharp',
     },
     {
       title: 'QR Code',
       value: 'qr-code',
       tab: 'qr-code',
-      icon: 'qr-code-sharp'
+      icon: 'qr-code-sharp',
     },
     {
       title: 'favorites',
       value: 'favorite',
       tab: 'favorite',
-      icon: 'heart'
+      icon: 'heart',
     },
     {
       title: 'Setting',
@@ -46,10 +45,7 @@ export class TabsPage {
     },
   ];
 
- 
-  constructor(
-    private router: Router,
- ) {}
+  constructor(private router: Router) {}
 
   async ngOnInit() {
     this.deviceInfo = await Device.getInfo();
@@ -63,5 +59,4 @@ export class TabsPage {
   navigateTo(page: any) {
     this.router.navigate([`${page?.url}`]);
   }
-
 }

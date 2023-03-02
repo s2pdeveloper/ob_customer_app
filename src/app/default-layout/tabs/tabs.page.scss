@@ -1,40 +1,38 @@
 ion-fab-list {
-    width: 65vw !important;
-    background-color: var(--ion-color-6);
+  width: 65vw !important;
+  background-color: var(--ion-color-6);
 
-    .text-toast {
-        padding: 5px;
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--ion-color-1);
-    }
+  .text-toast {
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ion-color-1);
+  }
 }
 
-
-
-// for selected tab 
+// for selected tab
 ion-tab-button {
-    --color: var(--ion-color-medium);
-    --color-selected: var(--ion-color-primary);
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary);
 
-    &::before {
-        background-color: transparent;
-        display: block;
-        content: "";
-        margin: 0 auto;
-        width: 20px;
-        height: 2px;
-    }
+  &::before {
+    background-color: transparent;
+    display: block;
+    content: "";
+    margin: 0 auto;
+    width: 20px;
+    height: 2px;
+  }
 
-    &.tab-selected::before {
-        background-color: var(--ion-color-primary);
-    }
+  &.tab-selected::before {
+    background-color: var(--ion-color-primary);
+  }
 }
 
 ion-margin-bottom {
-    margin-bottom: 30px !important;
-    border: 50px !important;
+  margin-bottom: 30px !important;
+  border: 50px !important;
 }
-ion-fab{
-    margin-bottom: 1rem;
+ion-fab {
+  margin-bottom: 1rem;
 }

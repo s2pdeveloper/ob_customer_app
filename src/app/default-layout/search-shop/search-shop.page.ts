@@ -35,20 +35,20 @@ export class SearchShopPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private localStorage: StorageService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.search) {
-        this.search = params.search
+        this.search = params.search;
       }
       this.businessTypeId = params.businessTypeId ?? '';
       this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params.subCategoryId ?? '';
       this.getAllShop(false);
-    } );
+    });
   }
 
   getAllShop(isFirstLoad: boolean, event?: any) {
@@ -63,7 +63,7 @@ export class SearchShopPage implements OnInit {
     });
   }
 
- navigateTo(path, _id) {
+  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 
@@ -106,5 +106,4 @@ export class SearchShopPage implements OnInit {
     this.infiniteScroll.disabled = true;
     event.target.complete();
   }
-
 }

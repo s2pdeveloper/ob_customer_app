@@ -107,13 +107,13 @@ const routes: Routes = [
         './default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
   },
-  {
-    path: 'category',
-    loadChildren: () =>
-      import('./default-layout/category/category.module').then(
-        (m) => m.CategoryPageModule
-      ),
-  },
+  // {
+  //   path: 'category',
+  //   loadChildren: () =>
+  //     import('./default-layout/category/category.module').then(
+  //       (m) => m.CategoryPageModule
+  //     ),
+  // },
   {
     path: 'setting',
     loadChildren: () =>

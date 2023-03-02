@@ -23,23 +23,21 @@
 }
 
 .yt {
-  color: #FF0000;
+  color: #ff0000;
   width: 2.5rem;
   height: 2rem;
 }
 
 .ct {
-  color: #0090D0;
+  color: #0090d0;
   width: 2.5rem;
   height: 2rem;
 }
 
 .icon {
-  color: #0090D0;
+  color: #0090d0;
   font-size: 17px;
 }
-
-
 
 .card::before {
   content: "";
@@ -58,7 +56,6 @@ ion-card {
     height: 6rem !important;
     border: 2px solid var(--cs-background-primary, #ffffff);
     object-fit: cover !important;
-
   }
 }
 
@@ -76,7 +73,6 @@ ion-card {
   padding-bottom: 13px;
   font-size: 14px;
   line-height: 1.5;
-
 }
 
 .banner-img {
@@ -124,15 +120,12 @@ ion-card {
   }
 }
 
-
-
 .gallery {
   border-radius: 5% !important;
   height: 4rem !important;
   width: 100% !important;
   background-image: no-repeat !important;
 }
-
 
 ion-content {
   --padding-bottom: 0 !important;
@@ -176,10 +169,8 @@ ion-button {
   --background: transparent;
   position: absolute;
 }
-.header-image{
+.header-image {
   width: 100%;
   height: 350px;
   object-fit: cover;
 }
-
-

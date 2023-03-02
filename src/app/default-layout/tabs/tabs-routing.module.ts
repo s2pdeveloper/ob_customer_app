@@ -43,6 +43,13 @@ const routes: Routes = [
             (m) => m.SearchShopPageModule
           ),
       },
+      {
+        path: 'category',
+        loadChildren: () =>
+          import('../../default-layout/category/category.module').then(
+            (m) => m.CategoryPageModule
+          ),
+      },
     ]
   },
   {

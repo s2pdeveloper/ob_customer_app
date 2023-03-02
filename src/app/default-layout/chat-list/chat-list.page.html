@@ -10,7 +10,10 @@
 </ion-header>
 
 <ion-content class="ion-no-padding">
-  <ion-segment [(ngModel)]="segment" (ionChange)="getAllShopListByOrderId(false)">
+  <ion-segment
+    [(ngModel)]="segment"
+    (ionChange)="getAllShopListByOrderId(false)"
+  >
     <ion-segment-button [id]="'new'" value="new" layout="icon-end">
       <ion-label>{{ 'new' | translate}}</ion-label>
     </ion-segment-button>
@@ -61,8 +64,10 @@
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize"
               >{{item?.shopId?.shopName}}</ion-label
             >
-            <ion-label class="ion-text-wrap shade-color " slot="end">
-              <p class="ion-padding-start">{{item.createdAt  | date:'shortTime'}}</p>
+            <ion-label class="ion-text-wrap shade-color" slot="end">
+              <p class="ion-padding-start">
+                {{item.createdAt | date:'shortTime'}}
+              </p>
             </ion-label>
           </ion-item>
         </ion-list>

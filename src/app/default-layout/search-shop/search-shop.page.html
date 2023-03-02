@@ -8,7 +8,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="ion-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content> </ion-refresher-content>
@@ -17,9 +16,9 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding size" inputmode="search" searchIcon animated type="text"
-        debounce="600" showCancelButton="never" placeholder="{{ 'searchShop' | translate}}" autocomplete="on"
-        autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()">
+      <ion-searchbar class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text" debounce="600"
+        showCancelButton="never" placeholder="{{ 'searchShop' | translate}}" autocomplete="on" autocorrect="on"
+        [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
 

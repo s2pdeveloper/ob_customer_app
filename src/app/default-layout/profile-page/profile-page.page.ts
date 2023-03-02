@@ -21,14 +21,13 @@ export class ProfilePagePage implements OnInit {
     private authService: AuthService,
     private spinner: LoaderService,
     private location: Location
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.getById();
   }
-
 
   getById() {
     this.loaded = false;

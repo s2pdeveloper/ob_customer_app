@@ -35,13 +35,13 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalController: ModalController
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
-    this.activatedRoute.queryParams.subscribe((params: any) => {      
-        // when we navigate to search shop to shop details
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      // when we navigate to search shop to shop details
       if (params._id) {
         this.shopId = params._id;
       }
