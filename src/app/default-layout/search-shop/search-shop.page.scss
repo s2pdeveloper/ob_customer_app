@@ -77,4 +77,22 @@ ion-card {
     width: 2.5rem;
     height: 2rem;
   }
+
 }
+.shadow {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding:0px;
+}
+.address-padding{
+  margin-bottom: 10px !important;
+}
+.shop-name {
+  font-weight: bold;
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  word-wrap: break-word;
+}
+

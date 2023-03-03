@@ -2,9 +2,8 @@
   <ion-toolbar>
     <ion-title> {{ 'shopList' | translate}} </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
+      <ion-back-button defaultHref="/app/tabs/category"></ion-back-button>
     </ion-buttons>
-    <!-- <ion-icon name="home" size="large" slot="end" routerLink="/app/tabs/landing-page" class="home-icon ion-margin-end"></ion-icon> -->
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +29,7 @@
 
   <ion-grid>
     <ion-row *ngFor="let s of shopArr">
-      <ion-col size="12">
+      <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
           'background-image': getUrl(s?.image), 
           'background-repeat':'no-repeat', 
@@ -52,17 +51,15 @@
           </ion-badge>
         </ion-card>
 
-        <strong class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</strong>
-
-        <ion-label (click)="navigateTo('/shop-detail',s._id)" class="address ion-margin-top" color="
+        <ion-label
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
+        <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
             light">
-          <ion-text class="ion-margin-start">
-            <h4>
-              {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
-              s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
-              "" }}.
-            </h4>
-          </ion-text>
+          <h4 class="address-padding ion-padding-start">
+            {{ s.address.city ? s.address.city : ""}},
+            {{s.address.state ? s.address.state : "" }},
+            {{s.address.pinCode ? s.address.pinCode : "" }}.
+          </h4>
         </ion-label>
       </ion-col>
     </ion-row>

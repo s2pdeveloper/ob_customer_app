@@ -35,7 +35,7 @@
 
   <ion-grid>
     <ion-row *ngFor="let s of shopFavorites">
-      <ion-col size="12">
+      <ion-col class="shadow">
         <ion-card
           class="shop-card"
           [ngStyle]="{ 
@@ -65,8 +65,10 @@
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
-        <b class="text-bold font-larger shade-color ion-margin-top"
-          >{{s.shopId.shopName}}</b
+        <ion-label
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize"
+        >
+          {{s.shopId.shopName}}</ion-label
         >
         <ion-label
           (click)="navigateTo('/shop-detail',s?.shopId._id)"
@@ -74,17 +76,17 @@
           color="
             light"
         >
-          <ion-text class="ion-margin-start ion-margin-bottom">
-            <h4>
-              {{ s.shopId .address.city ? s.shopId .address.city : ""}},
-              {{s.shopId .address.state ? s.shopId .address.state : "" }},
-              {{s.shopId .address.pinCode ? s.shopId .address.pinCode : "" }}.
-            </h4>
-          </ion-text>
+          <h4 class="address-padding ion-padding-start">
+            {{ s.shopId .address.city ? s.shopId .address.city : ""}},
+            {{s.shopId .address.state ? s.shopId .address.state : "" }},
+            {{s.shopId .address.pinCode ? s.shopId .address.pinCode : "" }}.
+          </h4>
         </ion-label>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-card></ion-card>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content

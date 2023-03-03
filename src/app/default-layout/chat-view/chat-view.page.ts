@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
@@ -8,9 +8,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
-const { App, Geolocation } = Plugins;
 import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
+import { LocationComponent } from 'src/app/modal/location/location.component';
 const { Filesystem } = Plugins;
+const { App, Geolocation } = Plugins;
 
 @Component({
   selector: 'app-chat-view',
@@ -21,6 +23,7 @@ export class ChatViewPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
+
   page: number = 1;
   pageSize: number = 10;
   search = '';
@@ -39,20 +42,21 @@ export class ChatViewPage implements OnInit, OnDestroy {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     public translate: TranslateService,
     private chatService: ChatService,
     private toaster: ToastService,
     private spinner: LoaderService,
     private localStorage: StorageService,
     private uploadService: UploadService,
+    private modalController: ModalController,
     private socket: Socket
   ) {}
 
   chatForm = new FormGroup({
     _id: new FormControl(),
     roomName: new FormControl(''),
-    message: new FormControl('',[Validators.required]),
+    message: new FormControl('', [Validators.required]),
     createdBy: new FormControl(),
     image: new FormControl(''),
   });
@@ -161,14 +165,6 @@ export class ChatViewPage implements OnInit, OnDestroy {
       });
   }
 
-  // location share
-  async locationShare() {
-    let geoLocation = await (await Geolocation.getCurrentPosition()).coords;
-    console.log('geoLocation', geoLocation);
-    let msg = `http://maps.google.com/?ie=UTF8&hq=&ll=${geoLocation.latitude},${geoLocation.longitude}&z=18`;
-    this.chatForm.controls.message.setValue(msg);
-    this.sendMessage();
-  }
   async openUrl(url) {
     console.log(url.includes('http'), 'url', url);
     if (!url.includes('http')) {
@@ -190,12 +186,26 @@ export class ChatViewPage implements OnInit, OnDestroy {
     this.sendMessage();
   }
 
-
-  navigateTo(shopId){
+  navigateTo(shopId) {
     this.router.navigate(['/shop-detail'], {
       queryParams: {
         shopId: this.shopId,
-     },
-    }); 
+      },
+    });
+  }
+
+  async navigateToLocation() {
+    const modal = await this.modalController.create({
+      component: LocationComponent,
+      componentProps: {
+        // galleryImage: data
+      },
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      this.chatForm.controls.message.setValue(data.data);
+      this.sendMessage();
+    }
   }
 }

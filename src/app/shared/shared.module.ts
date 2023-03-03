@@ -13,6 +13,7 @@ import { GalleryListComponent } from './gallery-list/gallery-list.component';
 import { ViewGalleryImagesComponent } from './view-gallery-images/view-gallery-images.component';
 import { AnimateItemsDirective } from '../directives/animate-items.directive';
 import { ParallaxHeader } from '../directives/parallax-header';
+import { LocationComponent } from '../modal/location/location.component';
 // import { ParallaxHeaderDirective } from '../directives/parallax-header.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -27,7 +28,8 @@ const COMPONENTS = [
   GalleryListComponent,
   ViewGalleryImagesComponent,
   DataUnavailableComponent,
-  PopoverComponent
+  PopoverComponent,
+  LocationComponent
 ];
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES],
