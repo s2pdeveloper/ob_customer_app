@@ -30,16 +30,14 @@ export class ForgetPwdPage implements OnInit {
     return this.forgetForm.controls;
   }
 
-  // forget(){}
+
   forget() {
     let obj = {
       mobile: this.forgetForm.value.mobile,
     };
-    // this.getCheckedStudentList();
-    // console.log(this.forgetForm.value);
     this.authService.forgetPassword(obj).subscribe(
       (success) => {
-        // console.log(success);
+       
         this.toaster.successToast('Please check your mobile to reset password');
         this.router.navigate(['/change-pwd'], { queryParams: success.data });
       },

@@ -40,27 +40,19 @@ export class SearchShopPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    // this.user = this.localStorage.get('OBCustomer')._id;
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.search) {
-        this.search=params.search
+        this.search = params.search;
       }
-    //  if (params.shopId) {
-    //     this.getShopById(params.shopId);
-    //   }
-    //    else {
-        this.businessTypeId = params.businessTypeId ?? '';
-        this.categoryId = params.categoryId ?? '';
-        this.subCategoryId = params.subCategoryId ?? '';
-        this.getAllShop(false);
-      }
-    // }
-    );
+      this.businessTypeId = params.businessTypeId ?? '';
+      this.categoryId = params.categoryId ?? '';
+      this.subCategoryId = params.subCategoryId ?? '';
+      this.getAllShop(false);
+    });
   }
 
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
-      // customerId:this.user,
       search: this.search,
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,
@@ -68,25 +60,15 @@ export class SearchShopPage implements OnInit {
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       this.shopArr = success.rows;
- });
+    });
   }
-
-  // getShopById(_id) {
-  //   this.spinner.showLoader();
-  //   this.loaded = false;
-  //   this.shopService.getByCategoryIdWithShop(_id).subscribe((success: any) => {
-  //     this.shopArr = success.payload.shop;
-  //     this.spinner.hideLoader();
-  //     this.loaded = true;
-  //   });
-  // }
 
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 
-    getUrl(url) {
-    let path = `url('${url}')`;    
+  getUrl(url) {
+    let path = `url('${url}')`;
     return path;
   }
   onSearch() {
@@ -124,5 +106,4 @@ export class SearchShopPage implements OnInit {
     this.infiniteScroll.disabled = true;
     event.target.complete();
   }
-
 }

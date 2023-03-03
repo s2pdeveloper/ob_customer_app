@@ -41,7 +41,15 @@ export class ShopDetailPage implements OnInit {
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.shopId = params._id;
+      // when we navigate to search shop to shop details
+      if (params._id) {
+        this.shopId = params._id;
+      }
+
+      // when we navigate to chat view to shop details
+      if (params.shopId) {
+        this.shopId = params.shopId;
+      }
       this.getShopById();
     });
   }
@@ -51,8 +59,6 @@ export class ShopDetailPage implements OnInit {
     this.loaded = false;
     this.shopService.getByIdShop(this.shopId).subscribe((success: any) => {
       this.shopDetails = success.rows;
-      console.log(" this.shopDetails", this.shopDetails);
-      
       this.spinner.hideLoader();
       this.loaded = true;
     });
@@ -69,11 +75,11 @@ export class ShopDetailPage implements OnInit {
   }
 
   goToChat() {
-    let params = {shopName: this.shopDetails[0].shopName};
+    let params = { shopName: this.shopDetails[0].shopName };
     this.router.navigate(['/chat-view'], { queryParams: params });
   }
 
-  async navigateToViewGalleryImages(galleryImg) {    
+  async navigateToViewGalleryImages(galleryImg) {
     const modal = await this.modalController.create({
       component: GalleryListComponent,
       componentProps: {

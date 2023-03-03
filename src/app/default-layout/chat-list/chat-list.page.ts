@@ -39,10 +39,10 @@ export class ChatListPage implements OnInit {
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
-    this.getAllShopList(false);
+    this.getAllShopListByOrderId(false);
   }
 
-  getAllShopList(isFirstLoad: boolean, event?: any) {
+  getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
     this.spinner.showLoader();
     let obj = {
       search: this.search,
@@ -70,13 +70,13 @@ export class ChatListPage implements OnInit {
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.start = 0;
-    this.getAllShopList(false, '');
+    this.getAllShopListByOrderId(false, '');
     event.target.complete();
   }
 
   doInfinite(event) {
     this.page++;
-    this.getAllShopList(true, event);
+    this.getAllShopListByOrderId(true, event);
     event.target.disabled = true;
     this.infiniteScroll.disabled = true;
     event.target.complete();
@@ -85,6 +85,6 @@ export class ChatListPage implements OnInit {
   onSearch() {
     this.shopConversationList = [];
     this.start = 0;
-    this.getAllShopList(false, '');
+    this.getAllShopListByOrderId(false, '');
   }
 }

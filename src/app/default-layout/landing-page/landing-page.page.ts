@@ -3,10 +3,8 @@ import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
-import { LoaderService } from 'src/app/core/services/loader.service';
 import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { forkJoin } from 'rxjs';
@@ -66,7 +64,15 @@ export class LandingPagePage implements OnInit {
   };
   deviceInfo: any;
   currentLocation: any = {};
-  geolocation: { latitude: number; longitude: number; accuracy: number; altitudeAccuracy?: number; altitude?: number; speed?: number; heading?: number; };
+  geolocation: {
+    latitude: number;
+    longitude: number;
+    accuracy: number;
+    altitudeAccuracy?: number;
+    altitude?: number;
+    speed?: number;
+    heading?: number;
+  };
 
   constructor(
     private router: Router,
@@ -75,26 +81,25 @@ export class LandingPagePage implements OnInit {
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
-    private authService: AuthService,
+    private authService: AuthService
+  ) {}
 
-  ) { }
-
-  ngOnInit() { }
+  ngOnInit() {}
   async ionViewWillEnter() {
-    this.search='';
+    this.search = '';
     this.user = this.localStorage.get('OBCustomer');
     this.getAllDataParallel();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();
   }
 
-  doInfinite($event) { }
+  doInfinite($event) {}
 
   getCurrentLocation() {
     let obj = {
       latitude: this.geolocation.latitude,
-      longitude: this.geolocation.longitude
-    }
+      longitude: this.geolocation.longitude,
+    };
     this.authService.getCurrentLocation(obj).subscribe((success: any) => {
       this.currentLocation = success.response.results[0];
     });
@@ -124,7 +129,7 @@ export class LandingPagePage implements OnInit {
   }
 
   seeAllCategory() {
-    this.router.navigate(['/category']);
+    this.router.navigate(['/app/tabs/category']);
   }
 
   navigateToProfilePage() {
@@ -142,7 +147,7 @@ export class LandingPagePage implements OnInit {
   }
 
   categoryToCategoryPage(c) {
-    this.router.navigate(['/category'], {
+    this.router.navigate(['/app/tabs/category'], {
       queryParams: {
         categoryId: c,
       },

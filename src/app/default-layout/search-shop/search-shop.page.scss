@@ -9,15 +9,10 @@ ion-content {
     border-radius: 2rem;
     box-shadow: none;
   }
-
-  .size {
-    width: 97%;
-  }
 }
 
 .shop-list {
   .shop-name {
-    // line-height: 3px;
     font-weight: bold;
     margin: 0px 0px 0px 0px;
   }
@@ -37,9 +32,6 @@ ion-content {
       margin-right: 1px;
     }
   }
-
-
-
 }
 
 .rating {
@@ -48,12 +40,10 @@ ion-content {
   bottom: 21px;
 }
 
-
 ion-card {
   width: 100%;
   height: 154px;
 }
-
 
 .shop-card {
   margin-bottom: 6px;
@@ -68,7 +58,7 @@ ion-card {
   ion-label {
     background-color: transparent;
     margin-top: 1rem !important;
- }
+  }
 
   .heart-icon {
     text-align: end !important;
@@ -80,11 +70,29 @@ ion-card {
     margin-left: 1.4rem;
     background-color: transparent;
     color: gray;
-
+    margin-bottom: 16px !important;
   }
 
-.home-icon{
-  width: 2.5rem;
-  height: 2rem;
+  .home-icon {
+    width: 2.5rem;
+    height: 2rem;
+  }
+
 }
+.shadow {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding:0px;
 }
+.address-padding{
+  margin-bottom: 10px !important;
+}
+.shop-name {
+  font-weight: bold;
+  display: block;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  word-wrap: break-word;
+}
+

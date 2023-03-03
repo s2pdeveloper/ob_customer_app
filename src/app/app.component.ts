@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   returnUrl: string;
   public selectedIndex: number = 0;
   currentUser: any = {};
- 
+
   constructor(
     private router: Router,
     private languageService: LanguageService,
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     this.currentUser = this.storageService.get('OBCustomer');
     if (this.currentUser) {
-      // this.router.navigate(['/landing-page']);
+      this.router.navigate(['/app/tabs/landing-page']);
     }
   }
 

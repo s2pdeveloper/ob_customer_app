@@ -15,52 +15,84 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding ion-margin-bottom size" inputmode="search" searchIcon animated
-        type="text" debounce="600" showCancelButton="never" placeholder="{{ 'searchShop' | translate}}"
-        autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()">
+      <ion-searchbar
+        class="search-box ion-no-padding ion-margin-bottom"
+        inputmode="search"
+        searchIcon
+        animated
+        type="text"
+        debounce="900"
+        showCancelButton="never"
+        placeholder="{{ 'searchShop' | translate}}"
+        autocomplete="on"
+        autocorrect="on"
+        [(ngModel)]="search"
+        (ionChange)="onSearch()"
+      >
       </ion-searchbar>
     </ion-col>
   </ion-row>
 
   <ion-grid>
-    <ion-row *ngFor="let s of shopArr">
-      <ion-col size="12" *ngIf="s?.shopFavorite.length>0">
-        <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUrl(s?.image), 
+    <ion-row *ngFor="let s of shopFavorites">
+      <ion-col class="shadow">
+        <ion-card
+          class="shop-card"
+          [ngStyle]="{ 
+          'background-image': getUrl(s?.shopId.image), 
           'background-repeat': 'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
-         }">
+         }"
+        >
           <div class="ion-text-end ion-margin-end ion-margin-top">
-            <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
-               " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
+            <ion-icon
+              (click)="addToFavorite(s)"
+              name="heart"
+              fill=""
+              size="large"
+              slot="end"
+              color="primary"
+            >
             </ion-icon>
-            <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-                 " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"
-              slot="end"></ion-icon>
           </div>
-          <ion-badge color="success" class="rating ion-text-end" (click)="navigateTo('/shop-detail',s._id)">
+          <ion-badge
+            color="success"
+            class="rating ion-text-end"
+            (click)="navigateTo('/shop-detail',s?.shopId._id)"
+          >
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
-        <b class="text-bold font-larger shade-color ion-margin-top">{{s.shopName}}</b>
-        <ion-label (click)="navigateTo('/shop-detail',s._id)" class="address ion-margin-top " color="
-            light">
-
-          <ion-text class="ion-margin-start ion-margin-bottom">
-            <h4>{{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
-              s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
-              "" }}.</h4>
-
-          </ion-text>
+        <ion-label
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize"
+        >
+          {{s.shopId.shopName}}</ion-label
+        >
+        <ion-label
+          (click)="navigateTo('/shop-detail',s?.shopId._id)"
+          class="address ion-margin-top"
+          color="
+            light"
+        >
+          <h4 class="address-padding ion-padding-start">
+            {{ s.shopId .address.city ? s.shopId .address.city : ""}},
+            {{s.shopId .address.state ? s.shopId .address.state : "" }},
+            {{s.shopId .address.pinCode ? s.shopId .address.pinCode : "" }}.
+          </h4>
         </ion-label>
       </ion-col>
     </ion-row>
   </ion-grid>
 
+  <ion-card></ion-card>
+
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService} from 'src/app/core/services';
+import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 
@@ -26,17 +26,14 @@ export class ProfilePagePage implements OnInit {
   ngOnInit() {}
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
-    console.log("this.user",this.user);
     this.getById();
   }
-
 
   getById() {
     this.loaded = false;
     this.authService.profile(this.user._id).subscribe((success) => {
-      console.log("success",success);
       this.userDetails = success;
-    this.spinner.hideLoader();
+      this.spinner.hideLoader();
       this.loaded = false;
     });
   }
