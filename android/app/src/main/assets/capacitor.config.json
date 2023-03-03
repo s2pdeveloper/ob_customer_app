@@ -18,7 +18,6 @@
 	},
 	"linuxAndroidStudioPath": "/home/s2p/gandhar/Pratik_Projects/android-studio/bin/studio.sh",
 	"server": {
-		"cleartext": true,
-		"url": "http://192.168.1.11:8100"
+		"cleartext": true
 	}
 }
