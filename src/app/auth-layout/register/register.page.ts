@@ -16,6 +16,7 @@ const { Device, Geolocation, Browser } = Plugins;
 export class RegisterPage implements OnInit {
   submitted: boolean = false;
   showEye: boolean = false;
+  passwordType = 'password';
   deviceInfo: any;
   constructor(
     private router: Router,
@@ -32,12 +33,10 @@ export class RegisterPage implements OnInit {
   }
 
   registerForm = new FormGroup({
-    // id: new FormControl(),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     mobile: new FormControl(''),
     password: new FormControl(''),
-    // confirmPassword: new FormControl(''),
     email: new FormControl(''),
     role: new FormControl('CUSTOMER'),
   });
@@ -83,7 +82,13 @@ export class RegisterPage implements OnInit {
   }
 
 
-
-
-
+  onClickEye() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.showEye = true;
+    } else {
+      this.passwordType = 'password';
+      this.showEye = false;
+    }
+  }
 }

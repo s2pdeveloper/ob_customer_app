@@ -20,11 +20,6 @@
         [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
-
-    <!-- filter -->
-    <!-- <ion-col size="2">
-      <ion-icon name="filter-outline" size="large" (click)="openSubCategoryModel()"></ion-icon>
-    </ion-col> -->
   </ion-row>
 
   <ion-grid>
@@ -51,8 +46,7 @@
           </ion-badge>
         </ion-card>
 
-        <ion-label
-          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
+        <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
         <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
             light">
           <h4 class="address-padding ion-padding-start">

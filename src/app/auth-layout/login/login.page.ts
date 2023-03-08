@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   submitted: boolean = false;
   returnUrl: string;
   deviceInfo: any;
+  passwordType = 'password';
   showEye: boolean = false;
   constructor(
     private router: Router,
@@ -50,6 +51,7 @@ export class LoginPage implements OnInit {
     }
     this.spinner.showLoader();
     this.authService.login(this.loginForm.value).subscribe((success) => {
+      this.toaster.successToast('Logged in successfully');
       this.localStorage.set('OBCustomer', success);
       this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
       this.saveDeviceToken(success._id);
@@ -74,5 +76,15 @@ export class LoginPage implements OnInit {
     );
     newObj.deviceId &&
       this.authService.createAndUpdateUserDevice(newObj).subscribe();
+  }
+
+  onClickEye() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.showEye = true;
+    } else {
+      this.passwordType = 'password';
+      this.showEye = false;
+    }
   }
 }

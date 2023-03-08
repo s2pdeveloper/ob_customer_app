@@ -1,6 +1,5 @@
 <ion-content>
   <ion-card>
-
     <div class="ion-text-center">
       <img src="./assets/image/login.svg" alt="Logo" height="350" />
     </div>
@@ -17,17 +16,18 @@
       <app-validation-messages [control]="form.mobile">
       </app-validation-messages>
 
+
       <ion-item class="input-class" [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
         <ion-label position="stacked">
           {{ 'password' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input formControlName="password" [type]="showEye ? 'password':'text'" name="password"
+        <ion-input formControlName="password" [type]="passwordType" name="password"
           placeholder="{{ 'password' | translate }}" autocomplete="on" clearInput></ion-input>
-        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="showEye = !showEye">
+       <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="onClickEye()">
         </ion-icon>
         <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
-          (click)="showEye = !showEye">
+          (click)="onClickEye()">
         </ion-icon>
       </ion-item>
 

@@ -15,20 +15,9 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar
-        class="search-box ion-no-padding ion-margin-bottom"
-        inputmode="search"
-        searchIcon
-        animated
-        type="text"
-        debounce="900"
-        showCancelButton="never"
-        placeholder="{{ 'searchShop' | translate}}"
-        autocomplete="on"
-        autocorrect="on"
-        [(ngModel)]="search"
-        (ionChange)="onSearch()"
-      >
+      <ion-searchbar class="search-box ion-no-padding ion-margin-bottom" inputmode="search" searchIcon animated
+        type="text" debounce="900" showCancelButton="never" placeholder="{{ 'searchShop' | translate}}"
+        autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
   </ion-row>
@@ -36,46 +25,26 @@
   <ion-grid>
     <ion-row *ngFor="let s of shopFavorites">
       <ion-col class="shadow">
-        <ion-card
-          class="shop-card"
-          [ngStyle]="{ 
+        <ion-card class="shop-card" [ngStyle]="{ 
           'background-image': getUrl(s?.shopId.image), 
           'background-repeat': 'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
-         }"
-        >
+         }" (click)="navigateTo('/shop-detail',s?.shopId._id)">
+
           <div class="ion-text-end ion-margin-end ion-margin-top">
-            <ion-icon
-              (click)="addToFavorite(s)"
-              name="heart"
-              fill=""
-              size="large"
-              slot="end"
-              color="primary"
-            >
+            <ion-icon (click)="addToFavorite($event,s)" name="heart" fill="" size="large" slot="end" color="primary">
             </ion-icon>
           </div>
-          <ion-badge
-            color="success"
-            class="rating ion-text-end"
-            (click)="navigateTo('/shop-detail',s?.shopId._id)"
-          >
+          <ion-badge color="success" class="rating ion-text-end" (click)="navigateTo('/shop-detail',s?.shopId._id)">
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
-        <ion-label
-          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize"
-        >
-          {{s.shopId.shopName}}</ion-label
-        >
-        <ion-label
-          (click)="navigateTo('/shop-detail',s?.shopId._id)"
-          class="address ion-margin-top"
-          color="
-            light"
-        >
+        <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">
+          {{s.shopId.shopName}}</ion-label>
+        <ion-label (click)="navigateTo('/shop-detail',s?.shopId._id)" class="address ion-margin-top" color="
+            light">
           <h4 class="address-padding ion-padding-start">
             {{ s.shopId .address.city ? s.shopId .address.city : ""}},
             {{s.shopId .address.state ? s.shopId .address.state : "" }},
@@ -86,13 +55,9 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card></ion-card>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data..."
-    >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

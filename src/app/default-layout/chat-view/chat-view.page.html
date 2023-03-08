@@ -21,12 +21,12 @@
             <div class="msg-info">
               <p>{{message?.createdAt | date:'shortTime'}}</p>
             </div>
-         
+
             <div class="msg-content ion-text-wrap" *ngIf="message.message">
               <p (click)="openUrl(message.message)">{{message.message}}</p>
             </div>
 
-         <div class="msg-info">
+            <div class="msg-info">
               <img src="{{message.image}}" *ngIf="message.image" />
               <ion-icon name="cloud-download-outline" *ngIf="message.image" class="download"
                 (click)="downloadImage(message)"></ion-icon>
@@ -97,9 +97,6 @@
             <ion-button (click)="fileInput1.click()">
               <ion-icon name="attach"></ion-icon>
             </ion-button>
-            <!-- <ion-button (click)="locationShare()">
-              <ion-icon name="location"></ion-icon>
-            </ion-button> -->
 
             <ion-button (click)="navigateToLocation()">
               <ion-icon name="location"></ion-icon>

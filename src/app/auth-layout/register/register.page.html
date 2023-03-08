@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card>
     <div class="ion-text-center ion-margin-top">
-      <img src="./assets/image/reg.webp" alt="Logo" height="250" />
+      <img src="./assets/image/Sign up-pana.svg" alt="Logo" height="250" />
     </div>
 
     <form [formGroup]="registerForm">
@@ -42,37 +42,19 @@
           formControlName="mobile" inputmode="number"></ion-input>
       </ion-item>
 
-      <ion-item  class="input-class" 
-        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
+      <ion-item class="input-class" [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
         <ion-label position="stacked">
           {{ 'password' | translate }}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input formControlName="password" [type]="showEye ? 'password':'text'" name="password"
+        <ion-input formControlName="password" [type]="passwordType" name="password"
           placeholder="{{ 'password' | translate }}" autocomplete="on" clearInput></ion-input>
-        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="showEye = !showEye">
+       <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="onClickEye()">
         </ion-icon>
         <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
-          (click)="showEye = !showEye">
+          (click)="onClickEye()">
         </ion-icon>
       </ion-item>
-
-
-      <!-- <ion-item   class="input-class"
-        [class.invalid]="!form.confirmPassword.valid && (form.confirmPassword.dirty || submitted)">
-        <ion-label position="stacked">
-          {{ 'Confirm password' | translate }}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input formControlName="confirmPassword" [type]="showEye ? 'password':'text'" name="Confirm Password"
-          placeholder="{{ 'Confirm Password' | translate }}" autocomplete="on" clearInput></ion-input>
-        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="!showEye = showEye">
-        </ion-icon>
-        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
-          (click)="showEye = !showEye">
-        </ion-icon>
-      </ion-item> -->
-
 
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">

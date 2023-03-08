@@ -25,7 +25,6 @@ export class CataloguePage implements OnInit {
   selectAll: boolean;
   subCategoryArr: any = [];
 
-
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -48,10 +47,9 @@ export class CataloguePage implements OnInit {
     private socket: Socket,
     private chatService: ChatService,
     public translate: TranslateService
+  ) {}
 
-  ) { }
-
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
@@ -59,7 +57,6 @@ export class CataloguePage implements OnInit {
       this.getShopById(params._id);
     });
   }
-
 
   getCatalogueBySubCategoryId(_id, index) {
     this.spinner.showLoader();
@@ -141,5 +138,9 @@ export class CataloguePage implements OnInit {
         },
       });
     });
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/app/tabs/landing-page']);
   }
 }
