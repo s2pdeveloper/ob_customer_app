@@ -31,21 +31,21 @@
           'object-fit':'cover',
           'background-size':'100% 100%'
 
-         }">
-          <div class="ion-text-end ion-margin-end ion-margin-top">
-            <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
-               " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
-            </ion-icon>
-            <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-                 " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"
-              slot="end"></ion-icon>
-          </div>
-          <ion-badge color="success" class="rating ion-text-end" (click)="navigateTo('/shop-detail',s._id)">
+         }" (click)="navigateTo('/shop-detail',s._id)">
+    
+          <ion-badge color="success" class="rating ion-text-end">
             5
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
-
+        <div class="ion-text-end ion-margin-end ion-margin-top heart-img">
+          <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
+             " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
+          </ion-icon>
+          <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
+               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"
+            slot="end"></ion-icon>
+        </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
         <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
             light">

@@ -39,17 +39,9 @@ ion-content {
     margin-top: 0px;
     object-fit: cover !important;
 
-    .heart-icon {
-      margin-left: 1rem !important;
-    }
-
-    ion-label {
+ ion-label {
       background-color: transparent;
       margin-top: 1rem !important;
-    }
-
-    .heart-icon {
-      text-align: end !important;
     }
 
     .address {
@@ -79,4 +71,11 @@ ion-content {
     padding-right: 1rem;
     word-wrap: break-word;
   }
+  .heart-img{
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+    right: 7px;
+  }
 }
+

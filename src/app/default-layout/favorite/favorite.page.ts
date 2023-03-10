@@ -68,10 +68,12 @@ export class FavoritePage implements OnInit {
   navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
+
   getUrl(url) {
     let path = `url('${url}')`;
     return path;
   }
+
   onSearch() {
     this.page = 1;
     this.shopFavorites = [];
@@ -85,9 +87,7 @@ export class FavoritePage implements OnInit {
     event.target.complete();
   }
 
-  async addToFavorite(ev,item) {
-    console.log("ev.........",ev);
-    
+  async addToFavorite(item) {
     let payload = {
       action: 'remove',
       shopId: item.shopId._id,
