@@ -37,7 +37,9 @@ export class CategoryPage implements OnInit {
   }
 
   getAllCategoryWithSubCategory() {
-    let obj = {};
+    let obj = {
+      search: this.search,
+    };
     this.categoryService
       .getAllCategoryWithSubCategory(obj)
       .subscribe((success) => {
@@ -89,6 +91,6 @@ export class CategoryPage implements OnInit {
   onSearch() {
     this.categoryArr = [];
     // this.start = 0;
-   this. getAllCategoryWithSubCategory();
+    this.getAllCategoryWithSubCategory();
   }
 }

@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService
-  ) {}
+  ) { }
 
   loginForm = new FormGroup({
     mobile: new FormControl('', [Validators.required]),
@@ -56,6 +56,8 @@ export class LoginPage implements OnInit {
       this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
       this.saveDeviceToken(success._id);
       this.spinner.hideLoader();
+    }, (error) => {
+      this.toaster.errorToast("The mobile number or password entered are incorrect");
     });
   }
 
