@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild ,AfterViewChecked} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
 import { StorageService, ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonContent, IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
 import { Plugins, FilesystemDirectory } from '@capacitor/core';
@@ -19,7 +19,9 @@ const { App, Geolocation } = Plugins;
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, OnDestroy {
+export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
+  @ViewChild(IonContent) content: IonContent;
+
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -62,6 +64,14 @@ export class ChatViewPage implements OnInit, OnDestroy {
   });
 
   ngOnInit() {}
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  scrollToBottom() {
+    this.content.scrollToBottom();
+  }
+
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
