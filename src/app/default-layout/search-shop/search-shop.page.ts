@@ -28,7 +28,6 @@ export class SearchShopPage implements OnInit {
 
   constructor(
     private router: Router,
-    private spinner: LoaderService,
     public translate: TranslateService,
     public modelController: ModalController,
     private shopService: ShopService,

@@ -20,7 +20,7 @@ export class TabsPage {
       icon: 'home',
     },
     {
-      title: 'chat',
+      title: 'orders',
       value: 'chat',
       tab: 'chat-list',
       icon: 'chatbubble-sharp',

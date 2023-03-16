@@ -90,7 +90,7 @@ export class CategoryPage implements OnInit {
 
   onSearch() {
     this.categoryArr = [];
-    // this.start = 0;
+    this.subCategoryArr= [];
     this.getAllCategoryWithSubCategory();
   }
 }
