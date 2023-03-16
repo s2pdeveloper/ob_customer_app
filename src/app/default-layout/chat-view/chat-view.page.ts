@@ -8,11 +8,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
-import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { LocationComponent } from 'src/app/modal/location/location.component';
-const { Filesystem } = Plugins;
-const { App, Geolocation } = Plugins;
+import { App } from '@capacitor/app';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-chat-view',
@@ -169,20 +169,28 @@ export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
         await Filesystem.writeFile({
           path: `${message.image.split('post/')[1]}`,
           data: success.result.src as string,
-          directory: FilesystemDirectory.Documents,
+          directory: Directory.Documents,
         });
         this.spinner.hideLoader();
       });
   }
 
+  // async openUrl(url) {
+  //   console.log(url.includes('http'), 'url', url);
+  //   if (!url.includes('http')) {
+  //     return;
+  //   }
+  //   let ret = await App.openUrl({
+  //     url: url,
+  //   });
+  // }
+
   async openUrl(url) {
-    console.log(url.includes('http'), 'url', url);
     if (!url.includes('http')) {
       return;
     }
-    let ret = await App.openUrl({
-      url: url,
-    });
+    await App.getLaunchUrl();
+    return url;
   }
 
   doRefresh(event: any) {

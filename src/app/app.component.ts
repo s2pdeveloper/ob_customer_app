@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins, StatusBarStyle } from '@capacitor/core';
-const { StatusBar, Network } = Plugins;
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { Network } from '@capacitor/network';
 import { LoadingController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from './core/services';
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
   }
 
   settingStyleAndSplashScreen = async () => {
-    await StatusBar.setStyle({ style: StatusBarStyle.Dark });
+    await StatusBar.setStyle({ style: Style.Dark });
     await StatusBar.setBackgroundColor({ color: '#ff0000' });
     await StatusBar.show();
   };

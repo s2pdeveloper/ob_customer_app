@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Plugins } from '@capacitor/core/dist/esm/global';
 import { ModalController } from '@ionic/angular';
-const { App, Geolocation } = Plugins;
+import { App } from '@capacitor/app';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-location',
