@@ -39,7 +39,6 @@ export class ParallaxHeaderDirective {
 	          translateAmt = 0;
 	          scaleAmt = -ev.detail.scrollTop / this.headerHeight + 1;
 	      }
-		  console.log("this.mainContent",this.mainContent);
 		  
 	      this.domCtrl.write(() => {
 	        this.renderer.setStyle(this.header, 'transform', 'translate3d(0,'+translateAmt+'px,0) scale('+scaleAmt+','+scaleAmt+')');

@@ -74,6 +74,34 @@ export class SearchShopPage implements OnInit {
     });
   }
 
+
+  // getAllShop(isFirstLoad: boolean, event?: any) {
+  //   let obj = {
+  //     page: this.page,
+  //     pageSize: this.pageSize,
+  //     // search: this.search,
+  //     businessTypeId: this.businessTypeId,
+  //     categoryId: this.categoryId,
+  //     subCategoryId: this.subCategoryId,
+  //   };
+  //   if (this.search) {
+  //     obj['search'] = this.search
+  //   }
+  //   this.shopService.getAllShop(obj).subscribe((success) => {
+  //     // this.shopArr = success.rows;
+  //     for (let i = 1; i < success.rows.length; i++) {
+  //       this.shopArr.push(success.rows[i]);
+  //     }
+  //     if (isFirstLoad) event?.target.complete();
+  //     if (success.length === 1 && event) {
+  //       event.target.disabled = true;
+  //     }
+  //     else {
+  //       this.page += this.pageSize
+  //     }
+  //   });
+  // }
+
   async addToFavorite(item) {
     this.user = this.localStorage.get('OBCustomer')._id;
     let payload = {
@@ -111,7 +139,7 @@ export class SearchShopPage implements OnInit {
   }
 
   doInfinite(event) {
-    this.page++;
+    // this.page++;
     this.getAllShop(true, event);
     event.target.complete();
   }

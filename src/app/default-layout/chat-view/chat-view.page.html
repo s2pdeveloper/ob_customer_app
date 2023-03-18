@@ -32,6 +32,7 @@
                 (click)="downloadImage(message)"></ion-icon>
             </div>
           </div>
+
           <div *ngIf="message.userIsSender" class="msg-status">
             <div *ngIf="message.status === 'pending';else sent">
               pending
@@ -61,6 +62,32 @@
     </div>
   </div>
 
+  <ion-card class="card-status">
+    <ion-card-content>
+      <ion-segment>
+        <ion-segment-button [id]="'new'" value="new" layout="icon-end">
+          <ion-label class="ion-text-wrap">{{ 'CHAT' | translate}}</ion-label>
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button [id]="'active'" value="active" layout="icon-end">
+          <ion-label class="ion-text-wrap">{{ 'ADD MSG' | translate}}</ion-label>
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-segment-button>
+        <hr color="secondary">
+      </ion-segment>
+      <ion-list class="ion-margin-top">
+        <ion-chip>Accept</ion-chip>
+        <ion-chip>Reject</ion-chip>
+        <ion-chip>Cancelled</ion-chip>
+        <ion-chip>Confirmed</ion-chip>
+        <ion-chip>Paid</ion-chip>
+        <ion-chip>ReOrder</ion-chip>
+      </ion-list>
+    </ion-card-content>
+
+  </ion-card>
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
     <ion-fab-button size="small">
       <ion-icon name="add"></ion-icon>
@@ -80,6 +107,7 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
 
 <ion-footer>
   <div class="footer-msg">
