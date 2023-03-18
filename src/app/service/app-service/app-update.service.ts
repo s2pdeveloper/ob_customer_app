@@ -12,9 +12,11 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Router } from '@angular/router';
 // import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth/auth.service';
-import { FilesystemDirectory, Plugins } from '@capacitor/core';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Device } from '@capacitor/device';
 import { LoaderService } from 'src/app/core/services/loader.service';
-const { Device, Filesystem, Storage, App } = Plugins;
+import { Preferences } from '@capacitor/preferences';
+// const { Device, Filesystem, Storage, App } = Plugins;
 export const FILE_KEY = 'files';
 
 interface AppUpdate {
@@ -65,7 +67,7 @@ export class AppUpdateService {
     this.http.get(this.updateUrl).subscribe(async (info: AppUpdate) => {
       const deviceInfo = await Device.getInfo();
       // console.log('deviceInfo', deviceInfo);
-      const versionNumber = deviceInfo.appVersion;
+      const versionNumber = deviceInfo.osVersion;
       // console.log('app version', deviceInfo.appVersion);
       if (!info.enabled) {
         this.presentAlert(
@@ -167,14 +169,14 @@ export class AppUpdateService {
             const deleteSecretFile = async () => {
               await Filesystem.deleteFile({
                 path: 's2pEdutech.apk',
-                directory: FilesystemDirectory.Data,
+                directory: Directory.Data,
               });
             };
             console.log('file delete', deleteSecretFile);
             const saveFile = await Filesystem.writeFile({
               path: `s2pEdutech.apk`,
               data: base64,
-              directory: FilesystemDirectory.Data,
+              directory: Directory.Data,
             });
             const path = saveFile.uri;
             console.log('file saveFile', saveFile);
@@ -223,7 +225,7 @@ export class AppUpdateService {
         this.presentToast('Please try to download again');
       });
     this.myFiles.unshift(path);
-    Storage.set({
+    Preferences.set({
       key: FILE_KEY,
       value: JSON.stringify(this.myFiles),
     }).then(() => {

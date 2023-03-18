@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
 import { StorageService } from '../core/services';
-import { Plugins, StatusBarStyle } from '@capacitor/core';
-const { StatusBar } = Plugins;
+import { StatusBar, Style } from '@capacitor/status-bar';
+
 @Component({
   selector: 'app-onboarding',
   templateUrl: './onboarding.page.html',
@@ -12,7 +12,7 @@ const { StatusBar } = Plugins;
 export class OnboardingPage implements OnInit {
   constructor(private router: Router, private localStorage: StorageService) {}
   async ionViewDidLeave() {
-    await StatusBar.setStyle({ style: StatusBarStyle.Dark });
+    await StatusBar.setStyle({ style: Style.Dark });
     await StatusBar.setBackgroundColor({ color: '#3f448a' });
     await StatusBar.show();
   }
@@ -20,7 +20,7 @@ export class OnboardingPage implements OnInit {
   user: any;
   ngOnInit() {}
   async ionViewWillEnter() {
-    await StatusBar.setStyle({ style: StatusBarStyle.Light });
+    await StatusBar.setStyle({ style: Style.Light });
     await StatusBar.setBackgroundColor({ color: '#e1eaf5' });
     this.user = this.localStorage.get('OBCustomer');
   }

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/services';
 import {  map } from 'rxjs/operators';
-import { Plugins, FilesystemDirectory } from '@capacitor/core';
+// import { Plugins, FilesystemDirectory } from '@capacitor/core';
+import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+
 import { FileOpener } from '@ionic-native/file-opener/ngx';
-const { Filesystem, Storage, LocalNotifications } = Plugins;
+// const { Filesystem, Storage, LocalNotifications } = Plugins;
 
 @Injectable({
   providedIn: 'root',
