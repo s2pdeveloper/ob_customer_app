@@ -1,4 +1,4 @@
-import { Directive , AfterViewInit, ElementRef, Renderer2, Input} from '@angular/core';
+import { Directive,AfterViewInit, ElementRef, Renderer2, Input } from '@angular/core';
 import { DomController } from '@ionic/angular';
 @Directive({
   selector: '[appParallaxHeader]',
@@ -7,19 +7,18 @@ import { DomController } from '@ionic/angular';
 	}
 })
 export class ParallaxHeaderDirective {
-  @Input('parallaxHeader') imagePath: string;
+
+   @Input('parallaxHeader') imagePath: string;
 	@Input('parallaxHeight') parallaxHeight: number;
 	private headerHeight: number;
 	private header: HTMLDivElement;
-  	private mainContent: HTMLDivElement;
+  private mainContent: HTMLDivElement;
+  constructor(private element: ElementRef, private renderer: Renderer2, private domCtrl: DomController){}
 
-  constructor(private element: ElementRef, private renderer: Renderer2, private domCtrl: DomController) {
-
-   }
-   ngAfterViewInit(){
-		this.headerHeight = this.parallaxHeight;
-    	this.mainContent = this.element.nativeElement.querySelector('main-content');
-		this.domCtrl.write(() => {
+  ngAfterViewInit(){
+		    this.headerHeight = this.parallaxHeight;
+           this.mainContent = this.element.nativeElement.querySelector('#content');
+		  this.domCtrl.write(() => {
 			this.header = this.renderer.createElement('div');
 			this.renderer.insertBefore(this.element.nativeElement, this.header, this.element.nativeElement.firstChild);
 			this.renderer.setStyle(this.header, 'background-image', 'url(' + this.imagePath + ')');
@@ -28,10 +27,9 @@ export class ParallaxHeaderDirective {
 		});
   	}
     onContentScroll(ev){
-	    this.domCtrl.read(() => {
+	     this.domCtrl.read(() => {
 	      let translateAmt, scaleAmt;
-	      // Already scrolled past the point at which the header image is visible
-	      if(ev.detail.scrollTop > this.parallaxHeight){
+        if(ev.detail.scrollTop > this.parallaxHeight){
 	        return;
 	      }
 	      if(ev.detail.scrollTop >= 0){
@@ -41,17 +39,13 @@ export class ParallaxHeaderDirective {
 	          translateAmt = 0;
 	          scaleAmt = -ev.detail.scrollTop / this.headerHeight + 1;
 	      }
+		  console.log("this.mainContent",this.mainContent);
+		  
 	      this.domCtrl.write(() => {
 	        this.renderer.setStyle(this.header, 'transform', 'translate3d(0,'+translateAmt+'px,0) scale('+scaleAmt+','+scaleAmt+')');
 	        this.renderer.setStyle(this.mainContent, 'transform', 'translate3d(0, '+(-ev.detail.scrollTop) + 'px, 0');
 	      });
-
 	    });
-	}
-
-
-
-	
-
+    }
 
 }

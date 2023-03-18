@@ -93,7 +93,7 @@ export class LandingPagePage implements OnInit {
     this.getCurrentLocation();
   }
 
-  doInfinite($event) {}
+ 
 
   getCurrentLocation() {
     let obj = {

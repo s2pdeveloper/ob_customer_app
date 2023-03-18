@@ -14,7 +14,7 @@ export class SearchShopPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
-  page: number = 1;
+  page: number = 0;
   pageSize: number = 10;
   search: string = '';
   businessTypeId: string = '';
@@ -34,9 +34,9 @@ export class SearchShopPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private localStorage: StorageService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -52,6 +52,8 @@ export class SearchShopPage implements OnInit {
 
   getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
       search: this.search,
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,
@@ -59,7 +61,32 @@ export class SearchShopPage implements OnInit {
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
       this.shopArr = success.rows;
+      // if (this.page == 1) {
+      //   this.shopArr = success.rows;
+      // } else {
+      //   this.shopArr = [...this.shopArr, ...success.rows];
+      // }
+      // // this.collection = success.count;
+      // if (isFirstLoad) event?.target.complete();
+      // if (this.shopArr.length >= this.collection && event) {
+      //   event.target.disabled = true;
+      // }
     });
+  }
+
+  async addToFavorite(item) {
+    this.user = this.localStorage.get('OBCustomer')._id;
+    let payload = {
+      _id: this.user,
+      action: item.shopFavorite.length ? 'remove' : 'add',
+      shopId: item._id,
+    };
+    this.shopService
+      .createOrRemoveFavorite(payload)
+      .subscribe(async (success) => {
+        this.getAllShop(false);
+        this.toaster.successToast(success.message);
+      });
   }
 
   navigateTo(path, _id) {
@@ -83,26 +110,9 @@ export class SearchShopPage implements OnInit {
     event.target.complete();
   }
 
-  async addToFavorite(item) {
-    this.user = this.localStorage.get('OBCustomer')._id;
-    let payload = {
-      _id: this.user,
-      action: item.shopFavorite.length ? 'remove' : 'add',
-      shopId: item._id,
-    };
-    this.shopService
-      .createOrRemoveFavorite(payload)
-      .subscribe(async (success) => {
-        this.getAllShop(false);
-        this.toaster.successToast(success.message);
-      });
-  }
-
   doInfinite(event) {
     this.page++;
     this.getAllShop(true, event);
-    event.target.disabled = true;
-    this.infiniteScroll.disabled = true;
     event.target.complete();
   }
 }

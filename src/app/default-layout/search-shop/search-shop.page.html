@@ -32,7 +32,7 @@
           'background-size':'100% 100%'
 
          }" (click)="navigateTo('/shop-detail',s._id)">
-    
+
           <ion-badge color="success" class="rating ion-text-end">
             5
             <ion-icon name="star"></ion-icon>
@@ -43,8 +43,7 @@
              " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
           </ion-icon>
           <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large"
-            slot="end"></ion-icon>
+               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large" slot="end"></ion-icon>
         </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
         <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
