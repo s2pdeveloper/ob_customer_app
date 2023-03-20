@@ -11,16 +11,14 @@ import { StorageService, ToastService } from 'src/app/core/services';
   styleUrls: ['./search-shop.page.scss'],
 })
 export class SearchShopPage implements OnInit {
-  @ViewChild(IonInfiniteScroll, { static: false })
-  infiniteScroll: IonInfiniteScroll;
-  disabledScroll = false;
-  page: number = 0;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  page: number = 1;
   pageSize: number = 10;
+  collection: number = 0;
   search: string = '';
   businessTypeId: string = '';
   categoryId: string = '';
   subCategoryId: string = '';
-  collection: number = 0;
   shopArr: any = [];
   loaded: boolean = false;
   shopDetails: any;
@@ -60,47 +58,18 @@ export class SearchShopPage implements OnInit {
       subCategoryId: this.subCategoryId,
     };
     this.shopService.getAllShop(obj).subscribe((success) => {
-      this.shopArr = success.rows;
-      // if (this.page == 1) {
-      //   this.shopArr = success.rows;
-      // } else {
-      //   this.shopArr = [...this.shopArr, ...success.rows];
-      // }
-      // // this.collection = success.count;
-      // if (isFirstLoad) event?.target.complete();
-      // if (this.shopArr.length >= this.collection && event) {
-      //   event.target.disabled = true;
-      // }
+      this.collection = success.count;
+      if (this.page == 1) {
+        this.shopArr = success.rows;
+      } else {
+        this.shopArr = [...this.shopArr, ...success.rows];
+      }
+      if (isFirstLoad) event?.target.complete();
+      if (this.shopArr.length >= this.collection && event) {
+        event.target.disabled = true;
+      }
     });
   }
-
-
-  // getAllShop(isFirstLoad: boolean, event?: any) {
-  //   let obj = {
-  //     page: this.page,
-  //     pageSize: this.pageSize,
-  //     // search: this.search,
-  //     businessTypeId: this.businessTypeId,
-  //     categoryId: this.categoryId,
-  //     subCategoryId: this.subCategoryId,
-  //   };
-  //   if (this.search) {
-  //     obj['search'] = this.search
-  //   }
-  //   this.shopService.getAllShop(obj).subscribe((success) => {
-  //     // this.shopArr = success.rows;
-  //     for (let i = 1; i < success.rows.length; i++) {
-  //       this.shopArr.push(success.rows[i]);
-  //     }
-  //     if (isFirstLoad) event?.target.complete();
-  //     if (success.length === 1 && event) {
-  //       event.target.disabled = true;
-  //     }
-  //     else {
-  //       this.page += this.pageSize
-  //     }
-  //   });
-  // }
 
   async addToFavorite(item) {
     this.user = this.localStorage.get('OBCustomer')._id;
@@ -134,13 +103,14 @@ export class SearchShopPage implements OnInit {
   doRefresh(event) {
     this.page = 1;
     this.shopArr = [];
-    this.getAllShop(false);
+    this.getAllShop(false, "");
     event.target.complete();
   }
 
   doInfinite(event) {
-    // this.page++;
+    this.page++;
     this.getAllShop(true, event);
-    event.target.complete();
+    // event.target.complete();
   }
+
 }

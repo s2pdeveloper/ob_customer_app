@@ -18,12 +18,11 @@ export class ChatListPage implements OnInit {
   disabledScroll = false;
   page: number = 1;
   pageSize: number = 10;
+  collection: number = 0;
   search = '';
   item: any;
   segment: any = 'new';
   shopConversationList: any = [];
-  start: number = 0;
-  limit: number = 20;
   user: any;
 
   constructor(
@@ -45,12 +44,23 @@ export class ChatListPage implements OnInit {
   getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
     this.spinner.showLoader();
     let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
       this.shopConversationList = success.rows;
-      this.spinner.hideLoader();
+      this.collection = success.count;
+      if (this.page == 1) {
+        this.shopConversationList = success.rows;
+      } else {
+        this.shopConversationList = [...this.shopConversationList, ...success.rows];
+      }
+      if (isFirstLoad) event?.target.complete();
+      if (this.shopConversationList.length >= this.collection && event) {
+        event.target.disabled = true;
+      }
     });
   }
 
@@ -66,10 +76,15 @@ export class ChatListPage implements OnInit {
     });
   }
 
+  onSearch() {
+    this.shopConversationList = [];
+    this.page = 0;
+    this.getAllShopListByOrderId(false, '');
+  }
  
   doRefresh(event: any) {
     this.shopConversationList = [];
-    this.start = 0;
+    this.page = 0;
     this.getAllShopListByOrderId(false, '');
     event.target.complete();
   }
@@ -77,14 +92,7 @@ export class ChatListPage implements OnInit {
   doInfinite(event) {
     this.page++;
     this.getAllShopListByOrderId(true, event);
-    event.target.disabled = true;
-    this.infiniteScroll.disabled = true;
     event.target.complete();
   }
 
-  onSearch() {
-    this.shopConversationList = [];
-    this.start = 0;
-    this.getAllShopListByOrderId(false, '');
-  }
 }

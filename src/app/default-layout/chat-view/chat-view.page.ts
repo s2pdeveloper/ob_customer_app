@@ -125,7 +125,7 @@ export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
     this.chatService
       .getMsgByCustomerId(this.roomName)
       .subscribe((success: any) => {
-        this.msgArr = success.payload.rows;
+        this.msgArr = success.rows;
         this.spinner.hideLoader();
       });
   }
