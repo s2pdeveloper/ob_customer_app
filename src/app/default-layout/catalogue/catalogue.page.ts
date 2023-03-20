@@ -47,24 +47,48 @@ export class CataloguePage implements OnInit {
     private socket: Socket,
     private chatService: ChatService,
     public translate: TranslateService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      console.log("params", params);
+      this.shopId = params._id
       this.getShopById(params._id);
     });
   }
 
+
+  getShopById(_id) {
+    console.log("_id...........", _id);
+    this.shopService.getByIdShop(_id).subscribe((success: any) => {
+      console.log("success",success);
+      
+      this.subCategoryArr = success.data.map((y, i) => {
+        y.isActive = false;
+        if (i == 0) {
+          y.isActive = true;
+          this.getCatalogueBySubCategoryId(y._id, null);
+        }
+        return y;
+      });
+    });
+  }
+
   getCatalogueBySubCategoryId(_id, index) {
+    console.log("_id622222", _id);
+    let obj = {
+      shopId: this.shopId,
+      subCategoryId:_id
+    }
     this.spinner.showLoader();
     this.loaded = false;
     this.shopService
-      .getCatalogueBySubCategoryId(_id)
+      .getCatalogueBySubCategoryId(obj)
       .subscribe((success: any) => {
-        this.catalogueArr = success.payload.rows.map((x) => {
+        this.catalogueArr = success.rows.map((x) => {
           x.isChecked = false;
           return x;
         });
@@ -81,18 +105,7 @@ export class CataloguePage implements OnInit {
       });
   }
 
-  getShopById(_id) {
-    this.shopService.getByIdShop(_id).subscribe((success: any) => {
-      this.subCategoryArr = success.data.map((y, i) => {
-        y.isActive = false;
-        if (i == 0) {
-          y.isActive = true;
-          this.getCatalogueBySubCategoryId(y._id, null);
-        }
-        return y;
-      });
-    });
-  }
+
 
   navigateTo() {
     let msg = '';

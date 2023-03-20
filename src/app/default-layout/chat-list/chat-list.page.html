@@ -64,10 +64,10 @@
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize"
               >{{item?.shopId?.shopName}}</ion-label
             >
-            <ion-label class="ion-text-wrap shade-color" slot="end">
-              <p class="ion-padding-start">
-                {{item.createdAt | date:'shortTime'}}
-              </p>
+            <ion-label class="" slot="end">
+              <ion-chip *ngIf="item.status" color="warning"
+                class="ion-padding-start"><b>{{item.status}}</b></ion-chip>
+              <p class="ion-padding-start p">{{item.createdAt | date:'shortTime'}}</p>
             </ion-label>
           </ion-item>
         </ion-list>

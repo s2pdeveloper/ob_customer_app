@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild ,AfterViewChecked} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
@@ -19,7 +19,7 @@ import { Geolocation } from '@capacitor/geolocation';
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
+export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild(IonContent) content: IonContent;
 
   @ViewChild(IonInfiniteScroll, { static: false })
@@ -53,7 +53,7 @@ export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
     private uploadService: UploadService,
     private modalController: ModalController,
     private socket: Socket
-  ) {}
+  ) { }
 
   chatForm = new FormGroup({
     _id: new FormControl(),
@@ -63,7 +63,7 @@ export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
     image: new FormControl(''),
   });
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -226,4 +226,14 @@ export class ChatViewPage implements OnInit, OnDestroy,AfterViewChecked {
       this.sendMessage();
     }
   }
+
+  // accept() {
+  //   this.chatForm.controls.message.setValue('accept');
+  //   this.sendMessage();
+  // }
+  // reject() {
+  //   this.chatForm.controls.message.setValue('reject');
+  //   this.sendMessage();
+  // }
+
 }
