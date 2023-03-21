@@ -227,13 +227,13 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
-  // accept() {
-  //   this.chatForm.controls.message.setValue('accept');
-  //   this.sendMessage();
-  // }
-  // reject() {
-  //   this.chatForm.controls.message.setValue('reject');
-  //   this.sendMessage();
-  // }
+  accept() {
+    this.chatForm.controls.message.setValue('accept');
+    this.sendMessage();
+  }
+  reject() {
+    this.chatForm.controls.message.setValue('reject');
+    this.sendMessage();
+  }
 
 }
