@@ -66,8 +66,8 @@
             >
             <ion-label class="" slot="end">
               <ion-chip *ngIf="item.status" color="warning"
-                class="ion-padding-start"><b>{{item.status}}</b></ion-chip>
-              <p class="ion-padding-start p">{{item.createdAt | date:'shortTime'}}</p>
+                class="ion-padding-start ion-margin-start">{{item.status}}</ion-chip>
+              <p class="ion-padding-start ion-margin-start  font">{{item.createdAt | date:'shortTime'}}</p>
             </ion-label>
           </ion-item>
         </ion-list>
