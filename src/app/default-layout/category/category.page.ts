@@ -16,7 +16,7 @@ export class CategoryPage implements OnInit {
   search: string = '';
   categoryArr: any = [];
   subCategoryArr: any = [];
-  subCatArr: any = [];
+
 
   constructor(
     private router: Router,
@@ -58,11 +58,10 @@ export class CategoryPage implements OnInit {
               x.active = false;
             }
           }
-
           return x;
         });
       });
-  }
+ }
 
   getCategoryAllSubCategory(index) {
     this.categoryArr = this.categoryArr.map((x, i) => {
@@ -76,21 +75,23 @@ export class CategoryPage implements OnInit {
       }
       return x;
     });
-  }
+ }
 
-  navigateTo(path, subCategoryId) {
-    let params = {
-      businessTypeId: this.businessTypeId,
-      categoryId: this.categoryId,
-      subCategoryId: subCategoryId,
-    };
+  navigateTo(path, subCategory) {
+   let params = {
+      businessTypeId: subCategory.businessTypeId,
+      categoryId: subCategory.categoryId,
+      // subCategoryId: subCategoryId,
+      subCategoryId:subCategory. _id
+ };
     this.router.navigate([path], { queryParams: params });
   }
 
-
   onSearch() {
     this.categoryArr = [];
-    this.subCategoryArr= [];
+    // this.subCategoryArr = this.subCategoryArr.filter(x => x.name.includes(this.search))
+    console.log(" this.subCategoryArr", this.subCategoryArr);
     this.getAllCategoryWithSubCategory();
   }
+
 }

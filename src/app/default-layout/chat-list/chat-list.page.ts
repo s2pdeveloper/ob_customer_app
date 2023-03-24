@@ -41,27 +41,28 @@ export class ChatListPage implements OnInit {
     this.getAllShopListByOrderId(false);
   }
 
-  getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
-    this.spinner.showLoader();
+  async getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
+    // this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
     };
-    this.chatService.getChatShopByCustomerId(obj).subscribe((success) => {
-      this.shopConversationList = success.rows;
-      this.collection = success.count;
-      if (this.page == 1) {
-        this.shopConversationList = success.rows;
-      } else {
-        this.shopConversationList = [...this.shopConversationList, ...success.rows];
-      }
-      if (isFirstLoad) event?.target.complete();
-      if (this.shopConversationList.length >= this.collection && event) {
-        event.target.disabled = true;
-      }
-    });
+    this.chatService.getChatShopByCustomerId(obj).subscribe(
+      async (success) => {
+        this.collection = success.count;
+        if (this.page == 1) {
+          this.shopConversationList = success.rows;
+        } else {
+          this.shopConversationList = [...this.shopConversationList, ...success.rows];
+        }
+        if (isFirstLoad) event?.target.complete();
+        if (this.shopConversationList.length >= this.collection && event) {
+          event.target.disabled = true;
+        }
+        await this.spinner.hideLoader();
+      });
   }
 
   navigateTo(item) {
@@ -81,7 +82,7 @@ export class ChatListPage implements OnInit {
     this.page = 0;
     this.getAllShopListByOrderId(false, '');
   }
- 
+
   doRefresh(event: any) {
     this.shopConversationList = [];
     this.page = 0;

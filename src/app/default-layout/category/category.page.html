@@ -10,12 +10,11 @@
 <ion-content>
 
   <ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
-    showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()"
+    showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()" 
     placeholder="{{ 'Search' | translate}}">
   </ion-searchbar>
 
-
-  <ion-grid class="category-list">
+ <ion-grid class="category-list">
     <ion-row>
       <ion-col size="3" class="category-section">
         <div class="cat-container">
@@ -29,7 +28,7 @@
       <ion-col size="9" class="subcategory-section">
         <ion-row class="ion-margin">
           <ion-col size="4" *ngFor="let subCategory of subCategoryArr">
-            <ion-card class="ion-text-center" (click)="navigateTo('/app/tabs/search-shop',subCategory._id)">
+            <ion-card class="ion-text-center" (click)="navigateTo('/app/tabs/search-shop',subCategory)">
               <img alt="Category Image" class="cat-img" src="{{subCategory.subCatImageUrl}}" />
               <ion-card-subtitle class="cat-head">{{subCategory.name}}</ion-card-subtitle>
             </ion-card>

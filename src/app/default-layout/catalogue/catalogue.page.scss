@@ -6,11 +6,11 @@
     ion-grid {
 
         ion-card {
-          
+
             width: 100%;
             border: 1px solid #D0CED1;
             padding: auto !important;
-            box-shadow: rgb(0 0 0 / 35%) 0px -50px 36px -58px inset;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             border-radius: 8px;
 
             ion-thumbnail {
@@ -34,25 +34,6 @@
                 display: flex;
             }
 
-            // .title {
-            //     position: absolute;
-            //     left: 16px;
-            //     font-size: 8px !important;
-            //     margin-right: 20px !important;
-            //     font-weight: bolder;
-            //     color: #ff0000;
-            //     word-break: break-all;
-
-            // }
-
-            .discription {
-                position: absolute;
-                left: 16px;
-                font-size: 16px;
-                margin-top: 10px;
-                color: #623a48;
-                top: 17px;
-            }
 
             .amount {
                 position: absolute;
@@ -71,7 +52,6 @@
         ion-icon {
             margin-right: 2px;
         }
-
     }
 
     .checkbox {
@@ -89,7 +69,6 @@
 }
 
 ion-slide {
-
     .sub-heading {
         text-align: center !important;
         font-weight: bolder;
@@ -101,12 +80,10 @@ ion-slide {
         border-radius: 50% !important;
         height: 70px !important;
         background: #ffff;
-
     }
-    
-
 }
 
-
-
-
+.noData {
+    text-align: center !important;
+    margin-top: 5rem !important;
+}

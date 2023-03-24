@@ -22,7 +22,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-grid>
+  <ion-grid *ngIf="shopFavorites?.length > 0;else noDataFound">
     <ion-row *ngFor="let s of shopFavorites">
       <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
@@ -31,10 +31,7 @@
           'object-fit':'cover',
           'background-size':'100% 100%'
          }" (click)="navigateTo('/shop-detail',s?.shopId._id)">
-          <!-- <div class="ion-text-end ion-margin-end ion-margin-top">
-            <ion-icon   (click)="addToFavorite(s)" name="heart" fill="" size="large" slot="end" color="primary">
-            </ion-icon>
-          </div> -->
+    
           <ion-badge color="success" class="rating ion-text-end">
             5
             <ion-icon name="star"></ion-icon>
@@ -58,6 +55,13 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ng-template #noDataFound>
+    <div class="noData">
+      <ion-label>No Data Found</ion-label>
+    </div>
+  </ng-template>
+
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">

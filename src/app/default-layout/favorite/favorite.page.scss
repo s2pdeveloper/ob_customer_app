@@ -39,7 +39,7 @@ ion-content {
     margin-top: 0px;
     object-fit: cover !important;
 
- ion-label {
+    ion-label {
       background-color: transparent;
       margin-top: 1rem !important;
     }
@@ -64,6 +64,7 @@ ion-content {
   .address-padding {
     margin-bottom: 10px !important;
   }
+
   .shop-name {
     font-weight: bold;
     display: block;
@@ -71,18 +72,16 @@ ion-content {
     padding-right: 1rem;
     word-wrap: break-word;
   }
-  .heart-img{
+
+  .heart-img {
     position: absolute;
     top: 5px;
     z-index: 1;
     right: 7px;
-  //   background: white;
-  // width: 30px;
-  // height: 33px;
-  // border-radius: 50%;
-  // line-height: 50px;
-  // text-align: center;
-  // color: #FFF;
   }
 }
 
+.noData {
+  text-align: center !important;
+  margin-top: 5rem !important;
+}

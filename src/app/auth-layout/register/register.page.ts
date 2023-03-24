@@ -45,14 +45,13 @@ export class RegisterPage implements OnInit {
     return this.registerForm.controls;
   }
 
-  register() {
-    console.log(this.registerForm.value);
+  async register() {
     this.submitted = true;
     if (this.registerForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
     }
-    this.spinner.showLoader();
+    // this.spinner.showLoader();
     let newObj: any = Object.assign(
       {
         deviceId: this.storageService.get('OBUserDeviceId'),
@@ -63,8 +62,8 @@ export class RegisterPage implements OnInit {
     this.storageService.set('mobile', formData.mobile);
     formData.role = 'CUSTOMER';
     formData.deviceInfo = newObj;
-    this.authService.createUser(formData).subscribe((success: any) => {
-      this.spinner.hideLoader();
+    this.authService.createUser(formData).subscribe(async (success: any) => {
+      await this.spinner.hideLoader();
       this.registerForm.reset();
       this.submitted = false;
       this.toaster.successToast('Register done successfully.');
@@ -80,7 +79,6 @@ export class RegisterPage implements OnInit {
   async open() {
     await Browser.open({ url: '' });
   }
-
 
   onClickEye() {
     if (this.passwordType === 'password') {

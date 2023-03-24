@@ -16,7 +16,8 @@ export class SearchShopPage implements OnInit {
   pageSize: number = 10;
   collection: number = 0;
   search: string = '';
-  businessTypeId: string = '';
+  // businessTypeId: string = '';
+  businessTypeId: any;
   categoryId: string = '';
   subCategoryId: string = '';
   shopArr: any = [];
@@ -29,6 +30,7 @@ export class SearchShopPage implements OnInit {
     public translate: TranslateService,
     public modelController: ModalController,
     private shopService: ShopService,
+    private spinner: LoaderService,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private localStorage: StorageService
@@ -48,7 +50,7 @@ export class SearchShopPage implements OnInit {
     });
   }
 
-  getAllShop(isFirstLoad: boolean, event?: any) {
+  async getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
@@ -57,7 +59,7 @@ export class SearchShopPage implements OnInit {
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
     };
-    this.shopService.getAllShop(obj).subscribe((success) => {
+    this.shopService.getAllShop(obj).subscribe(async (success) => {
       this.collection = success.count;
       if (this.page == 1) {
         this.shopArr = success.rows;
@@ -68,6 +70,7 @@ export class SearchShopPage implements OnInit {
       if (this.shopArr.length >= this.collection && event) {
         event.target.disabled = true;
       }
+      await this.spinner.hideLoader();
     });
   }
 

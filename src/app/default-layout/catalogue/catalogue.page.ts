@@ -54,18 +54,13 @@ export class CataloguePage implements OnInit {
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log("params", params);
       this.shopId = params._id
       this.getShopById(params._id);
     });
   }
 
-
-  getShopById(_id) {
-    console.log("_id...........", _id);
-    this.shopService.getByIdShop(_id).subscribe((success: any) => {
-      console.log("success",success);
-      
+  async getShopById(_id) {
+    this.shopService.getByIdShop(_id).subscribe(async (success: any) => {
       this.subCategoryArr = success.data.map((y, i) => {
         y.isActive = false;
         if (i == 0) {
@@ -74,20 +69,18 @@ export class CataloguePage implements OnInit {
         }
         return y;
       });
+      await this.spinner.hideLoader();
     });
   }
 
-  getCatalogueBySubCategoryId(_id, index) {
-    console.log("_id622222", _id);
+  async getCatalogueBySubCategoryId(_id, index) {
     let obj = {
       shopId: this.shopId,
-      subCategoryId:_id
+      subCategoryId: _id
     }
-    this.spinner.showLoader();
-    this.loaded = false;
     this.shopService
       .getCatalogueBySubCategoryId(obj)
-      .subscribe((success: any) => {
+      .subscribe(async (success: any) => {
         this.catalogueArr = success.rows.map((x) => {
           x.isChecked = false;
           return x;
@@ -100,12 +93,9 @@ export class CataloguePage implements OnInit {
             x.isActive = false;
           }
         });
-        this.spinner.hideLoader();
-        this.loaded = true;
+        await this.spinner.hideLoader();
       });
   }
-
-
 
   navigateTo() {
     let msg = '';

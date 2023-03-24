@@ -54,13 +54,13 @@ export class ShopDetailPage implements OnInit {
     });
   }
 
-  getShopById() {
-    this.spinner.showLoader();
-    this.loaded = false;
-    this.shopService.getByIdShop(this.shopId).subscribe((success: any) => {
+ async getShopById() {
+    // this.spinner.showLoader();
+    // this.loaded = false;
+    this.shopService.getByIdShop(this.shopId).subscribe(async(success: any) => {
       this.shopDetails = success.rows;
-      this.spinner.hideLoader();
-      this.loaded = true;
+     await this.spinner.hideLoader();
+      // this.loaded = true;
     });
   }
 
