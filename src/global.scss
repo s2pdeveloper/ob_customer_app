@@ -51,11 +51,19 @@ ion-margin-bottom {
 
 .swiper-pagination-bullet {
     background: red;
-  }
+}
 
-  body.scanner-active {
-    --background: transparent;
-    --ion-background-color: transparent;
-  }
+body.scanner-active {
+    background: transparent !important;
+    --ion-background-color: transparent !important;
+    color: var(--ion-color-primary) !important;
 
 
+    ion-tab-bar {
+        --background: var(--ion-color-6);
+        --color: var(--ion-color-5);
+        --border: none;
+        background: white;
+        // padding-top: 17rem !important;
+    }
+}
