@@ -51,7 +51,6 @@ export class ChatListPage implements OnInit {
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe(
       async (success) => {
-        this.shopConversationList = success.rows;
         this.collection = success.count;
         if (this.page == 1) {
           this.shopConversationList = success.rows;

@@ -40,14 +40,10 @@ export class SearchShopPage implements OnInit {
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log("params...........",params);
-      
       if (params.search) {
         this.search = params.search;
       }
       this.businessTypeId = params.businessTypeId ?? '';
-      console.log("this.businessTypeId---------",this.businessTypeId);
-      
       this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params.subCategoryId ?? '';
       this.getAllShop(false);
@@ -63,8 +59,6 @@ export class SearchShopPage implements OnInit {
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
     };
-    console.log("obj......",obj.businessTypeId);
-    
     this.shopService.getAllShop(obj).subscribe(async (success) => {
       this.collection = success.count;
       if (this.page == 1) {

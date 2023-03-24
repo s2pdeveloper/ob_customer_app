@@ -61,7 +61,7 @@ export class CategoryPage implements OnInit {
           return x;
         });
       });
-  }
+ }
 
   getCategoryAllSubCategory(index) {
     this.categoryArr = this.categoryArr.map((x, i) => {
@@ -75,14 +75,15 @@ export class CategoryPage implements OnInit {
       }
       return x;
     });
-  }
+ }
 
-  navigateTo(path, subCategoryId) {
-    let params = {
-      businessTypeId: this.businessTypeId,
-      categoryId: this.categoryId,
-      subCategoryId: subCategoryId,
-    };
+  navigateTo(path, subCategory) {
+   let params = {
+      businessTypeId: subCategory.businessTypeId,
+      categoryId: subCategory.categoryId,
+      // subCategoryId: subCategoryId,
+      subCategoryId:subCategory. _id
+ };
     this.router.navigate([path], { queryParams: params });
   }
 

@@ -97,15 +97,15 @@ export class AppComponent implements OnInit {
       // system requested the user for permission during this call
       // only possible when force set to true
     }
-    if (status.neverAsked) {
-      // user has not been requested this permission before
-      // it is advised to show the user some sort of prompt
-      // this way you will not waste your only chance to ask for the permission
-      const c = confirm('We need your permission to use your camera to be able to scan barcodes');
-      if (!c) {
-        return false;
-      }
-    }
+    // if (status.neverAsked) {
+    //   // user has not been requested this permission before
+    //   // it is advised to show the user some sort of prompt
+    //   // this way you will not waste your only chance to ask for the permission
+    //   const c = confirm('We need your permission to use your camera to be able to scan barcodes');
+    //   if (!c) {
+    //     return false;
+    //   }
+    // }
     if (status.restricted || status.unknown) {
       // ios only
       // probably means the permission has been denied
