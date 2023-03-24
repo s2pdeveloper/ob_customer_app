@@ -44,18 +44,18 @@ export class LoginPage implements OnInit {
     return this.loginForm.controls;
   }
 
-  login() {
+  async login() {
     if (this.loginForm.invalid) {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
     }
-    this.spinner.showLoader();
-    this.authService.login(this.loginForm.value).subscribe((success) => {
+    // this.spinner.showLoader();
+    this.authService.login(this.loginForm.value).subscribe(async (success) => {
       this.toaster.successToast('Logged in successfully');
       this.localStorage.set('OBCustomer', success);
       this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
       this.saveDeviceToken(success._id);
-      this.spinner.hideLoader();
+      await this.spinner.hideLoader();
     }, (error) => {
       this.toaster.errorToast("The mobile number or password entered are incorrect");
     });

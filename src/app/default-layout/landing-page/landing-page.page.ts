@@ -141,7 +141,6 @@ export class LandingPagePage implements OnInit {
   }
 
   doRefresh(event: any) {
-    this.advertiseArr = [];
     this.getAllDataParallel();
     event.target.complete();
   }

@@ -83,7 +83,7 @@ export class EditProfilePage implements OnInit {
 
 
   async getData() {
-    await this.spinner.hideLoader();
+    // await this.spinner.hideLoader();
     this.authService.profile(this.user._id).subscribe(async success => {
       this.profileForm.patchValue(success);
       if (success.image) {

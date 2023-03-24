@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService, ToastService } from 'src/app/core/services';
@@ -37,35 +37,29 @@ export class FavoritePage implements OnInit {
     public modelController: ModalController,
     private shopService: ShopService,
     private favoriteService: FavoriteService,
-    private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private localStorage: StorageService,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.getFavoriteByCustomerId(false)
   }
 
-
-  getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
+ async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
     this.user = this.localStorage.get('OBCustomer');
-    this.spinner.showLoader();
+    // this.spinner.showLoader();
     let obj = {
       search: this.search,
     };
-    this.loaded = false;
-    this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe((success: any) => {
+    this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe(async success => {
       this.shopFavorites = success.rows;
-      this.spinner.hideLoader();
-      this.loaded = true;
+      await this.spinner.hideLoader();
     });
   }
 
-
-  navigateTo(path, _id) {
+ navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 

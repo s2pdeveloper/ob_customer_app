@@ -16,7 +16,7 @@ export class CategoryPage implements OnInit {
   search: string = '';
   categoryArr: any = [];
   subCategoryArr: any = [];
-  subCatArr: any = [];
+
 
   constructor(
     private router: Router,
@@ -58,7 +58,6 @@ export class CategoryPage implements OnInit {
               x.active = false;
             }
           }
-
           return x;
         });
       });
@@ -87,10 +86,11 @@ export class CategoryPage implements OnInit {
     this.router.navigate([path], { queryParams: params });
   }
 
-
   onSearch() {
     this.categoryArr = [];
-    this.subCategoryArr= [];
+    // this.subCategoryArr = this.subCategoryArr.filter(x => x.name.includes(this.search))
+    console.log(" this.subCategoryArr", this.subCategoryArr);
     this.getAllCategoryWithSubCategory();
   }
+
 }

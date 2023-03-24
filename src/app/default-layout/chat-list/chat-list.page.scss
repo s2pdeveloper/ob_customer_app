@@ -5,7 +5,8 @@
 }
 
 p {
-  font-size: 0.7rem !important;
+  font-size: 0.6rem !important;
+  margin-left: 2rem;
 }
 
 ion-chip {
@@ -13,4 +14,10 @@ ion-chip {
   border-radius: 4px;
   font-size: small;
   height: auto;
+  margin-left: 1.9rem;
+}
+
+.noData {
+  text-align: center !important;
+  margin-top: 5rem !important;
 }

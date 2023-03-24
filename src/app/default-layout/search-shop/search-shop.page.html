@@ -22,7 +22,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-grid>
+  <ion-grid *ngIf="shopArr?.length > 0;else noDataFound">
     <ion-row *ngFor="let s of shopArr">
       <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
@@ -57,6 +57,12 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ng-template #noDataFound>
+    <div class="noData">
+      <ion-label>No Data Found</ion-label>
+    </div>
+  </ng-template>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">

@@ -8,7 +8,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/service/upload/upload.service';
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { LocationComponent } from 'src/app/modal/location/location.component';
 import { App } from '@capacitor/app';
@@ -95,7 +95,6 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnDestroy(): void {
-    console.log('destroy');
     this.socket.disconnect();
   }
 
@@ -120,13 +119,13 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     );
   }
 
-  getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.spinner.showLoader();
+  async getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
+    // this.spinner.showLoader();
     this.chatService
       .getMsgByCustomerId(this.roomName)
-      .subscribe((success: any) => {
+      .subscribe(async success => {
         this.msgArr = success.rows;
-        this.spinner.hideLoader();
+        await this.spinner.hideLoader();
       });
   }
 
@@ -158,8 +157,8 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     event.target.complete();
   }
 
-  downloadImage(message) {
-    this.spinner.showLoader();
+async  downloadImage(message) {
+    // this.spinner.showLoader();
     this.uploadService
       .downloadImage(message.image)
       .subscribe(async (success: any) => {
@@ -171,21 +170,11 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
           data: success.result.src as string,
           directory: Directory.Documents,
         });
-        this.spinner.hideLoader();
+       await this.spinner.hideLoader();
       });
   }
 
-  // async openUrl(url) {
-  //   console.log(url.includes('http'), 'url', url);
-  //   if (!url.includes('http')) {
-  //     return;
-  //   }
-  //   let ret = await App.openUrl({
-  //     url: url,
-  //   });
-  // }
-
-  async openUrl(url) {
+ async openUrl(url) {
     if (!url.includes('http')) {
       return;
     }

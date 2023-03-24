@@ -14,7 +14,7 @@
 
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll"
-      [scrollTop]="scrollMe?.scrollHeight">
+      >
       <div class="message-wrap">
         <div *ngFor="let message of msgArr" class="message" [class.right]="message.createdBy === user._id">
           <div class="msg-detail">

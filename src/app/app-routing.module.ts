@@ -31,14 +31,6 @@ const routes: Routes = [
         (m) => m.ForgetPwdPageModule
       ),
   },
-
-  {
-    path: 'profile-page',
-    loadChildren: () =>
-      import('./default-layout/profile-page/profile-page.module').then(
-        (m) => m.ProfilePagePageModule
-      ),
-  },
   {
     path: 'view-profile',
     // canLoad: [AuthGuard],
@@ -107,13 +99,7 @@ const routes: Routes = [
         './default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
   },
-  // {
-  //   path: 'category',
-  //   loadChildren: () =>
-  //     import('./default-layout/category/category.module').then(
-  //       (m) => m.CategoryPageModule
-  //     ),
-  // },
+ 
   {
     path: 'setting',
     loadChildren: () =>
