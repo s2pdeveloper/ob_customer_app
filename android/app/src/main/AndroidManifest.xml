@@ -15,18 +15,12 @@
             android:name="com.ob.customer.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBarLaunch"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="@string/custom_url_scheme" />
             </intent-filter>
 
         </activity>
@@ -45,7 +39,7 @@
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Camera, Photos, input file -->
+      <!-- Camera, Photos, input file -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Geolocation API -->

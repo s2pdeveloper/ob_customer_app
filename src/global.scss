@@ -53,4 +53,9 @@ ion-margin-bottom {
     background: red;
   }
 
+  body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+  }
+
 

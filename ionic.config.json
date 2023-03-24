@@ -1,7 +1,8 @@
 {
   "name": "pratik",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -10,7 +10,7 @@ import { ToastService } from './core/services/toast.service';
 import { AppBackButtonService } from './service/app-service/app-back-button.service';
 import { AppUpdateService } from './service/app-service/app-update.service';
 import { PushNotificationService } from './service/app-service/push-notification.service';
-
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -37,12 +37,14 @@ export class AppComponent implements OnInit {
     this.initializeApp();
   }
   async ngOnInit() {
+    this.checkPermission();
+    this.didUserGrantPermission();
+    this.checkDeniedPermission();
     this.currentUser = this.storageService.get('OBCustomer');
     if (this.currentUser) {
       this.router.navigate(['/app/tabs/landing-page']);
     }
   }
-
   initializeApp() {
     this.platform.ready().then(() => {
       document.body.setAttribute('color-theme', 'light');
@@ -69,6 +71,72 @@ export class AppComponent implements OnInit {
       }
     });
   }
+  checkPermission = async () => {
+    // check or request permission
+    const status = await BarcodeScanner.checkPermission({ force: true });
+
+    if (status.granted) {
+      // the user granted permission
+      return true;
+    }
+
+    return false;
+  };
+  didUserGrantPermission = async () => {
+    // check if user already granted permission
+    const status = await BarcodeScanner.checkPermission({ force: false });
+    if (status.granted) {
+      // user granted permission
+      return true;
+    }
+    if (status.denied) {
+      // user denied permission
+      return false;
+    }
+    if (status.asked) {
+      // system requested the user for permission during this call
+      // only possible when force set to true
+    }
+    if (status.neverAsked) {
+      // user has not been requested this permission before
+      // it is advised to show the user some sort of prompt
+      // this way you will not waste your only chance to ask for the permission
+      const c = confirm('We need your permission to use your camera to be able to scan barcodes');
+      if (!c) {
+        return false;
+      }
+    }
+    if (status.restricted || status.unknown) {
+      // ios only
+      // probably means the permission has been denied
+      return false;
+    }
+    // user has not denied permission
+    // but the user also has not yet granted the permission
+    // so request it
+    const statusRequest = await BarcodeScanner.checkPermission({ force: true });
+    if (statusRequest.asked) {
+      // system requested the user for permission during this call
+      // only possible when force set to true
+    }
+    if (statusRequest.granted) {
+      // the user did grant the permission now
+      return true;
+    }
+    // user did not grant the permission, so he must have declined the request
+    return false;
+  };
+  checkDeniedPermission = async () => {
+    const status = await BarcodeScanner.checkPermission();
+    if (status.denied) {
+      // the user denied permission for good
+      // redirect user to app settings if they want to grant it anyway
+      const c = confirm('If you want to grant permission for using your camera, enable it in the app settings.');
+      if (c) {
+        BarcodeScanner.openAppSettings();
+      }
+    }
+  };
 
   settingStyleAndSplashScreen = async () => {
     await StatusBar.setStyle({ style: Style.Dark });
