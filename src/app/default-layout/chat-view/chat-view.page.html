@@ -62,30 +62,6 @@
     </div>
   </div>
 
-  <!-- <ion-card class="card-status">
-    <ion-card-content>
-      <ion-segment>
-        <ion-segment-button [id]="'new'" value="new" layout="icon-end">
-          <ion-label class="ion-text-wrap">{{ 'CHAT' | translate}}</ion-label>
-          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        </ion-segment-button>
-        <ion-segment-button [id]="'active'" value="active" layout="icon-end">
-          <ion-label class="ion-text-wrap">{{ 'ADD MSG' | translate}}</ion-label>
-          <ion-icon name="create-outline"></ion-icon>
-        </ion-segment-button>
-        <hr color="secondary">
-      </ion-segment>
-      <ion-list class="ion-margin-top">
-        <ion-chip  (click)="accept()">Accept</ion-chip>
-        <ion-chip (click)="reject()">Reject</ion-chip>
-        <ion-chip>Cancelled</ion-chip>
-        <ion-chip>Confirmed</ion-chip>
-        <ion-chip>Paid</ion-chip>
-        <ion-chip>ReOrder</ion-chip>
-      </ion-list>
-    </ion-card-content>
-
-  </ion-card> -->
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
@@ -97,7 +73,7 @@
         <ion-icon name="checkmark-done-circle-sharp" color="primary" (click)="confirmOrder()"></ion-icon>
       </ion-fab-button>
       <ion-fab-button>
-        <ion-icon name="star" color="primary"></ion-icon>
+        <ion-icon name="star" color="primary" (click)="modalRating()"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>

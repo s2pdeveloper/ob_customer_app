@@ -32,6 +32,7 @@
 
 @import "./theme/index.scss";
 @import "./theme/custom.scss";
+@import "node_modules/ngx-bar-rating/themes/br-stars-theme";
 
 * {
     --ion-font-family: 'Open Sans', sans-serif !important;

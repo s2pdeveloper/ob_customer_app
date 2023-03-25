@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-capitalize">Give Rating</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal(true)">{{"close" | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="formData">
+    <ion-item class="item-no-height" lines="none">
+      <ion-label position="fixed">{{ 'Quality' | translate}}</ion-label>
+      <bar-rating formControlName="quality" [max]="5" [theme]="'stars'" slot="end"></bar-rating>
+    </ion-item>
+
+    <div class="clearfix ion-padding-top">
+      <ion-button (click)="onSubmit()" [disabled]="formData.invalid" expand="block" class="btn-color-2" type="submit">
+        {{ 'submit' | translate}}
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

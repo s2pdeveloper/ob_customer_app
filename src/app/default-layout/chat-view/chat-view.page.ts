@@ -13,6 +13,7 @@ import { ModalController } from '@ionic/angular';
 import { LocationComponent } from 'src/app/modal/location/location.component';
 import { App } from '@capacitor/app';
 import { Geolocation } from '@capacitor/geolocation';
+import { OrderRatingComponent } from 'src/app/modal/order-rating/order-rating.component';
 
 @Component({
   selector: 'app-chat-view',
@@ -41,6 +42,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   fileUploaded: boolean = false;
   filePath: string = '';
   data: any = {};
+  orderId: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,7 +53,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     private spinner: LoaderService,
     private localStorage: StorageService,
     private uploadService: UploadService,
-    private modalController: ModalController,
+    private modalCtrl: ModalController,
     private socket: Socket
   ) { }
 
@@ -79,7 +81,10 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
         this.shopId = params.shopId;
       }
       if (params.shopName) this.shopName = params.shopName;
+
+      // roomName means orderId
       if (params.roomName) this.roomName = params.roomName;
+      this.orderId = params.roomName;
       this.getMsgByCustomerId(false);
     });
 
@@ -120,7 +125,6 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   async getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
-    // this.spinner.showLoader();
     this.chatService
       .getMsgByCustomerId(this.roomName)
       .subscribe(async success => {
@@ -149,16 +153,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     );
   }
 
-  doInfinite(event) {
-    this.page++;
-    this.getMsgByCustomerId(true, event);
-    event.target.disabled = true;
-    this.infiniteScroll.disabled = true;
-    event.target.complete();
-  }
-
-async  downloadImage(message) {
-    // this.spinner.showLoader();
+  async downloadImage(message) {
     this.uploadService
       .downloadImage(message.image)
       .subscribe(async (success: any) => {
@@ -170,11 +165,11 @@ async  downloadImage(message) {
           data: success.result.src as string,
           directory: Directory.Documents,
         });
-       await this.spinner.hideLoader();
+        await this.spinner.hideLoader();
       });
   }
 
- async openUrl(url) {
+  async openUrl(url) {
     if (!url.includes('http')) {
       return;
     }
@@ -185,6 +180,12 @@ async  downloadImage(message) {
   doRefresh(event: any) {
     this.msgArr = [];
     this.getMsgByCustomerId(false, '');
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    this.page++;
+    this.getMsgByCustomerId(true, event);
     event.target.complete();
   }
 
@@ -202,11 +203,9 @@ async  downloadImage(message) {
   }
 
   async navigateToLocation() {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: LocationComponent,
-      componentProps: {
-        // galleryImage: data
-      },
+      componentProps: {},
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
@@ -216,13 +215,29 @@ async  downloadImage(message) {
     }
   }
 
-  accept() {
-    this.chatForm.controls.message.setValue('accept');
-    this.sendMessage();
-  }
-  reject() {
-    this.chatForm.controls.message.setValue('reject');
-    this.sendMessage();
+  async modalRating() {
+    const modal = await this.modalCtrl.create({
+      component: OrderRatingComponent,
+      cssClass: 'modal-medium',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {
+        ratingObj: {
+          shopId: this.shopId,
+          orderId: this.orderId
+        }
+      }
+    });
+    console.log("shopId.........", this.shopId);
+    console.log("orderId.........", this.orderId);
+
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    console.log("data", data);
+
+    if (data && data.dismissed) {
+      // this.getMsgByCustomerId(false);
+    }
   }
 
 }
