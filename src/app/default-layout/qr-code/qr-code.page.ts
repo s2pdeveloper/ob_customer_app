@@ -24,6 +24,10 @@ export class QrCodePage implements OnInit {
     // this.scan();
     this.startScan();
   }
+  ionViewWillLeave(){
+    this.destroy();
+    this.stopScan();
+  }
   // scan() {
   //   console.log("call scan");
   //   this.data = null;
@@ -63,17 +67,17 @@ export class QrCodePage implements OnInit {
   prepare = () => {
     BarcodeScanner.prepare();
   };
-
+ 
   startScan = async () => {
+    // this.prepare()
     await BarcodeScanner.checkPermission({ force: true });
-    BarcodeScanner.hideBackground();
-    const result = await BarcodeScanner.startScan({
-       targetedFormats: [SupportedFormat.QR_CODE] ,
-       cameraDirection:CameraDirection.BACK,
-      });
-    console.log('scan result data ', result.content);
+    BarcodeScanner.hideBackground(); 
+    document.querySelector('body').classList.add('scanner-active');
+    BarcodeScanner.toggleTorch();
+    BarcodeScanner.getTorchState();
+    const result = await BarcodeScanner.startScan();
+    console.log('scan result data ', result);
     let _id = result.content;
-    console.log(" _id.....................", _id);
     if (_id.includes('=')) {
       this.shopService
         .getByIdShopUPI({ UPI: _id })
@@ -95,14 +99,17 @@ export class QrCodePage implements OnInit {
     BarcodeScanner.stopScan();
   };
 
-   askUser = () => {
-   this.prepare();
-    const c = confirm('Do you want to scan a QR-CODE?');
+  //  askUser = () => {
+  //  this.prepare();
+  //   const c = confirm('Do you want to scan a QR-CODE?');
   
-    if (c) {
-      this.startScan();
-    } else {
-      this.stopScan();
-    }
-  };
+  //   if (c) {
+  //     this.startScan();
+  //   } else {
+  //     this.stopScan();
+  //   }
+  // };
+  destroy(){
+    document.querySelector('body').classList.remove('scanner-active');
+  }
 }

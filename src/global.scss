@@ -52,22 +52,19 @@ ion-margin-bottom {
 
 .swiper-pagination-bullet {
     background: red;
-  }
+}
 
-  body.scanner-active {
-    --background: transparent;
-    --ion-background-color: transparent;
-  }
+body.scanner-active {
+    background: transparent !important;
+    --ion-background-color: transparent !important;
+    color: var(--ion-color-primary) !important;
 
-  // .modal-medium {
-  //   .modal-wrapper {
-  //     position: absolute;
-  //     width: 100vw;
-  //     --max-height: 70vh;
-  //     bottom: 0;
-  //     left: 0;
-  //     right: 0;
-  //     border-top-left-radius: 5%;
-  //     border-top-right-radius: 5%;
-  //   }
-  // }
+
+    ion-tab-bar {
+        --background: var(--ion-color-6);
+        --color: var(--ion-color-5);
+        --border: none;
+        background: white;
+        // padding-top: 17rem !important;
+    }
+}
