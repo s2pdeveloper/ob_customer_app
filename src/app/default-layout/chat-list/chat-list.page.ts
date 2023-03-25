@@ -42,7 +42,6 @@ export class ChatListPage implements OnInit {
   }
 
   async getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
-    // this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,

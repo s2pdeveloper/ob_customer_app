@@ -14,15 +14,16 @@ import { ViewGalleryImagesComponent } from './view-gallery-images/view-gallery-i
 import { AnimateItemsDirective } from '../directives/animate-items.directive';
 import { ParallaxHeader } from '../directives/parallax-header';
 import { LocationComponent } from '../modal/location/location.component';
-// import { ParallaxHeaderDirective } from '../directives/parallax-header.directive';
-
+import { OrderRatingComponent } from '../modal/order-rating/order-rating.component';
+import { BarRatingModule } from 'ngx-bar-rating';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 const PIPES = [TruncatePipe, CapitalizePipe, DateAgoPipe];
 const COMPONENTS = [
-  // ParallaxHeaderDirective,
+  OrderRatingComponent,
   ParallaxHeader,
   AnimateItemsDirective,
   GalleryListComponent,
@@ -36,6 +37,9 @@ const COMPONENTS = [
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BarRatingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

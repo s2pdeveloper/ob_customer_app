@@ -32,6 +32,7 @@
 
 @import "./theme/index.scss";
 @import "./theme/custom.scss";
+@import "node_modules/ngx-bar-rating/themes/br-stars-theme";
 
 * {
     --ion-font-family: 'Open Sans', sans-serif !important;
@@ -58,4 +59,15 @@ ion-margin-bottom {
     --ion-background-color: transparent;
   }
 
-
+  // .modal-medium {
+  //   .modal-wrapper {
+  //     position: absolute;
+  //     width: 100vw;
+  //     --max-height: 70vh;
+  //     bottom: 0;
+  //     left: 0;
+  //     right: 0;
+  //     border-top-left-radius: 5%;
+  //     border-top-right-radius: 5%;
+  //   }
+  // }
