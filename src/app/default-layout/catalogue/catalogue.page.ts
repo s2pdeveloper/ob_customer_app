@@ -130,6 +130,8 @@ export class CataloguePage implements OnInit {
     };
     this.chatService.create(message).subscribe((success) => {
       this.spinner.hideLoader();
+      console.log("join success",success);
+      
       // join
       this.socket.emit('join', { room: success.orderId, user: this.user._id });
       this.router.navigate(['/chat-view'], {

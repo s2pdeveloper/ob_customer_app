@@ -8,7 +8,6 @@ import { StorageService } from './core/services';
 import { LanguageService } from './core/services/language.service';
 import { ToastService } from './core/services/toast.service';
 import { AppBackButtonService } from './service/app-service/app-back-button.service';
-import { AppUpdateService } from './service/app-service/app-update.service';
 import { PushNotificationService } from './service/app-service/push-notification.service';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 @Component({
@@ -28,7 +27,6 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private toastService: ToastService,
     public loadingController: LoadingController,
-    private appUpdate: AppUpdateService,
     private appBackButton: AppBackButtonService,
     private pushNotificationService: PushNotificationService,
     public translate: TranslateService

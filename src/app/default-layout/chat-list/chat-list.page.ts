@@ -32,9 +32,9 @@ export class ChatListPage implements OnInit {
     private localStorage: StorageService,
     private socket: Socket,
     public translate: TranslateService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
@@ -48,24 +48,28 @@ export class ChatListPage implements OnInit {
       search: this.search,
       status: this.segment,
     };
-    this.chatService.getChatShopByCustomerId(obj).subscribe(
-      async (success) => {
-        this.collection = success.count;
-        if (this.page == 1) {
-          this.shopConversationList = success.rows;
-        } else {
-          this.shopConversationList = [...this.shopConversationList, ...success.rows];
-        }
-        if (isFirstLoad) event?.target.complete();
-        if (this.shopConversationList.length >= this.collection && event) {
-          event.target.disabled = true;
-        }
-        await this.spinner.hideLoader();
-      });
+    this.chatService.getChatShopByCustomerId(obj).subscribe(async (success) => {
+      this.collection = success.count;
+      if (this.page == 1) {
+        this.shopConversationList = success.rows;
+      } else {
+        this.shopConversationList = [
+          ...this.shopConversationList,
+          ...success.rows,
+        ];
+      }
+      if (isFirstLoad) event?.target.complete();
+      if (this.shopConversationList.length >= this.collection && event) {
+        event.target.disabled = true;
+      }
+      await this.spinner.hideLoader();
+    });
   }
 
   navigateTo(item) {
     // join
+    console.log('join : ', item);
+
     this.socket.emit('join', { room: item._id, user: this.user._id });
     this.router.navigate(['/chat-view'], {
       queryParams: {
@@ -94,5 +98,4 @@ export class ChatListPage implements OnInit {
     this.getAllShopListByOrderId(true, event);
     event.target.complete();
   }
-
 }

@@ -34,7 +34,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     CoreModule,
     HttpClientModule,
     SocketIoModule.forRoot(config),
-
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
