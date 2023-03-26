@@ -67,7 +67,7 @@ export class ChatListPage implements OnInit {
   }
 
   navigateTo(item) {
-    // join
+   // join
     console.log('join : ', item);
 
     this.socket.emit('join', { room: item._id, user: this.user._id });
@@ -76,6 +76,7 @@ export class ChatListPage implements OnInit {
         shopId: item.shopId._id,
         shopName: item.shopId?.shopName,
         roomName: item._id,
+        status:item.status
       },
     });
   }

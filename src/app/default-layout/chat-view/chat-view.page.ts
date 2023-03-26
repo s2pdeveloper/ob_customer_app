@@ -44,6 +44,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   data: any = {};
   orderId: any;
   chatData: any = {};
+  status: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -78,11 +79,9 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
-      if (params.shopId) {
-        this.shopId = params.shopId;
-      }
-      if (params.shopName) this.shopName = params.shopName;
-
+      this.status = params.status;
+      this.shopId = params.shopId;
+      this.shopName = params.shopName;
       // roomName means orderId
       if (params.roomName) this.roomName = params.roomName;
       this.orderId = params.roomName;
@@ -94,7 +93,6 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
       'latest',
       function (data: any) {
         console.log(data);
-        console.log('latest-data called in shopApp@@@@');
         this.getMsgByCustomerId(false);
       }.bind(this)
     );
@@ -130,9 +128,6 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
       .getMsgByCustomerId(this.roomName)
       .subscribe(async success => {
         this.msgArr = success.rows;
-        this.chatData = success.rows;
-        console.log(" this.chatData ", this.chatData);
-
         await this.spinner.hideLoader();
       });
   }

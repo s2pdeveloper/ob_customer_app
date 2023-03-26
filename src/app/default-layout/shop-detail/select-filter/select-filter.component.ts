@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 @Component({
   selector: 'app-select-filter',
   templateUrl: './select-filter.component.html',
@@ -13,7 +13,7 @@ export class SelectFilterComponent implements OnInit {
     startDate: new FormControl('', [Validators.required]),
   });
   // errorMessages = promotionErrors;
-  maxDate = moment().format();
+  // maxDate = moment().format();
   constructor(private modalController: ModalController, public translate: TranslateService) { }
 
   ngOnInit() {}
@@ -26,7 +26,7 @@ export class SelectFilterComponent implements OnInit {
     this.modalController.dismiss({
       'dismissed': isClose,
       filterForm: {
-        startDate: moment(this.filterForm.value.startDate).format('YYYY-MM-DD'),
+        // startDate: moment(this.filterForm.value.startDate).format('YYYY-MM-DD'),
       }
     });
   }
