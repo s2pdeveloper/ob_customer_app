@@ -1,13 +1,8 @@
 <ion-header>
-  <ion-toolbar class="bg-color-2">
-    <ion-title class="text-color-4 ion-text-capitalize"
-      >Send Location</ion-title
-    >
-    <ion-buttons slot="end">
-      <ion-button  (click)="dismissModal(true)">{{
-        "close" | translate
-      }}</ion-button>
-    </ion-buttons>
+  <ion-toolbar color="warning">
+    <ion-title>{{ "sendLocation" | translate }}</ion-title>
+    <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large"
+      (click)="dismissModal(true)"></ion-icon>
   </ion-toolbar>
 </ion-header>
 

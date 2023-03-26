@@ -77,14 +77,14 @@ export class ChatListPage implements OnInit {
   }
 
   onSearch() {
+    this.page = 1;
     this.shopConversationList = [];
-    this.page = 0;
     this.getAllShopListByOrderId(false, '');
   }
 
   doRefresh(event: any) {
+    this.page = 1;
     this.shopConversationList = [];
-    this.page = 0;
     this.getAllShopListByOrderId(false, '');
     event.target.complete();
   }

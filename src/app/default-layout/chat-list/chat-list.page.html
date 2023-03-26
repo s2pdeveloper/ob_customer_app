@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar class="bg-color-2">
+  <ion-toolbar>
     <ion-buttons shape="round" slot="start">
       <ion-back-button defaultHref="/app/tabs/landing-page"></ion-back-button>
     </ion-buttons>
-    <ion-title class="text-color-4 ion-text-capitalize">{{ 'orders' | translate}}</ion-title>
+    <ion-title class=" ion-text-capitalize">{{ 'orders' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -39,8 +39,7 @@
             </ion-avatar>
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize">{{item?.shopId?.shopName}}</ion-label>
             <ion-label class="" slot="end">
-              <ion-chip  color="warning"
-                class="ion-padding-start ion-margin-start"><b>{{item.orderStatus
+              <ion-chip color="warning" class="ion-padding-start ion-margin-start"><b>{{item.orderStatus
                   }}</b></ion-chip>
               <p class="ion-padding-start ion-margin-start">{{item.createdAt | date:'shortTime'}}</p>
             </ion-label>

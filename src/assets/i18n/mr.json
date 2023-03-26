@@ -155,5 +155,8 @@
   "galleryImages": "गॅलरी प्रतिमा",
   "shopTiming": "दुकानाची वेळ",
   "favoritesShop": "आवडते दुकान",
-  "orders":"ऑर्डर"
+  "orders":"ऑर्डर",
+  "giveRating":"रेटिंग द्या",
+  "sendLocation":"स्थान पाठवा"
+
 }

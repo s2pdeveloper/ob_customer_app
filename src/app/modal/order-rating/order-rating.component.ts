@@ -73,4 +73,10 @@ export class OrderRatingComponent implements OnInit {
       dismissed: isDismissed,
     });
   }
+
+  closeModal() {
+    this.modalCtrl.dismiss({
+      'dismissed': false,
+    });
+  }
 }

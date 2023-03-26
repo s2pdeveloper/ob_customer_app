@@ -43,6 +43,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   filePath: string = '';
   data: any = {};
   orderId: any;
+  chatData: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -129,6 +130,9 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
       .getMsgByCustomerId(this.roomName)
       .subscribe(async success => {
         this.msgArr = success.rows;
+        this.chatData = success.rows;
+        console.log(" this.chatData ", this.chatData);
+
         await this.spinner.hideLoader();
       });
   }
@@ -205,6 +209,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   async navigateToLocation() {
     const modal = await this.modalCtrl.create({
       component: LocationComponent,
+      cssClass: 'location-modal',
       componentProps: {},
     });
     await modal.present();
@@ -218,7 +223,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   async modalRating() {
     const modal = await this.modalCtrl.create({
       component: OrderRatingComponent,
-      cssClass: 'modal-medium',
+      cssClass: 'rating-modal',
       mode: 'ios',
       swipeToClose: true,
       componentProps: {
@@ -228,16 +233,8 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
         }
       }
     });
-    console.log("shopId.........", this.shopId);
-    console.log("orderId.........", this.orderId);
-
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    console.log("data", data);
-
-    if (data && data.dismissed) {
-      // this.getMsgByCustomerId(false);
-    }
   }
 
 }
