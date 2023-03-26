@@ -104,7 +104,6 @@ export class CataloguePage implements OnInit {
       this.toaster.errorToast('Plz select at least one product');
       return;
     }
-
     let amount = 0;
     let description = '';
     // msg += `Dear ${arr[0].shopId.shopName},\n ${arr[0].shopId.fullName},\n would like to buy `;
