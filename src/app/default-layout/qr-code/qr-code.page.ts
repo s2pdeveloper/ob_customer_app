@@ -109,6 +109,7 @@ export class QrCodePage implements OnInit {
   //     this.stopScan();
   //   }
   // };
+  
   destroy(){
     document.querySelector('body').classList.remove('scanner-active');
   }

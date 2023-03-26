@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     public loadingController: LoadingController,
     private appUpdate: AppUpdateService,
     private appBackButton: AppBackButtonService,
-    // private pushNotificationService: PushNotificationService,
+    private pushNotificationService: PushNotificationService,
     public translate: TranslateService
   ) {
     this.languageService.getLang();
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
       // document.body.setAttribute('color-theme','dark')
       this.settingStyleAndSplashScreen();
       // this.appUpdate.checkUpdate();
-      // this.pushNotificationService.registerForPushNotification();
+      this.pushNotificationService.registerForPushNotification();
       this.checkInternet();
       this.appBackButton.backButtonFunc();
     });

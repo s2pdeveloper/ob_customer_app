@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { ModalController } from '@ionic/angular';
 import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.component';
+import { SelectFilterComponent } from './select-filter/select-filter.component';
 
 @Component({
   selector: 'app-shop-detail',
@@ -35,9 +36,9 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalController: ModalController
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -54,12 +55,12 @@ export class ShopDetailPage implements OnInit {
     });
   }
 
- async getShopById() {
+  async getShopById() {
     // this.spinner.showLoader();
     // this.loaded = false;
-    this.shopService.getByIdShop(this.shopId).subscribe(async(success: any) => {
+    this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
       this.shopDetails = success.rows;
-     await this.spinner.hideLoader();
+      await this.spinner.hideLoader();
       // this.loaded = true;
     });
   }
@@ -87,5 +88,23 @@ export class ShopDetailPage implements OnInit {
       },
     });
     await modal.present();
+  }
+
+  /**
+* open modal
+* @param item 
+*/
+  async modalFilter() {
+    const modal = await this.modalController.create({
+      component: SelectFilterComponent,
+      cssClass: 'modal-medium',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {
+        // 'product': item,
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
   }
 }
