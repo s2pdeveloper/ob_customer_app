@@ -3,7 +3,7 @@
 </ion-item>
 
 <ion-content style="padding: 0" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvents]="true">
-  <img [src]="shopDetails[0]?.bannerImages" class="header-image" />
+  <img [src]="shopDetails?.bannerImages" class="header-image" />
 
   <div id="content" class="main-content ion-padding">
     <ion-card>
@@ -11,29 +11,29 @@
         <ion-list>
           <ion-item lines="none">
             <ion-avatar class="ion-margin-end">
-              <img alt="logo-image" *ngIf="shopDetails[0]?.image" [src]="shopDetails[0]?.image" />
+              <img alt="logo-image" *ngIf="shopDetails?.image" [src]="shopDetails?.image" />
             </ion-avatar>
             <ion-label>
               <ion-row class="ion-justify-content-between">
                 <ion-col>
                   <h2>
-                    <span class="text-bold font-larger shade-color ion-text-wrap">{{shopDetails[0]?.shopName}}</span>
+                    <span class="text-bold font-larger shade-color ion-text-wrap">{{shopDetails?.shopName}}</span>
                   </h2>
-                  <p class="font-larger">{{shopDetails[0]?.firstName}} {{shopDetails[0]?.lastName}}</p>
+                  <p class="font-larger">{{shopDetails?.firstName}} {{shopDetails?.lastName}}</p>
                   <ion-label class="text-color-9">
                     <ion-text class="ion-text-wrap">
                       <h4>
-                        {{shopDetails[0]?.address?.city}}, {{shopDetails[0]?.address?.state}} -
-                        {{shopDetails[0]?.address?.pinCode}}
+                        {{shopDetails?.address?.city}}, {{shopDetails?.address?.state}} -
+                        {{shopDetails?.address?.pinCode}}
                       </h4>
                     </ion-text>
                     <p>
-                      <span class="ion-text-wrap">{{shopDetails[0]?.address?.line1}}</span>
+                      <span class="ion-text-wrap">{{shopDetails?.address?.line1}}</span>
                     </p>
                     <p>
                       <span class="ion-padding-top ion-text-wrap">
-                        {{shopDetails[0]?.schedule?.day}}:{{shopDetails[0]?.schedule?.startTime}} to
-                        {{shopDetails[0]?.schedule?.endTime }}</span>
+                        {{shopDetails?.schedule?.day}}:{{shopDetails?.schedule?.startTime}} to
+                        {{shopDetails?.schedule?.endTime }}</span>
                     </p>
                   </ion-label>
                 </ion-col>
@@ -53,7 +53,7 @@
             </ion-col>
             <ion-col size="4">
               <ion-button fill="clear">
-                <a href="tel:+91{{shopDetails[0]?.mobile}}">
+                <a href="tel:+91{{shopDetails?.mobile}}">
                   <ion-icon name="call" size="large" class="ct"></ion-icon>
                 </a>
               </ion-button>
@@ -69,21 +69,21 @@
           <ion-row class="ion-text-center">
             <ion-col size="4">
               <ion-button fill="clear">
-                <a href="{{shopDetails[0]?.links?.facebook}}">
+                <a href="{{shopDetails?.links?.facebook}}">
                   <ion-icon name="logo-facebook" class="font fb"></ion-icon>
                 </a>
               </ion-button>
             </ion-col>
             <ion-col size="4">
               <ion-button fill="clear">
-                <a href="{{shopDetails[0]?.links?.insta}}">
+                <a href="{{shopDetails?.links?.insta}}">
                   <img src="../../../assets/image/instaicon.png" alt="" class="insta" />
                 </a>
               </ion-button>
             </ion-col>
             <ion-col size="4">
               <ion-button fill="clear">
-                <a href="{{shopDetails[0]?.links?.youtube}}">
+                <a href="{{shopDetails?.links?.youtube}}">
                   <ion-icon name="logo-youtube" class="font yt"></ion-icon>
                 </a>
               </ion-button>
@@ -95,24 +95,37 @@
           <ion-row>
             <ion-col>
               <b>{{ 'aboutUs' | translate}}</b>
-              <p class="ion-text-wrap">{{shopDetails[0]?.aboutUs }}</p>
+              <p class="ion-text-wrap">{{shopDetails?.aboutUs }}</p>
             </ion-col>
           </ion-row>
         </ion-item>
       </ion-card-content>
     </ion-card>
+    <!-- <h1>{{shopType[0]?.name}}</h1> -->
 
-    <div class="ion-text-center ion-margin-vertical">
+    <div class="ion-text-center ion-margin-vertical" *ngIf="shopType[0]?.name==='product' && shopType[0]?.name==='resale'">
       <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
         {{ 'viewCatalogue' | translate}}
       </ion-button>
     </div>
-    <div class="ion-text-center ion-margin-vertical">
+    <div class="ion-text-center ion-margin-vertical" *ngIf="shopType[0]?.name==='service'">
       <ion-button color="primary" expand="full" shape="round" class="btn" (click)="modalFilter()">
         {{ 'Book Appointment' | translate}}
       </ion-button>
     </div>
 
+    <div *ngIf="shopType[0]?.name==='product and services '">
+    <div class="ion-text-center ion-margin-vertical">
+      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+        {{ 'viewCatalogue' | translate}}
+      </ion-button>
+    </div>
+    <div class="ion-text-center ion-margin-vertical" >
+      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="modalFilter()">
+        {{ 'Book Appointment' | translate}}
+      </ion-button>
+    </div>
+  </div>
     <!-- gallery -->
     <ion-card>
       <ion-card-content>
@@ -121,12 +134,12 @@
             <b class="ion-text-wrap"> {{'gallery' | translate}}</b>
           </ion-title>
           <ion-icon color="primary" name="eye"
-            (click)="navigateToViewGalleryImages(shopDetails[0]?.galleryImages)"></ion-icon>
+            (click)="navigateToViewGalleryImages(shopDetails?.galleryImages)"></ion-icon>
         </ion-item>
         <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
-          <ion-slide *ngFor="let galleryImg of shopDetails[0]?.galleryImages">
+          <ion-slide *ngFor="let galleryImg of shopDetails?.galleryImages">
             <div class="ion-margin-top ion-no-padding">
-              <ion-item (click)="navigateToViewGalleryImages(shopDetails[0]?.galleryImages)">
+              <ion-item (click)="navigateToViewGalleryImages(shopDetails?.galleryImages)">
                 <img class="gallery ion-no-padding" src="{{galleryImg}}" />
               </ion-item>
             </div>

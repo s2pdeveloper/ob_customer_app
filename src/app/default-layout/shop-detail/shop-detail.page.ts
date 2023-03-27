@@ -14,7 +14,7 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
 })
 export class ShopDetailPage implements OnInit {
   loaded = false;
-  shopDetails = [];
+  shopDetails : any;
   shopName: string = '';
   shopId = null;
 
@@ -29,6 +29,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
+  shopType: any=[];
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -59,7 +60,14 @@ export class ShopDetailPage implements OnInit {
     // this.spinner.showLoader();
     // this.loaded = false;
     this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
+      console.log("success",success);
+      
       this.shopDetails = success.rows;
+      this.shopType = success.rows.businessTypeId;
+      console.log(" this.shopDetails", this.shopDetails);
+      console.log("this.shopType.....",this.shopType,   );
+      
+      
       await this.spinner.hideLoader();
       // this.loaded = true;
     });
@@ -101,7 +109,7 @@ export class ShopDetailPage implements OnInit {
       mode: 'ios',
       swipeToClose: true,
       componentProps: {
-        // 'product': item,
+      shopDetail: this.shopDetails,
       }
     });
     await modal.present();

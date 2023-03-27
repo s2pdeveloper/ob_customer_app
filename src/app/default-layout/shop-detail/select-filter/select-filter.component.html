@@ -9,13 +9,13 @@
 <ion-content class="ion-padding">
   <form [formGroup]="filterForm">
     <ion-item class="input-class mt-3" lines="none">
-      <ion-label position="stacked">{{ 'Select Data And Time' | translate}} <span class="text-danger"> * </span> </ion-label>
+      <ion-label position="stacked">{{ 'Select Date And Time' | translate}} <span class="text-danger"> * </span> </ion-label>
       <ion-datetime formControlName="startDate" placeholder="Select Date" [min]="maxDate" max="2050"
-        displayFormat="D MMM YYYY">
+        displayFormat="D MMM YYYY" (ionChange)="getDate($event)">
       </ion-datetime>
     </ion-item>
     <div class="clearfix ion-padding-top">
-      <ion-button (click)="dismissModal(true)" expand="block" class="btn-color-2 btn-height-large" type="submit">
+      <ion-button (click)="navigateTo()" expand="block" class="btn-height-large" type="submit">
         {{ 'Book My appointment ' | translate}}
       </ion-button>
     </div>

@@ -61,7 +61,7 @@ export class CataloguePage implements OnInit {
 
   async getShopById(_id) {
     this.shopService.getByIdShop(_id).subscribe(async (success: any) => {
-      this.subCategoryArr = success.data.map((y, i) => {
+      this.subCategoryArr = success.subCatData.map((y, i) => {
         y.isActive = false;
         if (i == 0) {
           y.isActive = true;
