@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
@@ -7,7 +7,9 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Plugins } from '@capacitor/core';
+import { ValidationService } from 'src/app/core/validation-messages/validation-messages.service';
 const { Device, Geolocation, Browser } = Plugins;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -15,8 +17,12 @@ const { Device, Geolocation, Browser } = Plugins;
 })
 export class RegisterPage implements OnInit {
   submitted: boolean = false;
-  showEye: boolean = false;
-  passwordType = 'password';
+  // showEye: boolean = false;
+  // passwordType = 'password';
+  passwordType1 = 'password';
+  showEye1: boolean = false;
+  passwordType2 = 'password';
+  showEye2: boolean = false;
   deviceInfo: any;
   constructor(
     private router: Router,
@@ -24,7 +30,11 @@ export class RegisterPage implements OnInit {
     private storageService: StorageService,
     private toaster: ToastService,
     public authService: AuthService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private formBuilder: FormBuilder,
+
+    private validationService: ValidationService
+
   ) { }
 
   ngOnInit() { }
@@ -32,14 +42,19 @@ export class RegisterPage implements OnInit {
     this.getDeviceInfo();
   }
 
-  registerForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    mobile: new FormControl(''),
-    password: new FormControl(''),
-    email: new FormControl(''),
-    role: new FormControl('CUSTOMER'),
-  });
+  registerForm = this.formBuilder.group(
+    {
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      mobile: new FormControl(''),
+      password: new FormControl('', [Validators.required]),
+      confirmPassword: new FormControl('', [Validators.required]),
+      role: new FormControl('CUSTOMER'),
+    },
+    {
+      validator: this.validationService.MustMatch('password', 'confirmPassword'),
+    }
+  );
 
   get form() {
     return this.registerForm.controls;
@@ -80,13 +95,24 @@ export class RegisterPage implements OnInit {
     await Browser.open({ url: '' });
   }
 
-  onClickEye() {
-    if (this.passwordType === 'password') {
-      this.passwordType = 'text';
-      this.showEye = true;
+  onClickEye1() {
+    if (this.passwordType1 === 'password') {
+      this.passwordType1 = 'text';
+      this.showEye1 = true;
     } else {
-      this.passwordType = 'password';
-      this.showEye = false;
+      this.passwordType1 = 'password';
+      this.showEye1 = false;
     }
   }
+
+  onClickEye2() {
+    if (this.passwordType2 === 'password') {
+      this.passwordType2 = 'text';
+      this.showEye2 = true;
+    } else {
+      this.passwordType2 = 'password';
+      this.showEye2 = false;
+    }
+  }
+
 }

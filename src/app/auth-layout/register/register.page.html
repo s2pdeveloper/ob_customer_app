@@ -1,7 +1,7 @@
 <ion-content>
   <ion-card>
     <div class="ion-text-center ion-margin-top">
-      <img src="./assets/image/Sign up-pana.svg" alt="Logo" height="250" />
+      <img src="./assets/image/Sign up-cuate.png" alt="Logo" height="250" />
     </div>
 
     <form [formGroup]="registerForm">
@@ -14,6 +14,8 @@
         </ion-label>
         <ion-input placeholder="{{ 'First Name' | translate}}" formControlName="firstName"></ion-input>
       </ion-item>
+      <app-validation-messages [control]="form['firstName']">
+      </app-validation-messages>
 
       <ion-item   class="input-class"
         [class.invalid]="!form.lastName.valid && (form.lastName.dirty || submitted)">
@@ -23,15 +25,10 @@
         </ion-label>
         <ion-input placeholder="{{ 'Last Name' | translate}}" formControlName="lastName"></ion-input>
       </ion-item>
+      <app-validation-messages [control]="form['lastName']">
+      </app-validation-messages>
 
-      <ion-item   class="input-class"
-        [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
-        <ion-label position="stacked">
-          {{ 'Email' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input placeholder="{{ 'Email' | translate}}" formControlName="email"></ion-input>
-      </ion-item>
+    
 
       <ion-item   class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label position="stacked">
@@ -41,20 +38,34 @@
         <ion-input maxlength="10" pattern="[0-9]{10}" type="number" placeholder="{{ 'Mobile Number' | translate}}"
           formControlName="mobile" inputmode="number"></ion-input>
       </ion-item>
+      <app-validation-messages [control]="form['mobile']">
+      </app-validation-messages>
 
-      <ion-item class="input-class" [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
-        <ion-label position="stacked">
-          {{ 'password' | translate }}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input formControlName="password" [type]="passwordType" name="password"
-          placeholder="{{ 'password' | translate }}" autocomplete="on" clearInput></ion-input>
-       <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="onClickEye()">
+      <ion-item class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+        <ion-label  position="stacked">{{ 'Password' | translate}}</ion-label>
+        <ion-input formControlName="password" [type]="passwordType1" name="password"
+          placeholder="{{ 'Password' | translate}}" autocomplete="on" clearInput></ion-input>
+        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye1" (click)="onClickEye1()">
         </ion-icon>
-        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
-          (click)="onClickEye()">
+        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye1"
+          (click)="onClickEye1()">
         </ion-icon>
       </ion-item>
+      <app-validation-messages [control]="form['password']">
+      </app-validation-messages>
+
+      <ion-item class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
+        <ion-label class="text-color-2" position="stacked">{{ 'confirmPassword' | translate}}</ion-label>
+        <ion-input formControlName="confirmPassword" [type]="passwordType2" name="confirmPassword"
+          placeholder="{{ 'confirmPassword' | translate}}" autocomplete="on" clearInput></ion-input>
+        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye2" (click)="onClickEye2()">
+        </ion-icon>
+        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye2"
+          (click)="onClickEye2()">
+        </ion-icon>
+      </ion-item>
+      <app-validation-messages [control]="form['confirmPassword']">
+      </app-validation-messages>
 
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" expand="full" shape="round" class="btn" (click)="register()">
