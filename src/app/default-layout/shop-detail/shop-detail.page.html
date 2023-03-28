@@ -3,7 +3,7 @@
 </ion-item>
 
 <ion-content style="padding: 0" class="shadow-none ion-no-padding">
-  <img [src]="shopDetails?.bannerImages" />
+  <img [src]="shopDetails?.bannerImages" class="header-image" />
 
   <!-- <ion-content style="padding: 0" class="shadow-none ion-no-padding" appParallaxHeader [scrollEvents]="true">
   <img [src]="shopDetails?.bannerImages" class="header-image" /> -->
@@ -292,7 +292,7 @@
         <!-- button -->
         <div class="ion-text-center ion-margin-vertical"
           *ngIf="shopType[0]?.name==='product' ||  shopType[0]?.name==='resale'">
-          <ion-button color="primary" expand="full" shape="round"  (click)="navigateTo('/catalogue')">
+          <ion-button color="primary" expand="full" shape="round" (click)="navigateTo('/catalogue')">
             {{ 'viewCatalogue' | translate}}
           </ion-button>
         </div>
@@ -305,25 +305,13 @@
 
         <ion-item *ngIf="shopType[0]?.name==='product and services '">
           <ion-col size="6" class="ion-margin-vertical">
-            <ion-button shape="round" class="btn"  expand="full" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
+            <ion-button shape="round" class="btn" expand="full"
+              (click)="navigateTo('/catalogue')">Catalogue</ion-button>
           </ion-col>
           <ion-col size="6" class="ion-margin-vertical">
-            <ion-button shape="round" class="btn"  expand="full"(click)="modalFilter()">Book Now</ion-button>
+            <ion-button shape="round" class="btn" expand="full" (click)="modalFilter()">Book Now</ion-button>
           </ion-col>
         </ion-item>
-
-        <!-- <div *ngIf="shopType[0]?.name==='product and services '">
-          <div class="ion-text-center ion-margin-vertical">
-            <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
-              {{ 'viewCatalogue' | translate}}
-            </ion-button>
-          </div>
-          <div class="ion-text-center ion-margin-vertical">
-            <ion-button color="primary" expand="full" shape="round" class="btn" (click)="modalFilter()">
-              {{ 'Book Appointment' | translate}}
-            </ion-button>
-          </div>
-        </div> -->
       </ion-card-content>
     </ion-card>
   </div>

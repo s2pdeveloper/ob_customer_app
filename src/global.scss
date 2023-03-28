@@ -34,6 +34,15 @@
 @import "./theme/custom.scss";
 @import "node_modules/ngx-bar-rating/themes/br-stars-theme";
 
+
+ion-datetime {
+  --background: #fff1f2;
+  --background-rgb: 255, 241, 242;
+
+  border-radius: 16px;
+  box-shadow: rgba(var(--ion-color-rose-rgb), 0.3) 0px 10px 15px -3px;
+}
+
 * {
     --ion-font-family: 'Open Sans', sans-serif !important;
 }
@@ -81,3 +90,19 @@ body.scanner-active {
     border-top-right-radius: 2rem;
     border-top-left-radius: 2rem;
   }
+
+  :host .calendar-day {
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background: none;
+    color: blue !important;
+    cursor: pointer;
+    appearance: none;
+    z-index: 0;
+}

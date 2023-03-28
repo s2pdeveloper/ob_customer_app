@@ -1,3 +1,15 @@
-// ion-datetime{
-//     background-color: #e0d3d345 !important;
-// }
+ion-datetime {
+    // background-color: #e0d3d345 !important;
+    // --background-rgb:red !important;
+    // --background:blue !important
+}
+
+:host .calendar-day {
+ color: blue !important;
+}
+
+// ion-datetime { color: var(--ion-color-primary) !important;
+//  }
+
+
+
