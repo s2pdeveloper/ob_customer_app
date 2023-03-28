@@ -43,12 +43,14 @@ export class ChatListPage implements OnInit {
 
   async getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
     let obj = {
-      page: this.page,
-      pageSize: this.pageSize,
+      // page: this.page,
+      // pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
     };
     this.chatService.getChatShopByCustomerId(obj).subscribe(async (success) => {
+      console.log("success...........",success);
+
       this.collection = success.count;
       if (this.page == 1) {
         this.shopConversationList = success.rows;

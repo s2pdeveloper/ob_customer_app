@@ -116,6 +116,7 @@ ion-card {
     top: 10px;
     position: relative !important;
     object-fit: cover !important;
+    border-radius: 50%;
   }
 }
 
@@ -142,9 +143,9 @@ ion-content {
   background-color: var(--ion-color-6);
 }
 
-ion-avatar {
-  --border-radius: 4px;
-}
+// ion-avatar {
+//   --border-radius: 50%;
+// }
 
 .item-inner {
   padding-left: 0px !important;
@@ -174,3 +175,8 @@ ion-button {
   height: 350px;
   object-fit: cover;
 }
+
+ion-segment-button{
+  font-size: 10px;
+}
+

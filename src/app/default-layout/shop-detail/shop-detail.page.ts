@@ -17,6 +17,8 @@ export class ShopDetailPage implements OnInit {
   shopDetails : any;
   shopName: string = '';
   shopId = null;
+  type = 'about';
+
 
   buttonSlide = {
     slidesPerView: 4,

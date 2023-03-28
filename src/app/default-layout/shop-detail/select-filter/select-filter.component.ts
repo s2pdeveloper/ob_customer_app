@@ -15,21 +15,15 @@ import { ChatService } from 'src/app/service/chat/chat.service';
 })
 export class SelectFilterComponent implements OnInit {
   @Input() shopDetail: any;
-  filterForm = new FormGroup({
-    startDate: new FormControl(''),
-  });
   maxDate = moment().format();
   user: any;
-  dateTime: any;
-  date: any;
-  time: any;
-  times: any;
-  dateReverse: any;
-  rev: any;
+  time1: any;
+  time2: any;
+  formatTime: string;
+  revDate: any;
+
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private toaster: ToastService,
     private localStorage: StorageService,
     private spinner: LoaderService,
     private socket: Socket,
@@ -41,57 +35,31 @@ export class SelectFilterComponent implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    console.log("shopdetails", this.shopDetail);
-
     this.user = this.localStorage.get('OBCustomer');
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-
-    });
-  }
-
-  get form() {
-    return this.filterForm.controls;
   }
 
   dismissModal(isClose) {
     this.modalCtrl.dismiss({
       'dismissed': isClose,
-      filterForm: {
-        startDate: moment(this.filterForm.value.startDate).format('YYYY-MM-DD'),
-      }
     });
   }
 
   getDate(ev) {
-    // console.log("ev", ev);
-    this.dateTime = ev.detail.value
-    console.log(" this.dateTime.........", this.dateTime);
-    this.date = ev.detail.value.split('T')[0];
- 
-    
-    this.time = ev.detail.value.split('T')[1];
-    this.times=this.time.split('+')[0];
-    console.log("date......",this.date);
-    console.log("time......",this.time);
-    console.log("times......",this.times);
-    // this.rev=this.times.reverse()
-    // console.log("revvvvv",this.rev);
+    this.revDate = ev.detail.value.split('T')[0].replace(/(\d{4})-(\d\d)-(\d\d)/, "$3-$2-$1");
+    this.time1 = ev.detail.value.split('T')[1];
+    this.time2 = this.time1.split('+')[0];
+    this.formatTime = moment(this.time2, ["HH.mm"]).format("hh:mm a");
   }
 
   navigateTo() {
-
-    console.log("this.filterForm.value", this.filterForm.value);
     let msg = '';
-    msg += `Dear merchant,\n please book an appointment Date:${this.date} and Time:${this.times}\n`;
+    msg += `Dear merchant,\n please book an appointment Date:- ${this.revDate} and Time:- ${this.formatTime}\n`;
     this.socket.emit('join', { room: this.shopDetail._id, user: this.user._id });
 
     let message = {
       shopId: this.shopDetail._id,
       message: msg,
     };
-    console.log("message", message);
-
-    // 
     this.chatService.create(message).subscribe((success) => {
       this.spinner.hideLoader();
       console.log("join success", success);
@@ -102,10 +70,10 @@ export class SelectFilterComponent implements OnInit {
         queryParams: {
           shopId: this.shopDetail._id,
           shopName: this.shopDetail.shopName,
-          roomName: this.shopDetail._id,
+          roomName: success.orderId,
         },
       });
-      this.dismissModal('')
+      this.dismissModal('isClose')
     });
   }
 

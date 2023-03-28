@@ -79,8 +79,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   ionViewWillEnter() {
     this.user = this.localStorage.get('OBCustomer');
     this.activatedRoute.queryParams.subscribe((params) => {
-      console.log("params",params);
-      
+
       this.status = params.status;
       this.shopId = params.shopId;
       this.shopName = params.shopName;
