@@ -1,0 +1,77 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:amazon="http://schemas.amazon.com/apk/res/android"
+3    xmlns:android="http://schemas.android.com/apk/res/android"
+4    package="capacitor.android.plugins"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="21"
+9-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+10        android:targetSdkVersion="29" />
+10-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml
+11
+12    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+12-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:12:1-75
+12-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:12:18-73
+13    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+13-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:13:1-78
+13-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:13:18-76
+14    <uses-permission android:name="android.permission.CAMERA" />
+14-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:14:1-60
+14-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:14:18-58
+15    <uses-permission android:name="android.permission.FLASHLIGHT" />
+15-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:15:1-64
+15-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:15:18-62
+16
+17    <uses-feature
+17-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:16:1-79
+18        android:name="android.hardware.camera"
+18-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:16:15-53
+19        android:required="true" />
+19-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:16:54-77
+20
+21    <application android:usesCleartextTraffic="true" >
+21-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:1-11:15
+21-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:5:15-50
+22        <provider
+22-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:1-8:12
+23            android:name="io.github.pwlin.cordova.plugins.fileopener2.FileProvider"
+23-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:11-82
+24            android:authorities="${applicationId}.fileOpener2.provider"
+24-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:83-142
+25            android:exported="false"
+25-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:143-167
+26            android:grantUriPermissions="true" >
+26-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:6:168-202
+27            <meta-data
+27-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:7:3-103
+28                android:name="android.support.FILE_PROVIDER_PATHS"
+28-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:7:14-64
+29                android:resource="@xml/opener_paths" />
+29-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:7:65-101
+30        </provider>
+31
+32        <activity
+32-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:1-302
+33            android:name="com.google.zxing.client.android.CaptureActivity"
+33-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:11-73
+34            android:clearTaskOnLaunch="true"
+34-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:74-106
+35            android:configChanges="orientation|keyboardHidden|screenSize"
+35-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:107-168
+36            android:exported="false"
+36-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:276-300
+37            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+37-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:169-227
+38            android:windowSoftInputMode="stateAlwaysHidden" />
+38-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:9:228-275
+39        <activity
+39-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:10:1-103
+40            android:name="com.google.zxing.client.android.encode.EncodeActivity"
+40-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:10:11-79
+41            android:label="Share" />
+41-->C:\Users\Admin\Project\OB_project\OB_CustomerApp\android\capacitor-cordova-android-plugins\src\main\AndroidManifest.xml:10:80-101
+42    </application>
+43
+44</manifest>

@@ -103,7 +103,7 @@
     </ion-card>
     <!-- <h1>{{shopType[0]?.name}}</h1> -->
 
-    <div class="ion-text-center ion-margin-vertical" *ngIf="shopType[0]?.name==='product' && shopType[0]?.name==='resale'">
+    <div class="ion-text-center ion-margin-vertical" *ngIf="shopType[0]?.name==='product'">
       <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
         {{ 'viewCatalogue' | translate}}
       </ion-button>
@@ -115,17 +115,17 @@
     </div>
 
     <div *ngIf="shopType[0]?.name==='product and services '">
-    <div class="ion-text-center ion-margin-vertical">
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
-        {{ 'viewCatalogue' | translate}}
-      </ion-button>
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button color="primary" expand="full" shape="round" class="btn" (click)="navigateTo('/catalogue')">
+          {{ 'viewCatalogue' | translate}}
+        </ion-button>
+      </div>
+      <div class="ion-text-center ion-margin-vertical" >
+        <ion-button color="primary" expand="full" shape="round" class="btn" (click)="modalFilter()">
+          {{ 'Book Appointment' | translate}}
+        </ion-button>
+      </div>
     </div>
-    <div class="ion-text-center ion-margin-vertical" >
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="modalFilter()">
-        {{ 'Book Appointment' | translate}}
-      </ion-button>
-    </div>
-  </div>
     <!-- gallery -->
     <ion-card>
       <ion-card-content>
