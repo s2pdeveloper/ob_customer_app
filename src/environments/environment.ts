@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
 
-  apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
-  url: 'http://localhost:2000',
-  s3Endpoint: 'http://localhost:2000/api/v1/shared/',
+  // apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
+  // url: 'http://localhost:2000',
+  // s3Endpoint: 'http://localhost:2000/api/v1/shared/',
 
 
 
-  // apiEndpoint: 'http://192.168.1.8:2000/api/v1/customerApp/',
-  // s3Endpoint: 'http://192.168.1.8:2000/api/v1/shared/',
-  // url: 'http://192.168.1.8:2000',
+  apiEndpoint: 'http://192.168.1.8:2000/api/v1/customerApp/',
+  s3Endpoint: 'http://192.168.1.8:2000/api/v1/shared/',
+  url: 'http://192.168.1.8:2000',
 
 
   // apiEndpoint: 'http://13.232.4.248:2000/api/v1/customerApp/',

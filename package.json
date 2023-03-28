@@ -51,7 +51,6 @@
     "add": "^2.0.6",
     "cordova": "^11.1.0",
     "cordova-plugin-file-opener2": "^3.0.5",
-    "ionic": "^5.4.16",
     "moment": "^2.29.4",
     "ngx-bar-rating": "^3.0.0",
     "ngx-ionic-image-viewer": "^0.7.4",
