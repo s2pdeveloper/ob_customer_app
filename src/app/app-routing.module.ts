@@ -126,11 +126,7 @@ const routes: Routes = [
     path: 'favorite',
     loadChildren: () => import('./default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
-  },  {
-    path: 'book-appointment',
-    loadChildren: () => import('./default-layout/book-appointment/book-appointment.module').then( m => m.BookAppointmentPageModule)
   },
-
  
 ];
 
