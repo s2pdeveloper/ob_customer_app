@@ -108,7 +108,7 @@ export class ShopDetailPage implements OnInit {
     const modal = await this.modalController.create({
       component: SelectFilterComponent,
       cssClass: 'modal-medium',
-      mode: 'ios',
+      // mode: 'ios',
       swipeToClose: true,
       componentProps: {
       shopDetail: this.shopDetails,
