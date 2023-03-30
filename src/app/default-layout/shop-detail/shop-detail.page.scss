@@ -12,13 +12,13 @@
 
 .fb {
   color: #3b5998;
-  width: 2.5rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .insta {
-  width: 2.5rem !important;
-  height: 2rem !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
   border: #ff0000;
   padding: 0px !important;
   margin: 0px !important;
@@ -27,14 +27,20 @@
 
 .yt {
   color: #ff0000;
-  width: 2.5rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .ct {
   color: #0090d0;
-  width: 2.5rem;
+  width: 3.5rem;
+  padding-top: 6px;
   height: 2rem;
+}
+
+.call{
+  color: #0090d0;
+
 }
 
 .icon {
@@ -121,8 +127,8 @@ ion-card {
 }
 
 .gallery {
-  border-radius: 5% !important;
-  height: 4rem !important;
+  border-radius: 15px !important;
+  height: 6rem !important;
   width: 100% !important;
   background-image: no-repeat !important;
 }
@@ -143,10 +149,6 @@ ion-content {
   background-color: var(--ion-color-6);
 }
 
-// ion-avatar {
-//   --border-radius: 50%;
-// }
-
 .item-inner {
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -159,9 +161,9 @@ ion-content {
 ion-button {
   overflow: hidden;
   font-weight: 700;
-  margin-left: 20px !important;
+  margin-left: 0px !important;
   margin-bottom: 15px !important;
-  margin-right: 20px !important;
+  margin-right: 0px !important;
   border: 0rem;
 }
 
@@ -176,12 +178,33 @@ ion-button {
   object-fit: cover;
 }
 
-ion-segment-button{
+ion-segment-button {
   font-size: 10px;
 }
 
-.btn{
-  width: 7rem;
-  height: 3rem;
+.btn {
+ height: 3rem; 
 }
 
+ion-fab-button {
+  --background: var(--ion-color-light);
+  height: 30px;
+  width: 30px;
+  margin-top: 0.5rem;
+}
+
+.social-links {
+  margin: 0px;
+  padding: 0px;
+}
+
+.chat-border {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+
+.call-border {
+  border: 1px solid black;
+  border-radius: 10px;
+}

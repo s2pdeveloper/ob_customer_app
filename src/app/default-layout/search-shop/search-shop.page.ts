@@ -3,7 +3,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { StorageService, ToastService } from 'src/app/core/services';
 @Component({
   selector: 'app-search-shop',
@@ -28,7 +28,6 @@ export class SearchShopPage implements OnInit {
   constructor(
     private router: Router,
     public translate: TranslateService,
-    public modelController: ModalController,
     private shopService: ShopService,
     private spinner: LoaderService,
     private activatedRoute: ActivatedRoute,

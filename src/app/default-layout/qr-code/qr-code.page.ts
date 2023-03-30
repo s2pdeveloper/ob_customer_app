@@ -82,14 +82,13 @@ export class QrCodePage implements OnInit {
       this.shopService
         .getByIdShopUPI({ UPI: _id })
         .subscribe((success: any) => {
-          console.log('success', success);
           this.router.navigate(['/shop-detail'], {
             queryParams: { _id: success?._id },
           });
         });
     } else {
       this.router.navigate(['/shop-detail'], {
-        queryParams: { _id },
+        queryParams: { _id:_id },
       });
     }
   };

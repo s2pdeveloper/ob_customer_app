@@ -32,26 +32,38 @@
           'background-size':'100% 100%'
 
          }" (click)="navigateTo('/shop-detail',s._id)">
-
           <ion-badge color="success" class="rating ion-text-end">
-       {{s?.avgRating}}
+            {{s?.avgRating}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
         <div class="ion-text-end ion-margin-end ion-margin-top heart-img">
-          <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
+          <!-- <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
              " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
-          </ion-icon>
-          <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large" slot="end"></ion-icon>
+          </ion-icon> -->
+          <ion-fab>
+            <ion-fab-button *ngIf="s && s.shopFavorite && !s.shopFavorite.length">
+              <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(s)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+
+          <!-- <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
+               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large" slot="end">
+              </ion-icon> -->
+
+          <ion-fab>
+            <ion-fab-button *ngIf="s && s.shopFavorite && s.shopFavorite.length">
+              <ion-icon name="heart" color="primary" (click)="addToFavorite(s)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
         </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s.shopName}}</ion-label>
         <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
             light">
           <h4 class="address-padding ion-padding-start">
-            {{ s.address.city ? s.address.city : ""}},
-            {{s.address.state ? s.address.state : "" }},
-            {{s.address.pinCode ? s.address.pinCode : "" }}.
+            {{ s.address.city ? s.address.city : ""}}, {{s.address.state ?
+            s.address.state : "" }}, {{s.address.pinCode ? s.address.pinCode :
+            "" }}.
           </h4>
         </ion-label>
       </ion-col>
