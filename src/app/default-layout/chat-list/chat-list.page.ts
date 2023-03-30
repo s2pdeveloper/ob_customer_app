@@ -16,6 +16,8 @@ export class ChatListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
+  direction: number = 1;
+  column: string;
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
@@ -101,4 +103,5 @@ export class ChatListPage implements OnInit {
     this.getAllShopListByOrderId(true, event);
     event.target.complete();
   }
+  
 }

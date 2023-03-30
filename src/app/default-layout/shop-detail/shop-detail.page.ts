@@ -6,6 +6,7 @@ import { ShopService } from 'src/app/service/shop/shop.service';
 import { ModalController } from '@ionic/angular';
 import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.component';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
+import { StorageService, ToastService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-shop-detail',
@@ -32,13 +33,18 @@ export class ShopDetailPage implements OnInit {
     spaceBetween: 1,
   };
   shopType: any=[];
+  user: any;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private shopService: ShopService,
     private spinner: LoaderService,
     public translate: TranslateService,
-    private modalController: ModalController
+    private modalCtrl: ModalController,
+    private localStorage: StorageService,
+    private toaster: ToastService,
+
+
   ) { }
 
   ngOnInit() { }
@@ -59,20 +65,32 @@ export class ShopDetailPage implements OnInit {
   }
 
   async getShopById() {
-    // this.spinner.showLoader();
-    // this.loaded = false;
-    this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
-      console.log("success",success);
-      
-      this.shopDetails = success.rows;
+   this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
+    this.shopDetails = success.rows;
+    console.log(" this.shopDetails ", this.shopDetails );
+    
       this.shopType = success.rows.businessTypeId;
-      console.log(" this.shopDetails", this.shopDetails);
-      console.log("this.shopType.....",this.shopType,   );
-      
-      
-      await this.spinner.hideLoader();
-      // this.loaded = true;
-    });
+     await this.spinner.hideLoader();
+   });
+  }
+
+  // favourite
+  async addToFavorite(item) {
+    console.log("item",item);
+    
+    this.user = this.localStorage.get('OBCustomer')._id;
+    let payload = {
+      _id: this.user,
+      action: item.shopFavorite.length ? 'remove' : 'add',
+      shopId: item._id,
+    };
+    this.shopService
+      .createOrRemoveFavorite(payload)
+      .subscribe(async (success) => {
+        // this.getAllShop(false);
+        this.getShopById()
+        this.toaster.successToast(success.message);
+      });
   }
 
   navigateTo(path) {
@@ -86,12 +104,12 @@ export class ShopDetailPage implements OnInit {
   }
 
   goToChat() {
-    let params = { shopName: this.shopDetails[0].shopName };
-    this.router.navigate(['/chat-view'], { queryParams: params });
+    let params = { shopName: this.shopDetails?.shopName };
+   this.router.navigate(['/chat-view'], { queryParams: params });
   }
 
   async navigateToViewGalleryImages(galleryImg) {
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: GalleryListComponent,
       componentProps: {
         data: galleryImg,
@@ -100,15 +118,10 @@ export class ShopDetailPage implements OnInit {
     await modal.present();
   }
 
-  /**
-* open modal
-* @param item 
-*/
-  async modalFilter() {
-    const modal = await this.modalController.create({
+ async modalFilter() {
+    const modal = await this.modalCtrl.create({
       component: SelectFilterComponent,
       cssClass: 'modal-medium',
-      // mode: 'ios',
       swipeToClose: true,
       componentProps: {
       shopDetail: this.shopDetails,
