@@ -199,6 +199,11 @@
                 - {{shopDetails?.address?.pinCode}}
               </h4>
             </ion-text>
+                 <ion-note class="ion-padding-top ion-text-wrap">Open on every
+                {{shopDetails?.schedule?.day}}:{{shopDetails?.schedule?.startTime}} to
+                {{shopDetails?.schedule?.endTime }}
+              </ion-note>
+       
           </ion-col>
         </ion-item>
 
@@ -237,10 +242,10 @@
                         </ion-row>
                       </ion-item>
                       <ion-item lines="none" class="social-links">
-                        <p>Social Links</p>
+                        <span>Social Links</span>
                       </ion-item>
                       <ion-row>
-                        <ion-col size="2">
+                        <ion-col size="2" class="ion-no-padding">
                           <ion-button fill="clear">
                             <a href="{{shopDetails?.links?.facebook}}">
                               <ion-icon
@@ -250,7 +255,7 @@
                             </a>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="2">
+                        <ion-col size="2" class="ion-no-padding">
                           <ion-button fill="clear">
                             <a href="{{shopDetails?.links?.insta}}">
                               <img
@@ -261,7 +266,7 @@
                             </a>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="2">
+                        <ion-col size="2" class="ion-no-padding">
                           <ion-button fill="clear">
                             <a href="{{shopDetails?.links?.youtube}}">
                               <ion-icon
@@ -273,39 +278,43 @@
                         </ion-col>
                       </ion-row>
                       <ion-item lines="none">
-                        <p>Contact us</p>
+                        <!-- <p>Contact us</p> -->
+                        <span>Contact us</span>
                       </ion-item>
-                      <!-- <ion-item lines="none">
-                        <ion-col size="3" class="chat-border chat-icon">
-                          <a>
-                            <ion-icon name="chatbubble-ellipses-outline" size="large" class="ct"
-                              (click)="goToChat()"></ion-icon>
-                          </a>
+                      <ion-row class="ion-text-center">
+                        <ion-col size="4">
+                          <ion-row class="chat-border">
+                            <ion-col size="12">
+                              <ion-icon
+                                name="chatbubble-ellipses-outline"
+                                size="large"
+                                class="call"
+                                (click)="goToChat()"
+                              ></ion-icon>
+                            </ion-col>
+                          </ion-row>
+                          <ion-col size="12">
+                            <ion-note>Orders</ion-note>
+                          </ion-col>
                         </ion-col>
-                        <br />
-                        <ion-label>Orders</ion-label>
-                        <ion-col size="3" class="chat-border chat-icon">
-                          <a href="tel:+91{{shopDetails?.mobile}}">
-                            <ion-icon name="call" size="large" class="ct"></ion-icon>
-                          </a>
+                        <ion-col size="4">
+                          <ion-row class="call-border">
+                            <ion-col size="12">
+                              <a href="tel:+91{{shopDetails?.mobile}}">
+                                <ion-icon
+                                  name="call"
+                                  size="large"
+                                  class="call"
+                                ></ion-icon>
+                              </a>
+                            </ion-col>
+                       
+                          </ion-row>
+                          <ion-col size="12">
+                            <ion-note>Call</ion-note>
+                          </ion-col>
                         </ion-col>
-                        <br />
-                        <ion-label>Calls</ion-label>
-                      </ion-item> -->
-
-                      <ion-item>
-                        <ion-item>
-                          <div>
-                            <ion-icon
-                              name="chatbubble-ellipses-outline"
-                              size="large"
-                              class="ct"
-                              (click)="goToChat()"
-                            ></ion-icon>
-                          </div>
-                          Orders
-                        </ion-item>
-                      </ion-item>
+                      </ion-row>
                     </ion-list>
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">

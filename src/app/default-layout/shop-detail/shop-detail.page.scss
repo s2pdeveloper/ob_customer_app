@@ -38,6 +38,11 @@
   height: 2rem;
 }
 
+.call{
+  color: #0090d0;
+
+}
+
 .icon {
   color: #0090d0;
   font-size: 17px;
@@ -178,9 +183,7 @@ ion-segment-button {
 }
 
 .btn {
-  // width: 9rem;
-  height: 3rem;
-  
+ height: 3rem; 
 }
 
 ion-fab-button {
@@ -198,29 +201,10 @@ ion-fab-button {
 .chat-border {
   border: 1px solid black;
   border-radius: 10px;
-
-  .chat-icon {
-    position: absolute;
-    width: 60px;
-    height: 9px;
-    top: 10px;
-   
-    padding-top: auto !important;
-  }
 }
 
 
 .call-border {
   border: 1px solid black;
-  margin-left: 2rem;
   border-radius: 10px;
-
-  .call-icon {
-    position: absolute;
-    width: 60px;
-    height: 9px;
-    top: 10px;
-    left:8px;
-    padding-top: auto !important;
-  }
 }
