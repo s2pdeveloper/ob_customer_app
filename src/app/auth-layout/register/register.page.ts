@@ -47,6 +47,7 @@ export class RegisterPage implements OnInit {
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       mobile: new FormControl(''),
+      email: new FormControl(''),
       password: new FormControl('', [Validators.required]),
       confirmPassword: new FormControl('', [Validators.required]),
       role: new FormControl('CUSTOMER'),

@@ -38,6 +38,7 @@ export class SearchShopPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
+    this.search='';
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.search) {
         this.search = params.search;
@@ -59,6 +60,8 @@ export class SearchShopPage implements OnInit {
       subCategoryId: this.subCategoryId,
     };
     this.shopService.getAllShop(obj).subscribe(async (success) => {
+      console.log("success........",success);
+
       this.collection = success.count;
       if (this.page == 1) {
         this.shopArr = success.rows;

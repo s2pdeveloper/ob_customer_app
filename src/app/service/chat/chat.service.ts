@@ -16,7 +16,7 @@ export class ChatService {
 
     getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
 
-    getChatShopByOrderId: `order/getChatShopByOrderId`,
+    getChatShopByCustomerId: `order/getChatShopByCustomerId`,
     
   };
 
@@ -30,8 +30,8 @@ export class ChatService {
     return this.http.get(this.routes.getMsgByCustomerId(_id));
   }
 // shop list
-  getChatShopByCustomerId(obj) {
-    return this.http.get(this.routes.getChatShopByOrderId,obj);
+getChatShopByCustomerId(obj) {
+    return this.http.get(this.routes.getChatShopByCustomerId,obj);
   }
 
 

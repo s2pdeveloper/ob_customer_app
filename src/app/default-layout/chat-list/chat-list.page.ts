@@ -16,14 +16,14 @@ export class ChatListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
-  direction: number = 1;
-  column: string;
+  // direction: number = 1;
+  // column: string;
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
   search = '';
   item: any;
-  segment: any = 'new';
+  segment: string = 'new';
   shopConversationList: any = [];
   user: any;
 
@@ -39,17 +39,20 @@ export class ChatListPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
+    this.search='';
     this.user = this.localStorage.get('OBCustomer');
-    this.getAllShopListByOrderId(false);
+    this.getChatShopByCustomerId(false);
   }
 
-  async getAllShopListByOrderId(isFirstLoad: boolean, event?: any) {
+ async getChatShopByCustomerId(isFirstLoad: boolean, event?: any) {
     let obj = {
-      // page: this.page,
-      // pageSize: this.pageSize,
+      page: this.page,
+      pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
     };
+    console.log("obj.......",obj);
+    
     this.chatService.getChatShopByCustomerId(obj).subscribe(async (success) => {
       console.log("success...........",success);
 
@@ -71,10 +74,7 @@ export class ChatListPage implements OnInit {
   }
 
   navigateTo(item) {
-   // join
-    console.log('join : ', item);
-
-    this.socket.emit('join', { room: item._id, user: this.user._id });
+  this.socket.emit('join', { room: item._id, user: this.user._id });
     this.router.navigate(['/chat-view'], {
       queryParams: {
         shopId: item.shopId._id,
@@ -88,19 +88,19 @@ export class ChatListPage implements OnInit {
   onSearch() {
     this.page = 1;
     this.shopConversationList = [];
-    this.getAllShopListByOrderId(false, '');
+    this.getChatShopByCustomerId(false, '');
   }
 
   doRefresh(event: any) {
     this.page = 1;
     this.shopConversationList = [];
-    this.getAllShopListByOrderId(false, '');
+    this.getChatShopByCustomerId(false, '');
     event.target.complete();
   }
 
   doInfinite(event) {
     this.page++;
-    this.getAllShopListByOrderId(true, event);
+    this.getChatShopByCustomerId(true, event);
     event.target.complete();
   }
   

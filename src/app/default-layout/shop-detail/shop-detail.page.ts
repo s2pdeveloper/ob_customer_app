@@ -19,7 +19,8 @@ export class ShopDetailPage implements OnInit {
   shopName: string = '';
   shopId = null;
   type = 'about';
-
+  shopType: any=[];
+  user: any;
 
   buttonSlide = {
     slidesPerView: 4,
@@ -32,8 +33,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
-  shopType: any=[];
-  user: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,

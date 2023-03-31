@@ -41,6 +41,17 @@
       <app-validation-messages [control]="form['mobile']">
       </app-validation-messages>
 
+      <ion-item   class="input-class"
+      [class.invalid]="!form.email.valid && (form.email.dirty || submitted)">
+      <ion-label position="stacked">
+        {{ 'Email' | translate}}
+        <ion-note color="danger">*</ion-note>
+      </ion-label>
+      <ion-input placeholder="{{ 'Email' | translate}}" formControlName="email"></ion-input>
+    </ion-item>
+    <app-validation-messages [control]="form['email']">
+    </app-validation-messages>
+
       <ion-item class="input-class" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
         <ion-label  position="stacked">{{ 'Password' | translate}}</ion-label>
         <ion-input formControlName="password" [type]="passwordType1" name="password"

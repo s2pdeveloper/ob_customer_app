@@ -7,21 +7,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-segment [(ngModel)]="segment" (ionChange)="getAllShopListByOrderId(false)">
+
+<ion-segment [(ngModel)]="segment" (ionChange)="getChatShopByCustomerId(false)">
   <ion-segment-button [id]="'new'" value="new" layout="icon-end">
-    <ion-label class="ion-text-wrap">{{ 'new' | translate}}</ion-label>
+    <ion-label class="ion-text-wrap">{{ 'new'| translate }}</ion-label>
   </ion-segment-button>
   <ion-segment-button [id]="'active'" value="active" layout="icon-end">
-    <ion-label class="ion-text-wrap">{{ 'active' | translate}}</ion-label>
+    <ion-label class="ion-text-wrap">{{ 'active'| translate }}</ion-label>
   </ion-segment-button>
   <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
-    <ion-label class="ion-text-wrap">{{ 'completed' | translate}}</ion-label>
+    <ion-label class="ion-text-wrap">{{ 'completed'| translate }}</ion-label>
   </ion-segment-button>
 </ion-segment>
 
 <ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
-showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()"
-placeholder="{{ 'Search' | translate}}">
+  showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()"
+  placeholder="{{ 'Search' | translate}}">
 </ion-searchbar>
 
 
@@ -30,10 +31,11 @@ placeholder="{{ 'Search' | translate}}">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
- <ion-grid class="ion-no-padding" *ngIf="shopConversationList?.length > 0;else noDataFound">
+  <ion-grid class="ion-no-padding" *ngIf="shopConversationList?.length > 0;else noDataFound">
     <ion-row>
       <ion-col size="12">
-        <ion-list *ngFor="let item of shopConversationList" appAnimateItems className="bounceInRight">
+        <!-- <ion-list *ngFor="let item of shopConversationList" appAnimateItems className="bounceInRight"> -->
+          <ion-list *ngFor="let item of shopConversationList">
           <ion-item class="animation-normal" (click)="navigateTo(item)">
             <ion-avatar slot="start">
               <img class="" [src]="item?.shopId?.image || 'assets/image/placeholder_profile.png'" alt="" />
@@ -57,4 +59,9 @@ placeholder="{{ 'Search' | translate}}">
       <ion-label>No Data Found</ion-label>
     </div>
   </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService, ToastService } from 'src/app/core/services';
@@ -41,25 +41,40 @@ export class FavoritePage implements OnInit {
     private localStorage: StorageService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
+    this.search = '';
     this.getFavoriteByCustomerId(false)
   }
 
- async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
+  async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
     this.user = this.localStorage.get('OBCustomer');
     // this.spinner.showLoader();
     let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
       search: this.search,
     };
     this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe(async success => {
-      this.shopFavorites = success.rows;
+      // this.shopFavorites = success.rows;
+      console.log("success........",success);
+      
+      this.collection = success.count;
+      if (this.page == 1) {
+        this.shopFavorites = success.rows;
+      } else {
+        this.shopFavorites = [...this.shopFavorites, ...success.rows];
+      }
+      if (isFirstLoad) event?.target.complete();
+      if (this.shopFavorites.length >= this.collection && event) {
+        event.target.disabled = true;
+      }
       await this.spinner.hideLoader();
     });
   }
 
- navigateTo(path, _id) {
+  navigateTo(path, _id) {
     this.router.navigate([path], { queryParams: { _id } });
   }
 
@@ -71,13 +86,13 @@ export class FavoritePage implements OnInit {
   onSearch() {
     this.page = 1;
     this.shopFavorites = [];
-    this.getFavoriteByCustomerId(false);
+    this.getFavoriteByCustomerId(false,'');
   }
 
   doRefresh(event) {
     this.page = 1;
     this.shopFavorites = [];
-    this.getFavoriteByCustomerId(true, event);
+    this.getFavoriteByCustomerId(false, '');
     event.target.complete();
   }
 
@@ -94,10 +109,8 @@ export class FavoritePage implements OnInit {
 
   doInfinite(event) {
     this.page++;
-    this.getFavoriteByCustomerId(false, '');
-    event.target.disabled = true;
-    this.infiniteScroll.disabled = true;
-    event.target.complete();
+    this.getFavoriteByCustomerId(true, event);
+    //  event.target.complete();
   }
 
 }
