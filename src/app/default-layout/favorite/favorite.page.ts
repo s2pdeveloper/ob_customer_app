@@ -58,8 +58,9 @@ export class FavoritePage implements OnInit {
     };
     this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe(async success => {
       // this.shopFavorites = success.rows;
-      console.log("success........",success);
-      
+      this.collection = success.rows.length;
+      console.log("success........", this.collection);
+
       this.collection = success.count;
       if (this.page == 1) {
         this.shopFavorites = success.rows;
@@ -86,7 +87,7 @@ export class FavoritePage implements OnInit {
   onSearch() {
     this.page = 1;
     this.shopFavorites = [];
-    this.getFavoriteByCustomerId(false,'');
+    this.getFavoriteByCustomerId(false, '');
   }
 
   doRefresh(event) {

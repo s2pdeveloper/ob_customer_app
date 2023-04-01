@@ -227,7 +227,7 @@
                         </ion-row>
                       </ion-item>
                       <ion-item lines="none" class="social-links">
-                        <span>Social Links</span>
+                        <ion-note class="heading" color="primary">Social Links</ion-note>
                       </ion-item>
                       <ion-row>
                         <ion-col size="2" class="ion-no-padding">
@@ -254,33 +254,26 @@
                       </ion-row>
                       <ion-item lines="none">
                         <!-- <p>Contact us</p> -->
-                        <span>Contact us</span>
+                        <ion-note class="heading" color="primary">Contact us</ion-note>
                       </ion-item>
-                      <ion-row class="ion-text-center">
-                        <ion-col size="4">
-                          <ion-row class="chat-border">
-                            <ion-col size="12">
-                              <ion-icon name="chatbubble-ellipses-outline" size="large" class="call"
-                                (click)="goToChat()"></ion-icon>
-                            </ion-col>
-                          </ion-row>
-                          <ion-col size="12">
-                            <ion-note>Orders</ion-note>
-                          </ion-col>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-card class="bg-xcard ion-text-center">
+                            <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
+                              (click)="goToChat()"></ion-icon>
+                          </ion-card>
                         </ion-col>
-                        <ion-col size="4">
-                          <ion-row class="call-border">
-                            <ion-col size="12">
-                              <a href="tel:+91{{shopDetails?.mobile}}">
-                                <ion-icon name="call" size="large" class="call"></ion-icon>
-                              </a>
-                            </ion-col>
-
-                          </ion-row>
-                          <ion-col size="12">
-                            <ion-note>Call</ion-note>
-                          </ion-col>
+                        <ion-col size="6">
+                          <ion-card class="bg-xcard ion-text-center">
+                            <a href="tel:+91{{shopDetails?.mobile}}">
+                              <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
+                            </a>
+                          </ion-card>
                         </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col size="6" class="note-pad"> <ion-note class="heading">Orders</ion-note></ion-col>
+                        <ion-col size="6" class="note-pad2"><ion-note class="heading">Call</ion-note></ion-col>
                       </ion-row>
                     </ion-list>
                     <!-- gallery -->
@@ -313,31 +306,7 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <!-- button -->
 
-        <!-- 
-        <div class="ion-text-center ion-margin-vertical"
-          *ngIf="shopType[0]?.name==='product' ||  shopType[0]?.name==='resale'">
-          <ion-button color="primary" expand="full" shape="round" (click)="navigateTo('/catalogue')">
-            {{ 'viewCatalogue' | translate}}
-          </ion-button>
-        </div>
-
-        <div class="ion-text-center ion-margin-vertical" *ngIf="shopType[0]?.name==='service'">
-          <ion-button color="primary" expand="full" shape="round" (click)="modalFilter()">
-            {{ 'Book Appointment' | translate}}
-          </ion-button>
-        </div>
-
-        <ion-item *ngIf="shopType[0]?.name==='product and services '">
-          <ion-col size="6" class="ion-margin-vertical">
-            <ion-button shape="round" class="btn" expand="block"
-              (click)="navigateTo('/catalogue')">Catalogue</ion-button>
-          </ion-col>
-          <ion-col size="6" class="ion-margin-vertical">
-            <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
-          </ion-col>
-        </ion-item> -->
       </ion-card-content>
     </ion-card>
   </div>
@@ -347,7 +316,7 @@
 
 <ion-footer class="ion-no-border">
   <!-- <ion-toolbar> -->
- <ion-item *ngIf="shopType[0]?.name==='product' ||  shopType[0]?.name==='resale'">
+  <ion-item *ngIf="shopType[0]?.name==='product' ||  shopType[0]?.name==='resale'">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>

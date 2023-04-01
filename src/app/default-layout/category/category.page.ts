@@ -28,6 +28,7 @@ export class CategoryPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
+    this.search='';
     this.getAllCategoryWithSubCategory();
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.categoryId) {

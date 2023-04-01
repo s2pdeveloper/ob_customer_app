@@ -20,9 +20,9 @@
 }
 
 
-.call{
+.call {
   color: #0090d0;
-
+  padding: 23px;
 }
 
 .card::before {
@@ -83,7 +83,7 @@ ion-card {
     background: var(--cs-gradient-linear);
   }
 
- img {
+  img {
     top: 10px;
     position: relative !important;
     object-fit: cover !important;
@@ -148,8 +148,13 @@ ion-segment-button {
   font-size: 10px;
 }
 
+.heading {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
 .btn {
- height: 3rem; 
+  height: 3rem;
 }
 
 ion-fab-button {
@@ -164,15 +169,21 @@ ion-fab-button {
   padding: 0px;
 }
 
-.chat-border {
-  // border: 1px solid black;
-  border-radius: 50px !important;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+.note-pad {
+  padding-left: 25px;
 }
 
+.note-pad2 {
+  padding-left: 27px;
+}
 
-.call-border {
-  border: 1px solid black;
-  border-radius: 10px;
-  // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+.bg-xcard {
+  border-radius: 50%;
+  background-color: transparent;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  border: 3rem;
+  overflow: hidden;
+  box-shadow: #9fb1dc 0px 25px 20px -20px;
 }

@@ -38,8 +38,10 @@ export class SearchShopPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.search='';
+  
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      console.log("params...........",params);
+      
       if (params.search) {
         this.search = params.search;
       }
@@ -48,6 +50,7 @@ export class SearchShopPage implements OnInit {
       this.subCategoryId = params.subCategoryId ?? '';
       this.getAllShop(false);
     });
+
   }
 
   async getAllShop(isFirstLoad: boolean, event?: any) {
@@ -60,11 +63,11 @@ export class SearchShopPage implements OnInit {
       subCategoryId: this.subCategoryId,
     };
     this.shopService.getAllShop(obj).subscribe(async (success) => {
-      console.log("success........",success);
-
+      await this.spinner.hideLoader();
       this.collection = success.count;
       if (this.page == 1) {
         this.shopArr = success.rows;
+
       } else {
         this.shopArr = [...this.shopArr, ...success.rows];
       }
@@ -72,7 +75,7 @@ export class SearchShopPage implements OnInit {
       if (this.shopArr.length >= this.collection && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+    
     });
   }
 
@@ -83,9 +86,7 @@ export class SearchShopPage implements OnInit {
       action: item.shopFavorite.length ? 'remove' : 'add',
       shopId: item._id,
     };
-    this.shopService
-      .createOrRemoveFavorite(payload)
-      .subscribe(async (success) => {
+    this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
         this.getAllShop(false);
         this.toaster.successToast(success.message);
       });
