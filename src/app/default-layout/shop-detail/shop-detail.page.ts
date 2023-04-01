@@ -15,13 +15,15 @@ import { StorageService, ToastService } from 'src/app/core/services';
 })
 export class ShopDetailPage implements OnInit {
   loaded = false;
-  shopDetails : any;
+  shopDetails: any;
   shopName: string = '';
   shopId = null;
   type = 'about';
-  shopType: any=[];
+  shopType: any = [];
   user: any;
-
+  faceBook: any;
+  insta: any;
+  youTube: any;
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -65,19 +67,21 @@ export class ShopDetailPage implements OnInit {
   }
 
   async getShopById() {
-   this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
-    this.shopDetails = success.rows;
-    console.log(" this.shopDetails ", this.shopDetails );
-    
+    this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
+      this.shopDetails = success.rows;
+      console.log(" this.shopDetails ", this.shopDetails);
+      this.faceBook = success.rows.links.facebook;
+      this.insta = success.rows.links.insta;
+      this.youTube = success.rows.links.youtube;
       this.shopType = success.rows.businessTypeId;
-     await this.spinner.hideLoader();
-   });
+      await this.spinner.hideLoader();
+    });
   }
 
   // favourite
   async addToFavorite(item) {
-    console.log("item",item);
-    
+    console.log("item", item);
+
     this.user = this.localStorage.get('OBCustomer')._id;
     let payload = {
       _id: this.user,
@@ -105,7 +109,7 @@ export class ShopDetailPage implements OnInit {
 
   goToChat() {
     let params = { shopName: this.shopDetails?.shopName };
-   this.router.navigate(['/chat-view'], { queryParams: params });
+    this.router.navigate(['/chat-view'], { queryParams: params });
   }
 
   async navigateToViewGalleryImages(galleryImg) {
@@ -118,13 +122,13 @@ export class ShopDetailPage implements OnInit {
     await modal.present();
   }
 
- async modalFilter() {
+  async modalFilter() {
     const modal = await this.modalCtrl.create({
       component: SelectFilterComponent,
       cssClass: 'modal-medium',
       swipeToClose: true,
       componentProps: {
-      shopDetail: this.shopDetails,
+        shopDetail: this.shopDetails,
       }
     });
     await modal.present();

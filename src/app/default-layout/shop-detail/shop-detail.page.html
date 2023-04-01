@@ -231,22 +231,31 @@
                       </ion-item>
                       <ion-row>
                         <ion-col size="2" class="ion-no-padding">
-                          <ion-button fill="clear">
-                            <a href="{{shopDetails?.links?.facebook}}">
+                          <ion-button fill="clear">                           
+                             <a *ngIf="faceBook" href="{{shopDetails?.links?.facebook}}">
+                              <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+                             </a>
+                             <a *ngIf="!faceBook">
                               <ion-icon name="logo-facebook" class="font fb"></ion-icon>
                             </a>
-                          </ion-button>
+                           </ion-button>
                         </ion-col>
                         <ion-col size="2" class="ion-no-padding">
                           <ion-button fill="clear">
-                            <a href="{{shopDetails?.links?.insta}}">
+                            <a *ngIf="insta" href="{{shopDetails?.links?.insta}}">
+                              <img src="../../../assets/image/instaicon.png" alt="" class="insta" />
+                            </a>
+                            <a *ngIf="!insta">
                               <img src="../../../assets/image/instaicon.png" alt="" class="insta" />
                             </a>
                           </ion-button>
                         </ion-col>
                         <ion-col size="2" class="ion-no-padding">
                           <ion-button fill="clear">
-                            <a href="{{shopDetails?.links?.youtube}}">
+                            <a *ngIf="youTube" href="{{shopDetails?.links?.youtube}}">
+                              <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+                            </a>
+                            <a *ngIf="!youTube">
                               <ion-icon name="logo-youtube" class="font yt"></ion-icon>
                             </a>
                           </ion-button>
@@ -272,7 +281,7 @@
                         </ion-col>
                       </ion-row>
                       <ion-row>
-                        <ion-col size="6" class="note-pad"> <ion-note class="heading">Orders</ion-note></ion-col>
+                        <ion-col size="6" class="note-pad"> <ion-note class="heading">Order</ion-note></ion-col>
                         <ion-col size="6" class="note-pad2"><ion-note class="heading">Call</ion-note></ion-col>
                       </ion-row>
                     </ion-list>
