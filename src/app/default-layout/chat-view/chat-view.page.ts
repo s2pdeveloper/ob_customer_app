@@ -12,7 +12,6 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { LocationComponent } from 'src/app/modal/location/location.component';
 import { App } from '@capacitor/app';
-import { Geolocation } from '@capacitor/geolocation';
 import { OrderRatingComponent } from 'src/app/modal/order-rating/order-rating.component';
 
 @Component({

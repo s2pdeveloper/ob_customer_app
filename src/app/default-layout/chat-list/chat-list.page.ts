@@ -16,8 +16,6 @@ export class ChatListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
-  // direction: number = 1;
-  // column: string;
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
@@ -44,16 +42,20 @@ export class ChatListPage implements OnInit {
     this.getChatShopByCustomerId(false);
   }
 
- async getChatShopByCustomerId(isFirstLoad: boolean, event?: any) {
+  getChatShopByCustomerId(isFirstLoad: boolean, event?: any) {
+    // this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
+      direction: -1
     };
-    console.log("obj.......",obj);
-    
-    this.chatService.getChatShopByCustomerId(obj).subscribe(async (success) => {
+    if (this.segment === "new") {
+      obj['status'] = this.segment,
+      obj['direction'] = 1
+    }
+  this.chatService.getChatShopByCustomerId(obj).subscribe( (success) => {
       console.log("success...........",success);
 
       this.collection = success.count;
@@ -69,7 +71,7 @@ export class ChatListPage implements OnInit {
       if (this.shopConversationList.length >= this.collection && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+       this.spinner.hideLoader();
     });
   }
 

@@ -3,7 +3,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll,IonContent } from '@ionic/angular';
 import { StorageService, ToastService } from 'src/app/core/services';
 @Component({
   selector: 'app-search-shop',
@@ -11,13 +11,13 @@ import { StorageService, ToastService } from 'src/app/core/services';
   styleUrls: ['./search-shop.page.scss'],
 })
 export class SearchShopPage implements OnInit {
+  @ViewChild(IonContent) content: IonContent;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
   search: string = '';
-  // businessTypeId: string = '';
-  businessTypeId: any;
+ businessTypeId: any;
   categoryId: string = '';
   subCategoryId: string = '';
   shopArr: any = [];
@@ -37,11 +37,17 @@ export class SearchShopPage implements OnInit {
 
   ngOnInit() { }
 
+  // ngAfterViewChecked() {
+    // this.scrollToBottom();
+  // }
+  // scrollToBottom() {
+  //   this.content.scrollToBottom();
+  // }
+
+
   ionViewWillEnter() {
-  
+    this.search = '';
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      console.log("params...........",params);
-      
       if (params.search) {
         this.search = params.search;
       }
@@ -65,17 +71,11 @@ export class SearchShopPage implements OnInit {
     this.shopService.getAllShop(obj).subscribe(async (success) => {
       await this.spinner.hideLoader();
       this.collection = success.count;
-      if (this.page == 1) {
-        this.shopArr = success.rows;
-
-      } else {
-        this.shopArr = [...this.shopArr, ...success.rows];
-      }
+      this.shopArr = success.rows;
       if (isFirstLoad) event?.target.complete();
       if (this.shopArr.length >= this.collection && event) {
         event.target.disabled = true;
       }
-    
     });
   }
 
@@ -87,9 +87,9 @@ export class SearchShopPage implements OnInit {
       shopId: item._id,
     };
     this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
-        this.getAllShop(false);
-        this.toaster.successToast(success.message);
-      });
+      this.getAllShop(false);
+      this.toaster.successToast(success.message);
+    });
   }
 
   navigateTo(path, _id) {

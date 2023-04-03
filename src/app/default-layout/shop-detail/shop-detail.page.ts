@@ -19,7 +19,6 @@ export class ShopDetailPage implements OnInit {
   shopName: string = '';
   shopId = null;
   type = 'about';
-  shopType: any = [];
   user: any;
   faceBook: any;
   insta: any;
@@ -68,20 +67,16 @@ export class ShopDetailPage implements OnInit {
 
   async getShopById() {
     this.shopService.getByIdShop(this.shopId).subscribe(async (success: any) => {
-      this.shopDetails = success.rows;
-      console.log(" this.shopDetails ", this.shopDetails);
-      this.faceBook = success.rows.links.facebook;
-      this.insta = success.rows.links.insta;
-      this.youTube = success.rows.links.youtube;
-      this.shopType = success.rows.businessTypeId;
+      this.shopDetails = success.rows[0];
+      this.faceBook = this.shopDetails.links.facebook;
+      this.insta = this.shopDetails.links.insta;
+      this.youTube = this.shopDetails.links.youtube;
       await this.spinner.hideLoader();
     });
   }
 
   // favourite
   async addToFavorite(item) {
-    console.log("item", item);
-
     this.user = this.localStorage.get('OBCustomer')._id;
     let payload = {
       _id: this.user,
@@ -91,7 +86,6 @@ export class ShopDetailPage implements OnInit {
     this.shopService
       .createOrRemoveFavorite(payload)
       .subscribe(async (success) => {
-        // this.getAllShop(false);
         this.getShopById()
         this.toaster.successToast(success.message);
       });

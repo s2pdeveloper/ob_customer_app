@@ -7,7 +7,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-segment [(ngModel)]="segment" (ionChange)="getChatShopByCustomerId(false)">
   <ion-segment-button [id]="'new'" value="new" layout="icon-end">
     <ion-label class="ion-text-wrap">{{ 'new'| translate }}</ion-label>
@@ -25,7 +24,6 @@
   placeholder="{{ 'Search' | translate}}">
 </ion-searchbar>
 
-
 <ion-content class="ion-no-padding">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
@@ -35,17 +33,20 @@
     <ion-row>
       <ion-col size="12">
         <!-- <ion-list *ngFor="let item of shopConversationList" appAnimateItems className="bounceInRight"> -->
-          <ion-list *ngFor="let item of shopConversationList">
+        <ion-list *ngFor="let item of shopConversationList">
           <ion-item class="animation-normal" (click)="navigateTo(item)">
             <ion-avatar slot="start">
               <img class="" [src]="item?.shopId?.image || 'assets/image/placeholder_profile.png'" alt="" />
             </ion-avatar>
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize">{{item?.shopId?.shopName}}</ion-label>
             <ion-label class="" slot="end">
-              <ion-chip color="warning" class="ion-padding-start ion-margin-start"><b>{{item.orderStatus
-                  }}</b></ion-chip>
-              <p class="ion-padding-start ion-margin-start">
-                {{item.createdAt | date:'shortTime'}}
+              <ion-chip color="warning" class="ion-text-capitalize"
+                *ngIf="item.status==='new'"><b>{{item.orderStatus ? item.orderStatus:'review'}}</b></ion-chip>
+              <ion-chip color="warning" class="ion-text-capitalize"
+                *ngIf="item.status!='new'"><b>{{item.orderStatus}}</b></ion-chip>
+
+              <p class="ion-padding-start ion-margin-start text-bold">
+                {{item.createdAt | date:'d MMM, y h:mm a'}}
               </p>
             </ion-label>
           </ion-item>

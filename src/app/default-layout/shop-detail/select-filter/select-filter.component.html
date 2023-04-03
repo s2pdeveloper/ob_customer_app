@@ -3,36 +3,23 @@
     <ion-buttons slot="end">
       <ion-button class="text-color-2" (click)="dismissModal(false)">{{
         "close" | translate
-      }}</ion-button>
+        }}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-item class="input-class mt-3" lines="none">
-    <ion-label position="stacked"
-      >{{ "Select Date And Time" | translate }}
+    <ion-label position="stacked">{{ "Select Date And Time" | translate }}
       <span class="text-danger"> * </span>
     </ion-label>
-    <ion-datetime
-      placeholder="Select Date"
-      [min]="maxDate"
-      max="2050"
-      displayFormat="D MMM YYYY"
-      (ionChange)="getDate($event)"
-    >
+    <ion-datetime placeholder="Select Date" [min]="maxDate" max="2050" displayFormat="D MMM YYYY"
+      (ionChange)="getDate($event)">
     </ion-datetime>
-    <!-- <ion-datetime (ionChange)="getDate($event)" color="danger"></ion-datetime> -->
-    <!-- <ion-datetime presentation="date" (ionChange)="getDate($event)"></ion-datetime> -->
   </ion-item>
 
   <div class="clearfix ion-padding-top">
-    <ion-button
-      (click)="navigateTo()"
-      expand="block"
-      class="btn-height-large"
-      type="submit"
-    >
+    <ion-button (click)="navigateTo()" expand="block" class="btn-height-large" type="submit">
       {{ "Book my appointment " | translate }}
     </ion-button>
   </div>

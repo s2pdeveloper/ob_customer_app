@@ -17,7 +17,7 @@
     <ion-col size="12">
       <ion-searchbar class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text" debounce="600"
         showCancelButton="never" placeholder="{{ 'searchShop' | translate}}" autocomplete="on" autocorrect="on"
-        [(ngModel)]="search" (ionInput)="onSearch()">
+        [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
     </ion-col>
   </ion-row>
@@ -37,20 +37,13 @@
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
+
         <div class="ion-text-end ion-margin-end ion-margin-top heart-img">
-          <!-- <ion-icon *ngIf="s && s.shopFavorite && !s.shopFavorite.length
-             " (click)="addToFavorite(s)" name="heart-outline" size="large" slot="end">
-          </ion-icon> -->
           <ion-fab>
             <ion-fab-button *ngIf="s && s.shopFavorite && !s.shopFavorite.length">
               <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(s)"></ion-icon>
             </ion-fab-button>
           </ion-fab>
-
-          <!-- <ion-icon *ngIf="s && s.shopFavorite && s.shopFavorite.length
-               " (click)="addToFavorite(s)" class="text-color-danger" name="heart" size="large" slot="end">
-              </ion-icon> -->
-
           <ion-fab>
             <ion-fab-button *ngIf="s && s.shopFavorite && s.shopFavorite.length">
               <ion-icon name="heart" color="primary" (click)="addToFavorite(s)"></ion-icon>

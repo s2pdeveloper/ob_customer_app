@@ -1,6 +1,14 @@
-ion-datetime {
-    // background-color: #e0d3d345 !important;
-    // --background-rgb:red !important;
-    // --background:blue !important
-}
+ion-buttons {
+    padding: 11px 0px 0px 49px;
+    margin: 1px 1px 0px 0px;
+  
+    ion-button {
+      overflow: hidden;
+      font-weight: 1000;
+      margin-left: 15px !important;
+      margin-bottom: 10px !important;
+      margin-right: 9px !important;
+      margin-left: 0px !important;
+    }
+  }
 
