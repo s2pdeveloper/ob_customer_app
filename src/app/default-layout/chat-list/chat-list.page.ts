@@ -49,12 +49,12 @@ export class ChatListPage implements OnInit {
       pageSize: this.pageSize,
       search: this.search,
       status: this.segment,
-      direction: -1
+      // direction: -1
     };
-    if (this.segment === "new") {
-      obj['status'] = this.segment,
-      obj['direction'] = 1
-    }
+    // if (this.segment === "new") {
+    //   obj['status'] = this.segment,
+    //   obj['direction'] = 1
+    // }
   this.chatService.getChatShopByCustomerId(obj).subscribe( (success) => {
       console.log("success...........",success);
 
