@@ -23,6 +23,7 @@ export class ShopDetailPage implements OnInit {
   faceBook: any;
   insta: any;
   youTube: any;
+  webSite:any;
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -71,6 +72,7 @@ export class ShopDetailPage implements OnInit {
       this.faceBook = this.shopDetails.links.facebook;
       this.insta = this.shopDetails.links.insta;
       this.youTube = this.shopDetails.links.youtube;
+      this.webSite = this.shopDetails.links.website;
       await this.spinner.hideLoader();
     });
   }

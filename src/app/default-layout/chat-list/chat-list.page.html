@@ -39,7 +39,7 @@
               <img class="" [src]="item?.shopId?.image || 'assets/image/placeholder_profile.png'" alt="" />
             </ion-avatar>
             <ion-label class="text-size-xs ion-text-wrap ion-text-capitalize">{{item?.shopId?.shopName}}</ion-label>
-            <ion-label class="" slot="end">
+            <ion-label class="ion-no-margin" slot="end">
               <ion-chip color="warning" class="ion-text-capitalize"
                 *ngIf="item.status==='new'"><b>{{item.orderStatus ? item.orderStatus:'review'}}</b></ion-chip>
               <ion-chip color="warning" class="ion-text-capitalize"
