@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
   },
   {
     path: 'view-profile',
-    // canLoad: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/setting/view-profile/view-profile.module').then(
         (m) => m.ViewProfilePageModule
@@ -41,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
-    // canLoad: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/setting/edit-profile/edit-profile.module').then(
         (m) => m.EditProfilePageModule
@@ -66,6 +67,7 @@ const routes: Routes = [
 
   {
     path: 'shop-detail',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/shop-detail/shop-detail.module').then(
         (m) => m.ShopDetailPageModule
@@ -73,6 +75,7 @@ const routes: Routes = [
   },
   {
     path: 'change-language',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/change-language/change-language.module').then(
         (m) => m.ChangeLanguagePageModule
@@ -87,6 +90,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/setting/edit-profile/edit-profile.module').then(
         (m) => m.EditProfilePageModule
@@ -94,6 +98,7 @@ const routes: Routes = [
   },
   {
     path: 'notification-list',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import(
         './default-layout/notification-list/notification-list.module'
@@ -102,6 +107,7 @@ const routes: Routes = [
  
   {
     path: 'setting',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./default-layout/setting/setting.module').then(
         (m) => m.SettingPageModule
@@ -109,21 +115,25 @@ const routes: Routes = [
   },
   {
     path: 'catalogue',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./default-layout/catalogue/catalogue.module').then
       (m => m.CataloguePageModule)
   },
   {
     path: 'chat-view',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./default-layout/chat-view/chat-view.module').then
       (m => m.ChatViewPageModule)
   },
   {
     path: 'map',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./default-layout/map/map.module').then
       (m => m.MapPageModule)
   },
   {
     path: 'favorite',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
   },

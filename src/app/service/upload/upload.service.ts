@@ -1,84 +1,52 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { StorageService } from '../../core/services/local-storage.service';
+import { JwtService } from './jwt.service';
+import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { formatErrors, OPTIONS } from "../../helpers";
 
 @Injectable()
 export class UploadService {
   token: String;
-  OPTIONS: { maxLimit: 8 };
   private httpClient: HttpClient;
 
-  constructor(private jwtService: StorageService, handler: HttpBackend) {
+  constructor(private jwtService: JwtService, handler: HttpBackend) {
     this.httpClient = new HttpClient(handler);
-    this.token = this.jwtService.get('OBCustomer').token;
+    this.token = this.jwtService.getToken();
   }
 
-  uploadFile(
-    formData,
-    isNew: boolean = false,
-    id: string = ''
-  ): Observable<any> {
+
+  uploadFile(formData, isNew: boolean = false, id: string = ""): Observable<any> {
     const httpHeaders = {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-        Accept: 'application/json',
-        enctype: 'multipart/form-data',
-      }),
+        'Authorization': `JWT ${this.token}`,
+        'Accept': 'application/json',
+        'enctype': 'multipart/form-data'
+      })
     };
-    let path = `upload`;
-    return this.httpClient
-      .post(`${environment.s3Endpoint}${path}`, formData, httpHeaders)
-      .pipe(
-        map((data) => {
-          if (data) {
-            return data;
-          } else {
-            return null;
-          }
-        })
-      );
-  }
-
-  
-  downloadImage(imageUrl: any) {
-    const httpHeaders = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.token}`,
-        Accept: 'application/json',
-        enctype: 'multipart/form-data',
-      }),
-      params: {
-        filePath: imageUrl,
-      },
-    };
-    let url = `convertToBase64`;
-    return this.httpClient
-      .get(`${environment.s3Endpoint}${url}`, httpHeaders)
-      .pipe(
-        map((data) => {
-          if (data && data) {
-            return data;
-          } else {
-            return null;
-          }
-        })
-      );
-  }
-
-
-  
+    let path = `/shared/upload`;
+    return this.httpClient.post(`${environment.app_url}${path}`, formData, httpHeaders)
+      .pipe(catchError(formatErrors))
+      .pipe(map(data => {
+        if (data) {
+          return data;
+        } else {
+          return null;
+        }
+      }));
+  };
 
   /**
-   * check th file size
-   * @param file
-   * @returns
-   */
+  * check th file size
+  * @param file 
+  * @returns 
+  */
   checkFileSize(file) {
     let size = file.size / (1024 * 1024);
-    if (size > this.OPTIONS.maxLimit) {
+    if (size > OPTIONS.maxLimit) {
       return true;
     }
     return false;
@@ -97,15 +65,17 @@ export class UploadService {
     return false;
   }
   /**
-   * check upload file type
-   * @param file
-   * @returns
-   */
+  * check upload file type
+  * @param file 
+  * @returns 
+  */
   checkImageType(file) {
     let types = ['image/png', 'image/jpeg', 'image/jpg'];
     if (!types.includes(file.type)) {
       return true;
     }
-    return false;
+    return false
   }
+
 }
+

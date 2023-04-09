@@ -4,21 +4,29 @@
   "webDir": "www",
   "bundledWebRuntime": false,
   "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1000,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffff",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": true,
+      "splashFullScreen": true,
+      "splashImmersive": true
+    },
     "LocalNotifications": {
       "smallIcon": "ic_launcher_rounded",
-      "icon": "ic_launcher_rounded"
+      "icon": "ic_launcher_rounded",
+      "iconColor": "#488AFF",
+      "sound": "beep.wav"
     },
     "PushNotifications": {
-      "presentationOptions": [
-        "badge",
-        "sound",
-        "alert"
-      ]
+      "smallIcon": "ic_launcher_rounded",
+      "icon": "ic_launcher_rounded",
+      "presentationOptions": ["badge", "sound", "alert"]
     }
   },
-  "linuxAndroidStudioPath": "/home/s2p/gandhar/Pratik_Projects/android-studio/bin/studio.sh",
   "server": {
     "cleartext": true
-  },
-  "npmClient": "npm"
+  }
 }

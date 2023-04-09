@@ -4,21 +4,8 @@
 
 export const environment = {
   production: false,
-
-  // apiEndpoint: 'http://localhost:2000/api/v1/customerApp/',
-  // url: 'http://localhost:2000',
-  // s3Endpoint: 'http://localhost:2000/api/v1/shared/',
-
-
-
-  // apiEndpoint: 'http://192.168.1.8:2000/api/v1/customerApp/',
-  // s3Endpoint: 'http://192.168.1.8:2000/api/v1/shared/',
-  // url: 'http://192.168.1.8:2000',
-
-
-  apiEndpoint: 'http://13.233.6.45:2000/api/v1/customerApp/',
+  apiEndpoint: 'http://13.233.6.45:2000/api/v1/',
   url: 'http://13.233.6.45:2000',
-  s3Endpoint: 'http://13.233.6.45:2000/api/v1/shared/',
 };
 
 /*
