@@ -1,10 +1,11 @@
 {
-  "signIn": "Sign In To Udhari Book",
+  "signIn": "Sign In To Bharat Online",
   "welcomeText": "Welcome back! Sign in with your previous account to continue shopping",
+  "welcomeSignUpText": "Welcome! Sign up to continue shopping",
   "welcome": "Welcome",
   "appName": "Udhari Book App",
   "signinText": "Sign In to your existing account or create a new account",
-  "signUp": "sign up",
+  "signUp": "Sign Up To Bharat Online",
   "signUpText": "Sign up to create an account",
   "hello": "Hello",
   "email": "Email",

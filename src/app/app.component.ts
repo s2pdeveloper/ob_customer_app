@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     public loadingController: LoadingController,
     private appUpdate: AppUpdateService,
     private appBackButton: AppBackButtonService,
-    // private pushNotificationService: PushNotificationService,
+    private pushNotificationService: PushNotificationService,
     public translate: TranslateService
   ) {
     this.languageService.getLang();

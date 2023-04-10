@@ -7,6 +7,10 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Plugins } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
+import { ROLES } from 'src/app/helpers/constants.helper';
+import { authFieldsErrors } from 'src/app/helpers/formErrors.helpers';
+import { validateField } from 'src/app/shared/validators/form.validator';
+import { UserService } from 'src/app/service/auth/user.service';
 const { Device, Geolocation } = Plugins;
 @Component({
   selector: 'app-login',
@@ -22,58 +26,77 @@ export class LoginPage implements OnInit {
   constructor(
     private router: Router,
     private localStorage: StorageService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private spinner: LoaderService,
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService
   ) { }
-
   loginForm = new FormGroup({
-    mobile: new FormControl('7028874108', [Validators.required]),
-    password: new FormControl('admin@1234', [Validators.required]),
+    mobileCode: new FormControl('91', [Validators.required]),
+    mobileNumber: new FormControl([
+      Validators.required,
+      Validators.pattern('^[7-9][0-9]{9}$'),
+      Validators.maxLength(10),
+    ]),
+    role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
+    // locationPoint: new FormControl(),
   });
-
-  ngOnInit() {
-    this.returnUrl =
-      this.route.snapshot.queryParams[`returnUrl`] || '/landing-page';
+  errorMessages = authFieldsErrors;
+  async ngOnInit() {
+    this.deviceInfo = await Device.getInfo();
+    this.deviceInfo.geoLocation = (
+      await Geolocation.getCurrentPosition()
+    ).coords;
+    // this.form.locationPoint.setValue([
+    //   this.deviceInfo.geoLocation.latitude,
+    //   this.deviceInfo.geoLocation.longitude,
+    // ]);
   }
 
   get form() {
     return this.loginForm.controls;
   }
-
-  login() {
+  async login() {
     if (this.loginForm.invalid) {
-      this.toaster.presentToast('warning', 'Please fill all valid field !');
+      validateField(this.loginForm);
       return;
     }
     this.spinner.showLoader();
-    this.authService.login(this.loginForm.value).subscribe((success) => {
-      if (typeof window !== 'undefined') {
-        this.localStorage.set('OBUser', success);
+    this.userService.sendMobileOtp(this.loginForm.value).subscribe(
+      async (success) => {
+        this.router.navigate([`/verification`], {
+          queryParams: {
+            mobileNumber: this.form.mobileNumber.value,
+          },
+        });
+        this.saveDeviceToken(success.id);
+        await this.spinner.hideLoader();
+        this.toaster.successToast(success.message);
+
+      },
+      async (error) => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
       }
-      this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
-      this.saveDeviceToken(success._id);
-      this.spinner.hideLoader();
-    });
+    );
   }
-  getDeviceInfo = async () => {
-    this.deviceInfo = await Device.getInfo();
-    this.deviceInfo.geoLocation = await (
-      await Geolocation.getCurrentPosition()
-    ).coords;
-  };
+
   saveDeviceToken(id) {
     let newObj: any = Object.assign(
       {
-        userId: id,
-        deviceId: this.localStorage.get('OBUserDeviceId'),
+        id: id,
+        deviceId: this.localStorage.get('OBShopDeviceId'),
+        platform: this.deviceInfo?.platform
       },
-      this.deviceInfo
     );
-    newObj.deviceId &&
-      this.authService.createAndUpdateUserDevice(newObj).subscribe();
+
+    console.log("newObj", newObj);
+    this.userService.addDeviceToken(newObj).subscribe();
   }
-  
+
+  navigateToSignUp() {
+    this.router.navigate([`/register`]);
+  }
 }

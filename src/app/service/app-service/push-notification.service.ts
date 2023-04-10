@@ -35,7 +35,7 @@ export class PushNotificationService {
     PushNotifications.addListener(
       'registration',
       (token: PushNotificationToken) => {
-        this.storageService.set('OBUserDeviceId', token.value);
+        this.storageService.set('OBShopDeviceId', token.value);
       }
     );
     // Show us the notification payload if the app is open on our device
@@ -89,20 +89,7 @@ export class PushNotificationService {
     const randomId = Math.floor(Math.random() * 10000) + 1;
     let additional = JSON.parse(notification);
     console.log('notification redirection', additional);
-
-    // this.router.navigateByUrl('./main-layout/more-layout/notifications');
-    // if (notificationType.CHAT_MESSAGE === notification.data.type) {
-    //   this.router.navigate([`/chat-view/${additional.id}`]);
-    // }
-    // LocalNotifications.addListener(
-    //   'localNotificationActionPerformed',
-    //   (notification: LocalNotificationActionPerformed) => {
-    //     console.log('localNotificationActionPerformed', notification);
-    //     console.log(
-    //       'localNotificationActionPerformed redirection',
-    //       notification
-    //     );
-    //   }
-    // );
   }
+  
+  
 }

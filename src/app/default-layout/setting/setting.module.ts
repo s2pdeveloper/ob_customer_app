@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SettingPageRoutingModule } from './setting-routing.module';
 import { SettingPage } from './setting.page';
-
+import { UserService } from 'src/app/service/auth/user.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -12,6 +12,7 @@ import { SettingPage } from './setting.page';
     IonicModule,
     SettingPageRoutingModule
   ],
-  declarations: [SettingPage]
+  declarations: [SettingPage],
+  providers:[UserService]
 })
 export class SettingPageModule {}

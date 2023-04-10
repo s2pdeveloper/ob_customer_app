@@ -1,63 +1,42 @@
-<ion-content>
-  <ion-card>
-
+<ion-content class="shadow-none ion-no-padding">
+  <img src="assets/images/grocery.jpg" class="head-image">
+  <div class="ion-padding">
     <div class="ion-text-center">
-      <img src="./assets/image/login2.jpg" alt="Logo" height="290" />
+      <ion-text class="text-label text-color-2 text-bold">
+        {{ 'signIn' | translate}}
+      </ion-text>
+      <p class="text-color-1">
+        {{ 'welcomeText' | translate}}
+      </p>
     </div>
 
     <form [formGroup]="loginForm">
-      <ion-item fill="outline" class="input" [class.invalid]="!form.mobile.valid && (form.mobile.dirty || submitted)">
-        <ion-label position="floating">
-          {{ 'Mobile Number' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input maxlength="10" pattern="[0-9]{10}" type="number" placeholder="{{ 'Mobile Number' | translate}}"
-          formControlName="mobile" inputmode="number"></ion-input>
+      <ion-item class="input-class mt-3" lines="none">
+        <ion-label class="text-color-2" position="stacked">{{ 'mobileNumber' | translate}} <span
+            class="span-color">*</span></ion-label>
+        <ion-input formControlName="mobileNumber" type="number" name="mobileNumber"
+          placeholder="{{ 'mobileNumber' | translate}}" autocomplete="on" clearInput>
+        </ion-input>
       </ion-item>
-      <app-validation-messages [control]="form.mobile">
-      </app-validation-messages>
+      <div class="text-left" *ngFor="let error of errorMessages.mobileNumber">
+        <ng-container
+          *ngIf="form.mobileNumber.hasError(error.type) && (form.mobileNumber.dirty || form.mobileNumber.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
 
-      <ion-item class="input" fill="outline"
-        [class.invalid]="!form.password.valid && (form.password.dirty || submitted)">
-        <ion-label position="floating">
-          {{ 'password' | translate }}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input formControlName="password" [type]="showEye ? 'password':'text'" name="password"
-          placeholder="{{ 'password' | translate }}" autocomplete="on" clearInput></ion-input>
-        <ion-icon class="input-icon eye-password" slot="end" name="eye" *ngIf="!showEye" (click)="showEye = !showEye">
-        </ion-icon>
-        <ion-icon class="input-icon eye-password" name="eye-off-outline" slot="end" *ngIf="showEye"
-          (click)="showEye = !showEye">
-        </ion-icon>
-        </ion-item>
+
+      <div class="clearfix ion-padding-top">
+        <ion-button (click)="login()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+          {{ 'login' | translate}}
+        </ion-button>
+      </div>
+      <div class="d-flex justify-content-center ion-margin-top">
+        <p class="text-color-1">
+          Not have an account yet ?
+          <a class="text-color-1 font-weight-bold" role="button" (click)="navigateToSignUp()">Sign Up</a>
+        </p>
+      </div>
     </form>
-
-    <!-- <div> -->
-      <a href="javascript:void()" routerLink="/forget-pwd">
-         <h6> <span style="float:right"> {{ 'Forgot Password ?' | translate}} 
-          </span></h6>
-      </a>
-    <!-- </div> <br> -->
-
-    <div class="ion-text-center ion-margin-vertical">
-      <ion-button color="primary" expand="full" shape="round" class="btn" (click)="login()" >
-        {{ 'Login' | translate}}
-      </ion-button>
-    </div>
-
-    <div class="ion-text-center signup">
-      <h6>
-        Not have an account Yet?
-        <a href="javascript:void()" routerLink="/register">
-          <ion-label color="medium">
-            <b>{{ 'SignUp' | translate}} 
-              
-            </b>
-          </ion-label>
-        </a>
-      </h6>
-    </div>
-
-  </ion-card>
+  </div>
 </ion-content>

@@ -25,6 +25,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'verification',
+    loadChildren: () =>
+      import('./auth-layout/verification/verification.module').then(
+        (m) => m.VerificationPageModule
+      ),
+  },
+  {
     path: 'forget-pwd',
     loadChildren: () =>
       import('./auth-layout/forget-pwd/forget-pwd.module').then(

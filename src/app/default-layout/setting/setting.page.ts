@@ -1,26 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/core/services';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { UserService } from 'src/app/service/auth/user.service';
+import { StorageService } from 'src/app/core/services';
+import { Plugins } from '@capacitor/core';
+const { Device, Geolocation } = Plugins;
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
   styleUrls: ['./setting.page.scss'],
 })
 export class SettingPage implements OnInit {
-
+  deviceInfo: any;
   constructor(
-    private router: Router
+    private router: Router,
+    private spinner: LoaderService,
+    private toaster: ToastService,
+    private userService: UserService,
+    private storageService: StorageService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.deviceInfo = await Device.getInfo();
+    this.deviceInfo.geoLocation = (
+      await Geolocation.getCurrentPosition()
+    ).coords;
   }
 
 
-  navigateTo(page:string) {
+  navigateTo(page: string) {
     this.router.navigate([`${page}`])
   }
-
-  logout() {
-    this.router.navigate(['/login'])
+  async logout() {
+    await this.spinner.showLoader();
+    let payload = {
+      deviceToken: localStorage.getItem('deviceToken'),
+      platform: this.deviceInfo.platform,
+    }
+    this.userService.removeDeviceToken(payload).subscribe(async result => {
+      this.userService.purgeAuth(this.storageService.remove('OBUser'));
+      this.router.navigate([`/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    }, async error => {
+      this.userService.purgeAuth(this.storageService.remove('OBUser'));
+      this.router.navigate([`/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    })
   }
 }

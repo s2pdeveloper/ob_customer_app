@@ -1,35 +1,17 @@
-ion-content {
-  height: 100vh;
-  // --background: #df7e7e !important;
+.toolbar-transparent {
+  --background: transparent;
+  position: absolute;
+}
 
-  ion-card {
-    margin: -2px;
-    border-radius: 1em;
-  }
+.head-image {
+  height: 230px;
+  width: 100%;
+}
 
-  .eye-password {
-    font-size: 25px;
-    padding-top: 0px;
-    vertical-align: middle;
-    color: #030c0b;
-  }
+.text-label {
+  font-size: larger;
+}
 
-  .input {
-    margin: 22px 15px 15px 15px;
-  }
-
-  ion-button {
-    margin: 30px;
-  }
-
-  h6 {
-    font-size: 17px;
-    margin: -8px 0px 20px 0;
-    padding: 13px;
-    word-spacing: 3px;
-  }
-  ion-item{
-    top:15px;
-  }
-
+.span-color {
+  color: red;
 }

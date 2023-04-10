@@ -7,7 +7,13 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { Plugins } from '@capacitor/core';
+import { ROLES } from 'src/app/helpers/constants.helper';
 const { Device, Geolocation, Browser } = Plugins;
+import { Location } from '@angular/common';
+import { validateField } from 'src/app/shared/validators/form.validator';
+import { UserService } from 'src/app/service/auth/user.service';
+import { authFieldsErrors } from 'src/app/helpers/formErrors.helpers';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -23,54 +29,92 @@ export class RegisterPage implements OnInit {
     private storageService: StorageService,
     private toaster: ToastService,
     public authService: AuthService,
-    public translate: TranslateService
+    private userService: UserService,
+    public translate: TranslateService,
+    private location: Location,
   ) { }
 
   ngOnInit() { }
   ionViewWillEnter(): void {
     this.getDeviceInfo();
   }
-
   registerForm = new FormGroup({
-    // id: new FormControl(),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    mobile: new FormControl(''),
-    password: new FormControl(''),
-    // confirmPassword: new FormControl(''),
-    email: new FormControl(''),
-    role: new FormControl('CUSTOMER'),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    role: new FormControl(ROLES.CUSTOMER),
+    mobileCode: new FormControl('91', [Validators.required]),
+    mobileNumber: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[7-9][0-9]{9}$'),
+    ]),
   });
-
+  errorMessages = authFieldsErrors;
+  passwordType = 'password';
   get form() {
     return this.registerForm.controls;
   }
 
-  register() {
-    console.log(this.registerForm.value);
-    this.submitted = true;
+  navigateToVerification() {
+    this.router.navigate([`/verification`], { replaceUrl: true });
+  }
+
+  onClickEye() {
+    if (this.passwordType === 'password') {
+      this.passwordType = 'text';
+      this.showEye = true;
+    } else {
+      this.passwordType = 'password';
+      this.showEye = false;
+    }
+  }
+
+  // register() {
+  //   console.log(this.registerForm.value);
+  //   this.submitted = true;
+  //   if (this.registerForm.invalid) {
+  //     this.toaster.presentToast('warning', 'Please fill all valid field !');
+  //     return;
+  //   }
+  //   this.spinner.showLoader();
+  //   let newObj: any = Object.assign(
+  //     {
+  //       deviceId: this.storageService.get('OBUserDeviceId'),
+  //     },
+  //     this.deviceInfo
+  //   );
+  //   let formData: any = this.registerForm.value;
+  //   this.storageService.set('mobile', formData.mobile);
+  //   formData.role = 'CUSTOMER';
+  //   formData.deviceInfo = newObj;
+  //   this.authService.createUser(formData).subscribe((success: any) => {
+  //     this.spinner.hideLoader();
+  //     this.registerForm.reset();
+  //     this.submitted = false;
+  //     this.toaster.successToast('Register done successfully.');
+  //     this.router.navigate(['/login']);
+  //   });
+  // }
+
+  async onSubmit() {
     if (this.registerForm.invalid) {
-      this.toaster.presentToast('warning', 'Please fill all valid field !');
+      validateField(this.registerForm);
       return;
     }
     this.spinner.showLoader();
-    let newObj: any = Object.assign(
-      {
-        deviceId: this.storageService.get('OBUserDeviceId'),
+    this.userService.signUp(this.registerForm.value).subscribe(
+      async (success) => {
+        this.router.navigate([`/verification`], {
+          queryParams: {
+            mobileNumber: this.form.mobileNumber.value,
+          },
+        });
+        await this.spinner.hideLoader();
+        this.toaster.successToast(success.message);
       },
-      this.deviceInfo
+      async (error) => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      }
     );
-    let formData: any = this.registerForm.value;
-    this.storageService.set('mobile', formData.mobile);
-    formData.role = 'CUSTOMER';
-    formData.deviceInfo = newObj;
-    this.authService.createUser(formData).subscribe((success: any) => {
-      this.spinner.hideLoader();
-      this.registerForm.reset();
-      this.submitted = false;
-      this.toaster.successToast('Register done successfully.');
-      this.router.navigate(['/login']);
-    });
   }
   getDeviceInfo = async () => {
     this.deviceInfo = await Device.getInfo();
@@ -83,6 +127,9 @@ export class RegisterPage implements OnInit {
   }
 
 
+  goBack() {
+    this.location.back();
+  }
 
 
 
