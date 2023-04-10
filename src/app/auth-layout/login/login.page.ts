@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -22,7 +21,6 @@ export class LoginPage implements OnInit {
   showEye: boolean = false;
   constructor(
     private router: Router,
-    private localStorage: StorageService,
     private route: ActivatedRoute,
     private spinner: LoaderService,
     private toaster: ToastService,
@@ -52,7 +50,6 @@ export class LoginPage implements OnInit {
     // this.spinner.showLoader();
     this.authService.login(this.loginForm.value).subscribe(async (success) => {
       this.toaster.successToast('Logged in successfully');
-      this.localStorage.set('OBCustomer', success);
       this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
       this.saveDeviceToken(success._id);
       await this.spinner.hideLoader();
@@ -69,15 +66,7 @@ export class LoginPage implements OnInit {
   };
 
   saveDeviceToken(id) {
-    let newObj: any = Object.assign(
-      {
-        customerId: id,
-        deviceId: this.localStorage.get('OBUserDeviceId'),
-      },
-      this.deviceInfo
-    );
-    newObj.deviceId &&
-      this.authService.createAndUpdateUserDevice(newObj).subscribe();
+
   }
 
   onClickEye() {

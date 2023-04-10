@@ -4,7 +4,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { ApiService } from './services/api.service';
 import { JwtService } from './services/jwt.service';
 import { UserService } from './services/user.service';
-import { UploadService } from '../service/upload/upload.service';
+import { UploadService } from './services/upload.service';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 

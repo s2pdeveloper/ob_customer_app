@@ -6,7 +6,8 @@ import { ShopService } from 'src/app/service/shop/shop.service';
 import { ModalController } from '@ionic/angular';
 import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.component';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
-import { StorageService, ToastService } from 'src/app/core/services';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-shop-detail',
@@ -23,7 +24,7 @@ export class ShopDetailPage implements OnInit {
   faceBook: any;
   insta: any;
   youTube: any;
-  webSite:any;
+  webSite: any;
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -43,7 +44,7 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalCtrl: ModalController,
-    private localStorage: StorageService,
+    private userService: UserService,
     private toaster: ToastService,
 
 
@@ -79,9 +80,9 @@ export class ShopDetailPage implements OnInit {
 
   // favourite
   async addToFavorite(item) {
-    this.user = this.localStorage.get('OBCustomer')._id;
+    this.user = this.userService.getCurrentUser();
     let payload = {
-      _id: this.user,
+      _id: this.user.id,
       action: item.shopFavorite.length ? 'remove' : 'add',
       shopId: item._id,
     };

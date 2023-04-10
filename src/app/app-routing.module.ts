@@ -5,7 +5,7 @@ import { AuthGuard } from './core/services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app/tabs/landing-page',
+    redirectTo: 'app/tabs/home',
     pathMatch: 'full',
   },
   {

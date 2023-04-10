@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/services';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CatalogueService {
   routes: any = {
-  
-    getAllCatalogue:() => 'catalogue/getAll',
+
+    getAllCatalogue: () => 'catalogue/getAll',
 
   };
   constructor(private http: ApiService) { }

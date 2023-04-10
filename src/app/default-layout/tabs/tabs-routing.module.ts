@@ -9,11 +9,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/landing-page',
+        redirectTo: '/home',
         pathMatch: 'full'
       },
       {
-        path: 'landing-page',
+        path: 'home',
         loadChildren: () => import('../../default-layout/landing-page/landing-page.module').then(m => m.LandingPagePageModule)
       },
       {
@@ -54,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'landing-page',
+    redirectTo: 'home',
     pathMatch: 'full'
   }
 ];

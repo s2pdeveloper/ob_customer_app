@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
 import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { forkJoin } from 'rxjs';
 import { Plugins } from '@capacitor/core';
+import { UserService } from 'src/app/core/services/user.service';
 const { Geolocation } = Plugins;
 @Component({
   selector: 'app-landing-page',
@@ -80,14 +80,14 @@ export class LandingPagePage implements OnInit {
     private categoryService: CategoryService,
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
-    private localStorage: StorageService,
+    private userService: UserService,
     private authService: AuthService
   ) {}
 
   ngOnInit() {}
   async ionViewWillEnter() {
     this.search = '';
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.getAllDataParallel();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();

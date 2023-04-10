@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
@@ -27,7 +26,6 @@ export class RegisterPage implements OnInit {
   constructor(
     private router: Router,
     private spinner: LoaderService,
-    private storageService: StorageService,
     private toaster: ToastService,
     public authService: AuthService,
     public translate: TranslateService,
@@ -67,17 +65,9 @@ export class RegisterPage implements OnInit {
       this.toaster.presentToast('warning', 'Please fill all valid field !');
       return;
     }
-    // this.spinner.showLoader();
-    let newObj: any = Object.assign(
-      {
-        deviceId: this.storageService.get('OBUserDeviceId'),
-      },
-      this.deviceInfo
-    );
     let formData: any = this.registerForm.value;
-    this.storageService.set('mobile', formData.mobile);
     formData.role = 'CUSTOMER';
-    formData.deviceInfo = newObj;
+ 
     this.authService.createUser(formData).subscribe(async (success: any) => {
       await this.spinner.hideLoader();
       this.registerForm.reset();

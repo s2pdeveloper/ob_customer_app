@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../core/services';
-import {debounceTime,distinctUntilChanged} from 'rxjs/operators'
+import { ApiService } from 'src/app/core/services/api.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class PassbookService {
     updatePath: (id) => `passbook/update/${id}`,
     deletePath: (id) => `passbook/delete/${id}`,
   };
-  constructor(private http: ApiService) {}
+  constructor(private http: ApiService) { }
 
   createPassbook(payload) {
     return this.http.post(this.routes.createPath, payload);

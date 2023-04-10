@@ -6,7 +6,7 @@ import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 import { EditProfilePage } from './edit-profile.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ValidationMessagesPageModule } from 'src/app/core/validation-messages/validation-messages.module';
-import { UploadService } from 'src/app/service/upload/upload.service';
+import { UploadService } from 'src/app/core/services/upload.service';
 
 @NgModule({
   imports: [
@@ -20,7 +20,7 @@ import { UploadService } from 'src/app/service/upload/upload.service';
   ],
   declarations: [EditProfilePage],
   providers: [
-    { provide: UploadService},
+    { provide: UploadService },
   ],
 })
-export class EditProfilePageModule {}
+export class EditProfilePageModule { }

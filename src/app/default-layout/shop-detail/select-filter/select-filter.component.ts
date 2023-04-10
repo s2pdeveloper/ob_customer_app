@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Socket } from 'ngx-socket-io';
-import { StorageService, ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { ChatService } from 'src/app/service/chat/chat.service';
 @Component({
   selector: 'app-select-filter',
@@ -24,7 +23,7 @@ export class SelectFilterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private localStorage: StorageService,
+    private userService: UserService,
     private spinner: LoaderService,
     private socket: Socket,
     private chatService: ChatService,
@@ -35,7 +34,7 @@ export class SelectFilterComponent implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
   }
 
   dismissModal(isClose) {

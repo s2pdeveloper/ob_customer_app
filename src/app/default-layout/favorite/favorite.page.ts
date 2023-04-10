@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService, ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { FavoriteService } from 'src/app/service/favourite/favourite.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 
@@ -38,7 +39,7 @@ export class FavoritePage implements OnInit {
     private shopService: ShopService,
     private favoriteService: FavoriteService,
     private toaster: ToastService,
-    private localStorage: StorageService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() { }
@@ -49,7 +50,7 @@ export class FavoritePage implements OnInit {
   }
 
   async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     // this.spinner.showLoader();
     let obj = {
       page: this.page,

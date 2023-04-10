@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { JwtService } from './jwt.service';
-import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { formatErrors, OPTIONS } from "../../helpers";
+import { JwtService } from './jwt.service';
 
 @Injectable()
 export class UploadService {
@@ -19,7 +18,7 @@ export class UploadService {
   }
 
 
-  uploadFile(formData, isNew: boolean = false, id: string = ""): Observable<any> {
+  uploadFile(formData): Observable<any> {
     const httpHeaders = {
       headers: new HttpHeaders({
         'Authorization': `JWT ${this.token}`,
@@ -28,7 +27,7 @@ export class UploadService {
       })
     };
     let path = `/shared/upload`;
-    return this.httpClient.post(`${environment.app_url}${path}`, formData, httpHeaders)
+    return this.httpClient.post(`${environment.apiEndpoint}${path}`, formData, httpHeaders)
       .pipe(catchError(formatErrors))
       .pipe(map(data => {
         if (data) {

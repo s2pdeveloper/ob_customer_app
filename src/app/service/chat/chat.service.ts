@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../core/services';
-import {  map } from 'rxjs/operators';
+import { ApiService } from 'src/app/core/services/api.service';
+import { map } from 'rxjs/operators';
 // import { Plugins, FilesystemDirectory } from '@capacitor/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
@@ -14,13 +14,13 @@ export class ChatService {
   routes: any = {
     createPath: `chat/create`,
 
-    getMsgByCustomerId: (_id) =>`chat/getMsgByCustomerId/${_id}`,
+    getMsgByCustomerId: (_id) => `chat/getMsgByCustomerId/${_id}`,
 
     getChatShopByCustomerId: `order/getChatShopByCustomerId`,
-    
+
   };
 
-  constructor(private http: ApiService,private fileOpener: FileOpener,) {}
+  constructor(private http: ApiService, private fileOpener: FileOpener,) { }
 
   create(payload) {
     return this.http.post(this.routes.createPath, payload);
@@ -29,9 +29,9 @@ export class ChatService {
   getMsgByCustomerId(_id) {
     return this.http.get(this.routes.getMsgByCustomerId(_id));
   }
-// shop list
-getChatShopByCustomerId(obj) {
-    return this.http.get(this.routes.getChatShopByCustomerId,obj);
+  // shop list
+  getChatShopByCustomerId(obj) {
+    return this.http.get(this.routes.getChatShopByCustomerId, obj);
   }
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/services';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class CategoryService {
     getSubCategoryBySubCategory: (obj) =>
       `subCategory/getAll?${obj.categoryId}`,
   };
-  constructor(private http: ApiService) {}
+  constructor(private http: ApiService) { }
 
   getAll(params) {
     return this.http

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { UploadService } from 'src/app/service/upload/upload.service';
+import { UploadService } from 'src/app/core/services/upload.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,7 +20,6 @@ export class EditProfilePage implements OnInit {
   user: any;
   fileUploaded: boolean = false;
   filePath: string = "";
-
 
   profileForm = new FormGroup({
     id: new FormControl(),
@@ -58,15 +57,15 @@ export class EditProfilePage implements OnInit {
     private router: Router,
     private spinner: LoaderService,
     private toaster: ToastService,
-    private localStorage: StorageService,
+    private userService: UserService,
     public authService: AuthService,
     public translate: TranslateService,
     private uploadService: UploadService,
 
-) { }
+  ) { }
 
   ngOnInit() {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.getById();
   }
 
@@ -76,7 +75,7 @@ export class EditProfilePage implements OnInit {
 
 
   getById() {
-    this.authService.profile(this.user._id).subscribe((success) => {
+    this.userService.getProfile().subscribe((success) => {
       this.profileForm.patchValue(success);
     });
   }
@@ -104,7 +103,7 @@ export class EditProfilePage implements OnInit {
     this.spinner.showLoader();
     let formData = this.profileForm.value;
     this.authService.updateUser(formData.id, formData).subscribe((success: any) => {
-   this.spinner.hideLoader();
+      this.spinner.hideLoader();
       this.profileForm.reset();
       this.toaster.successToast('Profile updated successfully.');
       this.router.navigate(['/view-profile']);

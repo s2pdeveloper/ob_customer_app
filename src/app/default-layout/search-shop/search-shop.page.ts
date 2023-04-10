@@ -3,8 +3,9 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShopService } from 'src/app/service/shop/shop.service';
-import { IonInfiniteScroll,IonContent } from '@ionic/angular';
-import { StorageService, ToastService } from 'src/app/core/services';
+import { IonInfiniteScroll, IonContent } from '@ionic/angular';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-search-shop',
   templateUrl: './search-shop.page.html',
@@ -17,13 +18,13 @@ export class SearchShopPage implements OnInit {
   pageSize: number = 10;
   collection: number = 0;
   search: string = '';
- businessTypeId: any;
+  businessTypeId: any;
   categoryId: string = '';
   subCategoryId: string = '';
   shopArr: any = [];
   loaded: boolean = false;
   shopDetails: any;
-  user: number;
+  user: any = {};
 
   constructor(
     private router: Router,
@@ -32,13 +33,13 @@ export class SearchShopPage implements OnInit {
     private spinner: LoaderService,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
-    private localStorage: StorageService
+    private userService: UserService
   ) { }
 
   ngOnInit() { }
 
   // ngAfterViewChecked() {
-    // this.scrollToBottom();
+  // this.scrollToBottom();
   // }
   // scrollToBottom() {
   //   this.content.scrollToBottom();
@@ -80,9 +81,9 @@ export class SearchShopPage implements OnInit {
   }
 
   async addToFavorite(item) {
-    this.user = this.localStorage.get('OBCustomer')._id;
+    this.user = this.userService.getCurrentUser();
     let payload = {
-      _id: this.user,
+      _id: this.user.id,
       action: item.shopFavorite.length ? 'remove' : 'add',
       shopId: item._id,
     };

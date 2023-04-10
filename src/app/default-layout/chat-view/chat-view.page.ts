@@ -2,17 +2,19 @@ import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked } from '@angu
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ChatService } from 'src/app/service/chat/chat.service';
-import { StorageService, ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
 import { Socket } from 'ngx-socket-io';
-import { UploadService } from 'src/app/service/upload/upload.service';
+import { UploadService } from 'src/app/core/services/upload.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { LocationComponent } from 'src/app/modal/location/location.component';
 import { App } from '@capacitor/app';
 import { OrderRatingComponent } from 'src/app/modal/order-rating/order-rating.component';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { RestService } from 'src/app/core/services/rest.service';
 
 @Component({
   selector: 'app-chat-view',
@@ -52,10 +54,11 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     private chatService: ChatService,
     private toaster: ToastService,
     private spinner: LoaderService,
-    private localStorage: StorageService,
+    private userService: UserService,
     private uploadService: UploadService,
     private modalCtrl: ModalController,
-    private socket: Socket
+    private socket: Socket,
+    private restService: RestService
   ) { }
 
   chatForm = new FormGroup({
@@ -76,7 +79,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params) => {
 
       this.status = params.status;
@@ -153,8 +156,7 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   async downloadImage(message) {
-    this.uploadService
-      .downloadImage(message.image)
+    this.restService.convertToBase64(message.image)
       .subscribe(async (success: any) => {
         this.toaster.successToast(
           'Image Downloaded successfully. Please check your Documents folder.'

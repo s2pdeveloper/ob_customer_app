@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Socket } from 'ngx-socket-io';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { ChatService } from 'src/app/service/chat/chat.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class ChatListPage implements OnInit {
     private router: Router,
     private chatService: ChatService,
     private spinner: LoaderService,
-    private localStorage: StorageService,
+    private userService: UserService,
     private socket: Socket,
     public translate: TranslateService
   ) {}
@@ -38,7 +38,7 @@ export class ChatListPage implements OnInit {
 
   ionViewWillEnter() {
     this.search='';
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.getChatShopByCustomerId(false);
   }
 

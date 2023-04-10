@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiService } from 'src/app/core/services';
+import { ApiService } from 'src/app/core/services/api.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,7 +23,7 @@ export class RestService {
     getAllShopNotifications: (page, pageSize) =>
       `notification/getAllShopNotifications?page=${page}&pageSize=${pageSize}`,
   };
-  constructor(private http: ApiService, private httpClient: HttpClient) {}
+  constructor(private http: ApiService, private httpClient: HttpClient) { }
 
   getAllAssignmentByBatchId(id) {
     return this.http.get(this.routes.getAllAssignmentByBatchId(id));

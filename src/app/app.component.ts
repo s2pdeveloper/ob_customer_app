@@ -11,6 +11,7 @@ import { SplashScreenService } from './core/services/splash-screen.service';
 import { CameraService } from './core/services/camera.service';
 import { StatusBarService } from './core/services/status-bar.service';
 import { BarcodeScannerService } from './core/services/barcode-scanner.service';
+import { UserService } from './core/services/user.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -48,10 +49,10 @@ export class AppComponent implements OnInit {
       if (this.jwtService.getToken()) {
         this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
       } else {
-        this.router.navigate([`/auth/login`], { replaceUrl: true });
+        this.router.navigate([`/login`], { replaceUrl: true });
       }
     } else {
-      this.router.navigate([`/auth/login`]);
+      this.router.navigate([`/login`]);
     }
   }
   initializeApp() {

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
-import { StorageService } from '../core/services';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Component({
@@ -10,7 +9,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
   styleUrls: ['./onboarding.page.scss'],
 })
 export class OnboardingPage implements OnInit {
-  constructor(private router: Router, private localStorage: StorageService) {}
+  constructor(private router: Router) { }
   async ionViewDidLeave() {
     await StatusBar.setStyle({ style: Style.Dark });
     await StatusBar.setBackgroundColor({ color: '#3f448a' });
@@ -18,11 +17,10 @@ export class OnboardingPage implements OnInit {
   }
   showSkip: boolean = false;
   user: any;
-  ngOnInit() {}
+  ngOnInit() { }
   async ionViewWillEnter() {
     await StatusBar.setStyle({ style: Style.Light });
     await StatusBar.setBackgroundColor({ color: '#e1eaf5' });
-    this.user = this.localStorage.get('OBCustomer');
   }
 
   @ViewChild('slides', { static: true }) slides: IonSlides;
@@ -99,16 +97,14 @@ export class OnboardingPage implements OnInit {
               : $slideEl.find('.swiper-slide-shadow-bottom');
             if (shadowBefore.length === 0) {
               shadowBefore = swiper.$(
-                `<div class="swiper-slide-shadow-${
-                  swiper.isHorizontal() ? 'left' : 'top'
+                `<div class="swiper-slide-shadow-${swiper.isHorizontal() ? 'left' : 'top'
                 }"></div>`
               );
               $slideEl.append(shadowBefore);
             }
             if (shadowAfter.length === 0) {
               shadowAfter = swiper.$(
-                `<div class="swiper-slide-shadow-${
-                  swiper.isHorizontal() ? 'right' : 'bottom'
+                `<div class="swiper-slide-shadow-${swiper.isHorizontal() ? 'right' : 'bottom'
                 }"></div>`
               );
               $slideEl.append(shadowAfter);
@@ -157,10 +153,6 @@ export class OnboardingPage implements OnInit {
     // });
   }
   navigateTo() {
-    if (this.user) {
-      this.router.navigate(['/landing-page']);
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate(['/login']);
   }
 }

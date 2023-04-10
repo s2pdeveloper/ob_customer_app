@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../../core/services';
 import { Router } from '@angular/router';
-import { StorageService } from '../../core/services';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/core/services/api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,14 +15,13 @@ export class AuthService {
     reset_password: 'user/reset-password',
     set_password: 'user/set-password',
     createAndUpdateUserDevice: 'user/createAndUpdateUserDevice',
-    getCurrentLocation:'customer/getUserCurrentLocation'
+    getCurrentLocation: 'customer/getUserCurrentLocation'
   };
 
   constructor(
     private http: ApiService,
-    private storageService: StorageService,
     public router: Router
-  ) {}
+  ) { }
 
   createUser(userPayload: any) {
     return this.http.post(this.routes.register, userPayload);
@@ -39,8 +36,8 @@ export class AuthService {
   profile(_id) {
     return this.http.get(this.routes.getByIdPath(_id));
   }
-  getCurrentLocation(params:any) {
-    return this.http.get(this.routes.getCurrentLocation,params); 
+  getCurrentLocation(params: any) {
+    return this.http.get(this.routes.getCurrentLocation, params);
   }
   getCurrentUser() {
     let x: any = localStorage.getItem('Student');

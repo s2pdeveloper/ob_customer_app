@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { StorageService, ToastService } from 'src/app/core/services';
 import { Socket } from 'ngx-socket-io';
 import { ChatService } from 'src/app/service/chat/chat.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-catalogue',
@@ -42,7 +43,7 @@ export class CataloguePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private shopService: ShopService,
-    private localStorage: StorageService,
+    private userService: UserService,
     private spinner: LoaderService,
     private socket: Socket,
     private chatService: ChatService,
@@ -52,7 +53,7 @@ export class CataloguePage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopId = params._id
       this.getShopById(params._id);

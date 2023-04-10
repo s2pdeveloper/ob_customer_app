@@ -1,73 +1,83 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  PushNotifications, ActionPerformed,
-  PushNotificationSchema,
-  Token,
-  
-} from '@capacitor/push-notifications';
-import { StorageService } from 'src/app/core/services';
+import { notificationType } from 'src/app/helpers';
+import { PushNotificationSchema, PushNotifications } from '@capacitor/push-notifications';
+import { LocalNotifications } from '@capacitor/local-notifications';
+import { Geolocation } from '@capacitor/geolocation';
 
-// const { PushNotifications, Geolocation, LocalNotifications } = Plugins;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PushNotificationService {
-  constructor(private router: Router, private storageService: StorageService) {}
 
-  registerForPushNotification(){
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
+  constructor(private router: Router) { }
+
+  async addListeners() {
+    await PushNotifications.addListener('registration', token => {
+      console.info('Registration token: ', token.value);
+      localStorage.setItem('deviceToken', token.value);
     });
 
-    PushNotifications.addListener('registration', (token: Token) => {
-      console.log('Push registration success, token: ' + token.value);
-      this.storageService.set('OBShopDeviceId', token.value);
+    await PushNotifications.addListener('registrationError', err => {
+      console.error('Registration error: ', err.error);
     });
 
-    PushNotifications.addListener('registrationError', (error: any) => {
-      alert('Error on registration: ' + JSON.stringify(error));
+    await PushNotifications.addListener('pushNotificationReceived', notification => {
+      const randomId = Math.floor(Math.random() * 10000) + 1;
+      LocalNotifications.schedule({
+        notifications: [
+          {
+            title: notification.title || 'Notification',
+            body: notification.body || '',
+            id: randomId,
+            smallIcon: "ic_launcher_rounded",
+          }
+        ]
+      });
     });
 
-    PushNotifications.addListener(
-      'pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-      },
-    );
+    await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
+      this.redirection(notification.notification);
+    });
 
-    PushNotifications.addListener(
-      'pushNotificationActionPerformed',
-      (notification: ActionPerformed) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-      },
-    );
+    const result = await Geolocation.requestPermissions();
+    console.log('geo location permission', result)
   }
-  redirection(notification) {
-    console.log('notification redirection', notification);
-    const randomId = Math.floor(Math.random() * 10000) + 1;
-    let additional = JSON.parse(notification);
-    console.log('notification redirection', additional);
+  async registerNotifications() {
+    let permStatus = await PushNotifications.checkPermissions();
 
-    // this.router.navigateByUrl('./main-layout/more-layout/notifications');
-    // if (notificationType.CHAT_MESSAGE === notification.data.type) {
-    //   this.router.navigate([`/chat-view/${additional.id}`]);
-    // }
-    // LocalNotifications.addListener(
-    //   'localNotificationActionPerformed',
-    //   (notification: LocalNotificationActionPerformed) => {
-    //     console.log('localNotificationActionPerformed', notification);
-    //     console.log(
-    //       'localNotificationActionPerformed redirection',
-    //       notification
-    //     );
-    //   }
-    // );
+    if (permStatus.receive === 'prompt') {
+      permStatus = await PushNotifications.requestPermissions();
+    }
+
+    if (permStatus.receive !== 'granted') {
+      return this.registerNotifications();
+      throw new Error('User denied permissions!');
+    }
+    await PushNotifications.register();
+  }
+
+  getDeliveredNotifications = async () => {
+    const notificationList = await PushNotifications.getDeliveredNotifications();
+  }
+
+  async registerForPushNotification() {
+    await this.registerNotifications();
+    await this.addListeners();
+  }
+
+  redirection(notification: PushNotificationSchema) {
+    let additional = JSON.parse(notification.data.additional);
+    if (notificationType.ORDER === notification.data.type) {
+      this.router.navigate([`/orders/request-booking`], {
+        queryParams: {
+          id: additional.id
+        }
+      });
+    }
+    else if (notificationType.CHAT_MESSAGE === notification.data.type) {
+      this.router.navigate([`/chat-view/${additional.id}`]);
+    }
   }
 }

@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
-import { StorageService } from 'src/app/core/services';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationService } from '../../../app/core/validation-messages/validation-messages.service';
 @Component({
@@ -38,15 +37,12 @@ export class ChangePwdPage implements OnInit {
     private auth: AuthService,
     private spinner: LoaderService,
     private toaster: ToastService,
-    private localStorage: StorageService,
     public translate: TranslateService,
     private validationService: ValidationService
   ) { }
 
   ngOnInit() { }
-  ionViewWillEnter() {
-    this.passForm.controls.id.setValue(this.localStorage.get('OBCustomer').id);
-  }
+  ionViewWillEnter() { }
   ngOnDestroy() { }
 
   get form() {
