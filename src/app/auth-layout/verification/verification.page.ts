@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Device } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { authFieldsErrors } from 'src/app/helpers/formErrors.helpers';
@@ -32,7 +33,7 @@ export class VerificationPage implements OnInit, OnDestroy {
   canResendOTP: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService,
-    private toastService: ToastService, private spinner: LoaderService,
+    private toastService: ToastService, private spinner: LoaderService, private localStorage: StorageService,
     public translate: TranslateService) { }
 
   async ngOnInit() {
@@ -88,8 +89,9 @@ export class VerificationPage implements OnInit, OnDestroy {
     this.userService.verifyMobileToken(this.loginForm.value).subscribe(
       async success => {
         let payload = {
-          deviceToken: localStorage.getItem('deviceToken'),
-          platform: this.deviceInfo.platform,
+          id: success.id,
+          deviceId: this.localStorage.get('OBShopDeviceId'),
+          platform: this.deviceInfo?.platform
         };
         this.userService.addDeviceToken(payload).subscribe();
         this.spinner.hideLoader();
@@ -125,6 +127,17 @@ export class VerificationPage implements OnInit, OnDestroy {
 
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
+  }
+  saveDeviceToken(id) {
+    let newObj: any = Object.assign(
+      {
+        id: id,
+        deviceId: this.localStorage.get('OBShopDeviceId'),
+        platform: this.deviceInfo?.platform
+      },
+    );
+    console.log("newObj", newObj);
+    this.userService.addDeviceToken(newObj).subscribe();
   }
 
 }

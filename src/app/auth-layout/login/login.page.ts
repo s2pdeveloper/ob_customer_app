@@ -71,7 +71,6 @@ export class LoginPage implements OnInit {
             mobileNumber: this.form.mobileNumber.value,
           },
         });
-        this.saveDeviceToken(success.id);
         await this.spinner.hideLoader();
         this.toaster.successToast(success.message);
 
@@ -83,18 +82,18 @@ export class LoginPage implements OnInit {
     );
   }
 
-  saveDeviceToken(id) {
-    let newObj: any = Object.assign(
-      {
-        id: id,
-        deviceId: this.localStorage.get('OBShopDeviceId'),
-        platform: this.deviceInfo?.platform
-      },
-    );
+  // saveDeviceToken(id) {
+  //   let newObj: any = Object.assign(
+  //     {
+  //       id: id,
+  //       deviceId: this.localStorage.get('OBShopDeviceId'),
+  //       platform: this.deviceInfo?.platform
+  //     },
+  //   );
 
-    console.log("newObj", newObj);
-    this.userService.addDeviceToken(newObj).subscribe();
-  }
+  //   console.log("newObj", newObj);
+  //   this.userService.addDeviceToken(newObj).subscribe();
+  // }
 
   navigateToSignUp() {
     this.router.navigate([`/register`]);
