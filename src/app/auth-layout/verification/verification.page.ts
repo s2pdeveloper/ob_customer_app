@@ -21,7 +21,6 @@ export class VerificationPage implements OnInit, OnDestroy {
     otp: new FormControl('', [Validators.required]),
     mobileCode: new FormControl('91', [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
-    referralCode: new FormControl('', [])
   });
 
   errorMessages = authFieldsErrors;
@@ -38,7 +37,6 @@ export class VerificationPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.form.referralCode.setValue(params['referralCode']);
       if (params['mobileNumber']) {
         this.form.mobileNumber.setValue(params['mobileNumber']);
       }
