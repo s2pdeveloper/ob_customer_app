@@ -4,7 +4,6 @@ import { LoadingController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './core/services/language.service';
 import { AppBackButtonService } from './core/services/app-back-button.service';
-import { PushNotificationService } from './service/app-service/push-notification.service';
 import { NetworkService } from './core/services/network.service';
 import { JwtService } from './core/services/jwt.service';
 import { SplashScreenService } from './core/services/splash-screen.service';
@@ -12,6 +11,7 @@ import { CameraService } from './core/services/camera.service';
 import { StatusBarService } from './core/services/status-bar.service';
 import { BarcodeScannerService } from './core/services/barcode-scanner.service';
 import { UserService } from './core/services/user.service';
+import { PushNotificationService } from './core/services/push-notification.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

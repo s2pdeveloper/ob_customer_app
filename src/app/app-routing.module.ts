@@ -11,24 +11,24 @@ const routes: Routes = [
   {
     path: 'app',
     loadChildren: () =>
-      import('./default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
+      import('./pages/default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
   {
     path: 'login',
     loadChildren: () =>
-      import('./auth-layout/login/login.module').then((m) => m.LoginPageModule),
+      import('./pages/auth-layout/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'register',
     loadChildren: () =>
-      import('./auth-layout/register/register.module').then(
+      import('./pages/auth-layout/register/register.module').then(
         (m) => m.RegisterPageModule
       ),
   },
   {
     path: 'forget-pwd',
     loadChildren: () =>
-      import('./auth-layout/forget-pwd/forget-pwd.module').then(
+      import('./pages/auth-layout/forget-pwd/forget-pwd.module').then(
         (m) => m.ForgetPwdPageModule
       ),
   },
@@ -36,7 +36,7 @@ const routes: Routes = [
     path: 'view-profile',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/setting/view-profile/view-profile.module').then(
+      import('./pages/default-layout/setting/view-profile/view-profile.module').then(
         (m) => m.ViewProfilePageModule
       ),
   },
@@ -44,7 +44,7 @@ const routes: Routes = [
     path: 'edit-profile',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/setting/edit-profile/edit-profile.module').then(
+      import('./pages/default-layout/setting/edit-profile/edit-profile.module').then(
         (m) => m.EditProfilePageModule
       ),
   },
@@ -52,7 +52,7 @@ const routes: Routes = [
   {
     path: 'change-pwd',
     loadChildren: () =>
-      import('./auth-layout/change-pwd/change-pwd.module').then(
+      import('./pages/auth-layout/change-pwd/change-pwd.module').then(
         (m) => m.ChangePwdPageModule
       ),
   },
@@ -60,7 +60,7 @@ const routes: Routes = [
   {
     path: 'onboarding',
     loadChildren: () =>
-      import('src/app/onboarding/onboarding.module').then(
+      import('./pages/onboarding/onboarding.module').then(
         (m) => m.OnboardingPageModule
       ),
   },
@@ -69,7 +69,7 @@ const routes: Routes = [
     path: 'shop-detail',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/shop-detail/shop-detail.module').then(
+      import('./pages/default-layout/shop-detail/shop-detail.module').then(
         (m) => m.ShopDetailPageModule
       ),
   },
@@ -77,14 +77,14 @@ const routes: Routes = [
     path: 'change-language',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/change-language/change-language.module').then(
+      import('./pages/default-layout/change-language/change-language.module').then(
         (m) => m.ChangeLanguagePageModule
       ),
   },
   {
     path: 'change-pwd',
     loadChildren: () =>
-      import('./auth-layout/change-pwd/change-pwd.module').then(
+      import('./pages/auth-layout/change-pwd/change-pwd.module').then(
         (m) => m.ChangePwdPageModule
       ),
   },
@@ -92,7 +92,7 @@ const routes: Routes = [
     path: 'edit-profile',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/setting/edit-profile/edit-profile.module').then(
+      import('./pages/default-layout/setting/edit-profile/edit-profile.module').then(
         (m) => m.EditProfilePageModule
       ),
   },
@@ -101,7 +101,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () =>
       import(
-        './default-layout/notification-list/notification-list.module'
+        './pages/default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
   },
  
@@ -109,32 +109,32 @@ const routes: Routes = [
     path: 'setting',
     canLoad: [AuthGuard],
     loadChildren: () =>
-      import('./default-layout/setting/setting.module').then(
+      import('./pages/default-layout/setting/setting.module').then(
         (m) => m.SettingPageModule
       ),
   },
   {
     path: 'catalogue',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then
+    loadChildren: () => import('./pages/default-layout/catalogue/catalogue.module').then
       (m => m.CataloguePageModule)
   },
   {
     path: 'chat-view',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then
+    loadChildren: () => import('./pages/default-layout/chat-view/chat-view.module').then
       (m => m.ChatViewPageModule)
   },
   {
     path: 'map',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./default-layout/map/map.module').then
+    loadChildren: () => import('./pages/default-layout/map/map.module').then
       (m => m.MapPageModule)
   },
   {
     path: 'favorite',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./default-layout/favorite/favorite.module').then
+    loadChildren: () => import('./pages/default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
   },
  
