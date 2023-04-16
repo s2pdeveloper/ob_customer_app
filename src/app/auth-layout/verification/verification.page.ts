@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Device } from '@capacitor/core';
+import { Device } from '@capacitor/device';
 import { TranslateService } from '@ngx-translate/core';
 import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -91,6 +91,7 @@ export class VerificationPage implements OnInit, OnDestroy {
           deviceId: this.localStorage.get('OBShopDeviceId'),
           platform: this.deviceInfo?.platform
         };
+        
         this.userService.addDeviceToken(payload).subscribe();
         this.spinner.hideLoader();
         this.router.navigate([`app/tabs/landing-page`], { replaceUrl: true });

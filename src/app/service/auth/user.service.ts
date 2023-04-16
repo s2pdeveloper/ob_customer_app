@@ -106,7 +106,6 @@ export class UserService {
         if (data && data.result) {
           localStorage.setItem('firstTime', 'firstTime');
           localStorage.setItem('mobileNumber', data.result.mobileNumber);
-          localStorage.setItem('mobileCode', data.result.mobileCode);
           return data.result;
         }
         else {
@@ -123,21 +122,6 @@ export class UserService {
           this.setAuth(data.result.data);
           return data.result;
         } else {
-          return null;
-        }
-      }
-    ));
-  }
-  setShop(payload): Observable<any> {
-    let url = `/mobile/user/set-shop`;
-    return this.apiService.post(url, payload).pipe(map(
-      data => {
-        if (data && data.result) {
-          this.setAuth(data.result.data);
-          localStorage.setItem('shopId', data.result.data.shopId);
-          return data.result;
-        }
-        else {
           return null;
         }
       }

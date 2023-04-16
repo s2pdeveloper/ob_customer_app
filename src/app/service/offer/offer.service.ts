@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/core/services';
 })
 export class OfferService {
   routes: any = {
-    getAllPath: `offer/getAll`,
+    getAllPath: `mobile/offer/`,
   };
 
   constructor(private http: ApiService) { }

@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/core/services';
 export class AdvertiseService {
   routes: any = {
   
-    getAllPath:  `advertise/getAll`,
+    getAllPath:  `mobile/advertise/`,
    
 
   };

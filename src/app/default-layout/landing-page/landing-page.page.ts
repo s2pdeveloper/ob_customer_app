@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
+import { StorageService, ToastService } from 'src/app/core/services';
 import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { CategoryService } from 'src/app/service/category/category.service';
 import { OfferService } from 'src/app/service/offer/offer.service';
 import { forkJoin } from 'rxjs';
-import { Plugins } from '@capacitor/core';
-const { Geolocation } = Plugins;
+import { Geolocation } from '@capacitor/geolocation';
+import { LoaderService } from 'src/app/core/services/loader.service';
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -81,19 +81,20 @@ export class LandingPagePage implements OnInit {
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private spinner: LoaderService,
+    private toaster: ToastService,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   async ionViewWillEnter() {
     this.search = '';
     this.user = this.localStorage.get('OBCustomer');
-    this.getAllDataParallel();
+    // this.getAllDataParallel();
+    this.getAllAdvertise()
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();
   }
-
- 
 
   getCurrentLocation() {
     let obj = {
@@ -108,19 +109,27 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/app/tabs/category']);
   }
 
-  getAllDataParallel() {
-    let response1 = this.categoryService.getAll({});
-    let response2 = this.offerService.getAll({});
-    let response3 = this.advertiseService.getAll({});
-    let response4 = this.authService.profile(this.user._id);
-    return forkJoin([response1, response2, response3, response4]).subscribe(
-      (success) => {
-        this.categoryArr = success[0].rows;
-        this.offerArr = success[1].rows;
-        this.advertiseArr = success[2].rows;
-        this.userDetails = success[3];
-      }
-    );
+  // getAllDataParallel() {
+  //   let response1 = this.categoryService.getAll({});
+  //   let response2 = this.offerService.getAll({});
+  //   let response3 = this.advertiseService.getAll({});
+  //   // let response4 = this.authService.profile(this.user._id);
+  //   return forkJoin([response1, response2, response3,]).subscribe(
+  //     (success) => {
+  //       this.categoryArr = success[0].rows;
+  //       this.offerArr = success[1].rows;
+  //       this.advertiseArr = success[2].rows;
+  //       // this.userDetails = success[3];
+  //     }
+  //   );
+  // }
+
+  async getAllAdvertise() {
+    this.advertiseService.getAll({}).subscribe(async (success) => {
+      await this.spinner.hideLoader();
+      this.advertiseArr = success;
+  
+    });
   }
 
   navigateToSearchShop(search) {
@@ -139,7 +148,7 @@ export class LandingPagePage implements OnInit {
   }
 
   doRefresh(event: any) {
-    this.getAllDataParallel();
+    // this.getAllDataParallel();
     event.target.complete();
   }
 

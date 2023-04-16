@@ -4,8 +4,8 @@ import { ToastService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UserService } from 'src/app/service/auth/user.service';
 import { StorageService } from 'src/app/core/services';
-import { Plugins } from '@capacitor/core';
-const { Device, Geolocation } = Plugins;
+import { Device } from '@capacitor/device';
+import { Geolocation } from '@capacitor/geolocation';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
