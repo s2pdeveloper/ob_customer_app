@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoadingController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from './core/services/language.service';
-import { AppBackButtonService } from './service/app-service/app-back-button.service';
+import { AppBackButtonService } from './core/services/app-back-button.service';
 import { PushNotificationService } from './service/app-service/push-notification.service';
 import { NetworkService } from './core/services/network.service';
 import { JwtService } from './core/services/jwt.service';
