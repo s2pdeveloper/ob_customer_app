@@ -9,6 +9,7 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 import { RegisterPage } from './register.page';
 import { ValidationMessagesPageModule } from 'src/app/core/validation-messages/validation-messages.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UserService } from 'src/app/service/auth/user.service';
 
 @NgModule({
   imports: [
@@ -21,5 +22,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule
   ],
   declarations: [RegisterPage],
+  providers:[UserService]
 })
 export class RegisterPageModule {}

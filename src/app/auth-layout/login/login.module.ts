@@ -6,7 +6,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { ValidationMessagesPageModule } from 'src/app/core/validation-messages/validation-messages.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { UserService } from 'src/app/service/auth/user.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +17,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ValidationMessagesPageModule,
     SharedModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers:[UserService]
 })
 export class LoginPageModule {}

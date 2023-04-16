@@ -103,6 +103,9 @@ export class LandingPagePage implements OnInit {
     this.authService.getCurrentLocation(obj).subscribe((success: any) => {
       this.currentLocation = success.response.results[0];
     });
+  };
+  seeAllCategory() {
+    this.router.navigate(['/app/tabs/category']);
   }
 
   getAllDataParallel() {
@@ -127,11 +130,6 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
-
-  seeAllCategory() {
-    this.router.navigate(['/app/tabs/category']);
-  }
-
   navigateToProfilePage() {
     this.router.navigate(['/view-profile']);
   }
@@ -153,3 +151,18 @@ export class LandingPagePage implements OnInit {
     });
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

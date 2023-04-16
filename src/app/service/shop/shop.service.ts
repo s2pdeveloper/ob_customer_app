@@ -9,16 +9,16 @@ export class ShopService {
     getAllPath: `customer/getAllShop`,
     addFavorites: `favorite/create`,
     getByIdPath: (_id) => `customer/getByIdShop/${_id}`,
-    getByUPIPath: `customer/getByIdShopUPI`,
-    getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
+     getByCategoryIdWithShop: (_id) => `customer/getShopByCategoryId/${_id}`,
 
-    getCatalogueBySubCategoryId:
-      `customer/getCatalogueBySubCategoryId`,
+     getCatalogueBySubCategoryId: (_id) => `customer/getCatalogueBySubCategoryId/${_id}`,
+
   };
   constructor(private http: ApiService) {}
 
   getAllShop(params) {
-    return this.http.get(this.routes.getAllPath, params);
+   
+    return this.http.get(this.routes.getAllPath(params),params)
   }
 
   getByIdShop(_id) {

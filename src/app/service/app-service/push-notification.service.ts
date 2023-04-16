@@ -4,6 +4,7 @@ import {
   PushNotifications, ActionPerformed,
   PushNotificationSchema,
   Token,
+  PushNotificationToken,
   
 } from '@capacitor/push-notifications';
 import { StorageService } from 'src/app/core/services';
@@ -25,16 +26,14 @@ export class PushNotificationService {
         // Show some error
       }
     });
-
-    PushNotifications.addListener('registration', (token: Token) => {
-      console.log('Push registration success, token: ' + token.value);
-      this.storageService.set('OBShopDeviceId', token.value);
-    });
-
-    PushNotifications.addListener('registrationError', (error: any) => {
-      alert('Error on registration: ' + JSON.stringify(error));
-    });
-
+    // On success, we should be able to receive notifications
+    PushNotifications.addListener(
+      'registration',
+      (token: PushNotificationToken) => {
+        this.storageService.set('OBShopDeviceId', token.value);
+      }
+    );
+    // Show us the notification payload if the app is open on our device
     PushNotifications.addListener(
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
@@ -54,20 +53,7 @@ export class PushNotificationService {
     const randomId = Math.floor(Math.random() * 10000) + 1;
     let additional = JSON.parse(notification);
     console.log('notification redirection', additional);
-
-    // this.router.navigateByUrl('./main-layout/more-layout/notifications');
-    // if (notificationType.CHAT_MESSAGE === notification.data.type) {
-    //   this.router.navigate([`/chat-view/${additional.id}`]);
-    // }
-    // LocalNotifications.addListener(
-    //   'localNotificationActionPerformed',
-    //   (notification: LocalNotificationActionPerformed) => {
-    //     console.log('localNotificationActionPerformed', notification);
-    //     console.log(
-    //       'localNotificationActionPerformed redirection',
-    //       notification
-    //     );
-    //   }
-    // );
   }
+  
+  
 }

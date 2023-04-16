@@ -25,12 +25,33 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'verification',
+    loadChildren: () =>
+      import('./auth-layout/verification/verification.module').then(
+        (m) => m.VerificationPageModule
+      ),
+  },
+  {
     path: 'forget-pwd',
     loadChildren: () =>
       import('./auth-layout/forget-pwd/forget-pwd.module').then(
         (m) => m.ForgetPwdPageModule
       ),
   },
+  // {
+  //   path: 'landing-page',
+  //   loadChildren: () =>
+  //     import('./default-layout/landing-page/landing-page.module').then(
+  //       (m) => m.LandingPagePageModule
+  //     ),
+  // },
+  // {
+  //   path: 'profile-page',
+  //   loadChildren: () =>
+  //     import('./default-layout/profile-page/profile-page.module').then(
+  //       (m) => m.ProfilePagePageModule
+  //     ),
+  // },
   {
     path: 'view-profile',
     // canLoad: [AuthGuard],
@@ -39,14 +60,14 @@ const routes: Routes = [
         (m) => m.ViewProfilePageModule
       ),
   },
-  {
-    path: 'edit-profile',
-    // canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./default-layout/setting/edit-profile/edit-profile.module').then(
-        (m) => m.EditProfilePageModule
-      ),
-  },
+  // {
+  //   path: 'edit-profile',
+  //   // canLoad: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./default-layout/setting/edit-profile/edit-profile.module').then(
+  //       (m) => m.EditProfilePageModule
+  //     ),
+  // },
 
   {
     path: 'change-pwd',
@@ -55,7 +76,6 @@ const routes: Routes = [
         (m) => m.ChangePwdPageModule
       ),
   },
-
   {
     path: 'onboarding',
     loadChildren: () =>
@@ -63,7 +83,6 @@ const routes: Routes = [
         (m) => m.OnboardingPageModule
       ),
   },
-
   {
     path: 'shop-detail',
     loadChildren: () =>
@@ -99,7 +118,13 @@ const routes: Routes = [
         './default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
   },
- 
+  {
+    path: 'category',
+    loadChildren: () =>
+      import('./default-layout/category/category.module').then(
+        (m) => m.CategoryPageModule
+      ),
+  },
   {
     path: 'setting',
     loadChildren: () =>
@@ -107,27 +132,33 @@ const routes: Routes = [
         (m) => m.SettingPageModule
       ),
   },
+
   {
     path: 'catalogue',
-    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then
-      (m => m.CataloguePageModule)
+    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then(m => m.CataloguePageModule)
   },
+
+
+  {
+    path: 'search-shop',
+    loadChildren: () => import('./default-layout/search-shop/search-shop.module').then(m => m.SearchShopPageModule)
+  },
+
   {
     path: 'chat-view',
-    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then
-      (m => m.ChatViewPageModule)
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then(m => m.ChatViewPageModule)
   },
   {
-    path: 'map',
-    loadChildren: () => import('./default-layout/map/map.module').then
-      (m => m.MapPageModule)
+    path: 'subcategory',
+    loadChildren: () => import('./default-layout/subcategory/subcategory.module').then(m => m.SubcategoryPageModule)
   },
-  {
-    path: 'favorite',
-    loadChildren: () => import('./default-layout/favorite/favorite.module').then
-      (m => m.FavoritePageModule)
-  },
- 
+
+  // {
+  //   path: 'offer',
+  //   loadChildren: () => import('./default-layout/offer/offer.module').then(m => m.OfferPageModule)
+  // },
+
+
 ];
 
 @NgModule({

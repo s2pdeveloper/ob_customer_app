@@ -42,6 +42,9 @@ export class ApiService {
     return this.httpClient.delete(path).pipe(map((res: any) => res.result));
   }
 
+  patch(path: string, body: Object = {}): Observable<any> {
+    return this.httpClient.patch(path, JSON.stringify(body)).pipe(catchError(this.formatErrors));
+  }
   public getFile(path: string) {
     console.log('path++++++++++++++', path);
     return this.httpClient.get(path, {

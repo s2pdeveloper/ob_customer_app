@@ -7,12 +7,11 @@ import { ApiService } from 'src/app/core/services';
 })
 export class CategoryService {
   routes: any = {
-    getAllPath: `category/getAll`,
-    getAllCategory: `category/getAll`,
-    getAllCategoryWithSubCategory: (obj) =>
-      `category/getAllCategoryWithSubCategory`,
-    getSubCategoryBySubCategory: (obj) =>
-      `subCategory/getAll?${obj.categoryId}`,
+
+    getAllPath: (obj) => `mobile/category/`,
+    getAllCategory: (obj) => `category/getAll`,
+
+
   };
   constructor(private http: ApiService) {}
 
@@ -28,11 +27,13 @@ export class CategoryService {
       .pipe(map((res: any) => res));
   }
 
-  getSubCategoryBySubCategory(params) {
-    return this.http
-      .get(this.routes.getSubCategoryBySubCategory(params), params)
-      .pipe(map((res: any) => res));
-  }
+
+  // getAllCatalogue(payload){
+  //   return this.http.get(this.routes.getAllCataloguePath,payload);
+  // }
+  // getAllCategoryByBusinessTypeId(businessTypeId) {
+  //   return this.http.get(this.routes.getAllCategoryByBusinessTypeId(businessTypeId));
+  // }
 
   getAllCategoryWithSubCategory(params) {
     return this.http

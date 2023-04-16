@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SettingPageRoutingModule } from './setting-routing.module';
 import { SettingPage } from './setting.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UserService } from 'src/app/service/auth/user.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     SettingPageRoutingModule,SharedModule
   ],
-  declarations: [SettingPage]
+  declarations: [SettingPage],
+  providers:[UserService]
 })
 export class SettingPageModule {}
