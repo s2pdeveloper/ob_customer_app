@@ -90,7 +90,7 @@ const routes: Routes = [
         (m) => m.OnboardingPageModule
       ),
   },
-  
+
   {
     path: 'customer-form',
     loadChildren: () =>
@@ -105,14 +105,6 @@ const routes: Routes = [
         (m) => m.ShopDetailPageModule
       ),
   },
-  {
-    path: 'customer-passbook',
-    loadChildren: () =>
-      import(
-        './default-layout/customer-passbook/customer-passbook.module'
-      ).then((m) => m.CustomerPassbookPageModule),
-  },
-  
   {
     path: 'change-language',
     loadChildren: () =>
@@ -155,30 +147,30 @@ const routes: Routes = [
         (m) => m.SettingPageModule
       ),
   },
-  
+
   {
     path: 'catalogue',
-    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then( m => m.CataloguePageModule)
+    loadChildren: () => import('./default-layout/catalogue/catalogue.module').then(m => m.CataloguePageModule)
   },
-  
- 
+
+
   {
     path: 'search-shop',
-    loadChildren: () => import('./default-layout/search-shop/search-shop.module').then( m => m.SearchShopPageModule)
+    loadChildren: () => import('./default-layout/search-shop/search-shop.module').then(m => m.SearchShopPageModule)
   },
 
   {
     path: 'chat-view',
-    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then( m => m.ChatViewPageModule)
+    loadChildren: () => import('./default-layout/chat-view/chat-view.module').then(m => m.ChatViewPageModule)
   },
   {
     path: 'subcategory',
-    loadChildren: () => import('./default-layout/subcategory/subcategory.module').then( m => m.SubcategoryPageModule)
+    loadChildren: () => import('./default-layout/subcategory/subcategory.module').then(m => m.SubcategoryPageModule)
   },
-  
+
   {
     path: 'offer',
-    loadChildren: () => import('./default-layout/offer/offer.module').then( m => m.OfferPageModule)
+    loadChildren: () => import('./default-layout/offer/offer.module').then(m => m.OfferPageModule)
   },
 
 
@@ -190,4 +182,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

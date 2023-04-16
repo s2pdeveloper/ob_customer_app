@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { BusinessTypeService } from 'src/app/service/businessType/businessType.service';
@@ -7,6 +7,8 @@ import { CategoryService } from 'src/app/service/category/category.service';
 import { ShopService } from 'src/app/service/shop/shop.service';
 import { StorageService } from 'src/app/core/services';
 import { OffersService } from 'src/app/service/offers/offers.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
+import { AdvertiseService } from 'src/app/core/services/advertiseservice';
 
 @Component({
   selector: 'app-landing-page',
@@ -14,120 +16,139 @@ import { OffersService } from 'src/app/service/offers/offers.service';
   styleUrls: ['./landing-page.page.scss'],
 })
 export class LandingPagePage implements OnInit {
-  businessDetails:any[];
-  businessTypeId: any;
   user: any;
-  businessArr: any = [];
-  BusinessWithCategoryArr: any = [];
   search: string = '';
-  loaded : boolean = true;
-  selectedBusinessId:string;
-  selectedBusinessName:string;
-  selectedCatalogueId:string;
-  selectedCatalogueName:string;
-  categoryDetails:any=[];
-  offerDetails:any=[];
+  loaded: boolean = true;
+  offerDetails: any = [];
+  advertise: any = [];
+  category: any = [];
+  userDetails: any = {};
   constructor(
     private router: Router,
-    private activatedRoute:ActivatedRoute,
-    private businessTypeService: BusinessTypeService,
-    private spinner: LoaderService,
     public translate: TranslateService,
     private categoryService: CategoryService,
-    private shopService: ShopService,
-    private localStorage:StorageService,
-    private offerService:OffersService
-
+    private offerService: OffersService,
+    private advertiseService: AdvertiseService,
+    private localStorage: StorageService,
+    private authService: AuthService
   ) { }
-
-  
   ngOnInit() {
-    this.getAllbusinesstype();
     this.user = this.localStorage.get('OBUser');
+    this.AllCategory();
     this.getAllOffer();
-
-}
-
-  getAllbusinesstype() {
-    // this.spinner.showLoader();
-    this.loaded = false;
-    let obj = {
- };
-    this.businessTypeService.getAllBusinessType(obj).subscribe((success) => {
-      console.log("success---------", success);
-      this.businessDetails = success.rows;
-
-      //thisshould ideally be set in localstorage
-      this.selectedBusinessId = success.rows[0]._id;
-      this.selectedBusinessName = success.rows[0].name;
-      this.getBusinessAllCategory(this.selectedBusinessId,this.selectedBusinessName);
-      console.log("this.selectedBusinessId",this.selectedBusinessId);
-      // this.spinner.hideLoader();
-      this.loaded = true;
-    });
+    this.getAllAdvertise();
   }
-  // getByIdCategory(ev, name) {
-  //   console.log("ev", ev);
-  // }
-  getBusinessAllCategory(ev,name) {
-    console.log("event", ev);
-    this.getCategoryByBusinessTypeId(ev,name)
+  buttonSlide = {
+    slidesPerView: 4,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    loop: true,
+    spaceBetween: 10,
   };
 
-  getCategoryByBusinessTypeId(businessTypeId,name) {
-    this.selectedBusinessId=businessTypeId;
-    this.selectedBusinessName=name;
-    let obj: any = {
-      businessTypeId: businessTypeId
-    };
-    this.categoryService
-      .getAll(obj)
-      .subscribe((success) => {
-        console.log("success------------", success);
-        this.BusinessWithCategoryArr = success.rows;
-      });
+  buttonSlide1 = {
+    slidesPerView: 1,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 300,
+    autoplay: {
+      delay: 5000,
+    },
+    spaceBetween: 25,
+  };
+
+  buttonSlide2 = {
+    slidesPerView: 1,
+    slideShadows: true,
+    initialSlide: 0,
+    speed: 400,
+    autoplay: {
+      delay: 3000,
+    },
+    spaceBetween: 25,
+  };
+  deviceInfo: any;
+  currentLocation: any = {};
+  geolocation: {
+    latitude: number;
+    longitude: number;
+    accuracy: number;
+    altitudeAccuracy?: number;
+    altitude?: number;
+    speed?: number;
+    heading?: number;
+  };
+
+  doRefresh(event: any) {
+    this.AllCategory();
+    event.target.complete();
   }
 
-
-  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
+  AllCategory() {
+    this.categoryService.getAll({}).subscribe((success) => {
+      this.category = success
+    });
+  };
+  seeAllCategory() {
+    this.router.navigate(['/app/tabs/category']);
+  }
+  navigateToMap() {
+    this.router.navigate(['/map']);
   }
 
   seeAll() {
-    this.router.navigate(['/category'],{queryParams:{_id:this.selectedBusinessId,
-      name: this.selectedBusinessName}})
+    this.router.navigate(['/category'], {
+      queryParams: {
+        // _id: this.selectedBusinessId,
+        // name: this.selectedBusinessName
+      }
+    })
   }
-  
+
 
   getCategoryIdWithShop(ev) {
-    console.log("event--------------shop", ev);
     let params = ev;
     console.log(params);
-    this.router.navigate(['/search-shop'], { queryParams: { params }});
+    this.router.navigate(['/search-shop'], { queryParams: { params } });
   }
 
-  getAllOffer(){
-    this.loaded=false;
-    let obj={
-    };
-     this.offerService.getAll(obj).subscribe((success)=>{
-     console.log("success....",success);
-     this.offerDetails=success.rows;
-     this.loaded=true;
-     
-     });
-   
-}
+  getAllOffer() {
+    this.loaded = false;
+    this.offerService.getAll({}).subscribe((success) => {
+      this.offerDetails = success;
+      this.loaded = true;
+    });
+  }
+  getAllAdvertise() {
+    this.loaded = false;
+    this.advertiseService.getAll({}).subscribe((success) => {
+      console.log("success", success);
+
+      this.advertise = success;
+      this.loaded = true;
+    });
+  }
+  navigateToProfilePage() {
+    this.router.navigate(['/view-profile']);
+  }
+  navigateToSearchShop(search) {
+    this.router.navigate(['/app/tabs/search-shop'], {
+      queryParams: {
+        search: this.search,
+      },
+    });
+  }
 
 }
 
 
 
-  
-  
-    
-  
-  
+
+
+
+
+
 
 
 

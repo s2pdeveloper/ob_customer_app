@@ -7,10 +7,10 @@ import { ApiService } from 'src/app/core/services';
 })
 export class CategoryService {
   routes: any = {
-  
-    getAllPath: (obj) => `category/getAll?${obj.businessTypeId}`,
+
+    getAllPath: (obj) => `mobile/category/`,
     getAllCategory: (obj) => `category/getAll`,
-    
+
 
   };
   constructor(private http: ApiService) { }
@@ -26,7 +26,7 @@ export class CategoryService {
       .get(this.routes.getAllCategory(params), params)
       .pipe(map((res: any) => res));
   }
-  
+
 
   // getAllCatalogue(payload){
   //   return this.http.get(this.routes.getAllCataloguePath,payload);
