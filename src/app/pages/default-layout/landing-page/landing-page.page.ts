@@ -93,6 +93,7 @@ export class LandingPagePage implements OnInit {
     this.getAllAdvertise()
     this.getAllOffer();
     this.getAllCategory();
+    this.getAllSeasonalOffer();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();
   }
@@ -136,6 +137,15 @@ export class LandingPagePage implements OnInit {
       }
     )
   }
+  getAllSeasonalOffer() {
+    this.advertiseService.getAllSeasonalOffer({}).subscribe(
+      async (success) => {
+        this.categoryArr = success;
+      }, (error) => {
+        this.spinner.hideLoader();
+      }
+    )
+  }
   navigateToSearchShop(search) {
     this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
@@ -163,6 +173,11 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
+
+  navigateToseasonalOffer() {
+    this.router.navigate(['/seasonal-offers'])
+  }
+
 }
 
 
