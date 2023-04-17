@@ -18,14 +18,11 @@ import { Browser } from '@capacitor/browser';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  submitted: boolean = false;
-  // showEye: boolean = false;
-  // passwordType = 'password';
-  passwordType1 = 'password';
-  showEye: boolean = false;
-  passwordType2 = 'password';
-  showEye2: boolean = false;
+  
   deviceInfo: any;
+  errorMessages = authFieldsErrors;
+
+
   constructor(
     private router: Router,
     private spinner: LoaderService,
@@ -48,24 +45,12 @@ export class RegisterPage implements OnInit {
       Validators.pattern('^[7-9][0-9]{9}$'),
     ]),
   });
-  errorMessages = authFieldsErrors;
-  passwordType = 'password';
   get form() {
     return this.registerForm.controls;
   }
 
   navigateToVerification() {
     this.router.navigate([`/verification`], { replaceUrl: true });
-  }
-
-  onClickEye() {
-    if (this.passwordType === 'password') {
-      this.passwordType = 'text';
-      this.showEye = true;
-    } else {
-      this.passwordType = 'password';
-      this.showEye = false;
-    }
   }
 
   async onSubmit() {
@@ -98,16 +83,6 @@ export class RegisterPage implements OnInit {
   };
   async open() {
     await Browser.open({ url: '' });
-  }
-
-  onClickEye1() {
-    if (this.passwordType1 === 'password') {
-      this.passwordType1 = 'text';
-      this.showEye = true;
-    } else {
-      this.passwordType1 = 'password';
-      this.showEye = false;
-    }
   }
 
   goBack() {

@@ -16,12 +16,6 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
 })
 export class VerificationPage implements OnInit, OnDestroy {
 
-  loginForm = new FormGroup({
-    otp: new FormControl('', [Validators.required]),
-    countryCode: new FormControl('IN', [Validators.required]),
-    mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
-  });
-
   errorMessages = authFieldsErrors;
   deviceInfo: any;
   duration: number = 60;
@@ -29,6 +23,16 @@ export class VerificationPage implements OnInit, OnDestroy {
   seconds: any = '00';
   setTimeOut: any;
   canResendOTP: boolean = false;
+
+  loginForm = new FormGroup({
+    otp: new FormControl('', [Validators.required]),
+    countryCode: new FormControl('IN', [Validators.required]),
+    mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
+  });
+
+  get form() {
+    return this.loginForm.controls;
+  }
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService,
     private toastService: ToastService, private spinner: LoaderService,
@@ -48,9 +52,7 @@ export class VerificationPage implements OnInit, OnDestroy {
     this.deviceInfo = await Device.getInfo();
   }
 
-  get form() {
-    return this.loginForm.controls;
-  }
+
   setDuration() {
     this.duration = 60;
   }
@@ -127,16 +129,6 @@ export class VerificationPage implements OnInit, OnDestroy {
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
   }
-  // saveDeviceToken(id) {
-  //   let newObj: any = Object.assign(
-  //     {
-  //       id: id,
-  //       deviceId: localStorage.get('OBShopDeviceId'),
-  //       platform: this.deviceInfo?.platform
-  //     },
-  //   );
-  //   console.log("newObj", newObj);
-  //   this.userService.addDeviceToken(newObj).subscribe();
-  // }
+
 
 }

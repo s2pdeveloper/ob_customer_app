@@ -87,8 +87,8 @@ ion-content {
 
       .cat-img {
         border-radius: 5%;
-        height: 3.5rem;
-        width: 3.5rem;
+        height: 4.5rem;
+        width: 4.5rem;
         object-fit: cover;
       }
 
@@ -98,4 +98,9 @@ ion-content {
       }
     }
   }
+}
+
+.noData {
+  text-align: center !important;
+  margin: 5rem !important;
 }

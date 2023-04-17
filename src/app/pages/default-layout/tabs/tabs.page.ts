@@ -15,8 +15,8 @@ export class TabsPage {
   public tabPages = [
     {
       title: 'home',
-      value: 'landing-page',
-      tab: 'landing-page',
+      value: 'home',
+      tab: 'home',
       icon: 'home',
     },
     {

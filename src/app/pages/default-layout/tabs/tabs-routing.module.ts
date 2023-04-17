@@ -24,10 +24,6 @@ const routes: Routes = [
         path: 'chat-list',
         loadChildren: () => import('../chat-list/chat-list.module').then(m => m.ChatListPageModule)
       },
-      // {
-      //   path: 'cart',
-      //   loadChildren: () => import('../cart/cart.module').then(m => m.CartPageModule)
-      // },
       {
         path: 'favorite',
         loadChildren: () => import('../favorite/favorite.module').then(m => m.FavoritePageModule)

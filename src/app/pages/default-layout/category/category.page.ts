@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 
 @Component({
   selector: 'app-category',
@@ -9,91 +11,94 @@ import { CategoryService } from 'src/app/core/services/category.service';
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit {
-  categoryDetails: any = [];
-  businessTypeId: any;
-  categoryId: any;
-  categoryTypeId: string;
-  businessName: string;
-  search: string = '';
+
+  businessTypeId: number;
+  categoryId: number;
   categoryArr: any = [];
   subCategoryArr: any = [];
+  page: number = 1;
+  pageSize: number = 10;
+  collection: number = 0;
+  search: string = '';
 
 
   constructor(
     private router: Router,
     private categoryService: CategoryService,
+    private subCategoryService: SubCategoryService,
     public translate: TranslateService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    private spinner: LoaderService,
   ) { }
 
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.search='';
-    this.getAllCategoryWithSubCategory();
+    this.getAllCategory();
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.categoryId) {
         this.categoryId = params.categoryId;
+        this.getAllSubCategory({ _id: params.categoryId })
       }
     });
   }
 
-  getAllCategoryWithSubCategory() {
-    let obj = {
-      search: this.search,
-    };
+  getAllCategory() {
     this.categoryService
-      .getAllCategory(obj)
+      .getAllCategory({})
       .subscribe((success) => {
-        // this.categoryArr = success.rows.map((x, i) => {
-        //   if (this.categoryId && x._id == this.categoryId) {
-        //     this.businessTypeId = x.businessTypeId;
-        //     x.active = true;
-        //     this.subCategoryArr = x?.categoryWithSubCategory;
-        //   } else {
-        //     if (!this.categoryId && i == 0) {
-        //       this.categoryId = this.categoryId ? this.categoryId : x._id;
-        //       this.businessTypeId = x.businessTypeId;
-        //       x.active = true;
-        //       this.subCategoryArr = x?.categoryWithSubCategory;
-        //     } else {
-        //       x.active = false;
-        //     }
-        //   }
-        //   return x;
-        // });
+        this.categoryArr = success;
+        this.categoryArr = success.map((x, i) => {
+          if (!this.categoryId && i == 0) {
+            this.categoryId = this.categoryId ? this.categoryId : x._id;
+            x.active = true;
+            this.getAllSubCategory(x);
+          } else {
+            x.active = false;
+          }
+          return x;
+        });
       });
- }
+  }
 
-  getSubCategory(index) {
-    this.categoryArr = this.categoryArr.map((x, i) => {
-      if (i == index) {
-        x.active = true;
-        this.categoryId = x._id;
-        this.businessTypeId = x.businessTypeId;
-        this.subCategoryArr = x?.categoryWithSubCategory;
-      } else {
-        x.active = false;
+  getAllSubCategory(item) {
+    let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
+      search: this.search,
+      parentId: item._id
+    };
+    this.subCategoryService.getAll(obj).subscribe(
+      async (success) => {
+        this.subCategoryArr = success.data;
+        this.categoryArr = this.categoryArr.map((x, i) => {
+          if (item._id == x._id) {
+            x.active = true;
+          } else {
+            x.active = false;
+          }
+          return x;
+        });
+      }, (error) => {
+        this.spinner.hideLoader();
       }
-      return x;
-    });
- }
+    )
+  }
 
-  navigateTo(path, subCategory) {
-   let params = {
-      businessTypeId: subCategory.businessTypeId,
-      categoryId: subCategory.categoryId,
-      // subCategoryId: subCategoryId,
-      subCategoryId:subCategory. _id
- };
-    this.router.navigate([path], { queryParams: params });
+
+  navigateTo(subCategory) {
+    this.router.navigate(['/app/tabs/search-shop'], {
+      queryParams: {
+        // categoryId: subCategory.categoryId,
+        // subCategoryId: subCategory._id
+      },
+    });
   }
 
   onSearch() {
-    this.categoryArr = [];
-    // this.subCategoryArr = this.subCategoryArr.filter(x => x.name.includes(this.search))
-    console.log(" this.subCategoryArr", this.subCategoryArr);
-    this.getAllCategoryWithSubCategory();
+    this.page = 1;
+    this.subCategoryArr = [];
+    this.getAllSubCategory(false);
   }
 
 }

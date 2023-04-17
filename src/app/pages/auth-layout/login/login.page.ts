@@ -16,19 +16,18 @@ import { Device } from '@capacitor/device';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  submitted: boolean = false;
-  returnUrl: string;
+
   deviceInfo: any;
-  passwordType = 'password';
-  showEye: boolean = false;
+  errorMessages = authFieldsErrors;
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private spinner: LoaderService,
     private toaster: ToastService,
     public translate: TranslateService,
     private userService: UserService
   ) { }
+
   loginForm = new FormGroup({
     countryCode: new FormControl('IN', [Validators.required]),
     mobileNumber: new FormControl([
@@ -37,9 +36,12 @@ export class LoginPage implements OnInit {
       Validators.maxLength(10),
     ]),
     role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
-    // locationPoint: new FormControl(),
   });
-  errorMessages = authFieldsErrors;
+
+  get form() {
+    return this.loginForm.controls;
+  }
+
   async ngOnInit() {
     this.deviceInfo = await Device.getInfo();
     this.deviceInfo.geoLocation = (
@@ -51,9 +53,7 @@ export class LoginPage implements OnInit {
     // ]);
   }
 
-  get form() {
-    return this.loginForm.controls;
-  }
+
   async login() {
     if (this.loginForm.invalid) {
       validateField(this.loginForm);
@@ -68,7 +68,6 @@ export class LoginPage implements OnInit {
           countryCode: this.form.countryCode.value,
         },
       });
-      // this.saveDeviceToken(success._id);
       await this.spinner.hideLoader();
     }, (error) => {
       this.toaster.errorToast("The mobile number or password entered are incorrect");

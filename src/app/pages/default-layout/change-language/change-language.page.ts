@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -26,7 +25,6 @@ export class ChangeLanguagePage implements OnInit {
     },
   ];
   constructor(
-    private router: Router,
     private toastService: ToastService,
     private langService: LanguageService,
     public translate: TranslateService

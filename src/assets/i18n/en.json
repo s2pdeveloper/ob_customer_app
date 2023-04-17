@@ -103,6 +103,7 @@
   "newCustomer": "New Customer",
   "customer": "Customer",
   "fullName": "Full Name",
+  "firstName":"First Name",
   "shopName": "Shop Name",
   "register": "Register",
   "Category": "Category",

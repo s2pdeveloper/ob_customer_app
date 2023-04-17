@@ -11,7 +11,7 @@
 
   <ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
     showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()"
-    placeholder="{{ 'Search' | translate}}">
+    placeholder="{{ 'Search SubCategory' | translate}}">
   </ion-searchbar>
 
   <ion-grid class="category-list">
@@ -19,22 +19,27 @@
       <ion-col size="3" class="category-section">
         <div class="cat-container">
           <ion-card class="ion-text-center" [ngClass]="item.active ? 'active':null "
-            *ngFor="let item of categoryArr;let i =index;" (click)="getSubCategory(i)">
+            *ngFor="let item of categoryArr;let i =index;" (click)="getAllSubCategory(item)">
             <img alt="Category Image" class="cat-img" src="{{item.image}}" />
             <ion-card-subtitle class="cat-head">{{item.name}}</ion-card-subtitle>
           </ion-card>
         </div>
       </ion-col>
-      <ion-col size="9" class="subcategory-section">
+      <ion-col size="9" class="subcategory-section" *ngIf="subCategoryArr?.length > 0;else noDataFound">
         <ion-row class="ion-margin">
-          <ion-col size="4" *ngFor="let subCategory of subCategoryArr">
-            <ion-card class="ion-text-center" (click)="navigateTo('/app/tabs/search-shop',subCategory)">
-              <img alt="Category Image" class="cat-img" src="{{subCategory.subCatImageUrl}}" />
+          <ion-col size="6" *ngFor="let subCategory of subCategoryArr">
+            <ion-card class="ion-text-center" (click)="navigateToShop(subCategory)">
+              <img alt="Category Image" class="cat-img" src="{{subCategory.image}}" />
               <ion-card-subtitle class="cat-head">{{subCategory.name}}</ion-card-subtitle>
             </ion-card>
           </ion-col>
         </ion-row>
       </ion-col>
+      <ng-template #noDataFound>
+        <div class="noData">
+          <ion-label>No Data Found</ion-label>
+        </div>
+      </ng-template>
     </ion-row>
   </ion-grid>
 </ion-content>
