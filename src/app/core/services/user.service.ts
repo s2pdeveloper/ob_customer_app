@@ -102,10 +102,13 @@ export class UserService {
     let url = `/mobile/user/send-mobile-otp`;
     return this.apiService.post(url, credentials).pipe(map(
       data => {
-        if (data && data.result) {
+        if (data && data.result && data.result.existingUser) {
           localStorage.setItem('firstTime', 'firstTime');
-          localStorage.setItem('mobileNumber', data.result.mobileNumber);
-          localStorage.setItem('mobileCode', data.result.mobileCode);
+          localStorage.setItem('mobileNumber', data.result.existingUser.mobileNumber);
+          localStorage.setItem('id', data.result.existingUser.id);
+          localStorage.setItem('role', data.result.existingUser.role);
+          localStorage.setItem('email', data.result.existingUser.email);
+          localStorage.setItem('fullName', data.result.existingUser.fullName);
           return data.result;
         }
         else {
@@ -116,7 +119,7 @@ export class UserService {
   }
 
   verifyMobileToken(credentials): Observable<any> {
-    return this.apiService.patch(`/mobile/user/verify-mobile-otp/`, credentials).pipe(map(
+    return this.apiService.patch(`/mobile/user/verify-mobile-otp`, credentials).pipe(map(
       data => {
         if (data && data.result) {
           this.setAuth(data.result.data);

@@ -3,13 +3,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Device } from '@capacitor/device';
 import { TranslateService } from '@ngx-translate/core';
-// import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { authFieldsErrors } from 'src/app/helpers/formErrors.helpers';
 import { UserService } from 'src/app/core/services/user.service';
 import { validateField } from 'src/app/shared/validators/form.validator';
-
+import { StorageService } from 'src/app/core/services/local-storage.service';
 @Component({
   selector: 'app-verification',
   templateUrl: './verification.page.html',
@@ -19,7 +18,7 @@ export class VerificationPage implements OnInit, OnDestroy {
 
   loginForm = new FormGroup({
     otp: new FormControl('', [Validators.required]),
-    mobileCode: new FormControl('91', [Validators.required]),
+    countryCode: new FormControl('IN', [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
   });
 
@@ -33,13 +32,14 @@ export class VerificationPage implements OnInit, OnDestroy {
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService,
     private toastService: ToastService, private spinner: LoaderService,
-    // private localStorage: StorageService,
+    private localStorage: StorageService,
     public translate: TranslateService) { }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['mobileNumber']) {
         this.form.mobileNumber.setValue(params['mobileNumber']);
+        this.form.countryCode.setValue(params['countryCode']);
       }
       this.canResendOTP = false;
       this.setDuration();
@@ -88,14 +88,13 @@ export class VerificationPage implements OnInit, OnDestroy {
     this.userService.verifyMobileToken(this.loginForm.value).subscribe(
       async success => {
         let payload = {
-          id: success.id,
-          deviceId: localStorage.get('OBShopDeviceId'),
+          id: success._id,
+          deviceId: this.localStorage.get('OBShopDeviceId'),
           platform: this.deviceInfo?.platform
         };
-
         this.userService.addDeviceToken(payload).subscribe();
+        this.router.navigate([`app/tabs/home`], { replaceUrl: true });
         this.spinner.hideLoader();
-        this.router.navigate([`app/tabs/landing-page`], { replaceUrl: true });
       },
       async error => {
         await this.spinner.hideLoader();
@@ -128,16 +127,16 @@ export class VerificationPage implements OnInit, OnDestroy {
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
   }
-  saveDeviceToken(id) {
-    let newObj: any = Object.assign(
-      {
-        id: id,
-        deviceId: localStorage.get('OBShopDeviceId'),
-        platform: this.deviceInfo?.platform
-      },
-    );
-    console.log("newObj", newObj);
-    this.userService.addDeviceToken(newObj).subscribe();
-  }
+  // saveDeviceToken(id) {
+  //   let newObj: any = Object.assign(
+  //     {
+  //       id: id,
+  //       deviceId: localStorage.get('OBShopDeviceId'),
+  //       platform: this.deviceInfo?.platform
+  //     },
+  //   );
+  //   console.log("newObj", newObj);
+  //   this.userService.addDeviceToken(newObj).subscribe();
+  // }
 
 }

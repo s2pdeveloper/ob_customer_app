@@ -6,16 +6,16 @@ import { SettingPageRoutingModule } from './setting-routing.module';
 import { SettingPage } from './setting.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserService } from 'src/app/core/services/user.service';
-
+import { StorageService } from 'src/app/core/services/local-storage.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SettingPageRoutingModule,SharedModule
+    SettingPageRoutingModule, SharedModule
   ],
   declarations: [SettingPage],
-  providers:[UserService]
+  providers: [UserService, StorageService]
 })
-export class SettingPageModule {}
+export class SettingPageModule { }

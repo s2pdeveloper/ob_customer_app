@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
     private userService: UserService
   ) { }
   loginForm = new FormGroup({
-    mobileCode: new FormControl('91', [Validators.required]),
+    countryCode: new FormControl('IN', [Validators.required]),
     mobileNumber: new FormControl([
       Validators.required,
       Validators.pattern('^[7-9][0-9]{9}$'),
@@ -59,15 +59,20 @@ export class LoginPage implements OnInit {
       validateField(this.loginForm);
       return;
     }
-    // this.spinner.showLoader();
-    // this.authService.login(this.loginForm.value).subscribe(async (success) => {
-    //   this.toaster.successToast('Logged in successfully');
-    //   this.router.navigate([`/app/tabs/landing-page`], { replaceUrl: true });
-    //   this.saveDeviceToken(success._id);
-    //   await this.spinner.hideLoader();
-    // }, (error) => {
-    //   this.toaster.errorToast("The mobile number or password entered are incorrect");
-    // });
+    this.spinner.showLoader();
+    this.userService.sendMobileOtp(this.loginForm.value).subscribe(async (success) => {
+      this.toaster.successToast('OTP sent to user Mobile Number');
+      this.router.navigate([`/verification`], {
+        queryParams: {
+          mobileNumber: this.form.mobileNumber.value,
+          countryCode: this.form.countryCode.value,
+        },
+      });
+      // this.saveDeviceToken(success._id);
+      await this.spinner.hideLoader();
+    }, (error) => {
+      this.toaster.errorToast("The mobile number or password entered are incorrect");
+    });
   }
 
   getDeviceInfo = async () => {
@@ -76,10 +81,6 @@ export class LoginPage implements OnInit {
       await Geolocation.getCurrentPosition()
     ).coords;
   };
-
-  saveDeviceToken(id) {
-
-  }
 
   // saveDeviceToken(id) {
   //   let newObj: any = Object.assign(

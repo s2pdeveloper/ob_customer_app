@@ -2,12 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-// import { AdvertiseService } from 'src/app/service/advertise/advertise.service';
-// import { AuthService } from 'src/app/service/auth/auth.service';
-// import { CategoryService } from 'src/app/service/category/category.service';
-// import { OfferService } from 'src/app/service/offer/offer.service';
+import { AdvertiseService } from 'src/app/core/services/advertise.service';
+import { CategoryService } from 'src/app/core/services/category.service';
+import { OfferService } from 'src/app/core/services/offer.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { forkJoin } from 'rxjs';
 import { Geolocation } from '@capacitor/geolocation';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
@@ -79,9 +77,9 @@ export class LandingPagePage implements OnInit {
   constructor(
     private router: Router,
     public translate: TranslateService,
-    // private categoryService: CategoryService,
-    // private offerService: OfferService,
-    // private advertiseService: AdvertiseService,
+    private categoryService: CategoryService,
+    private offerService: OfferService,
+    private advertiseService: AdvertiseService,
     private localStorage: StorageService,
     private authService: UserService,
     private spinner: LoaderService,
@@ -92,8 +90,9 @@ export class LandingPagePage implements OnInit {
   async ionViewWillEnter() {
     this.search = '';
     this.user = this.localStorage.get('OBCustomer');
-    // this.getAllDataParallel();
     this.getAllAdvertise()
+    this.getAllOffer();
+    this.getAllCategory();
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();
   }
@@ -110,30 +109,33 @@ export class LandingPagePage implements OnInit {
   seeAllCategory() {
     this.router.navigate(['/app/tabs/category']);
   }
-
-  // getAllDataParallel() {
-  //   let response1 = this.categoryService.getAll({});
-  //   let response2 = this.offerService.getAll({});
-  //   let response3 = this.advertiseService.getAll({});
-  //   // let response4 = this.authService.profile(this.user._id);
-  //   return forkJoin([response1, response2, response3,]).subscribe(
-  //     (success) => {
-  //       this.categoryArr = success[0].rows;
-  //       this.offerArr = success[1].rows;
-  //       this.advertiseArr = success[2].rows;
-  //       // this.userDetails = success[3];
-  //     }
-  //   );
-  // }
-
-  async getAllAdvertise() {
-    // this.advertiseService.getAll({}).subscribe(async (success) => {
-    //   await this.spinner.hideLoader();
-    //   this.advertiseArr = success;
-  
-    // });
+  getAllAdvertise() {
+    this.advertiseService.getAll({}).subscribe(
+      async (success) => {
+        this.advertiseArr = success;
+      }, (error) => {
+        this.spinner.hideLoader();
+      }
+    )
   }
-
+  getAllOffer() {
+    this.offerService.getAll({}).subscribe(
+      async (success) => {
+        this.offerArr = success;
+      }, (error) => {
+        this.spinner.hideLoader();
+      }
+    )
+  }
+  getAllCategory() {
+    this.categoryService.getAllCategory({}).subscribe(
+      async (success) => {
+        this.categoryArr = success;
+      }, (error) => {
+        this.spinner.hideLoader();
+      }
+    )
+  }
   navigateToSearchShop(search) {
     this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
@@ -154,7 +156,7 @@ export class LandingPagePage implements OnInit {
     event.target.complete();
   }
 
-  categoryToCategoryPage(c) {
+  navigateToCategory(c) {
     this.router.navigate(['/app/tabs/category'], {
       queryParams: {
         categoryId: c,

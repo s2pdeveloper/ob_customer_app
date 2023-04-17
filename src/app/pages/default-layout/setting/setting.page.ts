@@ -6,6 +6,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
 import { Device } from '@capacitor/device';
 import { Geolocation } from '@capacitor/geolocation';
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
@@ -18,7 +19,7 @@ export class SettingPage implements OnInit {
     private spinner: LoaderService,
     private toaster: ToastService,
     private userService: UserService,
-    private storageService: StorageService
+    private localStorage: StorageService
   ) { }
 
   async ngOnInit() {
@@ -35,17 +36,17 @@ export class SettingPage implements OnInit {
   async logout() {
     await this.spinner.showLoader();
     let payload = {
-      deviceToken: localStorage.getItem('deviceToken'),
+      deviceToken: this.localStorage.get('deviceToken'),
       platform: this.deviceInfo.platform,
     }
-    // this.userService.removeDeviceToken(payload).subscribe(async result => {
-    //   this.userService.purgeAuth(this.storageService.remove('OBUser'));
-    //   this.router.navigate([`/login`], { replaceUrl: true });
-    //   await this.spinner.hideLoader();
-    // }, async error => {
-    //   this.userService.purgeAuth(this.storageService.remove('OBUser'));
-    //   this.router.navigate([`/login`], { replaceUrl: true });
-    //   await this.spinner.hideLoader();
-    // })
+    this.userService.removeDeviceToken(payload).subscribe(async result => {
+      this.userService.purgeAuth();
+      this.router.navigate([`/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    }, async error => {
+      this.userService.purgeAuth();
+      this.router.navigate([`/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    })
   }
 }

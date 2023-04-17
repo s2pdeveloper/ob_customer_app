@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { VerificationPageRoutingModule } from './verification-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VerificationPage } from './verification.page';
-import { UserService } from 'src/app/service/auth/user.service';
+import { UserService } from 'src/app/core/services/user.service';
+import { StorageService } from 'src/app/core/services/local-storage.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { UserService } from 'src/app/service/auth/user.service';
     SharedModule
   ],
   declarations: [VerificationPage],
-  providers:[UserService]
+  providers: [UserService, StorageService]
 
 })
 export class VerificationPageModule { }

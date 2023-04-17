@@ -34,10 +34,10 @@
     <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide">
-    <ion-slide *ngFor="let c of categoryArr">
+    <ion-slide *ngFor="let item of categoryArr">
       <div class="">
-        <img src="{{c.imageUrl}} " (click)="categoryToCategoryPage(c._id)" /><br />
-        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{c.name}}</ion-note>
+        <img src="{{item.image}} " (click)="navigateToCategory(item._id)" /><br />
+        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{item.name}}</ion-note>
       </div>
     </ion-slide>
   </ion-slides>
@@ -47,9 +47,9 @@
     <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
   </ion-item>
   <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
-    <ion-slide *ngFor="let o of offerArr">
+    <ion-slide *ngFor="let item of offerArr">
       <div class="offer">
-        <img class="offerImage" src="{{o.imageUrl}} " /><br />
+        <img class="offerImage" src="{{item.image}} " /><br />
       </div>
     </ion-slide>
   </ion-slides>

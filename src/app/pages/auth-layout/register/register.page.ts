@@ -42,7 +42,7 @@ export class RegisterPage implements OnInit {
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     role: new FormControl(ROLES.CUSTOMER),
-    mobileCode: new FormControl('91', [Validators.required]),
+    countryCode: new FormControl('IN', [Validators.required]),
     mobileNumber: new FormControl('', [
       Validators.required,
       Validators.pattern('^[7-9][0-9]{9}$'),
@@ -68,29 +68,6 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  // register() {
-  //     return;
-  //   }
-  //   this.spinner.showLoader();
-  //   let newObj: any = Object.assign(
-  //     {
-  //       deviceId: this.storageService.get('OBUserDeviceId'),
-  //     },
-  //     this.deviceInfo
-  //   );
-  //   let formData: any = this.registerForm.value;
-  //   this.storageService.set('mobile', formData.mobile);
-  //   formData.role = 'CUSTOMER';
-  //   formData.deviceInfo = newObj;
-  //   this.authService.createUser(formData).subscribe((success: any) => {
-  //     this.spinner.hideLoader();
-  //     this.registerForm.reset();
-  //     this.submitted = false;
-  //     this.toaster.successToast('Register done successfully.');
-  //     this.router.navigate(['/login']);
-  //   });
-  // }
-
   async onSubmit() {
     if (this.registerForm.invalid) {
       validateField(this.registerForm);
@@ -102,6 +79,7 @@ export class RegisterPage implements OnInit {
         this.router.navigate([`/verification`], {
           queryParams: {
             mobileNumber: this.form.mobileNumber.value,
+            countryCode: this.form.countryCode.value,
           },
         });
         this.toaster.successToast(success.message);

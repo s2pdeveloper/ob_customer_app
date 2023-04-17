@@ -26,6 +26,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'verification',
+    loadChildren: () =>
+      import('./pages/auth-layout/verification/verification.module').then(
+        (m) => m.VerificationPageModule
+      ),
+  },
+  {
     path: 'forget-pwd',
     loadChildren: () =>
       import('./pages/auth-layout/forget-pwd/forget-pwd.module').then(
@@ -104,7 +111,7 @@ const routes: Routes = [
         './pages/default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
   },
- 
+
   {
     path: 'setting',
     canLoad: [AuthGuard],
@@ -137,7 +144,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
   },
- 
+
 ];
 
 @NgModule({

@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 import { HttpEventType } from '@angular/common/http';
 import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { Router } from '@angular/router';
-// import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+// import { AuthService } from '../auth/auth.service';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { Device } from '@capacitor/device';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -53,11 +53,10 @@ export class AppUpdateService {
   ionVersionNumber: string;
   ionVersionCode: string | number;
   constructor(
-    private auth: AuthService,
     private http: HttpClient,
     private alertCtrl: AlertController,
     private router: Router,
-    // private translate: TranslateService,
+    private translate: TranslateService,
     private fileOpener: FileOpener,
     private toastController: ToastController,
     private loadingController: LoadingController

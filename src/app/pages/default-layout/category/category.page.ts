@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-// import { CategoryService } from 'src/app/service/category/category.service';
+import { CategoryService } from 'src/app/core/services/category.service';
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.page.html',
@@ -20,7 +21,7 @@ export class CategoryPage implements OnInit {
 
   constructor(
     private router: Router,
-    // private categoryService: CategoryService,
+    private categoryService: CategoryService,
     public translate: TranslateService,
     public activatedRoute: ActivatedRoute
   ) { }
@@ -41,30 +42,30 @@ export class CategoryPage implements OnInit {
     let obj = {
       search: this.search,
     };
-    // this.categoryService
-    //   .getAllCategoryWithSubCategory(obj)
-    //   .subscribe((success) => {
-    //     this.categoryArr = success.rows.map((x, i) => {
-    //       if (this.categoryId && x._id == this.categoryId) {
-    //         this.businessTypeId = x.businessTypeId;
-    //         x.active = true;
-    //         this.subCategoryArr = x?.categoryWithSubCategory;
-    //       } else {
-    //         if (!this.categoryId && i == 0) {
-    //           this.categoryId = this.categoryId ? this.categoryId : x._id;
-    //           this.businessTypeId = x.businessTypeId;
-    //           x.active = true;
-    //           this.subCategoryArr = x?.categoryWithSubCategory;
-    //         } else {
-    //           x.active = false;
-    //         }
-    //       }
-    //       return x;
-    //     });
-    //   });
+    this.categoryService
+      .getAllCategory(obj)
+      .subscribe((success) => {
+        // this.categoryArr = success.rows.map((x, i) => {
+        //   if (this.categoryId && x._id == this.categoryId) {
+        //     this.businessTypeId = x.businessTypeId;
+        //     x.active = true;
+        //     this.subCategoryArr = x?.categoryWithSubCategory;
+        //   } else {
+        //     if (!this.categoryId && i == 0) {
+        //       this.categoryId = this.categoryId ? this.categoryId : x._id;
+        //       this.businessTypeId = x.businessTypeId;
+        //       x.active = true;
+        //       this.subCategoryArr = x?.categoryWithSubCategory;
+        //     } else {
+        //       x.active = false;
+        //     }
+        //   }
+        //   return x;
+        // });
+      });
  }
 
-  getCategoryAllSubCategory(index) {
+  getSubCategory(index) {
     this.categoryArr = this.categoryArr.map((x, i) => {
       if (i == index) {
         x.active = true;

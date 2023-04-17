@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs/operators';
-import { ApiService } from 'src/app/core/services/api.service';
+import { BehaviorSubject } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdvertiseService {
-  routes: any = {
-  
-    getAllPath:  `mobile/advertise/`,
-   
-
-  };
   constructor(private http: ApiService) { }
-
+  /**
+    * get All category
+    * @returns 
+    */
   getAll(payload) {
-    return this.http.get(this.routes.getAllPath, payload);
+    let url: string = `mobile/advertise/`;
+    return this.http.get(url, payload).pipe(map(
+      (data: any) => {
+        if (data && data.result) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      })
+    );
   }
-
 
 }
