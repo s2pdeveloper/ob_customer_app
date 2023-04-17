@@ -126,7 +126,11 @@ const routes: Routes = [
     path: 'favorite',
     loadChildren: () => import('./default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
+  },  {
+    path: 'seasonal-offers',
+    loadChildren: () => import('./default-layout/seasonal-offers/seasonal-offers.module').then( m => m.SeasonalOffersPageModule)
   },
+
  
 ];
 

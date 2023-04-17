@@ -152,4 +152,7 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
+  navigateToseasonalOffer(){
+    this.router.navigate(['/seasonal-offers'])
+  }
 }
