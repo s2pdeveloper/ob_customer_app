@@ -122,9 +122,7 @@ export class VerificationPage implements OnInit, OnDestroy {
       }
     );
   }
-  navigateToInfo() {
-    this.router.navigate([`/auth/optional-info`], { replaceUrl: true });
-  }
+
 
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
