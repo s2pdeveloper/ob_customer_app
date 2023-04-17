@@ -46,7 +46,6 @@ export class ApiService {
     return this.httpClient.patch(path, JSON.stringify(body)).pipe(catchError(this.formatErrors));
   }
   public getFile(path: string) {
-    console.log('path++++++++++++++', path);
     return this.httpClient.get(path, {
       responseType: 'blob',
       headers: new HttpHeaders().append('Content-Type', 'application/json'),

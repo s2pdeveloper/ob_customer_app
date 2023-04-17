@@ -2,11 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { StorageService } from 'src/app/core/services';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { ratingFormErrors } from 'src/app/helpers/formErrors.helpers';
-import { OrderRatingService } from 'src/app/service/order-rating/order-rating.service';
+import { UserService } from 'src/app/core/services/user.service';
+// import { OrderRatingService } from 'src/app/service/order-rating/order-rating.service';
 import { validateField } from 'src/app/shared/validators/form.validator';
 
 @Component({
@@ -31,14 +30,14 @@ export class OrderRatingComponent implements OnInit {
     private toaster: ToastService,
     public translate: TranslateService,
     private spinner: LoaderService,
-    private localStorage: StorageService,
-    private orderRating: OrderRatingService
+    private userService: UserService,
+    // private orderRating: OrderRatingService
   ) { }
 
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.user = this.localStorage.get('OBCustomer');
+    this.user = this.userService.getCurrentUser();
     this.formData.controls.customerId.setValue(this.user._id)
     this.formData.controls.shopId.setValue(this.ratingObj.shopId)
   }
@@ -53,17 +52,17 @@ export class OrderRatingComponent implements OnInit {
     if (this.formData.invalid) {
       validateField(this.formData);
     }
-    await this.spinner.showLoader();
-    this.orderRating.giveRating(this.ratingObj.orderId, this.formData.value,).subscribe(
-      async success => {
-        await this.spinner.hideLoader();
-        this.toaster.successToast(success.message);
-        this.formData.reset();
-        this.dismissModal();
-      }, async error => {
-        await this.spinner.hideLoader();
-        this.toaster.errorToast(error);
-      })
+    // await this.spinner.showLoader();
+    // this.orderRating.giveRating(this.ratingObj.orderId, this.formData.value,).subscribe(
+    //   async success => {
+    //     await this.spinner.hideLoader();
+    //     this.toaster.successToast(success.message);
+    //     this.formData.reset();
+    //     this.dismissModal();
+    //   }, async error => {
+    //     await this.spinner.hideLoader();
+    //     this.toaster.errorToast(error);
+    //   })
   }
   /**
  * to dismiss modal
