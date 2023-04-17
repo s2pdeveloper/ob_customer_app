@@ -99,7 +99,7 @@ export class UserService {
    * @returns 
    */
   sendMobileOtp(credentials): Observable<any> {
-    let url = `/mobile/user/send-mobile-otp`;
+    let url = `mobile/user/send-mobile-otp`;
     return this.apiService.post(url, credentials).pipe(map(
       data => {
         if (data && data.result && data.result.existingUser) {
@@ -119,7 +119,7 @@ export class UserService {
   }
 
   verifyMobileToken(credentials): Observable<any> {
-    return this.apiService.patch(`/mobile/user/verify-mobile-otp`, credentials).pipe(map(
+    return this.apiService.patch(`mobile/user/verify-mobile-otp`, credentials).pipe(map(
       data => {
         if (data && data.result) {
           this.setAuth(data.result.data);
@@ -136,7 +136,7 @@ export class UserService {
    * @returns 
    */
   addDeviceToken(payload): Observable<any> {
-    let url = `/mobile/user/set-fcm-token`;
+    let url = `mobile/user/set-fcm-token`;
     return this.apiService.post(url, payload).pipe(map(
       data => {
         if (data && data.result) {
@@ -153,7 +153,7 @@ export class UserService {
  * @returns 
  */
   removeDeviceToken(payload): Observable<any> {
-    let url = `/mobile/user/clear-fcm-token`;
+    let url = `mobile/user/clear-fcm-token`;
     return this.apiService.put(url, payload).pipe(map(
       data => {
         if (data && data.result) {
@@ -170,7 +170,7 @@ export class UserService {
    * @returns 
    */
   sendToken(credentials) {
-    return this.apiService.post('/mobile/user/send-token', credentials).pipe(map(
+    return this.apiService.post('mobile/user/send-token', credentials).pipe(map(
       data => {
         if (data && data.result) {
           return data.result;
@@ -186,7 +186,7 @@ export class UserService {
    * @returns
    */
   verifyToken(credentials) {
-    return this.apiService.post(`/mobile/user/verify-token/`, credentials).pipe(map(
+    return this.apiService.post(`mobile/user/verify-token/`, credentials).pipe(map(
       data => {
         if (data && data.result) {
           return data.result;
@@ -207,7 +207,7 @@ export class UserService {
    * @returns
    */
   updateProfile(updatePayload: any) {
-    return this.apiService.put('/mobile/user/update', updatePayload).pipe(map(data => {
+    return this.apiService.put('mobile/user/update', updatePayload).pipe(map(data => {
       if (data && data.result) {
         // this.currentUserSubject.next(data.result);
         this.populate();
@@ -223,7 +223,7 @@ export class UserService {
    * @returns
    */
   getProfile() {
-    return this.apiService.get(`/mobile/user/profile`).pipe(map(data => {
+    return this.apiService.get(`mobile/user/profile`).pipe(map(data => {
       if (data && data.result) {
         return data.result;
       } else {
