@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
-import { Socket } from 'ngx-socket-io';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
@@ -15,13 +14,15 @@ import { OrderRatingComponent } from 'src/app/modal/order-rating/order-rating.co
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
+import { SocketService } from 'src/app/core/services/socket.service';
+import { socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 
 @Component({
   selector: 'app-chat-view',
   templateUrl: './chat-view.page.html',
   styleUrls: ['./chat-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
+export class ChatViewPage implements OnInit, AfterViewChecked {
   @ViewChild(IonContent) content: IonContent;
 
   @ViewChild(IonInfiniteScroll, { static: false })
@@ -57,15 +58,14 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
     private userService: UserService,
     private uploadService: UploadService,
     private modalCtrl: ModalController,
-    private socket: Socket,
+    private socketService: SocketService,
     private restService: RestService
-  ) { }
+  ) {
+    this.receiveDataMessages();
+  }
 
   chatForm = new FormGroup({
-    _id: new FormControl(),
-    roomName: new FormControl(''),
     message: new FormControl('', [Validators.required]),
-    createdBy: new FormControl(),
     image: new FormControl(''),
   });
 
@@ -81,52 +81,33 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params) => {
-
       this.status = params.status;
       this.shopId = params.shopId;
       this.shopName = params.shopName;
-      // roomName means orderId
-      if (params.roomName) this.roomName = params.roomName;
-      this.orderId = params.roomName;
-      this.getMsgByCustomerId(false);
+      this.orderId = params.orderId;
+      this.getMsgByCustomerId();
     });
-
-    // socket
-    this.socket.on(
-      'latest',
-      function (data: any) {
-        console.log(data);
-        this.getMsgByCustomerId(false);
-      }.bind(this)
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.socket.disconnect();
   }
 
   sendMessage() {
-    this.chatForm.controls.roomName.setValue(this.roomName);
-    // this.chatService.create(this.chatForm.value).subscribe(
-    //   (success) => {
-    //     this.getMsgByCustomerId(false);
-    //     // emit
-    //     this.socket.emit('latestdata', {
-    //       roomName: this.roomName,
-    //       userId: this.user._id,
-    //       data: this.chatForm.value,
-    //     });
-    //     this.chatForm.reset();
-    //     this.spinner.hideLoader();
-    //   },
-    //   (error: any) => {
-    //     this.spinner.hideLoader();
-    //     this.toaster.errorToast(error);
-    //   }
-    // );
+    this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
   }
 
-  async getMsgByCustomerId(isFirstLoad: boolean, event?: any) {
+  emitToLoadMessages() {
+    let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
+    this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
+  }
+  receiveDataMessages() {
+    this.socketService.listenEvent(socketOnEvents.LIST_MESSAGE).subscribe({
+      next(value) {
+        console.log(value)
+      },
+      error(error) {
+        console.log(error)
+      },
+    })
+  }
+  async getMsgByCustomerId() {
     // this.chatService
     //   .getMsgByCustomerId(this.roomName)
     //   .subscribe(async success => {
@@ -180,13 +161,11 @@ export class ChatViewPage implements OnInit, OnDestroy, AfterViewChecked {
 
   doRefresh(event: any) {
     this.msgArr = [];
-    this.getMsgByCustomerId(false, '');
     event.target.complete();
   }
 
   doInfinite(event) {
     this.page++;
-    this.getMsgByCustomerId(true, event);
     event.target.complete();
   }
 

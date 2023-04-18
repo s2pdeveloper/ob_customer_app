@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 @Component({
   selector: 'app-search-shop',
   templateUrl: './search-shop.page.html',
@@ -29,7 +30,7 @@ export class SearchShopPage implements OnInit {
   constructor(
     private router: Router,
     public translate: TranslateService,
-    // private shopService: ShopService,
+    private shopService: ShopService,
     private spinner: LoaderService,
     private toaster: ToastService,
     private activatedRoute: ActivatedRoute,
@@ -68,15 +69,15 @@ export class SearchShopPage implements OnInit {
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
     };
-    // this.shopService.getAllShop(obj).subscribe(async (success) => {
-    //   await this.spinner.hideLoader();
-    //   this.collection = success.count;
-    //   this.shopArr = success.rows;
-    //   if (isFirstLoad) event?.target.complete();
-    //   if (this.shopArr.length >= this.collection && event) {
-    //     event.target.disabled = true;
-    //   }
-    // });
+    this.shopService.list(obj).subscribe(async (success) => {
+      await this.spinner.hideLoader();
+      this.collection = success.count;
+      this.shopArr = success.data;
+      if (isFirstLoad) event?.target.complete();
+      if (this.shopArr.length >= this.collection && event) {
+        event.target.disabled = true;
+      }
+    });
   }
 
   // async addToFavorite(item) {
@@ -92,8 +93,8 @@ export class SearchShopPage implements OnInit {
   //   });
   // }
 
-  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
+  navigateTo(path, id) {
+    this.router.navigate([path], { queryParams: { id: id } });
   }
 
   getUrl(url) {

@@ -28,8 +28,8 @@ export class ShopService {
     * get shop profile
     * @returns 
     */
-    getShopProfile(id: number) {
-        let url: string = `/mobile/shop/view/${id}`;
+    getShopProfile(id: string) {
+        let url: string = `/mobile/shop/${id}`;
         return this.apiService.get(url).pipe(map(
             (data: any) => {
                 if (data && data.result) {
@@ -42,7 +42,7 @@ export class ShopService {
         );
     }
     list(params) {
-        let url: string = `/mobile/shop/shop-list`;
+        let url: string = `/mobile/shop`;
         return this.apiService.get(url, params).pipe(map(
             (data: any) => {
                 if (data && data.result) {
@@ -55,17 +55,4 @@ export class ShopService {
         );
     }
 
-    businessType(params) {
-        let url: string = `/mobile/shop/business-type-list`;
-        return this.apiService.get(url, params).pipe(map(
-            (data: any) => {
-                if (data && data.result) {
-                    return data.result;
-                }
-                else {
-                    return null;
-                }
-            })
-        );
-    }
 }

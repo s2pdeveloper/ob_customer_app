@@ -3,42 +3,42 @@
 </ion-item>
 
  <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="shopDetails && shopDetails.shopFavorite && !shopDetails.shopFavorite.length">
+  <ion-fab-button *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && !shopUser?.shopDetails.shopFavorite.length">
     <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
 <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="shopDetails && shopDetails.shopFavorite && shopDetails.shopFavorite.length">
+  <ion-fab-button *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && shopUser?.shopDetails.shopFavorite.length">
     <ion-icon name="heart" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
 <ion-content style="padding: 0" class="shadow-none ion-no-padding">
-  <img [src]="shopDetails?.bannerImages" class="header-image" />
+  <img [src]="shopUser?.shopDetails?.bannerImages" class="header-image" />
   <div id="content" class="main-content ion-padding">
     <ion-card>
       <ion-card-content>
         <ion-item>
           <ion-col size="5">
             <ion-avatar class="ion-margin-end logo-image">
-              <img alt="logo-image" *ngIf="shopDetails?.image" [src]="shopDetails?.image" />
+              <img alt="logo-image" *ngIf="shopUser?.profilePicture" [src]="shopDetails?.image" />
             </ion-avatar>
           </ion-col>
           <ion-col size="7" class="ion-text-capitalize ion-text-wrap">
-            <ion-label class="ion-text-wrap"><b>{{shopDetails?.shopName}}</b></ion-label>
+            <ion-label class="ion-text-wrap"><b>{{shopUser?.shopDetails?.shopName}}</b></ion-label>
             <p class="font-larger">
-              {{shopDetails?.firstName}} {{shopDetails?.lastName}}
+              {{shopUser?.shopDetails?.firstName}} {{shopUser?.shopDetails?.lastName}}
             </p>
             <ion-text class="ion-text-wrap">
               <h4>
-                {{shopDetails?.address?.city}}, {{shopDetails?.address?.state}}
-                - {{shopDetails?.address?.pinCode}}
+                {{shopUser?.shopDetails?.address?.city}}, {{shopUser?.shopDetails?.address?.state}}
+                - {{shopUser?.shopDetails?.address?.pinCode}}
               </h4>
             </ion-text>
             <ion-note class="ion-padding-top ion-text-wrap">
-              {{shopDetails?.schedule?.day}}:{{shopDetails?.schedule?.startTime}} to
-              {{shopDetails?.schedule?.endTime }}
+              {{shopUser?.shopDetails?.schedule?.day}}:{{shopUser?.shopDetails?.schedule?.startTime}} to
+              {{shopUser?.shopDetails?.schedule?.endTime }}
             </ion-note>
 
           </ion-col>
@@ -67,7 +67,7 @@
                         <ion-row>
                           <ion-col>
                             <p class="ion-text-wrap">
-                              {{shopDetails?.aboutUs }}
+                              {{shopUser?.shopDetails?.aboutUs }}
                             </p>
                           </ion-col>
                         </ion-row>
@@ -78,7 +78,7 @@
                       <ion-row class="ion-no-margin">
                         <ion-col size="3" class="ion-no-padding ion-text-center">
                           <ion-button fill="clear">                           
-                             <a *ngIf="faceBook" href="{{shopDetails?.links?.facebook}}">
+                             <a *ngIf="faceBook" href="{{shopUser?.shopDetails?.links?.facebook}}">
                               <ion-icon name="logo-facebook" class="font fb"></ion-icon>
                              </a>
                              <a *ngIf="!faceBook">
@@ -88,7 +88,7 @@
                         </ion-col>
                         <ion-col size="3" class="ion-no-padding ion-text-center">
                           <ion-button fill="clear">
-                            <a *ngIf="insta" href="{{shopDetails?.links?.insta}}">
+                            <a *ngIf="insta" href="{{shopUser?.shopDetails?.links?.insta}}">
                               <img src="../../../assets/image/instaicon.png" alt="" class="insta" />
                             </a>
                             <a *ngIf="!insta">
@@ -98,7 +98,7 @@
                         </ion-col>
                         <ion-col size="3" class="ion-no-padding ion-text-center">
                           <ion-button fill="clear">
-                            <a *ngIf="youTube" href="{{shopDetails?.links?.youtube}}">
+                            <a *ngIf="youTube" href="{{shopUser?.shopDetails?.links?.youtube}}">
                               <ion-icon name="logo-youtube" class="font yt"></ion-icon>
                             </a>
                             <a *ngIf="!youTube">
@@ -108,7 +108,7 @@
                         </ion-col>
                         <ion-col size="3" class="ion-no-padding ion-text-center">
                         <ion-button fill="clear">
-                          <a *ngIf=" webSite" href="{{userDetails?.links?.website}}">
+                          <a *ngIf=" webSite" href="{{shopUser?.shopDetails?.links?.website}}">
                             <ion-icon name="globe-sharp" class="font fb"></ion-icon>
                           </a>
                           <a *ngIf="!webSite">
@@ -146,11 +146,11 @@
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">
                       <ion-card>
-                        <ion-grid *ngIf="shopDetails?.galleryImages?.length > 0;else noDataFound">
+                        <ion-grid *ngIf="shopUser?.shopDetails?.galleryImages?.length > 0;else noDataFound">
                           <!-- <ion-grid> -->
                           <ion-row>
-                            <ion-col *ngFor="let galleryImg of shopDetails?.galleryImages" size="6"
-                              (click)="navigateToViewGalleryImages(shopDetails?.galleryImages)">
+                            <ion-col *ngFor="let galleryImg of shopUser?.shopDetails?.galleryImages" size="6"
+                              (click)="navigateToViewGalleryImages(shopUser?.shopDetails?.galleryImages)">
                               <img class="gallery ion-no-padding" src="{{galleryImg}}" />
                             </ion-col>
                           </ion-row>
@@ -182,20 +182,20 @@
 
  <ion-footer class="ion-no-border">
 
-  <ion-item *ngIf=" shopDetails?.shopBusiness[0]?.name==='product' ||   shopDetails?.shopBusiness[0]?.name==='resale'">
+  <ion-item *ngIf="shopUser?.shopDetails?.businessType?.name==='product' ||  shopUser?.shopDetails?.businessType?.name==='resale'">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopDetails?.shopBusiness[0]?.name==='service'">
+  <ion-item *ngIf="shopUser?.shopDetails?.businessType?.name==='service'">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'Book Appointment' |
         translate}}</ion-button>
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopDetails?.shopBusiness[0]?.name==='product and services '">
+  <ion-item *ngIf="shopUser?.shopDetails?.businessType?.name==='product and services'">
     <ion-col size="6">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
