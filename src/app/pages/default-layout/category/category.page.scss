@@ -18,6 +18,7 @@ ion-content {
       max-width: 75vh !important;
       height: 75vh !important;
       overflow: auto !important;
+      position: fixed;
     }
 
     ion-card {
@@ -29,8 +30,8 @@ ion-content {
 
       .cat-img {
         border-radius: 5%;
-        height: 3.5rem;
-        width: 3.5rem;
+        height: 5rem;
+        width: 5rem;
         object-fit: cover;
       }
 
@@ -85,10 +86,10 @@ ion-content {
       margin: 0.2rem;
       height: 100%;
 
-      .cat-img {
+      .subcat-img {
         border-radius: 5%;
-        height: 4.5rem;
-        width: 4.5rem;
+        height: 80%;
+        width: 75%;
         object-fit: cover;
       }
 

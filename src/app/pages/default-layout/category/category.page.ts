@@ -12,14 +12,15 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 })
 export class CategoryPage implements OnInit {
 
-  businessTypeId: number;
+  
   categoryId: number;
-  categoryArr: any = [];
-  subCategoryArr: any = [];
+  categoryList: any = [];
+  subCategoryList: any = [];
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
-  search: string = '';
+  searchText: string;
+  activeParentId: any = null;
 
 
   constructor(
@@ -38,7 +39,7 @@ export class CategoryPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.categoryId) {
         this.categoryId = params.categoryId;
-        this.getAllSubCategory({ _id: params.categoryId })
+        this.getAllSubCategory(this.categoryId, false, '')
       }
     });
   }
@@ -47,12 +48,12 @@ export class CategoryPage implements OnInit {
     this.categoryService
       .getAllCategory({})
       .subscribe((success) => {
-        this.categoryArr = success;
-        this.categoryArr = success.map((x, i) => {
+        this.categoryList = success;
+        this.categoryList = success.map((x, i) => {
           if (!this.categoryId && i == 0) {
             this.categoryId = this.categoryId ? this.categoryId : x._id;
             x.active = true;
-            this.getAllSubCategory(x);
+            this.getAllSubCategory(this.categoryId, false, '');
           } else {
             x.active = false;
           }
@@ -61,24 +62,33 @@ export class CategoryPage implements OnInit {
       });
   }
 
-  getAllSubCategory(item) {
-    let obj = {
-      page: this.page,
-      pageSize: this.pageSize,
-      search: this.search,
-      parentId: item._id
-    };
-    this.subCategoryService.getAll(obj).subscribe(
+  getAllSubCategory(parentId, isFirstLoad, event) {
+    this.activeParentId = parentId
+   let params = { page: this.page,pageSize: this.pageSize, parentId: parentId};
+    if (this.searchText) {
+      params['search'] = this.searchText;
+    }
+    this.subCategoryService.getAll(params).subscribe(
       async (success) => {
-        this.subCategoryArr = success.data;
-        this.categoryArr = this.categoryArr.map((x, i) => {
-          if (item._id == x._id) {
+        this.subCategoryList = success.data;
+        this.categoryList = this.categoryList.map((x, i) => {
+          if (parentId == x._id) {
             x.active = true;
           } else {
             x.active = false;
           }
           return x;
         });
+        // for (let i = 0; i < success.data.length; i++) {
+        //   this.subCategoryList.push(success.data[i]);
+        // }
+        // if (isFirstLoad)
+        //   event.target.complete();
+        // if (success.data.length === 0 && event) {
+        //   event.target.disabled = true;
+        // } else {
+        //   this.page += this.pageSize;
+        // }
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -86,7 +96,7 @@ export class CategoryPage implements OnInit {
   }
 
 
-  navigateTo(subCategory) {
+  navigateToShopList(subCategory) {
     this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
         // categoryId: subCategory.categoryId,
@@ -97,8 +107,21 @@ export class CategoryPage implements OnInit {
 
   onSearch() {
     this.page = 1;
-    this.subCategoryArr = [];
-    this.getAllSubCategory(false);
+    this.subCategoryList = [];
+    this.getAllSubCategory(this.activeParentId, false, '');
+  }
+
+  doRefresh(event: any) {
+    this.page = 1;
+    this.subCategoryList = [];
+    this.getAllSubCategory(this.activeParentId, false, '');
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    this.page++;
+    this.getAllSubCategory(this.activeParentId, false, "");
+    event.target.complete();
   }
 
 }
