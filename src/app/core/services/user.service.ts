@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { SocketService } from './socket.service';
 
 
 @Injectable()
@@ -14,9 +15,7 @@ export class UserService {
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
   refreshTable = new Subject();
 
-  constructor(
-    private apiService: ApiService,
-    private jwtService: JwtService) { }
+  constructor(private apiService: ApiService,private jwtService: JwtService,private socketService: SocketService) { }
 
   // Verify JWT in local storage with server & load user's info.
   // This runs once on application startup.
@@ -47,6 +46,7 @@ export class UserService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
+    this.socketService.connect();
   }
 
   purgeAuth() {

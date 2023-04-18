@@ -80,7 +80,21 @@ export const getAllRolesArray = () => {
         ROLES.EMPLOYEE
     ]
 };
-export const UNITS = ['g', 'kg', 'ml', 'ltr', 'dz', 'pk', 'bx', 'pcs', 'nos'];
+export const socketOnEvents = {
+    AUTHENTICATE: 'authenticate',
+    CREATE_ORDER: 'createOrder',
+    SEND_MESSAGE: 'sendMessage',
+    DELETE_MESSAGE: 'deleteMessage',
+    LIST_MESSAGE: 'listMessages',
+    LIST_ORDER: 'listOrder',
+};
+
+export const socketEmitEvents = {
+    RECEIVE_ORDER: 'receiveOrder',
+    RECEIVE_MESSAGE: 'receiveMessage',
+    ERROR_MESSAGE: 'errorMessage',
+};
+
 export const notificationType = {
     ORDER: "order",
     PRODUCT_REQUEST: "product_request",

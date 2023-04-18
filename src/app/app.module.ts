@@ -15,11 +15,6 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 // qr code
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
-// socket
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
-
-const config: SocketIoConfig = { url: environment.url, options: {} };
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -33,7 +28,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
