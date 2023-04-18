@@ -31,9 +31,8 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
 
   page: number = 1;
   pageSize: number = 10;
-  search = '';
   shopId: number;
-  msgArr: any = [];
+  messages: any = [];
   user: any = {};
   msg: any = '';
   customerId: number;
@@ -61,7 +60,7 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     private socketService: SocketService,
     private restService: RestService
   ) {
-    this.receiveDataMessages();
+    this.receiveDataMessages(false, "");
   }
 
   chatForm = new FormGroup({
@@ -74,10 +73,21 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
+
   scrollToBottom() {
     this.content.scrollToBottom();
   }
+  doRefresh(event: any) {
+    this.messages = [];
+    this.page = 0;
+    this.receiveDataMessages(false, "");
+    event.target.complete();
+  }
 
+  doInfinite(event) {
+    this.receiveDataMessages(true, event);
+    event.target.complete();
+  }
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -97,10 +107,20 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
     this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
   }
-  receiveDataMessages() {
+  receiveDataMessages(isFirstLoad, event) {
     this.socketService.listenEvent(socketOnEvents.LIST_MESSAGE).subscribe({
-      next(value) {
-        console.log(value)
+      next(data: any) {
+        console.log(data);
+        for (let i = 0; i < data.rows.length; i++) {
+          this.messages.unshift(data.rows[i]);
+        }
+        if (isFirstLoad)
+          event.target.complete();
+        if (data.rows.length === 0 && event) {
+          event.target.disabled = true;
+        } else {
+          this.page += this.limit;
+        }
       },
       error(error) {
         console.log(error)
@@ -111,7 +131,7 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     // this.chatService
     //   .getMsgByCustomerId(this.roomName)
     //   .subscribe(async success => {
-    //     this.msgArr = success.rows;
+    //     this.messages = success.rows;
     //     await this.spinner.hideLoader();
     //   });
   }
@@ -157,16 +177,6 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     }
     await App.getLaunchUrl();
     return url;
-  }
-
-  doRefresh(event: any) {
-    this.msgArr = [];
-    event.target.complete();
-  }
-
-  doInfinite(event) {
-    this.page++;
-    event.target.complete();
   }
 
   confirmOrder() {
