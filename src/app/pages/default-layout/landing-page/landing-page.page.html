@@ -55,51 +55,16 @@
   </ion-slides>
 
   <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary"
-    >{{'Seasonal Offers' | translate}}</ion-title
-  >
-</ion-item>
-  <ion-card (click)="navigateToseasonalOffer()">
-    <ion-title class="ion-no-padding heading1" color="primary"
-    >{{'Coolers' | translate}}</ion-title>
-  <ion-row>
-    <ion-col class="ion-text-center" size="6">
-      <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-      <ion-label class="business-font-size ion-text-capitalize ion-text-wrap">Coolers</ion-label>
-    </ion-col>
-    <ion-col class="ion-text-center" size="6">
-      <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-      <ion-label class="business-font-size ion-text-capitalize ion-text-wrap">Coolers</ion-label>
-    </ion-col> 
-  </ion-row>
-</ion-card>
-<ion-card (click)="navigateToseasonalOffer()">
-  <ion-title class="ion-no-padding heading1" color="primary"
-  >{{'Coolers' | translate}}</ion-title>
-<ion-row>
-  <ion-col class="ion-text-center" size="6">
-    <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-    <ion-label class="business-font-size ion-text-capitalize ion-text-wrap">Coolers</ion-label>
-  </ion-col>
-  <ion-col class="ion-text-center" size="6">
-    <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-    <ion-label class="business-font-size ion-text-capitalize ion-text-wrap" >Coolers</ion-label>
-  </ion-col> 
-</ion-row>
-</ion-card>
-<ion-card >
-  <ion-title class="ion-no-padding heading1" color="primary"
-  >{{'Coolers' | translate}}</ion-title>
-<ion-row>
-  <ion-col class="ion-text-center" size="6">
-    <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-    <ion-label class="business-font-size ion-text-capitalize ion-text-wrap">Coolers</ion-label>
-  </ion-col>
-  <ion-col class="ion-text-center" size="6">
-    <img class="img-seasonal" src="../../../../assets//images/grocery.jpg">
-    <ion-label class="business-font-size ion-text-capitalize ion-text-wrap" >Coolers</ion-label>
-  </ion-col> 
-</ion-row>
-</ion-card>
-
+    <ion-title class="ion-no-padding heading" color="primary">{{'Seasonal Offers' | translate}}</ion-title>
+  </ion-item>
+  <ion-card *ngFor="let item of seasonalOffer" >
+    <ion-title class="ion-no-padding ion-text-capitalize ">{{item.heading | translate}}</ion-title>
+    <ion-row>
+      <ion-col class="ion-text-center" size="6" *ngFor="let img of item.media ">
+        <img class="img-seasonal" height="100%" width="100%" src={{img.image}}>
+        <ion-label class="ion-text-capitalize ion-text-wrap">{{img.title}}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-label (click)="navigateToSeasonalOffer()" slot="start">{{'See all' | translate}}</ion-label>
+  </ion-card>
 </ion-content>

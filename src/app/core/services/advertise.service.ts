@@ -26,7 +26,7 @@ export class AdvertiseService {
     );
   }
   getAllSeasonalOffer(payload) {
-    let url: string = `mobile/seasonalOffer/`;
+    let url: string = `mobile/seasonal-offer/`;
     return this.http.get(url, payload).pipe(map(
       (data: any) => {
         if (data && data.result) {

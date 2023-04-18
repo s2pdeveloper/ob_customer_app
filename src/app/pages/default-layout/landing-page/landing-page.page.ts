@@ -28,6 +28,7 @@ export class LandingPagePage implements OnInit {
   user: any = '';
   loaded: boolean;
   userDetails: any = [];
+  seasonalOffer: any = [];
 
   buttonSlide = {
     slidesPerView: 4,
@@ -140,7 +141,7 @@ export class LandingPagePage implements OnInit {
   getAllSeasonalOffer() {
     this.advertiseService.getAllSeasonalOffer({}).subscribe(
       async (success) => {
-        this.categoryArr = success;
+        this.seasonalOffer = success;
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -174,7 +175,7 @@ export class LandingPagePage implements OnInit {
     });
   }
 
-  navigateToseasonalOffer() {
+  navigateToSeasonalOffer() {
     this.router.navigate(['/seasonal-offers'])
   }
 
