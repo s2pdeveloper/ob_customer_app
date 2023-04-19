@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaderService } from 'src/app/core/services/loader.service';
 import { UserService } from 'src/app/core/services/user.service';
-// import { AuthService } from 'src/app/service/auth/auth.service';
 
 @Component({
   selector: 'app-view-profile',
@@ -11,22 +9,32 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./view-profile.page.scss'],
 })
 export class ViewProfilePage implements OnInit {
-  user: any;
-  loaded = false;
-  userDetails: any={};
+
+  user: any = {};
 
   constructor(
-    // private authService: AuthService,
     private router: Router,
-    private spinner: LoaderService,
     private userService: UserService,
     public translate: TranslateService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
-    this.user = this.userService.getCurrentUser();
+    this.getUserDetails();
+  }
+
+  // getUserDetails() {
+  //   this.userService.currentUser.subscribe((userData:any) => {
+  //     this.user = userData;
+  //     console.log("userData.......",userData); 
+  //   });
+  // }
+
+  getUserDetails() {
+    this.userService.getProfile().subscribe((userData: any) => {
+      this.user = userData;
+    });
   }
 
   navigate(page: string) {

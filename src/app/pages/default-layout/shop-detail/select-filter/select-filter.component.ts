@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { Socket } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { UserService } from 'src/app/core/services/user.service';
 // import { ChatService } from 'src/app/service/chat/chat.service';
@@ -25,7 +25,7 @@ export class SelectFilterComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private spinner: LoaderService,
-    private socket: Socket,
+    // private socket: Socket,
     // private chatService: ChatService,
     private modalCtrl: ModalController,
     public translate: TranslateService
@@ -53,7 +53,7 @@ export class SelectFilterComponent implements OnInit {
   navigateTo() {
     let msg = '';
     msg += `Dear merchant,\n please book an appointment Date:- ${this.revDate} and Time:- ${this.formatTime}\n`;
-    this.socket.emit('join', { room: this.shopDetail._id, user: this.user._id });
+    // this.socket.emit('join', { room: this.shopDetail._id, user: this.user._id });
 
     let message = {
       shopId: this.shopDetail._id,
@@ -65,15 +65,15 @@ export class SelectFilterComponent implements OnInit {
 
     //   // join
     //   this.socket.emit('join', { room: success.orderId, user: this.user._id });
-    //   this.router.navigate(['/chat-view'], {
-    //     queryParams: {
-    //       shopId: this.shopDetail._id,
-    //       shopName: this.shopDetail.shopName,
-    //       roomName: success.orderId,
-    //     },
-    //   });
-    //   this.dismissModal('isClose')
-    // });
+    this.router.navigate(['/chat-view'], {
+      //     queryParams: {
+      //       shopId: this.shopDetail._id,
+      //       shopName: this.shopDetail.shopName,
+      //       roomName: success.orderId,
+      //     },
+      //   });
+      //   this.dismissModal('isClose')
+    });
   }
 
 

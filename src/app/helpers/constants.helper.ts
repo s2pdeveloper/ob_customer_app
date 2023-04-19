@@ -70,6 +70,12 @@ export const ROLES = {
     CUSTOMER: 'CUSTOMER',
     EMPLOYEE: 'EMPLOYEE'
 }
+export const BUSINESSTYPE = {
+    PRODUCT: 'product',
+    SERVICES: 'services',
+    PRODUCT_AND_SERVICES: 'product and services',
+    RESALE: 'resale',
+}
 export const getAllRolesArray = () => {
     return [
         ROLES.SUPER_ADMIN,

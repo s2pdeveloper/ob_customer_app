@@ -9,13 +9,14 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
-
+import {BUSINESSTYPE } from 'src/app/helpers/constants.helper';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
   styleUrls: ['./shop-detail.page.scss'],
 })
 export class ShopDetailPage implements OnInit {
+  businessType:any=BUSINESSTYPE;
   shopUser: any;
   buttonSlide = {
     slidesPerView: 4,
@@ -29,7 +30,7 @@ export class ShopDetailPage implements OnInit {
     spaceBetween: 1,
   };
   shopId: string = null;
-  type:string = 'about'
+  type: string = 'about'
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,

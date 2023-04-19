@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 // import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-import { Socket } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
 // import { ChatService } from 'src/app/service/chat/chat.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
-
+import { ShopService } from 'src/app/core/services/shop.service';
+import { StorageService } from 'src/app/core/services/local-storage.service';
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.page.html',
@@ -37,17 +38,19 @@ export class CataloguePage implements OnInit {
     },
     spaceBetween: 3,
   };
+  shopCatalogue: any = [];
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
-    // private shopService: ShopService,
+    private shopService: ShopService,
     private userService: UserService,
     private spinner: LoaderService,
-    private socket: Socket,
+    // private socket: Socket,
     // private chatService: ChatService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() { }
@@ -56,51 +59,26 @@ export class CataloguePage implements OnInit {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopId = params._id
-      this.getShopById(params._id);
+      if (params._id) {
+        this.getShopCatalogue(params._id)
+      }
+    });
+  }
+  async getShopCatalogue(id) {
+    this.shopService.getShopCatalogue({ shopId: id }).subscribe(async (success: any) => {
+      this.shopCatalogue = success.data;
+      await this.spinner.hideLoader();
     });
   }
 
-  async getShopById(_id) {
-    // this.shopService.getByIdShop(_id).subscribe(async (success: any) => {
-    //   this.subCategoryArr = success.subCatData.map((y, i) => {
-    //     y.isActive = false;
-    //     if (i == 0) {
-    //       y.isActive = true;
-    //       this.getCatalogueBySubCategoryId(y._id, null);
-    //     }
-    //     return y;
-    //   });
-    //   await this.spinner.hideLoader();
-    // });
+  navigateToCheckout() {
+    let filteredData = this.shopCatalogue.filter(x => x.isChecked);
+    this.storageService.set("orderData", filteredData)
+    this.router.navigate(['/checkout'], {});
   }
-
-  async getCatalogueBySubCategoryId(_id, index) {
-    let obj = {
-      shopId: this.shopId,
-      subCategoryId: _id
-    }
-    // this.shopService
-    //   .getCatalogueBySubCategoryId(obj)
-    //   .subscribe(async (success: any) => {
-    //     this.catalogueArr = success.rows.map((x) => {
-    //       x.isChecked = false;
-    //       return x;
-    //     });
-    //     // ----------------------------------- //
-    //     this.subCategoryArr.forEach((x) => {
-    //       if (x.id === _id) {
-    //         x.isActive = true;
-    //       } else {
-    //         x.isActive = false;
-    //       }
-    //     });
-    //     await this.spinner.hideLoader();
-    //   });
-  }
-
-  navigateTo() {
+  navigateToChat() {
     let msg = '';
-    let arr = this.catalogueArr.filter((x) => x.isChecked == true);
+    let arr = this.shopCatalogue.filter((x) => x.isChecked == true);
     if (arr.length < 1) {
       this.toaster.errorToast('Plz select at least one product');
       return;
@@ -123,7 +101,7 @@ export class CataloguePage implements OnInit {
     }
 
     let message = {
-      shopId: arr[0].shopId._id,
+      shopId: this.shopId,
       message: msg,
       description: description,
       // amount: amount,
@@ -131,20 +109,20 @@ export class CataloguePage implements OnInit {
     // this.chatService.create(message).subscribe((success) => {
     //   this.spinner.hideLoader();
     //   console.log("join success",success);
-      
+
     //   // join
     //   this.socket.emit('join', { room: success.orderId, user: this.user._id });
-    //   this.router.navigate(['/chat-view'], {
-    //     queryParams: {
-    //       shopId: arr[0].shopId._id,
-    //       shopName: arr[0].shopId.shopName,
-    //       roomName: success.orderId, //join
-    //     },
-    //   });
-    // });
+    this.router.navigate(['/chat-view'], {
+      //     queryParams: {
+      //       shopId: arr[0].shopId._id,
+      //       shopName: arr[0].shopId.shopName,
+      //       roomName: success.orderId, //join
+      //     },
+      //   });
+    });
   }
 
   navigateToHome() {
-    this.router.navigate(['/app/tabs/landing-page']);
+    this.router.navigate(['/app/tabs/home']);
   }
 }

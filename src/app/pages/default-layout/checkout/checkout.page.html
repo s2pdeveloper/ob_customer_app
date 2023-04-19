@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'Product' | translate}}</ion-title>
+    <ion-title>{{'Checkout' | translate}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="category" mode="md"></ion-back-button>
+      <ion-back-button defaultHref="checkout" mode="md"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end" class="ion-margin-end">
       <ion-icon name="home" slot="end" (click)="navigateToHome()"></ion-icon>
@@ -11,19 +11,10 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
-    <ion-slide *ngFor="let item of subCategoryArr;let i=index">
-      <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
-        <img class="img-box" src="{{item.image}} " /><br />
-        <ion-note class="sub-heading ion-text-capitalize">{{item.name}}</ion-note>
-      </div>
-    </ion-slide>
-  </ion-slides> -->
-
   <div class="container">
-    <ion-grid *ngIf="shopCatalogue?.length > 0;else noDataFound">
+    <ion-grid *ngIf="orderData?.length > 0;else noDataFound">
       <ion-row appAnimateItems className="bounceIn">
-        <ion-col *ngFor=" let item of shopCatalogue" class="animation-normal">
+        <ion-col *ngFor=" let item of orderData" class="animation-normal">
           <ion-list lines="none">
             <ion-card>
               <ion-item class="ion-no-padding">
@@ -63,7 +54,7 @@
   </div>
 
   <ion-button color="primary" expand="block" strong="true" shape="round" class="ion-margin-top"
-    *ngIf="shopCatalogue?.length > 0" (click)="navigateToCheckout()">
-    {{'Checkout' | translate}}
+    *ngIf="orderData?.length > 0" (click)="navigateToChat()">
+    {{'Place Order' | translate}}
   </ion-button>
 </ion-content>

@@ -15,7 +15,7 @@ export class AuthGuard implements CanLoad {
     return this.userService.isAuthenticated.pipe(take(1), tap(allowed => {
       if (!allowed) {
         let returnUrl = segemets[0].path;
-        this.router.navigate(['/auth/login'], { queryParams: { returnUrl } });
+        this.router.navigate(['/login'], { queryParams: { returnUrl } });
       } else {
         const currentUser = this.userService.getCurrentUser();
         if (currentUser) {
@@ -31,7 +31,7 @@ export class AuthGuard implements CanLoad {
           return true;
           // }
         } else {
-          this.router.navigate(['/auth/login']);
+          this.router.navigate(['/login']);
           return false;
         }
       }

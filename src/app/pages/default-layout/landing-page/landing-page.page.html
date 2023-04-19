@@ -36,7 +36,9 @@
   <ion-slides [options]="buttonSlide">
     <ion-slide *ngFor="let item of categoryArr">
       <div class="">
-        <img src="{{item.image}} " (click)="navigateToCategory(item._id)" /><br />
+        <img src="{{item.image}} " (click)="navigateToCategory(item._id)" />
+        <img class="img-fluid" *ngIf="!item.image" src="assets/images/placeholder_product.png"
+          alt="product-image" /><br />
         <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{item.name}}</ion-note>
       </div>
     </ion-slide>
@@ -57,7 +59,7 @@
   <ion-item lines="none">
     <ion-title class="ion-no-padding heading" color="primary">{{'Seasonal Offers' | translate}}</ion-title>
   </ion-item>
-  <ion-card *ngFor="let item of seasonalOffer" >
+  <ion-card *ngFor="let item of seasonalOffer">
     <ion-title class="ion-no-padding ion-text-capitalize ">{{item.heading | translate}}</ion-title>
     <ion-row>
       <ion-col class="ion-text-center" size="6" *ngFor="let img of item.media ">

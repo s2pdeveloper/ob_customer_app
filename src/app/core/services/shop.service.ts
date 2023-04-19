@@ -55,4 +55,22 @@ export class ShopService {
         );
     }
 
+    /**
+  * get shop catalogue
+  * @returns 
+  */
+    getShopCatalogue(payload: any) {
+        let url: string = `mobile/shop/shop-catalogue`;
+        return this.apiService.get(url, payload).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+
 }

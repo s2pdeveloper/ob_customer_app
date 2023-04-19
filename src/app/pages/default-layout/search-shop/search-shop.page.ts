@@ -18,7 +18,7 @@ export class SearchShopPage implements OnInit {
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
-  search: string = '';
+  search: string = null;
   businessTypeId: any;
   categoryId: string = '';
   subCategoryId: string = '';
@@ -26,6 +26,7 @@ export class SearchShopPage implements OnInit {
   loaded: boolean = false;
   shopDetails: any;
   user: any = {};
+  shopCount: any;
 
   constructor(
     private router: Router,
@@ -55,30 +56,66 @@ export class SearchShopPage implements OnInit {
       this.businessTypeId = params.businessTypeId ?? '';
       this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params.subCategoryId ?? '';
-      this.getAllShop(false);
+      this.getAllShop(false, '');
     });
-
+  }
+  onSearch() {
+    this.page = 1;
+    this.shopArr = [];
+    this.getAllShop(false, '');
   }
 
+  doRefresh(event) {
+    this.page = 1;
+    this.shopArr = [];
+    this.getAllShop(false, "");
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    this.page++;
+    this.getAllShop(true, event);
+    event.target.complete();
+  }
+  ngOnDestroy(): void {
+    this.shopArr = [];
+    this.page = 1;
+    this.search = '';
+  }
   async getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
-      search: this.search,
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
     };
+    if (this.search) {
+      obj['search'] = this.search
+    }
     this.shopService.list(obj).subscribe(async (success) => {
-      await this.spinner.hideLoader();
       this.collection = success.count;
       this.shopArr = success.data;
       if (isFirstLoad) event?.target.complete();
       if (this.shopArr.length >= this.collection && event) {
         event.target.disabled = true;
       }
-    });
-  }
+      // for (let i = 0; i < success.data.length; i++) {
+      //   this.shopArr.push(success.data[i]);
+      // }
+      // if (isFirstLoad)
+      //   event.target.complete();
+      // if (success.data.length === 0 && event) {
+      //   event.target.disabled = true;
+      // }
+      await this.spinner.hideLoader();
+    }, error => {
+      this.spinner.hideLoader();
+      this.toaster.errorToast(error);
+    }
+    )
+  };
+
 
   // async addToFavorite(item) {
   //   this.user = this.userService.getCurrentUser();
@@ -101,24 +138,8 @@ export class SearchShopPage implements OnInit {
     let path = `url('${url}')`;
     return path;
   }
-  onSearch() {
-    this.page = 1;
-    this.shopArr = [];
-    this.getAllShop(false, '');
-  }
 
-  doRefresh(event) {
-    this.page = 1;
-    this.shopArr = [];
-    this.getAllShop(false, "");
-    event.target.complete();
-  }
 
-  doInfinite(event) {
-    this.page++;
-    this.getAllShop(true, event);
-    event.target.complete();
-  }
 
 }
 

@@ -144,6 +144,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/default-layout/favorite/favorite.module').then
       (m => m.FavoritePageModule)
   },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then( m => m.CheckoutPageModule)
+  },
 
 ];
 
