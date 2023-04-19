@@ -14,10 +14,10 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
- IonicModule,
+    IonicModule,
     SearchShopPageRoutingModule,
     SharedModule
   ],
   declarations: [SearchShopPage]
 })
-export class SearchShopPageModule {}
+export class SearchShopPageModule { }

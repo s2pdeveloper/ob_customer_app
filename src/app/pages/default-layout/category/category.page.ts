@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
@@ -10,7 +10,7 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
 })
-export class CategoryPage implements OnInit {
+export class CategoryPage implements OnInit, OnDestroy {
 
 
   categoryId: number;
@@ -34,6 +34,13 @@ export class CategoryPage implements OnInit {
   ) { }
 
   ngOnInit() { }
+
+  ngOnDestroy(): void {
+    this.categoryList = this.subCategoryList = [];
+    this.page = 1;
+    this.searchText = '';
+    console.log(this.categoryList, this.subCategoryList)
+  }
 
   ionViewWillEnter() {
     this.getAllCategory();
@@ -125,7 +132,7 @@ export class CategoryPage implements OnInit {
     this.getAllSubCategory(this.activeParentId, false, "");
     event.target.complete();
   }
-  
+
   getSubCategories(activeParentId) {
     this.page = 1;
     this.subCategoryList = [];

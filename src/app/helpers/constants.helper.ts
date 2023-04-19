@@ -70,7 +70,7 @@ export const ROLES = {
     CUSTOMER: 'CUSTOMER',
     EMPLOYEE: 'EMPLOYEE'
 }
-export const BUSINESSTYPE = {
+export const BUSINESS_TYPE = {
     PRODUCT: 'product',
     SERVICES: 'services',
     PRODUCT_AND_SERVICES: 'product and services',

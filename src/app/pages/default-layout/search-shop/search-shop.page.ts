@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,7 +12,7 @@ import { ShopService } from 'src/app/core/services/shop.service';
   templateUrl: './search-shop.page.html',
   styleUrls: ['./search-shop.page.scss'],
 })
-export class SearchShopPage implements OnInit {
+export class SearchShopPage implements OnInit,OnDestroy {
   @ViewChild(IonContent) content: IonContent;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   page: number = 1;
@@ -59,6 +59,7 @@ export class SearchShopPage implements OnInit {
       this.getAllShop(false, '');
     });
   }
+  
   onSearch() {
     this.page = 1;
     this.shopArr = [];
@@ -77,6 +78,7 @@ export class SearchShopPage implements OnInit {
     this.getAllShop(true, event);
     event.target.complete();
   }
+
   ngOnDestroy(): void {
     this.shopArr = [];
     this.page = 1;
@@ -95,19 +97,14 @@ export class SearchShopPage implements OnInit {
     }
     this.shopService.list(obj).subscribe(async (success) => {
       this.collection = success.count;
-      this.shopArr = success.data;
-      if (isFirstLoad) event?.target.complete();
-      if (this.shopArr.length >= this.collection && event) {
+      for (let i = 0; i < success.data.length; i++) {
+        this.shopArr.push(success.data[i]);
+      }
+      if (isFirstLoad)
+        event.target.complete();
+      if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      // for (let i = 0; i < success.data.length; i++) {
-      //   this.shopArr.push(success.data[i]);
-      // }
-      // if (isFirstLoad)
-      //   event.target.complete();
-      // if (success.data.length === 0 && event) {
-      //   event.target.disabled = true;
-      // }
       await this.spinner.hideLoader();
     }, error => {
       this.spinner.hideLoader();

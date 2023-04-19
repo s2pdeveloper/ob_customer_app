@@ -60,7 +60,7 @@ export class ShopService {
   * @returns 
   */
     getShopCatalogue(payload: any) {
-        let url: string = `mobile/shop/shop-catalogue`;
+        let url: string = `mobile/shop/catalogue`;
         return this.apiService.get(url, payload).pipe(map(
             (data: any) => {
                 if (data && data.result) {

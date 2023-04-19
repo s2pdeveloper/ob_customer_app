@@ -32,14 +32,16 @@ const COMPONENTS = [
   PopoverComponent,
   LocationComponent
 ];
+const MODULES = [
+  FormsModule,
+  ReactiveFormsModule,
+  BarRatingModule
+]
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES],
   imports: [
     CommonModule,
     IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BarRatingModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -47,7 +49,8 @@ const COMPONENTS = [
         deps: [HttpClient],
       },
     }),
+    ...MODULES
   ],
-  exports: [...COMPONENTS, ...PIPES, TranslateModule],
+  exports: [...COMPONENTS, ...PIPES, ...MODULES, TranslateModule],
 })
 export class SharedModule { }

@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaderService } from 'src/app/core/services/loader.service';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { socketOnEvents } from 'src/app/helpers';
-// import { ChatService } from 'src/app/service/chat/chat.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -28,7 +26,7 @@ export class ChatListPage implements OnInit {
 
   constructor(
     private router: Router,
-    private spinner: LoaderService,
+    // private change: Chang,
     private userService: UserService,
     private socketService: SocketService,
     public translate: TranslateService
@@ -36,12 +34,13 @@ export class ChatListPage implements OnInit {
     this.receiveData();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.emitToLoad();
+  }
 
   ionViewWillEnter() {
     this.searchText = '';
     this.user = this.userService.getCurrentUser();
-    this.emitToLoad();
   }
 
   emitToLoad() {
@@ -54,10 +53,12 @@ export class ChatListPage implements OnInit {
 
   receiveData() {
     this.socketService.listenEvent(socketOnEvents.LIST_ORDER).subscribe({
-      next(value) {
-        console.log(value)
+      next: (result: any) => {
+        for (let i = 0; i < result.data.length; i++) {
+          this.dataList.push(result.data[i]);
+        }
       },
-      error(error) {
+      error: (error) => {
         console.log(error)
       },
     })
@@ -79,6 +80,7 @@ export class ChatListPage implements OnInit {
     this.page = 1;
     this.dataList = [];
     this.emitToLoad();
+    console.log('in search')
   }
 
   doRefresh(event: any) {
@@ -86,12 +88,14 @@ export class ChatListPage implements OnInit {
     this.dataList = [];
     this.emitToLoad();
     event.target.complete();
+    console.log('in doRefresh')
   }
 
   doInfinite(event) {
     this.page++;
     this.emitToLoad();
     event.target.complete();
+    console.log('in doInfinite')
   }
 
 }

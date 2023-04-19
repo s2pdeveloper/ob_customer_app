@@ -9,14 +9,14 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
-import {BUSINESSTYPE } from 'src/app/helpers/constants.helper';
+import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
   styleUrls: ['./shop-detail.page.scss'],
 })
 export class ShopDetailPage implements OnInit {
-  businessType:any=BUSINESSTYPE;
+  businessType: any = BUSINESS_TYPE;
   shopUser: any;
   buttonSlide = {
     slidesPerView: 4,
@@ -81,7 +81,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   goToChat() {
-    let params = { shopName: this.shopUser?.shopDetails?.shopName };
+    let params = { shopName: this.shopUser?.shopDetails?.shopName, shopId: this.shopId };
     this.router.navigate(['/chat-view'], { queryParams: params });
   }
 

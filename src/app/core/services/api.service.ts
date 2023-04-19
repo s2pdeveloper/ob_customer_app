@@ -38,7 +38,6 @@ export class ApiService {
 
 
   private formatErrors(error: any) {
-    // console.log('formaterror',error)
     if (error && (error.status === 403 || error.status === 401)) {
       location.reload();
     }
@@ -48,10 +47,10 @@ export class ApiService {
       if (err && err.error_params && err.error_params.length > 0) {
         const errors = err.error_params.map(e => e.msg);
         return throwError(errors || ['Oops something went wrong!']);
-      } else if (err && err.errors && err.errors.length > 0) {
-        return throwError(err.errors || ['Oops something went wrong!']);
+      } else if (err && err.message && err.message.length > 0) {
+        return throwError(err.message || 'Oops something went wrong!');
       } else {
-        return throwError(['Oops something went wrong!']);
+        return throwError('Oops something went wrong!');
       }
     } else {
       return throwError(err ? err.errors ? err.errors : 'Oops something went wrong!' : 'Oops something went wrong!');
