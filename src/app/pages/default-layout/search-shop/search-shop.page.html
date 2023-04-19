@@ -25,7 +25,7 @@
     <ion-row *ngFor="let s of shopArr">
       <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUrl(s?.shopDetails?.bannerImage), 
+          'background-image': getUrl(s?.shopDetails?.bannerImages), 
           'background-repeat':'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
@@ -49,12 +49,13 @@
             </ion-fab-button>
           </ion-fab>
         </div>
-        <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s?.shopDetails?.shopName}}</ion-label>
+        <ion-label
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s?.shopDetails?.shopName}}</ion-label>
         <ion-label (click)="navigateTo('/shop-detail',s?._id)" class="address ion-margin-top" color="
             light">
-          <h4 class="address-padding ion-padding-start">
-            {{ s?.shopDetails?.address?.city ? s?.shopDetails?.address?.city : ""}}, {{s?.shopDetails?.address?.state ?
-            s?.shopDetails?.address?.state : "" }}, {{s?.shopDetails?.address?.pinCode ? s?.shopDetails?.address?.pinCode :
+          <h4 class="address-padding ion-padding-start" *ngIf="s?.address !=[]">
+            {{ s?.address?.city ? s?.address?.city : ""}}, {{s?.address?.state ?
+            s?.address?.state : "" }}, {{s?.address?.pinCode ? s?.address?.pinCode :
             "" }}.
           </h4>
         </ion-label>

@@ -117,7 +117,7 @@ export class SearchShopPage implements OnInit {
   doInfinite(event) {
     this.page++;
     this.getAllShop(true, event);
-    // event.target.complete();
+    event.target.complete();
   }
 
 }

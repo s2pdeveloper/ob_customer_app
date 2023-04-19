@@ -29,7 +29,7 @@ export class ShopService {
     * @returns 
     */
     getShopProfile(id: string) {
-        let url: string = `/mobile/shop/${id}`;
+        let url: string = `mobile/shop/${id}`;
         return this.apiService.get(url).pipe(map(
             (data: any) => {
                 if (data && data.result) {
@@ -42,7 +42,7 @@ export class ShopService {
         );
     }
     list(params) {
-        let url: string = `/mobile/shop`;
+        let url: string = `mobile/shop`;
         return this.apiService.get(url, params).pipe(map(
             (data: any) => {
                 if (data && data.result) {

@@ -12,7 +12,7 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 })
 export class CategoryPage implements OnInit {
 
-  
+
   categoryId: number;
   categoryList: any = [];
   subCategoryList: any = [];
@@ -21,6 +21,7 @@ export class CategoryPage implements OnInit {
   collection: number = 0;
   searchText: string;
   activeParentId: any = null;
+  parentId: number;
 
 
   constructor(
@@ -63,8 +64,9 @@ export class CategoryPage implements OnInit {
   }
 
   getAllSubCategory(parentId, isFirstLoad, event) {
-    this.activeParentId = parentId
-   let params = { page: this.page,pageSize: this.pageSize, parentId: parentId};
+    this.parentId = parentId,
+      this.activeParentId = parentId
+    let params = { page: this.page, pageSize: this.pageSize, parentId: parentId };
     if (this.searchText) {
       params['search'] = this.searchText;
     }
@@ -97,10 +99,12 @@ export class CategoryPage implements OnInit {
 
 
   navigateToShopList(subCategory) {
+    console.log("subCategory", subCategory);
     this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
-        // categoryId: subCategory.categoryId,
-        // subCategoryId: subCategory._id
+        categoryId: this.parentId,
+        subCategoryId: subCategory._id,
+        businessTypeId: subCategory.businessTypeId[0]
       },
     });
   }

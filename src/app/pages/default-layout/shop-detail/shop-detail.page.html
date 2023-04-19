@@ -2,14 +2,16 @@
   <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
 </ion-item>
 
- <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && !shopUser?.shopDetails.shopFavorite.length">
+<ion-fab horizontal="end" slot="fixed">
+  <ion-fab-button
+    *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && !shopUser?.shopDetails.shopFavorite.length">
     <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
 <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && shopUser?.shopDetails.shopFavorite.length">
+  <ion-fab-button
+    *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && shopUser?.shopDetails.shopFavorite.length">
     <ion-icon name="heart" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
@@ -22,7 +24,7 @@
         <ion-item>
           <ion-col size="5">
             <ion-avatar class="ion-margin-end logo-image">
-              <img alt="logo-image" *ngIf="shopUser?.profilePicture" [src]="shopDetails?.image" />
+              <img alt="logo-image" *ngIf="shopUser?.profilePicture" [src]="shopUser?.profilePicture" />
             </ion-avatar>
           </ion-col>
           <ion-col size="7" class="ion-text-capitalize ion-text-wrap">
@@ -32,8 +34,9 @@
             </p>
             <ion-text class="ion-text-wrap">
               <h4>
-                {{shopUser?.shopDetails?.address?.city}}, {{shopUser?.shopDetails?.address?.state}}
-                - {{shopUser?.shopDetails?.address?.pinCode}}
+                {{shopUser?.address?.line1}}{{shopUser?.address?.line2}}
+                {{shopUser?.address?.city}}, {{shopUser?.address?.state}}
+                - {{shopUser?.address?.pinCode}}
               </h4>
             </ion-text>
             <ion-note class="ion-padding-top ion-text-wrap">
@@ -77,14 +80,14 @@
                       </ion-item>
                       <ion-row class="ion-no-margin">
                         <ion-col size="3" class="ion-no-padding ion-text-center">
-                          <ion-button fill="clear">                           
-                             <a *ngIf="faceBook" href="{{shopUser?.shopDetails?.links?.facebook}}">
-                              <ion-icon name="logo-facebook" class="font fb"></ion-icon>
-                             </a>
-                             <a *ngIf="!faceBook">
+                          <ion-button fill="clear">
+                            <a *ngIf="faceBook" href="{{shopUser?.shopDetails?.links?.facebook}}">
                               <ion-icon name="logo-facebook" class="font fb"></ion-icon>
                             </a>
-                           </ion-button>
+                            <a *ngIf="!faceBook">
+                              <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+                            </a>
+                          </ion-button>
                         </ion-col>
                         <ion-col size="3" class="ion-no-padding ion-text-center">
                           <ion-button fill="clear">
@@ -106,16 +109,20 @@
                             </a>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="3" class="ion-no-padding ion-text-center">
-                        <ion-button fill="clear">
-                          <a *ngIf=" webSite" href="{{shopUser?.shopDetails?.links?.website}}">
-                            <ion-icon name="globe-sharp" class="font fb"></ion-icon>
-                          </a>
-                          <a *ngIf="!webSite">
-                            <ion-icon name="globe-sharp" class="font fb"></ion-icon>
-                          </a>
-                        </ion-button>
-                      </ion-col>
+                      </ion-row>
+                      <ion-item lines="none" class="social-links">
+                        <ion-note class="heading" color="primary">Web Links</ion-note>
+                      </ion-item>
+                      <ion-row class="ion-no-margin">
+                        <ion-col  class="ion-no-padding ion-text-center">
+                          <ion-item lines="none">
+                            <a href="{{shopUser?.shopDetails?.links?.website}}">
+                              <ion-icon name="globe-sharp" class="font fb"></ion-icon>
+                            </a>
+                            <a class="web" href=" {{shopUser?.shopDetails?.links?.website}}">
+                              {{shopUser?.shopDetails?.links?.website}}</a>
+                          </ion-item>
+                        </ion-col>
                       </ion-row>
                       <ion-item lines="none">
                         <!-- <p>Contact us</p> -->
@@ -123,16 +130,16 @@
                       </ion-item>
                       <ion-row class="ion-no-padding">
                         <ion-col size="3"></ion-col>
-                        <ion-col size="3"  class="ion-text-center" >
+                        <ion-col size="3" class="ion-text-center">
                           <div>
-                          <ion-card class="bg-xcard">
-                            <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
-                              (click)="goToChat()"></ion-icon>
-                          </ion-card>
-                          <ion-note class="heading ion-texxt-center">Order</ion-note>
-                        </div>
+                            <ion-card class="bg-xcard">
+                              <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
+                                (click)="goToChat()"></ion-icon>
+                            </ion-card>
+                            <ion-note class="heading ion-texxt-center">Order</ion-note>
+                          </div>
                         </ion-col>
-                        <ion-col size="3"  class="ion-text-center">
+                        <ion-col size="3" class="ion-text-center">
                           <ion-card class="bg-xcard ion-text-center">
                             <a href="tel:+91{{shopDetails?.mobile}}">
                               <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
@@ -180,9 +187,10 @@
 </ion-content>
 
 
- <ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border">
 
-  <ion-item *ngIf="shopUser?.shopDetails?.businessType?.name==='product' ||  shopUser?.shopDetails?.businessType?.name==='resale'">
+  <ion-item
+    *ngIf="shopUser?.shopDetails?.businessType?.name==='product' ||  shopUser?.shopDetails?.businessType?.name==='resale'">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
@@ -204,4 +212,4 @@
     </ion-col>
   </ion-item>
 
-</ion-footer> 
+</ion-footer>
