@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
+  <div class="clearfix">
     <ion-grid *ngIf="orderData?.length > 0;else noDataFound">
       <ion-row appAnimateItems className="bounceIn">
         <ion-col *ngFor=" let item of orderData" class="animation-normal">

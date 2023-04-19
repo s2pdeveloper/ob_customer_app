@@ -71,7 +71,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   navigateTo(path) {
-    let params = { _id: this.shopId };
+    let params = { shopId: this.shopId };
     this.router.navigate([path], { queryParams: params });
   }
 

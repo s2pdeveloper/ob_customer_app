@@ -65,15 +65,13 @@ export class ChatListPage implements OnInit {
   }
 
   navigateTo(item) {
-    // this.socket.emit('join', { room: item._id, user: this.user._id });
-    //   this.router.navigate(['/chat-view'], {
-    //     queryParams: {
-    //       shopId: item.shopId._id,
-    //       shopName: item.shopId?.shopName,
-    //       roomName: item._id,
-    //       status:item.status
-    //     },
-    //   });
+    this.router.navigate(['/chat-view'], {
+      queryParams: {
+        shopId: item.shopId,
+        shopName: item.shopDetails?.shopName,
+        orderId: item._id,
+      },
+    });
   }
 
   onSearch() {

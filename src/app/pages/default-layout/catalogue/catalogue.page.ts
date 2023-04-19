@@ -18,10 +18,10 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
 export class CataloguePage implements OnInit {
   loaded: boolean = false;
   user: any;
-  shopId: any;
+  shopId: string;
   page: number = 1;
   pageSize: number = 10;
-  search = '';
+  searchText: string;
   shopDetails: any;
   catalogueArr: any = [];
   selectAll: boolean;
@@ -58,14 +58,14 @@ export class CataloguePage implements OnInit {
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.shopId = params._id
-      if (params._id) {
-        this.getShopCatalogue(params._id)
+      this.shopId = params.shopId
+      if (params.shopId) {
+        this.getShopCatalogue()
       }
     });
   }
-  async getShopCatalogue(id) {
-    this.shopService.getShopCatalogue({ shopId: id }).subscribe(async (success: any) => {
+  async getShopCatalogue() {
+    this.shopService.getShopCatalogue({ shopId: this.shopId }).subscribe(async (success: any) => {
       this.shopCatalogue = success.data;
       await this.spinner.hideLoader();
     });
@@ -74,7 +74,7 @@ export class CataloguePage implements OnInit {
   navigateToCheckout() {
     let filteredData = this.shopCatalogue.filter(x => x.isChecked);
     this.storageService.set("orderData", filteredData)
-    this.router.navigate(['/checkout'], {});
+    this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
   }
   navigateToChat() {
     let msg = '';
@@ -125,4 +125,24 @@ export class CataloguePage implements OnInit {
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
   }
+
+  onSearch() {
+    this.page = 1;
+    this.shopCatalogue = [];
+    this.getShopCatalogue();
+  }
+
+  doRefresh(event: any) {
+    this.page = 1;
+    this.shopCatalogue = [];
+    this.getShopCatalogue();
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    this.page++;
+    this.getShopCatalogue();
+    event.target.complete();
+  }
+
 }

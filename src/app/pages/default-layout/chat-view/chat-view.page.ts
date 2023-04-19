@@ -61,12 +61,14 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     private restService: RestService
   ) {
     this.receiveListMessages(false, "");
+    this.receiveMessage();
   }
 
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
     image: new FormControl(''),
     shopId: new FormControl(),
+    orderId: new FormControl()
   });
 
   ngOnInit() { }
@@ -78,6 +80,7 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
   scrollToBottom() {
     this.content.scrollToBottom();
   }
+
   doRefresh(event: any) {
     this.messages = [];
     this.page = 0;
@@ -89,14 +92,19 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
     this.receiveListMessages(true, event);
     event.target.complete();
   }
+
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params) => {
       this.shopId = params.shopId;
       this.shopName = params.shopName;
-      this.orderId = params.orderId;
+      if (params.orderId) {
+        this.orderId = params.orderId;
+        this.chatForm.get('orderId').setValue(this.orderId);
+      }
       this.chatForm.get('shopId').setValue(this.shopId);
       this.getMsgByCustomerId();
+      this.emitToLoadMessages();
     });
   }
 
@@ -111,31 +119,30 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
 
   receiveListMessages(isFirstLoad, event) {
     this.socketService.listenEvent(socketOnEvents.LIST_MESSAGE).subscribe({
-      next(data: any) {
-        console.log(data);
-        for (let i = 0; i < data.rows.length; i++) {
-          this.messages.unshift(data.rows[i]);
+      next: (result: any) => {
+        console.log(result);
+        for (let i = 0; i < result.data.length; i++) {
+          this.messages.unshift(result.data[i]);
         }
         if (isFirstLoad)
           event.target.complete();
-        if (data.rows.length === 0 && event) {
+        if (result.data.length === 0 && event) {
           event.target.disabled = true;
         } else {
-          this.page += this.limit;
+          this.page += this.pageSize;
         }
       },
-      error(error) {
+      error: (error) => {
         console.log(error)
       },
     })
   }
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
-      next(result: any) {
-        console.log(result);
-        this.messages.unshift(result.data)
+      next: (result: any) => {
+        this.messages.push(result.data)
       },
-      error(error) {
+      error: (error) => {
         console.log(error)
       },
     })

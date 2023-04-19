@@ -11,16 +11,16 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-slides [options]="buttonSlide" class="ion-margin-bottom">
-    <ion-slide *ngFor="let item of subCategoryArr;let i=index">
-      <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getCatalogueBySubCategoryId(item._id,i)">
-        <img class="img-box" src="{{item.image}} " /><br />
-        <ion-note class="sub-heading ion-text-capitalize">{{item.name}}</ion-note>
-      </div>
-    </ion-slide>
-  </ion-slides> -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <div class="container">
+  <ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
+    showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
+    placeholder="{{ 'searchSubCategory' | translate}}">
+  </ion-searchbar>
+
+  <div class="clearfix">
     <ion-grid *ngIf="shopCatalogue?.length > 0;else noDataFound">
       <ion-row appAnimateItems className="bounceIn">
         <ion-col *ngFor=" let item of shopCatalogue" class="animation-normal">
@@ -61,6 +61,11 @@
       </div>
     </ng-template>
   </div>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-button color="primary" expand="block" strong="true" shape="round" class="ion-margin-top"
     *ngIf="shopCatalogue?.length > 0" (click)="navigateToCheckout()">
