@@ -13,12 +13,12 @@
   <div class="text-center">
     <ion-avatar class="avatar">
       <img
-        [src]="userDetails?.image || 'assets/images/placeholder_profile.png'"
+        [src]="user?.profilePicture || 'assets/images/placeholder_profile.png'"
       />
     </ion-avatar>
     <ion-text>
       <h2 class="ion-text-capitalize ion-text-wrap center">
-        {{userDetails?.firstName}} {{userDetails?.lastName}}
+        {{user?.firstName}} {{user?.lastName}}
       </h2>
     </ion-text>
   </div>
@@ -34,7 +34,7 @@
         /></i>
         <ion-label class="ion-margin-start email">
           {{ 'email' | translate}}
-          <p>{{userDetails?.email}}</p>
+          <p>{{user?.email}}</p>
         </ion-label>
       </ion-item>
       <ion-item>
@@ -46,7 +46,7 @@
         /></i>
         <ion-label class="ion-margin-start mobile-number">
           {{ 'mobileNumber' | translate}}
-          <p>{{userDetails?.mobile}}</p>
+          <p>{{user?.mobileNumber}}</p>
         </ion-label>
       </ion-item>
       <ion-item>
@@ -59,10 +59,10 @@
         <ion-label class="ion-margin-start address">
           {{ 'Address' | translate}}
           <p>
-            {{userDetails?.address?.line1}} {{userDetails?.address?.city}}
+            {{user?.address?.line1}} {{user?.address?.city}}
             <br>
-            {{userDetails?.address?.state}} {{userDetails?.address?.country}}
-            {{userDetails?.address?.pinCode}}
+            {{user?.address?.state}} {{user?.address?.country}}
+            {{user?.address?.pinCode}}
           </p>
         </ion-label>
       </ion-item>

@@ -12,7 +12,7 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 })
 export class CategoryPage implements OnInit {
 
-  
+
   categoryId: number;
   categoryList: any = [];
   subCategoryList: any = [];
@@ -64,13 +64,22 @@ export class CategoryPage implements OnInit {
 
   getAllSubCategory(parentId, isFirstLoad, event) {
     this.activeParentId = parentId
-   let params = { page: this.page,pageSize: this.pageSize, parentId: parentId};
+    let params = { page: this.page, pageSize: this.pageSize, parentId: parentId };
     if (this.searchText) {
       params['search'] = this.searchText;
     }
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
-        this.subCategoryList = success.data;
+        // this.subCategoryList = success.data;
+        for (let i = 0; i < success.data.length; i++) {
+          this.subCategoryList.push(success.data[i]);
+        }
+        if (isFirstLoad)
+          event.target.complete();
+        if (success.data.length === 0 && event) {
+          event.target.disabled = true;
+        }
+
         this.categoryList = this.categoryList.map((x, i) => {
           if (parentId == x._id) {
             x.active = true;
@@ -79,16 +88,6 @@ export class CategoryPage implements OnInit {
           }
           return x;
         });
-        // for (let i = 0; i < success.data.length; i++) {
-        //   this.subCategoryList.push(success.data[i]);
-        // }
-        // if (isFirstLoad)
-        //   event.target.complete();
-        // if (success.data.length === 0 && event) {
-        //   event.target.disabled = true;
-        // } else {
-        //   this.page += this.pageSize;
-        // }
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -123,5 +122,10 @@ export class CategoryPage implements OnInit {
     this.getAllSubCategory(this.activeParentId, false, "");
     event.target.complete();
   }
-
+  
+  getSubCategories(activeParentId) {
+    this.page = 1;
+    this.subCategoryList = [];
+    this.getAllSubCategory(activeParentId, false, "");
+  }
 }
