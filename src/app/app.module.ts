@@ -14,7 +14,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 // qr code
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-
+import { StorageService } from './core/services/local-storage.service';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -42,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BarcodeScanner,
     Geolocation,
     NativeGeocoder,
+    StorageService
   ],
   bootstrap: [AppComponent],
 })

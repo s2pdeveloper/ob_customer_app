@@ -17,4 +17,7 @@ export class StorageService {
   remove(key: string): any {
      localStorage ? localStorage.removeItem(key) : null;
   }
+  clear(){
+    localStorage.clear();
+  }
 }
