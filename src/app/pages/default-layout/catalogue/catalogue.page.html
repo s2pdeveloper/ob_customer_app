@@ -30,9 +30,9 @@
                 <ion-checkbox slot="start" [(ngModel)]="item.isChecked"></ion-checkbox>
                 <ion-item>
                   <ion-thumbnail slot="start">
-                    <img class="img-fluid" *ngIf="item.image.length>=1" [src]="item.image">
-                    <img class="img-fluid" *ngIf="item.image.length==0" src="assets/images/placeholder_product.png"
-                      alt="product-image" />
+                    <img class="img-fluid" *ngIf="item.catalogueMedia[0].image" [src]="item.catalogueMedia[0].image">
+                    <img class="img-fluid" *ngIf="!item.catalogueMedia[0].image"
+                      src="assets/images/placeholder_product.png" alt="product-image" />
                   </ion-thumbnail>
                   <ion-label>
                     <ion-row class="ion-justify-content-between">
