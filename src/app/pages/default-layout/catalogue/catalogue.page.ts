@@ -26,6 +26,7 @@ export class CataloguePage implements OnInit {
   catalogueArr: any = [];
   selectAll: boolean;
   subCategoryArr: any = [];
+  collection:number=0;
 
   buttonSlide = {
     slidesPerView: 4,
@@ -60,19 +61,53 @@ export class CataloguePage implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopId = params.shopId
       if (params.shopId) {
-        this.getShopCatalogue()
+        this.getShopCatalogue(false,'')
       }
     });
   }
-  async getShopCatalogue() {
-    this.shopService.getShopCatalogue({ shopId: this.shopId }).subscribe(async (success: any) => {
-      this.shopCatalogue = success.data;
+  
+  onSearch() {
+    this.page = 1;
+    this.shopCatalogue = [];
+    this.getShopCatalogue(false,'');
+  }
+
+  doRefresh(event: any) {
+    this.page = 1;
+    this.shopCatalogue = [];
+    this.getShopCatalogue(false,'');
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    if (this.shopCatalogue.length < this.collection) {
+      this.page++;
+      this.getShopCatalogue(false, event);
+    } else {
+      event.target.complete();
+    }
+  }
+  async getShopCatalogue(isFirstLoad: boolean, event?: any) {
+    this.shopService.getShopCatalogue({page: this.page, pageSize: this.pageSize, shopId: this.shopId }).subscribe(async (success: any) => {
+      // this.shopCatalogue = success.data;
+      this.collection = success.count;
+      for (let i = 0; i < success.data.length; i++) {
+        this.shopCatalogue.push(success.data[i]);
+      }
+      if (isFirstLoad)
+        event.target.complete();
+      if (success.data.length === 0 && event) {
+        event.target.disabled = true;
+      }
       await this.spinner.hideLoader();
     });
   }
 
   navigateToCheckout() {
+    console.log("this.shopCatalogue", this.shopCatalogue);
     let filteredData = this.shopCatalogue.filter(x => x.isChecked);
+    console.log("filteredData", filteredData);
+
     this.storageService.set("orderData", filteredData)
     this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
   }
@@ -126,23 +161,5 @@ export class CataloguePage implements OnInit {
     this.router.navigate(['/app/tabs/home']);
   }
 
-  onSearch() {
-    this.page = 1;
-    this.shopCatalogue = [];
-    this.getShopCatalogue();
-  }
-
-  doRefresh(event: any) {
-    this.page = 1;
-    this.shopCatalogue = [];
-    this.getShopCatalogue();
-    event.target.complete();
-  }
-
-  doInfinite(event) {
-    this.page++;
-    this.getShopCatalogue();
-    event.target.complete();
-  }
 
 }
