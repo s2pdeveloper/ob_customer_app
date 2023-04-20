@@ -44,7 +44,7 @@ export class ChatListPage implements OnInit {
   }
 
   emitToLoad() {
-    let params = { page: this.page, pageSize: this.pageSize };
+    let params = { page: this.page, pageSize: this.pageSize, status: this.segment };
     if (this.searchText) {
       params['search'] = this.searchText;
     }
@@ -95,5 +95,9 @@ export class ChatListPage implements OnInit {
     event.target.complete();
     console.log('in doInfinite')
   }
-
+  async segmentChanged(event) {
+    this.searchText = null;
+    this.segment = event.detail.value;
+    this.onSearch();
+  }
 }

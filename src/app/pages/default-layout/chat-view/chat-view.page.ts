@@ -110,6 +110,7 @@ export class ChatViewPage implements OnInit, AfterViewChecked {
 
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
+    this.chatForm.get('message').setValue('')
   }
 
   emitToLoadMessages() {
