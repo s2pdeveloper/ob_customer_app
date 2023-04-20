@@ -127,10 +127,10 @@ const routes: Routes = [
       (m => m.CataloguePageModule)
   },
   {
-    path: 'chat-view',
+    path: 'order-view',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./pages/default-layout/chat-view/chat-view.module').then
-      (m => m.ChatViewPageModule)
+    loadChildren: () => import('./pages/default-layout/order-view/order-view.module').then
+      (m => m.OrderViewPageModule)
   },
   {
     path: 'map',

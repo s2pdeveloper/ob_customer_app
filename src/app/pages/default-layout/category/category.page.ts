@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -11,7 +12,7 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
   styleUrls: ['./category.page.scss'],
 })
 export class CategoryPage implements OnInit, OnDestroy {
-
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   categoryId: number;
   categoryList: any = [];
@@ -22,7 +23,6 @@ export class CategoryPage implements OnInit, OnDestroy {
   searchText: string;
   activeParentId: any = null;
   parentId: number;
-
 
   constructor(
     private router: Router,
@@ -51,7 +51,28 @@ export class CategoryPage implements OnInit, OnDestroy {
       }
     });
   }
+  onSearch() {
+    this.page = 1;
+    this.subCategoryList = [];
+    this.getAllSubCategory(this.activeParentId, false, '');
+  }
 
+  doRefresh(event: any) {
+    this.page = 1;
+    this.subCategoryList = [];
+    this.getAllSubCategory(this.activeParentId, false, '');
+    event.target.complete();
+  }
+
+  doInfinite(event) {
+    if (this.subCategoryList.length < this.collection) {
+      this.page++;
+      this.getAllSubCategory(this.activeParentId, false, event);
+    } else {
+      event.target.complete();
+    }
+
+  }
   getAllCategory() {
     this.categoryService
       .getAllCategory({})
@@ -79,16 +100,15 @@ export class CategoryPage implements OnInit, OnDestroy {
     }
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
-        // this.subCategoryList = success.data;
-        for (let i = 0; i < success.data.length; i++) {
-          this.subCategoryList.push(success.data[i]);
-        }
-        if (isFirstLoad)
+        this.collection = success.count;
+        if (!event) {
+          this.subCategoryList = success.data;
+        } else {
+          for (let i = 0; i < success.data.length; i++) {
+            this.subCategoryList.push(success.data[i]);
+          }
           event.target.complete();
-        if (success.data.length === 0 && event) {
-          event.target.disabled = true;
         }
-
         this.categoryList = this.categoryList.map((x, i) => {
           if (parentId == x._id) {
             x.active = true;
@@ -97,11 +117,13 @@ export class CategoryPage implements OnInit, OnDestroy {
           }
           return x;
         });
+
       }, (error) => {
         this.spinner.hideLoader();
       }
     )
   }
+
 
 
   navigateToShopList(subCategory) {
@@ -113,29 +135,11 @@ export class CategoryPage implements OnInit, OnDestroy {
       },
     });
   }
-
-  onSearch() {
-    this.page = 1;
-    this.subCategoryList = [];
-    this.getAllSubCategory(this.activeParentId, false, '');
-  }
-
-  doRefresh(event: any) {
-    this.page = 1;
-    this.subCategoryList = [];
-    this.getAllSubCategory(this.activeParentId, false, '');
-    event.target.complete();
-  }
-
-  doInfinite(event) {
-    this.page++;
-    this.getAllSubCategory(this.activeParentId, false, "");
-    event.target.complete();
-  }
-
   getSubCategories(activeParentId) {
+    if (this.infiniteScroll.disabled) {
+      this.infiniteScroll.disabled = false;
+    }
     this.page = 1;
-    this.subCategoryList = [];
     this.getAllSubCategory(activeParentId, false, "");
   }
 }

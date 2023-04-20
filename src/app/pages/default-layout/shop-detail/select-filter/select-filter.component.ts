@@ -56,8 +56,8 @@ export class SelectFilterComponent implements OnInit {
     // this.socket.emit('join', { room: this.shopDetail._id, user: this.user._id });
 
     let message = {
-      shopId: this.shopDetail._id,
-      message: msg,
+      // shopId: this.shopDetail._id,
+      // message: msg,
     };
     // this.chatService.create(message).subscribe((success) => {
     //   this.spinner.hideLoader();
@@ -65,15 +65,16 @@ export class SelectFilterComponent implements OnInit {
 
     //   // join
     //   this.socket.emit('join', { room: success.orderId, user: this.user._id });
-    this.router.navigate(['/chat-view'], {
+    this.router.navigate(['/order-view'], {
       //     queryParams: {
       //       shopId: this.shopDetail._id,
       //       shopName: this.shopDetail.shopName,
       //       roomName: success.orderId,
       //     },
       //   });
-      //   this.dismissModal('isClose')
+        // this.dismissModal('isClose')
     });
+    this.dismissModal('isClose')
   }
 
 

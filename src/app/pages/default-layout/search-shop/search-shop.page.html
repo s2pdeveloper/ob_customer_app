@@ -31,7 +31,7 @@
           'background-size':'100% 100%'
 
          }" (click)="navigateTo('/shop-detail',s?._id)">
-          <ion-badge color="success" class="rating ion-text-end">
+          <ion-badge *ngIf="s?.shopDetails?.avgRating" color="success" class="rating ion-text-end">
             {{s?.shopDetails?.avgRating}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>

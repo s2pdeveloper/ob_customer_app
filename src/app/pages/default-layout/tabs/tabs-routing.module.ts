@@ -21,8 +21,8 @@ const routes: Routes = [
         loadChildren: () => import('../../default-layout/qr-code/qr-code.module').then(m => m.QrCodePageModule)
       },
       {
-        path: 'chat-list',
-        loadChildren: () => import('../chat-list/chat-list.module').then(m => m.ChatListPageModule)
+        path: 'order-list',
+        loadChildren: () => import('../order-list/order-list.module').then(m => m.OrderListPageModule)
       },
       {
         path: 'favorite',

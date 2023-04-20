@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ChatListPageRoutingModule } from './chat-list-routing.module';
-import { ChatListPage } from './chat-list.page';
+import { OrderListPageRoutingModule } from './order-list-routing.module';
+import { OrderListPage } from './order-list.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    ChatListPageRoutingModule,
+    OrderListPageRoutingModule,
     SharedModule,
   ],
-  declarations: [ChatListPage],
+  declarations: [OrderListPage],
 })
-export class ChatListPageModule { }
+export class OrderListPageModule { }

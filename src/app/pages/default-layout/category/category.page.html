@@ -25,8 +25,7 @@
           <ion-card class="ion-text-center" [ngClass]="item.active ? 'active':null "
             *ngFor="let item of categoryList;let i =index;" (click)="getSubCategories(item._id)">
             <img alt="Category Image" class="cat-img" *ngIf="item.image" src="{{item.image}}" />
-            <img class="img-fluid" *ngIf="item.image==null" src="assets/images/placeholder_product.png"
-              alt="product-image" />
+            <img alt="Category Image" class="cat-img" *ngIf="!item.image" src="assets/images/placeholder_product.png" />
             <ion-card-subtitle class="cat-head">{{item.name}}</ion-card-subtitle>
           </ion-card>
         </div>
@@ -35,7 +34,9 @@
         <ion-row class="ion-margin">
           <ion-col size="6" *ngFor="let subCategory of subCategoryList">
             <ion-card class="ion-text-center" (click)="navigateToShopList(subCategory)">
-              <img alt="Category Image" class="subcat-img" src="{{subCategory.image}}" />
+              <img alt="Category Image" class="subcat-img" *ngIf="subCategory.image" src="{{subCategory.image}}" />
+              <img alt="Category Image" class="subcat-img" *ngIf="!subCategory.image"
+                src="assets/images/placeholder_product.png" />
               <ion-card-subtitle class="cat-head">{{subCategory.name}}</ion-card-subtitle>
             </ion-card>
           </ion-col>
@@ -49,10 +50,8 @@
     </ion-row>
   </ion-grid>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll #IonInfiniteScroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
-
 </ion-content>

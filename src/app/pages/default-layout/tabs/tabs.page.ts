@@ -21,8 +21,8 @@ export class TabsPage {
     },
     {
       title: 'orders',
-      value: 'chat',
-      tab: 'chat-list',
+      value: 'order',
+      tab: 'order-list',
       icon: 'chatbubble-sharp',
     },
     {

@@ -36,9 +36,9 @@
   <ion-slides [options]="buttonSlide">
     <ion-slide *ngFor="let item of categoryArr">
       <div class="">
-        <img src="{{item.image}} " (click)="navigateToCategory(item._id)" />
-        <img class="img-fluid" *ngIf="!item.image" src="assets/images/placeholder_product.png"
-          alt="product-image" /><br />
+        <img *ngIf="item.image" src="{{item.image}} " (click)="navigateToCategory(item._id)" />
+        <img class="subcat-img" *ngIf="!item.image" src="assets/images/placeholder_product.png"
+          (click)="navigateToCategory(item._id)" /><br />
         <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{item.name}}</ion-note>
       </div>
     </ion-slide>
@@ -51,7 +51,8 @@
   <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
     <ion-slide *ngFor="let item of offerArr">
       <div class="offer">
-        <img class="offerImage" src="{{item.image}} " /><br />
+        <img class="offerImage" *ngIf="item.image" src="{{item.image}} " /><br />
+        <img class="offerImage" *ngIf="!item.image" src="assets/images/placeholder_product.png" alt="offer-image" />
       </div>
     </ion-slide>
   </ion-slides>
@@ -63,7 +64,9 @@
     <ion-title class="ion-no-padding ion-text-capitalize ">{{item.heading | translate}}</ion-title>
     <ion-row>
       <ion-col class="ion-text-center" size="6" *ngFor="let img of item.media ">
-        <img class="img-seasonal" height="100%" width="100%" src={{img.image}}>
+        <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
+        <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
+          src="assets/images/placeholder_product.png" alt="offer-image" />
         <ion-label class="ion-text-capitalize ion-text-wrap">{{img.title}}</ion-label>
       </ion-col>
     </ion-row>

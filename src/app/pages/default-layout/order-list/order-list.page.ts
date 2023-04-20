@@ -7,11 +7,11 @@ import { UserService } from 'src/app/core/services/user.service';
 import { socketOnEvents } from 'src/app/helpers';
 
 @Component({
-  selector: 'app-chat-list',
-  templateUrl: './chat-list.page.html',
-  styleUrls: ['./chat-list.page.scss'],
+  selector: 'app-order-list',
+  templateUrl: './order-list.page.html',
+  styleUrls: ['./order-list.page.scss'],
 })
-export class ChatListPage implements OnInit {
+export class OrderListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;

@@ -18,11 +18,11 @@ import { SocketService } from 'src/app/core/services/socket.service';
 import { socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 
 @Component({
-  selector: 'app-chat-view',
-  templateUrl: './chat-view.page.html',
-  styleUrls: ['./chat-view.page.scss'],
+  selector: 'app-order-view',
+  templateUrl: './order-view.page.html',
+  styleUrls: ['./order-view.page.scss'],
 })
-export class ChatViewPage implements OnInit, AfterViewChecked {
+export class OrderViewPage implements OnInit, AfterViewChecked {
   @ViewChild(IonContent) content: IonContent;
 
   @ViewChild(IonInfiniteScroll, { static: false })
