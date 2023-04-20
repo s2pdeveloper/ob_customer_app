@@ -65,7 +65,7 @@ export class OrderListPage implements OnInit {
   }
 
   navigateTo(item) {
-    this.router.navigate(['/chat-view'], {
+    this.router.navigate(['/order-view'], {
       queryParams: {
         shopId: item.shopId,
         shopName: item.shopDetails?.shopName,
