@@ -68,7 +68,6 @@ export class CheckoutPage implements OnInit {
   receiveMessage() {
     this.socketService.listenEvent(socketOnEvents.CREATE_ORDER).subscribe({
       next: (result: any) => {
-        console.log(result);
         this.router.navigate(['/order-view'], { queryParams: { shopId: this.shopId, orderId: result.data._id } });
       },
       error: (error) => {

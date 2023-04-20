@@ -41,4 +41,16 @@ export class SocketService {
     });
     return observable;
   }
+
+
+  removeListeners(event: string) {
+    let observable = new Observable(observer => {
+      console.log('Removing listener', event);
+      this.socket.off(event, (data) => {
+        console.log('response', data)
+      });
+      return () => { this.socket.disconnect(); }
+    });
+    return observable;
+  }
 }

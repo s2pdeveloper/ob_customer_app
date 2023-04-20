@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-// import { ChatService } from 'src/app/service/chat/chat.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll } from '@ionic/angular';
@@ -16,13 +15,14 @@ import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { socketEmitEvents, socketOnEvents } from 'src/app/helpers';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-order-view',
   templateUrl: './order-view.page.html',
   styleUrls: ['./order-view.page.scss'],
 })
-export class OrderViewPage implements OnInit, AfterViewChecked {
+export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
 
   @ViewChild(IonInfiniteScroll, { static: false })
@@ -73,6 +73,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked {
 
   ngOnInit() { }
 
+  ngOnDestroy(): void {
+    forkJoin([this.socketService.removeListeners(socketOnEvents.LIST_MESSAGE), this.socketService.removeListeners(socketEmitEvents.RECEIVE_MESSAGE)]).subscribe();
+  }
+
   ngAfterViewChecked() {
     this.scrollToBottom();
   }
@@ -121,7 +125,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked {
   receiveListMessages(isFirstLoad, event) {
     this.socketService.listenEvent(socketOnEvents.LIST_MESSAGE).subscribe({
       next: (result: any) => {
-        console.log(result);
+        console.log('LIST_MESSAGE', result);
         for (let i = 0; i < result.data.length; i++) {
           this.messages.unshift(result.data[i]);
         }
@@ -141,6 +145,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked {
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
+        console.log('RECEIVE_MESSAGE', result.data)
         this.messages.push(result.data)
       },
       error: (error) => {

@@ -82,7 +82,7 @@ export class ShopDetailPage implements OnInit {
 
   goToChat() {
     let params = { shopName: this.shopUser?.shopDetails?.shopName, shopId: this.shopId };
-    this.router.navigate(['/chat-view'], { queryParams: params });
+    this.router.navigate(['/order-view'], { queryParams: params });
   }
 
   async navigateToViewGalleryImages(galleryImg) {
