@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://13.233.6.45:3000/api/v1',
+  apiEndpoint: 'http://13.233.6.45:3000/api/v1/',
   s3Endpoint: 'http://13.233.6.45:3000/api/v1/shared/',
   url: 'http://13.233.6.45:3000',
 
