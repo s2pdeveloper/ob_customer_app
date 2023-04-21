@@ -1,6 +1,6 @@
 {
   "appId": "com.ob.customer",
-  "appName": "Customer App",
+  "appName": "Ob Customer",
   "webDir": "www",
   "bundledWebRuntime": false,
   "plugins": {
