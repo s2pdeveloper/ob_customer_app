@@ -14,7 +14,7 @@
     "e2e": "ng e2e",
     "android": "ionic cap run android -l --external --watch --open",
     "ios": "ionic cap run ios -l --external --watch --open",
-    "generate-icon-splash": "npx @capacitor/assets generate"
+    "generate-icon-splash": "npx @capacitor/assets generate android"
   },
   "private": true,
   "dependencies": {
