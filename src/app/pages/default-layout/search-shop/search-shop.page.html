@@ -39,12 +39,12 @@
 
         <div class="ion-text-end ion-margin-end ion-margin-top heart-img">
           <ion-fab>
-            <ion-fab-button *ngIf="s && s?.shopFavorite && !s?.shopFavorite.length">
+            <ion-fab-button *ngIf="s.shopFavorite.length==0">
               <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(s)"></ion-icon>
             </ion-fab-button>
           </ion-fab>
           <ion-fab>
-            <ion-fab-button *ngIf="s && s?.shopFavorite && s?.shopFavorite.length">
+            <ion-fab-button *ngIf="s.shopFavorite.length>0">
               <ion-icon name="heart" color="primary" (click)="addToFavorite(s)"></ion-icon>
             </ion-fab-button>
           </ion-fab>

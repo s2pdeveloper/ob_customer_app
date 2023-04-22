@@ -12,7 +12,7 @@ import { ShopService } from 'src/app/core/services/shop.service';
   templateUrl: './search-shop.page.html',
   styleUrls: ['./search-shop.page.scss'],
 })
-export class SearchShopPage implements OnInit,OnDestroy {
+export class SearchShopPage implements OnInit, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   page: number = 1;
@@ -27,6 +27,7 @@ export class SearchShopPage implements OnInit,OnDestroy {
   shopDetails: any;
   user: any = {};
   shopCount: any;
+  favoriteShop: any;
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class SearchShopPage implements OnInit,OnDestroy {
     private spinner: LoaderService,
     private toaster: ToastService,
     private activatedRoute: ActivatedRoute,
+    private userService: UserService,
   ) { }
 
   ngOnInit() { }
@@ -58,8 +60,9 @@ export class SearchShopPage implements OnInit,OnDestroy {
       this.subCategoryId = params.subCategoryId ?? '';
       this.getAllShop(false, '');
     });
+    this.getAllShop(false, "")
   }
-  
+
   onSearch() {
     this.page = 1;
     this.shopArr = [];
@@ -100,6 +103,7 @@ export class SearchShopPage implements OnInit,OnDestroy {
       for (let i = 0; i < success.data.length; i++) {
         this.shopArr.push(success.data[i]);
       }
+      this.shopArr = [...this.shopArr];
       if (isFirstLoad)
         event.target.complete();
       if (success.data.length === 0 && event) {
@@ -114,18 +118,19 @@ export class SearchShopPage implements OnInit,OnDestroy {
   };
 
 
-  // async addToFavorite(item) {
-  //   this.user = this.userService.getCurrentUser();
-  //   let payload = {
-  //     _id: this.user.id,
-  //     action: item.shopFavorite.length ? 'remove' : 'add',
-  //     shopId: item._id,
-  //   };
-  //   this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
-  //     this.getAllShop(false);
-  //     this.toaster.successToast(success.message);
-  //   });
-  // }
+  async addToFavorite(item) {
+    this.user = this.userService.getCurrentUser();
+    let payload = {
+      customerId: this.user._id,
+      action: item.shopFavorite.length ? 'remove' : 'add',
+      shopId: item?.shopDetails?._id,
+    };
+    this.shopService.favoriteShop(payload).subscribe(async (success) => {
+      this.shopArr = [];
+      this.getAllShop(false);
+      this.toaster.successToast(success.message);
+    });
+  }
 
   navigateTo(path, id) {
     this.router.navigate([path], { queryParams: { id: id } });

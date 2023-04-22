@@ -146,6 +146,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
 
