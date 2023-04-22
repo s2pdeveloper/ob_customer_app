@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
       this.cameraService.requestPermission();
       this.barcodeScannerService.askPermission();
       this.statusBarService.changeColor('#44551c');
-      this.userService.populate();
+      // this.userService.populate();
       this.appBackButton.backButtonFunc();
     });
   }

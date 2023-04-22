@@ -15,7 +15,7 @@ export class UserService {
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
   refreshTable = new Subject();
 
-  constructor(private apiService: ApiService,private storageService:StorageService,private jwtService: JwtService,private socketService: SocketService) { }
+  constructor(private apiService: ApiService, private storageService: StorageService, private jwtService: JwtService, private socketService: SocketService) { }
 
   // Verify JWT in local storage with server & load user's info.
   // This runs once on application startup.
@@ -58,6 +58,7 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
     //clear local storage 
     this.storageService.clear();
+    this.socketService.disconnect();
   }
 
   /**

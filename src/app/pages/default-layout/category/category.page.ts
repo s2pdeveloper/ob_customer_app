@@ -11,7 +11,7 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
   templateUrl: './category.page.html',
   styleUrls: ['./category.page.scss'],
 })
-export class CategoryPage implements OnInit, OnDestroy {
+export class CategoryPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   categoryId: number;
@@ -35,11 +35,10 @@ export class CategoryPage implements OnInit, OnDestroy {
 
   ngOnInit() { }
 
-  ngOnDestroy(): void {
+  ionViewDidLeave(): void {
     this.categoryList = this.subCategoryList = [];
     this.page = 1;
     this.searchText = '';
-    console.log(this.categoryList, this.subCategoryList)
   }
 
   ionViewWillEnter() {
@@ -47,7 +46,6 @@ export class CategoryPage implements OnInit, OnDestroy {
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.categoryId) {
         this.categoryId = params.categoryId;
-        this.getAllSubCategory(this.categoryId, false, '')
       }
     });
   }
@@ -78,16 +76,16 @@ export class CategoryPage implements OnInit, OnDestroy {
       .getAllCategory({})
       .subscribe((success) => {
         this.categoryList = success;
-        this.categoryList = success.map((x, i) => {
-          if (!this.categoryId && i == 0) {
-            this.categoryId = this.categoryId ? this.categoryId : x._id;
+        this.categoryList = success.map((x, index) => {
+          if (index === 0) {
             x.active = true;
-            this.getAllSubCategory(this.categoryId, false, '');
           } else {
             x.active = false;
           }
+          this.categoryId = this.categoryId ? this.categoryId : x._id;
           return x;
         });
+        this.getAllSubCategory(this.categoryId, false, '');
       });
   }
 
@@ -101,13 +99,15 @@ export class CategoryPage implements OnInit, OnDestroy {
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
         this.collection = success.count;
-        if (!event) {
-          this.subCategoryList = success.data;
-        } else {
-          for (let i = 0; i < success.data.length; i++) {
-            this.subCategoryList.push(success.data[i]);
-          }
+        for (let i = 0; i < success.data.length; i++) {
+          this.subCategoryList.push(success.data[i]);
+        }
+        if (isFirstLoad)
           event.target.complete();
+        if (success.data.length === 0 && event) {
+          event.target.disabled = true;
+        } else {
+          this.page += this.pageSize;
         }
         this.categoryList = this.categoryList.map((x, i) => {
           if (parentId == x._id) {
@@ -140,6 +140,7 @@ export class CategoryPage implements OnInit, OnDestroy {
       this.infiniteScroll.disabled = false;
     }
     this.page = 1;
+    this.subCategoryList = [];
     this.getAllSubCategory(activeParentId, false, "");
   }
 }

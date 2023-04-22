@@ -32,20 +32,6 @@ const routes: Routes = [
         path: 'settings',
         loadChildren: () => import('../../default-layout/setting/setting.module').then(m => m.SettingPageModule)
       },
-      {
-        path: 'search-shop',
-        loadChildren: () =>
-          import('../../default-layout/search-shop/search-shop.module').then(
-            (m) => m.SearchShopPageModule
-          ),
-      },
-      {
-        path: 'category',
-        loadChildren: () =>
-          import('../../default-layout/category/category.module').then(
-            (m) => m.CategoryPageModule
-          ),
-      },
     ]
   },
   {

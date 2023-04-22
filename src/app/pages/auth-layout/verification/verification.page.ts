@@ -91,12 +91,12 @@ export class VerificationPage implements OnInit, OnDestroy {
       async success => {
         let payload = {
           id: success._id,
-          deviceId: this.localStorage.get('deviceToken'),
+          deviceId: localStorage.getItem('deviceToken'),
           platform: this.deviceInfo?.platform
         };
+        await this.spinner.hideLoader();
         this.userService.addDeviceToken(payload).subscribe();
         this.router.navigate([`app/tabs/home`], { replaceUrl: true });
-        await this.spinner.hideLoader();
       },
       async error => {
         await this.spinner.hideLoader();

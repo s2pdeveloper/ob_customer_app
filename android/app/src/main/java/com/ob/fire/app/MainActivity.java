@@ -1,4 +1,4 @@
-package com.ob.customer;
+package com.ob.fire.app;
 
 import com.getcapacitor.BridgeActivity;
 

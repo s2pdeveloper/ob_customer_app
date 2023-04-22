@@ -1,6 +1,6 @@
 {
-	"appId": "com.ob.customer",
-	"appName": "Ob Customer",
+	"appId": "com.ob.fire.app",
+	"appName": "Ob Fire",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

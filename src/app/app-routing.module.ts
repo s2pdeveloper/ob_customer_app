@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    canLoad: [AuthGuard],
+    // canLoad: [AuthGuard],
     loadChildren: () =>
       import('./pages/default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
@@ -51,14 +51,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'onboarding',
-    loadChildren: () =>
-      import('./pages/onboarding/onboarding.module').then(
-        (m) => m.OnboardingPageModule
-      ),
-  },
-
-  {
     path: 'shop-detail',
     canLoad: [AuthGuard],
     loadChildren: () =>
@@ -74,14 +66,7 @@ const routes: Routes = [
         (m) => m.ChangeLanguagePageModule
       ),
   },
-  {
-    path: 'edit-profile',
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./pages/default-layout/setting/edit-profile/edit-profile.module').then(
-        (m) => m.EditProfilePageModule
-      ),
-  },
+
   {
     path: 'notification-list',
     canLoad: [AuthGuard],
@@ -89,15 +74,6 @@ const routes: Routes = [
       import(
         './pages/default-layout/notification-list/notification-list.module'
       ).then((m) => m.NotificationListPageModule),
-  },
-
-  {
-    path: 'setting',
-    canLoad: [AuthGuard],
-    loadChildren: () =>
-      import('./pages/default-layout/setting/setting.module').then(
-        (m) => m.SettingPageModule
-      ),
   },
   {
     path: 'catalogue',
@@ -116,12 +92,6 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/map/map.module').then
       (m => m.MapPageModule)
-  },
-  {
-    path: 'favorite',
-    canLoad: [AuthGuard],
-    loadChildren: () => import('./pages/default-layout/favorite/favorite.module').then
-      (m => m.FavoritePageModule)
   },
   {
     path: 'checkout',
