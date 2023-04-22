@@ -151,14 +151,16 @@ ion-segment-button {
 }
 
 .heading {
-  font-size: 0.8rem;
   font-weight: bold;
 }
 
 .btn {
   height: 3rem;
 }
-
+.link-icon{
+  display: flex;
+  align-items: center;
+}
 ion-fab-button {
   --background: var(--ion-color-light);
   height: 30px;

@@ -2,17 +2,16 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-// import { ShopService } from 'src/app/service/shop/shop.service';
 import { IonInfiniteScroll, IonContent } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
+
 @Component({
   selector: 'app-search-shop',
   templateUrl: './search-shop.page.html',
   styleUrls: ['./search-shop.page.scss'],
 })
-export class SearchShopPage implements OnInit,OnDestroy {
+export class SearchShopPage implements OnInit {
   @ViewChild(IonContent) content: IonContent;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   page: number = 1;
@@ -37,18 +36,7 @@ export class SearchShopPage implements OnInit,OnDestroy {
     private activatedRoute: ActivatedRoute,
   ) { }
 
-  ngOnInit() { }
-
-  // ngAfterViewChecked() {
-  // this.scrollToBottom();
-  // }
-  // scrollToBottom() {
-  //   this.content.scrollToBottom();
-  // }
-
-
-  ionViewWillEnter() {
-    this.search = '';
+  ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.search) {
         this.search = params.search;
@@ -56,10 +44,25 @@ export class SearchShopPage implements OnInit,OnDestroy {
       this.businessTypeId = params.businessTypeId ?? '';
       this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params.subCategoryId ?? '';
-      this.getAllShop(false, '');
     });
   }
-  
+
+  // ngAfterViewChecked() {
+  // this.scrollToBottom();
+  // }
+  // scrollToBottom() {
+  //   this.content.scrollToBottom();
+  // }
+  ionViewWillEnter(): void {
+    this.getAllShop(false, '');
+  }
+
+  ionViewDidLeave(): void {
+    this.shopArr = [];
+    this.page = 1;
+    this.search = '';
+  }
+
   onSearch() {
     this.page = 1;
     this.shopArr = [];
@@ -79,11 +82,6 @@ export class SearchShopPage implements OnInit,OnDestroy {
     event.target.complete();
   }
 
-  ngOnDestroy(): void {
-    this.shopArr = [];
-    this.page = 1;
-    this.search = '';
-  }
   async getAllShop(isFirstLoad: boolean, event?: any) {
     let obj = {
       page: this.page,

@@ -75,8 +75,8 @@
                           </ion-col>
                         </ion-row>
                       </ion-item>
-                      <ion-item lines="none" class="social-links">
-                        <ion-note class="heading" color="primary">Social Links</ion-note>
+                      <ion-item lines="none" class="social-links ion-no-height">
+                        <ion-label class="heading ion-no-padding" color="primary">Social Links</ion-label>
                       </ion-item>
                       <ion-row class="ion-no-margin">
                         <ion-col size="4" class="ion-no-padding ion-text-center">
@@ -110,23 +110,20 @@
                           </ion-button>
                         </ion-col>
                       </ion-row>
-                      <ion-item lines="none" class="social-links">
-                        <ion-note class="heading" color="primary">Web Links</ion-note>
-                      </ion-item>
-                      <ion-row class="ion-no-margin">
-                        <ion-col class="ion-no-padding ion-text-center">
-                          <ion-item lines="none">
+                      <ion-item lines="none" class="social-links ion-no-height">
+                        <ion-label class="heading ion-no-padding" color="primary">Web Links
+                          <p class="link-icon">
                             <a href="{{shopUser?.shopDetails?.links?.website}}">
                               <ion-icon name="globe-sharp" class="font fb"></ion-icon>
                             </a>
                             <a class="web" href=" {{shopUser?.shopDetails?.links?.website}}">
                               {{shopUser?.shopDetails?.links?.website}}</a>
-                          </ion-item>
-                        </ion-col>
-                      </ion-row>
-                      <ion-item lines="none">
-                        <!-- <p>Contact us</p> -->
-                        <ion-note class="heading" color="primary">Contact us</ion-note>
+                          </p>
+                        </ion-label>
+
+                      </ion-item>
+                      <ion-item lines="none" class="social-links ion-no-height">
+                        <ion-label class="heading ion-no-padding" color="primary">Contact us</ion-label>
                       </ion-item>
                       <ion-row class="ion-no-padding">
                         <ion-col size="3"></ion-col>
@@ -189,8 +186,7 @@
 
 <ion-footer class="ion-no-border">
 
-  <ion-item
-    *ngIf="[businessType.PRODUCT,businessType.RESALE].includes(shopUser?.shopDetails?.businessType.name)">
+  <ion-item *ngIf="[businessType.PRODUCT,businessType.RESALE].includes(shopUser?.shopDetails?.businessType.name)">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>

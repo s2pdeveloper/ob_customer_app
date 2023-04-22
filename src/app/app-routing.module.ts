@@ -76,6 +76,19 @@ const routes: Routes = [
       ).then((m) => m.NotificationListPageModule),
   },
   {
+    path: 'category',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/category/category.module').then
+      (m => m.CategoryPageModule)
+  },
+  {
+    path: 'search-shop',
+    loadChildren: () =>
+      import('./pages/default-layout/search-shop/search-shop.module').then(
+        (m) => m.SearchShopPageModule
+      ),
+  },
+  {
     path: 'catalogue',
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/catalogue/catalogue.module').then
@@ -96,7 +109,7 @@ const routes: Routes = [
   {
     path: 'checkout',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then( m => m.CheckoutPageModule)
+    loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then(m => m.CheckoutPageModule)
   },
 
 ];

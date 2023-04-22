@@ -127,7 +127,7 @@ export class CategoryPage implements OnInit {
 
 
   navigateToShopList(subCategory) {
-    this.router.navigate(['/app/tabs/search-shop'], {
+    this.router.navigate(['/search-shop'], {
       queryParams: {
         categoryId: this.parentId,
         subCategoryId: subCategory._id,

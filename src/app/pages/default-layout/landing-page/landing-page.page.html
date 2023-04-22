@@ -34,12 +34,11 @@
     <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide">
-    <ion-slide *ngFor="let item of categoryArr">
+    <ion-slide *ngFor="let item of categoryArr" (click)="navigateToCategory(item._id)">
       <div>
-        <img *ngIf="item.image" src="{{item.image}} " (click)="navigateToCategory(item._id)" />
-        <img class="subcat-img" *ngIf="!item.image" src="assets/images/placeholder_product.png"
-          (click)="navigateToCategory(item._id)" /><br />
-        <ion-note class="business-font-size ion-text-capitalize ion-text-wrap">{{item.name}}</ion-note>
+        <img *ngIf="item.image" src="{{item.image}} " />
+        <img class="subcat-img" *ngIf="!item.image" src="assets/images/placeholder_product.png" /><br />
+        <ion-label class="business-font-size ion-text-capitalize ion-text-wrap">{{item.name | truncate}}</ion-label>
       </div>
     </ion-slide>
   </ion-slides>

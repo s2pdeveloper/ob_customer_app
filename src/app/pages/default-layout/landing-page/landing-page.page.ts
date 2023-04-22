@@ -109,7 +109,7 @@ export class LandingPagePage implements OnInit {
     // });
   };
   seeAllCategory() {
-    this.router.navigate(['/app/tabs/category']);
+    this.router.navigate(['/category']);
   }
   getAllAdvertise() {
     this.advertiseService.getAll({}).subscribe(
@@ -168,7 +168,7 @@ export class LandingPagePage implements OnInit {
   }
 
   navigateToCategory(c) {
-    this.router.navigate(['/app/tabs/category'], {
+    this.router.navigate(['/category'], {
       queryParams: {
         categoryId: c,
       },
