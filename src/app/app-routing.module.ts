@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    // canLoad: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./pages/default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
