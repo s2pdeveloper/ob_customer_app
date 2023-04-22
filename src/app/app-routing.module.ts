@@ -10,6 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'app',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./pages/default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
   },
@@ -33,13 +34,6 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'forget-pwd',
-    loadChildren: () =>
-      import('./pages/auth-layout/forget-pwd/forget-pwd.module').then(
-        (m) => m.ForgetPwdPageModule
-      ),
-  },
-  {
     path: 'view-profile',
     canLoad: [AuthGuard],
     loadChildren: () =>
@@ -53,14 +47,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/default-layout/setting/edit-profile/edit-profile.module').then(
         (m) => m.EditProfilePageModule
-      ),
-  },
-
-  {
-    path: 'change-pwd',
-    loadChildren: () =>
-      import('./pages/auth-layout/change-pwd/change-pwd.module').then(
-        (m) => m.ChangePwdPageModule
       ),
   },
 
@@ -86,13 +72,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/default-layout/change-language/change-language.module').then(
         (m) => m.ChangeLanguagePageModule
-      ),
-  },
-  {
-    path: 'change-pwd',
-    loadChildren: () =>
-      import('./pages/auth-layout/change-pwd/change-pwd.module').then(
-        (m) => m.ChangePwdPageModule
       ),
   },
   {
@@ -146,6 +125,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
+    canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
 

@@ -1,11 +1,11 @@
 ion-tab-bar {
-  --background: var(--ion-color-6);
-  --color: var(--ion-color-5);
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-primary);
   --border: none;
 
   ion-tab-button {
-    --background-focused: var(--ion-color-1);
-    --color-selected: var(--ion-color-2);
+    --background-focused: var(--ion-color-primary);
+    --color-selected: var(--ion-color-light);
     font-size: 0.8rem;
 
     ion-icon {
@@ -21,29 +21,14 @@ ion-margin-bottom {
 }
 
 
-
-// ion-segment {
-//   --background: var(--ion-color-praimary-shade);
-//   padding: 5px !important;
-//   overflow: hidden;
-//   border-radius: 1rem;
-//   ion-segment-button {
-//     --background-checked: var(--ion-color-primary);
-//     --color-checked: var(--ion-color-light);
-//     --color: var(--ion-color-secondary);
-//     width: 2.5rem;
-//     font-size: 11px;
-//     font-weight: 700;
-//     border-radius: 1rem;
-//     --padding-top: 0;
-//     --padding-end: 0;
-//     --padding-bottom: 0;
-//     --padding-start: 0;
-//     --indicator-color: transparent;
-//     --transition: var(--ion-color-primary);
-//     --indicator-box-shadow: 0 20px 15px -3px rgba(71, 69, 69, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-//     ion-icon {
-//       margin-right: 3px;
-//     }
-//   }
-// }
+ion-segment {
+  --background: var(--ion-color-light);
+  ion-segment-button {
+    --background-checked: var(--ion-color-light);
+    --color-checked: var(--ion-color-primary);
+    --color: var(--ion-color-medium);
+    --indicator-color: var(--ion-color-primary);
+    --indicator-height: 0;
+    min-width: fit-content !important;
+  }
+}

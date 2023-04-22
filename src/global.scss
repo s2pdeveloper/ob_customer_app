@@ -22,17 +22,6 @@
   --ion-font-family: "Open Sans", sans-serif !important;
 }
 
-.header-md ion-toolbar:last-of-type {
-  --border-width: 0 0 0;
-}
-
-ion-margin-bottom {
-  --margin-bottom: var(--ion-margin, 20px);
-  margin-bottom: var(--ion-margin, 20px);
-  contain: none;
-  background-color: blue;
-}
-
 .swiper-pagination-bullet {
   background: red;
 }

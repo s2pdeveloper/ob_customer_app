@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
 
   loginForm = new FormGroup({
     countryCode: new FormControl('IN', [Validators.required]),
-    mobileNumber: new FormControl([
+    mobileNumber: new FormControl('', [
       Validators.required,
       Validators.pattern('^[7-9][0-9]{9}$'),
       Validators.maxLength(10),
@@ -47,10 +47,6 @@ export class LoginPage implements OnInit {
     this.deviceInfo.geoLocation = (
       await Geolocation.getCurrentPosition()
     ).coords;
-    // this.form.locationPoint.setValue([
-    //   this.deviceInfo.geoLocation.latitude,
-    //   this.deviceInfo.geoLocation.longitude,
-    // ]);
   }
 
 
@@ -59,7 +55,7 @@ export class LoginPage implements OnInit {
       validateField(this.loginForm);
       return;
     }
-    this.spinner.showLoader();
+    await this.spinner.showLoader();
     this.userService.sendMobileOtp(this.loginForm.value).subscribe(async (success) => {
       this.toaster.successToast('OTP sent to user Mobile Number');
       this.router.navigate([`/verification`], {
@@ -69,8 +65,9 @@ export class LoginPage implements OnInit {
         },
       });
       await this.spinner.hideLoader();
-    }, (error) => {
-      this.toaster.errorToast("The mobile number or password entered are incorrect");
+    }, async (error) => {
+      await this.spinner.hideLoader();
+      this.toaster.errorToast(error);
     });
   }
 

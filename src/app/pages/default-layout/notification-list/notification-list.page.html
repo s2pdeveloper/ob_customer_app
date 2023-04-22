@@ -1,5 +1,5 @@
-<ion-toolbar color="primary">
-  <ion-buttons class="" slot="start">
+<ion-toolbar class="bg-color-primary" color="primary">
+  <ion-buttons slot="start">
     <ion-back-button defaultHref="landing-page"></ion-back-button>
   </ion-buttons>
   <ion-title class="ion-text-capitalize">Notifications</ion-title>
@@ -18,10 +18,7 @@
     </ion-card>
   </ng-container>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data..."
-    >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

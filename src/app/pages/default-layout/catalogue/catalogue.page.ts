@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-// import { ShopService } from 'src/app/service/shop/shop.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
-// import { Socket } from 'ngx-socket-io';
-// import { ChatService } from 'src/app/service/chat/chat.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
+
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.page.html',
