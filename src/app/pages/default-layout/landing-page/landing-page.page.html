@@ -1,7 +1,10 @@
-<ion-content class="font-poppins">
+<ion-content class="">
   <ion-item lines="none">
-    <ion-icon class="location-icon" color="primary" name="location" slot="start" (click)="navigateToMap()"></ion-icon>
-    <span class="location">{{currentLocation?.formatted_address | truncate: 30}}</span>
+    <ion-icon class="location-icon" color="primary" name="location" slot="start" (click)="openMap()"></ion-icon>
+    <ion-label (click)="openMap()">
+      <h3 class="mb-0">Location</h3>
+      <p>{{currentLocation?.formatted_address | truncate: 40}}</p>
+    </ion-label>
     <ion-avatar slot="end">
       <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
         (click)="navigateToProfilePage()" />
@@ -9,8 +12,8 @@
   </ion-item>
 
   <ion-item lines="none">
-    <ion-searchbar class="search-box ion-no-padding" [(ngModel)]="search" searchIcon animated type="text"
-      showCancelButton="never" placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on"
+    <ion-searchbar class="search-box" [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
+      placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on"
       (keyup.enter)="navigateToSearchShop(search)">
     </ion-searchbar>
   </ion-item>

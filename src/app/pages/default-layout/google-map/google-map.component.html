@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar class="bg-color-2">
+    <ion-buttons slot="start">
+      <ion-button class="text-color-4" (click)="saveLocation()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'selectAddress' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="input-search">
+    <input class="form-control bg-outline-primary" (keydown.enter)="$event.preventDefault()"
+      placeholder="Search Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="search"
+      #locationSearch>
+  </div>
+  <div>
+    <div id="map-canvas" class="map-canvas"></div>
+  </div>
+  <div class="clearfix ion-padding-top save-button">
+    <ion-button (click)="saveLocation()" expand="block" class="btn-color-1" type="submit">
+      {{ 'saveLocation' | translate}}
+    </ion-button>
+  </div>
+
+</ion-content>

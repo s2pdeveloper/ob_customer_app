@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { MapPageRoutingModule } from './map-routing.module';
 import { MapPage } from './map.page';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
+// import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +14,5 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     MapPageRoutingModule
   ],
   declarations: [MapPage],
-  providers: [Geolocation, NativeGeocoder],
 })
-export class MapPageModule {}
+export class MapPageModule { }

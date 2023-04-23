@@ -43,6 +43,8 @@
   "address": "पत्ता",
   "myProfile": "माझे प्रोफाइल",
   "changeProfile": "प्रोफाइल बदला",
+  "selectAddress": "Select Address",
+  "saveLocation": "Save Location",
   "generalInformation": "सामान्य माहिती",
   "userName": "वापरकर्ता नाव",
   "firstName": "पहिले नाव",
@@ -155,8 +157,7 @@
   "galleryImages": "गॅलरी प्रतिमा",
   "shopTiming": "दुकानाची वेळ",
   "favoritesShop": "आवडते दुकान",
-  "orders":"ऑर्डर",
-  "giveRating":"रेटिंग द्या",
-  "sendLocation":"स्थान पाठवा"
-
+  "orders": "ऑर्डर",
+  "giveRating": "रेटिंग द्या",
+  "sendLocation": "स्थान पाठवा"
 }

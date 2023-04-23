@@ -42,6 +42,8 @@
   "address": "पता",
   "myProfile": "मेरी प्रोफाइल",
   "changeProfile": "प्रोफ़ाइल परिवर्तन",
+  "selectAddress": "Select Address",
+  "saveLocation": "Save Location",
   "generalInformation": "सामान्य जानकारी",
   "userName": "उपयोगकर्ता नाम",
   "firstName": "पहला नाम",
@@ -124,7 +126,7 @@
   "newCustomer": "नए ग्राहक",
   "customer": "ग्राहक",
   "fullName": "पूरा नाम",
-  "shopName":"दुकान का नाम",
+  "shopName": "दुकान का नाम",
   "register": "पंजीकरण करवाना",
   "Category": "वर्ग",
   "Location": "जगह",
@@ -142,38 +144,21 @@
   "Set App Language": "ऐप भाषा सेट करें",
   "chats": "चैट",
   "new": "नया",
-  "completed":"पुरा",
+  "completed": "पुरा",
   "shopList": "दुकान सूची",
   "searchShop": "दुकान खोजें",
   "shopDetails": "दुकान विवरण",
-  "shopOwnerName":"दुकान मालिक का नाम",
+  "shopOwnerName": "दुकान मालिक का नाम",
   "Address": "पता",
-  "viewCatalogue":"सूची देखें",
-  "chat":"चैट",
-  "QR Code":"QR कोड",
-  "favorites":"पसंदीदा",
+  "viewCatalogue": "सूची देखें",
+  "chat": "चैट",
+  "QR Code": "QR कोड",
+  "favorites": "पसंदीदा",
   "gallery": "गेलरी",
   "galleryImages": "गैलरी छवियाँ",
   "shopTiming": "दुकान का समय",
-  "favoritesShop":"पसंदीदा दुकान",
-  "orders":" ऑर्डर",
-  "giveRating":"रेटिंग दें",
-  "sendLocation":"स्थान भेजें"
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
+  "favoritesShop": "पसंदीदा दुकान",
+  "orders": " ऑर्डर",
+  "giveRating": "रेटिंग दें",
+  "sendLocation": "स्थान भेजें"
 }

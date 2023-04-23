@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AdvertiseService } from 'src/app/core/services/advertise.service';
 import { CategoryService } from 'src/app/core/services/category.service';
@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Device } from '@capacitor/device';
 import { SocketService } from 'src/app/core/services/socket.service';
+import { GoogleMapComponent } from '../google-map/google-map.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -88,6 +89,7 @@ export class LandingPagePage implements OnInit {
     private userService: UserService,
     private spinner: LoaderService,
     private toaster: ToastService,
+    private modalController: ModalController,
     private socketService: SocketService
   ) { }
 
@@ -107,18 +109,28 @@ export class LandingPagePage implements OnInit {
     this.getAllOffer();
     this.getAllCategory();
     this.getAllSeasonalOffer();
-    this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     this.getCurrentLocation();
   }
 
-  getCurrentLocation() {
+  async getCurrentLocation() {
+    this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
     let obj = {
       latitude: this.geolocation.latitude,
       longitude: this.geolocation.longitude,
     };
-    // this.authService.getCurrentLocation(obj).subscribe((success: any) => {
-    //   this.currentLocation = success.response.results[0];
-    // });
+    const geocoder = new google.maps.Geocoder()
+    geocoder.geocode({ location: { lat: this.geolocation.latitude, lng: this.geolocation.longitude } }, (results, status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          console.log('address', results)
+          this.currentLocation = results[0]
+        } else {
+          this.toaster.successToast('No address found')
+        }
+      } else {
+        this.toaster.successToast('Try after some time')
+      }
+    });
   };
   seeAllCategory() {
     this.router.navigate(['/category']);
@@ -170,8 +182,19 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/view-profile']);
   }
 
-  navigateToMap() {
-    this.router.navigate(['/map']);
+  async openMap() {
+    const modal = await this.modalController.create({
+      component: GoogleMapComponent,
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {}
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      console.log(data)
+      this.currentLocation = data.location
+    }
   }
 
   doRefresh(event: any) {

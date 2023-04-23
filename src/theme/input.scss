@@ -1,32 +1,12 @@
 .input-class {
-  --border-radius: 1.5em;
-  overflow: hidden;
-  margin-top: 0.7rem;
-  margin-bottom: 0.5rem;
-  box-shadow: #9fb1dc 0px 25px 20px -20px;
-  // box-shadow: #dee0e7 0px 18px 100px 39px;;
-  --padding-bottom: 0.5rem;
-  ion-label {
-    --color: var(--ion-color-secondary) !important;
-    // --padding-bottom : 0.5rem;
-  }
-  ion-label.sc-ion-label-md-h.sc-ion-label-md-s.md.label-stacked.hydrated {
-    // -webkit-transform: translateY(50%) scale(0.80);
-    padding-bottom: 0.7rem;
-  }
+  --border-color: var(--ion-color-primary);
+  --border-radius: 0.6em;
+  --border-width: 1px;
 }
-
-.sc-ion-label-md-s h3,
-.sc-ion-label-md-s h4,
-.sc-ion-label-md-s h5,
-.sc-ion-label-md-s h6 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 2px;
-  margin-bottom: 20px !important;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: normal;
+.search-box {
+  --border-radius: 2em;
+  --box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
 }
 
 .eye-password {

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ElementRef, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+// import { Geolocation } from '@ionic-native/geolocation/ngx';
+// import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 declare var google;
 @Component({
@@ -27,7 +27,7 @@ export class MapPage implements OnInit {
   constructor(
     private geolocation: Geolocation,
     private activatedRoute: ActivatedRoute,
-    private nativeGeocoder: NativeGeocoder,
+    // private nativeGeocoder: NativeGeocoder,
     public zone: NgZone,
   ) {
     this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
@@ -48,53 +48,53 @@ export class MapPage implements OnInit {
   loadMap() {
     //FIRST GET THE LOCATION FROM THE DEVICE.
     if (navigator.geolocation) {
-      this.geolocation.getCurrentPosition().then((resp) => {
-        let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-        let mapOptions = {
-          center: latLng,
-          zoom: 15,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+      // this.geolocation.getCurrentPosition().then((resp) => {
+      //   let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      //   let mapOptions = {
+      //     center: latLng,
+      //     zoom: 15,
+      //     mapTypeId: google.maps.MapTypeId.ROADMAP
+      //   }
 
-        //LOAD THE MAP WITH THE PREVIOUS VALUES AS PARAMETERS.
-        this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-        this.map.addListener('tilesloaded', () => {
-          console.log('accuracy', this.map, this.map.center.lat());
-          this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-          this.lat = this.map.center.lat()
-          this.long = this.map.center.lng()
-        });
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
+      //   //LOAD THE MAP WITH THE PREVIOUS VALUES AS PARAMETERS.
+      //   this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+      //   this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      //   this.map.addListener('tilesloaded', () => {
+      //     console.log('accuracy', this.map, this.map.center.lat());
+      //     this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
+      //     this.lat = this.map.center.lat()
+      //     this.long = this.map.center.lng()
+      //   });
+      // }).catch((error) => {
+      //   console.log('Error getting location', error);
+      // });
     }
   }
 
 
   getAddressFromCoords(lattitude, longitude) {
     console.log("getAddressFromCoords " + lattitude + " " + longitude);
-    let options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 5
-    };
-    this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
-      .then((result: NativeGeocoderResult[]) => {
-        this.address = "";
-        let responseAddress = [];
-        for (let [key, value] of Object.entries(result[0])) {
-          if (value.length > 0)
-            responseAddress.push(value);
-        }
-        responseAddress.reverse();
-        for (let value of responseAddress) {
-          this.address += value + ", ";
-        }
-        this.address = this.address.slice(0, -2);
-      })
-      .catch((error: any) => {
-        this.address = "Address Not Available!";
-      });
+    // let options: NativeGeocoderOptions = {
+    //   useLocale: true,
+    //   maxResults: 5
+    // };
+    // this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
+    //   .then((result: NativeGeocoderResult[]) => {
+    //     this.address = "";
+    //     let responseAddress = [];
+    //     for (let [key, value] of Object.entries(result[0])) {
+    //       if (value.length > 0)
+    //         responseAddress.push(value);
+    //     }
+    //     responseAddress.reverse();
+    //     for (let value of responseAddress) {
+    //       this.address += value + ", ";
+    //     }
+    //     this.address = this.address.slice(0, -2);
+    //   })
+    //   .catch((error: any) => {
+    //     this.address = "Address Not Available!";
+    //   });
   }
 
   //FUNCTION SHOWING THE COORDINATES OF THE POINT AT THE CENTER OF THE MAP
