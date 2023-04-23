@@ -42,6 +42,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'qr-code',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/qr-code/qr-code.module').then(m => m.QrCodePageModule)
+  },
+  {
     path: 'edit-profile',
     canLoad: [AuthGuard],
     loadChildren: () =>

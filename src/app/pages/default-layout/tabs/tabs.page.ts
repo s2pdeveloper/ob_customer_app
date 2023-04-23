@@ -45,7 +45,7 @@ export class TabsPage {
     },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   async ngOnInit() {
     this.deviceInfo = await Device.getInfo();
@@ -59,4 +59,9 @@ export class TabsPage {
   navigateTo(page: any) {
     this.router.navigate([`${page?.url}`]);
   }
+
+  navigateToScanner() {
+    this.router.navigate(['/qr-code']);
+  }
+
 }

@@ -5,7 +5,7 @@ import { ShopDetailPage } from './shop-detail.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ShopDetailPage
   }
 ];
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ShopDetailPageRoutingModule {}
+export class ShopDetailPageRoutingModule { }

@@ -17,10 +17,6 @@ const routes: Routes = [
         loadChildren: () => import('../../default-layout/landing-page/landing-page.module').then(m => m.LandingPagePageModule)
       },
       {
-        path: 'qr-code',
-        loadChildren: () => import('../../default-layout/qr-code/qr-code.module').then(m => m.QrCodePageModule)
-      },
-      {
         path: 'order-list',
         loadChildren: () => import('../order-list/order-list.module').then(m => m.OrderListPageModule)
       },

@@ -24,10 +24,6 @@ export class ShopService {
         return this.shopSubject.asObservable();
     }
 
-    /**
-    * get shop profile
-    * @returns 
-    */
     getShopProfile(id: string) {
         let url: string = `mobile/shop/${id}`;
         return this.apiService.get(url).pipe(map(
@@ -41,6 +37,7 @@ export class ShopService {
             })
         );
     }
+
     list(params) {
         let url: string = `mobile/shop`;
         return this.apiService.get(url, params).pipe(map(
@@ -55,10 +52,6 @@ export class ShopService {
         );
     }
 
-    /**
-  * get shop catalogue
-  * @returns 
-  */
     getShopCatalogue(payload: any) {
         let url: string = `mobile/shop/catalogue`;
         return this.apiService.get(url, payload).pipe(map(
@@ -73,13 +66,23 @@ export class ShopService {
         );
     }
 
-    /**
-* add and removed favorite shop
-* @returns 
-*/
+
     favoriteShop(payload: any) {
         let url: string = `mobile/favorite`;
         return this.apiService.post(url, payload).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+    checkQrCode(code: any) {
+        let url: string = `mobile/shop/search-barCode/${code}`;
+        return this.apiService.get(url, null).pipe(map(
             (data: any) => {
                 if (data && data.result) {
                     return data.result;

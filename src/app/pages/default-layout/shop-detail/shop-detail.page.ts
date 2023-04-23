@@ -45,7 +45,7 @@ export class ShopDetailPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
-    this.activatedRoute.queryParams.subscribe((params: any) => {
+    this.activatedRoute.params.subscribe((params: any) => {
       if (params.id) {
         this.shopId = params.id;
         console.log("  this.shopId", this.shopId);

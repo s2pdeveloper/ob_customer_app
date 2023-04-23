@@ -31,6 +31,7 @@ export class AuthGuard implements CanLoad {
           return true;
           // }
         } else {
+          console.log('in else route to login')
           this.router.navigate(['/login']);
           return false;
         }

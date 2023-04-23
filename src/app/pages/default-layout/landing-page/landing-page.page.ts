@@ -11,6 +11,7 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Device } from '@capacitor/device';
+import { SocketService } from 'src/app/core/services/socket.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -87,6 +88,7 @@ export class LandingPagePage implements OnInit {
     private userService: UserService,
     private spinner: LoaderService,
     private toaster: ToastService,
+    private socketService: SocketService
   ) { }
 
   async ngOnInit() {
@@ -96,6 +98,7 @@ export class LandingPagePage implements OnInit {
       platform: this.deviceInfo?.platform
     };
     this.userService.addDeviceToken(payload).subscribe();
+    this.socketService.connect();
   }
   async ionViewWillEnter() {
     this.search = '';

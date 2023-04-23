@@ -1,115 +1,57 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
-// import { ShopService } from 'src/app/service/shop/shop.service';
-import { BarcodeScanner, CameraDirection, SupportedFormat } from '@capacitor-community/barcode-scanner';
+import { BarcodeScannerService } from 'src/app/core/services/barcode-scanner.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { ShopService } from 'src/app/core/services/shop.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 @Component({
   selector: 'app-qr-code',
   templateUrl: './qr-code.page.html',
   styleUrls: ['./qr-code.page.scss'],
 })
 export class QrCodePage implements OnInit {
-  scanActive: boolean = false;
-  data: any;
-  encodedData: any;
 
-  constructor(
-    // private barcodeScanner: BarcodeScanner,
-    // private shopService: ShopService,
-    private router: Router
+  scanResult: any = null;
+  constructor(private barcodeScannerService: BarcodeScannerService, private location: Location, private router: Router,
+    private shopService: ShopService, private loader: LoaderService, private toastService: ToastService
   ) { }
 
   ngOnInit() { }
+
   ionViewWillEnter() {
-    // this.scan();
-    this.startScan();
+    this.startScan()
   }
-  ionViewWillLeave(){
-    this.destroy();
-    this.stopScan();
+
+  ionViewWillLeave() {
+    this.barcodeScannerService.stopScan()
   }
-  // scan() {
-  //   console.log("call scan");
-  //   this.data = null;
-  //   this.barcodeScanner
-  //     .scan({
-  //       preferFrontCamera: false,
-  //       showFlipCameraButton: true,
-  //       showTorchButton: true,
-  //       torchOn: false,
-  //       // prompt: 'Place a barcode inside the scan area',
-  //       resultDisplayDuration: 500,
-  //       formats: 'EAN_13,EAN_8,QR_CODE,PDF_417 ',
-  //       orientation: 'portrait',
-  //     })
-  //     .then((barcodeData) => {
-  //       let _id = barcodeData.text.split('?_id=')[1];
-  //       if (_id.includes('=')) {
-  //         this.shopService
-  //           .getByIdShopUPI({ UPI: _id })
-  //           .subscribe((success: any) => {
-  //             console.log('success', success);
-  //             this.router.navigate(['/shop-detail'], {
-  //               queryParams: { _id: success?._id },
-  //             });
-  //           });
-  //       } else {
-  //         this.router.navigate(['/shop-detail'], {
-  //           queryParams: { _id },
-  //         });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log('Error', err);
-  //     });
-  // }
 
-  prepare = () => {
-    BarcodeScanner.prepare();
-  };
- 
-  startScan = async () => {
-    // this.prepare()
-    await BarcodeScanner.checkPermission({ force: true });
-    BarcodeScanner.hideBackground(); 
-    document.querySelector('body').classList.add('scanner-active');
-    BarcodeScanner.toggleTorch();
-    BarcodeScanner.getTorchState();
-    const result = await BarcodeScanner.startScan();
-    console.log('scan result data ', result);
-    let _id = result.content;
-    // if (_id.includes('=')) {
-    //   this.shopService
-    //     .getByIdShopUPI({ UPI: _id })
-    //     .subscribe((success: any) => {
-    //       this.router.navigate(['/shop-detail'], {
-    //         queryParams: { _id: success?._id },
-    //       });
-    //     });
-    // } else {
-    //   this.router.navigate(['/shop-detail'], {
-    //     queryParams: { _id:_id },
-    //   });
-    // }
-  };
-
-  stopScan = () => {
-    BarcodeScanner.showBackground();
-    BarcodeScanner.stopScan();
-  };
-
-  //  askUser = () => {
-  //  this.prepare();
-  //   const c = confirm('Do you want to scan a QR-CODE?');
-  
-  //   if (c) {
-  //     this.startScan();
-  //   } else {
-  //     this.stopScan();
-  //   }
-  // };
-  
-  destroy(){
-    document.querySelector('body').classList.remove('scanner-active');
+  async startScan() {
+    this.scanResult = await this.barcodeScannerService.startScan();
+    console.log('scan Result', this.scanResult)
+    let vpaId = this.scanResult;
+    vpaId = vpaId.split('pa=')[1]
+    vpaId = vpaId.split('&pn=')[0];
+    this.checkShop(vpaId);
   }
+
+  goBack() {
+    this.location.back();
+  }
+
+  async checkShop(code: string) {
+    await this.loader.showLoader();
+    this.shopService.checkQrCode(code).subscribe({
+      next: async (value) => {
+        await this.loader.hideLoader();
+        this.router.navigate([`/shop-detail/${value.id}`])
+      },
+      error: async (error) => {
+        await this.loader.hideLoader();
+        this.toastService.errorToast(error)
+      }
+    })
+  }
+
 }

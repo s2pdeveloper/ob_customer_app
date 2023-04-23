@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { BarcodeScanner, CameraDirection } from '@capacitor-community/barcode-scanner';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BarcodeScannerService {
 
-  constructor() { }
+  constructor(private toastService: ToastService) { }
 
   askPermission = async () => {
     // check if user already granted permission
@@ -41,5 +42,28 @@ export class BarcodeScannerService {
     }
     // user did not grant the permission, so he must have declined the request
     this.askPermission();
+  };
+
+  async startScan() {
+    // Check camera permission
+    // This is just a simple example, check out the better checks below
+    await BarcodeScanner.checkPermission({ force: true });
+    // make background of WebView transparent
+    // note: if you are using ionic this might not be enough, check below
+    await BarcodeScanner.hideBackground();
+    document.querySelector('body').classList.add('scanner-active');
+    const result = await BarcodeScanner.startScan({ cameraDirection: CameraDirection.BACK }); // start scanning and wait for a result
+    if (result.hasContent) {
+      console.log(result.content); // log the raw scanned content
+      return result.content
+    }
+    this.toastService.presentToast('success', 'No result found');
+    return null;
+  }
+
+  stopScan() {
+    BarcodeScanner.showBackground();
+    BarcodeScanner.stopScan();
+    document.querySelector('body').classList.remove('scanner-active');
   };
 }

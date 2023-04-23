@@ -5,7 +5,8 @@ import { QrCodePage } from './qr-code.page';
 const routes: Routes = [
   {
     path: '',
-    component: QrCodePage
+    component: QrCodePage,
+    pathMatch: 'full'
   }
 ];
 
@@ -13,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class QrCodePageRoutingModule {}
+export class QrCodePageRoutingModule { }

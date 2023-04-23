@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="view-profile"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title> {{ 'editProfile' | translate}} </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
- <ion-card>
+  <ion-card>
     <div class="img">
       <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
         <img src="{{profileForm.value.profilePicture}}">

@@ -120,15 +120,15 @@ export class SearchShopPage implements OnInit {
     });
   }
 
-  navigateTo(path, id) {
-    this.router.navigate([path], { queryParams: { id: id } });
+  navigateToShop(id: string) {
+    const path: string = `/shop-detail/${id}`;
+    this.router.navigate([path]);
   }
 
   getUrl(url) {
     let path = `url('${url}')`;
     return path;
   }
-
 
 
 }
