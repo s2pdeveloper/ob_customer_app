@@ -114,10 +114,10 @@ export class LandingPagePage implements OnInit {
 
   async getCurrentLocation() {
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;
-    let obj = {
+    this.localStorage.set('location', {
       latitude: this.geolocation.latitude,
       longitude: this.geolocation.longitude,
-    };
+    });
     const geocoder = new google.maps.Geocoder()
     geocoder.geocode({ location: { lat: this.geolocation.latitude, lng: this.geolocation.longitude } }, (results, status) => {
       if (status === 'OK') {
@@ -193,6 +193,7 @@ export class LandingPagePage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       console.log(data)
+      this.localStorage.set('location', data.coordinates);
       this.currentLocation = data.location
     }
   }
