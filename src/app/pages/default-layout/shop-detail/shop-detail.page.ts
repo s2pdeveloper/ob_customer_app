@@ -48,33 +48,23 @@ export class ShopDetailPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       if (params.id) {
         this.shopId = params.id;
+        console.log("  this.shopId", this.shopId);
       }
       this.getShopById();
     });
   }
 
   async getShopById() {
+    console.log("shopId", this.shopId);
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
       await this.spinner.hideLoader();
     });
   }
-
-  // favourite
-  async addToFavorite(item) {
-    // this.shopService
-    //   .createOrRemoveFavorite(payload)
-    //   .subscribe(async (success) => {
-    //     this.getShopById()
-    //     this.toaster.successToast(success.message);
-    //   });
-  }
-
   navigateTo(path) {
     let params = { shopId: this.shopId };
     this.router.navigate([path], { queryParams: params });
   }
-
   goToMap(address: string) {
     let params = { address: address };
     this.router.navigate(['/map'], { queryParams: params });

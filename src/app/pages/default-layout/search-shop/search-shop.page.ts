@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,6 +26,7 @@ export class SearchShopPage implements OnInit {
   shopDetails: any;
   user: any = {};
   shopCount: any;
+  favoriteShop: any;
 
   constructor(
     private router: Router,
@@ -47,12 +48,6 @@ export class SearchShopPage implements OnInit {
     });
   }
 
-  // ngAfterViewChecked() {
-  // this.scrollToBottom();
-  // }
-  // scrollToBottom() {
-  //   this.content.scrollToBottom();
-  // }
   ionViewWillEnter(): void {
     this.getAllShop(false, '');
   }
@@ -98,6 +93,7 @@ export class SearchShopPage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.shopArr.push(success.data[i]);
       }
+      this.shopArr = [...this.shopArr];
       if (isFirstLoad)
         event.target.complete();
       if (success.data.length === 0 && event) {
@@ -112,18 +108,17 @@ export class SearchShopPage implements OnInit {
   };
 
 
-  // async addToFavorite(item) {
-  //   this.user = this.userService.getCurrentUser();
-  //   let payload = {
-  //     _id: this.user.id,
-  //     action: item.shopFavorite.length ? 'remove' : 'add',
-  //     shopId: item._id,
-  //   };
-  //   this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
-  //     this.getAllShop(false);
-  //     this.toaster.successToast(success.message);
-  //   });
-  // }
+  async addToFavorite(item) {
+    let payload = {
+      shopId: item?.shopDetails?._id,
+    };
+    console.log(payload)
+    this.shopService.favoriteShop(payload).subscribe((success) => {
+      console.log(success)
+      this.toaster.successToast(success.message);
+      item.shopFavorite = success.data
+    });
+  }
 
   navigateTo(path, id) {
     this.router.navigate([path], { queryParams: { id: id } });

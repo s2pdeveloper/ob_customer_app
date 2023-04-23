@@ -10,6 +10,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Device } from '@capacitor/device';
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.page.html',
@@ -82,12 +84,19 @@ export class LandingPagePage implements OnInit {
     private offerService: OfferService,
     private advertiseService: AdvertiseService,
     private localStorage: StorageService,
-    private authService: UserService,
+    private userService: UserService,
     private spinner: LoaderService,
     private toaster: ToastService,
   ) { }
 
-  ngOnInit() { }
+  async ngOnInit() {
+    this.deviceInfo = await Device.getInfo();
+    let payload = {
+      deviceId: localStorage.getItem('deviceToken'),
+      platform: this.deviceInfo?.platform
+    };
+    this.userService.addDeviceToken(payload).subscribe();
+  }
   async ionViewWillEnter() {
     this.search = '';
     this.user = this.localStorage.get('OBCustomer');

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Device } from '@capacitor/device';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -17,7 +16,6 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
 export class VerificationPage implements OnInit, OnDestroy {
 
   errorMessages = authFieldsErrors;
-  deviceInfo: any;
   duration: number = 60;
   minutes: any = '00';
   seconds: any = '00';
@@ -49,7 +47,6 @@ export class VerificationPage implements OnInit, OnDestroy {
       this.setDuration();
       this.startTimer();
     });
-    this.deviceInfo = await Device.getInfo();
   }
 
 
@@ -89,14 +86,8 @@ export class VerificationPage implements OnInit, OnDestroy {
     await this.spinner.showLoader();
     this.userService.verifyMobileToken(this.loginForm.value).subscribe(
       async success => {
-        let payload = {
-          id: success._id,
-          deviceId: localStorage.getItem('deviceToken'),
-          platform: this.deviceInfo?.platform
-        };
         await this.spinner.hideLoader();
-        this.userService.addDeviceToken(payload).subscribe();
-        this.router.navigate([`app/tabs/home`], { replaceUrl: true });
+        this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
       },
       async error => {
         await this.spinner.hideLoader();

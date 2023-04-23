@@ -5,9 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
-// import { FavoriteService } from 'src/app/service/favourite/favourite.service';
-// import { ShopService } from 'src/app/service/shop/shop.service';
-
+import { FavoriteService } from 'src/app/core/services/favorite.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.page.html',
@@ -36,8 +35,8 @@ export class FavoritePage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     public modelController: ModalController,
-    // private shopService: ShopService,
-    // private favoriteService: FavoriteService,
+    private shopService: ShopService,
+    private favoriteService: FavoriteService,
     private toaster: ToastService,
     private userService: UserService,
   ) { }
@@ -48,43 +47,14 @@ export class FavoritePage implements OnInit {
     this.search = '';
     this.getFavoriteByCustomerId(false)
   }
-
-  async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.user = this.userService.getCurrentUser();
-    // this.spinner.showLoader();
-    let obj = {
-      page: this.page,
-      pageSize: this.pageSize,
-      search: this.search,
-    };
-    // this.favoriteService.getFavoriteByCustomerId(this.user._id, obj).subscribe(async success => {
-    //   // this.shopFavorites = success.rows;
-    //   this.collection = success.rows.length;
-    //   console.log("success........", this.collection);
-
-    //   this.collection = success.count;
-    //   if (this.page == 1) {
-    //     this.shopFavorites = success.rows;
-    //   } else {
-    //     this.shopFavorites = [...this.shopFavorites, ...success.rows];
-    //   }
-    //   if (isFirstLoad) event?.target.complete();
-    //   if (this.shopFavorites.length >= this.collection && event) {
-    //     event.target.disabled = true;
-    //   }
-    //   await this.spinner.hideLoader();
-    // });
+  doInfinite(event) {
+    if (this.shopFavorites.length < this.collection) {
+      this.page++;
+      this.getFavoriteByCustomerId(false, event);
+    } else {
+      event.target.complete();
+    }
   }
-
-  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { _id } });
-  }
-
-  getUrl(url) {
-    let path = `url('${url}')`;
-    return path;
-  }
-
   onSearch() {
     this.page = 1;
     this.shopFavorites = [];
@@ -98,21 +68,45 @@ export class FavoritePage implements OnInit {
     event.target.complete();
   }
 
-  async addToFavorite(item) {
-    let payload = {
-      action: 'remove',
-      shopId: item.shopId._id,
+  async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
+    this.user = this.userService.getCurrentUser();
+    await this.spinner.showLoader();
+    let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
+      search: this.search,
     };
-    // this.shopService.createOrRemoveFavorite(payload).subscribe(async (success) => {
-    //   this.getFavoriteByCustomerId(false);
-    //   this.toaster.successToast(success.message);
-    // });
+    this.favoriteService.getAllFavoriteWithCustomerId(obj).subscribe(async success => {
+      this.collection = success.count;
+      for (let i = 0; i < success.data.length; i++) {
+        this.shopFavorites.push(success.data[i]);
+      }
+      if (isFirstLoad)
+        event.target.complete();
+      if (success.data.length === 0 && event) {
+        event.target.disabled = true;
+      }
+      await this.spinner.hideLoader();
+    });
   }
-
-  doInfinite(event) {
-    this.page++;
-    this.getFavoriteByCustomerId(true, event);
-    //  event.target.complete();
+  navigateTo(path, _id) {
+    this.router.navigate([path], { queryParams: { id: _id } });
   }
-
+  getUrl(url) {
+    let path = `url('${url}')`;
+    return path;
+  }
+  async addToFavorite(item) {
+    this.user = this.userService.getCurrentUser();
+    let payload = {
+      customerId: this.user._id,
+      action: 'remove',
+      shopId: item?.shopDetails?._id,
+    };
+    this.shopService.favoriteShop(payload).subscribe(async (success) => {
+      this.toaster.successToast(success.message);
+      this.shopFavorites = [];
+      this.getFavoriteByCustomerId(false);
+    });
+  }
 }

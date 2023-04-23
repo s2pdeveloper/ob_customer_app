@@ -46,10 +46,12 @@ export class UserService {
     this.currentUserSubject.next(user);
     // Set isAuthenticated to true
     this.isAuthenticatedSubject.next(true);
+
     this.socketService.connect();
   }
 
   purgeAuth() {
+    this.socketService.disconnect();
     // Remove JWT from local storage
     this.jwtService.destroyToken();
     // Set current user to an empty object
@@ -58,7 +60,6 @@ export class UserService {
     this.isAuthenticatedSubject.next(false);
     //clear local storage 
     this.storageService.clear();
-    this.socketService.disconnect();
   }
 
   /**

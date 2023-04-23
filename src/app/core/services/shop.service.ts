@@ -73,4 +73,22 @@ export class ShopService {
         );
     }
 
+    /**
+* add and removed favorite shop
+* @returns 
+*/
+    favoriteShop(payload: any) {
+        let url: string = `mobile/favorite`;
+        return this.apiService.post(url, payload).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+
 }
