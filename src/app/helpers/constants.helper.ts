@@ -56,7 +56,11 @@ export const paymentStatus = {
     PAID: 'paid',
     PENDING: 'pending'
 };
-
+export const messageCategory = {
+    NORMAL: 'normal',
+    MEDIA: 'media',
+    LOCATION: 'location'
+};
 export const addressType = {
     Home: 'home',
     Work: 'work'

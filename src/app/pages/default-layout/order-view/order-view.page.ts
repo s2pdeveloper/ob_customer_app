@@ -14,8 +14,9 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { SocketService } from 'src/app/core/services/socket.service';
-import { socketEmitEvents, socketOnEvents } from 'src/app/helpers';
+import { messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 import { forkJoin } from 'rxjs';
+import { GoogleMapComponent } from '../google-map/google-map.component';
 
 @Component({
   selector: 'app-order-view',
@@ -51,7 +52,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public translate: TranslateService,
-    // private chatService: ChatService,
+    private modalController: ModalController,
     private toaster: ToastService,
     private spinner: LoaderService,
     private userService: UserService,
@@ -68,7 +69,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     message: new FormControl('', [Validators.required]),
     image: new FormControl(''),
     shopId: new FormControl(),
-    orderId: new FormControl()
+    orderId: new FormControl(),
+    location: new FormControl(),
+    category: new FormControl(messageCategory.NORMAL)
   });
 
   ngOnInit() { }
@@ -114,7 +117,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
-    this.chatForm.get('message').setValue('')
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.chatForm.get('message').setValue('');
+    this.chatForm.get('image').setValue(null);
+    this.chatForm.get('category').setValue(messageCategory.NORMAL);
+    this.chatForm.get('location').setValue(null);
   }
 
   emitToLoadMessages() {
@@ -169,10 +179,11 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     formData.append('file', file);
     this.uploadService.uploadFile(formData).subscribe(
       async (data: any) => {
-        this.filePath = data?.result?.url;
+        this.filePath = data?.result?.cdn;
         this.chatForm.controls.image.setValue(this.filePath);
         this.fileUploaded = true;
         await this.spinner.hideLoader();
+        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
         this.sendMessage();
       },
       async (error: any) => {
@@ -218,16 +229,23 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
-  async navigateToLocation() {
-    const modal = await this.modalCtrl.create({
-      component: LocationComponent,
-      cssClass: 'location-modal',
-      componentProps: {},
+
+  async openMap() {
+    const modal = await this.modalController.create({
+      component: GoogleMapComponent,
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {}
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
-      this.chatForm.controls.message.setValue(data.data);
+      console.log(data)
+      // this.localStorage.set('location', data.coordinates);
+      // this.currentLocation = data.location
+      this.chatForm.controls.message.setValue('Location');
+      this.chatForm.controls.category.setValue(messageCategory.LOCATION);
+      this.chatForm.controls.location.setValue(data.coordinates);
       this.sendMessage();
     }
   }
