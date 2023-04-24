@@ -42,6 +42,29 @@ const routes: Routes = [
       ),
   },
   {
+    path:'privacy-policy',
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+    import('./pages/default-layout/setting/privacy-policy/privacy-policy.module').then(
+      (m) => m.PrivacyPolicyPageModule
+    ),
+  },
+  {
+    path:'term-of-use',
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+    import('./pages/default-layout/setting/term-of-use/term-of-use.module').then(
+      (m) => m.TermOfUsePageModule
+    ),
+  }, {
+    path:'support',
+    canLoad: [AuthGuard],
+    loadChildren: () =>
+    import('./pages/default-layout/setting/support/support.module').then(
+      (m) => m.SupportPageModule
+    ),
+  },
+  {
     path: 'qr-code',
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/qr-code/qr-code.module').then(m => m.QrCodePageModule)
