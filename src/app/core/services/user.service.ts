@@ -40,6 +40,7 @@ export class UserService {
   }
 
   setAuth(user: any) {
+    console.log(user)
     // Save JWT sent from server in local storage
     this.jwtService.saveToken(user.token);
     // Set current user data into observable
@@ -105,12 +106,6 @@ export class UserService {
     return this.apiService.post(url, credentials).pipe(map(
       data => {
         if (data && data.result && data.result.existingUser) {
-          localStorage.setItem('firstTime', 'firstTime');
-          localStorage.setItem('mobileNumber', data.result.existingUser.mobileNumber);
-          localStorage.setItem('id', data.result.existingUser.id);
-          localStorage.setItem('role', data.result.existingUser.role);
-          localStorage.setItem('email', data.result.existingUser.email);
-          localStorage.setItem('fullName', data.result.existingUser.fullName);
           return data.result;
         }
         else {
@@ -124,6 +119,12 @@ export class UserService {
     return this.apiService.patch(`mobile/user/verify-mobile-otp`, credentials).pipe(map(
       data => {
         if (data && data.result) {
+          localStorage.setItem('firstTime', 'firstTime');
+          localStorage.setItem('mobileNumber', data.result.data.mobileNumber);
+          localStorage.setItem('id', data.result.data.id);
+          localStorage.setItem('role', data.result.data.role);
+          localStorage.setItem('email', data.result.data.email);
+          localStorage.setItem('fullName', data.result.data.fullName);
           this.setAuth(data.result.data);
           return data.result;
         } else {

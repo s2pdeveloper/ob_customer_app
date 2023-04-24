@@ -29,7 +29,7 @@ export const authFieldsErrors = {
 	],
 	mobileNumber: [
 		{ type: 'required', message: 'Enter mobile number' },
-		{ type: 'pattern', message: 'Please enter a valid mobile number' },
+		{ type: 'pattern', message: 'Please enter 10 digit valid Phone number' },
 		{ type: 'maxlength', message: 'Enter 10 digit number' }
 	],
 	mobileCode: [

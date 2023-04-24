@@ -41,11 +41,11 @@ export class SettingPage implements OnInit {
     }
     this.userService.removeDeviceToken(payload).subscribe(async result => {
       this.userService.purgeAuth();
-      this.router.navigate([`/login`], { replaceUrl: true });
+      this.router.navigate([`/auth/login`], { replaceUrl: true });
       await this.spinner.hideLoader();
     }, async error => {
       this.userService.purgeAuth();
-      this.router.navigate([`/login`], { replaceUrl: true });
+      this.router.navigate([`/auth/login`], { replaceUrl: true });
       await this.spinner.hideLoader();
     })
   }

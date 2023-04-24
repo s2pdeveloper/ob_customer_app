@@ -7,13 +7,13 @@
 </ion-header>
 
 <ion-content>
-  <img src="assets/images/authentication_bro.svg" class="head-image">
+  <img src="assets/images/undraw_unlock_re_a558.svg" class="head-image">
   <div class="ion-padding">
     <ion-text class="text-label text-color-2 font-weight-bold">
       {{ 'verificationLabel' | translate}}
     </ion-text>
     <p class="text-color-1">
-      {{ 'verificationDescription' | translate}}
+      {{ 'verificationDescription' | translate}} +{{form.countryCode.value}} {{form.mobileNumber.value}}
     </p>
     <!-- form -->
     <form [formGroup]="loginForm" class="form-container ion-text-center">

@@ -12,10 +12,10 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
 @Component({
   selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginComponent implements OnInit {
 
   deviceInfo: any;
   errorMessages = authFieldsErrors;
@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
   ) { }
 
   loginForm = new FormGroup({
-    countryCode: new FormControl('IN', [Validators.required]),
+    countryCode: new FormControl('91', [Validators.required]),
     mobileNumber: new FormControl('', [
       Validators.required,
       Validators.pattern('^[7-9][0-9]{9}$'),
@@ -56,40 +56,23 @@ export class LoginPage implements OnInit {
       return;
     }
     await this.spinner.showLoader();
-    this.userService.sendMobileOtp(this.loginForm.value).subscribe(async (success) => {
-      this.toaster.successToast('OTP sent to user Mobile Number');
-      this.router.navigate([`/verification`], {
-        queryParams: {
-          mobileNumber: this.form.mobileNumber.value,
-          countryCode: this.form.countryCode.value,
-        },
-      });
-      await this.spinner.hideLoader();
-    }, async (error) => {
-      await this.spinner.hideLoader();
-      this.toaster.errorToast(error);
-    });
+    this.userService.sendMobileOtp(this.loginForm.value).subscribe({
+      next: async (success) => {
+        await this.spinner.hideLoader();
+        this.toaster.successToast('OTP sent to user mobile number');
+        this.router.navigate([`/auth/verification`], {
+          queryParams: {
+            mobileNumber: this.form.mobileNumber.value,
+            countryCode: this.form.countryCode.value,
+          },
+        });
+      }, error: async (error) => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      }
+    }
+    );
   }
-
-  getDeviceInfo = async () => {
-    this.deviceInfo = await Device.getInfo();
-    this.deviceInfo.geoLocation = await (
-      await Geolocation.getCurrentPosition()
-    ).coords;
-  };
-
-  // saveDeviceToken(id) {
-  //   let newObj: any = Object.assign(
-  //     {
-  //       id: id,
-  //       deviceId: this.localStorage.get('OBShopDeviceId'),
-  //       platform: this.deviceInfo?.platform
-  //     },
-  //   );
-
-  //   console.log("newObj", newObj);
-  //   this.userService.addDeviceToken(newObj).subscribe();
-  // }
 
   navigateToSignUp() {
     this.router.navigate([`/register`]);

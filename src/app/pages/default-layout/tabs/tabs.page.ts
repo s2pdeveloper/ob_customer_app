@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Plugins } from '@capacitor/core';
 
-const { Device, Geolocation } = Plugins;
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
@@ -10,7 +8,6 @@ const { Device, Geolocation } = Plugins;
 })
 export class TabsPage {
   public selectedIndex: number = 0;
-  deviceInfo: any;
 
   public tabPages = [
     {
@@ -47,9 +44,8 @@ export class TabsPage {
 
   constructor(private router: Router) { }
 
-  async ngOnInit() {
-    this.deviceInfo = await Device.getInfo();
-    console.log('device info', this.deviceInfo);
+  ngOnInit() {
+
   }
 
   /**

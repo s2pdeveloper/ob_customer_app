@@ -5,33 +5,18 @@ import { AuthGuard } from './core/services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app/tabs/home',
+    redirectTo: 'app',
     pathMatch: 'full',
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./pages/auth-layout/auth.module').then(m => m.AuthPageModule)
   },
   {
     path: 'app',
     canLoad: [AuthGuard],
     loadChildren: () =>
       import('./pages/default-layout/tabs/tabs.module').then((m) => m.TabsPageModule),
-  },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./pages/auth-layout/login/login.module').then((m) => m.LoginPageModule),
-  },
-  {
-    path: 'register',
-    loadChildren: () =>
-      import('./pages/auth-layout/register/register.module').then(
-        (m) => m.RegisterPageModule
-      ),
-  },
-  {
-    path: 'verification',
-    loadChildren: () =>
-      import('./pages/auth-layout/verification/verification.module').then(
-        (m) => m.VerificationPageModule
-      ),
   },
   {
     path: 'view-profile',

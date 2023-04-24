@@ -10,10 +10,11 @@ import { validateField } from 'src/app/shared/validators/form.validator';
 import { StorageService } from 'src/app/core/services/local-storage.service';
 @Component({
   selector: 'app-verification',
-  templateUrl: './verification.page.html',
-  styleUrls: ['./verification.page.scss'],
+  templateUrl: './verification.component.html',
+  styleUrls: ['./verification.component.scss'],
 })
-export class VerificationPage implements OnInit, OnDestroy {
+
+export class VerificationComponent implements OnInit, OnDestroy {
 
   errorMessages = authFieldsErrors;
   duration: number = 60;
@@ -24,7 +25,7 @@ export class VerificationPage implements OnInit, OnDestroy {
 
   loginForm = new FormGroup({
     otp: new FormControl('', [Validators.required]),
-    countryCode: new FormControl('IN', [Validators.required]),
+    countryCode: new FormControl('91', [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
   });
 
@@ -33,15 +34,13 @@ export class VerificationPage implements OnInit, OnDestroy {
   }
 
   constructor(private router: Router, private route: ActivatedRoute, private userService: UserService,
-    private toastService: ToastService, private spinner: LoaderService,
-    private localStorage: StorageService,
-    public translate: TranslateService) { }
+    private toastService: ToastService, private spinner: LoaderService, public translate: TranslateService) { }
 
   async ngOnInit() {
     this.route.queryParams.subscribe(params => {
       if (params['mobileNumber']) {
         this.form.mobileNumber.setValue(params['mobileNumber']);
-        this.form.countryCode.setValue(params['countryCode']);
+        // this.form.countryCode.setValue(params['countryCode']);
       }
       this.canResendOTP = false;
       this.setDuration();
@@ -73,6 +72,7 @@ export class VerificationPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     clearInterval(this.setTimeOut);
   }
+
   stopTimer() {
     clearInterval(this.setTimeOut);
     this.toggleResend();
@@ -84,17 +84,15 @@ export class VerificationPage implements OnInit, OnDestroy {
       return;
     }
     await this.spinner.showLoader();
-    this.userService.verifyMobileToken(this.loginForm.value).subscribe(
-      async success => {
+    this.userService.verifyMobileToken(this.loginForm.value).subscribe({
+      next: async (success) => {
         await this.spinner.hideLoader();
-        this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
-      },
-      async error => {
+        this.router.navigate(['app/tabs/home'], { replaceUrl: true });
+      }, error: async (error) => {
         await this.spinner.hideLoader();
-        this.router.navigate([`/login`], { replaceUrl: true });
         this.toastService.errorToast(error);
       }
-    )
+    })
 
   }
   async requestOtp() {

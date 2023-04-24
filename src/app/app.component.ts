@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     this.languageService.getLang();
     this.initializeApp();
   }
-  async ngOnInit() {
+  ngOnInit() {
     if (
       localStorage.getItem('firstTime') &&
       localStorage.getItem('firstTime').match('firstTime')
@@ -49,10 +49,10 @@ export class AppComponent implements OnInit {
       if (this.jwtService.getToken()) {
         this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
       } else {
-        this.router.navigate([`/login`], { replaceUrl: true });
+        this.router.navigate([`/auth/login`], { replaceUrl: true });
       }
     } else {
-      this.router.navigate([`/login`]);
+      this.router.navigate([`/auth/login`]);
     }
   }
   initializeApp() {
@@ -68,11 +68,4 @@ export class AppComponent implements OnInit {
     });
   }
 
-
-  navigateTo(page: any) {
-    this.router.navigate([`${page?.url}`]);
-  }
-  logout() {
-    this.router.navigate([`login`]);
-  }
 }
