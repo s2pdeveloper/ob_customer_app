@@ -48,14 +48,12 @@ export class ShopDetailPage implements OnInit {
     this.activatedRoute.params.subscribe((params: any) => {
       if (params.id) {
         this.shopId = params.id;
-        console.log("  this.shopId", this.shopId);
       }
       this.getShopById();
     });
   }
 
   async getShopById() {
-    console.log("shopId", this.shopId);
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
       await this.spinner.hideLoader();

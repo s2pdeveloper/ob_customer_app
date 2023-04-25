@@ -7,13 +7,10 @@ const routes: Routes = [
     path: '',
     component: SettingPage
   },
-
- 
- 
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SettingPageRoutingModule {}
+export class SettingPageRoutingModule { }

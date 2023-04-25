@@ -78,7 +78,7 @@
                       <ion-item lines="none" class="social-links ion-no-height">
                         <ion-label class="heading ion-no-padding" color="primary">Social Links</ion-label>
                       </ion-item>
-                      <ion-row class="ion-no-margin">
+                      <ion-row *ngIf="shopUser?.shopDetails?.links" class="ion-no-margin">
                         <ion-col size="4" class="ion-no-padding ion-text-center">
                           <ion-button fill="clear">
                             <a *ngIf="faceBook" href="{{shopUser?.shopDetails?.links?.facebook}}">
@@ -110,13 +110,12 @@
                           </ion-button>
                         </ion-col>
                       </ion-row>
-                      <ion-item lines="none" class="social-links ion-no-height">
+                      <ion-item *ngIf="shopUser?.shopDetails?.links?.website" lines="none"
+                        class="social-links ion-no-height">
                         <ion-label class="heading ion-no-padding" color="primary">Web Links
                           <p class="link-icon">
-                            <a href="{{shopUser?.shopDetails?.links?.website}}">
-                              <ion-icon name="globe-sharp" class="font fb"></ion-icon>
-                            </a>
-                            <a class="web" href=" {{shopUser?.shopDetails?.links?.website}}">
+                            <ion-icon name="globe-sharp" class="font fb"></ion-icon>
+                            <a class="web" href="">
                               {{shopUser?.shopDetails?.links?.website}}</a>
                           </p>
                         </ion-label>

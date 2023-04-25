@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   deviceInfo: any;
   errorMessages = authFieldsErrors;
-
+  btnDisabled: boolean = true;
+  tnc: boolean = false;
 
   constructor(
     private router: Router,
@@ -50,7 +51,7 @@ export class RegisterComponent implements OnInit {
   }
 
   navigateToVerification() {
-    this.router.navigate([`/verification`], { replaceUrl: true });
+    this.router.navigate([`/auth/verification`], { replaceUrl: true });
   }
 
   async onSubmit() {
@@ -61,7 +62,8 @@ export class RegisterComponent implements OnInit {
     this.spinner.showLoader();
     this.userService.signUp(this.registerForm.value).subscribe(
       async (success) => {
-        this.router.navigate([`/verification`], {
+        await this.spinner.hideLoader();
+        this.router.navigate([`/auth/verification`], {
           queryParams: {
             mobileNumber: this.form.mobileNumber.value,
             countryCode: this.form.countryCode.value,
@@ -89,6 +91,15 @@ export class RegisterComponent implements OnInit {
     this.location.back();
   }
 
+  navigateToLogin() {
+    this.router.navigate([`/auth/login`]);
+  }
+  checkTnC(event) {
+    this.tnc = event.target.checked;
+  }
 
+  isChecked(event) {
+    this.btnDisabled = event.target.checked;
+  }
 
 }

@@ -33,14 +33,6 @@ export class EditProfilePage implements OnInit {
       mobileNumber: new FormControl(''),
       profilePicture: new FormControl(''),
       registrationPlatform: new FormControl('android'),
-      address: new FormGroup({
-        line1: new FormControl(''),
-        line2: new FormControl(''),
-        city: new FormControl(''),
-        state: new FormControl(''),
-        country: new FormControl('India'),
-        pinCode: new FormControl(''),
-      }),
       path: new FormControl(),
     },
   );
@@ -56,7 +48,7 @@ export class EditProfilePage implements OnInit {
     private uploadService: UploadService,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.getUserDetails();
