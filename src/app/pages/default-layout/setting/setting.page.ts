@@ -6,7 +6,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
 import { Device } from '@capacitor/device';
 import { Geolocation } from '@capacitor/geolocation';
-
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
@@ -19,7 +19,8 @@ export class SettingPage implements OnInit {
     private spinner: LoaderService,
     private toaster: ToastService,
     private userService: UserService,
-    private localStorage: StorageService
+    private localStorage: StorageService,
+    private alertController: AlertController,
   ) { }
 
   async ngOnInit() {
@@ -33,7 +34,33 @@ export class SettingPage implements OnInit {
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
   }
-  async logout() {
+  async logOutAlert() {
+    const alert = await this.alertController.create({
+      header: 'Are You Sure You Want To Logout?',
+      cssClass: 'custom-alert',
+      mode: 'md',
+      buttons: [
+        {
+          text: 'Cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          },
+        },
+        {
+          text: 'OK',
+          cssClass: 'primary',
+          handler: (alertData) => {
+            this.logout(alertData);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+
+  async logout(item) {
     await this.spinner.showLoader();
     let payload = {
       deviceToken: this.localStorage.get('deviceToken'),
