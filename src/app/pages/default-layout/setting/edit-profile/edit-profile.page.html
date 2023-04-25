@@ -21,88 +21,35 @@
           (change)="uploadFile($event)" required>
       </ion-text>
     </div>
-
-
     <form [formGroup]="profileForm">
-      <ion-item class="input-class">
-        <ion-label position="stacked">
-          {{ 'FirstName' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input type="text" placeholder="{{ 'FirstName' | translate}}" formControlName="firstName"></ion-input>
+      <ion-item class="input-class" lines="none">
+        <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
+            class="span-color">*</span></ion-label>
+        <ion-input formControlName="firstName" type="text" name="firstName"
+          placeholder="{{ 'enter first Name' | translate}} " autocomplete="on" clearInput>
+        </ion-input>
       </ion-item>
-      <ion-item class="input-class">
-        <ion-label position="stacked">
-          {{ 'LastName' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input type="text" placeholder="{{ 'LastName' | translate}}" formControlName="lastName"></ion-input>
+      <ion-item class="input-class" lines="none">
+        <ion-label class="text-color-2" position="stacked">{{ 'LastName' | translate}} <span
+            class="span-color">*</span></ion-label>
+        <ion-input formControlName="lastName" type="text" name="lastName"
+          placeholder="{{ 'enter last name' | translate}} " autocomplete="on" clearInput>
+        </ion-input>
       </ion-item>
-      <ion-item class="input-class">
-        <ion-label position="stacked">
-          {{ 'mobileNumber' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input maxlength="10" minlength="10" type="number" placeholder="{{ 'mobile' | translate}}"
-          formControlName="mobileNumber"></ion-input>
+      <ion-item class="input-class" lines="none">
+        <ion-label class="text-color-2" position="stacked">{{ 'mobileNumber' | translate}} <span
+            class="span-color">*</span></ion-label>
+        <ion-input formControlName="mobileNumber" maxlength="10" minlength="10" type="number"
+          placeholder="{{ 'enter mobile number' | translate}} " autocomplete="on" clearInput>
+        </ion-input>
       </ion-item>
-      <ion-item class="input-class">
-        <ion-label position="stacked">
-          {{ 'email' | translate}}
-          <ion-note color="danger">*</ion-note>
-        </ion-label>
-        <ion-input type="text" placeholder="{{ 'email' | translate}}" formControlName="email"></ion-input>
+      <ion-item class="input-class" lines="none">
+        <ion-label class="text-color-2" position="stacked">{{ 'email' | translate}} <span
+            class="span-color">*</span></ion-label>
+        <ion-input formControlName="email" type="email" placeholder="{{ 'enter email' | translate}} " autocomplete="on"
+          clearInput>
+        </ion-input>
       </ion-item>
-
-      <div class="accordian">
-        <ion-accordion-group expand="inset">
-          <ion-accordion value="first">
-            <ion-item slot="header" color="light">
-              <ion-label>Address</ion-label>
-            </ion-item>
-            <div class="ion-padding" slot="content">
-              <ion-label formGroupName="address">
-                <ion-item class="input-class">
-                  <ion-label position="stacked">
-                    {{ 'address' | translate}}
-                    <ion-note color="danger">*</ion-note>
-                  </ion-label>
-                  <ion-input type="text" placeholder="{{ 'address' | translate}}" formControlName="line1"></ion-input>
-                </ion-item>
-                <ion-item class="input-class">
-                  <ion-label position="stacked">
-                    {{ 'city' | translate}}
-                    <ion-note color="danger">*</ion-note>
-                  </ion-label>
-                  <ion-input type="text" placeholder="{{ 'city' | translate}}" formControlName="city"></ion-input>
-                </ion-item>
-                <ion-item class="input-class">
-                  <ion-label position="stacked">
-                    {{ 'state' | translate}}
-                    <ion-note color="danger">*</ion-note>
-                  </ion-label>
-                  <ion-input type="text" placeholder="{{ 'state' | translate}}" formControlName="state"></ion-input>
-                </ion-item>
-                <ion-item class="input-class">
-                  <ion-label position="stacked">
-                    {{ 'Country' | translate}}
-                    <ion-note color="danger">*</ion-note>
-                  </ion-label>
-                  <ion-input type="text" placeholder="{{ 'Country' | translate}}" formControlName="country"></ion-input>
-                </ion-item>
-                <ion-item class="input-class">
-                  <ion-label position="stacked">
-                    {{ 'pinCode' | translate}}
-                    <ion-note color="danger">*</ion-note>
-                  </ion-label>
-                  <ion-input type="text" placeholder="{{ 'pinCode' | translate}}" formControlName="pinCode"></ion-input>
-                </ion-item>
-              </ion-label>
-
-            </div>
-          </ion-accordion>
-        </ion-accordion-group>
-      </div>
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" expand="block" shape="round" class="btn" (click)="updateProfile()">
           {{ 'submit' | translate}}

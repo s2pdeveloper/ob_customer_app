@@ -172,7 +172,7 @@ export class LandingPagePage implements OnInit {
     )
   }
   navigateToSearchShop(search) {
-    this.router.navigate(['/app/tabs/search-shop'], {
+    this.router.navigate(['/search-shop'], {
       queryParams: {
         search: this.search,
       },
