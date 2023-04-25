@@ -90,11 +90,13 @@ export class CategoryPage implements OnInit {
   }
 
   getAllSubCategory(parentId, isFirstLoad, event) {
-    this.parentId = parentId,
       this.activeParentId = parentId
-    let params = { page: this.page, pageSize: this.pageSize, parentId: parentId };
+    let params = { page: this.page, pageSize: this.pageSize };
     if (this.searchText) {
-      params['search'] = this.searchText;
+      params['search'] = this.searchText,
+        parentId = null;
+    } else {
+      params['parentId'] = parentId;
     }
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
@@ -139,6 +141,7 @@ export class CategoryPage implements OnInit {
     if (this.infiniteScroll.disabled) {
       this.infiniteScroll.disabled = false;
     }
+    this.searchText = '';
     this.page = 1;
     this.subCategoryList = [];
     this.getAllSubCategory(activeParentId, false, "");

@@ -63,15 +63,18 @@
     <ion-title class="ion-no-padding heading" color="primary">{{'Seasonal Offers' | translate}}</ion-title>
   </ion-item>
   <ion-card *ngFor="let item of seasonalOffer">
-    <ion-title class="ion-no-padding ion-text-capitalize ">{{item.heading | translate}}</ion-title>
+    <ion-item lines="none">
+      <ion-title class="ion-no-padding heading ion-text-capitalize ">{{item.heading}}</ion-title>
+    </ion-item>
     <ion-row>
       <ion-col class="ion-text-center" size="6" *ngFor="let img of item.media ">
-        <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
-        <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
-          src="assets/images/placeholder_product.png" alt="offer-image" />
-        <ion-label class="ion-text-capitalize ion-text-wrap">{{img.title}}</ion-label>
+        <ion-card class="ion-text-center">
+          <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
+          <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
+            src="assets/images/placeholder_product.png" alt="offer-image" />
+          <ion-card-subtitle class="cat-head">{{img.title}}</ion-card-subtitle>
+        </ion-card>
       </ion-col>
     </ion-row>
-    <ion-label (click)="navigateToSeasonalOffer()" slot="start">{{'See all' | translate}}</ion-label>
   </ion-card>
 </ion-content>

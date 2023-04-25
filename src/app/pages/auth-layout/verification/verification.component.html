@@ -3,15 +3,16 @@
   <ion-buttons slot="start">
     <ion-back-button defaultHref class="text-color-2"></ion-back-button>
   </ion-buttons>
+  <ion-title>{{'verificationLabel' | translate}}</ion-title>
 </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <img src="assets/images/undraw_unlock_re_a558.svg" class="head-image">
   <div class="ion-padding">
-    <ion-text class="text-label text-color-2 font-weight-bold">
+    <!-- <ion-text class="text-label text-color-2 font-weight-bold">
       {{ 'verificationLabel' | translate}}
-    </ion-text>
+    </ion-text> -->
     <p class="text-color-1">
       {{ 'verificationDescription' | translate}} +{{form.countryCode.value}} {{form.mobileNumber.value}}
     </p>
