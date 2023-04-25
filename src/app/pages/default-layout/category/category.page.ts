@@ -90,7 +90,6 @@ export class CategoryPage implements OnInit {
   }
 
   getAllSubCategory(parentId, isFirstLoad, event) {
-    this.parentId = parentId,
       this.activeParentId = parentId
     let params = { page: this.page, pageSize: this.pageSize };
     if (this.searchText) {
