@@ -1,5 +1,4 @@
-
-.location-icon{
+.location-icon {
   margin-right: 6px;
 }
 
@@ -47,7 +46,15 @@
   padding: 0px !important;
 }
 
-.img-seasonal{
-  width: 80%;
-  height: 80%;
+ion-card {
+  .img-seasonal {
+    border-radius: 5%;
+    height: 7rem;
+    width: 7rem;
+    object-fit: cover;
+  }
+  .cat-head {
+    font-size: 0.9rem;
+    text-transform: capitalize;
+  }
 }
