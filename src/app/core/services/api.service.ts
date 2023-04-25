@@ -1,19 +1,19 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 
-import {catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
   api_url = environment.apiEndpoint;
   constructor(
     private http: HttpClient,
-  ) {}
+  ) { }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-    return this.http.get(`${this.api_url}${path}`, {params})
+    return this.http.get(`${this.api_url}${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
 
@@ -38,6 +38,7 @@ export class ApiService {
 
 
   private formatErrors(error: any) {
+    console.log('formatErrors', error)
     if (error && (error.status === 403 || error.status === 401)) {
       location.reload();
     }

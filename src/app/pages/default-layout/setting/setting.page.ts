@@ -41,13 +41,13 @@ export class SettingPage implements OnInit {
       mode: 'md',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           cssClass: 'secondary',
           handler: () => {
           },
         },
         {
-          text: 'OK',
+          text: 'Yes',
           cssClass: 'primary',
           handler: (alertData) => {
             this.logout(alertData);
@@ -63,7 +63,7 @@ export class SettingPage implements OnInit {
   async logout(item) {
     await this.spinner.showLoader();
     let payload = {
-      deviceToken: this.localStorage.get('deviceToken'),
+      deviceToken: localStorage.getItem('deviceToken'),
       platform: this.deviceInfo.platform,
     }
     this.userService.removeDeviceToken(payload).subscribe(async result => {
