@@ -7,8 +7,6 @@ import { IonContent, IonInfiniteScroll } from '@ionic/angular';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
-import { LocationComponent } from 'src/app/shared/modals/location/location.component';
-import { App } from '@capacitor/app';
 import { OrderRatingComponent } from 'src/app/shared/modals/order-rating/order-rating.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -39,7 +37,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: number;
   message: string = '';
   shopName: string = '';
-  roomName: string = '';
+
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
@@ -163,6 +161,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       },
     })
   }
+  
   async getMsgByCustomerId() {
     // this.chatService
     //   .getMsgByCustomerId(this.roomName)
