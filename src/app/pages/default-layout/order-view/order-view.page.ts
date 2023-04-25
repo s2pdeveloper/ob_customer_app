@@ -47,7 +47,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   orderId: any;
   chatData: any = {};
   status: any;
-
+  messageCategory = messageCategory
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -208,12 +208,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       });
   }
 
-  async openUrl(url) {
-    if (!url.includes('http')) {
-      return;
+  async openGoogleMap(location) {
+    if (location) {
+      const destination = `${location.coordinates[0]},${location.coordinates[1]}`;
+      window.open("https://www.google.com/maps/search/?api=1&query=" + destination)
     }
-    await App.getLaunchUrl();
-    return url;
+    return;
   }
 
   confirmOrder() {

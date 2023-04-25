@@ -22,7 +22,9 @@
             </div>
 
             <div class="msg-content ion-text-wrap" *ngIf="message.message">
-              <p (click)="openUrl(message.message)">{{message.message}}</p>
+              <p>{{message.message}}
+                <a role="button" class="ion-text-underline" (click)="openGoogleMap(message.location)" *ngIf="message.category === messageCategory.LOCATION">Open Map</a>
+              </p>
             </div>
 
             <div class="msg-info">
