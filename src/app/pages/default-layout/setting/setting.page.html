@@ -25,7 +25,28 @@
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
 
-    <ion-item button="true" (click)="logout()" lines="none">
+    <!-- about us -->
+    <ion-item button="true">
+      <ion-icon name="people-outline" color="primary"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'About Us' | translate }}
+        <p class="text-color-7" (click)="navigateTo('privacy-policy')">{{'Privacy Policy' | translate}}</p>
+        <p class="text-color-7" (click)="navigateTo('term-of-use')">{{'Terms of Use' | translate}}</p>
+      </ion-label>
+    </ion-item>
+    <!-- about us -->
+
+    <!-- support -->
+    <ion-item button="true" (click)="navigateTo('support')">
+      <ion-icon name="build" color="primary"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'Support' | translate }}
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+    <!-- support -->
+
+    <ion-item button="true" (click)="logOutAlert()" lines="none">
       <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp" color="primary">
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
