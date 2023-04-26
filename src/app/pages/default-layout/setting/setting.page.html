@@ -25,17 +25,6 @@
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
 
-    <!-- about us -->
-    <ion-item button="true">
-      <ion-icon name="people-outline" color="primary"></ion-icon>
-      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{ 'About Us' | translate }}
-        <p class="text-color-7" (click)="navigateTo('privacy-policy')">{{'Privacy Policy' | translate}}</p>
-        <p class="text-color-7" (click)="navigateTo('term-of-use')">{{'Terms of Use' | translate}}</p>
-      </ion-label>
-    </ion-item>
-    <!-- about us -->
-
     <!-- support -->
     <ion-item button="true" (click)="navigateTo('support')">
       <ion-icon name="build" color="primary"></ion-icon>
@@ -45,6 +34,28 @@
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
     <!-- support -->
+
+    <!-- Terms of Use -->
+    <ion-item button="true">
+      <ion-icon name="document-text-outline" color="primary"></ion-icon>
+      <ion-button fill="clear" class="font-1 text-color-black">
+        <a href="https://www.bharat-online.com/terms-and-conditions">Terms of Use
+        </a>
+      </ion-button>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+    <!-- Terms of Use -->
+
+    <!-- Privacy Policy -->
+    <ion-item button="true">
+      <ion-icon name="people-outline" color="primary"></ion-icon>
+      <ion-button fill="clear" class="font-1 text-color-black">
+        <a href="https://www.bharat-online.com/privacy-policy">Privacy Policy
+        </a>
+      </ion-button>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+    <!-- Privacy Policy  -->
 
     <ion-item button="true" (click)="logOutAlert()" lines="none">
       <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp" color="primary">
