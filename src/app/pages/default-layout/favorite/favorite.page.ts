@@ -47,6 +47,11 @@ export class FavoritePage implements OnInit {
     this.search = '';
     this.getFavoriteByCustomerId(false)
   }
+  ionViewDidLeave(): void {
+    this.shopFavorites = [];
+    this.page = 1;
+    this.search = '';
+  }
   doInfinite(event) {
     if (this.shopFavorites.length < this.collection) {
       this.page++;

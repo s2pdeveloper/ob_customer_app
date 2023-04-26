@@ -24,7 +24,7 @@ export class CataloguePage implements OnInit {
   catalogueArr: any = [];
   selectAll: boolean;
   subCategoryArr: any = [];
-  collection:number=0;
+  collection: number = 0;
 
   buttonSlide = {
     slidesPerView: 4,
@@ -53,27 +53,34 @@ export class CataloguePage implements OnInit {
   ) { }
 
   ngOnInit() { }
-
+  ionViewDidLeave(): void {
+    this.shopCatalogue = [];
+    console.log("enter in ionViewDidLeave", this.shopCatalogue);
+    this.page = 1;
+  }
   ionViewWillEnter() {
+    this.shopCatalogue = [...this.shopCatalogue];
+
+    console.log("enter in ionViewWillEnter", this.shopCatalogue);
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopId = params.shopId
       if (params.shopId) {
-        this.getShopCatalogue(false,'')
+        this.getShopCatalogue(false, '')
       }
     });
   }
-  
+
   onSearch() {
     this.page = 1;
     this.shopCatalogue = [];
-    this.getShopCatalogue(false,'');
+    this.getShopCatalogue(false, '');
   }
 
   doRefresh(event: any) {
     this.page = 1;
     this.shopCatalogue = [];
-    this.getShopCatalogue(false,'');
+    this.getShopCatalogue(false, '');
     event.target.complete();
   }
 
@@ -86,8 +93,7 @@ export class CataloguePage implements OnInit {
     }
   }
   async getShopCatalogue(isFirstLoad: boolean, event?: any) {
-    this.shopService.getShopCatalogue({page: this.page, pageSize: this.pageSize, shopId: this.shopId }).subscribe(async (success: any) => {
-      // this.shopCatalogue = success.data;
+    this.shopService.getShopCatalogue({ page: this.page, pageSize: this.pageSize, shopId: this.shopId }).subscribe(async (success: any) => {
       this.collection = success.count;
       for (let i = 0; i < success.data.length; i++) {
         this.shopCatalogue.push(success.data[i]);
@@ -102,12 +108,13 @@ export class CataloguePage implements OnInit {
   }
 
   navigateToCheckout() {
-    console.log("this.shopCatalogue", this.shopCatalogue);
     let filteredData = this.shopCatalogue.filter(x => x.isChecked);
-    console.log("filteredData", filteredData);
-
-    this.storageService.set("orderData", filteredData)
-    this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
+    if (filteredData.length > 0) {
+      this.storageService.set("orderData", filteredData)
+      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
+    } else {
+      this.toaster.warningToast("please select at least one product")
+    }
   }
   navigateToChat() {
     let msg = '';
@@ -132,26 +139,12 @@ export class CataloguePage implements OnInit {
       }
       // amount += catPrice;
     }
-
     let message = {
       shopId: this.shopId,
       message: msg,
       description: description,
-      // amount: amount,
     };
-    // this.chatService.create(message).subscribe((success) => {
-    //   this.spinner.hideLoader();
-    //   console.log("join success",success);
-
-    //   // join
-    //   this.socket.emit('join', { room: success.orderId, user: this.user._id });
     this.router.navigate(['/chat-view'], {
-      //     queryParams: {
-      //       shopId: arr[0].shopId._id,
-      //       shopName: arr[0].shopId.shopName,
-      //       roomName: success.orderId, //join
-      //     },
-      //   });
     });
   }
 

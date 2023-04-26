@@ -83,11 +83,15 @@ ion-content {
 
 .noData {
   text-align: center !important;
-  margin-top: 5rem !important;
 }
 
-ion-fab-button{
-  --background:var(--ion-color-light);
+.favorite {
+  margin-top: 5rem !important;
+  text-align: center !important;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-light);
   height: 30px;
   width: 30px;
   position: absolute;

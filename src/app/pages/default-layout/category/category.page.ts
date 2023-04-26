@@ -66,6 +66,7 @@ export class CategoryPage implements OnInit {
     if (this.subCategoryList.length < this.collection) {
       this.page++;
       this.getAllSubCategory(this.activeParentId, false, event);
+      event.target.complete();
     } else {
       event.target.complete();
     }
@@ -90,6 +91,7 @@ export class CategoryPage implements OnInit {
   }
 
   getAllSubCategory(parentId, isFirstLoad, event) {
+    this.parentId = parentId,
       this.activeParentId = parentId
     let params = { page: this.page, pageSize: this.pageSize };
     if (this.searchText) {
@@ -108,8 +110,6 @@ export class CategoryPage implements OnInit {
           event.target.complete();
         if (success.data.length === 0 && event) {
           event.target.disabled = true;
-        } else {
-          this.page += this.pageSize;
         }
         this.categoryList = this.categoryList.map((x, i) => {
           if (parentId == x._id) {
@@ -125,8 +125,6 @@ export class CategoryPage implements OnInit {
       }
     )
   }
-
-
 
   navigateToShopList(subCategory) {
     this.router.navigate(['/search-shop'], {
