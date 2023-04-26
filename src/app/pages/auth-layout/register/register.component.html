@@ -39,15 +39,20 @@
         </ng-container>
       </div>
       <ion-item class="ion-no-height" lines="none">
-        <ion-checkbox type="checkbox" (click)="checkTnC($event)" slot="start"></ion-checkbox>
-        <ion-label>I agree to the terms and conditions</ion-label>
+        <ion-checkbox type="checkbox" (click)="checkTnC($event)"></ion-checkbox>
+        <ion-button fill="clear" class="font-size-small text-color-black">
+          <a class="font-color" href="https://www.bharat-online.com/terms-and-conditions">I agree to the terms and conditions
+          </a>
+        </ion-button>
 
       </ion-item>
       <ion-item class="ion-no-height" lines="none">
-        <ion-checkbox type="checkbox" (click)="isChecked($event)" slot="start"></ion-checkbox>
-        <ion-label>I agree to the self and declaration</ion-label>
+        <ion-checkbox type="checkbox" (click)="isChecked($event)"></ion-checkbox>
+        <ion-button fill="clear" class="font-size-small text-color-black">
+          <a class="font-color" href="">I agree to the self and declaration
+          </a>
+        </ion-button>
       </ion-item>
-
       <div class="clearfix ion-padding-top">
         <ion-button (click)="onSubmit()" shape="round" [disabled]="registerForm.invalid || btnDisabled || tnc"
           expand="block" class="btn-color-1 btn-height-large" type="submit">
