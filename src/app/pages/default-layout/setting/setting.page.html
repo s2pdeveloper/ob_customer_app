@@ -24,7 +24,25 @@
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
+    <!-- Terms of Use -->
+    <ion-item button="true" (click)="openTerms()">
+      <ion-icon name="document-text-outline" color="primary"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'Terms of Use' | translate }}
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+    <!-- Terms of Use -->
 
+    <!-- Privacy Policy -->
+    <ion-item button="true" (click)="openPolicy()">
+      <ion-icon name="people-outline" color="primary"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'Privacy Policy' | translate }}
+      </ion-label>
+      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
+    </ion-item>
+    <!-- Privacy Policy  -->
     <!-- support -->
     <ion-item button="true" (click)="navigateTo('support')">
       <ion-icon name="build" color="primary"></ion-icon>
@@ -34,29 +52,6 @@
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
     <!-- support -->
-
-    <!-- Terms of Use -->
-    <ion-item button="true">
-      <ion-icon name="document-text-outline" color="primary"></ion-icon>
-      <ion-button fill="clear" class="font-1 text-color-black">
-        <a href="https://www.bharat-online.com/terms-and-conditions">Terms of Use
-        </a>
-      </ion-button>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
-    </ion-item>
-    <!-- Terms of Use -->
-
-    <!-- Privacy Policy -->
-    <ion-item button="true">
-      <ion-icon name="people-outline" color="primary"></ion-icon>
-      <ion-button fill="clear" class="font-1 text-color-black">
-        <a href="https://www.bharat-online.com/privacy-policy">Privacy Policy
-        </a>
-      </ion-button>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
-    </ion-item>
-    <!-- Privacy Policy  -->
-
     <ion-item button="true" (click)="logOutAlert()" lines="none">
       <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp" color="primary">
       </ion-icon>
