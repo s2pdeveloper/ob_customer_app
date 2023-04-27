@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-capitalize ion-text-wrap">{{ 'Support' | translate}}</ion-title>
+    <ion-title class="ion-text-capitalize ion-text-wrap">{{ 'support' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,27 +11,27 @@
 
   <ion-card class="">
     <form [formGroup]="supportForm">
-      <ion-item class="input-class">
+      <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
           {{ 'name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="text" placeholder="{{ 'Name' | translate}}" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="name"></ion-input>
       </ion-item>
-      <ion-item class="input-class">
+      <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
           {{ 'email' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="email" placeholder="{{ 'Email' | translate}}" formControlName="email"></ion-input>
+        <ion-input type="email" placeholder="{{ 'enterEmail' | translate}}" formControlName="email"></ion-input>
       </ion-item>
 
-      <ion-item class="input-class">
+      <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
           {{ 'note' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-textarea type="text" rows="10" formControlName="notes" placeholder="Enter write your...">
+        <ion-textarea type="text" rows="10" formControlName="notes" placeholder="{{'writeNote'|translate}}">
         </ion-textarea>
       </ion-item>
       <div class="ion-text-center ion-margin-vertical">
