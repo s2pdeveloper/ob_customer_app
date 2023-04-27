@@ -6,7 +6,7 @@
       <p>{{currentLocation?.formatted_address | truncate: 40}}</p>
     </ion-label>
     <ion-avatar slot="end">
-      <img [src]="userDetails?.image || 'assets/images/placeholder_profile.png'" alt="profile"
+      <img [src]="userDetails?.profilePicture || 'assets/images/placeholder_profile.png'" alt="profile"
         (click)="navigateToProfilePage()" />
     </ion-avatar>
   </ion-item>
