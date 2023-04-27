@@ -13,14 +13,12 @@ export class AuthGuard implements CanLoad {
   }
   canLoad(route: Route, segemets: UrlSegment[]): Observable<boolean> {
     return this.userService.isAuthenticated.pipe(take(1), tap(allowed => {
-      console.log('allowed', allowed)
       if (!allowed) {
         let returnUrl = segemets[0].path;
         this.router.navigate(['/auth/login'], { queryParams: { returnUrl } });
         return false;
       } else {
         const currentUser = this.userService.getCurrentUser();
-        console.log('current user', currentUser)
         if (currentUser) {
           // if (route.data.roles && route.data.roles.length) {
 

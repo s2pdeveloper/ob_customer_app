@@ -31,7 +31,7 @@ export class LandingPagePage implements OnInit {
   advertiseArr: any = [];
   user: any = '';
   loaded: boolean;
-  userDetails: any = [];
+  userDetails: any = {};
   seasonalOffer: any = [];
 
   buttonSlide = {
@@ -94,6 +94,7 @@ export class LandingPagePage implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
     let payload = {
       deviceId: localStorage.getItem('deviceToken'),

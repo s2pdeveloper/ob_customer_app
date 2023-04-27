@@ -94,8 +94,9 @@ export class FavoritePage implements OnInit {
       await this.spinner.hideLoader();
     });
   }
-  navigateTo(path, _id) {
-    this.router.navigate([path], { queryParams: { id: _id } });
+  navigateToShop(id: string) {
+    const path: string = `/shop-detail/${id}`;
+    this.router.navigate([path]);
   }
   getUrl(url) {
     let path = `url('${url}')`;
