@@ -25,7 +25,7 @@
   <!-- advertise -->
   <ion-slides [options]="buttonSlide2" class="ion-margin-bottom" autoplay="true" loop="true" pager>
     <ion-slide *ngFor="let item of advertiseArr">
-      <div class="advertise ion-no-padding">
+      <div class="advertise">
         <img class="advertiseImage" src="{{item.image}} " /><br />
       </div>
     </ion-slide>
@@ -58,23 +58,29 @@
       </div>
     </ion-slide>
   </ion-slides>
-
-  <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">{{'Seasonal Offers' | translate}}</ion-title>
-  </ion-item>
-  <ion-card *ngFor="let item of seasonalOffer">
-    <ion-item lines="none">
-      <ion-title class="ion-no-padding heading ion-text-capitalize ">{{item.heading}}</ion-title>
+  <ion-grid *ngFor="let item of seasonalOffer">
+    <ion-item lines="none" class="ion-no-padding" style="padding-left:10px">
+      <ion-label class="text-color-2 text-bold text-title">
+        {{item.heading}}
+      </ion-label>
     </ion-item>
     <ion-row>
-      <ion-col class="ion-text-center" size="6" *ngFor="let img of item.media ">
-        <ion-card class="ion-text-center">
-          <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
-          <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
-            src="assets/images/placeholder_product.png" alt="offer-image" />
-          <ion-card-subtitle class="cat-head">{{img.title}}</ion-card-subtitle>
+      <ion-col size="6" size-lg="4" size-md="5" *ngFor="let img of item.media ; let i=index" style="display: flex;">
+        <ion-card class="seasonal-card shadow-color-1" button="true">
+          <div>
+            <div class="ion-no-padding ion-text-center ion-padding-vertical">
+              <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
+              <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
+                src="assets/images/placeholder_product.png" alt="offer-image" />
+            </div>
+          </div>
+          <ion-card-content>
+            <div>
+              <h5 class="text-color-2 ion-text-center ion-text-capitalize">{{ img?.title | truncate:24 }}</h5>
+            </div>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-card>
+  </ion-grid>
 </ion-content>
