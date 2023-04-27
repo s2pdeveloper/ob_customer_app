@@ -102,4 +102,9 @@ export class RegisterComponent implements OnInit {
     this.btnDisabled = event.target.checked;
   }
 
+  openTerms = async () => {
+    console.log('enter here');
+    await Browser.open({ url: 'https://www.bharat-online.com/terms-and-conditions' });
+  };
+
 }

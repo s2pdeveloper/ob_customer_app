@@ -13,7 +13,7 @@
 
   <div class="input-search">
     <input class="form-control bg-outline-primary" (keydown.enter)="$event.preventDefault()"
-      placeholder="Search Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="search"
+      placeholder="{{'searchLocation'| translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" type="search"
       #locationSearch>
   </div>
   <div>

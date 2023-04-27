@@ -2,7 +2,7 @@
   <ion-item lines="none">
     <ion-icon class="location-icon" color="primary" name="location" slot="start" (click)="openMap()"></ion-icon>
     <ion-label (click)="openMap()">
-      <h3 class="mb-0">Location</h3>
+      <h3 class="mb-0">{{'location'| translate}}</h3>
       <p>{{currentLocation?.formatted_address | truncate: 40}}</p>
     </ion-label>
     <ion-avatar slot="end">
@@ -59,7 +59,7 @@
     </ion-slide>
   </ion-slides>
   <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">{{'Seasonal Offer' | translate}}</ion-title>
+    <ion-title class="ion-no-padding heading" color="primary">{{'seasonalOffer' | translate}}</ion-title>
   </ion-item>
   <ion-grid *ngFor="let item of seasonalOffer">
     <ion-item lines="none" class="ion-no-padding" style="padding-left:10px">
