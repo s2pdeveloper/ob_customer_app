@@ -52,9 +52,9 @@
       </div>
     </ng-template>
   </div>
-
-  <ion-button color="primary" expand="block" strong="true" shape="round" class="ion-margin-top"
-    *ngIf="orderData?.length > 0" (click)="navigateToChat()">
-    {{'Place Order' | translate}}
-  </ion-button>
+  <div class="clearfix ion-padding-top">
+    <ion-button  *ngIf="orderData?.length > 0" (click)="navigateToChat()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{ 'Place Order' | translate}}
+    </ion-button>
+  </div>
 </ion-content>
