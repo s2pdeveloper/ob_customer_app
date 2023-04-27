@@ -10,7 +10,7 @@
     <ion-item button="true" (click)="navigateTo('view-profile')">
       <ion-icon class="text-color-2" name="person-circle" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{"My Profile" | translate}}
+        {{"myProfile" | translate}}
         <p class="text-color-7">{{"View Your Profile" | translate}}</p>
       </ion-label>
     </ion-item>
@@ -19,16 +19,17 @@
     <ion-item button="true" (click)="navigateTo('change-language')">
       <ion-icon class="text-color-2" name="text" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{ 'Change Language' | translate }}
+        {{ 'changeLanguage' | translate }}
         <p class="text-color-7">{{'Set App Language' | translate}}</p>
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
+
     <!-- Terms of Use -->
     <ion-item button="true" (click)="openTerms()">
       <ion-icon name="document-text-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{ 'Terms of Use' | translate }}
+        {{ 'terms' | translate }}
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
@@ -38,7 +39,7 @@
     <ion-item button="true" (click)="openPolicy()">
       <ion-icon name="people-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{ 'Privacy Policy' | translate }}
+        {{ 'privacy' | translate }}
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
@@ -47,7 +48,7 @@
     <ion-item button="true" (click)="navigateTo('support')">
       <ion-icon name="build" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
-        {{ 'Support' | translate }}
+        {{ 'support' | translate }}
       </ion-label>
       <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>

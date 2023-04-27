@@ -16,14 +16,14 @@
           {{ 'name' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="text" placeholder="{{ 'enter name' | translate}}" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="name"></ion-input>
       </ion-item>
       <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
           {{ 'email' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="email" placeholder="{{ 'enter email' | translate}}" formControlName="email"></ion-input>
+        <ion-input type="email" placeholder="{{ 'enterEmail' | translate}}" formControlName="email"></ion-input>
       </ion-item>
 
       <ion-item class="input-class" lines="none">
@@ -31,7 +31,7 @@
           {{ 'Note' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-textarea type="text" rows="10" formControlName="notes" placeholder="Write your note...">
+        <ion-textarea type="text" rows="10" formControlName="notes" placeholder="{{'writeNote'|translate}}">
         </ion-textarea>
       </ion-item>
       <div class="ion-text-center ion-margin-vertical">
