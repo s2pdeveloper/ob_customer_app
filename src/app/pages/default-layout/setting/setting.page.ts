@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
 import { Device } from '@capacitor/device';
 import { Geolocation } from '@capacitor/geolocation';
 import { AlertController } from '@ionic/angular';
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.page.html',
@@ -34,6 +35,12 @@ export class SettingPage implements OnInit {
   navigateTo(page: string) {
     this.router.navigate([`${page}`])
   }
+  openTerms = async () => {
+    await Browser.open({ url: 'https://www.bharat-online.com/terms-and-conditions' });
+  };
+  openPolicy = async () => {
+    await Browser.open({ url: 'https://www.bharat-online.com/privacy-policy' });
+  };
   async logOutAlert() {
     const alert = await this.alertController.create({
       header: 'Are You Sure You Want To Logout?',

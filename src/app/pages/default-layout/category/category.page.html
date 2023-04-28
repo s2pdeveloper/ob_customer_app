@@ -20,7 +20,7 @@
 
   <ion-grid class="category-list">
     <ion-row>
-      <ion-col size="3" class="category-section">
+      <ion-col size="4" class="category-section">
         <div class="cat-container">
           <ion-card class="ion-text-center" [ngClass]="item.active ? 'active':null "
             *ngFor="let item of categoryList;let i =index;" (click)="getSubCategories(item._id)">
@@ -30,7 +30,7 @@
           </ion-card>
         </div>
       </ion-col>
-      <ion-col size="9" class="subcategory-section" *ngIf="subCategoryList?.length > 0;else noDataFound">
+      <ion-col size="8" class="subcategory-section" *ngIf="subCategoryList?.length > 0;else noDataFound">
         <ion-row class="ion-margin">
           <ion-col size="6" *ngFor="let subCategory of subCategoryList">
             <ion-card class="ion-text-center" (click)="navigateToShopList(subCategory)">
@@ -43,9 +43,11 @@
         </ion-row>
       </ion-col>
       <ng-template #noDataFound>
-        <div class="noData">
-          <ion-label>No Data Found</ion-label>
-        </div>
+        <ion-col size="8">
+          <div class="noData">
+            <ion-label>Coming Soon !!</ion-label>
+          </div>
+        </ion-col>
       </ng-template>
     </ion-row>
   </ion-grid>

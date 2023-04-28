@@ -8,6 +8,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { validateField } from 'src/app/shared/validators/form.validator';
+import { OPTIONS } from 'src/app/helpers';
 
 
 @Component({
@@ -102,23 +103,23 @@ export class EditProfilePage implements OnInit {
 
   async uploadFile($event) {
     let file = $event.target.files[0];
-    // if (this.uploadService.checkFileSize(file)) {
-    //   this.toaster.errorToast(OPTIONS.sizeLimit);
-    //   this.spinner.hideLoader();
-    //   return;
-    // }
-    // if (this.uploadService.checkImageType(file)) {
-    //   this.toaster.errorToast(OPTIONS.imageType);
-    //   this.spinner.hideLoader();
-    //   return;
-    // }
+    if (this.uploadService.checkFileSize(file)) {
+      this.toaster.errorToast(OPTIONS.sizeLimit);
+      this.spinner.hideLoader();
+      return;
+    }
+    if (this.uploadService.checkImageType(file)) {
+      this.toaster.errorToast(OPTIONS.imageType);
+      this.spinner.hideLoader();
+      return;
+    }
     await this.spinner.showLoader();
     let formData = new FormData();
     formData.append('file', file);
     this.uploadService.uploadFile(formData)
       .subscribe(
-        async (data: any) => {
-          this.filePath = data?.result?.url;
+        async (success: any) => {
+          this.filePath = success?.result?.data?.key;
           this.profileForm.controls.profilePicture.setValue(this.filePath);
           this.fileUploaded = true;
           await this.spinner.hideLoader();
