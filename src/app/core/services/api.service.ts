@@ -40,7 +40,7 @@ export class ApiService {
   private formatErrors(error: any) {
     console.log('formatErrors', error)
     if (error && (error.status === 403 || error.status === 401)) {
-      location.reload();
+      // location.reload();
     }
     let err = error.error;
     if (err.error) {

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="bg-color-primary">
-    <ion-title class="text-white" (click)="navigateTo(shopId)">{{shopName}}</ion-title>
+    <ion-title class="ion-text-capitalize">#{{orderDetails?.orderNumber}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="catalogue"></ion-back-button>
     </ion-buttons>
@@ -15,15 +15,16 @@
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll">
       <div class="message-wrap">
-        <div *ngFor="let message of messages" class="message" [class.right]="message.senderId === user._id">
+        <div *ngFor="let message of messages" class="message" [class.right]="message?.senderId === user?._id">
           <div class="msg-detail">
-            <div class="msg-info" *ngIf="message.createdAt">
+            <div class="msg-info" *ngIf="message?.createdAt">
               <p>{{message?.createdAt | date:'shortTime'}}</p>
             </div>
 
-            <div class="msg-content ion-text-wrap" *ngIf="message.message">
-              <p>{{message.message}}
-                <a role="button" class="ion-text-underline" (click)="openGoogleMap(message.location)" *ngIf="message.category === messageCategory.LOCATION">Open Map</a>
+            <div class="msg-content ion-text-wrap" *ngIf="message?.message">
+              <p>{{message?.message}}
+                <a role="button" class="ion-text-underline" (click)="openGoogleMap(message?.location)"
+                  *ngIf="message?.category === messageCategory.LOCATION">Open Map</a>
               </p>
             </div>
 
