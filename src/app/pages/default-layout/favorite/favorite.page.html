@@ -30,7 +30,7 @@
           'background-repeat': 'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
-         }" (click)="navigateTo('/shop-detail',s?.ownerDetails[0]._id)">
+         }" (click)="navigateToShop(s?.ownerDetails[0]._id)">
 
           <ion-badge color="success" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
             {{s?.shopDetails.avgRating}}
@@ -46,7 +46,7 @@
         </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">
           {{s.shopDetails.shopName}}</ion-label>
-        <ion-label (click)="navigateTo('/shop-detail',s?.ownerDetails[0]._id)" class="address ion-margin-top" color="
+        <ion-label (click)="navigateToShop(s?.ownerDetails[0]._id)" class="address ion-margin-top" color="
             light">
           <h4 class="address-padding ion-padding-start">
             {{ s.ownerDetails[0].address.city ? s.ownerDetails[0].address.city : ""}},
