@@ -20,9 +20,11 @@ export class SocketService {
     })
   }
   disconnect() {
-    this.socket.on('disconnect', () => {
-      console.log('Socket disconnect successfully')
-    })
+    if (this.socket) {
+      this.socket.on('disconnect', () => {
+        console.log('Socket disconnect successfully')
+      })
+    }
   }
 
   emitEvent(event: string, payload: any) {

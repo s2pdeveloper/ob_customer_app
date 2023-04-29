@@ -31,7 +31,7 @@
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
     <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
       <ion-avatar slot="start">
-        <img [src]="item?.shopOwner?.profilePicture || 'assets/image/placeholder_profile.png'" alt="" />
+        <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
       </ion-avatar>
       <ion-label>
         <ion-row class="ion-justify-content-between">

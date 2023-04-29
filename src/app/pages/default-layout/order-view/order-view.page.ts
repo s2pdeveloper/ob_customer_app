@@ -15,6 +15,7 @@ import { SocketService } from 'src/app/core/services/socket.service';
 import { messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 import { forkJoin } from 'rxjs';
 import { GoogleMapComponent } from '../google-map/google-map.component';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-order-view',
@@ -30,22 +31,21 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   page: number = 1;
   pageSize: number = 10;
-  shopId: string;
   messages: any = [];
   user: any = {};
-  msg: any = '';
-  customerId: number;
+  customerId: string;
+  shopId: string;
   message: string = '';
   shopName: string = '';
 
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
-  data: any = {};
   orderId: any;
-  chatData: any = {};
-  status: any;
-  messageCategory = messageCategory
+  
+  messageCategory = messageCategory;
+  orderDetails: any = {};
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -57,7 +57,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private uploadService: UploadService,
     private modalCtrl: ModalController,
     private socketService: SocketService,
-    private restService: RestService
+    private restService: RestService,
+    private orderService: OrderService,
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -108,11 +109,19 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         this.chatForm.get('orderId').setValue(this.orderId);
       }
       this.chatForm.get('shopId').setValue(this.shopId);
-      this.getMsgByCustomerId();
+      this.getOrderById();
       this.emitToLoadMessages();
     });
   }
-
+  async getOrderById() {
+    await this.spinner.showLoader();
+    this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
+      this.orderDetails = success;
+      await this.spinner.hideLoader();
+    }, async error => {
+      await this.spinner.hideLoader();
+    });
+  }
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
@@ -161,15 +170,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       },
     })
   }
-  
-  async getMsgByCustomerId() {
-    // this.chatService
-    //   .getMsgByCustomerId(this.roomName)
-    //   .subscribe(async success => {
-    //     this.messages = success.rows;
-    //     await this.spinner.hideLoader();
-    //   });
-  }
+
 
   async uploadFileAWS($event) {
     let file = $event.target.files[0];
