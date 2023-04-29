@@ -53,7 +53,7 @@
           class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s?.shopDetails?.shopName}}</ion-label>
         <ion-label (click)="navigateToShop(s.id)" class="address ion-margin-top" color="
             light">
-          <h4 class="address-padding ion-padding-start" *ngIf="s?.address !=[]">
+          <h4 class="address-padding ion-padding-start" *ngIf="s?.shopDetails?.address">
             {{ s?.address?.city ? s?.address?.city : ""}}, {{s?.address?.state ?
             s?.address?.state : "" }}, {{s?.address?.pinCode ? s?.address?.pinCode :
             "" }}.
