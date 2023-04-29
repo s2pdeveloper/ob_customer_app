@@ -157,10 +157,12 @@ ion-segment-button {
 .btn {
   height: 3rem;
 }
-.link-icon{
+
+.link-icon {
   display: flex;
   align-items: center;
 }
+
 ion-fab-button {
   --background: var(--ion-color-light);
   height: 30px;
@@ -186,7 +188,13 @@ ion-fab-button {
   overflow: hidden;
   box-shadow: #9fb1dc 0px 25px 20px -20px;
 }
-.web{
+
+.web {
   margin-bottom: 5px;
   margin-left: 3px;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-around;
 }
