@@ -30,10 +30,7 @@ export class QrCodePage implements OnInit {
   async startScan() {
     this.scanResult = await this.barcodeScannerService.startScan();
     console.log('scan Result', this.scanResult)
-    let vpaId = this.scanResult;
-    vpaId = vpaId.split('pa=')[1]
-    vpaId = vpaId.split('&pn=')[0];
-    this.checkShop(vpaId);
+    this.checkShop(this.scanResult);
   }
 
   goBack() {
