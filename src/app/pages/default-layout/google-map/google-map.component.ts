@@ -100,6 +100,8 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
       this.ngZone.run(() => {
         //get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        this.address = place.formatted_address;
+        this.selectedLocation = place;
         console.log('places', place['formatted_address'])
         if (place) {
           const currentLatLong = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
