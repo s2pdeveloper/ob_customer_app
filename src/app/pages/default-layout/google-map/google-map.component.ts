@@ -49,8 +49,8 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
     if ('geolocation' in navigator) {
       this.deviceInfo = (await Geolocation.getCurrentPosition());
       this.ngZone.run(() => {
-        console.log(this.locationData)
-        this.coordinates = this.locationData || this.deviceInfo.coords;
+        console.log(this.locationData, this.deviceInfo.coords)
+        this.coordinates = this.deviceInfo.coords || this.locationData
         this.loadMap();
       })
     }
@@ -130,6 +130,8 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
   }
 
   getAddress({ latitude, longitude }): void {
+    console.log("latitude, longitude", latitude, longitude);
+
     const geocoder = new google.maps.Geocoder()
     geocoder.geocode({ location: { lat: latitude, lng: longitude } }, (results, status) => {
       if (status === 'OK') {
@@ -137,7 +139,7 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
           this.zoom = 12;
           this.address = results[0].formatted_address;
           this.selectedLocation = results[0];
-          console.log('address selected', this.address)
+          console.log('address selected', this.address, this.selectedLocation)
         } else {
           this.toastService.successToast('No address found')
         }
