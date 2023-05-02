@@ -105,6 +105,7 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
         console.log('places', place['formatted_address'])
         if (place) {
           const currentLatLong = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
+          console.log("currentLatLong ", currentLatLong, place.geometry.location.lat(), place.geometry.location.lng());
           this.setMarker(currentLatLong);
         }
       });

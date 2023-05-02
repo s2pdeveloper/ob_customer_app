@@ -46,8 +46,6 @@ export class CataloguePage implements OnInit {
     private shopService: ShopService,
     private userService: UserService,
     private spinner: LoaderService,
-    // private socket: Socket,
-    // private chatService: ChatService,
     public translate: TranslateService,
     private storageService: StorageService
   ) { }
@@ -55,13 +53,9 @@ export class CataloguePage implements OnInit {
   ngOnInit() { }
   ionViewDidLeave(): void {
     this.shopCatalogue = [];
-    console.log("enter in ionViewDidLeave", this.shopCatalogue);
     this.page = 1;
   }
   ionViewWillEnter() {
-    this.shopCatalogue = [...this.shopCatalogue];
-
-    console.log("enter in ionViewWillEnter", this.shopCatalogue);
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopId = params.shopId
@@ -95,8 +89,10 @@ export class CataloguePage implements OnInit {
   async getShopCatalogue(isFirstLoad: boolean, event?: any) {
     this.shopService.getShopCatalogue({ page: this.page, pageSize: this.pageSize, shopId: this.shopId }).subscribe(async (success: any) => {
       this.collection = success.count;
-      for (let i = 0; i < success.data.length; i++) {
-        this.shopCatalogue.push(success.data[i]);
+      if (this.shopCatalogue.length < this.collection) {
+        for (let i = 0; i < success.data.length; i++) {
+          this.shopCatalogue.push(success.data[i]);
+        }
       }
       if (isFirstLoad)
         event.target.complete();
@@ -116,38 +112,6 @@ export class CataloguePage implements OnInit {
       this.toaster.warningToast("please select at least one product")
     }
   }
-  navigateToChat() {
-    let msg = '';
-    let arr = this.shopCatalogue.filter((x) => x.isChecked == true);
-    if (arr.length < 1) {
-      this.toaster.errorToast('Plz select at least one product');
-      return;
-    }
-    let amount = 0;
-    let description = '';
-    msg += `Dear merchant,\n i would like to buy \n`;
-    for (let i = 0; i < arr.length; i++) {
-      const catTitle = arr[i].title;
-      // const catPrice = arr[i].price;
-      msg += `${catTitle}`;
-      if (i != arr.length - 1) {
-        msg += ` , \n `;
-      }
-      description += `${catTitle}`;
-      if (i != arr.length - 1) {
-        description += `,`;
-      }
-      // amount += catPrice;
-    }
-    let message = {
-      shopId: this.shopId,
-      message: msg,
-      description: description,
-    };
-    this.router.navigate(['/chat-view'], {
-    });
-  }
-
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
   }
