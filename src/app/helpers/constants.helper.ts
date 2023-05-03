@@ -33,6 +33,8 @@ export const bookingStatus = {
 };
 export const defaultStatus = {
     ACTIVE: "active",
+    NEW: 'new',
+    PAST: 'past',
     CLOSED: "closed",
     INACTIVE: "inactive",
     UNAPPROVED: "unapproved",
@@ -110,3 +112,24 @@ export const notificationType = {
     PRODUCT_REQUEST: "product_request",
     CHAT_MESSAGE: `chat_message`,
 };
+
+export const secondaryStatus = {
+    WAITING: 'waiting',
+    ACCEPT: 'accepted',
+    REJECT: 'rejected',
+    READY: 'ready',
+    CANCELLED: 'cancelled',
+    COMPLETED: 'completed',
+    COMING: 'coming',
+    PAID: 'paid',
+    ARRIVED: 'arrived',
+    REQUEST_FOR_PAYMENT: 'request for payment',
+    REOPEN: "reopen",
+    DELAYED: 'delayed',
+    CONFIRMED: 'confirmed',
+    RE_ORDER: 'reOrder',
+    RETURNED: 'returned',
+    TIMED_OUT: 'timed_out',
+    IM_ON_THE_WAY: 'I am on the way',
+    RECEIVED: 'received',
+}

@@ -42,9 +42,22 @@
             <p class="text-color-2">{{ item?.orderNumber }}</p>
             <small class="text-color-7 ion-text-wrap">{{ item?.createdAt | date:'d MMM, y h:mm a' }}</small>
           </ion-col>
-          <ion-col size="4" class="ion-text-end">
+          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.NEW">
             <ion-chip>
-              <ion-text class="ion-text-uppercase">{{item?.status}}</ion-text>
+              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                :'Waiting'}}</ion-text>
+            </ion-chip>
+          </ion-col>
+          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.ACTIVE">
+            <ion-chip>
+              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                :'Accept'}}</ion-text>
+            </ion-chip>
+          </ion-col>
+          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.PAST">
+            <ion-chip>
+              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                :'Completed'}}</ion-text>
             </ion-chip>
           </ion-col>
         </ion-row>

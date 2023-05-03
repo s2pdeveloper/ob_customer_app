@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { socketOnEvents } from 'src/app/helpers';
-
+import { defaultStatus } from 'src/app/helpers/constants.helper';
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.page.html',
@@ -23,7 +23,7 @@ export class OrderListPage implements OnInit {
   segment: string = 'new';
   dataList: any = [];
   user: any;
-
+  defaultStatus = defaultStatus;
   constructor(
     private router: Router,
     // private change: Chang,
