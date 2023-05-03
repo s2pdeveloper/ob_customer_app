@@ -14,7 +14,7 @@
   <ion-segment-button [id]="'active'" value="active" layout="icon-end">
     <ion-label class="ion-text-wrap">{{ 'active'| translate }}</ion-label>
   </ion-segment-button>
-  <ion-segment-button [id]="'past'" value="past" layout="icon-end">
+  <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
     <ion-label class="ion-text-wrap">{{ 'completed'| translate }}</ion-label>
   </ion-segment-button>
 </ion-segment>
@@ -54,7 +54,7 @@
                 :'Accept'}}</ion-text>
             </ion-chip>
           </ion-col>
-          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.PAST">
+          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.COMPLETED">
             <ion-chip>
               <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
                 :'Completed'}}</ion-text>

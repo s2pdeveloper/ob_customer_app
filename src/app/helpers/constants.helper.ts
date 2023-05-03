@@ -34,7 +34,7 @@ export const bookingStatus = {
 export const defaultStatus = {
     ACTIVE: "active",
     NEW: 'new',
-    PAST: 'past',
+    COMPLETED: 'completed',
     CLOSED: "closed",
     INACTIVE: "inactive",
     UNAPPROVED: "unapproved",
