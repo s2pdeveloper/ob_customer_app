@@ -21,41 +21,41 @@
     </ion-col>
   </ion-row>
 
-  <ion-grid *ngIf="shopArr?.length > 0;else noDataFound">
-    <ion-row *ngFor="let s of shopArr">
+  <ion-grid *ngIf="shopList?.length > 0;else noDataFound">
+    <ion-row *ngFor="let item of shopList">
       <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUrl(s?.shopDetails?.bannerImages), 
+          'background-image': getUrl(item?.shopDetails?.bannerImages), 
           'background-repeat':'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
 
-         }" (click)="navigateToShop(s.id)">
-          <ion-badge *ngIf="s?.shopDetails?.avgRating" color="success" class="rating ion-text-end">
-            {{s?.shopDetails?.avgRating}}
+         }" (click)="navigateToShop(item.id)">
+          <ion-badge *ngIf="item?.shopDetails?.avgRating" color="success" class="rating ion-text-end">
+            {{item?.shopDetails?.avgRating}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
 
         <div class="ion-text-end ion-margin-end ion-margin-top heart-img">
           <ion-fab>
-            <ion-fab-button *ngIf="!s.shopFavorite">
-              <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(s)"></ion-icon>
+            <ion-fab-button *ngIf="!item.shopFavorite">
+              <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(item)"></ion-icon>
             </ion-fab-button>
           </ion-fab>
           <ion-fab>
-            <ion-fab-button *ngIf="s.shopFavorite">
-              <ion-icon name="heart" color="primary" (click)="addToFavorite(s)"></ion-icon>
+            <ion-fab-button *ngIf="item.shopFavorite">
+              <ion-icon name="heart" color="primary" (click)="addToFavorite(item)"></ion-icon>
             </ion-fab-button>
           </ion-fab>
         </div>
         <ion-label
-          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{s?.shopDetails?.shopName}}</ion-label>
-        <ion-label (click)="navigateToShop(s.id)" class="address ion-margin-top" color="
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{item?.shopDetails?.shopName}}</ion-label>
+        <ion-label (click)="navigateToShop(item.id)" class="address ion-margin-top" color="
             light">
-          <h4 class="address-padding ion-padding-start" *ngIf="s?.shopDetails?.address">
-            {{ s?.address?.city ? s?.address?.city : ""}}, {{s?.address?.state ?
-            s?.address?.state : "" }}, {{s?.address?.pinCode ? s?.address?.pinCode :
+          <h4 class="address-padding ion-padding-start" *ngIf="item?.shopDetails?.address">
+            {{ item?.address?.city ? item?.address?.city : ""}}, {{item?.address?.state ?
+              item?.address?.state : "" }}, {{item?.address?.pinCode ? item?.address?.pinCode :
             "" }}.
           </h4>
         </ion-label>

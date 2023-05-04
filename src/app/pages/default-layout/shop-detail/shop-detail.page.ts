@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { TranslateService } from '@ngx-translate/core';
-// import { ShopService } from 'src/app/service/shop/shop.service';
 import { ModalController } from '@ionic/angular';
 import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.component';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
 @Component({
@@ -18,6 +16,8 @@ import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
 export class ShopDetailPage implements OnInit {
   businessType: any = BUSINESS_TYPE;
   shopUser: any;
+  shopId: string = null;
+  type: string = 'about'
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -29,8 +29,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
-  shopId: string = null;
-  type: string = 'about'
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -38,7 +37,6 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalCtrl: ModalController,
-    private userService: UserService,
     private toaster: ToastService,
   ) { }
 
@@ -49,14 +47,26 @@ export class ShopDetailPage implements OnInit {
       if (params.id) {
         this.shopId = params.id;
       }
-      this.getShopById();
+      this.getShopData();
     });
   }
 
-  async getShopById() {
+  async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
-      await this.spinner.hideLoader();
+      console.log(" this.shopUser", this.shopUser);
+     await this.spinner.hideLoader();
+    });
+  }
+
+  async addToFavorite(item) {
+    let payload = {
+      shopId: item?.shopDetails?._id,
+    };
+    this.shopService.favoriteShop(payload).subscribe((success) => {
+      this.toaster.successToast(success.message);
+      item.shopFavorite = success.data
+      this.getShopData()
     });
   }
   navigateTo(path) {
