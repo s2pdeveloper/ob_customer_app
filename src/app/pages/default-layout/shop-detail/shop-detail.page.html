@@ -3,16 +3,14 @@
 </ion-item>
 
 <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button
-    *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && !shopUser?.shopDetails.shopFavorite.length">
-    <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
+  <ion-fab-button *ngIf="!shopUser?.shopFavorite">
+    <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
 <ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button
-    *ngIf="shopUser?.shopDetails && shopUser?.shopDetails.shopFavorite && shopUser?.shopDetails.shopFavorite.length">
-    <ion-icon name="heart" color="primary" (click)="addToFavorite(shopDetails)"></ion-icon>
+  <ion-fab-button *ngIf="shopUser?.shopFavorite">
+    <ion-icon name="heart" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
   </ion-fab-button>
 </ion-fab>
 

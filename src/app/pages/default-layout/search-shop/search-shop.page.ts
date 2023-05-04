@@ -21,7 +21,7 @@ export class SearchShopPage implements OnInit {
   businessTypeId: any;
   categoryId: string = '';
   subCategoryId: string = '';
-  shopArr: any = [];
+  shopList: any = [];
   loaded: boolean = false;
   shopDetails: any;
   user: any = {};
@@ -53,28 +53,31 @@ export class SearchShopPage implements OnInit {
   }
 
   ionViewDidLeave(): void {
-    this.shopArr = [];
+    this.shopList = [];
     this.page = 1;
     this.search = '';
   }
 
   onSearch() {
     this.page = 1;
-    this.shopArr = [];
+    this.shopList = [];
     this.getAllShop(false, '');
   }
 
   doRefresh(event) {
     this.page = 1;
-    this.shopArr = [];
+    this.shopList = [];
     this.getAllShop(false, "");
     event.target.complete();
   }
 
   doInfinite(event) {
-    this.page++;
-    this.getAllShop(true, event);
-    event.target.complete();
+    if (this.shopList.length < this.collection) {
+      this.page++;
+      this.getAllShop(false, event);
+    } else {
+      event.target.complete();
+    }
   }
 
   async getAllShop(isFirstLoad: boolean, event?: any) {
@@ -89,11 +92,12 @@ export class SearchShopPage implements OnInit {
       obj['search'] = this.search
     }
     this.shopService.list(obj).subscribe(async (success) => {
-      this.collection = success.count;
-      for (let i = 0; i < success.data.length; i++) {
-        this.shopArr.push(success.data[i]);
+    this.collection = success.count;
+      if (this.shopList.length < this.collection) {
+        for (let i = 0; i < success.data.length; i++) {
+          this.shopList.push(success.data[i]);
+        }
       }
-      this.shopArr = [...this.shopArr];
       if (isFirstLoad)
         event.target.complete();
       if (success.data.length === 0 && event) {
@@ -112,9 +116,7 @@ export class SearchShopPage implements OnInit {
     let payload = {
       shopId: item?.shopDetails?._id,
     };
-    console.log(payload)
     this.shopService.favoriteShop(payload).subscribe((success) => {
-      console.log(success)
       this.toaster.successToast(success.message);
       item.shopFavorite = success.data
     });
