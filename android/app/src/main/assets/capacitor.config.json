@@ -1,5 +1,5 @@
 {
-	"appId": "bharatonline.customer.app",
+	"appId": "com.bharatonline.customer.app",
 	"appName": "Bharat Online",
 	"webDir": "www",
 	"bundledWebRuntime": false,
