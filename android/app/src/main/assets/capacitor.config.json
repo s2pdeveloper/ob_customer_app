@@ -1,6 +1,6 @@
 {
-	"appId": "com.ob.fire.app",
-	"appName": "Ob Fire",
+	"appId": "bharatonline.customer.app",
+	"appName": "Bharat Online",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

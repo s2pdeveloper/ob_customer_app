@@ -1,4 +1,4 @@
-package com.ob.fire.app;
+package bharatonline.customer.app;
 
 import com.getcapacitor.BridgeActivity;
 
