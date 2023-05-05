@@ -65,7 +65,7 @@
   </div>
 
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
     <ion-fab-button size="large">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -73,11 +73,11 @@
       <ion-fab-button>
         <ion-icon name="checkmark-done-circle-sharp" color="primary" (click)="confirmOrder()"></ion-icon>
       </ion-fab-button>
-      <!-- <ion-fab-button *ngIf="status==='completed'">
+      <ion-fab-button *ngIf="status==='completed'">
         <ion-icon name="star" color="primary" (click)="modalRating()"></ion-icon>
-      </ion-fab-button> -->
+      </ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab> -->
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
