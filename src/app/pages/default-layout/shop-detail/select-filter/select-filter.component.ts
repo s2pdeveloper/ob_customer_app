@@ -5,7 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 // import { Socket } from 'ngx-socket-io';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { SocketService } from 'src/app/core/services/socket.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { socketOnEvents } from 'src/app/helpers';
 // import { ChatService } from 'src/app/service/chat/chat.service';
 @Component({
   selector: 'app-select-filter',
@@ -26,7 +28,7 @@ export class SelectFilterComponent implements OnInit {
     private userService: UserService,
     private spinner: LoaderService,
     // private socket: Socket,
-    // private chatService: ChatService,
+    private socketService: SocketService,
     private modalCtrl: ModalController,
     public translate: TranslateService
   ) { }
@@ -37,9 +39,10 @@ export class SelectFilterComponent implements OnInit {
     this.user = this.userService.getCurrentUser();
   }
 
-  dismissModal(isClose) {
+  dismissModal(isClose = false, data) {
     this.modalCtrl.dismiss({
       'dismissed': isClose,
+      data
     });
   }
 
@@ -56,26 +59,22 @@ export class SelectFilterComponent implements OnInit {
     // this.socket.emit('join', { room: this.shopDetail._id, user: this.user._id });
 
     let message = {
-      // shopId: this.shopDetail._id,
-      // message: msg,
+      shopId: this.shopDetail._id,
+      message: msg,
+      catalogue: []
     };
-    // this.chatService.create(message).subscribe((success) => {
-    //   this.spinner.hideLoader();
-    //   console.log("join success", success);
-
-    //   // join
-    //   this.socket.emit('join', { room: success.orderId, user: this.user._id });
-    this.router.navigate(['/order-view'], {
-      //     queryParams: {
-      //       shopId: this.shopDetail._id,
-      //       shopName: this.shopDetail.shopName,
-      //       roomName: success.orderId,
-      //     },
-      //   });
-        // this.dismissModal('isClose')
-    });
-    this.dismissModal('isClose')
+    this.receiveMessage();
+    this.socketService.emitEvent(socketOnEvents.CREATE_ORDER, message);
   }
-
+  receiveMessage() {
+    this.socketService.listenEvent(socketOnEvents.CREATE_ORDER).subscribe({
+      next: (result: any) => {
+        this.dismissModal(true, { shopId: this.shopDetail._id, orderId: result.data._id });
+      },
+      error: (error) => {
+        console.log(error)
+      },
+    })
+  }
 
 }

@@ -102,5 +102,8 @@ export class ShopDetailPage implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
+    if (data && data.dismissed) {
+      this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: data });
+    }
   }
 }
