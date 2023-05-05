@@ -1,27 +1,6 @@
 ion-content {
   height: 85vh;
 
-  .no-data {
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 2rem;
-    box-shadow: none;
-  }
-
-  .star {
-    position: absolute;
-    top: 85px;
-    left: 79px;
-    white-space: nowrap;
-    color: gold;
-
-    ion-icon {
-      margin-right: 1px;
-    }
-  }
-
   .rating {
     position: absolute;
     right: 1.5rem;
@@ -34,9 +13,7 @@ ion-content {
   }
 
   .shop-card {
-    margin-bottom: 6px;
-    padding-right: 5px;
-    margin-top: 0px;
+    margin: 0px 5px 6px 0px;
     object-fit: cover !important;
 
     ion-label {
@@ -73,7 +50,7 @@ ion-content {
     word-wrap: break-word;
   }
 
-  .heart-img {
+  .heart-icon {
     position: absolute;
     top: 5px;
     z-index: 1;

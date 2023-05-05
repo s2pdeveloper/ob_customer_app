@@ -1,118 +1,74 @@
 ion-content {
   height: 85vh;
 
-  .no-data {
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    border-radius: 2rem;
-    box-shadow: none;
-  }
-}
-
-.shop-list {
-  .shop-name {
-    font-weight: bold;
-    margin: 0px 0px 0px 0px;
+  .rating {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 21px;
   }
 
   ion-card {
-    ---border-color: #f0f0f0;
+    width: 100%;
+    height: 154px;
   }
 
-  .star {
-    position: absolute;
-    top: 85px;
-    left: 79px;
-    white-space: nowrap;
-    color: gold;
+  .shop-card {
+    margin: 0px 5px 6px 0px;
+    object-fit: cover !important;
 
-    ion-icon {
-      margin-right: 1px;
+    ion-label {
+      background-color: transparent;
+      margin-top: 1rem !important;
+    }
+
+    .address {
+      position: absolute;
+      bottom: 0.5rem;
+      margin-left: 1.4rem;
+      background-color: transparent;
+      color: gray;
     }
   }
-}
 
-.rating {
-  position: absolute;
-  right: 1.5rem;
-  bottom: 21px;
-}
-
-ion-card {
-  width: 100%;
-  height: 154px;
-}
-
-.shop-card {
-  margin-bottom: 6px;
-  padding-right: 5px;
-  margin-top: 0px;
-  object-fit: cover !important;
-
-  .heart-icon {
-    margin-left: 1rem !important;
+  .shadow {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: 0px;
   }
 
-  ion-label {
-    background-color: transparent;
-    margin-top: 1rem !important;
+  .address-padding {
+    margin-bottom: 10px !important;
+  }
+
+  .shop-name {
+    font-weight: bold;
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    word-wrap: break-word;
   }
 
   .heart-icon {
-    text-align: end !important;
-  }
-
-  .address {
     position: absolute;
-    bottom: 0.5rem;
-    margin-left: 1.4rem;
-    background-color: transparent;
-    color: gray;
-    margin-bottom: 16px !important;
+    top: 5px;
+    z-index: 1;
+    right: 7px;
   }
-
-  .home-icon {
-    width: 2.5rem;
-    height: 2rem;
-  }
-
-}
-
-.shadow {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
-  padding: 0px;
-}
-
-.address-padding {
-  margin-bottom: 10px !important;
-}
-
-.shop-name {
-  font-weight: bold;
-  display: block;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  word-wrap: break-word;
-}
-
-.heart-img {
-  position: absolute;
-  top: 5px;
-  z-index: 1;
-  right: 7px;
 }
 
 .noData {
   text-align: center !important;
-  margin-top: 5rem !important;
 }
 
-ion-fab-button{
-  --background:var(--ion-color-light);
+.favorite {
+  margin-top: 5rem !important;
+  text-align: center !important;
+}
+
+ion-fab-button {
+  --background: var(--ion-color-light);
   height: 30px;
   width: 30px;
   position: absolute;

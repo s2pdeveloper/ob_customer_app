@@ -54,8 +54,7 @@ export class ShopDetailPage implements OnInit {
   async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
-      console.log(" this.shopUser", this.shopUser);
-     await this.spinner.hideLoader();
+      await this.spinner.hideLoader();
     });
   }
 
@@ -66,7 +65,6 @@ export class ShopDetailPage implements OnInit {
     this.shopService.favoriteShop(payload).subscribe((success) => {
       this.toaster.successToast(success.message);
       item.shopFavorite = success.data
-      this.getShopData()
     });
   }
   navigateTo(path) {
