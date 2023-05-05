@@ -9,6 +9,7 @@
     "build": "ionic build --configuration production --base-href /",
     "build-prod": "ionic build --configuration production --base-href /",
     "build-uat": "ionic build --configuration uat --base-href /",
+    "build-dev": "ng build --configuration dev --base-href /",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
