@@ -40,6 +40,7 @@
   "login": "Login",
   "forgotPasswordDescription": "Enter your registered mobile number below to receive password reset instructions",
   "otp": "OTP",
+  "resendOTP":"Resend OTP in",
   "verificationLabel": "Verify your account",
   "verificationDescription": "We have sent the verification code to your mobile number",
   "resetPasswordLabel": "Check your inbox",

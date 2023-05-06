@@ -8,6 +8,7 @@ import { authFieldsErrors } from 'src/app/helpers/formErrors.helpers';
 import { UserService } from 'src/app/core/services/user.service';
 import { validateField } from 'src/app/shared/validators/form.validator';
 import { StorageService } from 'src/app/core/services/local-storage.service';
+import { ROLES } from 'src/app/helpers';
 @Component({
   selector: 'app-verification',
   templateUrl: './verification.component.html',
@@ -27,6 +28,7 @@ export class VerificationComponent implements OnInit, OnDestroy {
     otp: new FormControl('', [Validators.required]),
     countryCode: new FormControl('91', [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.pattern("^[7-9][0-9]{9}$"), Validators.maxLength(10)]),
+    role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
   });
 
   get form() {

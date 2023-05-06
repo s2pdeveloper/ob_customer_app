@@ -35,6 +35,7 @@
   "login": "लोग इन करा",
   "forgotPasswordDescription": "पासवर्ड रीसेट करण्याच्या सूचना प्राप्त करण्यासाठी खाली तुमचा नोंदणीकृत ईमेल एंटर करा",
   "otp": "ओटीपी",
+  "resendOTP": "ओटीपी पुन्हा पाठवा",
   "verificationLabel": "आपले खाते पडताळा",
   "verificationDescription": "Bharat Online ने तुमच्या मोबाईल नंबरवर व्हेरिफिकेशन कोड पाठवला आहे",
   "resetPasswordLabel": "आपला इनबॉक्स तपासा",
