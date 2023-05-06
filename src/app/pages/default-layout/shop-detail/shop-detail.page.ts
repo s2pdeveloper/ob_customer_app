@@ -97,13 +97,14 @@ export class ShopDetailPage implements OnInit {
       cssClass: 'modal-medium',
       swipeToClose: true,
       componentProps: {
-        shopDetail: this.shopUser?.shopDetails,
+        shopDetail: this.shopUser,
       }
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data && data.dismissed) {
-      this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: data });
+      console.log(data)
+      this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
     }
   }
 }

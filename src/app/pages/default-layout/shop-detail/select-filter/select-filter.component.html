@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button class="text-color-2" (click)="dismissModal(false)">{{
+      <ion-button class="text-color-2" (click)="dismissModal(false,null)">{{
         "close" | translate
         }}</ion-button>
     </ion-buttons>
@@ -13,8 +13,8 @@
     <ion-label position="stacked">{{ "Select Date And Time" | translate }}
       <span class="text-danger"> * </span>
     </ion-label>
-    <ion-datetime placeholder="Select Date" [min]="maxDate" max="2050" displayFormat="D MMM YYYY"
-      (ionChange)="getDate($event)">
+    <ion-datetime [(ngModel)]="dateTime" placeholder="Select Date" [min]="maxDate" max="2050"
+      displayFormat="D MMM YYYY">
     </ion-datetime>
   </ion-item>
 
