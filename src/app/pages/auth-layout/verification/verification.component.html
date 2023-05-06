@@ -36,7 +36,7 @@
             <a class="text-color-8 font-weight-bold" role="button" (click)="requestOtp()">Resend</a>
           </p>
           <p class="text-color-8 mb-0" *ngIf="!canResendOTP">
-            Resend OTP in <strong>{{ minutes }}:{{ seconds }}</strong>
+            {{'resendOTP'| translate}} <strong>{{ minutes }}:{{ seconds }}</strong>
           </p>
         </div>
 
