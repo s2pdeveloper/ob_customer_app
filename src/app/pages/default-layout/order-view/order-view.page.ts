@@ -57,7 +57,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private modalCtrl: ModalController,
     private socketService: SocketService,
     private restService: RestService,
-    private orderService: OrderService,
+    private orderService: OrderService
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -272,10 +272,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   viewShop() {
-    this.router.navigate(['/shop-detail'], {
-      queryParams: {
-        shopId:this.shopId,
-      },
+    this.router.navigate([`/shop-detail/${this.shopId}`], {
+      relativeTo: this.activatedRoute
     });
   }
 
