@@ -94,4 +94,18 @@ export class ShopService {
         );
     }
 
+    orderList(params) {
+        let url: string = `mobile/shop/${params.shopId}/orders`;
+        return this.apiService.get(url, params).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+
 }
