@@ -11,7 +11,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.directive';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 
- 
 
 @NgModule({
   imports: [
@@ -28,4 +27,4 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
     ParallaxHeaderDirective,
   ],
 })
-export class ShopDetailPageModule {}
+export class ShopDetailPageModule { }

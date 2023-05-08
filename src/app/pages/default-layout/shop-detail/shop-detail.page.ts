@@ -76,11 +76,6 @@ export class ShopDetailPage implements OnInit {
     this.router.navigate(['/map'], { queryParams: params });
   }
 
-  goToChat() {
-    let params = { shopName: this.shopUser?.shopDetails?.shopName, shopId: this.shopId };
-    this.router.navigate(['/order-view'], { queryParams: params });
-  }
-
   async navigateToViewGalleryImages(galleryImg) {
     const modal = await this.modalCtrl.create({
       component: GalleryListComponent,
@@ -106,5 +101,14 @@ export class ShopDetailPage implements OnInit {
       console.log(data)
       this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
     }
+  }
+  navigateToShopOrder(item) {
+    this.router.navigate(['/shop-order'], {
+      queryParams: {
+        shopUserId: item.shopDetailsId,
+        shopName: item.shopDetails.shopName,
+        shopId: item.id
+      },
+    });
   }
 }
