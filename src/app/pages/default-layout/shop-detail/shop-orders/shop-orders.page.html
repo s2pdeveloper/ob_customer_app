@@ -1,16 +1,15 @@
 <ion-header>
   <ion-toolbar class="bg-color-2">
-    <ion-title class="text-color-4 ion-text-capitalize">{{ 'orders' | translate}}</ion-title>
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'myOrders' | translate}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref mode="md" (click)="dismissModal(true,'')"></ion-back-button>
+      <ion-back-button defaultHref mode="md"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-
 </ion-header>
 
 <ion-content class="ion-no-padding">
   <ion-list *ngIf="orderList.length; else noRequestsFound">
-    <ion-item *ngFor="let item of orderList" button>
+    <ion-item *ngFor="let item of orderList" button (click)="navigateToChat(item)">
       <ion-avatar slot="start">
         <img class="product-image" src="assets/images/placeholder_profile.png" alt="product-image">
       </ion-avatar>
@@ -64,14 +63,11 @@
       <ion-label class="ion-text-center ion-text-wrap text-color-5">No Order Available !!</ion-label>
     </ion-item>
   </ng-template>
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="bg-color-2" (click)="goToChat()">
       <ion-icon name="chatbubbles"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>

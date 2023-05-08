@@ -127,18 +127,18 @@
                           <div>
                             <ion-card class="bg-xcard">
                               <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
-                                (click)="shopOrder()"></ion-icon>
+                                (click)="navigateToShopOrder(shopUser)"></ion-icon>
                             </ion-card>
-                            <ion-note class="heading ion-texxt-center">Order</ion-note>
+                            <ion-note class="heading ion-texxt-center">{{'myOrders'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
                           <ion-card class="bg-xcard ion-text-center">
-                            <a href="tel:+91{{shopDetails?.mobile}}">
+                            <a href="tel:+91{{shopUser?.mobileNumber}}">
                               <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
                             </a>
                           </ion-card>
-                          <ion-note class=" heading ion-text-center">Call</ion-note>
+                          <ion-note class=" heading ion-text-center">{{'call'|translate}}</ion-note>
                         </ion-col>
                       </ion-row>
                     </ion-list>

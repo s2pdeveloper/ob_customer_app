@@ -1,41 +1,50 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { defaultStatus, secondaryStatus } from 'src/app/helpers/constants.helper';
+import { defaultStatus, secondaryStatus } from 'src/app/helpers';
 
 @Component({
   selector: 'app-shop-orders',
-  templateUrl: './shop-orders.component.html',
-  styleUrls: ['./shop-orders.component.scss'],
+  templateUrl: './shop-orders.page.html',
+  styleUrls: ['./shop-orders.page.scss'],
 })
-export class ShopOrdersComponent implements OnInit {
+export class ShopOrdersPage implements OnInit {
+
   @Input() shopDetail: any;
   page: number = 1;
   pageSize: number = 10;
   collection: number = 0;
   search: string = null;
   orderList: any = [];
-
+  shopUserId: string = null;
   secondaryStatus = secondaryStatus;
   defaultStatus = defaultStatus
+  shopName: string = '';
+  userTableId: string = null;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private userService: UserService, private router: Router,
     private modalCtrl: ModalController, private spinner: LoaderService,
     private toastService: ToastService, private shopService: ShopService,
   ) { }
 
   ngOnInit() {
-    console.log("shopDetail", this.shopDetail);
-
   }
 
-  ionViewWillEnter(): void {
-    this.getAllOrders(false, '');
+  ionViewWillEnter() {
+    this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.shopName = params.shopName;
+      this.userTableId = params.shopId;
+      if (params.shopUserId) {
+        this.shopUserId = params.shopUserId;
+        this.getAllOrders(false, '');
+      }
+    });
   }
 
   ionViewDidLeave(): void {
@@ -70,7 +79,7 @@ export class ShopOrdersComponent implements OnInit {
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
-      shopId: this.shopDetail?.shopDetailsId
+      shopId: this.shopUserId
     };
     if (this.search) {
       obj['search'] = this.search
@@ -96,18 +105,17 @@ export class ShopOrdersComponent implements OnInit {
   };
 
   goToChat() {
-    let params = { shopName: this.shopDetail?.shopDetails?.shopName, shopId: this.shopDetail?.id };
+    let params = { shopName: this.shopName, shopId: this.userTableId };
     this.router.navigate(['/order-view'], { queryParams: params });
-    this.dismissModal(true, '')
   }
 
-  dismissModal(isClose = false, data) {
-    this.modalCtrl.dismiss({
-      'dismissed': isClose,
-      ...data
+  navigateToChat(item) {
+    this.router.navigate(['/order-view'], {
+      queryParams: {
+        orderId: item._id,
+        shopId: item.shopDetails._id,
+        shopName: item.shopDetails?.shopName,
+      },
     });
   }
-
-
-
 }
