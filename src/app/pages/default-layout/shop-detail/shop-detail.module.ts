@@ -10,7 +10,7 @@ import { ShopDetailPage } from './shop-detail.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.directive';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
-
+import { ShopOrdersComponent } from './shop-orders/shop-orders.component';
  
 
 @NgModule({
@@ -25,6 +25,7 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
   declarations: [
     ShopDetailPage,
     SelectFilterComponent,
+    ShopOrdersComponent,
     ParallaxHeaderDirective,
   ],
 })

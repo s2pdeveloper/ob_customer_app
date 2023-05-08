@@ -8,6 +8,7 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
+import { ShopOrdersComponent } from './shop-orders/shop-orders.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -46,6 +47,8 @@ export class ShopDetailPage implements OnInit {
     this.activatedRoute.params.subscribe((params: any) => {
       if (params.id) {
         this.shopId = params.id;
+        console.log("this.shopId", this.shopId);
+
       }
       this.getShopData();
     });
@@ -80,6 +83,11 @@ export class ShopDetailPage implements OnInit {
     let params = { shopName: this.shopUser?.shopDetails?.shopName, shopId: this.shopId };
     this.router.navigate(['/order-view'], { queryParams: params });
   }
+  // navigateToOrders(){
+  //   let params={}
+  //   this.router.navigate(['/shop-orders'], { queryParams: params });
+
+  // }
 
   async navigateToViewGalleryImages(galleryImg) {
     const modal = await this.modalCtrl.create({
@@ -94,6 +102,23 @@ export class ShopDetailPage implements OnInit {
   async modalFilter() {
     const modal = await this.modalCtrl.create({
       component: SelectFilterComponent,
+      cssClass: 'modal-medium',
+      swipeToClose: true,
+      componentProps: {
+        shopDetail: this.shopUser,
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data && data.dismissed) {
+      console.log(data)
+      this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
+    }
+  }
+
+  async shopOrder() {
+    const modal = await this.modalCtrl.create({
+      component: ShopOrdersComponent,
       cssClass: 'modal-medium',
       swipeToClose: true,
       componentProps: {
