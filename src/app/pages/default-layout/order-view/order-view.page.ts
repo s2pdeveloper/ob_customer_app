@@ -271,10 +271,15 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     const { data } = await modal.onWillDismiss();
   }
 
+  // viewShop() {
+  //   this.router.navigate([`/shop-detail/${this.shopId}`], {
+  //     relativeTo: this.activatedRoute
+  //   });
+  // }
+
   viewShop() {
-    this.router.navigate([`/shop-detail/${this.shopId}`], {
-      relativeTo: this.activatedRoute
-    });
+    const path: string = `/shop-detail/${this.shopId}`;
+    this.router.navigate([path]);
   }
 
 }
