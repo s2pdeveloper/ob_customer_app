@@ -9,6 +9,7 @@ import { OrderViewPageRoutingModule } from './order-view-routing.module';
 import { OrderViewPage } from './order-view.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UploadService } from 'src/app/core/services/upload.service';
+import { OrderRatingComponent } from './order-rating/order-rating.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import { UploadService } from 'src/app/core/services/upload.service';
     OrderViewPageRoutingModule,
     SharedModule
   ],
-  declarations: [OrderViewPage],
+  declarations: [OrderViewPage,OrderRatingComponent],
   providers: [UploadService],
 })
 export class OrderViewPageModule { }

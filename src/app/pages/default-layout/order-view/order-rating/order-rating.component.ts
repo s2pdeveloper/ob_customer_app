@@ -21,7 +21,7 @@ export class OrderRatingComponent implements OnInit {
   formData = new FormGroup({
     quality: new FormControl(0),
     shopId: new FormControl(),
-    customerId: new FormControl(),
+    orderId: new FormControl(),
   });
 
 
@@ -34,11 +34,14 @@ export class OrderRatingComponent implements OnInit {
     // private orderRating: OrderRatingService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log("this.ratingObj",this.ratingObj);
+    
+   }
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
-    this.formData.controls.customerId.setValue(this.user._id)
+    this.formData.controls.orderId.setValue(this.ratingObj.orderId)
     this.formData.controls.shopId.setValue(this.ratingObj.shopId)
   }
 
@@ -52,17 +55,17 @@ export class OrderRatingComponent implements OnInit {
     if (this.formData.invalid) {
       validateField(this.formData);
     }
-    // await this.spinner.showLoader();
-    // this.orderRating.giveRating(this.ratingObj.orderId, this.formData.value,).subscribe(
-    //   async success => {
-    //     await this.spinner.hideLoader();
-    //     this.toaster.successToast(success.message);
-    //     this.formData.reset();
-    //     this.dismissModal();
-    //   }, async error => {
-    //     await this.spinner.hideLoader();
-    //     this.toaster.errorToast(error);
-    //   })
+    await this.spinner.showLoader();
+    this.orderRating.giveRating(this.ratingObj.orderId, this.formData.value,).subscribe(
+      async success => {
+        await this.spinner.hideLoader();
+        this.toaster.successToast(success.message);
+        this.formData.reset();
+        this.dismissModal();
+      }, async error => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      })
   }
   /**
  * to dismiss modal
