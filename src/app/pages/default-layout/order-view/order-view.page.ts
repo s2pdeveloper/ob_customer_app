@@ -35,14 +35,13 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   user: any = {};
   customerId: string;
   shopId: string;
-  message: string = '';
   shopName: string = '';
 
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
-  orderId: any;
-  
+  orderId: string = null;
+
   messageCategory = messageCategory;
   orderDetails: any = {};
 
@@ -58,7 +57,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private modalCtrl: ModalController,
     private socketService: SocketService,
     private restService: RestService,
-    private orderService: OrderService,
+    private orderService: OrderService
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -101,20 +100,20 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
-    this.activatedRoute.queryParams.subscribe((params) => {
+    this.activatedRoute.queryParams.subscribe(async (params) => {
       this.shopId = params.shopId;
       this.shopName = params.shopName;
       if (params.orderId) {
         this.orderId = params.orderId;
         this.chatForm.get('orderId').setValue(this.orderId);
+        await this.spinner.showLoader();
+        this.getOrderById();
       }
       this.chatForm.get('shopId').setValue(this.shopId);
-      this.getOrderById();
       this.emitToLoadMessages();
     });
   }
   async getOrderById() {
-    await this.spinner.showLoader();
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success;
       await this.spinner.hideLoader();
@@ -163,7 +162,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
         console.log('RECEIVE_MESSAGE', result.data)
-        this.messages.push(result.data)
+        this.messages.push(result.data);
+        if (!this.orderId) {
+          this.orderId = result.data.orderId;
+          this.chatForm.get('orderId').setValue(this.orderId);
+          this.getOrderById();
+        }
       },
       error: (error) => {
         console.log(error)
@@ -268,10 +272,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   viewShop() {
-    this.router.navigate(['/shop-detail'], {
-      queryParams: {
-        shopId:this.shopId,
-      },
+    this.router.navigate([`/shop-detail/${this.shopId}`], {
+      relativeTo: this.activatedRoute
     });
   }
 
