@@ -36,20 +36,7 @@ body.scanner-active {
     --color: var(--ion-color-5);
     --border: none;
     background: white;
-    // padding-top: 17rem !important;
   }
-}
-
-.rating-modal {
-  top: 60%;
-  border-top-right-radius: 2rem;
-  border-top-left-radius: 2rem;
-}
-
-.location-modal {
-  top: 60%;
-  border-top-right-radius: 2rem;
-  border-top-left-radius: 2rem;
 }
 
 :host .calendar-day {
@@ -66,4 +53,9 @@ body.scanner-active {
   cursor: pointer;
   appearance: none;
   z-index: 0;
+}
+
+.noData {
+  text-align: center !important;
+  margin-top: 5rem !important;
 }

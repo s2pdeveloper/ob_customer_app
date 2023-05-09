@@ -3,11 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IonContent, IonInfiniteScroll } from '@ionic/angular';
+import { IonContent, IonInfiniteScroll, PopoverController } from '@ionic/angular';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
-import { OrderRatingComponent } from 'src/app/shared/modals/order-rating/order-rating.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
@@ -16,6 +15,8 @@ import { messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpe
 import { forkJoin } from 'rxjs';
 import { GoogleMapComponent } from '../google-map/google-map.component';
 import { OrderService } from 'src/app/core/services/order.service';
+import { OrderRatingComponent } from './order-rating/order-rating.component';
+import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 
 @Component({
   selector: 'app-order-view',
@@ -57,7 +58,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private modalCtrl: ModalController,
     private socketService: SocketService,
     private restService: RestService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public popoverController: PopoverController
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -268,7 +270,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       }
     });
     await modal.present();
-    const { data } = await modal.onWillDismiss();
   }
 
   // viewShop() {
@@ -281,5 +282,26 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     const path: string = `/shop-detail/${this.shopId}`;
     this.router.navigate([path]);
   }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      componentProps: {
+        dataList: [
+          { label: 'Rating', event: 'rating' },
+          { label: 'Report', event: 'report' },
+      ]
+      },
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+    });
+    await popover.present();
+ const { data } = await popover.onDidDismiss();
+  if (data.event === 'rating') {
+     this. modalRating()
+    }
+  }
+
 
 }

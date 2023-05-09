@@ -8,7 +8,7 @@
 <ion-content class="ion-padding">
   <form [formGroup]="formData">
     <ion-item class="ion-margin-top" lines="none">
-      <ion-label position="fixed">{{ "Product Quality" | translate }}</ion-label>
+      <ion-label position="fixed" class="ion-text-wrap">{{ "Product Quality" | translate }}</ion-label>
       <bar-rating formControlName="quality" [max]="5" [theme]="'stars'" slot="end"></bar-rating>
     </ion-item>
 
