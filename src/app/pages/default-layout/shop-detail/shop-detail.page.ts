@@ -8,6 +8,7 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -110,5 +111,18 @@ export class ShopDetailPage implements OnInit {
         shopId: item.id
       },
     });
+  }
+
+  openWeb = async () => {
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.website}` });
+  };
+  openYouTube = async () => {
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}` });
+  }
+  openInstagram = async () => {
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}` });
+  }
+  openFb = async () => {
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
   }
 }

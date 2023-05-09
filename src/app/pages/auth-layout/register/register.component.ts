@@ -104,7 +104,6 @@ export class RegisterComponent implements OnInit {
   }
 
   openTerms = async () => {
-    console.log('enter here');
     await Browser.open({ url: 'https://www.bharat-online.com/terms-and-conditions' });
   };
 
