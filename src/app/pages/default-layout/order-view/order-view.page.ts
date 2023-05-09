@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { SocketService } from 'src/app/core/services/socket.service';
-import { messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
+import { defaultStatus, messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 import { forkJoin } from 'rxjs';
 import { GoogleMapComponent } from '../google-map/google-map.component';
 import { OrderService } from 'src/app/core/services/order.service';
@@ -74,7 +74,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     category: new FormControl(messageCategory.NORMAL)
   });
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   ngOnDestroy(): void {
     forkJoin([this.socketService.removeListeners(socketOnEvents.LIST_MESSAGE), this.socketService.removeListeners(socketEmitEvents.RECEIVE_MESSAGE)]).subscribe();
@@ -290,16 +291,18 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         dataList: [
           { label: 'Rating', event: 'rating' },
           { label: 'Report', event: 'report' },
-      ]
+        ]
       },
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,
     });
     await popover.present();
- const { data } = await popover.onDidDismiss();
-  if (data.event === 'rating') {
-     this. modalRating()
+    const { data } = await popover.onDidDismiss();
+    if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
+      this.modalRating()
+    } else {
+      this.toaster.successToast('please wait for order status completed')
     }
   }
 

@@ -1,4 +1,3 @@
-
 @import "~@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -58,4 +57,21 @@ body.scanner-active {
 .noData {
   text-align: center !important;
   margin-top: 5rem !important;
+}
+
+.rating-modal {
+  top: 60%;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+
+.br-stars {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+
+  .br-text {
+    font-size: 18px;
+    color: var(--ion-color-7);
+  }
 }

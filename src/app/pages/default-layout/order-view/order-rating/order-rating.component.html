@@ -11,6 +11,20 @@
       <ion-label position="fixed" class="ion-text-wrap">{{ "Product Quality" | translate }}</ion-label>
       <bar-rating formControlName="quality" [max]="5" [theme]="'stars'" slot="end"></bar-rating>
     </ion-item>
+    <!-- <ion-item class="ion-margin-top" lines="none">
+      <ion-label position="fixed" class="ion-text-wrap">{{ "Product Quality" | translate }}</ion-label>
+      <bar-rating [(rate)]="data.quality" [max]="5" [readOnly]="true" [theme]="'stars'" slot="end">
+        <ng-template ratingActive>
+          <ion-icon name="star" class="text-color-10"></ion-icon>
+        </ng-template>
+        <ng-template ratingInactive>
+          <ion-icon name="star" class="text-color-5"></ion-icon>
+        </ng-template>
+        <ng-template ratingFraction>
+          <ion-icon name="star-half" class="text-color-10"></ion-icon>
+        </ng-template>
+      </bar-rating>
+    </ion-item> -->
 
     <div class="clearfix ion-padding-top btn">
       <ion-button (click)="onSubmit()" [disabled]="formData.invalid" expand="block" type="submit">

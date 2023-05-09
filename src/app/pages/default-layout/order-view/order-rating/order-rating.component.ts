@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { OrderService } from 'src/app/core/services/order.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
-// import { OrderRatingService } from 'src/app/service/order-rating/order-rating.service';
+import { ratingFormErrors } from 'src/app/helpers/formErrors.helpers';
 import { validateField } from 'src/app/shared/validators/form.validator';
 
 @Component({
@@ -17,27 +18,23 @@ export class OrderRatingComponent implements OnInit {
 
   @Input() ratingObj: any;
   user: any;
-
+  errorMessages = ratingFormErrors;
   formData = new FormGroup({
-    quality: new FormControl(0),
-    shopId: new FormControl(),
-    orderId: new FormControl(),
+    quality: new FormControl('', Validators.required),
+    shopId: new FormControl('', Validators.required),
+    orderId: new FormControl('', Validators.required),
   });
-
-
   constructor(
     private modalCtrl: ModalController,
     private toaster: ToastService,
     public translate: TranslateService,
     private spinner: LoaderService,
     private userService: UserService,
-    // private orderRating: OrderRatingService
+    private orderService: OrderService,
   ) { }
 
   ngOnInit() {
-    console.log("this.ratingObj",this.ratingObj);
-    
-   }
+  }
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
@@ -50,13 +47,11 @@ export class OrderRatingComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log("this.formData", this.formData.value);
-
     if (this.formData.invalid) {
       validateField(this.formData);
     }
     await this.spinner.showLoader();
-    this.orderRating.giveRating(this.ratingObj.orderId, this.formData.value,).subscribe(
+    this.orderService.giveRating(this.formData.value).subscribe(
       async success => {
         await this.spinner.hideLoader();
         this.toaster.successToast(success.message);
@@ -65,6 +60,7 @@ export class OrderRatingComponent implements OnInit {
       }, async error => {
         await this.spinner.hideLoader();
         this.toaster.errorToast(error);
+        this.dismissModal();
       })
   }
   /**
