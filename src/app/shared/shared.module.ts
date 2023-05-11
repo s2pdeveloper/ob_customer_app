@@ -13,8 +13,6 @@ import { GalleryListComponent } from './gallery-list/gallery-list.component';
 import { ViewGalleryImagesComponent } from './view-gallery-images/view-gallery-images.component';
 import { AnimateItemsDirective } from '../directives/animate-items.directive';
 import { ParallaxHeader } from '../directives/parallax-header';
-import { LocationComponent } from './modals/location/location.component';
-import { OrderRatingComponent } from './modals/order-rating/order-rating.component';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -24,14 +22,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 const PIPES = [TruncatePipe, CapitalizePipe, DateAgoPipe];
 const COMPONENTS = [
-  OrderRatingComponent,
   ParallaxHeader,
   AnimateItemsDirective,
   GalleryListComponent,
   ViewGalleryImagesComponent,
   DataUnavailableComponent,
   PopoverComponent,
-  LocationComponent,
 ];
 const MODULES = [
   FormsModule,

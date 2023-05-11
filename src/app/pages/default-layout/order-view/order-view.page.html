@@ -1,8 +1,11 @@
-<ion-header>
+ <ion-header>
   <ion-toolbar class="bg-color-primary">
     <ion-title class="ion-text-capitalize">#{{orderDetails?.orderNumber}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="catalogue"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" class="ion-margin-end">
+      <ion-icon (click)="presentPopover($event)" size="large" slot="icon-only" name="ellipsis-vertical"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -63,27 +66,11 @@
     </div>
   </div>
 
-
-  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="bottom">
-    <ion-fab-button size="large">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="start">
-      <ion-fab-button>
-        <ion-icon name="checkmark-done-circle-sharp" color="primary" (click)="confirmOrder()"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button *ngIf="status==='completed'">
-        <ion-icon name="star" color="primary" (click)="modalRating()"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab> -->
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
+ <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
-
 
 <ion-footer>
   <div class="footer-msg">

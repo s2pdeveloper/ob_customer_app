@@ -123,6 +123,23 @@ export const ratingFormErrors = {
 		{ type: 'required', message: "Rate for delivery time" }
 	],
 };
+export const reportFormErrors = {
+	reason: [
+		{ type: 'required', message: "please enter reason" }
+	],
+};
+
+export const supportFormErrors = {
+	firstName: [
+		{ type: 'required', message: "Enter first name" }
+	],
+	lastName: [
+		{ type: 'required', message: "Enter last name" }
+	],
+	description: [
+		{ type: 'required', message: "please enter note here" }
+	],
+};
 export const feedBackFormErrors = {
 	description: [
 		{ type: 'required', message: "Enter description" },

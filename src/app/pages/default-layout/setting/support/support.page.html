@@ -8,20 +8,35 @@
 </ion-header>
 
 <ion-content>
-
   <ion-card class="">
     <form [formGroup]="supportForm">
       <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
-          {{ 'name' | translate}}
+          {{ 'firstName' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="name"></ion-input>
+        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="firstName"></ion-input>
       </ion-item>
+      <div class="text-left" *ngFor="let error of errorMessages.firstName">
+        <ng-container *ngIf="form.firstName.hasError(error.type) && (form.firstName.dirty || form.firstName.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item class="input-class" lines="none">
+        <ion-label position="stacked">
+          {{ 'lastName' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="lastName"></ion-input>
+      </ion-item>
+      <div class="text-left" *ngFor="let error of errorMessages.lastName">
+        <ng-container *ngIf="form.lastName.hasError(error.type) && (form.lastName.dirty || form.lastName.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
       <ion-item class="input-class" lines="none">
         <ion-label position="stacked">
           {{ 'email' | translate}}
-          <ion-note color="danger">*</ion-note>
         </ion-label>
         <ion-input type="email" placeholder="{{ 'enterEmail' | translate}}" formControlName="email"></ion-input>
       </ion-item>
@@ -31,9 +46,14 @@
           {{ 'note' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-textarea type="text" rows="10" formControlName="notes" placeholder="{{'writeNote'|translate}}">
+        <ion-textarea type="text" maxlength="250" rows="10" formControlName="description" placeholder="{{'writeNote'|translate}}">
         </ion-textarea>
       </ion-item>
+      <div class="text-left" *ngFor="let error of errorMessages.description">
+        <ng-container *ngIf="form.description.hasError(error.type) && (form.description.dirty || form.description.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" expand="block" shape="round" class="btn" (click)="onSubmit()">
           {{ 'submit' | translate}}
