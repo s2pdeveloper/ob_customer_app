@@ -1,8 +1,12 @@
 <ion-header>
   <ion-toolbar class="bg-color-2">
-    <ion-title class="text-color-4 ion-text-capitalize">{{ 'myOrders' | translate}}</ion-title>
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'myOrders' | translate}} with {{shopName |
+      truncate:10}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref mode="md"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" class="ion-margin-end">
+      <ion-icon name="list-outline" size="large" slot="end" (click)="navigateToOrder()"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

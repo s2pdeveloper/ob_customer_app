@@ -54,6 +54,7 @@ export class OrderListPage implements OnInit {
   receiveData() {
     this.socketService.listenEvent(socketOnEvents.LIST_ORDER).subscribe({
       next: (result: any) => {
+
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
