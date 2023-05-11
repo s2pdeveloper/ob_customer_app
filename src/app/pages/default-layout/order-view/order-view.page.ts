@@ -17,6 +17,7 @@ import { GoogleMapComponent } from '../google-map/google-map.component';
 import { OrderService } from 'src/app/core/services/order.service';
 import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
+import { ReportComponent } from './report/report.component';
 
 @Component({
   selector: 'app-order-view',
@@ -273,6 +274,24 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await modal.present();
   }
 
+  async modalReport() {
+    const modal = await this.modalCtrl.create({
+      component: ReportComponent,
+      cssClass: 'rating-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {
+        reportData: {
+          shopId: this.shopId,
+          orderId: this.orderId
+        }
+      }
+    });
+    await modal.present();
+  }
+
+
+
   // viewShop() {
   //   this.router.navigate([`/shop-detail/${this.shopId}`], {
   //     relativeTo: this.activatedRoute
@@ -302,7 +321,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
       this.modalRating()
     } else {
-      this.toaster.successToast('please wait for order status completed')
+      this.modalReport();
     }
   }
 
