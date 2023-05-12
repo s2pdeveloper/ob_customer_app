@@ -38,6 +38,9 @@ export class CataloguePage implements OnInit {
     spaceBetween: 3,
   };
   shopCatalogue: any = [];
+  subCategory: any = [];
+  shopDetailsId: any;
+  productArray: any = [];
 
   constructor(
     private router: Router,
@@ -52,48 +55,92 @@ export class CataloguePage implements OnInit {
 
   ngOnInit() { }
   ionViewDidLeave(): void {
-    this.shopCatalogue = [];
+    this.subCategory = []; this.productArray = [];
     this.page = 1;
+    this.searchText = '';
   }
+
   ionViewWillEnter() {
+    this.subCategory = []; this.productArray = [];
+    this.page = 1;
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.shopDetailsId = params.shopUserId;
       this.shopId = params.shopId
       if (params.shopId) {
-        this.getShopCatalogue(false, '')
+        this.getShopSubCategory(false, '');
       }
     });
   }
 
   onSearch() {
     this.page = 1;
-    this.shopCatalogue = [];
-    this.getShopCatalogue(false, '');
+    this.productArray = [];
+    this.subCategory = [];
+    this.getProductBySubCategoryId('', false);
   }
 
   doRefresh(event: any) {
     this.page = 1;
-    this.shopCatalogue = [];
-    this.getShopCatalogue(false, '');
+    this.productArray = [];
+    this.subCategory = [];
+    this.getProductBySubCategoryId('', false);
     event.target.complete();
   }
 
   doInfinite(event) {
-    if (this.shopCatalogue.length < this.collection) {
+    if (this.productArray.length < this.collection) {
       this.page++;
-      this.getShopCatalogue(false, event);
+      this.getProductBySubCategoryId(false, event);
     } else {
       event.target.complete();
     }
   }
-  async getShopCatalogue(isFirstLoad: boolean, event?: any) {
-    this.shopService.getShopCatalogue({ page: this.page, pageSize: this.pageSize, shopId: this.shopId }).subscribe(async (success: any) => {
-      this.collection = success.count;
-      if (this.shopCatalogue.length < this.collection) {
-        for (let i = 0; i < success.data.length; i++) {
-          this.shopCatalogue.push(success.data[i]);
-        }
+  async getShopSubCategory(isFirstLoad: boolean, event?: any) {
+    let obj = { page: this.page, pageSize: this.pageSize, shopId: this.shopDetailsId };
+    if (this.searchText) {
+      obj['search'] = this.searchText
+    }
+    this.shopService.getShopSubCategory(obj).subscribe(async (success: any) => {
+      for (let i = 0; i < success.data.length; i++) {
+        this.subCategory.push(success.data[i]);
       }
+      this.subCategory = [...new Map(this.subCategory.map(item => [item.subCategory._id, item])).values()]
+      if (isFirstLoad)
+        event.target.complete();
+      if (success.data.length === 0 && event) {
+        event.target.disabled = true;
+      }
+      if (this.subCategory.length > 0) {
+        this.getProductBySubCategoryId(this.subCategory[0].subCategory._id, false)
+      }
+      await this.spinner.hideLoader();
+    });
+  }
+
+  getProduct(item) {
+    this.page = 1;
+    this.productArray = [];
+    this.collection = 0;
+    this.getProductBySubCategoryId(item, false)
+  }
+
+  async getProductBySubCategoryId(item, isFirstLoad: boolean, event?: any) {
+    let obj = {
+      page: this.page,
+      pageSize: this.pageSize,
+      shopId: this.shopId,
+      subCategoryId: item
+    };
+    if (this.searchText) {
+      obj['search'] = this.searchText
+    }
+    this.shopService.getShopCatalogueBySubCategory(obj).subscribe(async (success: any) => {
+      this.collection = success.count;
+      for (let i = 0; i < success.data.length; i++) {
+        this.productArray.push(success.data[i]);
+      }
+      this.productArray = [...new Map(this.productArray.map(item => [item._id, item])).values()]
       if (isFirstLoad)
         event.target.complete();
       if (success.data.length === 0 && event) {
@@ -104,7 +151,7 @@ export class CataloguePage implements OnInit {
   }
 
   navigateToCheckout() {
-    let filteredData = this.shopCatalogue.filter(x => x.isChecked);
+    let filteredData = this.productArray.filter(x => x.isChecked);
     if (filteredData.length > 0) {
       this.storageService.set("orderData", filteredData)
       this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
