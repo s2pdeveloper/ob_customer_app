@@ -21,7 +21,7 @@ export class OrderRatingComponent implements OnInit {
   errorMessages = ratingFormErrors;
   formData = new FormGroup({
     id: new FormControl(''),
-    quality: new FormControl('', Validators.required),
+    productQuality: new FormControl('', Validators.required),
     shopId: new FormControl('', Validators.required),
     orderId: new FormControl('', Validators.required),
   });
