@@ -21,4 +21,19 @@ export class OrderService {
       })
     );
   }
+
+
+  giveRating(payload) {
+    let url: string = `mobile/shop/${payload.orderId}/rating`;
+    return this.apiService.put(url, payload).pipe(map(
+      (data: any) => {
+        if (data && data.result) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      })
+    );
+  }
 }
