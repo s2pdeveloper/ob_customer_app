@@ -66,6 +66,33 @@ export class ShopService {
         );
     }
 
+    getShopSubCategory(payload: any) {
+        let url: string = `mobile/shop/shop-subCategory`;
+        return this.apiService.get(url, payload).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+    getShopCatalogueBySubCategory(payload: any) {
+        let url: string = `mobile/shop/shop-catalogue`;
+        return this.apiService.get(url, payload).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+
 
     favoriteShop(payload: any) {
         let url: string = `mobile/favorite`;

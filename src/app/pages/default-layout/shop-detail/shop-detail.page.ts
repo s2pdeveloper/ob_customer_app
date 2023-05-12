@@ -69,7 +69,7 @@ export class ShopDetailPage implements OnInit {
     });
   }
   navigateTo(path) {
-    let params = { shopId: this.shopId };
+    let params = { shopId: this.shopId, shopUserId: this.shopUser.shopDetails.id };
     this.router.navigate([path], { queryParams: params });
   }
   goToMap(address: string) {
