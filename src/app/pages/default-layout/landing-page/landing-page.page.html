@@ -11,9 +11,9 @@
     </ion-avatar>
   </ion-item>
 
-  <ion-item lines="none">
-    <ion-searchbar class="search-box" [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
-      placeholder="{{ 'Search' | translate}}" [animated]="true" cancelable=false autocomplete="on" autocorrect="on"
+  <ion-item lines="none" class="search-animation">
+    <ion-searchbar class="search-box " [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
+      placeholder="{{ 'Search' | translate}}" autocomplete="on" cancelable=false autocorrect="on"
       (keyup.enter)="navigateToSearchShop(search)">
     </ion-searchbar>
   </ion-item>
