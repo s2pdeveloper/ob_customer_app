@@ -13,6 +13,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { Device } from '@capacitor/device';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { GoogleMapComponent } from '../google-map/google-map.component';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -78,6 +79,7 @@ export class LandingPagePage implements OnInit {
     speed?: number;
     heading?: number;
   };
+  dynamicText$:Subscription;
 
   constructor(
     private router: Router,
@@ -93,6 +95,7 @@ export class LandingPagePage implements OnInit {
     private socketService: SocketService
   ) { }
 
+
   async ngOnInit() {
     this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
@@ -105,6 +108,7 @@ export class LandingPagePage implements OnInit {
   }
   async ionViewWillEnter() {
     this.search = '';
+    this.getSearchText();
     this.user = this.localStorage.get('OBCustomer');
     this.getAllAdvertise()
     this.getAllOffer();
@@ -215,6 +219,25 @@ export class LandingPagePage implements OnInit {
   navigateToSeasonalOffer() {
     this.router.navigate(['/seasonal-offers'])
   }
+
+  getSearchText(){
+    let placeholders = [
+      "Search Shop",
+      "Search Product",
+      "Search Category"
+    ];
+    
+    let currentIndex = 0;
+    this.dynamicText$=interval(4000).subscribe(() => {
+      currentIndex = (currentIndex + 1) % placeholders.length;
+      document.querySelector('ion-searchbar').placeholder = placeholders[currentIndex];
+      
+  });
+  }
+
+  ionViewWillLeave() {
+    this.dynamicText$.unsubscribe()
+}
 
 }
 
