@@ -62,9 +62,9 @@ export class LandingPagePage implements OnInit {
     slidesPerView: 1,
     slideShadows: true,
     initialSlide: 0,
-    speed: 400,
+    speed: 300,
     autoplay: {
-      delay: 3000,
+      delay: 6000,
     },
     spaceBetween: 25,
   };
@@ -143,7 +143,12 @@ export class LandingPagePage implements OnInit {
   getAllAdvertise() {
     this.advertiseService.getAll({}).subscribe(
       async (success) => {
-        this.advertiseArr = success;
+        this.advertiseArr = success.map(x => {
+          x.contentType = x.image.slice(x.image.lastIndexOf('.'));
+          return x;
+        });
+        console.log("advertiseArr", this.advertiseArr);
+
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -240,18 +245,3 @@ export class LandingPagePage implements OnInit {
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

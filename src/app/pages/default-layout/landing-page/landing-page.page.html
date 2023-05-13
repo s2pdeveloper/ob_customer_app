@@ -13,7 +13,7 @@
 
   <ion-item lines="none" class="search-animation">
     <ion-searchbar class="search-box " [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
-      placeholder="{{ 'Search' | translate}}" autocomplete="on" autocorrect="on"
+      placeholder="{{ 'Search' | translate}}" autocomplete="on" cancelable=false autocorrect="on"
       (keyup.enter)="navigateToSearchShop(search)">
     </ion-searchbar>
   </ion-item>
@@ -25,8 +25,13 @@
   <!-- advertise -->
   <ion-slides [options]="buttonSlide2" class="ion-margin-bottom" autoplay="true" loop="true" pager>
     <ion-slide *ngFor="let item of advertiseArr">
-      <div class="advertise">
+      <div class="advertise" *ngIf="item.contentType!='.mp4'">
         <img class="advertiseImage" src="{{item.image}} " /><br />
+      </div>
+      <div class="advertise" *ngIf="item.contentType=='.mp4'">
+        <video class="advertiseImage" type="video/mp4" loop [muted]="true" [autoplay]="true">
+          <source src="{{item.image}} " type='video/mp4' />
+        </video>
       </div>
     </ion-slide>
   </ion-slides>
