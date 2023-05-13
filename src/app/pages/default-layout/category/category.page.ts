@@ -131,7 +131,6 @@ export class CategoryPage implements OnInit {
       queryParams: {
         categoryId: this.parentId,
         subCategoryId: subCategory._id,
-        businessTypeId: subCategory.businessTypeId[0]
       },
     });
   }

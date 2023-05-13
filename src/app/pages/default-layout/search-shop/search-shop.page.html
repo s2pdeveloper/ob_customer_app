@@ -25,14 +25,14 @@
     <ion-row *ngFor="let item of shopList">
       <ion-col class="shadow">
         <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUrl(item?.shopDetails?.bannerImages), 
+          'background-image': getUrl(item?.bannerImages), 
           'background-repeat':'no-repeat', 
           'object-fit':'cover',
           'background-size':'100% 100%'
 
          }" (click)="navigateToShop(item.id)">
-          <ion-badge *ngIf="item?.shopDetails?.avgRating" color="success" class="rating ion-text-end">
-            {{item?.shopDetails?.avgRating}}
+          <ion-badge *ngIf="item?.avgRating" color="success" class="rating ion-text-end">
+            {{item?.avgRating}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
@@ -50,10 +50,10 @@
           </ion-fab>
         </div>
         <ion-label
-          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{item?.shopDetails?.shopName}}</ion-label>
+          class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{item?.shopName}}</ion-label>
         <ion-label (click)="navigateToShop(item.id)" class="address ion-margin-top" color="
             light">
-          <h4 class="address-padding ion-padding-start" *ngIf="item?.shopDetails?.address">
+          <h4 class="address-padding ion-padding-start" *ngIf="item?.address">
             {{ item?.address?.city ? item?.address?.city : ""}}, {{item?.address?.state ?
               item?.address?.state : "" }}, {{item?.address?.pinCode ? item?.address?.pinCode :
             "" }}.

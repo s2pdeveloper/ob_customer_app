@@ -114,7 +114,7 @@ export class SearchShopPage implements OnInit {
 
   async addToFavorite(item) {
     let payload = {
-      shopId: item?.shopDetails?._id,
+      shopId: item?._id,
     };
     this.shopService.favoriteShop(payload).subscribe((success) => {
       this.toaster.successToast(success.message);
