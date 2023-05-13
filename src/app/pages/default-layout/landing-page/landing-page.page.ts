@@ -237,26 +237,9 @@ export class LandingPagePage implements OnInit {
 
   ionViewWillLeave() {
     this.dynamicText$.unsubscribe()
-    // Code goes here...
 }
 
 }
-  //  change() {
-  //   var text = ["Hola", "Hallo", "Merhaba"];
-  //   var counter = 0;
-  //   var myText='ytyutuy'
-  //   var _this = this;
-  //   // elem.innerHTML = text[counter];
-  //   console.log(text[counter]);
-    
-  //   _this.dynamicText=text[counter] ;
-  //   console.log("this.dynamicText11111111",_this.dynamicText);
-  //   myText=text[counter]
-  //   // this.getText(myText)
-  //   counter++;
-  //   if (counter >= text.length) { counter = 0; }
-  //   return myText;
-  // }
 
 
 

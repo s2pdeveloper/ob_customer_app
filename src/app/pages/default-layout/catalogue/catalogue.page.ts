@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-catalogue',
@@ -14,6 +15,8 @@ import { StorageService } from 'src/app/core/services/local-storage.service';
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
+  // subCategory$: Subscription;
+  // product$: Subscription;
   loaded: boolean = false;
   user: any;
   shopId: string;
@@ -53,14 +56,7 @@ export class CataloguePage implements OnInit {
     private storageService: StorageService
   ) { }
 
-  ngOnInit() { }
-  ionViewDidLeave(): void {
-    this.subCategory = []; this.productArray = [];
-    this.page = 1;
-    this.searchText = '';
-  }
-
-  ionViewWillEnter() {
+  ngOnInit() {
     this.subCategory = []; this.productArray = [];
     this.page = 1;
     this.user = this.userService.getCurrentUser();
@@ -71,6 +67,16 @@ export class CataloguePage implements OnInit {
         this.getShopSubCategory(false, '');
       }
     });
+
+  }
+  ionViewDidLeave(): void {
+    this.subCategory = []; this.productArray = [];
+    this.page = 1;
+    this.searchText = '';
+  }
+
+  ionViewWillEnter() {
+
   }
 
   onSearch() {
@@ -97,6 +103,7 @@ export class CataloguePage implements OnInit {
     }
   }
   async getShopSubCategory(isFirstLoad: boolean, event?: any) {
+
     let obj = { page: this.page, pageSize: this.pageSize, shopId: this.shopDetailsId };
     if (this.searchText) {
       obj['search'] = this.searchText
@@ -140,6 +147,8 @@ export class CataloguePage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.productArray.push(success.data[i]);
       }
+      console.log("productArray", this.productArray);
+
       this.productArray = [...new Map(this.productArray.map(item => [item._id, item])).values()]
       if (isFirstLoad)
         event.target.complete();
