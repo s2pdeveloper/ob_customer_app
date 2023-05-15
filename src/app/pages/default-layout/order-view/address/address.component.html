@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class="bg-color-primary" color="primary">
+    <ion-title>{{ "Select Address" | translate }}</ion-title>
+    <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large" (click)="closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-item lines="none" class="ion-padding-top">
+    <ion-icon name='location' color="primary"></ion-icon>
+    <ion-label (click)="openMap()"><b>{{'locationSend'| translate}}</b></ion-label>
+  </ion-item>
+  <ion-list *ngIf="addressData.length >0;else noData">
+    <ion-item lines="none" *ngFor="let item of addressData;let i = index" (click)="selectedAddress(item)">
+      <ion-label>
+        <ion-text class="ion-text-wrap">
+          <h4>{{item.city}},{{item.state}} - {{item?.pincode}}</h4>
+        </ion-text>
+        <p class="ion-text-wrap">
+          <span> {{item.addressLine1}}</span>
+          <span *ngIf="item.addressLine2">
+            , {{item.addressLine2}}
+          </span>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ng-template #noData>
+    <app-data-unavailable [customText]="'No default address found'" [buttonText]="'addAddress' | translate">
+    </app-data-unavailable>
+  </ng-template>
+
+</ion-content>

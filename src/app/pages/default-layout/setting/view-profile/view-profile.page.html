@@ -35,6 +35,18 @@
           <p>{{user?.mobileNumber}}</p>
         </ion-label>
       </ion-item>
+
+      <ion-item>
+        <i>
+          <img src="../../../assets/images/location.png" width="30px" alt="location img">
+        </i>
+        <ion-label class="ion-margin-start">
+          {{ 'address' | translate}}
+          <p (click)="navigateToMyAdd()">{{'view' | translate}}</p>
+        </ion-label>
+        <ion-icon slot="end" size="large" (click)="navigateToMyAdd()" name="add-circle-sharp"></ion-icon>
+      </ion-item>
+
       <div class="ion-text-center ion-margin-vertical">
         <ion-button color="primary" fill="outline" expand="block" strong="true" shape="round"
           (click)="navigate('edit-profile')">

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -18,6 +18,7 @@ import { OrderService } from 'src/app/core/services/order.service';
 import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
+import { AddressComponent } from './address/address.component';
 
 @Component({
   selector: 'app-order-view',
@@ -248,9 +249,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await modal.present();
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log(data)
-      // this.localStorage.set('location', data.coordinates);
-      // this.currentLocation = data.location
       this.chatForm.controls.message.setValue('Location');
       this.chatForm.controls.category.setValue(messageCategory.LOCATION);
       this.chatForm.controls.location.setValue(data.coordinates);
@@ -323,6 +321,31 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     } else {
       this.modalReport();
     }
+  }
+
+
+  async address() {
+    const modal = await this.modalCtrl.create({
+      component: AddressComponent,
+      cssClass: 'address-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {},
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data?.data?.data?.coordinates) {
+      let coordinates = data.data.data.coordinates
+      this.chatForm.controls.message.setValue('Location');
+      this.chatForm.controls.category.setValue(messageCategory.LOCATION);
+      this.chatForm.controls.location.setValue(coordinates);
+      this.sendMessage();
+    } else {
+      this.chatForm.controls.message.setValue(`Address : ${data.data}`);
+      this.sendMessage();
+    }
+
+
   }
 
 
