@@ -11,6 +11,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { ReportComponent } from './report/report.component';
+import { AddressComponent } from './address/address.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +21,7 @@ import { ReportComponent } from './report/report.component';
     OrderViewPageRoutingModule,
     SharedModule
   ],
-  declarations: [OrderViewPage, OrderRatingComponent, ReportComponent],
+  declarations: [OrderViewPage, OrderRatingComponent, ReportComponent, AddressComponent],
   providers: [UploadService],
 })
 export class OrderViewPageModule { }

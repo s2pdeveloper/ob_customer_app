@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref mode="md" (click)="dismissModal()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="addressForm">
+    <!-- address -->
+    <ion-item lines="none">
+      <ion-label>{{'selectType' | translate}}</ion-label>
+    </ion-item>
+    <ion-radio-group formControlName="type" class="ion-radio-style">
+      <ion-row>
+        <ion-col size="6" class="ion-no-padding">
+          <ion-item lines="none">
+            <ion-radio class="radio-color-1" [value]="addressType.Home"></ion-radio>
+            <ion-label>{{'homeType' | translate}}</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6" class="ion-no-padding">
+          <ion-item lines="none">
+            <ion-radio class="radio-color-1" [value]="addressType.Work"></ion-radio>
+            <ion-label>{{'workType' | translate}}</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+
+
+    <ion-item class="input-class mt-3" lines="none">
+      <ion-label position="stacked">{{ 'addressLine1' | translate}}</ion-label>
+      <ion-input formControlName="addressLine1" type="text" placeholder="{{ 'addressLine1' | translate}} "></ion-input>
+    </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.addressLine1">
+      <ng-container
+        *ngIf="form.addressLine1.hasError(error.type) && (form.addressLine1.dirty || form.addressLine1.touched)">
+        <small class="text-color-danger">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item class="input-class mt-3" lines="none">
+      <ion-label position="stacked">{{ 'addressLine2' | translate}}</ion-label>
+      <ion-input formControlName="addressLine2" type="text" placeholder="{{ 'addressLine2' | translate}} "></ion-input>
+    </ion-item>
+
+    <ion-item class="input-class mt-3" lines="none">
+      <ion-label position="stacked">{{ 'pincode' | translate}} <span class="text-danger"> * </span> </ion-label>
+      <ion-input formControlName="pincode" type="tel" name="pincode" placeholder="{{ 'pincode' | translate}} "
+        autocomplete="on" debounce="500">
+      </ion-input>
+    </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.pincode">
+      <ng-container *ngIf="form.pincode.hasError(error.type) && (form.pincode.dirty || form.pincode.touched)">
+        <small class="text-color-danger">{{error.message}}</small>
+      </ng-container>
+    </div>
+    <ion-item class="input-class mt-3" lines="none">
+      <ion-label position="stacked">{{ 'city' | translate}} <span class="text-danger"> * </span> </ion-label>
+      <ion-input formControlName="city" name="city" placeholder="{{ 'city' | translate}} ">
+      </ion-input>
+    </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.city">
+      <ng-container *ngIf="form.city.hasError(error.type) && (form.city.dirty || form.city.touched)">
+        <small class="text-color-danger">{{error.message}}</small>
+      </ng-container>
+    </div>
+    <ion-item class="input-class mt-3" lines="none">
+      <ion-label position="stacked">{{ 'state' | translate}} <span class="text-danger"> * </span> </ion-label>
+      <ion-input formControlName="state" name="state" placeholder="{{ 'state' | translate}} ">
+      </ion-input>
+    </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.state">
+      <ng-container *ngIf="form.state.hasError(error.type) && (form.state.dirty || form.state.touched)">
+        <small class="text-color-danger">{{error.message}}</small>
+      </ng-container>
+    </div>
+    <!-- address -->
+  </form>
+
+  <div class="clearfix ion-padding-top">
+    <ion-button (click)="onSubmit()" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{ 'save' | translate}}
+    </ion-button>
+  </div>
+</ion-content>

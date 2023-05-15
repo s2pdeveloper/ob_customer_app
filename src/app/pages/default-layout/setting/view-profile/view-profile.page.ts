@@ -40,4 +40,7 @@ export class ViewProfilePage implements OnInit {
   navigate(page: string) {
     this.router.navigate([`${page}`]);
   }
+  navigateToMyAdd() {
+    this.router.navigate([`/my-addresses`]);
+  }
 }

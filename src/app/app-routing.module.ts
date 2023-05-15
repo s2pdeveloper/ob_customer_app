@@ -27,6 +27,11 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'my-addresses',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/setting/my-addresses/my-addresses.module').then(m => m.MyAddressesPageModule)
+  },
+  {
     path: 'privacy-policy',
     canLoad: [AuthGuard],
     loadChildren: () =>
