@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { SubCategoryService } from 'src/app/core/services/sub-category.service';
+import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-category',
@@ -23,6 +24,7 @@ export class CategoryPage implements OnInit {
   searchText: string;
   activeParentId: any = null;
   parentId: number;
+  geoNearestDistance: number = 2;
 
   constructor(
     private router: Router,
@@ -31,6 +33,7 @@ export class CategoryPage implements OnInit {
     public translate: TranslateService,
     public activatedRoute: ActivatedRoute,
     private spinner: LoaderService,
+    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() { }
@@ -93,7 +96,7 @@ export class CategoryPage implements OnInit {
   getAllSubCategory(parentId, isFirstLoad, event) {
     this.parentId = parentId,
       this.activeParentId = parentId
-    let params = { page: this.page, pageSize: this.pageSize };
+    let params = { page: this.page, pageSize: this.pageSize, geoNearestDistance: this.geoNearestDistance };
     if (this.searchText) {
       params['search'] = this.searchText,
         parentId = null;
@@ -119,7 +122,6 @@ export class CategoryPage implements OnInit {
           }
           return x;
         });
-
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -143,4 +145,22 @@ export class CategoryPage implements OnInit {
     this.subCategoryList = [];
     this.getAllSubCategory(activeParentId, false, "");
   }
+
+  async navigateToFilter() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+      cssClass: 'rating-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {},
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data.data) {
+      this.geoNearestDistance = data?.data?.geoNearestDistance
+    this.subCategoryList = [];
+      this.getAllSubCategory(this.activeParentId, false, '');
+    }
+  }
+
 }
