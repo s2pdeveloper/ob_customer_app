@@ -1,4 +1,4 @@
-import { NgModule ,OnInit} from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -8,15 +8,15 @@ import { CategoryPageRoutingModule } from './category-routing.module';
 
 import { CategoryPage } from './category.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoryPageRoutingModule,SharedModule
+    CategoryPageRoutingModule, SharedModule
   ],
-  declarations: [CategoryPage]
+  declarations: [CategoryPage, FilterComponent]
 })
-export class CategoryPageModule  {}
+export class CategoryPageModule { }

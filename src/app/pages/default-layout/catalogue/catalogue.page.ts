@@ -147,8 +147,6 @@ export class CataloguePage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.productArray.push(success.data[i]);
       }
-      console.log("productArray", this.productArray);
-
       this.productArray = [...new Map(this.productArray.map(item => [item._id, item])).values()]
       if (isFirstLoad)
         event.target.complete();
