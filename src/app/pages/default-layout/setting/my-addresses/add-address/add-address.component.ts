@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AddressService } from 'src/app/core/services/address.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
+import { StorageService } from 'src/app/core/services/local-storage.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -28,7 +29,7 @@ export class AddAddressComponent implements OnInit {
     countryCode: new FormControl('IN', []),
     city: new FormControl('', [Validators.required]),
     state: new FormControl('', [Validators.required]),
-    locationPoint: new FormControl(''),
+    // location: new FormControl(''),
     isDefault: new FormControl(false, []),
     userId: new FormControl(''),
   });
