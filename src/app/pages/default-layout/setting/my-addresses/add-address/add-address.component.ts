@@ -29,9 +29,7 @@ export class AddAddressComponent implements OnInit {
     countryCode: new FormControl('IN', []),
     city: new FormControl('', [Validators.required]),
     state: new FormControl('', [Validators.required]),
-    // location: new FormControl(''),
     isDefault: new FormControl(false, []),
-    userId: new FormControl(''),
   });
   @Input() modalData: any = {};
 
@@ -44,27 +42,18 @@ export class AddAddressComponent implements OnInit {
   user: any = {};
   constructor(
     public translate: TranslateService,
-    private restService: RestService,
     private spinner: LoaderService,
     private toaster: ToastService,
     private address: AddressService,
     private modalController: ModalController,
-    private userService: UserService,
   ) { }
 
   ngOnInit() {
-    this.getUserDetails();
     if (this.modalData && this.modalData.id) {
       this.addressForm.patchValue(this.modalData)
     }
   }
 
-  getUserDetails() {
-    this.userService.getProfile().subscribe((userData: any) => {
-      this.user = userData;
-      this.addressForm.controls.userId.setValue(this.user.id)
-    });
-  }
   get form() {
     return this.addressForm.controls;
   }

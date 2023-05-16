@@ -12,6 +12,7 @@
   </ion-item>
   <ion-list *ngIf="addressData.length >0;else noData">
     <ion-item lines="none" *ngFor="let item of addressData;let i = index" (click)="selectedAddress(item)">
+      <ion-chip slot="end" class="ion-text-capitalize">{{item?.type}}</ion-chip>
       <ion-label>
         <ion-text class="ion-text-wrap">
           <h4>{{item.city}},{{item.state}} - {{item?.pincode}}</h4>
