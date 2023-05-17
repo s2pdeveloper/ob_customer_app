@@ -17,6 +17,7 @@ import { socketOnEvents } from 'src/app/helpers';
 export class CheckoutPage implements OnInit {
   orderData: any = [];
   shopId: string;
+  shopDetailsId: string;
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
@@ -32,7 +33,8 @@ export class CheckoutPage implements OnInit {
   }
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-      this.shopId = params.shopId
+      this.shopDetailsId = params.shopUserId;
+      this.shopId = params.shopId;
     });
   }
   navigateToChat() {
@@ -57,7 +59,7 @@ export class CheckoutPage implements OnInit {
       }
     }
     let message = {
-      shopId: this.shopId,
+      shopId: this.shopDetailsId,
       message: msg,
       description: description,
       catalogue: this.orderData

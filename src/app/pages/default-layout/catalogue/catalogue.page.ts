@@ -161,7 +161,7 @@ export class CataloguePage implements OnInit {
     let filteredData = this.productArray.filter(x => x.isChecked);
     if (filteredData.length > 0) {
       this.storageService.set("orderData", filteredData)
-      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId } });
+      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId, shopUserId: this.shopDetailsId } });
     } else {
       this.toaster.warningToast("please select at least one product")
     }
