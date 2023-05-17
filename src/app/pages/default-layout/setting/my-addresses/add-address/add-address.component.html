@@ -31,7 +31,7 @@
 
 
     <ion-item class="input-class mt-3" lines="none">
-      <ion-label position="stacked">{{ 'addressLine1' | translate}}</ion-label>
+      <ion-label position="stacked">{{ 'addressLine1' | translate}} <span class="text-danger"> * </span></ion-label>
       <ion-input formControlName="addressLine1" type="text" placeholder="{{ 'addressLine1' | translate}} "></ion-input>
     </ion-item>
     <div class="text-left" *ngFor="let error of errorMessages.addressLine1">

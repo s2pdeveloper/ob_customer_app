@@ -111,7 +111,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       if (params.orderId) {
         this.orderId = params.orderId;
         this.chatForm.get('orderId').setValue(this.orderId);
-        await this.spinner.showLoader();
         this.getOrderById();
       }
       this.chatForm.get('shopId').setValue(this.shopId);
