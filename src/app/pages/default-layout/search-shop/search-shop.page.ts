@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IonInfiniteScroll, IonContent } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, ModalController } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
+import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-search-shop',
@@ -27,6 +28,7 @@ export class SearchShopPage implements OnInit {
   user: any = {};
   shopCount: any;
   favoriteShop: any;
+  geoNearestDistance: number = 2;
 
   constructor(
     private router: Router,
@@ -35,6 +37,8 @@ export class SearchShopPage implements OnInit {
     private spinner: LoaderService,
     private toaster: ToastService,
     private activatedRoute: ActivatedRoute,
+    private modalCtrl: ModalController,
+
   ) { }
 
   ngOnInit() {
@@ -87,12 +91,13 @@ export class SearchShopPage implements OnInit {
       businessTypeId: this.businessTypeId,
       categoryId: this.categoryId,
       subCategoryId: this.subCategoryId,
+      geoNearestDistance: this.geoNearestDistance
     };
     if (this.search) {
       obj['search'] = this.search
     }
     this.shopService.list(obj).subscribe(async (success) => {
-    this.collection = success.count;
+      this.collection = success.count;
       if (this.shopList.length < this.collection) {
         for (let i = 0; i < success.data.length; i++) {
           this.shopList.push(success.data[i]);
@@ -132,6 +137,22 @@ export class SearchShopPage implements OnInit {
     return path;
   }
 
+  async navigateToFilter() {
+    const modal = await this.modalCtrl.create({
+      component: FilterComponent,
+      cssClass: 'rating-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {},
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data.data) {
+      this.geoNearestDistance = data?.data?.geoNearestDistance
+      this.shopList = [];
+      this.getAllShop(false, "");
+    }
+  }
 
 }
 
