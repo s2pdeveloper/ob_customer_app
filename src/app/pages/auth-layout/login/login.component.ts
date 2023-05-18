@@ -10,22 +10,27 @@ import { validateField } from 'src/app/shared/validators/form.validator';
 import { UserService } from 'src/app/core/services/user.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
+import { LanguageService } from 'src/app/core/services/language.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
+  lang = 'en';
   deviceInfo: any;
   errorMessages = authFieldsErrors;
+  selectedLanguage: string = '';
+
 
   constructor(
     private router: Router,
     private spinner: LoaderService,
     private toaster: ToastService,
     public translate: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private langService: LanguageService
+
   ) { }
 
   loginForm = new FormGroup({
@@ -76,5 +81,29 @@ export class LoginComponent implements OnInit {
 
   navigateToSignUp() {
     this.router.navigate([`/auth/signup`]);
+  }
+
+  
+  languages = [
+    {
+      label: 'English',
+      value: 'en',
+    },
+    {
+      label: 'हिंदी',
+      value: 'hi',
+    },
+    {
+      label: 'मराठी',
+      value: 'mr',
+    },
+  ];
+
+  async setLanguage($event) {
+    this.selectedLanguage = $event.target.value;
+    if (this.selectedLanguage != this.langService.getLang()) {
+      await this.toaster.successToast('Language Change Successfully');
+    }
+    this.langService.setLang(this.selectedLanguage);
   }
 }

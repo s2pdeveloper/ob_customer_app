@@ -52,12 +52,12 @@
   </ion-slides>
 
   <!-- offers -->
-  <ion-item lines="none">
+  <ion-item lines="none" *ngIf="offerArr.length>0">
     <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
   </ion-item>
   <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
     <ion-slide *ngFor="let item of offerArr">
-      <div class="offer">
+      <div class="offer" (click)="navigateToShop(item)">
         <img class="offerImage" *ngIf="item.image" src="{{item.image}} " /><br />
         <img class="offerImage" *ngIf="!item.image" src="assets/images/placeholder_product.png" alt="offer-image" />
       </div>

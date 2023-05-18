@@ -79,7 +79,7 @@ export class LandingPagePage implements OnInit {
     speed?: number;
     heading?: number;
   };
-  dynamicText$:Subscription;
+  dynamicText$: Subscription;
 
   constructor(
     private router: Router,
@@ -163,6 +163,12 @@ export class LandingPagePage implements OnInit {
       }
     )
   }
+
+  navigateToShop(item) {
+    let id = item.shopId[0];
+    const path: string = `/shop-detail/${id}`;
+    this.router.navigate([path]);
+  }
   getAllCategory() {
     this.categoryService.getAllCategory({}).subscribe(
       async (success) => {
@@ -225,23 +231,21 @@ export class LandingPagePage implements OnInit {
     this.router.navigate(['/seasonal-offers'])
   }
 
-  getSearchText(){
+  getSearchText() {
     let placeholders = [
       "Search Shop",
       "Search Product",
       "Search Category"
     ];
-    
     let currentIndex = 0;
-    this.dynamicText$=interval(4000).subscribe(() => {
+    this.dynamicText$ = interval(4000).subscribe(() => {
       currentIndex = (currentIndex + 1) % placeholders.length;
       document.querySelector('ion-searchbar').placeholder = placeholders[currentIndex];
-      
-  });
+    });
   }
 
   ionViewWillLeave() {
     this.dynamicText$.unsubscribe()
-}
+  }
 
 }
