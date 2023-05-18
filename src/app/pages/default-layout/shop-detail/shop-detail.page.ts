@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.component';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -30,6 +30,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
+  shopName: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,6 +39,7 @@ export class ShopDetailPage implements OnInit {
     private spinner: LoaderService,
     public translate: TranslateService,
     private modalCtrl: ModalController,
+    private alertController: AlertController,
     private toaster: ToastService,
   ) { }
 
@@ -85,6 +87,40 @@ export class ShopDetailPage implements OnInit {
       },
     });
     await modal.present();
+  }
+  async orderAlert(item) {
+    this.shopName = item.shopDetails.shopName;
+    const alert = await this.alertController.create({
+      header: 'Do you want to add to existing order or new order?',
+      cssClass: 'custom-alert',
+      mode: 'md',
+      buttons: [
+        {
+          text: 'Existing',
+          cssClass: 'primary',
+          handler: () => {
+            this.navigateToShopOrder(item);
+          },
+        },
+        {
+          text: 'New',
+          cssClass: 'primary',
+          handler: () => {
+            this.goToChat();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+
+  goToChat() {
+    let params = { shopName: this.shopName, shopId: this.shopId };
+    console.log(params);
+    
+    this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
   }
 
   async modalFilter() {
