@@ -6,3 +6,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true" [style.--background]="scanActive?'#00000000':'#ffffff'">
+  <div class="scan-box" [hidden]="!scanActive"></div>
+  <ion-row class="scan-button" [hidden]="!scanActive">
+    <ion-col class="ion-padding">
+      <ion-button expand="full" (click)="stopScanner()">{{'scanUPI'}}</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

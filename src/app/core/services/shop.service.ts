@@ -107,9 +107,9 @@ export class ShopService {
             })
         );
     }
-    checkQrCode(code: any) {
-        let url: string = `mobile/shop/search-qr/${code}`;
-        return this.apiService.get(url,  ).pipe(map(
+    checkQrCode(payload: any) {
+        let url: string = `mobile/shop/search-qr`;
+        return this.apiService.patch(url, payload).pipe(map(
             (data: any) => {
                 if (data && data.result) {
                     return data.result;

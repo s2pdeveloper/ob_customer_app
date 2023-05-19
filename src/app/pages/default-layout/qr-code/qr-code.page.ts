@@ -13,6 +13,8 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class QrCodePage implements OnInit {
 
   scanResult: any = null;
+  scanActive: boolean = true;
+
   constructor(private barcodeScannerService: BarcodeScannerService, private location: Location, private router: Router,
     private shopService: ShopService, private loader: LoaderService, private toastService: ToastService
   ) { }
@@ -28,9 +30,16 @@ export class QrCodePage implements OnInit {
   }
 
   async startScan() {
+    this.scanActive = true;
     this.scanResult = await this.barcodeScannerService.startScan();
+    this.scanActive = false;
     console.log('scan Result', this.scanResult)
     this.checkShop(this.scanResult);
+  }
+
+  stopScanner() {
+    this.scanActive = false;
+    this.barcodeScannerService.stopScan()
   }
 
   goBack() {
@@ -39,7 +48,7 @@ export class QrCodePage implements OnInit {
 
   async checkShop(code: string) {
     await this.loader.showLoader();
-    this.shopService.checkQrCode(code).subscribe({
+    this.shopService.checkQrCode({ code }).subscribe({
       next: async (value) => {
         await this.loader.hideLoader();
         this.router.navigate([`/shop-detail/${value.id}`])
