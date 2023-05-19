@@ -104,10 +104,10 @@ export class ShopOrdersPage implements OnInit {
     )
   };
 
-  goToChat() {
-    let params = { shopName: this.shopName, shopId: this.userTableId };
-    this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
-  }
+  // goToChat() {
+  //   let params = { shopName: this.shopName, shopId: this.userTableId };
+  //   this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
+  // }
   navigateToOrder() {
     this.router.navigate(['/app/tabs/order-list'], { replaceUrl: true });
   }
