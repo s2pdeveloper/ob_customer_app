@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BarcodeScanner, CameraDirection } from '@capacitor-community/barcode-scanner';
+import { BarcodeScanner, CameraDirection, SupportedFormat } from '@capacitor-community/barcode-scanner';
 import { ToastService } from './toast.service';
 
 @Injectable({
@@ -52,7 +52,7 @@ export class BarcodeScannerService {
     // note: if you are using ionic this might not be enough, check below
     await BarcodeScanner.hideBackground();
     document.querySelector('body').classList.add('scanner-active');
-    const result = await BarcodeScanner.startScan({ cameraDirection: CameraDirection.BACK }); // start scanning and wait for a result
+    const result = await BarcodeScanner.startScan({ targetedFormats: [SupportedFormat.QR_CODE], cameraDirection: CameraDirection.BACK }); // start scanning and wait for a result
     if (result.hasContent) {
       console.log(result.content); // log the raw scanned content
       return result.content

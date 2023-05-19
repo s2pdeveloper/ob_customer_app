@@ -1,18 +1,13 @@
 body {
-  background: #ffffff;
   color: var(--ion-color-primary);
 }
 
 ion-toolbar {
   --background: var(--ion-color-primary) !important;
   --color: var(--ion-color-light);
-  
-
-
 }
 
 ion-content {
-    background: #ffffff !important;
   color: var(--ion-color-primary) !important;
 }
 
