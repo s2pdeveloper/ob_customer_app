@@ -18,6 +18,7 @@ export class CheckoutPage implements OnInit {
   orderData: any = [];
   shopId: string;
   shopDetailsId: string;
+  shopName: string;
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
@@ -35,6 +36,7 @@ export class CheckoutPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopDetailsId = params.shopUserId;
       this.shopId = params.shopId;
+      this.shopName = params.shopName;
     });
   }
   navigateToChat() {
@@ -46,7 +48,7 @@ export class CheckoutPage implements OnInit {
       return;
     }
     let description = '';
-    msg += `Dear merchant,\n i would like to buy \n`;
+    msg += `Dear ${this.shopName},\n i would like to buy \n`;
     for (let i = 0; i < arr.length; i++) {
       const catTitle = arr[i].title;
       msg += `${catTitle}`;
