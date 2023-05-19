@@ -31,6 +31,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
+  isPreview: boolean= false;
 
   page: number = 1;
   pageSize: number = 10;
@@ -61,7 +62,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private socketService: SocketService,
     private restService: RestService,
     private orderService: OrderService,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -345,9 +347,39 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       this.chatForm.controls.message.setValue(`Address : ${data.data}`);
       this.sendMessage();
     }
-
-
   }
 
+  async previewImage(url) {
+    console.log(url);
+this.isPreview=true;
+
+    const opt: capShowOptions = {} as capShowOptions;
+    opt.images = [{ url: url, title: '' }];
+    opt.mode = 'one';
+    // if( mode === 'one' || mode === 'slider') {
+    //   opt.startFrom = startFrom;
+    // }
+    // if(options) {
+    //   opt
+    console.log("url.........................", url);
+    try {
+      const ret = await this.pvPlugin.show(opt);
+      console.log("ret", ret);
+
+      // if(ret.result) {
+      //     return Promise.resolve(ret);
+      // } else {
+      //     return Promise.reject(ret.message);
+      // }
+    } catch (err) {
+      console.log("err", err);
+
+      // const ret: capShowResult = {} as capShowResult;
+      // ret.result = false;
+      // ret.message = err.message;
+      // return Promise.reject(err.message);
+    }
+
+  }
 
 }

@@ -15,6 +15,7 @@ import { AnimateItemsDirective } from '../directives/animate-items.directive';
 import { ParallaxHeader } from '../directives/parallax-header';
 import { BarRatingModule } from 'ngx-bar-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PhotoViewer } from '@capacitor-community/photoviewer';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ const COMPONENTS = [
   ViewGalleryImagesComponent,
   DataUnavailableComponent,
   PopoverComponent,
+  PhotoViewer
 ];
 const MODULES = [
   FormsModule,

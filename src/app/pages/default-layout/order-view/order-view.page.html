@@ -1,4 +1,4 @@
- <ion-header>
+<ion-header *ngIf="!isPreview">
   <ion-toolbar class="bg-color-primary">
     <ion-title class="ion-text-capitalize">#{{orderDetails?.orderNumber}}</ion-title>
     <ion-buttons slot="start">
@@ -10,10 +10,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-label color="tertiary" class="ion-text-center ion-padding-vertical ion-text-capitalize shopName" >
+<ion-label color="tertiary" class="ion-text-center ion-padding-vertical ion-text-capitalize shopName">
   <a (click)="viewShop()">{{shopName}}</a>
 </ion-label>
 <ion-content>
+  
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll">
       <div class="message-wrap">
@@ -31,7 +32,7 @@
             </div>
 
             <div class="msg-info">
-              <img src="{{message.image}}" *ngIf="message.image" />
+              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message.image)" />
               <ion-icon name="cloud-download-outline" *ngIf="message.image" class="download"
                 (click)="downloadImage(message)"></ion-icon>
             </div>
@@ -66,7 +67,7 @@
     </div>
   </div>
 
- <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
@@ -102,3 +103,4 @@
     </ion-toolbar>
   </div>
 </ion-footer>
+
