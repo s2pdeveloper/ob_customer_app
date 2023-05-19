@@ -61,6 +61,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
+  canReceiveMessage: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -78,7 +79,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private photoViewerService: PhotoViewerService
   ) {
     this.receiveListMessages(false, "");
-    this.receiveMessage();
   }
 
   chatForm = new FormGroup({
@@ -105,13 +105,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.content.scrollToBottom();
   }
 
-  doRefresh(event: any) {
-    this.messages = [];
-    this.page = 0;
-    this.receiveListMessages(false, "");
-    event.target.complete();
-  }
-
   doInfinite(event) {
     this.receiveListMessages(true, event);
     event.target.complete();
@@ -129,6 +122,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       }
       this.chatForm.get('shopId').setValue(this.shopId);
       this.emitToLoadMessages();
+      if (!this.canReceiveMessage) {
+        this.canReceiveMessage = true
+      }
     });
   }
   async getOrderById() {
@@ -142,6 +138,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
+    if (this.canReceiveMessage) {
+      this.receiveMessage();
+    }
   }
 
   resetForm() {
@@ -179,12 +178,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
+        this.canReceiveMessage = false;
         console.log('RECEIVE_MESSAGE', result.data)
         this.messages.push(result.data);
         if (!this.orderId) {
           this.orderId = result.data.orderId;
           this.chatForm.get('orderId').setValue(this.orderId);
           this.getOrderById();
+          console.log('no order id')
         }
       },
       error: (error) => {
@@ -330,10 +331,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await popover.present();
     const { data } = await popover.onDidDismiss();
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
-      console.log("call if");
       this.modalRating()
-    }
-    if (data.event === 'report') {
+    } else {
       this.modalReport();
     }
   }
