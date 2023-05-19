@@ -114,7 +114,6 @@ export class CataloguePage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.subCategory.push(success.data[i]);
       }
-      console.log("subCategory", this.subCategory);
       this.subCategory = [...new Map(this.subCategory.map(item => [item.subCategory._id, item])).values()]
       if (isFirstLoad)
         event.target.complete();

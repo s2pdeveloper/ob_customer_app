@@ -238,7 +238,7 @@ export class LandingPagePage implements OnInit {
       "Search Category"
     ];
     let currentIndex = 0;
-    this.dynamicText$ = interval(4000).subscribe(() => {
+    this.dynamicText$ = interval(3005).subscribe(() => {
       currentIndex = (currentIndex + 1) % placeholders.length;
       document.querySelector('ion-searchbar').placeholder = placeholders[currentIndex];
     });
@@ -249,3 +249,4 @@ export class LandingPagePage implements OnInit {
   }
 
 }
+// a:not(:focus){color: blue;}
