@@ -12,6 +12,7 @@ import { UploadService } from 'src/app/core/services/upload.service';
 import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
+import { PhotoviewerComponentModule } from 'src/app/shared/photoviewer/photoviewer.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import { AddressComponent } from './address/address.component';
     ReactiveFormsModule,
     IonicModule,
     OrderViewPageRoutingModule,
-    SharedModule
+    SharedModule,
+    PhotoviewerComponentModule
   ],
   declarations: [OrderViewPage, OrderRatingComponent, ReportComponent, AddressComponent],
   providers: [UploadService],

@@ -19,6 +19,7 @@ import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
+import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 
 @Component({
   selector: 'app-order-view',
@@ -31,6 +32,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
+  isPreview: boolean = false;
 
   page: number = 1;
   pageSize: number = 10;
@@ -48,6 +50,18 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   messageCategory = messageCategory;
   orderDetails: any = {};
 
+  photoViewerConfig = {
+    mode: 'one',
+    images: [],
+    options: {
+      title: false,
+      share: false,
+      transformer: 'depth',
+      backgroundcolor: 'black'
+    }
+  }
+
+  canReceiveMessage: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -61,10 +75,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private socketService: SocketService,
     private restService: RestService,
     private orderService: OrderService,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private photoViewerService: PhotoViewerService
   ) {
     this.receiveListMessages(false, "");
-    this.receiveMessage();
   }
 
   chatForm = new FormGroup({
@@ -91,13 +105,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.content.scrollToBottom();
   }
 
-  doRefresh(event: any) {
-    this.messages = [];
-    this.page = 0;
-    this.receiveListMessages(false, "");
-    event.target.complete();
-  }
-
   doInfinite(event) {
     this.receiveListMessages(true, event);
     event.target.complete();
@@ -115,6 +122,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       }
       this.chatForm.get('shopId').setValue(this.shopId);
       this.emitToLoadMessages();
+      if (!this.canReceiveMessage) {
+        this.canReceiveMessage = true
+      }
     });
   }
   async getOrderById() {
@@ -128,6 +138,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
+    if (this.canReceiveMessage) {
+      this.receiveMessage();
+    }
   }
 
   resetForm() {
@@ -165,12 +178,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
+        this.canReceiveMessage = false;
         console.log('RECEIVE_MESSAGE', result.data)
         this.messages.push(result.data);
         if (!this.orderId) {
           this.orderId = result.data.orderId;
           this.chatForm.get('orderId').setValue(this.orderId);
           this.getOrderById();
+          console.log('no order id')
         }
       },
       error: (error) => {
@@ -316,10 +331,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await popover.present();
     const { data } = await popover.onDidDismiss();
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
-      console.log("call if");
       this.modalRating()
-    }
-    if (data.event === 'report') {
+    } else {
       this.modalReport();
     }
   }
@@ -345,9 +358,27 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       this.chatForm.controls.message.setValue(`Address : ${data.data}`);
       this.sendMessage();
     }
+  }
 
-
+  async previewImage(message) {
+    this.photoViewerConfig.images.push({
+      url: message.image,
+      title: ''
+    });
   }
 
 
+  handleExit(ev) {
+    this.photoViewerConfig.images = []
+    console.log(`&&& ev: ${JSON.stringify(ev)}`);
+    const keys = Object.keys(ev);
+    if (keys.includes('result') && ev.result) {
+      if (keys.includes('imageIndex')) {
+        console.log(`last image index: ${ev.imageIndex}`);
+      }
+    }
+    if (keys.includes('message')) {
+      console.log(`returned message: ${ev.message}`);
+    }
+  }
 }

@@ -32,7 +32,7 @@ const COMPONENTS = [
 const MODULES = [
   FormsModule,
   ReactiveFormsModule,
-  BarRatingModule
+  BarRatingModule,
 ]
 @NgModule({
   declarations: [...COMPONENTS, ...PIPES],

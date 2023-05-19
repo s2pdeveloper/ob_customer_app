@@ -8,6 +8,10 @@
 		"classpath": "com.getcapacitor.community.datepicker.DatePickerPlugin"
 	},
 	{
+		"pkg": "@capacitor-community/photoviewer",
+		"classpath": "com.getcapacitor.community.media.photoviewer.PhotoViewerPlugin"
+	},
+	{
 		"pkg": "@capacitor/app",
 		"classpath": "com.capacitorjs.plugins.app.AppPlugin"
 	},

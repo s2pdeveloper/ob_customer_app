@@ -8,6 +8,9 @@ project(':capacitor-community-barcode-scanner').projectDir = new File('../node_m
 include ':capacitor-community-date-picker'
 project(':capacitor-community-date-picker').projectDir = new File('../node_modules/@capacitor-community/date-picker/android')
 
+include ':capacitor-community-photoviewer'
+project(':capacitor-community-photoviewer').projectDir = new File('../node_modules/@capacitor-community/photoviewer/android')
+
 include ':capacitor-app'
 project(':capacitor-app').projectDir = new File('../node_modules/@capacitor/app/android')
 
