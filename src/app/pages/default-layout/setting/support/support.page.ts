@@ -21,7 +21,7 @@ export class SupportPage implements OnInit {
       lastName: new FormControl('', Validators.required),
       email: new FormControl(''),
       description: new FormControl('', Validators.required),
-      customerId: new FormControl('',)
+      userId: new FormControl('',)
     },
   );
   constructor(private spinner: LoaderService,
@@ -38,7 +38,7 @@ export class SupportPage implements OnInit {
   }
   getUserDetails() {
     this.user = this.userService.getCurrentUser();
-    this.supportForm.controls.customerId.setValue(this.user.id)
+    this.supportForm.controls.userId.setValue(this.user.id)
     this.supportForm.patchValue(this.user)
   }
 
