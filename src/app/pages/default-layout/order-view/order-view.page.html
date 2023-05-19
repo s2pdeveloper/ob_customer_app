@@ -14,7 +14,7 @@
   <a (click)="viewShop()">{{shopName}}</a>
 </ion-label>
 <ion-content>
-  
+
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll">
       <div class="message-wrap">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="msg-info">
-              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message.image)" />
+              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message)" />
               <ion-icon name="cloud-download-outline" *ngIf="message.image" class="download"
                 (click)="downloadImage(message)"></ion-icon>
             </div>
@@ -104,3 +104,7 @@
   </div>
 </ion-footer>
 
+<div id="photo-container" *ngIf="photoViewerConfig.images.length > 0">
+  <app-photoviewer (pvExit)="handleExit($event)" [imageList]="photoViewerConfig.images" [mode]="photoViewerConfig?.mode"
+    [startFrom]="0"></app-photoviewer>
+</div>

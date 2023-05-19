@@ -156,3 +156,13 @@ ion-chip {
   background-color: rgb(241, 239, 239);
   padding: 5px;
 }
+
+#photo-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: #000;
+  z-index: 999;
+}

@@ -19,6 +19,7 @@ import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
+import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 
 @Component({
   selector: 'app-order-view',
@@ -31,7 +32,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
-  isPreview: boolean= false;
+  isPreview: boolean = false;
 
   page: number = 1;
   pageSize: number = 10;
@@ -49,6 +50,17 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   messageCategory = messageCategory;
   orderDetails: any = {};
 
+  photoViewerConfig = {
+    mode: 'one',
+    images: [],
+    options: {
+      title: false,
+      share: false,
+      transformer: 'depth',
+      backgroundcolor: 'black'
+    }
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -63,7 +75,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private restService: RestService,
     private orderService: OrderService,
     public popoverController: PopoverController,
-
+    private photoViewerService: PhotoViewerService
   ) {
     this.receiveListMessages(false, "");
     this.receiveMessage();
@@ -349,37 +361,25 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  async previewImage(url) {
-    console.log(url);
-this.isPreview=true;
-
-    const opt: capShowOptions = {} as capShowOptions;
-    opt.images = [{ url: url, title: '' }];
-    opt.mode = 'one';
-    // if( mode === 'one' || mode === 'slider') {
-    //   opt.startFrom = startFrom;
-    // }
-    // if(options) {
-    //   opt
-    console.log("url.........................", url);
-    try {
-      const ret = await this.pvPlugin.show(opt);
-      console.log("ret", ret);
-
-      // if(ret.result) {
-      //     return Promise.resolve(ret);
-      // } else {
-      //     return Promise.reject(ret.message);
-      // }
-    } catch (err) {
-      console.log("err", err);
-
-      // const ret: capShowResult = {} as capShowResult;
-      // ret.result = false;
-      // ret.message = err.message;
-      // return Promise.reject(err.message);
-    }
-
+  async previewImage(message) {
+    this.photoViewerConfig.images.push({
+      url: message.image,
+      title: ''
+    });
   }
 
+
+  handleExit(ev) {
+    this.photoViewerConfig.images = []
+    console.log(`&&& ev: ${JSON.stringify(ev)}`);
+    const keys = Object.keys(ev);
+    if (keys.includes('result') && ev.result) {
+      if (keys.includes('imageIndex')) {
+        console.log(`last image index: ${ev.imageIndex}`);
+      }
+    }
+    if (keys.includes('message')) {
+      console.log(`returned message: ${ev.message}`);
+    }
+  }
 }
