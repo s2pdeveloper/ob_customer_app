@@ -71,7 +71,7 @@ export class ShopDetailPage implements OnInit {
     });
   }
   navigateTo(path) {
-    let params = { shopId: this.shopId, shopUserId: this.shopUser.id };
+    let params = { shopId: this.shopId, shopUserId: this.shopUser.id, shopName: this.shopUser.shopDetails.shopName };
     this.router.navigate([path], { queryParams: params });
   }
   goToMap(address: string) {
@@ -119,7 +119,7 @@ export class ShopDetailPage implements OnInit {
   goToChat() {
     let params = { shopName: this.shopName, shopId: this.shopId };
     console.log(params);
-    
+
     this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
   }
 

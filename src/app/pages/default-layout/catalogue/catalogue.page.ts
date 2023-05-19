@@ -44,6 +44,7 @@ export class CataloguePage implements OnInit {
   subCategory: any = [];
   shopDetailsId: any;
   productArray: any = [];
+  shopName: string;
 
   constructor(
     private router: Router,
@@ -61,6 +62,7 @@ export class CataloguePage implements OnInit {
     this.page = 1;
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe((params: any) => {
+      this.shopName = params.shopName;
       this.shopDetailsId = params.shopUserId;
       this.shopId = params.shopId
       if (params.shopId) {
@@ -112,6 +114,7 @@ export class CataloguePage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.subCategory.push(success.data[i]);
       }
+      console.log("subCategory", this.subCategory);
       this.subCategory = [...new Map(this.subCategory.map(item => [item.subCategory._id, item])).values()]
       if (isFirstLoad)
         event.target.complete();
@@ -161,7 +164,7 @@ export class CataloguePage implements OnInit {
     let filteredData = this.productArray.filter(x => x.isChecked);
     if (filteredData.length > 0) {
       this.storageService.set("orderData", filteredData)
-      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId, shopUserId: this.shopDetailsId } });
+      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId, shopUserId: this.shopDetailsId, shopName: this.shopName } });
     } else {
       this.toaster.warningToast("please select at least one product")
     }
