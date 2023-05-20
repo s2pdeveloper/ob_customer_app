@@ -35,8 +35,6 @@ export class OrderRatingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("this.rating Object", this.ratingObj);
-
   }
 
   ionViewWillEnter() {

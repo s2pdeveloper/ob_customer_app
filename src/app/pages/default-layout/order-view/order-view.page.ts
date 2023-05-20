@@ -132,8 +132,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success.orderDetails;
       this.ratingDetails = success.ratingDetails;
-      console.log("this.orderDetails", this.orderDetails, this.ratingDetails);
-
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
