@@ -16,7 +16,7 @@ import { validateField } from 'src/app/shared/validators/form.validator';
 })
 export class OrderRatingComponent implements OnInit {
 
-  @Input() ratingObj: any;
+  @Input() ratingObj: any = {};
   user: any;
   errorMessages = ratingFormErrors;
   formData = new FormGroup({
@@ -35,12 +35,15 @@ export class OrderRatingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("this.rating Object", this.ratingObj);
+
   }
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.formData.controls.orderId.setValue(this.ratingObj.orderId)
     this.formData.controls.shopId.setValue(this.ratingObj.shopId)
+    this.formData.controls.productQuality.patchValue(this.ratingObj.ratingDetails.productQuality)
   }
 
   get form() {

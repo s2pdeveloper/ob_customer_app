@@ -49,6 +49,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   messageCategory = messageCategory;
   orderDetails: any = {};
+  ratingDetails: any = {};
 
   photoViewerConfig = {
     mode: 'one',
@@ -129,7 +130,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
-      this.orderDetails = success;
+      this.orderDetails = success.orderDetails;
+      this.ratingDetails = success.ratingDetails;
+      console.log("this.orderDetails", this.orderDetails, this.ratingDetails);
+
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
@@ -279,11 +283,13 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       componentProps: {
         ratingObj: {
           shopId: this.shopId,
-          orderId: this.orderId
+          orderId: this.orderId,
+          ratingDetails: this.ratingDetails,
         }
       }
     });
     await modal.present();
+    this.getOrderById();
   }
 
   async modalReport() {
