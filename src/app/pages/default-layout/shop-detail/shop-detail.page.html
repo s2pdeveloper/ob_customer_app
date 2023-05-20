@@ -174,20 +174,13 @@
 
 <ion-footer class="ion-no-border">
 
-  <ion-item *ngIf="[businessType.PRODUCT,businessType.RESALE].includes(shopUser?.shopDetails?.businessType.name)">
+  <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopUser?.shopDetails?.businessType.name === businessType.SERVICES">
-    <ion-col class=" ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'Book Appointment' |
-        translate}}</ion-button>
-    </ion-col>
-  </ion-item>
-
-  <ion-item *ngIf="shopUser?.shopDetails?.businessType.name === businessType.PRODUCT_AND_SERVICES">
+  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService">
     <ion-col size="6">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
