@@ -100,7 +100,7 @@ export class LandingPagePage implements OnInit {
     this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
     let payload = {
-      deviceId: localStorage.getItem('deviceToken'),
+      deviceToken: localStorage.getItem('deviceToken'),
       platform: this.deviceInfo?.platform
     };
     this.userService.addDeviceToken(payload).subscribe();
