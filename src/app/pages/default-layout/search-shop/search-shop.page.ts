@@ -94,7 +94,8 @@ export class SearchShopPage implements OnInit {
       geoNearestDistance: this.geoNearestDistance
     };
     if (this.search) {
-      obj['search'] = this.search
+      obj['search'] = this.search,
+        obj['geoNearestDistance'] = this.geoNearestDistance
     }
     this.shopService.list(obj).subscribe(async (success) => {
       this.collection = success.count;
