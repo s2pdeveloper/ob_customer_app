@@ -140,21 +140,19 @@ export class LandingPagePage implements OnInit {
   seeAllCategory() {
     this.router.navigate(['/category']);
   }
-  getAllAdvertise() {
+  async getAllAdvertise() {
     this.advertiseService.getAll({}).subscribe(
       async (success) => {
         this.advertiseArr = success.map(x => {
           x.contentType = x.image.slice(x.image.lastIndexOf('.'));
           return x;
         });
-        console.log("advertiseArr", this.advertiseArr);
-
       }, (error) => {
         this.spinner.hideLoader();
       }
     )
   }
-  getAllOffer() {
+  async getAllOffer() {
     this.offerService.getAll({}).subscribe(
       async (success) => {
         this.offerArr = success;
