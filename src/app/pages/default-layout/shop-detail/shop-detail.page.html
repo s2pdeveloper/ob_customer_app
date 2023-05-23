@@ -174,13 +174,19 @@
 
 <ion-footer class="ion-no-border">
 
-  <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService">
+  <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0">
     <ion-col class=" ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService">
+  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 ">
+    <ion-col class=" ion-text-center">
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
+    </ion-col>
+  </ion-item>
+
+  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0">
     <ion-col size="6">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
