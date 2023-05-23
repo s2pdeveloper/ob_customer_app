@@ -167,6 +167,15 @@ export class LandingPagePage implements OnInit {
     const path: string = `/shop-detail/${id}`;
     this.router.navigate([path]);
   }
+
+  navigateToShopList(item) {
+    let id = item;
+    this.router.navigate(['/search-shop'], {
+      queryParams: {
+        shopId: id,
+      },
+    });
+  }
   getAllCategory() {
     this.categoryService.getAllCategory({}).subscribe(
       async (success) => {
@@ -180,6 +189,7 @@ export class LandingPagePage implements OnInit {
     this.advertiseService.getAllSeasonalOffer({}).subscribe(
       async (success) => {
         this.seasonalOffer = success;
+        console.log("this.seasonalOfffer", this.seasonalOffer);
       }, (error) => {
         this.spinner.hideLoader();
       }
