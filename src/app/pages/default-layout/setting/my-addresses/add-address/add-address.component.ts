@@ -20,7 +20,7 @@ import { validateField } from 'src/app/shared/validators/form.validator';
 export class AddAddressComponent implements OnInit {
 
   addressForm = new FormGroup({
-    id: new FormControl('', []),
+    id: new FormControl(''),
     type: new FormControl('', [Validators.required]),
     addressLine1: new FormControl('', [Validators.required]),
     addressLine2: new FormControl('', []),

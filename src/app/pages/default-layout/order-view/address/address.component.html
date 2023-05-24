@@ -5,27 +5,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-no-padding">
-  <ion-item lines="none" class="ion-padding-top">
-    <ion-icon name='location' color="primary"></ion-icon>
+<ion-content>
+  <div class="ion-padding">
+  <ion-item>
+    <ion-icon name='location' color="primary" class="ion-margin-end"></ion-icon>
     <ion-label (click)="openMap()"><b>{{'locationSend'| translate}}</b></ion-label>
   </ion-item>
+
+  <ion-item>
+    <ion-icon name='add-sharp' color="primary" class="ion-margin-end"></ion-icon>
+    <ion-label (click)="modalAddress(null)"><b>{{'addAddress'| translate}}</b></ion-label>
+  </ion-item>
+
+
+<ion-item lines="none" class="ion-margin-top">
+  <ion-label class="address">Saved Addresses</ion-label>
+</ion-item>
+
   <ion-list *ngIf="addressData.length >0;else noData">
-    <ion-item lines="none" *ngFor="let item of addressData;let i = index" (click)="selectedAddress(item)">
+    <ion-item  *ngFor="let item of addressData;let i = index">
       <ion-chip slot="end" class="ion-text-capitalize">{{item?.type}}</ion-chip>
-      <ion-label>
+      <ion-label (click)="selectedAddress(item)">
         <ion-text class="ion-text-wrap">
-          <h4>{{item.city}},{{item.state}} - {{item?.pincode}}</h4>
+          <h2>{{item.city}},{{item.state}} - {{item?.pincode}}</h2>
         </ion-text>
-        <p class="ion-text-wrap">
+        <ion-label class="ion-text-wrap">
           <span> {{item.addressLine1}}</span>
           <span *ngIf="item.addressLine2">
             , {{item.addressLine2}}
           </span>
-        </p>
+        </ion-label>
       </ion-label>
+      <ion-icon slot="end" name="ellipsis-vertical" (click)="presentActionSheet(item,i)"></ion-icon>
     </ion-item>
   </ion-list>
+</div>
   <ng-template #noData>
     <app-data-unavailable [customText]="'No default address found'" [buttonText]="'addAddress' | translate">
     </app-data-unavailable>

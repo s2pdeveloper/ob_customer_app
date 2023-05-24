@@ -242,8 +242,8 @@ export class LandingPagePage implements OnInit {
   getSearchText() {
     let placeholders = [
       "Search Shop",
-      "Search Product",
-      "Search Category"
+      // "Search Product",
+      // "Search Category"
     ];
     let currentIndex = 0;
     this.dynamicText$ = interval(3005).subscribe(() => {

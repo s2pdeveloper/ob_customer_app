@@ -24,14 +24,7 @@ export class ViewProfilePage implements OnInit {
     this.getUserDetails();
   }
 
-  // getUserDetails() {
-  //   this.userService.currentUser.subscribe((userData:any) => {
-  //     this.user = userData;
-  //     console.log("userData.......",userData); 
-  //   });
-  // }
-
-  getUserDetails() {
+ getUserDetails() {
     this.userService.getProfile().subscribe((userData: any) => {
       this.user = userData;
     });

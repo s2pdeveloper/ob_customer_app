@@ -37,10 +37,10 @@
                 - {{shopUser?.address?.pinCode}}
               </h4>
             </ion-text>
-            <ion-note class="ion-padding-top ion-text-wrap">
-              {{shopUser?.shopDetails?.schedule?.startTime}} AM to
-              {{shopUser?.shopDetails?.schedule?.endTime}} PM
-            </ion-note>
+            <!-- <ion-note class="ion-padding-top ion-text-wrap">
+              {{shopUser?.shopDetails?.schedule?.startTime}}
+              {{shopUser?.shopDetails?.schedule?.endTime}} 
+            </ion-note> -->
 
           </ion-col>
         </ion-item>
@@ -57,11 +57,13 @@
                     <ion-segment-button value="gallery">
                       <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
                     </ion-segment-button>
+                    <ion-segment-button value="schedule">
+                      <ion-label class="ion-text-wrap">{{ 'schedule' | translate}}</ion-label>
+                    </ion-segment-button>
                     <ion-segment-button value="reviews">
                       <ion-label class="ion-text-wrap">{{ 'reviews' | translate}}</ion-label>
                     </ion-segment-button>
                   </ion-segment>
-
                   <div [ngSwitch]="type">
                     <ion-list *ngSwitchCase="'about'">
                       <ion-item lines="none">
@@ -139,14 +141,13 @@
                     <ion-list *ngSwitchCase="'gallery'">
                       <ion-card>
                         <ion-grid *ngIf="shopUser?.shopDetails?.galleryImages?.length > 0;else noDataFound">
-                          <!-- <ion-grid> -->
                           <ion-row>
                             <ion-col *ngFor="let galleryImg of shopUser?.shopDetails?.galleryImages" size="6"
                               (click)="navigateToViewGalleryImages(shopUser?.shopDetails?.galleryImages)">
                               <img class="gallery ion-no-padding" src="{{galleryImg}}" />
                             </ion-col>
                           </ion-row>
-                          <!-- </ion-grid> -->
+
                         </ion-grid>
                         <ng-template #noDataFound>
                           <div class="noData">
@@ -155,10 +156,26 @@
                         </ng-template>
                       </ion-card>
                     </ion-list>
+                    <!-- schedule -->
+                    <ion-list *ngSwitchCase="'schedule'" >
+                        <ion-grid>
+                          <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
+                            <ion-col size="4">
+                              <b>{{item?.schedule?.day}}</b>
+                            </ion-col>
+                            <ion-col size="7" >
+                              <p *ngFor="let session of item?.schedule?.session">
+                               <b> {{session?.sessionName}}  {{session?.startTime ? '-' +session?.startTime : ''}} {{session?.endTime}}</b>
+                              </p>
+                            </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                    </ion-list>
                     <!-- reviews -->
                     <ion-list *ngSwitchCase="'reviews'">
                       <ion-label>Review goes here</ion-label>
                     </ion-list>
+
                   </div>
                 </ion-card-content>
               </ion-card>

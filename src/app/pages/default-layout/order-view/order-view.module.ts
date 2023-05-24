@@ -13,6 +13,7 @@ import { OrderRatingComponent } from './order-rating/order-rating.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoviewerComponentModule } from 'src/app/shared/photoviewer/photoviewer.module';
+import { MyAddressesPageModule } from '../setting/my-addresses/my-addresses.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,8 @@ import { PhotoviewerComponentModule } from 'src/app/shared/photoviewer/photoview
     IonicModule,
     OrderViewPageRoutingModule,
     SharedModule,
-    PhotoviewerComponentModule
+    PhotoviewerComponentModule,
+    MyAddressesPageModule
   ],
   declarations: [OrderViewPage, OrderRatingComponent, ReportComponent, AddressComponent],
   providers: [UploadService],

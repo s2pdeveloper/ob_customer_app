@@ -345,20 +345,23 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async address() {
     const modal = await this.modalCtrl.create({
       component: AddressComponent,
-      cssClass: 'address-modal',
+      cssClass: '', 
       mode: 'ios',
       swipeToClose: true,
       componentProps: {},
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data?.data?.data?.coordinates) {
+  if (data?.data?.data?.coordinates) {
       let coordinates = data.data.data.coordinates
       this.chatForm.controls.message.setValue('Location');
       this.chatForm.controls.category.setValue(messageCategory.LOCATION);
       this.chatForm.controls.location.setValue(coordinates);
       this.sendMessage();
-    } else {
+    } else if (data.data == null) {
+      return
+    }
+    else {
       this.chatForm.controls.message.setValue(`Address : ${data.data}`);
       this.sendMessage();
     }
