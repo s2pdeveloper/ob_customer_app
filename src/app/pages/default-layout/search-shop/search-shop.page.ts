@@ -103,8 +103,6 @@ export class SearchShopPage implements OnInit {
         obj['geoNearestDistance'] = this.geoNearestDistance
     }
     this.shopService.list(obj).subscribe(async (success) => {
-      console.log("success@@@@@@@@@@@@@@@@@",success);
-      
       this.collection = success.count;
       if (this.shopList.length < this.collection) {
         for (let i = 0; i < success.data.length; i++) {

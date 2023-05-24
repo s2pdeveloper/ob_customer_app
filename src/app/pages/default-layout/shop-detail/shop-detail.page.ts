@@ -57,7 +57,6 @@ export class ShopDetailPage implements OnInit {
   async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
-      console.log("this.shopuser@@@@@@@@@@@@@@", this.shopUser);
       await this.spinner.hideLoader();
     });
   }

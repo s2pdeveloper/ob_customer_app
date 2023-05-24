@@ -37,14 +37,8 @@
                 - {{shopUser?.address?.pinCode}}
               </h4>
             </ion-text>
-            <!-- <ion-note class="ion-padding-top ion-text-wrap">
-              {{shopUser?.shopDetails?.schedule?.startTime}}
-              {{shopUser?.shopDetails?.schedule?.endTime}} 
-            </ion-note> -->
-
           </ion-col>
         </ion-item>
-
         <ion-grid>
           <ion-row>
             <ion-col size="12">
@@ -157,19 +151,20 @@
                       </ion-card>
                     </ion-list>
                     <!-- schedule -->
-                    <ion-list *ngSwitchCase="'schedule'" >
-                        <ion-grid>
-                          <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
-                            <ion-col size="4">
-                              <b>{{item?.schedule?.day}}</b>
-                            </ion-col>
-                            <ion-col size="7" >
-                              <p *ngFor="let session of item?.schedule?.session">
-                               <b> {{session?.sessionName}}  {{session?.startTime ? '-' +session?.startTime : ''}} {{session?.endTime}}</b>
-                              </p>
-                            </ion-col>
-                          </ion-row>
-                        </ion-grid>
+                    <ion-list *ngSwitchCase="'schedule'">
+                      <ion-grid>
+                        <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
+                          <ion-col size="4">
+                            <b>{{item?.schedule?.day}}</b>
+                          </ion-col>
+                          <ion-col size="7">
+                            <p *ngFor="let session of item?.schedule?.session">
+                              <b> {{session?.sessionName}} {{session?.startTime ? '-' +session?.startTime : ''}}
+                                {{session?.endTime}}</b>
+                            </p>
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
                     </ion-list>
                     <!-- reviews -->
                     <ion-list *ngSwitchCase="'reviews'">
