@@ -151,9 +151,9 @@
   "Search": "Search",
   "Offers": "Offers",
   "See all": "See all",
-  "Product": "Product",
-  "Place Order": "Place Order",
-  "Type your message...": "Type your message...",
+  "product": "Product",
+  "placeOrder": "Place Order",
+  "typeYourMessage": "Type your message...",
   "Settings": "Settings",
   "Setting": "Setting",
   "My Profile": "My Profile",
@@ -168,7 +168,7 @@
   "shopDetails": "Shop Detail",
   "gallery": "Gallery",
   "shopOwnerName": "Shop Owner Name",
-  "Address": "Address",
+  "address": "Address",
   "viewCatalogue": "View Product",
   "chat": "Chat",
   "QR Code": "QR Code",
@@ -179,5 +179,7 @@
   "orders": "Orders",
   "giveRating": "Give Rating",
   "sendLocation": "Send Location",
-  "searchSubCategory": "Search Sub-Category"
+  "searchSubCategory": "Search Sub-Category",
+  "checkout":"Checkout",
+  "searchProduct":"Search Product"
 }

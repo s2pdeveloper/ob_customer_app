@@ -10,9 +10,6 @@
 <ion-content>
   <img src="assets/images/undraw_unlock_re_a558.svg" class="head-image">
   <div class="ion-padding">
-    <!-- <ion-text class="text-label text-color-2 font-weight-bold">
-      {{ 'verificationLabel' | translate}}
-    </ion-text> -->
     <p class="text-color-1">
       {{ 'verificationDescription' | translate}} +{{form.countryCode.value}} {{form.mobileNumber.value}}
     </p>
@@ -21,7 +18,7 @@
       <ion-item class="input-class" lines="none">
         <ion-label class="text-color-2" position="stacked">{{ 'otp' | translate}}</ion-label>
         <ion-input  type="tel" name="otp" placeholder="{{ 'otp' | translate}}" autocomplete="on"
-          clearInput formControlName="otp" >
+          clearInput formControlName="otp" (keyup.enter)="onSubmit()" >
         </ion-input>
       </ion-item>
       <div class="text-left" *ngFor="let error of errorMessages.otp">

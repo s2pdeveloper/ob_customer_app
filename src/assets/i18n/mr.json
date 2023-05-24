@@ -165,9 +165,9 @@
   "Search": "शोधा",
   "Offers": "ऑफर",
   "See all": "सर्व पाहा",
-  "Product": "उत्पादन",
-  "Place Order": "मागणी नोंद करा",
-  "Type your message...": "तुमचा संदेश टाइप करा...",
+  "product": "उत्पादन",
+  "placeOrder": "मागणी नोंद करा",
+  "typeYourMessage": "तुमचा संदेश टाइप करा...",
   "Settings": "सेटिंग्ज",
   "Setting": "सेटिंग्ज",
   "My Profile": "माझे प्रोफाइल",
@@ -192,5 +192,7 @@
   "favoritesShop": "आवडते दुकान",
   "orders": "ऑर्डर",
   "giveRating": "रेटिंग द्या",
-  "sendLocation": "स्थान पाठवा"
+  "sendLocation": "स्थान पाठवा",
+  "checkout":"तपासा",
+  "searchProduct":"उत्पादन शोधा"
 }
