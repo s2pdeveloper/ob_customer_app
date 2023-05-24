@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'Product' | translate}}</ion-title>
+    <ion-title>{{'product' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="category" mode="md"></ion-back-button>
     </ion-buttons>
@@ -16,7 +16,7 @@
   </ion-refresher>
   <ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
     showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
-    placeholder="{{ 'Search Product' | translate}}">
+    placeholder="{{ 'searchProduct' | translate}}">
   </ion-searchbar>
 
   <ion-slides [options]="buttonSlide" class="ion-padding">
@@ -76,8 +76,13 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
-  <ion-button color="primary" expand="block" strong="true" shape="round" class="ion-margin-top"
-    *ngIf="productArray?.length > 0" (click)="navigateToCheckout()">
-    {{'Checkout' | translate}}
-  </ion-button>
 </ion-content>
+
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding-top footer-msg" *ngIf="productArray?.length > 0">
+    <ion-button (click)="navigateToCheckout()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{'Checkout' | translate}}
+    </ion-button>
+  </div>
+</ion-footer>

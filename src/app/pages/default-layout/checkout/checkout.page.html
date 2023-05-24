@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'Checkout' | translate}}</ion-title>
+    <ion-title>{{'checkout' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="checkout" mode="md"></ion-back-button>
     </ion-buttons>
@@ -52,9 +52,12 @@
       </div>
     </ng-template>
   </div>
-  <div class="clearfix ion-padding-top">
-    <ion-button  *ngIf="orderData?.length > 0" (click)="navigateToChat()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
-      {{ 'Place Order' | translate}}
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="ion-padding-top footer-msg" *ngIf="orderData?.length > 0">
+    <ion-button (click)="navigateToChat()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{ 'placeOrder' | translate}}
     </ion-button>
   </div>
-</ion-content>
+</ion-footer>
