@@ -336,7 +336,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     const { data } = await popover.onDidDismiss();
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
       this.modalRating()
-    } else {
+    }
+    if (data.event === 'report') {
       this.modalReport();
     }
   }

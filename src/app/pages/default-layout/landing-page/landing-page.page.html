@@ -74,7 +74,7 @@
       <ion-col size="6" size-lg="4" size-md="5" *ngFor="let img of item.media ; let i=index" style="display: flex;">
         <ion-card class="seasonal-card shadow-color-1" button="true">
           <div>
-            <div class="ion-no-padding ion-text-center ion-padding-vertical" (click)="navigateToShopList(img.shopId)">
+            <div class="ion-no-padding ion-text-center" (click)="navigateToShopList(img.shopId)">
               <img class="img-seasonal" height="100%" width="100%" *ngIf="img.image" src={{img.image}}>
               <img class="img-seasonal" height="100%" width="100%" *ngIf="!img.image"
                 src="assets/images/placeholder_product.png" alt="offer-image" />
