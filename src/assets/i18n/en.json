@@ -67,9 +67,10 @@
   "selectLanguage": "Select Language",
   "home": "Home",
   "homeType": "Home",
-  "nearBy :":"Near By",
+  "nearBy :": "Near By",
   "workType": "Work",
-  "locationSend":"Send Your Current Location",
+  "above": "Above",
+  "locationSend": "Send Your Current Location",
   "selectType": "Select Type",
   "addressLine1": "Address Line 1",
   "addressLine2": "Address Line 2",
@@ -180,6 +181,6 @@
   "giveRating": "Give Rating",
   "sendLocation": "Send Location",
   "searchSubCategory": "Search Sub-Category",
-  "checkout":"Checkout",
-  "searchProduct":"Search Product"
+  "checkout": "Checkout",
+  "searchProduct": "Search Product"
 }

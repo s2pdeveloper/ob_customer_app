@@ -153,13 +153,13 @@ export class SearchShopPage implements OnInit {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    if (data.data) {
+    if (data?.data?.geoNearestDistance) {
+      console.log("data?.data?.geoNearestDistance", data?.data?.geoNearestDistance);
       this.geoNearestDistance = data?.data?.geoNearestDistance
       this.shopList = [];
       this.getAllShop(false, "");
     }
   }
-
 }
 
 

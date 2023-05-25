@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class FilterComponent implements OnInit {
   selectedData: string = '';
   filterForm = new FormGroup({
-    geoNearestDistance: new FormControl('', [Validators.required]),
+    geoNearestDistance: new FormControl(2, [Validators.required]),
   });
   constructor(
     private modalCtrl: ModalController,
@@ -39,6 +39,8 @@ export class FilterComponent implements OnInit {
     await this.modalCtrl.dismiss({
       'dismissed': false,
       data: this.filterForm.value,
+
     });
+    console.log("data", this.filterForm.value);
   }
 }

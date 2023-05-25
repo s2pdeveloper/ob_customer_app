@@ -61,6 +61,7 @@
   "home": "मुख्य पृष्ठ",
   "homeType": "घर",
   "workType": "कामाचे घर",
+  "above": "वर",
   "addressLine1": "पत्ता ओळ 1",
   "addressLine2": "पत्ता ओळ 2",
   "selectType": "प्रकार निवडा",
@@ -193,6 +194,6 @@
   "orders": "ऑर्डर",
   "giveRating": "रेटिंग द्या",
   "sendLocation": "स्थान पाठवा",
-  "checkout":"तपासा",
-  "searchProduct":"उत्पादन शोधा"
+  "checkout": "तपासा",
+  "searchProduct": "उत्पादन शोधा"
 }
