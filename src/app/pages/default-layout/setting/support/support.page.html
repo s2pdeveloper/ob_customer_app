@@ -54,9 +54,9 @@
           <small class="text-color-danger">{{ error.message }}</small>
         </ng-container>
       </div>
-      <div class="ion-text-center ion-margin-vertical">
-        <ion-button color="primary" expand="block" shape="round" class="btn" (click)="onSubmit()">
-          {{ 'submit' | translate}}
+      <div class="clearfix ion-padding-top">
+        <ion-button (click)="onSubmit()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+          {{ 'save' | translate}}
         </ion-button>
       </div>
     </form>

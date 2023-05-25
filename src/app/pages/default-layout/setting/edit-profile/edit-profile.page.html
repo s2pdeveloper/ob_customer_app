@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+<ion-content class="ion-padding">
+
     <div class="img">
       <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
         <img src="{{profileForm.value.profilePicture}}">
@@ -22,6 +22,7 @@
       </ion-text>
     </div>
     <form [formGroup]="profileForm">
+     
       <ion-item class="input-class" lines="none">
         <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
             class="span-color">*</span></ion-label>
@@ -50,11 +51,12 @@
           clearInput>
         </ion-input>
       </ion-item>
-      <div class="ion-text-center ion-margin-vertical">
-        <ion-button color="primary" expand="block" shape="round" class="btn" (click)="updateProfile()">
-          {{ 'submit' | translate}}
+      <div class="clearfix ion-padding-top">
+        <ion-button (click)="updateProfile()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+          {{ 'save' | translate}}
         </ion-button>
       </div>
+    
     </form>
-  </ion-card>
+
 </ion-content>

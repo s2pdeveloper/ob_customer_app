@@ -168,7 +168,7 @@
   "Search": "खोज",
   "Offers": "ऑफर",
   "See all": "सभी देखें",
-  "product": "उत्पाद",
+  "chooseAndPickItem": "आइटम चुनें ",
   "placeOrder": "आदेश देना",
   "typeYourMessage": "अपना संदेश टाइप करें...",
   "Settings": "समायोजन",
@@ -180,7 +180,7 @@
   "chats": "चैट",
   "new": "नया",
   "completed": "पुरा",
-  "shopList": "दुकान सूची",
+  "allShops": "दुकान सूची",
   "searchShop": "दुकान खोजें",
   "shopDetails": "दुकान विवरण",
   "shopOwnerName": "दुकान मालिक का नाम",
@@ -196,6 +196,8 @@
   "orders": " ऑर्डर",
   "giveRating": "रेटिंग दें",
   "sendLocation": "स्थान भेजें",
-  "checkout":"चेक आउट",
-  "searchProduct":"खोज उत्पाद"
+  "proceedToCheckout":"चेक आउट करने के लिए आगे बढ़ें",
+  "searchProduct":"खोज उत्पाद",
+  "viewTerms":"उपयोग की शर्तें देखें",
+  "viewPrivacy":"गोपनीयता नीति देखें"
 }

@@ -23,52 +23,15 @@
   }
 }
 
-
-// .modal-small {
-//     .modal-wrapper {
-//       position: absolute;
-//       width: 100vw;
-//       --max-height: 50vh;
-//       bottom: 0;
-//       left: 0;
-//       right: 0;
-//       border-top-left-radius: 5%;
-//       border-top-right-radius: 5%;
-//     }
-//   }
-  .modal-medium {
-    .modal-wrapper {
-      position: absolute;
-      width: 100vw;
-      --max-height: 70vh;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-top-left-radius: 5%;
-      border-top-right-radius: 5%;
+.my-popover-class {
+  .popover-wrapper {
+    .popover-content {
+      .sc-ion-select-popover {
+        padding: 0 !important;
+      }
+      // max-width: 100px;
+      // left: 221px !important;
+      // transform-origin: left  !important;
     }
   }
-  
-//   .my-popover-class {
-//     .popover-wrapper {
-//       .popover-content {
-//         .sc-ion-select-popover {
-//           padding: 0 !important;
-//         }
-//         // max-width: 100px;
-//         // left: 221px !important;
-//         // transform-origin: left  !important;
-//       }
-//     }
-//   }
-  
-
-
-ion-datetime {
-    // --background: #fff1f2;
-    // --color:blue;
-    // color:blue;
-    --background-rgb: 255, 241, 242;  
-    border-radius: 16px;
-    box-shadow: rgba(var(--ion-color-rose-rgb), 0.3) 0px 10px 15px -3px;
-  }
+}

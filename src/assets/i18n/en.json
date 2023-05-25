@@ -152,7 +152,7 @@
   "Search": "Search",
   "Offers": "Offers",
   "See all": "See all",
-  "product": "Product",
+  "chooseAndPickItem": "Choose and pick item",
   "placeOrder": "Place Order",
   "typeYourMessage": "Type your message...",
   "Settings": "Settings",
@@ -164,7 +164,7 @@
   "chats": "chats",
   "new": "new",
   "completed": "Past",
-  "shopList": "Shop List",
+  "allShops": "All shops",
   "searchShop": "Search Shop",
   "shopDetails": "Shop Detail",
   "gallery": "Gallery",
@@ -181,6 +181,8 @@
   "giveRating": "Give Rating",
   "sendLocation": "Send Location",
   "searchSubCategory": "Search Sub-Category",
-  "checkout": "Checkout",
-  "searchProduct": "Search Product"
+  "proceedToCheckout": "Proceed to checkout",
+  "searchProduct": "Search Product",
+  "viewTerms":"View terms of use",
+  "viewPrivacy":"View privacy policy"
 }

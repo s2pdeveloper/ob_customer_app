@@ -19,7 +19,7 @@
 
 
 <ion-item lines="none" class="ion-margin-top">
-  <ion-label class="address">Saved Addresses</ion-label>
+  <h2 class="address">Saved Addresses</h2>
 </ion-item>
 
   <ion-list *ngIf="addressData.length >0;else noData">
@@ -27,7 +27,7 @@
       <ion-chip slot="end" class="ion-text-capitalize">{{item?.type}}</ion-chip>
       <ion-label (click)="selectedAddress(item)">
         <ion-text class="ion-text-wrap">
-          <h2>{{item.city}},{{item.state}} - {{item?.pincode}}</h2>
+          <h4>{{item.city}},{{item.state}} - {{item?.pincode}}</h4>
         </ion-text>
         <ion-label class="ion-text-wrap">
           <span> {{item.addressLine1}}</span>

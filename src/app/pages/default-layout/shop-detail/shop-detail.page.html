@@ -54,9 +54,6 @@
                     <ion-segment-button value="schedule">
                       <ion-label class="ion-text-wrap">{{ 'schedule' | translate}}</ion-label>
                     </ion-segment-button>
-                    <ion-segment-button value="reviews">
-                      <ion-label class="ion-text-wrap">{{ 'reviews' | translate}}</ion-label>
-                    </ion-segment-button>
                   </ion-segment>
                   <div [ngSwitch]="type">
                     <ion-list *ngSwitchCase="'about'">
@@ -152,25 +149,20 @@
                     </ion-list>
                     <!-- schedule -->
                     <ion-list *ngSwitchCase="'schedule'">
-                      <ion-grid>
-                        <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
-                          <ion-col size="4">
-                            <b>{{item?.schedule?.day}}</b>
-                          </ion-col>
-                          <ion-col size="7">
-                            <p *ngFor="let session of item?.schedule?.session">
-                              <b> {{session?.sessionName}} {{session?.startTime ? '-' +session?.startTime : ''}}
-                                {{session?.endTime}}</b>
-                            </p>
-                          </ion-col>
-                        </ion-row>
-                      </ion-grid>
+                      <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
+                        <ion-col size="4">
+                          <b>{{item?.schedule?.day}}</b>
+                        </ion-col>
+                        <ion-col size="7">
+                          <p *ngFor="let session of item?.schedule?.session">
+                           {{session?.sessionName}} {{session?.startTime ? '-' + session?.startTime : ''}}
+                              {{session?.endTime}}
+                          </p>
+                        </ion-col>
+                      </ion-row>
+
                     </ion-list>
                     <!-- reviews -->
-                    <ion-list *ngSwitchCase="'reviews'">
-                      <ion-label>Review goes here</ion-label>
-                    </ion-list>
-
                   </div>
                 </ion-card-content>
               </ion-card>

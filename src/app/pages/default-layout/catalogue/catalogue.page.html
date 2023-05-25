@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'product' | translate}}</ion-title>
+    <ion-title>{{'chooseAndPickItem' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="category" mode="md"></ion-back-button>
     </ion-buttons>
@@ -24,7 +24,7 @@
       <div [ngClass]="item.isActive ? 'subCategoryActive':null"
         (click)="getProduct(item.subCategory._id)">
         <img class="img-box" src="{{item.subCategory.image}} " /><br />
-        <ion-note class="sub-heading ion-text-capitalize">{{item.subCategory.name}}</ion-note>
+        <ion-note class="sub-heading ion-text-capitalize ion-text-wrap">{{item.subCategory.name}}</ion-note>
       </div>
     </ion-slide>
   </ion-slides>
@@ -82,7 +82,7 @@
 <ion-footer class="ion-no-border">
   <div class="ion-padding-top footer-msg" *ngIf="productArray?.length > 0">
     <ion-button (click)="navigateToCheckout()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
-      {{'Checkout' | translate}}
+      {{'proceedToCheckout' | translate}}
     </ion-button>
   </div>
 </ion-footer>

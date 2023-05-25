@@ -15,14 +15,12 @@
       </ion-label>
     </ion-item>
 
-
     <ion-item button="true" (click)="navigateTo('change-language')">
       <ion-icon class="text-color-2" name="text" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'changeLanguage' | translate }}
         <p class="text-color-7">{{'Set App Language' | translate}}</p>
       </ion-label>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
 
     <!-- Terms of Use -->
@@ -30,8 +28,8 @@
       <ion-icon name="document-text-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'terms' | translate }}
+        <p class="text-color-7">{{'viewTerms' | translate}}</p>
       </ion-label>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
     <!-- Terms of Use -->
 
@@ -40,8 +38,8 @@
       <ion-icon name="people-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'privacy' | translate }}
+        <p class="text-color-7">{{'viewPrivacy' | translate}}</p>
       </ion-label>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
     <!-- Privacy Policy  -->
     <!-- support -->
@@ -49,8 +47,8 @@
       <ion-icon name="build" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'support' | translate }}
+        <p class="text-color-7">{{'support' | translate}}</p>
       </ion-label>
-      <ion-icon name="chevron-forward-outline" class="text-color-7" slot="end"></ion-icon>
     </ion-item>
     <!-- support -->
     <ion-item button="true" (click)="logOutAlert()" lines="none">
@@ -58,7 +56,7 @@
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"logout" | translate}}
-        <p class="text-color-7">{{"logout" | translate}}</p>
+        <p class="text-color-7">{{"logoutText" | translate}}</p>
       </ion-label>
     </ion-item>
 

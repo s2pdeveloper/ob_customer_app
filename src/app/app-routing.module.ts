@@ -84,14 +84,10 @@ const routes: Routes = [
         (m) => m.ChangeLanguagePageModule
       ),
   },
-
   {
-    path: 'notification-list',
+    path: 'notifications',
     canLoad: [AuthGuard],
-    loadChildren: () =>
-      import(
-        './pages/default-layout/notification-list/notification-list.module'
-      ).then((m) => m.NotificationListPageModule),
+    loadChildren: () => import('./pages/default-layout/notifications/notifications.module').then(m => m.NotificationsPageModule)
   },
   {
     path: 'category',

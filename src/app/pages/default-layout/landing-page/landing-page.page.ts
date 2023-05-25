@@ -189,7 +189,6 @@ export class LandingPagePage implements OnInit {
     this.advertiseService.getAllSeasonalOffer({}).subscribe(
       async (success) => {
         this.seasonalOffer = success;
-        console.log("this.seasonalOfffer", this.seasonalOffer);
       }, (error) => {
         this.spinner.hideLoader();
       }
@@ -202,8 +201,8 @@ export class LandingPagePage implements OnInit {
       },
     });
   }
-  navigateToProfilePage() {
-    this.router.navigate(['/view-profile']);
+  navigateTo() {
+    this.router.navigate(['/notifications']);
   }
 
   async openMap() {
