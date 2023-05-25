@@ -1,6 +1,6 @@
 .input-class {
   margin-top: 1.2rem;
-  --border-color: var(--ion-color-1);
+  --border-color: var(--ion-color-primary);
   --border-radius: 0.6em;
   --border-width: 1px;
 }
@@ -48,7 +48,7 @@
 }
 
 .alert-radio-inner.sc-ion-alert-md {
-  background-color: red !important;
+  background-color: --ion-color-primary !important;
 }
 
 .alert-button {
