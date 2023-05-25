@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
       this.pushNotificationService.registerForPushNotification();
       this.cameraService.requestPermission();
       this.barcodeScannerService.askPermission();
-      this.statusBarService.changeColor('#ff0000');
+      this.statusBarService.changeColor('#de0f3f');
       this.userService.populate();
       this.appBackButton.backButtonFunc();
     });
