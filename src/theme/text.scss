@@ -1,6 +1,6 @@
 .text-color-danger {
-  color: #e31b23 !important;
-  --color: #e31b23 !important;
+  color: --ion-color-primary !important;
+  --color: --ion-color-primary !important;
 }
 
 .text-color-dark {
