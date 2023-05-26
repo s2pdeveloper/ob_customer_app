@@ -326,8 +326,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
-    console.log(data);
-    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
+   if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
       this.toaster.errorToast("Your rating will active in past")
     }
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
