@@ -1,6 +1,6 @@
 {
   "signIn": "Sign In To Bharat Online",
-  "welcomeText": "Welcome back! Sign in with your previous account to continue shopping",
+  "welcomeText": "For shopping on Bharat Online Platform, Login with your account",
   "welcomeSignUpText": "Welcome! Sign up to continue shopping",
   "welcome": "Welcome",
   "appName": "Udhari Book App",
@@ -183,6 +183,14 @@
   "searchSubCategory": "Search Sub-Category",
   "proceedToCheckout": "Proceed to checkout",
   "searchProduct": "Search Product",
-  "viewTerms":"View terms of use",
-  "viewPrivacy":"View privacy policy"
+  "viewTerms": "View terms of use",
+  "viewPrivacy": "View privacy policy",
+  "profile": "Profile",
+  "otpText": "Enter otp",
+  "welcome": "Welcome",
+  "t&cNote1": "By clicking, I accept the",
+  "t&cNote2": "Terms & Conditions &",
+  "privacyPolicyNote1": "By continuing, I accept the ",
+  "privacyPolicyNote2": "Privacy Policy",
+  "schedule":"Timing"
 }

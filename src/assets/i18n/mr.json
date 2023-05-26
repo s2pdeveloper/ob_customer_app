@@ -41,7 +41,7 @@
   "report": "अहवाल",
   "resendOTP": "ओटीपी पुन्हा पाठवा",
   "verificationLabel": "आपले खाते पडताळा",
-  "verificationDescription": "Bharat Online ने तुमच्या मोबाईल नंबरवर व्हेरिफिकेशन कोड पाठवला आहे",
+  "verificationDescription": "आम्ही तुमच्या मोबाईल नंबरवर व्हेरिफिकेशन कोड पाठवला आहे",
   "resetPasswordLabel": "आपला इनबॉक्स तपासा",
   "oldPassword": "जुना पासवर्ड",
   "newPassword": "नवीन पासवर्ड",
@@ -197,5 +197,11 @@
   "proceedToCheckout": "चेकआउट करण्यासाठी पुढे जा",
   "searchProduct": "उत्पादन शोधा",
   "viewTerms":"वापराच्या अटी पहा",
-  "viewPrivacy":"गोपनीयता धोरण पहा"
+  "viewPrivacy":"गोपनीयता धोरण पहा",
+  "profile":"प्रोफाइल",
+  "otpText":"ओटीपी एंटर करा",
+  "t&cNote1": "क्लिक करून, मी स्वीकारतो",
+  "t&cNote2": "अटी व शर्ती &",
+  "privacyPolicyNote1": "सुरू ठेवून, मी स्वीकारतो",
+  "privacyPolicyNote2": "गोपनीयता धोरण"
 }

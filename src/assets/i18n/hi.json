@@ -199,5 +199,11 @@
   "proceedToCheckout":"चेक आउट करने के लिए आगे बढ़ें",
   "searchProduct":"खोज उत्पाद",
   "viewTerms":"उपयोग की शर्तें देखें",
-  "viewPrivacy":"गोपनीयता नीति देखें"
+  "viewPrivacy":"गोपनीयता नीति देखें",
+  "profile":"प्रोफ़ाइल",
+  "otpText":"ओटीपी दर्ज करें",
+  "t&cNote1": "क्लिक करके, मैं स्वीकार करता हूं",
+  "t&cNote2": "नियम एवं शर्तें &",
+  "privacyPolicyNote1": "जारी रखकर, मैं स्वीकार करता हूं",
+  "privacyPolicyNote2": "गोपनीयता नीति"
 }

@@ -48,11 +48,11 @@
                     <ion-segment-button value="about" checked>
                       <ion-label class="ion-text-wrap">{{ 'about' | translate}}</ion-label>
                     </ion-segment-button>
-                    <ion-segment-button value="gallery">
-                      <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
-                    </ion-segment-button>
                     <ion-segment-button value="schedule">
                       <ion-label class="ion-text-wrap">{{ 'schedule' | translate}}</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value="gallery">
+                      <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
                     </ion-segment-button>
                   </ion-segment>
                   <div [ngSwitch]="type">
@@ -116,6 +116,7 @@
                                 (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
                             <ion-note class="heading ion-texxt-center">{{'myOrders'|translate}}</ion-note>
+                            <!-- <ion-text>Simply Type Click and Share</ion-text> -->
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
@@ -127,6 +128,21 @@
                           <ion-note class=" heading ion-text-center">{{'call'|translate}}</ion-note>
                         </ion-col>
                       </ion-row>
+                    </ion-list>
+                    <!-- schedule -->
+                    <ion-list *ngSwitchCase="'schedule'">
+                      <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
+                        <ion-col size="4">
+                          <b>{{item?.schedule?.day}}</b>
+                        </ion-col>
+                        <ion-col size="7">
+                          <p *ngFor="let session of item?.schedule?.session">
+                            {{session?.sessionName}} {{session?.startTime ? '-' + session?.startTime : ''}}
+                            {{session?.endTime}}
+                          </p>
+                        </ion-col>
+                      </ion-row>
+
                     </ion-list>
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">
@@ -147,22 +163,7 @@
                         </ng-template>
                       </ion-card>
                     </ion-list>
-                    <!-- schedule -->
-                    <ion-list *ngSwitchCase="'schedule'">
-                      <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
-                        <ion-col size="4">
-                          <b>{{item?.schedule?.day}}</b>
-                        </ion-col>
-                        <ion-col size="7">
-                          <p *ngFor="let session of item?.schedule?.session">
-                           {{session?.sessionName}} {{session?.startTime ? '-' + session?.startTime : ''}}
-                              {{session?.endTime}}
-                          </p>
-                        </ion-col>
-                      </ion-row>
 
-                    </ion-list>
-                    <!-- reviews -->
                   </div>
                 </ion-card-content>
               </ion-card>

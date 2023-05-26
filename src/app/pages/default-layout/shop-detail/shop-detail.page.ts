@@ -97,14 +97,14 @@ export class ShopDetailPage implements OnInit {
       buttons: [
         {
           text: 'Existing',
-          cssClass: 'primary',
+          cssClass: 'alert-button-cancel',
           handler: () => {
             this.navigateToShopOrder(item);
           },
         },
         {
           text: 'New',
-          cssClass: 'primary',
+          cssClass: 'alert-button-confirm',
           handler: () => {
             this.goToChat();
           },

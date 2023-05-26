@@ -9,54 +9,52 @@
 
 <ion-content class="ion-padding">
 
-    <div class="img">
-      <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
-        <img src="{{profileForm.value.profilePicture}}">
-      </ion-avatar>
-      <ion-text>
-        <ion-chip class="bg-color-5 text-color-2">
-          {{ 'changeProfile' | translate}}
-        </ion-chip>
-        <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-          (change)="uploadFile($event)" required>
-      </ion-text>
-    </div>
-    <form [formGroup]="profileForm">
-     
-      <ion-item class="input-class" lines="none">
-        <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
-            class="span-color">*</span></ion-label>
-        <ion-input formControlName="firstName" type="text" name="firstName"
-          placeholder="{{ 'enter first Name' | translate}} " autocomplete="on" clearInput>
-        </ion-input>
-      </ion-item>
-      <ion-item class="input-class" lines="none">
-        <ion-label class="text-color-2" position="stacked">{{ 'LastName' | translate}} <span
-            class="span-color">*</span></ion-label>
-        <ion-input formControlName="lastName" type="text" name="lastName"
-          placeholder="{{ 'enter last name' | translate}} " autocomplete="on" clearInput>
-        </ion-input>
-      </ion-item>
-      <ion-item class="input-class" lines="none">
-        <ion-label class="text-color-2" position="stacked">{{ 'mobileNumber' | translate}} <span
-            class="span-color">*</span></ion-label>
-        <ion-input formControlName="mobileNumber" maxlength="10" minlength="10" type="number"
-          placeholder="{{ 'enter mobile number' | translate}} " autocomplete="on" clearInput>
-        </ion-input>
-      </ion-item>
-      <ion-item class="input-class" lines="none">
-        <ion-label class="text-color-2" position="stacked">{{ 'email' | translate}} <span
-            class="span-color">*</span></ion-label>
-        <ion-input formControlName="email" type="email" placeholder="{{ 'enter email' | translate}} " autocomplete="on"
-          clearInput>
-        </ion-input>
-      </ion-item>
-      <div class="clearfix ion-padding-top">
-        <ion-button (click)="updateProfile()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
-          {{ 'save' | translate}}
-        </ion-button>
-      </div>
-    
-    </form>
+  <div class="img">
+    <ion-avatar class="avatar border-color-7" (click)="fileInput1.click()">
+      <img src="{{profileForm.value.profilePicture}}">
+    </ion-avatar>
+    <ion-text>
+      <ion-chip class="bg-color-5 text-color-2">
+        {{ 'changeProfile' | translate}}
+      </ion-chip>
+      <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+        (change)="uploadFile($event)" required>
+    </ion-text>
+  </div>
+  <form [formGroup]="profileForm">
 
+    <ion-item class="input-class" lines="none">
+      <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
+          class="span-color">*</span></ion-label>
+      <ion-input formControlName="firstName" type="text" name="firstName"
+        placeholder="{{ 'enter first Name' | translate}} " autocomplete="on" clearInput>
+      </ion-input>
+    </ion-item>
+    <ion-item class="input-class" lines="none">
+      <ion-label class="text-color-2" position="stacked">{{ 'LastName' | translate}} <span
+          class="span-color">*</span></ion-label>
+      <ion-input formControlName="lastName" type="text" name="lastName"
+        placeholder="{{ 'enter last name' | translate}} " autocomplete="on" clearInput>
+      </ion-input>
+    </ion-item>
+    <ion-item class="input-class" lines="none">
+      <ion-label class="text-color-2" position="stacked">{{ 'mobileNumber' | translate}} <span
+          class="span-color">*</span></ion-label>
+      <ion-input formControlName="mobileNumber" maxlength="10" minlength="10" type="number"
+        placeholder="{{ 'enter mobile number' | translate}} " autocomplete="on" clearInput>
+      </ion-input>
+    </ion-item>
+    <ion-item class="input-class" lines="none">
+      <ion-label class="text-color-2" position="stacked">{{ 'email' | translate}} <span
+          class="span-color">*</span></ion-label>
+      <ion-input formControlName="email" type="email" placeholder="{{ 'enter email' | translate}} " autocomplete="on"
+        clearInput>
+      </ion-input>
+    </ion-item>
+  </form>
+  <div class="clearfix ion-padding-top">
+    <ion-button (click)="updateProfile()" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{ 'save' | translate}}
+    </ion-button>
+  </div>
 </ion-content>

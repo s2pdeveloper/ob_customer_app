@@ -306,14 +306,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await modal.present();
   }
 
-
-
-  // viewShop() {
-  //   this.router.navigate([`/shop-detail/${this.shopId}`], {
-  //     relativeTo: this.activatedRoute
-  //   });
-  // }
-
   viewShop() {
     const path: string = `/shop-detail/${this.shopId}`;
     this.router.navigate([path]);
@@ -334,6 +326,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
+    console.log(data);
+    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
+      this.toaster.errorToast("Your rating will active in past")
+    }
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
       this.modalRating()
     }
@@ -346,14 +342,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async address() {
     const modal = await this.modalCtrl.create({
       component: AddressComponent,
-      cssClass: '', 
+      cssClass: '',
       mode: 'ios',
       swipeToClose: true,
       componentProps: {},
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-  if (data?.data?.data?.coordinates) {
+    if (data?.data?.data?.coordinates) {
       let coordinates = data.data.data.coordinates
       this.chatForm.controls.message.setValue('Location');
       this.chatForm.controls.category.setValue(messageCategory.LOCATION);

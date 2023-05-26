@@ -35,10 +35,10 @@ export class TabsPage {
       icon: 'heart',
     },
     {
-      title: 'Setting',
+      title: 'profile',
       value: 'settings',
       tab: 'settings',
-      icon: 'settings',
+      icon: 'person-sharp',
     },
   ];
 

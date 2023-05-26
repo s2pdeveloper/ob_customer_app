@@ -34,7 +34,6 @@
         max-width: 70%;
         color: #ffffff;
         background-color: #b7b7b7;
-        // background-color: #0090d0;
       }
     }
 
@@ -80,7 +79,6 @@
         white-space: pre-wrap;
         color: #ffffff;
         background-color: lighten($color: red, $amount: 20);
-        // background-color: --ion-color-primary;
         float: right;
         position: relative;
         margin-top: 2px;
@@ -135,28 +133,11 @@ img {
   width: 7rem !important;
   object-fit: cover;
 }
-
-.card-status {
-  position: fixed;
-  top: 30rem;
-  right: 1rem;
-  left: 1rem;
-  height: 11rem;
-  width: 24rem;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-ion-chip {
-  padding: 8px 8px;
-  border-radius: 4px;
-  font-size: small;
-  height: auto;
-}
-
 .shopName {
   background-color: rgb(241, 239, 239);
   padding: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 #photo-container {

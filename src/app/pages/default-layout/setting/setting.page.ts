@@ -43,19 +43,19 @@ export class SettingPage implements OnInit {
   };
   async logOutAlert() {
     const alert = await this.alertController.create({
-      header: 'Are You Sure You Want To Logout?',
+      header: '',
+      message: 'Log out of your account?',
       cssClass: 'custom-alert',
-      mode: 'md',
       buttons: [
         {
           text: 'No',
-          cssClass: 'secondary',
+          cssClass: 'alert-button-cancel',
           handler: () => {
           },
         },
         {
           text: 'Yes',
-          cssClass: 'primary',
+          cssClass: 'alert-button-confirm',
           handler: (alertData) => {
             this.logout(alertData);
           },

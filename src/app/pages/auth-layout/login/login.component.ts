@@ -11,6 +11,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
 import { LanguageService } from 'src/app/core/services/language.service';
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -106,4 +107,11 @@ export class LoginComponent implements OnInit {
     }
     this.langService.setLang(this.selectedLanguage);
   }
+
+  openTerms = async () => {
+    await Browser.open({ url: 'https://www.bharat-online.com/terms-and-conditions' });
+  };
+  openPolicy = async () => {
+    await Browser.open({ url: 'https://www.bharat-online.com/privacy-policy' });
+  };
 }

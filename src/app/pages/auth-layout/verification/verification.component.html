@@ -17,7 +17,7 @@
     <form [formGroup]="loginForm" class="form-container ion-text-center">
       <ion-item class="input-class" lines="none">
         <ion-label class="text-color-2" position="stacked">{{ 'otp' | translate}}</ion-label>
-        <ion-input  type="tel" name="otp" placeholder="{{ 'otp' | translate}}" autocomplete="on"
+        <ion-input  type="tel" name="otp" placeholder="{{ 'otpText' | translate}}" autocomplete="on"
           clearInput formControlName="otp" (keyup.enter)="onSubmit()" >
         </ion-input>
       </ion-item>

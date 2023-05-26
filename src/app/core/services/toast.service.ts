@@ -19,7 +19,7 @@ export class ToastService {
   async successToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 4000,
+      duration: 1000,
       position: 'bottom',
       cssClass: 'toast-success',
       buttons: [
@@ -37,7 +37,7 @@ export class ToastService {
   async errorToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 4000,
+      duration: 1000,
       position: 'bottom',
       cssClass: 'toast-error',
       buttons: [
@@ -55,7 +55,7 @@ export class ToastService {
   async warningToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 4000,
+      duration: 1000,
       position: 'bottom',
       cssClass: 'toast-warning',
       buttons: [

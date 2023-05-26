@@ -9,7 +9,7 @@
   <div class="ion-padding">
     <div class="ion-text-center">
       <ion-text class="text-label text-color-2 text-bold">
-        {{ 'signIn' | translate}}
+        {{ 'welcome' | translate}}
       </ion-text>
       <p class="text-color-1">
         {{ 'welcomeText' | translate}}
@@ -43,8 +43,11 @@
       </div>
       <div class="d-flex justify-content-center ion-margin-top">
         <p class="ion-text-center">
-          {{'termsAndConditionNote'| translate}}
-        </p>
+         {{'t&cNote1' | translate}} <u (click)="openTerms()"> {{'t&cNote2' | translate}}</u>
+           </p>
+           <p class="ion-text-center">
+            {{'privacyPolicyNote1' | translate}} <u (click)="openPolicy()"> {{"privacyPolicyNote2"|translate}}</u>
+           </p>
       </div>
     </form>
   </div>
