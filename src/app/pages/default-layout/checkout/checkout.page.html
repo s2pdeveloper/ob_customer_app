@@ -56,8 +56,13 @@
 
 <ion-footer class="ion-no-border">
   <div class="ion-padding-top footer-msg" *ngIf="orderData?.length > 0">
-    <ion-button (click)="navigateToChat()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+    <ion-button (click)="navigateToChat()" shape="round" expand="block" class="btn-color-1 btn-height-large"
+      type="submit">
       {{ 'placeOrder' | translate}}
     </ion-button>
+    <p class="ion-padding-horizontal">
+   {{'placeholderNote'| translate}}
+    </p>
   </div>
+
 </ion-footer>
