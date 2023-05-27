@@ -5,7 +5,7 @@
       <h3 class="mb-0">{{'location'| translate}}</h3>
       <p>{{currentLocation?.formatted_address | truncate: 40}}</p>
     </ion-label>
-    <ion-icon name="notifications-sharp"  color="primary" slot="end" (click)="navigateTo()"></ion-icon>
+    <ion-icon name="notifications-sharp" color="primary" slot="end" (click)="navigateTo()"></ion-icon>
   </ion-item>
 
   <ion-item lines="none" class="search-animation">
@@ -77,7 +77,7 @@
                 src="assets/images/placeholder_product.png" alt="offer-image" />
             </div>
           </div>
-          <ion-card-content>
+          <ion-card-content *ngIf="img?.title">
             <div>
               <h5 class="text-color-2 ion-text-center ion-text-capitalize">{{ img?.title | truncate:24 }}</h5>
             </div>
