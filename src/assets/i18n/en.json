@@ -176,7 +176,7 @@
   "favorites": "Favorites",
   "galleryImages": "Gallery Images",
   "shopTiming": "Shop Timing",
-  "favoritesShop": "Favorites Shop",
+  "favoritesShop": "My hand pick market",
   "orders": "Orders",
   "giveRating": "Give Rating",
   "sendLocation": "Send Location",
@@ -192,5 +192,8 @@
   "t&cNote2": "Terms & Conditions &",
   "privacyPolicyNote1": "By continuing, I accept the ",
   "privacyPolicyNote2": "Privacy Policy",
-  "schedule":"Timing"
+  "schedule":"Timing",
+  "placeholderNote":"On Clicking Place order button, picked items will be sent to seller or service provider via Order chat. Your order processing will be done from the same window.",
+  "checkout":"Checkout"
+
 }

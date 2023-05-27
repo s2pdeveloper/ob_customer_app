@@ -111,21 +111,21 @@
                       <ion-row class="ion-no-padding contact">
                         <ion-col size="4" class="ion-text-center">
                           <div>
-                            <ion-card class="bg-xcard">
+                            <ion-card class="bg-card">
                               <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
                                 (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
-                            <ion-note class="heading ion-texxt-center">{{'myOrders'|translate}}</ion-note>
-                            <!-- <ion-text>Simply Type Click and Share</ion-text> -->
+                            <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
+                            <p>Simply type click and share</p>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
-                          <ion-card class="bg-xcard ion-text-center">
+                          <ion-card class="bg-card ion-text-center">
                             <a href="tel:+91{{shopUser?.mobileNumber}}">
                               <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
                             </a>
                           </ion-card>
-                          <ion-note class=" heading ion-text-center">{{'call'|translate}}</ion-note>
+                          <ion-note class=" heading ">{{'call'|translate}}</ion-note>
                         </ion-col>
                       </ion-row>
                     </ion-list>
