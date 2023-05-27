@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{ 'allShops' | translate}} </ion-title>
+    <ion-title *ngIf="!subCategoryName"> {{ 'allShops' | translate}} </ion-title>
+    <ion-title *ngIf="subCategoryName" class="ion-text-capitalize">
+      {{subCategoryName}}
+    </ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/app/tabs/category"></ion-back-button>
     </ion-buttons>

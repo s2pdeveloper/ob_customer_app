@@ -4,9 +4,6 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="app/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-icon size="large" name="filter-outline" (click)="navigateToFilter()"></ion-icon>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -37,10 +34,10 @@
         <ion-row class="ion-margin">
           <ion-col size="6" *ngFor="let item of subCategoryList">
             <ion-card class="ion-text-center" (click)="navigateToShopList(item)">
-              <img alt="Category Image" class="subcat-img" *ngIf="item?.subCategory.image" src="{{item?.subCategory.image}}" />
-              <img alt="Category Image" class="subcat-img" *ngIf="!item?.subCategory.image"
+              <img alt="Category Image" class="subcat-img" *ngIf="item?.image" src="{{item?.image}}" />
+              <img alt="Category Image" class="subcat-img" *ngIf="!item?.image"
                 src="assets/images/placeholder_product.png" />
-              <ion-card-subtitle class="cat-head ion-text-wrap">{{item?.subCategory.name}}</ion-card-subtitle>
+              <ion-card-subtitle class="cat-head ion-text-wrap">{{item?.name}}</ion-card-subtitle>
             </ion-card>
           </ion-col>
         </ion-row>

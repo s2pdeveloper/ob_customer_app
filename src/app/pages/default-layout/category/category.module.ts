@@ -8,7 +8,6 @@ import { CategoryPageRoutingModule } from './category-routing.module';
 
 import { CategoryPage } from './category.page';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   imports: [
@@ -17,6 +16,6 @@ import { FilterComponent } from './filter/filter.component';
     IonicModule,
     CategoryPageRoutingModule, SharedModule
   ],
-  declarations: [CategoryPage, FilterComponent]
+  declarations: [CategoryPage,]
 })
 export class CategoryPageModule { }

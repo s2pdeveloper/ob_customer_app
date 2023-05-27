@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { SubCategoryService } from 'src/app/core/services/sub-category.service';
-import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-category',
@@ -24,7 +23,6 @@ export class CategoryPage implements OnInit {
   searchText: string;
   activeParentId: any = null;
   parentId: number;
-  geoNearestDistance: number = 2;
 
   constructor(
     private router: Router,
@@ -33,7 +31,6 @@ export class CategoryPage implements OnInit {
     public translate: TranslateService,
     public activatedRoute: ActivatedRoute,
     private spinner: LoaderService,
-    private modalCtrl: ModalController,
   ) { }
 
   ngOnInit() { }
@@ -96,7 +93,7 @@ export class CategoryPage implements OnInit {
   getAllSubCategory(parentId, isFirstLoad, event) {
     this.parentId = parentId,
       this.activeParentId = parentId
-    let params = { page: this.page, pageSize: this.pageSize, geoNearestDistance: this.geoNearestDistance };
+    let params = { page: this.page, pageSize: this.pageSize, };
     if (this.searchText) {
       params['search'] = this.searchText,
         parentId = null;
@@ -109,6 +106,8 @@ export class CategoryPage implements OnInit {
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
         }
+        console.log("this.subcategory", this.subCategoryList);
+
         if (isFirstLoad)
           event.target.complete();
         if (success.data.length === 0 && event) {
@@ -129,10 +128,12 @@ export class CategoryPage implements OnInit {
   }
 
   navigateToShopList(subCategory) {
- this.router.navigate(['/search-shop'], {
+    console.log(subCategory);
+    
+    this.router.navigate(['/search-shop'], {
       queryParams: {
-        categoryId: this.parentId,
-        subCategoryId:subCategory._id,
+        subCategoryId: subCategory._id,
+        subCategoryName:subCategory.name,
       },
     });
   }
@@ -144,23 +145,6 @@ export class CategoryPage implements OnInit {
     this.page = 1;
     this.subCategoryList = [];
     this.getAllSubCategory(activeParentId, false, "");
-  }
-
-  async navigateToFilter() {
-    const modal = await this.modalCtrl.create({
-      component: FilterComponent,
-      cssClass: 'rating-modal',
-      mode: 'ios',
-      swipeToClose: true,
-      componentProps: {},
-    });
-    await modal.present();
-    const { data } = await modal.onWillDismiss();
-    if (data.data) {
-      this.geoNearestDistance = data?.data?.geoNearestDistance
-    this.subCategoryList = [];
-      this.getAllSubCategory(this.activeParentId, false, '');
-    }
   }
 
 }

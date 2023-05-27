@@ -30,6 +30,7 @@ export class SearchShopPage implements OnInit {
   favoriteShop: any;
   geoNearestDistance: number = 2;
   shopId = [];
+  subCategoryName: string = null;
 
   constructor(
     private router: Router,
@@ -44,6 +45,7 @@ export class SearchShopPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
+
       if (params.shopId) {
         this.shopId = params.shopId;
       }
@@ -53,6 +55,7 @@ export class SearchShopPage implements OnInit {
       this.businessTypeId = params.businessTypeId ?? '';
       this.categoryId = params.categoryId ?? '';
       this.subCategoryId = params.subCategoryId ?? '';
+      this.subCategoryName = params.subCategoryName ?? '';
     });
   }
 
