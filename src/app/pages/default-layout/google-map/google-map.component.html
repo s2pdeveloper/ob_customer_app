@@ -21,7 +21,7 @@
   </div>
   <div class="clearfix ion-padding-top save-button">
     <ion-button (click)="saveLocation()" expand="block" class="btn-color-1" type="submit">
-      {{ 'saveLocation' | translate}}
+      {{ key ? 'sendLocation' : 'saveLocation' | translate}}
     </ion-button>
   </div>
 

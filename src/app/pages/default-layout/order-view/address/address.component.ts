@@ -45,7 +45,9 @@ export class AddressComponent implements OnInit {
       component: GoogleMapComponent,
       mode: 'ios',
       swipeToClose: true,
-      componentProps: {}
+      componentProps: {
+        key:'orderView'
+      }
     });
     await modal.present();
     this.data = await modal.onWillDismiss();
