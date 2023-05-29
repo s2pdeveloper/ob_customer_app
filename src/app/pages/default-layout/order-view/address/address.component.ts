@@ -126,7 +126,7 @@ export class AddressComponent implements OnInit {
         {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
-          handler: (alertData) => {
+          handler: () => {
             this.deleteAddress(item, index)
           },
         },

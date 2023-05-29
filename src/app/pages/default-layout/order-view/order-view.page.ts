@@ -28,7 +28,6 @@ import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 })
 export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   @ViewChild(IonContent) content: IonContent;
-
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;

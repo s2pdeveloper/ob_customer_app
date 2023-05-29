@@ -42,7 +42,7 @@
             <p class="ion-text-wrap">{{ item.description | truncate:24 }}</p>
             <ion-label class="cat-price" color="primary">
               ₹ {{item.price}}
-              <ion-checkbox slot="end" [(ngModel)]="item.isChecked"></ion-checkbox>
+              <ion-checkbox  [(ngModel)]="item.isChecked"></ion-checkbox>
             </ion-label>
           </ion-card-content>
         </ion-card>
