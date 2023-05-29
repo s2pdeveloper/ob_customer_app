@@ -149,7 +149,7 @@ export class SearchShopPage implements OnInit {
   async navigateToFilter() {
     const modal = await this.modalCtrl.create({
       component: FilterComponent,
-      cssClass: 'rating-modal',
+      cssClass: 'filter-modal',
       mode: 'ios',
       swipeToClose: true,
       componentProps: {},

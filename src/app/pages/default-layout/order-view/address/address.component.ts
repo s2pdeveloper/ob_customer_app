@@ -46,17 +46,17 @@ export class AddressComponent implements OnInit {
       mode: 'ios',
       swipeToClose: true,
       componentProps: {
-        key:'orderView'
+        key: 'orderView'
       }
     });
     await modal.present();
-    this.data = await modal.onWillDismiss();
-    if (this.data) {
-      this.closeModal();
-    }
+    modal.onDidDismiss().then(data => {
+      this.data = data;
+      this.dismissModal();
+    })
   }
 
- dismissModal(isDismissed: boolean = false) {
+  dismissModal(isDismissed: boolean = false) {
     this.modalController.dismiss({
       dismissed: isDismissed,
       data: this.data,
@@ -64,7 +64,7 @@ export class AddressComponent implements OnInit {
   }
 
   selectedAddress(item) {
-  this.data = `${item.addressLine1} ${item.addressLine2} ${item.pincode} ${item.city} ${item.countryName}`;
+    this.data = `${item.addressLine1} ${item.addressLine2} ${item.pincode} ${item.city} ${item.countryName}`;
     this.closeModal()
   }
 
@@ -76,7 +76,7 @@ export class AddressComponent implements OnInit {
   }
 
   async modalAddress(address) {
-   const modal = await this.modalController.create({
+    const modal = await this.modalController.create({
       component: AddAddressComponent,
       cssClass: 'modal-medium',
       mode: 'ios',
@@ -114,18 +114,19 @@ export class AddressComponent implements OnInit {
   async openConfirmDelete(item, index) {
     const alert = await this.alertController.create({
       header: 'Confirm Delete ?',
-      subHeader: 'Are you sure you want to delete this address',
+      message: 'Are you sure you want to delete this address',
       cssClass: 'custom-alert',
-      mode: 'md',
       buttons: [
         {
           text: 'No',
-          cssClass: 'secondary',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+          },
         },
         {
           text: 'Yes',
-          cssClass: 'primary',
-          handler: () => {
+          cssClass: 'alert-button-confirm',
+          handler: (alertData) => {
             this.deleteAddress(item, index)
           },
         },

@@ -106,8 +106,6 @@ export class CategoryPage implements OnInit {
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
         }
-        console.log("this.subcategory", this.subCategoryList);
-
         if (isFirstLoad)
           event.target.complete();
         if (success.data.length === 0 && event) {
@@ -129,11 +127,11 @@ export class CategoryPage implements OnInit {
 
   navigateToShopList(subCategory) {
     console.log(subCategory);
-    
+
     this.router.navigate(['/search-shop'], {
       queryParams: {
         subCategoryId: subCategory._id,
-        subCategoryName:subCategory.name,
+        subCategoryName: subCategory.name,
       },
     });
   }

@@ -1,16 +1,27 @@
 <ion-item lines="none" class="ion-no-padding bg-transparent">
-  <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
+  <ion-back-button
+    color="primary"
+    defaultHref="app/tabs/landing-page"
+  ></ion-back-button>
 </ion-item>
 
 <ion-fab horizontal="end" slot="fixed">
   <ion-fab-button *ngIf="!shopUser?.shopFavorite">
-    <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
+    <ion-icon
+      name="heart-outline"
+      color="primary"
+      (click)="addToFavorite(shopUser)"
+    ></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
 <ion-fab horizontal="end" slot="fixed">
   <ion-fab-button *ngIf="shopUser?.shopFavorite">
-    <ion-icon name="heart" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
+    <ion-icon
+      name="heart"
+      color="primary"
+      (click)="addToFavorite(shopUser)"
+    ></ion-icon>
   </ion-fab-button>
 </ion-fab>
 
@@ -22,19 +33,26 @@
         <ion-item>
           <ion-col size="5">
             <ion-avatar class="ion-margin-end logo-image">
-              <img alt="logo-image" *ngIf="shopUser?.profilePicture" [src]="shopUser?.profilePicture" />
+              <img
+                alt="logo-image"
+                *ngIf="shopUser?.profilePicture"
+                [src]="shopUser?.profilePicture"
+              />
             </ion-avatar>
           </ion-col>
           <ion-col size="7" class="ion-text-capitalize ion-text-wrap">
-            <ion-label class="ion-text-wrap"><b>{{shopUser?.shopDetails?.shopName}}</b></ion-label>
+            <ion-label class="ion-text-wrap"
+              ><b>{{shopUser?.shopDetails?.shopName}}</b></ion-label
+            >
             <p class="font-larger">
-              {{shopUser?.shopDetails?.firstName}} {{shopUser?.shopDetails?.lastName}}
+              {{shopUser?.shopDetails?.firstName}}
+              {{shopUser?.shopDetails?.lastName}}
             </p>
             <ion-text class="ion-text-wrap">
               <h4>
                 {{shopUser?.address?.line1}}{{shopUser?.address?.line2}}
-                {{shopUser?.address?.city}}, {{shopUser?.address?.state}}
-                - {{shopUser?.address?.pinCode}}
+                {{shopUser?.address?.city}}, {{shopUser?.address?.state}} -
+                {{shopUser?.address?.pinCode}}
               </h4>
             </ion-text>
           </ion-col>
@@ -46,13 +64,19 @@
                 <ion-card-content>
                   <ion-segment color="primary" [(ngModel)]="type" scrollable>
                     <ion-segment-button value="about" checked>
-                      <ion-label class="ion-text-wrap">{{ 'about' | translate}}</ion-label>
+                      <ion-label class="ion-text-wrap"
+                        >{{ 'about' | translate}}</ion-label
+                      >
                     </ion-segment-button>
                     <ion-segment-button value="schedule">
-                      <ion-label class="ion-text-wrap">{{ 'schedule' | translate}}</ion-label>
+                      <ion-label class="ion-text-wrap"
+                        >{{ 'schedule' | translate}}</ion-label
+                      >
                     </ion-segment-button>
                     <ion-segment-button value="gallery">
-                      <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
+                      <ion-label class="ion-text-wrap"
+                        >{{ 'gallery' | translate}}</ion-label
+                      >
                     </ion-segment-button>
                   </ion-segment>
                   <div [ngSwitch]="type">
@@ -67,137 +91,229 @@
                         </ion-row>
                       </ion-item>
                       <ion-item lines="none" class="social-links ion-no-height">
-                        <ion-label class="heading ion-no-padding" color="primary">Social Links</ion-label>
+                        <ion-label
+                          class="heading ion-no-padding"
+                          color="primary"
+                          >Social Links</ion-label
+                        >
                       </ion-item>
-                      <ion-row *ngIf="shopUser?.shopDetails?.links" class="ion-no-margin">
-                        <ion-col size="4" class="ion-no-padding ion-text-center">
+                      <ion-row
+                        *ngIf="shopUser?.shopDetails?.links"
+                        class="ion-no-margin"
+                      >
+                        <ion-col
+                          size="4"
+                          class="ion-no-padding ion-text-center"
+                        >
                           <ion-button fill="clear" (click)="openFb()">
-                            <ion-icon name="logo-facebook" class="font fb"></ion-icon>
+                            <ion-icon
+                              name="logo-facebook"
+                              class="font fb"
+                            ></ion-icon>
                           </ion-button>
                         </ion-col>
-                        <ion-col size="4" class="ion-no-padding ion-text-center">
+                        <ion-col
+                          size="4"
+                          class="ion-no-padding ion-text-center"
+                        >
                           <ion-button fill="clear" (click)="openInstagram()">
-                            <img src="../../../assets/images/instaicon.png" alt="" class="insta" />
+                            <img
+                              src="../../../assets/images/instaicon.png"
+                              alt=""
+                              class="insta"
+                            />
                           </ion-button>
                         </ion-col>
-                        <ion-col size="4" class="ion-no-padding ion-text-center">
+                        <ion-col
+                          size="4"
+                          class="ion-no-padding ion-text-center"
+                        >
                           <ion-button fill="clear" (click)="openYouTube()">
-                            <ion-icon name="logo-youtube" class="font yt"></ion-icon>
+                            <ion-icon
+                              name="logo-youtube"
+                              class="font yt"
+                            ></ion-icon>
                           </ion-button>
                         </ion-col>
                       </ion-row>
-                      <ion-item *ngIf="shopUser?.shopDetails?.links?.website" lines="none"
-                        class="social-links ion-no-height">
+                      <ion-item
+                        *ngIf="shopUser?.shopDetails?.links?.website"
+                        lines="none"
+                        class="social-links ion-no-height"
+                      >
                         <ion-grid>
                           <ion-row>
                             <ion-col size="12">
-                              <ion-label class="heading ion-no-padding" color="primary">Web Link </ion-label>
+                              <ion-label
+                                class="heading ion-no-padding"
+                                color="primary"
+                                >Web Link
+                              </ion-label>
                             </ion-col>
                           </ion-row>
                           <ion-row>
                             <ion-col size="2">
-                              <ion-icon name="globe-sharp" class="font fb"></ion-icon>
+                              <ion-icon
+                                name="globe-sharp"
+                                class="font fb"
+                              ></ion-icon>
                             </ion-col>
                             <ion-col size="10">
-                              <ion-label (click)="openWeb()"> {{shopUser?.shopDetails?.links?.website}}
+                              <ion-label (click)="openWeb()">
+                                {{shopUser?.shopDetails?.links?.website}}
                               </ion-label>
                             </ion-col>
                           </ion-row>
                         </ion-grid>
                       </ion-item>
                       <ion-item lines="none" class="social-links ion-no-height">
-                        <ion-label class="heading ion-no-padding" color="primary">Contact us</ion-label>
+                        <ion-label
+                          class="heading ion-no-padding"
+                          color="primary"
+                          >Contact us</ion-label
+                        >
                       </ion-item>
                       <ion-row class="ion-no-padding contact">
                         <ion-col size="4" class="ion-text-center">
                           <div>
                             <ion-card class="bg-card">
-                              <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
-                                (click)="orderAlert(shopUser)"></ion-icon>
+                              <ion-icon
+                                name="chatbubble-ellipses-outline"
+                                size="large"
+                                class="call"
+                                color="primary"
+                                (click)="orderAlert(shopUser)"
+                              ></ion-icon>
                             </ion-card>
-                            <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
+                            <ion-note class="heading"
+                              >{{'myOrders'|translate}}</ion-note
+                            >
                             <p>Simply type click and share</p>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
                           <ion-card class="bg-card ion-text-center">
                             <a href="tel:+91{{shopUser?.mobileNumber}}">
-                              <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
+                              <ion-icon
+                                name="call"
+                                size="large"
+                                class="call"
+                                color="primary"
+                              ></ion-icon>
                             </a>
                           </ion-card>
-                          <ion-note class=" heading ">{{'call'|translate}}</ion-note>
+                          <ion-note class="heading"
+                            >{{'directCall'|translate}}</ion-note
+                          >
                         </ion-col>
                       </ion-row>
                     </ion-list>
                     <!-- schedule -->
                     <ion-list *ngSwitchCase="'schedule'">
-                      <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
+                      <ion-row
+                        *ngFor="let item of shopUser.shopSchedule"
+                        class="schedule-class"
+                      >
                         <ion-col size="4">
                           <b>{{item?.schedule?.day}}</b>
                         </ion-col>
                         <ion-col size="7">
                           <p *ngFor="let session of item?.schedule?.session">
-                            {{session?.sessionName}} {{session?.startTime ? '-' + session?.startTime : ''}}
-                            {{session?.endTime}}
+                            {{session?.sessionName}} {{session?.startTime ? '- '
+                            + session?.startTime : ''}} {{session?.endTime ? 'to
+                            ' + session?.endTime : ''}}
                           </p>
                         </ion-col>
                       </ion-row>
-
                     </ion-list>
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">
                       <ion-card>
-                        <ion-grid *ngIf="shopUser?.shopDetails?.galleryImages?.length > 0;else noDataFound">
+                        <ion-grid
+                          *ngIf="shopUser?.shopDetails?.galleryImages?.length > 0;else noDataFound"
+                        >
                           <ion-row>
-                            <ion-col *ngFor="let galleryImg of shopUser?.shopDetails?.galleryImages" size="6"
-                              (click)="navigateToViewGalleryImages(shopUser?.shopDetails?.galleryImages)">
-                              <img class="gallery ion-no-padding" src="{{galleryImg}}" />
+                            <ion-col
+                              *ngFor="let galleryImg of shopUser?.shopDetails?.galleryImages"
+                              size="6"
+                              (click)="navigateToViewGalleryImages(shopUser?.shopDetails?.galleryImages)"
+                            >
+                              <img
+                                class="gallery ion-no-padding"
+                                src="{{galleryImg}}"
+                              />
                             </ion-col>
                           </ion-row>
-
                         </ion-grid>
                         <ng-template #noDataFound>
                           <div class="noData">
-                            <ion-label class="ion-text-center">No Images Found</ion-label>
+                            <ion-label class="ion-text-center"
+                              >No Images Found</ion-label
+                            >
                           </div>
                         </ng-template>
                       </ion-card>
                     </ion-list>
-
                   </div>
                 </ion-card-content>
               </ion-card>
             </ion-col>
           </ion-row>
         </ion-grid>
-
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
 
-
 <ion-footer class="ion-no-border">
-
-  <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0">
-    <ion-col class=" ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
+  <ion-item
+    *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0"
+  >
+    <ion-col class="ion-text-center">
+      <ion-button
+        shape="round"
+        class="btn"
+        expand="block"
+        (click)="navigateTo('/catalogue')"
+        >Catalogue</ion-button
+      >
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 ">
-    <ion-col class=" ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
+  <ion-item
+    *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 "
+  >
+    <ion-col class="ion-text-center">
+      <ion-button
+        shape="round"
+        class="btn"
+        expand="block"
+        (click)="modalFilter()"
+        >Book Now</ion-button
+      >
     </ion-col>
   </ion-item>
 
-  <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0">
+  <ion-item
+    *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0"
+  >
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
+      <ion-button
+        shape="round"
+        class="btn"
+        expand="block"
+        (click)="navigateTo('/catalogue')"
+        >Catalogue</ion-button
+      >
     </ion-col>
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
+      <ion-button
+        shape="round"
+        class="btn"
+        expand="block"
+        (click)="modalFilter()"
+        >Book Now</ion-button
+      >
     </ion-col>
   </ion-item>
-
 </ion-footer>

@@ -160,4 +160,5 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
       location: this.selectedLocation
     });
   }
+  
 }

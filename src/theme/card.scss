@@ -50,6 +50,28 @@ ion-card {
     }
   }
 }
+
+
+.catalogue-card {
+  border-radius: 0.9em;
+  margin: 5px !important;
+  width: 100% !important;
+  img {
+    height: 120px;
+  }
+  ion-card-content {
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    .unit-select {
+      max-width: 84px;
+      border-radius: 20px;
+      border: none !important;
+      background-color: var(--ion-color-5) !important;
+      box-shadow: none !important;
+    }
+  }
+}
 // .product-view {
 //   box-shadow: none !important;
 //   .image-content {
