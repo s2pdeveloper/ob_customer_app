@@ -45,6 +45,8 @@ export const defaultStatus = {
     CANCELLED: "cancelled",
     DELETED: "deleted",
     EXPIRED: "expired",
+    BLOCK: 'block',
+    UNBLOCK: 'unblock',
 };
 export const deliveryStatus = {
     PENDING: "pending",

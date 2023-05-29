@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IonContent, IonInfiniteScroll, PopoverController } from '@ionic/angular';
+import { AlertController, IonContent, IonInfiniteScroll, PopoverController } from '@ionic/angular';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
@@ -20,6 +20,7 @@ import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
+import { ShopService } from 'src/app/core/services/shop.service';
 
 @Component({
   selector: 'app-order-view',
@@ -41,6 +42,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: string;
   shopId: string;
   shopName: string = '';
+  isBlocked:boolean=false;
 
   userId: number;
   fileUploaded: boolean = false;
@@ -77,7 +79,11 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private restService: RestService,
     private orderService: OrderService,
     public popoverController: PopoverController,
-    private photoViewerService: PhotoViewerService
+    private photoViewerService: PhotoViewerService,
+    private alertController: AlertController,
+    private shopService: ShopService,
+
+
   ) {
     this.receiveListMessages(false, "");
   }
@@ -131,6 +137,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success.orderDetails;
+      console.log("this.orderDetails",this.orderDetails);
+      if(this.orderDetails.shopDetails.blockedUser.some(x=>x==this.shopId)) this.isBlocked=true; 
+
       this.ratingDetails = success.ratingDetails;
       await this.spinner.hideLoader();
     }, async error => {
@@ -138,6 +147,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
   sendMessage() {
+    // if(this.isBlocked){
+    //   let obj=this.chatForm.value;
+    //   obj.
+    // }
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
     if (this.canReceiveMessage) {
@@ -312,29 +325,87 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async presentPopover(ev: any) {
-    const popover = await this.popoverController.create({
+    let componentProps= {
+      dataList: [
+        { label: 'Rating', event: 'rating' },
+        { label: 'Report', event: 'report' },
+        { label: 'Block', event: 'block' },
+      ]
+    };
+    let popover = await this.popoverController.create({
       component: PopoverComponent,
-      componentProps: {
-        dataList: [
-          { label: 'Rating', event: 'rating' },
-          { label: 'Report', event: 'report' },
-        ]
-      },
+      componentProps: componentProps,
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,
     });
+    console.log("popover",popover,this.isBlocked);
+    if(this.isBlocked){
+        popover.componentProps.dataList[2]={ label: 'Unblock', event: 'unblock' };
+    }else{
+      popover.componentProps.dataList[2]= { label: 'Block', event: 'block' };
+    }
+    
     await popover.present();
     const { data } = await popover.onDidDismiss();
-   if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
+    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
       this.toaster.errorToast("Your rating will active in past")
     }
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
+      componentProps.dataList.shift();
       this.modalRating()
     }
     if (data.event === 'report') {
       this.modalReport();
     }
+    if (data.event === 'block') {
+      this.blockAlert(data.event );
+    }
+    if (data.event === 'unblock') {
+      this.blockAlert(data.event );
+    }
+  }
+
+  async blockAlert(event) {
+    const alert = await this.alertController.create({
+      header: '',
+      message: `Are yuo sure you want to ${event} this user?`,
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'alert-button-cancel',
+          handler: () => {
+          },
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alert-button-confirm',
+          handler: (alertData) => {
+            alertData = this.shopId;
+            this.block(alertData,event);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+  async block(shopId,event) {
+    console.log(shopId,event);
+    await this.spinner.showLoader();
+    let payload = {
+      blockedUser: shopId,
+      event:event,
+      shopId:shopId
+    }
+    console.log(payload);
+    this.shopService.userBlock(payload).subscribe(async result => {
+      await this.spinner.hideLoader();
+    }, async error => {
+      await this.spinner.hideLoader();
+    })
   }
 
 
