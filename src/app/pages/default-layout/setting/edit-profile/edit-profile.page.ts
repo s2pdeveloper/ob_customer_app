@@ -9,6 +9,7 @@ import { UploadService } from 'src/app/core/services/upload.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { validateField } from 'src/app/shared/validators/form.validator';
 import { OPTIONS } from 'src/app/helpers';
+import { CameraService } from 'src/app/core/services/camera.service';
 
 
 @Component({
@@ -47,6 +48,7 @@ export class EditProfilePage implements OnInit {
     private userService: UserService,
     public translate: TranslateService,
     private uploadService: UploadService,
+    private camerService: CameraService
   ) { }
 
   ngOnInit() { }
@@ -68,10 +70,10 @@ export class EditProfilePage implements OnInit {
     await this.spinner.showLoader();
     this.userService.getProfile().subscribe(async success => {
       this.profileForm.patchValue(success);
-      // if (success.profilePicture) {
-      //   this.profileForm.controls.path.setValue(success.profilePicture);
-      //   this.fileUploaded = true;
-      // }
+      if (success.profilePicture) {
+        this.profileForm.controls.path.setValue(success.profilePicture);
+        this.fileUploaded = true;
+      }
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
@@ -100,34 +102,41 @@ export class EditProfilePage implements OnInit {
     this.location.back();
   }
 
-
-  async uploadFile($event) {
-    let file = $event.target.files[0];
-    if (this.uploadService.checkFileSize(file)) {
-      this.toaster.errorToast(OPTIONS.sizeLimit);
-      this.spinner.hideLoader();
-      return;
-    }
-    if (this.uploadService.checkImageType(file)) {
-      this.toaster.errorToast(OPTIONS.imageType);
-      this.spinner.hideLoader();
-      return;
-    }
-    await this.spinner.showLoader();
-    let formData = new FormData();
-    formData.append('file', file);
-    this.uploadService.uploadFile(formData)
-      .subscribe(
-        async (success: any) => {
-          this.filePath = success?.result?.data?.key;
-          this.profileForm.controls.profilePicture.setValue(this.filePath);
-          this.fileUploaded = true;
-          await this.spinner.hideLoader();
-        },
-        async (error: any) => {
-          await this.spinner.hideLoader();
+  async uploadFile() {
+   const image = await this.camerService.openCamera();
+    console.log('image', JSON.stringify(image))
+    const realFile = this.camerService.b64toBlob(image.base64String, `image/${image.format}`);
+    await this.spinner.hideLoader();
+    console.log('readfile', realFile);
+    const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
+    if (!this.uploadService.checkFileSize(realFile)) {
+      this.uploadService.getSignUrl(params).subscribe(
+        async (data: any) => {
+          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
+            async (result: any) => {
+              console.log('after upload', result);
+              this.filePath = data.filePath
+              this.profileForm.controls.profilePicture.setValue(data.filePath);
+              this.profileForm.controls.path.setValue(data.filePath);
+              this.fileUploaded = true;
+              await this.spinner.hideLoader();
+            }, async (error: any) => {
+              this.toaster.errorToast(error);
+              await this.spinner.hideLoader();
+            }
+          );
+        }, async (error: any) => {
           this.toaster.errorToast(error);
+          await this.spinner.hideLoader();
         }
-      );
+      )
+    }
+    else {
+      if (this.uploadService.checkFileSize(realFile.size)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
+        await this.spinner.hideLoader();
+        return;
+      }
+    }
   }
 }

@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { formatErrors, OPTIONS } from "../../helpers";
 import { JwtService } from './jwt.service';
+import { ApiService } from './api.service';
 
 @Injectable()
 export class UploadService {
   token: String;
   private httpClient: HttpClient;
 
-  constructor(private jwtService: JwtService, handler: HttpBackend) {
+  constructor(private jwtService: JwtService, handler: HttpBackend,private apiService: ApiService) {
     this.httpClient = new HttpClient(handler);
     this.token = this.jwtService.getToken();
   }
@@ -37,6 +38,28 @@ export class UploadService {
         }
       }));
   };
+
+  uploadFileUsingSignedUrl(path: string, file): Observable<any> {
+    return this.httpClient.put(`${path}`, file)
+      .pipe(catchError(formatErrors))
+      .pipe(map(data => {
+        if (data) {
+          return data;
+        } else {
+          return null;
+        }
+      }));
+  };
+  getSignUrl(params) {
+    let url = `/shared/signed-url`;
+    return this.apiService.get(url, params).pipe(map(data => {
+      if (data && data.result) {
+        return data.result;
+      } else {
+        return null;
+      }
+    }))
+  }
 
   /**
   * check th file size
