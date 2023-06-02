@@ -3,10 +3,9 @@ import { Router } from '@angular/router';
 import { ModalController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-// import { NotificationService } from 'src/app/core/services/notification.service';
-// import { SpinnerService } from 'src/app/core/services/spinner.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-
+import { notificationService } from 'src/app/core/services/notifications.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
@@ -15,63 +14,72 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class NotificationsPage implements OnInit {
 
   dataList: any = [];
-  start: number = 0;
-  limit: number = 10;
+  page: number = 1;
+  pageSize: number = 100;
+  collection: number = 0;
   constructor(
-    // private notificationService:  NotificationService,
-     private router: Router,
-     private modalController: ModalController,
-    // private spinnerService: SpinnerService,
-     private toastService: ToastService, 
-     public translate: TranslateService) { }
+    private notificationService: notificationService,
+    private router: Router,
+    private modalController: ModalController,
+    private spinnerService: LoaderService,
+    private toastService: ToastService,
+    public translate: TranslateService) { }
 
 
   ngOnInit() {
   }
 
   async ionViewDidEnter() {
-    // await this.spinnerService.presentLoading();
-    // this.loadData(false, "");
+    await this.spinnerService.showLoader();
+    this.loadData(false, "");
+    await this.spinnerService.hideLoader();
   }
   /**
    * refresh page content
    * @param event
    */
   doRefresh(event: any) {
+    this.page = 1;
     this.dataList = [];
-    this.start = 0;
-    // this.loadData(false, "");
+    this.loadData(false, "");
     event.target.complete();
   }
+
   doInfinite(event) {
-    // this.loadData(true, event);
-    event.target.complete();
+    if (this.dataList.length < this.collection) {
+      this.page++;
+      this.loadData(false, event);
+    } else {
+      event.target.complete();
+    }
   }
 
   /**
    * for ion-infinite scroll
    */
-  // async loadData(isFirstLoad, event) {
-  //   let params = { start: this.start, limit: this.limit };
-  //   this.notificationService.list(params).subscribe(
-  //     async data => {
-  //       for (let i = 0; i < data.length; i++) {
-  //         this.dataList.push(data[i]);
-  //       }
-  //       if (isFirstLoad)
-  //         event.target.complete();
-  //       if (data.length === 0 && event) {
-  //         event.target.disabled = true;
-  //       } else {
-  //         this.start += this.limit;
-  //       }
-  //       await this.spinnerService.dismissLoading();
-  //     }, async error => {
-  //       await this.spinnerService.dismissLoading();
-  //       this.toastService.presentErrorToast(error);
-  //     }
-  //   )
-  // }
+  async loadData(isFirstLoad, event) {
+    let params = {
+      page: this.page,
+      pageSize: this.pageSize,
+    };
+    this.notificationService.getAll(params).subscribe(
+      async data => {
+        this.collection = data.length;
+        for (let i = 0; i < data.length; i++) {
+          this.dataList.push(data[i]);
+        }
+        if (isFirstLoad)
+          event.target.complete();
+        if (data.length === 0 && event) {
+          event.target.disabled = true;
+        }
+        await this.spinnerService.hideLoader();
+      }, async error => {
+        await this.spinnerService.hideLoader();
+        this.toastService.errorToast(error);
+      }
+    )
+  }
   create_human_friendly_date(timestamp,
     yesterday_text,
     today_text,
@@ -98,8 +106,8 @@ export class NotificationsPage implements OnInit {
     var is_same_year = diff_years === 0;
 
     if (is_today && timestamp) {
-      return 'Recent updates'
-      // return moment(timestamp).format('hh:mm a');
+      // return 'Recent updates'
+      return moment(timestamp).format('hh:mm a');
     } else if (is_yesterday && timestamp) {
       return yesterday_text;
     } else if (is_tomorrow && timestamp) {
