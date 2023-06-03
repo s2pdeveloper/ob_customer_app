@@ -103,7 +103,9 @@ export class LandingPagePage implements OnInit {
       deviceToken: localStorage.getItem('deviceToken'),
       platform: this.deviceInfo?.platform
     };
-    this.userService.addDeviceToken(payload).subscribe();
+    if (payload.platform === 'android') {
+      this.userService.addDeviceToken(payload).subscribe();
+    }
     this.socketService.connect();
   }
   async ionViewWillEnter() {
