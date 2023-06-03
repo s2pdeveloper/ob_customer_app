@@ -15,8 +15,7 @@ export class NotificationsPage implements OnInit {
 
   dataList: any = [];
   page: number = 1;
-  pageSize: number = 100;
-  collection: number = 0;
+  pageSize: number = 10;
   constructor(
     private notificationService: notificationService,
     private router: Router,
@@ -30,9 +29,7 @@ export class NotificationsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    await this.spinnerService.showLoader();
     this.loadData(false, "");
-    await this.spinnerService.hideLoader();
   }
   /**
    * refresh page content
@@ -46,12 +43,9 @@ export class NotificationsPage implements OnInit {
   }
 
   doInfinite(event) {
-    if (this.dataList.length < this.collection) {
-      this.page++;
-      this.loadData(false, event);
-    } else {
-      event.target.complete();
-    }
+    this.page++;
+    this.loadData(true, event);
+    event.target.complete();
   }
 
   /**
@@ -64,7 +58,6 @@ export class NotificationsPage implements OnInit {
     };
     this.notificationService.getAll(params).subscribe(
       async data => {
-        this.collection = data.length;
         for (let i = 0; i < data.length; i++) {
           this.dataList.push(data[i]);
         }
@@ -106,8 +99,8 @@ export class NotificationsPage implements OnInit {
     var is_same_year = diff_years === 0;
 
     if (is_today && timestamp) {
-      // return 'Recent updates'
-      return moment(timestamp).format('hh:mm a');
+      return 'Recent updates'
+      // return moment(timestamp).format('hh:mm a');
     } else if (is_yesterday && timestamp) {
       return yesterday_text;
     } else if (is_tomorrow && timestamp) {
