@@ -20,7 +20,9 @@ import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
-
+import { CameraService } from 'src/app/core/services/camera.service';
+import { OPTIONS } from 'src/app/helpers';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 @Component({
   selector: 'app-order-view',
   templateUrl: './order-view.page.html',
@@ -40,6 +42,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: string;
   shopId: string;
   shopName: string = '';
+  fileData: any = {};
 
   userId: number;
   fileUploaded: boolean = false;
@@ -76,18 +79,19 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private restService: RestService,
     private orderService: OrderService,
     public popoverController: PopoverController,
-    private photoViewerService: PhotoViewerService
+    private photoViewerService: PhotoViewerService,
+    private cameraService: CameraService,
   ) {
     this.receiveListMessages(false, "");
   }
 
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
-    image: new FormControl(''),
     shopId: new FormControl(),
     orderId: new FormControl(),
     location: new FormControl(),
-    category: new FormControl(messageCategory.NORMAL)
+    category: new FormControl(messageCategory.NORMAL),
+    media: new FormControl(),
   });
 
   ngOnInit() {
@@ -146,9 +150,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   resetForm() {
     this.chatForm.get('message').setValue('');
-    this.chatForm.get('image').setValue(null);
     this.chatForm.get('category').setValue(messageCategory.NORMAL);
     this.chatForm.get('location').setValue(null);
+    this.chatForm.get('media').setValue(null);
   }
 
   emitToLoadMessages() {
@@ -182,6 +186,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         this.canReceiveMessage = false;
         console.log('RECEIVE_MESSAGE', result.data)
         this.messages.push(result.data);
+        console.log("this.message", this.messages);
+
         if (!this.orderId) {
           this.orderId = result.data.orderId;
           this.chatForm.get('orderId').setValue(this.orderId);
@@ -196,25 +202,73 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
 
-  async uploadFileAWS($event) {
-    let file = $event.target.files[0];
-    await this.spinner.showLoader();
-    let formData = new FormData();
-    formData.append('file', file);
-    this.uploadService.uploadFile(formData).subscribe(
-      async (data: any) => {
-        this.filePath = data?.result?.cdn;
-        this.chatForm.controls.image.setValue(this.filePath);
-        this.fileUploaded = true;
+  // async uploadFileAWS($event) {
+  //   let file = $event.target.files[0];
+  //   await this.spinner.showLoader();
+  //   let formData = new FormData();
+  //   formData.append('file', file);
+  //   this.uploadService.uploadFile(formData).subscribe(
+  //     async (data: any) => {
+  //       this.filePath = data?.result?.cdn;
+  //       this.chatForm.controls.image.setValue(this.filePath);
+  //       this.fileUploaded = true;
+  //       await this.spinner.hideLoader();
+  //       this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+  //       this.sendMessage();
+  //     },
+  //     async (error: any) => {
+  //       await this.spinner.hideLoader();
+  //       this.toaster.errorToast(error);
+  //     }
+  //   );
+  // }
+
+  async uploadFileAWS() {
+    const image = await this.cameraService.openCamera();
+    console.log('image', JSON.stringify(image))
+    const realFile = this.cameraService.b64toBlob(image.base64String, `image/${image.format}`);
+    await this.spinner.hideLoader();
+    console.log('readfile...........', realFile);
+    const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
+    if (!this.uploadService.checkFileSize(realFile)) {
+      console.log("realFile,,,,,,", realFile);
+      this.uploadService.getSignUrl(params).subscribe(
+        async (data: any) => {
+          console.log("data.............", data);
+          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
+            async (result: any) => {
+              console.log('after upload', result);
+              this.fileData = {
+                file: data.filePath,
+                fileName: `${data.filePath}`.split('post/')[1],
+                fileType: `image/${image.format}`,
+                fileSize: realFile.size,
+              }
+              console.log("this.fileData..........", this.fileData);
+              this.chatForm.controls.media.setValue(this.fileData);
+              this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+              this.fileUploaded = true;
+              console.log("this.chatForm.value", this.chatForm.value);
+              this.sendMessage();
+              await this.spinner.hideLoader();
+            }, async (error: any) => {
+              this.toaster.errorToast(error);
+              await this.spinner.hideLoader();
+            }
+          );
+        }, async (error: any) => {
+          this.toaster.errorToast(error);
+          await this.spinner.hideLoader();
+        }
+      )
+    }
+    else {
+      if (this.uploadService.checkFileSize(realFile.size)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
         await this.spinner.hideLoader();
-        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-        this.sendMessage();
-      },
-      async (error: any) => {
-        await this.spinner.hideLoader();
-        this.toaster.errorToast(error);
+        return;
       }
-    );
+    }
   }
 
   async downloadImage(message) {
@@ -325,7 +379,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
-   if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
+    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
       this.toaster.errorToast("Your rating will active in past")
     }
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
@@ -364,7 +418,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   async previewImage(message) {
     this.photoViewerConfig.images.push({
-      url: message.image,
+      url: message.file,
       title: ''
     });
   }

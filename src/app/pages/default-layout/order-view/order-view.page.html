@@ -33,29 +33,13 @@
               </p>
             </div>
 
-            <div class="msg-info">
-              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message)" />
+            <div class="msg-info" *ngFor="let image of message.chatMedia">
+              <img src="{{image.file}}" *ngIf="image.file" (click)="previewImage(image)" />
+
             </div>
           </div>
 
-          <div *ngIf="message.userIsSender" class="msg-status">
-            <div *ngIf="message.status === 'pending';else sent">
-              pending
-              <ion-icon name="checkmark-circle"></ion-icon>
-            </div>
-            <ng-template #sent>
-              <div *ngIf="message.status === 'sent';else seen">
-                sent
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-              </div>
-            </ng-template>
-            <ng-template #seen>
-              <div *ngIf="message.status === 'seen'">
-                seen
-                <ion-icon name="checkmark"></ion-icon>
-              </div>
-            </ng-template>
-          </div>
+
         </div>
       </div>
       <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
@@ -66,7 +50,19 @@
       </div>
     </div>
   </div>
-
+  <ion-fab class="attach-btn" size="small" fill="clear" slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
+    <ion-fab-button size="small">
+      <ion-icon name="attach"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon color="primary" name="camera-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon color="primary" name="image-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
@@ -82,13 +78,15 @@
             autocorrect="true" maxlength="500" type="text" placeholder="{{'typeYourMessage'| translate}}"
             (keyup.enter)="sendMessage()">
           </ion-textarea>
-          <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-            (change)="uploadFileAWS($event)" required />
+
 
           <ng-container class="footer-btns">
-            <ion-button (click)="fileInput1.click()">
-              <ion-icon name="attach"></ion-icon>
-            </ion-button>
+            <!-- (click)="uploadFileAWS()" -->
+            <!-- <ion-button fill="clear"> -->
+            <!-- <ion-icon size="large" name="attach"></ion-icon> -->
+
+            <!-- </ion-button> -->
+
 
             <ion-button (click)="address()">
               <ion-icon name="location"></ion-icon>
@@ -98,11 +96,15 @@
               <ion-icon name="send-sharp"></ion-icon>
             </ion-button>
           </ng-container>
+
         </ion-item>
       </form>
+
     </ion-toolbar>
   </div>
+
 </ion-footer>
+
 
 <div id="photo-container" *ngIf="photoViewerConfig.images.length > 0">
   <app-photoviewer (pvExit)="handleExit($event)" [imageList]="photoViewerConfig.images" [mode]="photoViewerConfig?.mode"
