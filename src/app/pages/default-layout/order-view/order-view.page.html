@@ -32,11 +32,28 @@
                     Map</ion-label></a>
               </p>
             </div>
-
-            <div class="msg-info" *ngFor="let image of message.chatMedia">
-              <img src="{{image.file}}" *ngIf="image.file" (click)="previewImage(image)" />
-
-            </div>
+            <ng-container *ngIf="message?.media.length > 0">
+              <div class="msg-info" *ngFor="let image of message.media">
+                <div class="msg-info"
+                  *ngIf="image?.fileType =='image/jpeg' || image?.fileType =='image/png' ||image?.fileType =='image/jpg' || image?.fileType =='image/svg' || image?.fileType =='image/gif'">
+                  <img src="{{image?.file}}" *ngIf="image.file" (click)="previewImage(image)" />
+                </div>
+                <div class="msg-info ion-margin-top"
+                  *ngIf="image?.fileType =='video/mp4'|| image?.fileType == 'video/x-m4v'">
+                  <video type="video/mp4" class="video-size" controls>
+                    <source class="avatar" src="{{image?.file}}" type='video/mp4' />
+                  </video>
+                </div>
+                <div class="msg-info ion-margin-top"
+                  *ngIf="image?.fileType === 'application/pdf' || image?.fileType ==='application/octet-stream'">
+                  <ion-button (click)="downloadFile(image)">
+                    <ion-icon class="ion-padding-end" name="arrow-down-outline"></ion-icon>
+                    <ion-label color="tertiary">Document
+                    </ion-label>
+                  </ion-button>
+                </div>
+              </div>
+            </ng-container>
           </div>
 
 
@@ -55,11 +72,14 @@
       <ion-icon name="attach"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top">
-      <ion-fab-button>
+      <ion-fab-button (click)="uploadFileAWS()">
         <ion-icon color="primary" name="camera-outline"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button>
+      <ion-fab-button (click)="fileInput1.click()">
         <ion-icon color="primary" name="image-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="address()">
+        <ion-icon color="primary" name="location"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
@@ -78,19 +98,13 @@
             autocorrect="true" maxlength="500" type="text" placeholder="{{'typeYourMessage'| translate}}"
             (keyup.enter)="sendMessage()">
           </ion-textarea>
-
+          <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+            (change)="uploadFiles($event)" required />
 
           <ng-container class="footer-btns">
-            <!-- (click)="uploadFileAWS()" -->
-            <!-- <ion-button fill="clear"> -->
-            <!-- <ion-icon size="large" name="attach"></ion-icon> -->
-
-            <!-- </ion-button> -->
-
-
-            <ion-button (click)="address()">
+            <!-- <ion-button >
               <ion-icon name="location"></ion-icon>
-            </ion-button>
+            </ion-button> -->
 
             <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
               <ion-icon name="send-sharp"></ion-icon>

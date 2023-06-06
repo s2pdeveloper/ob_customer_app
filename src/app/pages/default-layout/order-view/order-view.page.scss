@@ -43,6 +43,7 @@
         max-width: 70%;
         background-color: #eaeaea;
       }
+
       .center-msg {
         white-space: pre-wrap;
         position: relative;
@@ -89,6 +90,11 @@
       display: inline-block;
 
       .msg-info {
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        align-items: end;
+
         p {
           text-align: right;
           text-transform: capitalize;
@@ -96,7 +102,7 @@
           color: #888;
         }
       }
-    
+
 
       .msg-content {
         white-space: pre-wrap;
@@ -178,11 +184,17 @@ img {
 
 .attach-btn {
   position: absolute;
-  bottom: -71px;
-  right: 101px;
+  bottom: -66px;
+  right: 58px;
 }
 
 ion-fab-button {
   height: 30px;
   width: 30px;
+}
+
+.video-size {
+  max-height: 10rem !important;
+  width: 10rem !important;
+  object-fit: cover;
 }

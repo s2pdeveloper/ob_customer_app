@@ -202,26 +202,32 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
 
-  // async uploadFileAWS($event) {
-  //   let file = $event.target.files[0];
-  //   await this.spinner.showLoader();
-  //   let formData = new FormData();
-  //   formData.append('file', file);
-  //   this.uploadService.uploadFile(formData).subscribe(
-  //     async (data: any) => {
-  //       this.filePath = data?.result?.cdn;
-  //       this.chatForm.controls.image.setValue(this.filePath);
-  //       this.fileUploaded = true;
-  //       await this.spinner.hideLoader();
-  //       this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-  //       this.sendMessage();
-  //     },
-  //     async (error: any) => {
-  //       await this.spinner.hideLoader();
-  //       this.toaster.errorToast(error);
-  //     }
-  //   );
-  // }
+  async uploadFiles($event) {
+    let file = $event.target.files[0];
+    await this.spinner.showLoader();
+    let formData = new FormData();
+    formData.append('file', file);
+    this.uploadService.uploadFile(formData).subscribe(
+      async (data: any) => {
+        this.fileData = {
+          file: data?.result?.data?.key,
+          fileName: `${data?.result?.data.key}`.split('post/')[1],
+          fileType: data?.result?.data?.contentType,
+          fileSize: data?.result?.data?.size,
+        }
+        this.chatForm.controls.media.setValue(this.fileData);
+        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+        this.fileUploaded = true;
+        await this.spinner.hideLoader();
+        console.log("this.chatform.............", this.chatForm.value);
+        this.sendMessage();
+      },
+      async (error: any) => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      }
+    );
+  }
 
   async uploadFileAWS() {
     const image = await this.cameraService.openCamera();
@@ -435,6 +441,21 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
     if (keys.includes('message')) {
       console.log(`returned message: ${ev.message}`);
+    }
+  }
+
+  async downloadFile(data) {
+    if (data.file) {
+      console.log('data media', data);
+      await this.spinner.showLoader();
+      this.restService.convertToBase64(data).subscribe(async response => {
+        console.log('response convertToBase64', response)
+        // let file = {
+        //   ...data.media[0],
+        //   fileName: data.media[0].fileName
+        // }
+        // await this.restService.saveFile(file, response.src);
+      })
     }
   }
 }
