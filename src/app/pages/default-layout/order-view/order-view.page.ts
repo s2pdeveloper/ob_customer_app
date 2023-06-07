@@ -188,8 +188,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         this.canReceiveMessage = false;
         console.log('RECEIVE_MESSAGE', result.data)
         this.messages.push(result.data);
-        console.log("this.message", this.messages);
-
         if (!this.orderId) {
           this.orderId = result.data.orderId;
           this.chatForm.get('orderId').setValue(this.orderId);

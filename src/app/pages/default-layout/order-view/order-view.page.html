@@ -39,13 +39,13 @@
                   <img src="{{image?.file}}" *ngIf="image.file" (click)="previewImage(image)" /><ion-icon
                     class="download" name="cloud-download-outline" (click)="downloadFile(image)"></ion-icon>
                 </div>
-                <div class="msg-info ion-margin-top"
+                <div class="msg-info"
                   *ngIf="image?.fileType =='video/mp4'|| image?.fileType == 'video/x-m4v' || image?.fileType == 'video/3gp'">
                   <video type="video/mp4" class="video-size" controls>
                     <source class="avatar" src="{{image?.file}}" type='video/mp4' />
                   </video>
                 </div>
-                <div class="msg-info ion-margin-top"
+                <div class="msg-info"
                   *ngIf="image?.fileType === 'application/pdf' || image?.fileType ==='application/octet-stream'|| image?.fileType=== 'application/xls'|| image?.fileType=== 'application/xlsx' || image?.fileType=== 'application/csv'|| image?.fileType=== 'application/xlsm'|| image?.fileType=== 'application/doc'|| image?.fileType=== 'application/docx' || image?.fileType=== 'application/txt' || image?.fileType=== 'application/tex'">
                   <ion-button (click)="downloadFile(image)">
                     <ion-icon class="ion-padding-end" name="arrow-down-outline"></ion-icon>
@@ -103,10 +103,6 @@
             (change)="uploadFiles($event)" required />
 
           <ng-container class="footer-btns">
-            <!-- <ion-button >
-              <ion-icon name="location"></ion-icon>
-            </ion-button> -->
-
             <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
               <ion-icon name="send-sharp"></ion-icon>
             </ion-button>
