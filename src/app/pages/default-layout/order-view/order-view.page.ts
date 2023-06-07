@@ -23,6 +23,8 @@ import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 import { CameraService } from 'src/app/core/services/camera.service';
 import { OPTIONS } from 'src/app/helpers';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-order-view',
   templateUrl: './order-view.page.html',
@@ -446,15 +448,16 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   async downloadFile(data) {
     if (data.file) {
-      console.log('data media', data);
       await this.spinner.showLoader();
       this.restService.convertToBase64(data).subscribe(async response => {
         console.log('response convertToBase64', response)
-        // let file = {
-        //   ...data.media[0],
-        //   fileName: data.media[0].fileName
-        // }
-        // await this.restService.saveFile(file, response.src);
+        let file = {
+          ...data,
+          fileName: data.fileName
+        }
+        await this.restService.saveFile(file, response.src);
+        await this.spinner.hideLoader();
+
       })
     }
   }

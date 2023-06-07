@@ -35,17 +35,18 @@
             <ng-container *ngIf="message?.media.length > 0">
               <div class="msg-info" *ngFor="let image of message.media">
                 <div class="msg-info"
-                  *ngIf="image?.fileType =='image/jpeg' || image?.fileType =='image/png' ||image?.fileType =='image/jpg' || image?.fileType =='image/svg' || image?.fileType =='image/gif'">
-                  <img src="{{image?.file}}" *ngIf="image.file" (click)="previewImage(image)" />
+                  *ngIf="image?.fileType =='image/jpeg' || image?.fileType =='image/png' ||image?.fileType =='image/jpg' || image?.fileType =='image/svg' || image?.fileType =='image/gif' || image?.fileType =='webp'">
+                  <img src="{{image?.file}}" *ngIf="image.file" (click)="previewImage(image)" /><ion-icon
+                    class="download" name="cloud-download-outline" (click)="downloadFile(image)"></ion-icon>
                 </div>
                 <div class="msg-info ion-margin-top"
-                  *ngIf="image?.fileType =='video/mp4'|| image?.fileType == 'video/x-m4v'">
+                  *ngIf="image?.fileType =='video/mp4'|| image?.fileType == 'video/x-m4v' || image?.fileType == 'video/3gp'">
                   <video type="video/mp4" class="video-size" controls>
                     <source class="avatar" src="{{image?.file}}" type='video/mp4' />
                   </video>
                 </div>
                 <div class="msg-info ion-margin-top"
-                  *ngIf="image?.fileType === 'application/pdf' || image?.fileType ==='application/octet-stream'">
+                  *ngIf="image?.fileType === 'application/pdf' || image?.fileType ==='application/octet-stream'|| image?.fileType=== 'application/xls'|| image?.fileType=== 'application/xlsx' || image?.fileType=== 'application/csv'|| image?.fileType=== 'application/xlsm'|| image?.fileType=== 'application/doc'|| image?.fileType=== 'application/docx' || image?.fileType=== 'application/txt' || image?.fileType=== 'application/tex'">
                   <ion-button (click)="downloadFile(image)">
                     <ion-icon class="ion-padding-end" name="arrow-down-outline"></ion-icon>
                     <ion-label color="tertiary">Document
