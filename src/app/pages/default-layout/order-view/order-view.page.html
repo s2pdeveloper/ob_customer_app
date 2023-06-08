@@ -32,30 +32,29 @@
                     Map</ion-label></a>
               </p>
             </div>
-
-            <div class="msg-info">
-              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message)" />
-            </div>
+            <ng-container>
+              <div class="msg-info">
+                <div class="msg-info" *ngIf="imageExtension.includes(message?.media?.fileType)">
+                  <img src="{{message?.media?.filePath }}" (click)="previewImage(message?.media)" /><ion-icon
+                    class="download" name="cloud-download-outline" (click)="downloadFile(message?.media)"></ion-icon>
+                </div>
+                <div class="msg-info" *ngIf="videoExtension.includes(message?.media?.fileType)">
+                  <video type="video/mp4" class="video-size" controls poster="assets/images/poster_image.png">
+                    <source class="avatar" src="{{message?.media?.filePath}}" type='video/mp4' />
+                  </video>
+                </div>
+                <div class="msg-info" *ngIf="fileExtension.includes(message?.media?.fileType)">
+                  <ion-button (click)="downloadFile(message?.media)">
+                    <ion-icon class="ion-padding-end" name="arrow-down-outline"></ion-icon>
+                    <ion-label color="tertiary">Document
+                    </ion-label>
+                  </ion-button>
+                </div>
+              </div>
+            </ng-container>
           </div>
 
-          <div *ngIf="message.userIsSender" class="msg-status">
-            <div *ngIf="message.status === 'pending';else sent">
-              pending
-              <ion-icon name="checkmark-circle"></ion-icon>
-            </div>
-            <ng-template #sent>
-              <div *ngIf="message.status === 'sent';else seen">
-                sent
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-              </div>
-            </ng-template>
-            <ng-template #seen>
-              <div *ngIf="message.status === 'seen'">
-                seen
-                <ion-icon name="checkmark"></ion-icon>
-              </div>
-            </ng-template>
-          </div>
+
         </div>
       </div>
       <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
@@ -66,7 +65,22 @@
       </div>
     </div>
   </div>
-
+  <ion-fab class="attach-btn" size="small" fill="clear" slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
+    <ion-fab-button size="small">
+      <ion-icon name="attach"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="uploadFileAWS()">
+        <ion-icon color="primary" name="camera-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="fileInput1.click()">
+        <ion-icon color="primary" name="image-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="address()">
+        <ion-icon color="primary" name="location"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
@@ -83,26 +97,22 @@
             (keyup.enter)="sendMessage()">
           </ion-textarea>
           <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-            (change)="uploadFileAWS($event)" required />
+            (change)="uploadFiles($event)" required />
 
           <ng-container class="footer-btns">
-            <ion-button (click)="fileInput1.click()">
-              <ion-icon name="attach"></ion-icon>
-            </ion-button>
-
-            <ion-button (click)="address()">
-              <ion-icon name="location"></ion-icon>
-            </ion-button>
-
             <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
               <ion-icon name="send-sharp"></ion-icon>
             </ion-button>
           </ng-container>
+
         </ion-item>
       </form>
+
     </ion-toolbar>
   </div>
+
 </ion-footer>
+
 
 <div id="photo-container" *ngIf="photoViewerConfig.images.length > 0">
   <app-photoviewer (pvExit)="handleExit($event)" [imageList]="photoViewerConfig.images" [mode]="photoViewerConfig?.mode"

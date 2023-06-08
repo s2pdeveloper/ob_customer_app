@@ -3,8 +3,8 @@ export const OPTIONS = {
     emailPattern: '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$',
     imageType: 'Please upload the file in jpeg, png format',
     documentType: 'Please upload the file in jpeg, png and pdf format',
-    sizeLimit: 'Please upload the file that is less then 8mb',
-    maxLimit: 8,
+    sizeLimit: 'Please upload the file that is less then 10 mb',
+    maxLimit: 10,
     noInternet: "Please check your internet connection and try again!"
 };
 
@@ -132,4 +132,31 @@ export const secondaryStatus = {
     TIMED_OUT: 'timed_out',
     IM_ON_THE_WAY: 'I am on the way',
     RECEIVED: 'received',
-}
+};
+export const imageExtension = [
+    'image/jpeg',
+    'image/png',
+    'image/jpg',
+    'image/svg',
+    'image/gif',
+    'webp'
+];
+
+export const fileExtension = [
+    'application/pdf',
+    'application/octet-stream',
+    'application/xls',
+    'application/xlsx',
+    'application/csv',
+    'application/xlsm',
+    'application/doc',
+    'application/docx',
+    'application/txt',
+    'application/tex'
+];
+
+export const videoExtension = [
+    'video/mp4',
+    'video/x-m4v',
+    'video/3gp'
+];

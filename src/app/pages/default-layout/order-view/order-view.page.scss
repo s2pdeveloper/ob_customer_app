@@ -43,6 +43,7 @@
         max-width: 70%;
         background-color: #eaeaea;
       }
+
       .center-msg {
         white-space: pre-wrap;
         position: relative;
@@ -82,6 +83,9 @@
     .download {
       position: relative;
       float: right;
+      right: 113px;
+      bottom: 100px;
+      font-size: 16px;
     }
 
     .msg-detail {
@@ -89,6 +93,11 @@
       display: inline-block;
 
       .msg-info {
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        align-items: end;
+
         p {
           text-align: right;
           text-transform: capitalize;
@@ -96,7 +105,7 @@
           color: #888;
         }
       }
-    
+
 
       .msg-content {
         white-space: pre-wrap;
@@ -111,7 +120,7 @@
         width: auto;
         max-width: 70%;
       }
-     
+
     }
 
     .msg-status {
@@ -158,6 +167,7 @@ img {
   width: 7rem !important;
   object-fit: cover;
 }
+
 .shopName {
   background-color: rgb(241, 239, 239);
   padding: 5px;
@@ -173,4 +183,21 @@ img {
   bottom: 0;
   background-color: #000;
   z-index: 999;
+}
+
+.attach-btn {
+  position: absolute;
+  bottom: -66px;
+  right: 58px;
+}
+
+ion-fab-button {
+  height: 30px;
+  width: 30px;
+}
+
+.video-size {
+  max-height: 10rem !important;
+  width: 10rem !important;
+  object-fit: cover;
 }
