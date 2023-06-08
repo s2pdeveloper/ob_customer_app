@@ -21,7 +21,7 @@ import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 import { CameraService } from 'src/app/core/services/camera.service';
-import { OPTIONS } from 'src/app/helpers';
+import { OPTIONS, videoExtension, fileExtension, imageExtension } from 'src/app/helpers';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { saveAs } from 'file-saver';
 
@@ -36,7 +36,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
   isPreview: boolean = false;
-
+  videoExtension = videoExtension;
+  fileExtension = fileExtension;
+  imageExtension = imageExtension;
   page: number = 1;
   pageSize: number = 10;
   messages: any = [];
@@ -204,57 +206,59 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   async uploadFiles($event) {
     let file = $event.target.files[0];
-    await this.spinner.showLoader();
-    let formData = new FormData();
-    formData.append('file', file);
-    this.uploadService.uploadFile(formData).subscribe(
-      async (data: any) => {
-        this.fileData = {
-          file: data?.result?.data?.key,
-          fileName: `${data?.result?.data.key}`.split('post/')[1],
-          fileType: data?.result?.data?.contentType,
-          fileSize: data?.result?.data?.size,
+    if (this.uploadService.checkFileSize(file)) {
+      await this.spinner.showLoader();
+      let formData = new FormData();
+      formData.append('file', file);
+      this.uploadService.uploadFile(formData).subscribe(
+        async (data: any) => {
+          this.fileData = {
+            filePath: data?.result?.data?.key,
+            fileName: `${data?.result?.data.key}`.split('post/')[1],
+            fileType: data?.result?.data?.contentType,
+            fileSize: data?.result?.data?.size,
+          }
+          this.chatForm.controls.media.setValue(this.fileData);
+          this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+          this.fileUploaded = true;
+          await this.spinner.hideLoader();
+          this.sendMessage();
+        },
+        async (error: any) => {
+
+          await this.spinner.hideLoader();
+          this.toaster.errorToast(error);
         }
-        this.chatForm.controls.media.setValue(this.fileData);
-        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-        this.fileUploaded = true;
-        await this.spinner.hideLoader();
-        console.log("this.chatform.............", this.chatForm.value);
-        this.sendMessage();
-      },
-      async (error: any) => {
-        await this.spinner.hideLoader();
-        this.toaster.errorToast(error);
+      );
+    } else {
+      if (!this.uploadService.checkFileSize(file)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
+        this.spinner.hideLoader();
+        return;
       }
-    );
+    }
   }
 
   async uploadFileAWS() {
     const image = await this.cameraService.openCamera();
-    console.log('image', JSON.stringify(image))
     const realFile = this.cameraService.b64toBlob(image.base64String, `image/${image.format}`);
     await this.spinner.hideLoader();
-    console.log('readfile...........', realFile);
     const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
-    if (!this.uploadService.checkFileSize(realFile)) {
-      console.log("realFile,,,,,,", realFile);
+    if (this.uploadService.checkFileSize(realFile)) {
       this.uploadService.getSignUrl(params).subscribe(
         async (data: any) => {
-          console.log("data.............", data);
           this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
             async (result: any) => {
               console.log('after upload', result);
               this.fileData = {
-                file: data.filePath,
+                filePath: data.filePath,
                 fileName: `${data.filePath}`.split('post/')[1],
                 fileType: `image/${image.format}`,
                 fileSize: realFile.size,
               }
-              console.log("this.fileData..........", this.fileData);
               this.chatForm.controls.media.setValue(this.fileData);
               this.chatForm.controls.category.setValue(messageCategory.MEDIA);
               this.fileUploaded = true;
-              console.log("this.chatForm.value", this.chatForm.value);
               this.sendMessage();
               await this.spinner.hideLoader();
             }, async (error: any) => {
@@ -269,29 +273,13 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       )
     }
     else {
-      if (this.uploadService.checkFileSize(realFile.size)) {
+      if (!this.uploadService.checkFileSize(realFile.size)) {
         this.toaster.errorToast(OPTIONS.sizeLimit);
         await this.spinner.hideLoader();
         return;
       }
     }
   }
-
-  async downloadImage(message) {
-    this.restService.convertToBase64(message.image)
-      .subscribe(async (success: any) => {
-        this.toaster.successToast(
-          'Image Downloaded successfully. Please check your Documents folder.'
-        );
-        await Filesystem.writeFile({
-          path: `${message.image.split('post/')[1]}`,
-          data: success.result.src as string,
-          directory: Directory.Documents,
-        });
-        await this.spinner.hideLoader();
-      });
-  }
-
   async openGoogleMap(location) {
     if (location) {
       const destination = `${location.coordinates[0]},${location.coordinates[1]}`;
@@ -424,7 +412,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   async previewImage(message) {
     this.photoViewerConfig.images.push({
-      url: message.file,
+      url: message.filePath,
       title: ''
     });
   }
@@ -445,10 +433,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async downloadFile(data) {
-    if (data.file) {
+    if (data.filePath) {
       await this.spinner.showLoader();
       this.restService.convertToBase64(data).subscribe(async response => {
-        console.log('response convertToBase64', response)
         let file = {
           ...data,
           fileName: data.fileName
