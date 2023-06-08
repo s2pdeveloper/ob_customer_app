@@ -39,7 +39,7 @@
                     class="download" name="cloud-download-outline" (click)="downloadFile(message?.media)"></ion-icon>
                 </div>
                 <div class="msg-info" *ngIf="videoExtension.includes(message?.media?.fileType)">
-                  <video type="video/mp4" class="video-size" controls>
+                  <video type="video/mp4" class="video-size" controls poster="assets/images/poster_image.png">
                     <source class="avatar" src="{{message?.media?.filePath}}" type='video/mp4' />
                   </video>
                 </div>
