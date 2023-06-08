@@ -7,7 +7,6 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-catalogue',
@@ -15,8 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
-  // subCategory$: Subscription;
-  // product$: Subscription;
+
   loaded: boolean = false;
   user: any;
   shopId: string;
@@ -77,9 +75,7 @@ export class CataloguePage implements OnInit {
     this.searchText = '';
   }
 
-  ionViewWillEnter() {
-
-  }
+  ionViewWillEnter() { }
 
   onSearch() {
     this.page = 1;
@@ -168,6 +164,7 @@ export class CataloguePage implements OnInit {
       this.toaster.warningToast("please select at least one product")
     }
   }
+
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
   }

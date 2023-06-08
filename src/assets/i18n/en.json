@@ -196,6 +196,13 @@
   "schedule":"Timing",
   "placeholderNote":"On Clicking Place order button, picked items will be sent to seller or service provider via Order chat. Your order processing will be done from the same window.",
   "checkout":"Checkout",
-  "directCall":"Direct Call"
+  "directCall":"Direct Call",
+  "bookMyAppointment":"Book my appointment",
+  "instructions": "Instructions",
+  "instruction1": "Delivery Method and Payment for selected items has to be mutually discused and agreed with seller or service provider.",
+  "instruction2": "Bharat Online doesn't receive payment on anyone behalf and has no involvement in any payment or delivery related issues.",
+  "instruction3": "Whatever and whenever feasible, opt for secure payment methods.",
+  "instruction4": "Avoid entering your UPI (Unified Payments Interface) PIN while receiving money.",
+  "instruction5": "Avoid upfront payments or providing products in advance Report suspicious users to Bharat Online."
 
 }

@@ -41,6 +41,5 @@ export class FilterComponent implements OnInit {
       data: this.filterForm.value,
 
     });
-    console.log("data", this.filterForm.value);
   }
 }
