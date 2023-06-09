@@ -17,47 +17,60 @@
 
   <div class="chat-screen">
     <div #scrollMe class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow: scroll">
-      <div class="message-wrap">
-        <div *ngFor="let message of messages" class="message" [class.right]="message?.senderId === user?._id">
-          <div class="msg-detail">
-            <div [ngClass]="message.type=='status' ? 'msg-info-center' : 'msg-info'" *ngIf="message?.createdAt">
-              <p>{{message?.createdAt | date:'shortTime'}}</p>
-            </div>
-
-            <div class="ion-text-wrap" [ngClass]="message.type=='status' ? 'center-msg' :'msg-content'"
-              *ngIf="message?.message">
-              <p>{{message?.message}}
-                <a role="button" class="ion-text-underline" (click)="openGoogleMap(message?.location)"
-                  *ngIf="message?.category === messageCategory.LOCATION"><ion-label color="tertiary">Open
-                    Map</ion-label></a>
-              </p>
-            </div>
-
-            <div class="msg-info">
-              <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message)" />
+      <ion-item-sliding *ngFor="let message of messages;let i = index" #slidingItem>
+        <ion-item  lines="none" class="ion-no-padding">
+          <div class="message-wrap">
+            <div  class="message" [class.right]="message?.senderId === user?._id">
+              <div class="msg-detail">
+                <div [ngClass]="message.type=='status' ? 'msg-info-center' : 'msg-info'" *ngIf="message?.createdAt">
+                  <p>{{message?.createdAt | date:'shortTime'}}</p>
+                </div>
+    
+                <div class="ion-text-wrap" [ngClass]="message.type=='status' ? 'center-msg' :'msg-content'"
+                  *ngIf="message?.message">
+                  <p>{{message?.message}}
+                    <a role="button" class="ion-text-underline" (click)="openGoogleMap(message?.location)"
+                      *ngIf="message?.category === messageCategory.LOCATION"><ion-label color="tertiary">Open
+                        Map</ion-label></a>
+                  </p>
+                </div>
+    
+                <div class="msg-info">
+                  <img src="{{message.image}}" *ngIf="message.image" (click)="previewImage(message)" />
+                </div>
+              </div>
+    
+              <div *ngIf="message.userIsSender" class="msg-status">
+                <div *ngIf="message.status === 'pending';else sent">
+                  pending
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </div>
+                <ng-template #sent>
+                  <div *ngIf="message.status === 'sent';else seen">
+                    sent
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                  </div>
+                </ng-template>
+                <ng-template #seen>
+                  <div *ngIf="message.status === 'seen'">
+                    seen
+                    <ion-icon name="checkmark"></ion-icon>
+                  </div>
+                </ng-template>
+              </div>
             </div>
           </div>
+        </ion-item>
 
-          <div *ngIf="message.userIsSender" class="msg-status">
-            <div *ngIf="message.status === 'pending';else sent">
-              pending
-              <ion-icon name="checkmark-circle"></ion-icon>
-            </div>
-            <ng-template #sent>
-              <div *ngIf="message.status === 'sent';else seen">
-                sent
-                <ion-icon name="checkmark-circle-outline"></ion-icon>
-              </div>
-            </ng-template>
-            <ng-template #seen>
-              <div *ngIf="message.status === 'seen'">
-                seen
-                <ion-icon name="checkmark"></ion-icon>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
+        <ion-item-options side="end" (click)="deleteMessage(i,message._id)"
+          *ngIf="message?.senderId=== user.id">
+          <ion-item-option class="btn-color-transparent ion-margin-top">
+            <ion-icon name="trash-outline" color="primary" size="small" slot="start"></ion-icon>
+            {{ 'delete' | translate}}
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+
       <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px">
         <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px"></div>
       </div>

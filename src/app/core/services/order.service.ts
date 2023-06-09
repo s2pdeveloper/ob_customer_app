@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,6 @@ export class OrderService {
     );
   }
 
-
   giveRating(payload) {
     let url: string = `mobile/shop/${payload.orderId}/rating`;
     return this.apiService.put(url, payload).pipe(map(
@@ -35,5 +35,24 @@ export class OrderService {
         }
       })
     );
+  }
+
+  /**
+* message delete
+* @param id 
+* @returns 
+*/
+  deleteMessage(id): Observable<any> {
+    let url: string = `/mobile/order/message${id}`;
+    return this.apiService.delete(url).pipe(map(
+      (data: any) => {
+        if (data && data.result) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      }
+    ));
   }
 }

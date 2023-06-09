@@ -40,12 +40,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: string;
   shopId: string;
   shopName: string = '';
-
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
   orderId: string = null;
-
   messageCategory = messageCategory;
   orderDetails: any = {};
   ratingDetails: any = {};
@@ -325,7 +323,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
-   if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
+    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
       this.toaster.errorToast("Your rating will active in past")
     }
     if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
@@ -382,5 +380,17 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     if (keys.includes('message')) {
       console.log(`returned message: ${ev.message}`);
     }
+  }
+
+  deleteMessage(index, id) {
+    this.orderService.deleteMessage(id).subscribe(
+      async data => {
+        this.messages.splice(index, 1);
+        this.toaster.successToast(data.message);
+      }, async error => {
+        await this.spinner.hideLoader();
+        this.toaster.errorToast(error);
+      }
+    )
   }
 }
