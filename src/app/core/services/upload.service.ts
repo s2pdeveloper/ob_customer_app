@@ -13,7 +13,7 @@ export class UploadService {
   token: String;
   private httpClient: HttpClient;
 
-  constructor(private jwtService: JwtService, handler: HttpBackend,private apiService: ApiService) {
+  constructor(private jwtService: JwtService, handler: HttpBackend, private apiService: ApiService) {
     this.httpClient = new HttpClient(handler);
     this.token = this.jwtService.getToken();
   }
@@ -62,13 +62,13 @@ export class UploadService {
   }
 
   /**
-  * check th file size
-  * @param file 
-  * @returns 
-  */
+   * check the file size
+   * @param file
+   * @returns
+   */
   checkFileSize(file) {
     let size = file.size / (1024 * 1024);
-    if (size > OPTIONS.maxLimit) {
+    if (size < OPTIONS.maxLimit) {
       return true;
     }
     return false;

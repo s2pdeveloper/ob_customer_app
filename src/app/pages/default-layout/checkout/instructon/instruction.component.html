@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color="light">
     <ion-title class="ion-text-capitalize ion-text-wrap" color="primary">{{'instruction'|translate}}</ion-title>
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
       <ion-button class="text-color-2" (click)="dismissModal(false)">{{ 'close' | translate}}</ion-button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card class="card">
+<ion-content class="ion-no-padding">
+  <ion-card >
     <ion-card-content class="ion-justify-content-center">
       <ul class="list">
         <li class="item">{{'instruction1' | translate}}</li>
@@ -24,7 +24,7 @@
 <ion-footer class="light">
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col>
-      <ion-button (click)="closeModal()" color="light" expand="block" class="btn-color-1 btn-height-large" >
+      <ion-button (click)="closeModal()" color="light" expand="block" class="btn-color-1 btn-height-large">
         {{ 'back' | translate}}
       </ion-button>
     </ion-col>

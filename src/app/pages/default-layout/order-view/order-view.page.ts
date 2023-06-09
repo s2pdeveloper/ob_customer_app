@@ -5,7 +5,6 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { IonContent, IonInfiniteScroll, PopoverController } from '@ionic/angular';
 import { UploadService } from 'src/app/core/services/upload.service';
-import { Filesystem, Directory } from '@capacitor/filesystem';
 import { ModalController } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -20,7 +19,8 @@ import { PopoverComponent } from 'src/app/shared/popover/popover.component';
 import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
-
+import { CameraService } from 'src/app/core/services/camera.service';
+import { OPTIONS, videoExtension, fileExtension, imageExtension } from 'src/app/helpers';
 @Component({
   selector: 'app-order-view',
   templateUrl: './order-view.page.html',
@@ -32,7 +32,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
   isPreview: boolean = false;
-
+  videoExtension = videoExtension;
+  fileExtension = fileExtension;
+  imageExtension = imageExtension;
   page: number = 1;
   pageSize: number = 10;
   messages: any = [];
@@ -40,6 +42,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: string;
   shopId: string;
   shopName: string = '';
+  fileData: any = {};
   userId: number;
   fileUploaded: boolean = false;
   filePath: string = '';
@@ -47,7 +50,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   messageCategory = messageCategory;
   orderDetails: any = {};
   ratingDetails: any = {};
-
+  canReceiveMessage: boolean = false;
   photoViewerConfig = {
     mode: 'one',
     images: [],
@@ -59,7 +62,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  canReceiveMessage: boolean = false;
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -74,18 +76,19 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private restService: RestService,
     private orderService: OrderService,
     public popoverController: PopoverController,
-    private photoViewerService: PhotoViewerService
+    private photoViewerService: PhotoViewerService,
+    private cameraService: CameraService,
   ) {
     this.receiveListMessages(false, "");
   }
 
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
-    image: new FormControl(''),
     shopId: new FormControl(),
     orderId: new FormControl(),
     location: new FormControl(),
-    category: new FormControl(messageCategory.NORMAL)
+    category: new FormControl(messageCategory.NORMAL),
+    media: new FormControl(),
   });
 
   ngOnInit() {
@@ -144,9 +147,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   resetForm() {
     this.chatForm.get('message').setValue('');
-    this.chatForm.get('image').setValue(null);
     this.chatForm.get('category').setValue(messageCategory.NORMAL);
     this.chatForm.get('location').setValue(null);
+    this.chatForm.get('media').setValue(null);
   }
 
   emitToLoadMessages() {
@@ -174,6 +177,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       },
     })
   }
+
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
@@ -193,43 +197,81 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     })
   }
 
-
-  async uploadFileAWS($event) {
+  async uploadFiles($event) {
     let file = $event.target.files[0];
-    await this.spinner.showLoader();
-    let formData = new FormData();
-    formData.append('file', file);
-    this.uploadService.uploadFile(formData).subscribe(
-      async (data: any) => {
-        this.filePath = data?.result?.cdn;
-        this.chatForm.controls.image.setValue(this.filePath);
-        this.fileUploaded = true;
-        await this.spinner.hideLoader();
-        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-        this.sendMessage();
-      },
-      async (error: any) => {
-        await this.spinner.hideLoader();
-        this.toaster.errorToast(error);
+    if (this.uploadService.checkFileSize(file)) {
+      await this.spinner.showLoader();
+      let formData = new FormData();
+      formData.append('file', file);
+      this.uploadService.uploadFile(formData).subscribe(
+        async (data: any) => {
+          this.fileData = {
+            filePath: data?.result?.data?.key,
+            fileName: `${data?.result?.data.key}`.split('post/')[1],
+            fileType: data?.result?.data?.contentType,
+            fileSize: data?.result?.data?.size,
+          }
+          this.chatForm.controls.media.setValue(this.fileData);
+          this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+          this.fileUploaded = true;
+          await this.spinner.hideLoader();
+          this.sendMessage();
+        },
+        async (error: any) => {
+          await this.spinner.hideLoader();
+          this.toaster.errorToast(error);
+        }
+      );
+    } else {
+      if (!this.uploadService.checkFileSize(file)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
+        this.spinner.hideLoader();
+        return;
       }
-    );
+    }
   }
 
-  async downloadImage(message) {
-    this.restService.convertToBase64(message.image)
-      .subscribe(async (success: any) => {
-        this.toaster.successToast(
-          'Image Downloaded successfully. Please check your Documents folder.'
-        );
-        await Filesystem.writeFile({
-          path: `${message.image.split('post/')[1]}`,
-          data: success.result.src as string,
-          directory: Directory.Documents,
-        });
+  async uploadFileAWS() {
+    const image = await this.cameraService.openCamera();
+    const realFile = this.cameraService.b64toBlob(image.base64String, `image/${image.format}`);
+    await this.spinner.hideLoader();
+    const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
+    if (this.uploadService.checkFileSize(realFile)) {
+      this.uploadService.getSignUrl(params).subscribe(
+        async (data: any) => {
+          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
+            async (result: any) => {
+              console.log('after upload', result);
+              this.fileData = {
+                filePath: data.filePath,
+                fileName: `${data.filePath}`.split('post/')[1],
+                fileType: `image/${image.format}`,
+                fileSize: realFile.size,
+              }
+              this.chatForm.controls.media.setValue(this.fileData);
+              this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+              this.fileUploaded = true;
+              this.sendMessage();
+              await this.spinner.hideLoader();
+            }, async (error: any) => {
+              this.toaster.errorToast(error);
+              await this.spinner.hideLoader();
+            }
+          );
+        }, async (error: any) => {
+          this.toaster.errorToast(error);
+          await this.spinner.hideLoader();
+        }
+      )
+    }
+    else {
+      if (!this.uploadService.checkFileSize(realFile.size)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
         await this.spinner.hideLoader();
-      });
+        return;
+      }
+    }
   }
-
   async openGoogleMap(location) {
     if (location) {
       const destination = `${location.coordinates[0]},${location.coordinates[1]}`;
@@ -250,7 +292,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       },
     });
   }
-
 
   async openMap() {
     const modal = await this.modalController.create({
@@ -290,7 +331,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async modalReport() {
     const modal = await this.modalCtrl.create({
       component: ReportComponent,
-      cssClass: 'rating-modal',
+      cssClass: 'report-modal',
       mode: 'ios',
       swipeToClose: true,
       componentProps: {
@@ -334,7 +375,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-
   async address() {
     const modal = await this.modalCtrl.create({
       component: AddressComponent,
@@ -362,11 +402,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   async previewImage(message) {
     this.photoViewerConfig.images.push({
-      url: message.image,
+      url: message.filePath,
       title: ''
     });
   }
-
 
   handleExit(ev) {
     this.photoViewerConfig.images = []
@@ -382,7 +421,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  deleteMessage(index, id) {
+  deleteMessage(index, id) { 
     this.orderService.deleteMessage(id).subscribe(
       async data => {
         this.messages.splice(index, 1);
@@ -392,5 +431,20 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         this.toaster.errorToast(error);
       }
     )
+  }
+
+  async downloadFile(data) {
+    if (data.filePath) {
+      await this.spinner.showLoader();
+      this.restService.convertToBase64(data).subscribe(async response => {
+        let file = {
+          ...data,
+          fileName: data.fileName
+        }
+        await this.restService.saveFile(file, response.src);
+        await this.spinner.hideLoader();
+
+      })
+    }
   }
 }

@@ -1,7 +1,9 @@
 <ion-header>
-  <ion-toolbar class="bg-color-primary" color="primary">
-    <ion-title>{{ "report" | translate }}</ion-title>
-    <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large" (click)="closeModal()"></ion-icon>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-capitalize ion-text-wrap" color="primary">{{'report'|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="dismissModal(false)">{{ 'close' | translate}}</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
