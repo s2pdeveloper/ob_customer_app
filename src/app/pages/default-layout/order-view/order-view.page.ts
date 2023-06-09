@@ -42,7 +42,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   customerId: string;
   shopId: string;
   shopName: string = '';
-  isBlocked:boolean=false;
+  isBlocked: boolean = false;
 
   userId: number;
   fileUploaded: boolean = false;
@@ -137,9 +137,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success.orderDetails;
-      console.log("this.orderDetails",this.orderDetails);
-      if(this.orderDetails.shopDetails.blockedUser.some(x=>x==this.shopId)) this.isBlocked=true; 
-
+      if (this.orderDetails.shopDetails.blockedUser.some(x => x == this.shopId)) this.isBlocked = true;
       this.ratingDetails = success.ratingDetails;
       await this.spinner.hideLoader();
     }, async error => {
@@ -325,7 +323,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async presentPopover(ev: any) {
-    let componentProps= {
+    let componentProps = {
       dataList: [
         { label: 'Rating', event: 'rating' },
         { label: 'Report', event: 'report' },
@@ -339,13 +337,13 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       event: ev,
       translucent: true,
     });
-    console.log("popover",popover,this.isBlocked);
-    if(this.isBlocked){
-        popover.componentProps.dataList[2]={ label: 'Unblock', event: 'unblock' };
-    }else{
-      popover.componentProps.dataList[2]= { label: 'Block', event: 'block' };
+    console.log("popover", popover, this.isBlocked);
+    if (this.isBlocked) {
+      popover.componentProps.dataList[2] = { label: 'Unblock', event: 'unblock' };
+    } else {
+      popover.componentProps.dataList[2] = { label: 'Block', event: 'block' };
     }
-    
+
     await popover.present();
     const { data } = await popover.onDidDismiss();
     if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
@@ -359,10 +357,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       this.modalReport();
     }
     if (data.event === 'block') {
-      this.blockAlert(data.event );
+      this.blockAlert(data.event);
     }
     if (data.event === 'unblock') {
-      this.blockAlert(data.event );
+      this.blockAlert(data.event);
     }
   }
 
@@ -383,7 +381,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
           cssClass: 'alert-button-confirm',
           handler: (alertData) => {
             alertData = this.shopId;
-            this.block(alertData,event);
+            this.block(alertData, event);
           },
         },
       ],
@@ -392,16 +390,17 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await alert.present();
     await alert.onDidDismiss();
   }
-  async block(shopId,event) {
-    console.log(shopId,event);
+  async block(shopId, event) {
+    console.log(shopId, event);
     await this.spinner.showLoader();
     let payload = {
       blockedUser: shopId,
-      event:event,
-      shopId:shopId
+      event: event,
+      shopId: shopId
     }
     console.log(payload);
     this.shopService.userBlock(payload).subscribe(async result => {
+      this.isBlocked = result?.shopData?.blockedUser.some(x => x == this.shopId);
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
