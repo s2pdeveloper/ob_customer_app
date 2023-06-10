@@ -101,7 +101,6 @@ export class CataloguePage implements OnInit {
     }
   }
   async getShopSubCategory(isFirstLoad: boolean, event?: any) {
-
     let obj = { page: this.page, pageSize: this.pageSize, shopId: this.shopId };
     if (this.searchText) {
       obj['search'] = this.searchText
@@ -142,6 +141,13 @@ export class CataloguePage implements OnInit {
     }
     this.shopService.getShopCatalogueBySubCategory(obj).subscribe(async (success: any) => {
       this.collection = success.count;
+      this.subCategory.forEach((x) => {
+        if (x.subCategory._id === item) {
+          x.isActive = true;
+        } else {
+          x.isActive = false;
+        }
+      });
       for (let i = 0; i < success.data.length; i++) {
         this.productArray.push(success.data[i]);
       }

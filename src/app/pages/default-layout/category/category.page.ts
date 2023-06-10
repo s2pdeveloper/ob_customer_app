@@ -73,24 +73,25 @@ export class CategoryPage implements OnInit {
 
   }
   getAllCategory() {
-    this.categoryService
-      .getAllCategory({})
-      .subscribe((success) => {
-        this.categoryList = success;
-        this.categoryList = success.map((x, index) => {
-          if (index === 0) {
-            x.active = true;
-          } else {
-            x.active = false;
-          }
-          this.categoryId = this.categoryId ? this.categoryId : x._id;
-          return x;
-        });
-        this.getAllSubCategory(this.categoryId, false, '');
+    this.spinner.showLoader();
+    this.categoryService.getAllCategory({}).subscribe((success) => {
+      this.categoryList = success;
+      this.categoryList = success.map((x, index) => {
+        if (index === 0) {
+          x.active = true;
+        } else {
+          x.active = false;
+        }
+        this.categoryId = this.categoryId ? this.categoryId : x._id;
+        return x;
       });
+      this.getAllSubCategory(this.categoryId, false, '');
+      this.spinner.hideLoader();
+    });
   }
 
-  getAllSubCategory(parentId, isFirstLoad, event) {
+  async getAllSubCategory(parentId, isFirstLoad, event) {
+    await this.spinner.showLoader();
     this.parentId = parentId,
       this.activeParentId = parentId
     let params = { page: this.page, pageSize: this.pageSize, };
@@ -102,6 +103,7 @@ export class CategoryPage implements OnInit {
     }
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
+        await this.spinner.hideLoader();
         this.collection = success.count;
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
@@ -119,21 +121,19 @@ export class CategoryPage implements OnInit {
           }
           return x;
         });
-      }, (error) => {
-        this.spinner.hideLoader();
-      }
-    )
+        await this.spinner.hideLoader();
+      })
   }
 
   navigateToShopList(subCategory) {
-   this.router.navigate(['/search-shop'], {
+    this.router.navigate(['/search-shop'], {
       queryParams: {
         subCategoryId: subCategory._id,
         subCategoryName: subCategory.name,
       },
     });
   }
-  
+
   getSubCategories(activeParentId) {
     if (this.infiniteScroll.disabled) {
       this.infiniteScroll.disabled = false;

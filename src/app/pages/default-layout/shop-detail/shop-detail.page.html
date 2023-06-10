@@ -55,6 +55,9 @@
                     <ion-segment-button value="gallery">
                       <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
                     </ion-segment-button>
+                    <ion-segment-button value="qr-code" (click)="modalQrCode()">
+                      <ion-label class="ion-text-wrap">{{ 'qr-code' | translate}}</ion-label>
+                    </ion-segment-button>
                   </ion-segment>
                   <div [ngSwitch]="type">
                     <ion-list *ngSwitchCase="'about'">
@@ -119,7 +122,6 @@
                                 (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
                             <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
-                            <p>Simply type click and share</p>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
@@ -129,6 +131,11 @@
                             </a>
                           </ion-card>
                           <ion-note class="heading">{{'directCall'|translate}}</ion-note>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                        <ion-col>
+                          <ion-note class="ion-padding-start">{{'easyOrderNote'|translate}}</ion-note>
                         </ion-col>
                       </ion-row>
                     </ion-list>

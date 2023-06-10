@@ -29,7 +29,7 @@
   </ion-slides>
 
   <div class="ion-padding">
-    <ion-row>
+    <ion-row *ngIf="productArray?.length > 0;else noDataFound">
       <ion-col size="6" size-lg="4" size-md="5" *ngFor=" let item of productArray" style="display: flex;">
         <ion-card class="catalogue-card shadow-color-1" button="true">
           <div class="ion-no-padding ion-text-center">

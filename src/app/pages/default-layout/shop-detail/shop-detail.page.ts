@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
+import { QRCodeComponent } from './qr-code/qr-code.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -158,5 +159,17 @@ export class ShopDetailPage implements OnInit {
   }
   openFb = async () => {
     await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
+  }
+
+  async modalQrCode() {
+    const modal = await this.modalCtrl.create({
+      component: QRCodeComponent,
+      cssClass: 'modal-medium',
+      swipeToClose: true,
+      componentProps: {
+        shopData: this.shopUser,
+      }
+    });
+    await modal.present();
   }
 }
