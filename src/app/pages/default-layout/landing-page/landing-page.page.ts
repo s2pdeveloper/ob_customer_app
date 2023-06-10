@@ -99,11 +99,13 @@ export class LandingPagePage implements OnInit {
   async ngOnInit() {
     this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
-    let payload = {
-      deviceToken: localStorage.getItem('deviceToken'),
-      platform: this.deviceInfo?.platform
-    };
-    this.userService.addDeviceToken(payload).subscribe();
+    if (this.deviceInfo?.platform === 'android' && localStorage.getItem('deviceToken') != null) {
+      let payload = {
+        deviceToken: localStorage.getItem('deviceToken'),
+        platform: this.deviceInfo?.platform
+      };
+      this.userService.addDeviceToken(payload).subscribe();
+    }
     this.socketService.connect();
   }
   async ionViewWillEnter() {

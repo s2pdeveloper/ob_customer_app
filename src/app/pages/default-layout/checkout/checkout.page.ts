@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaderService } from 'src/app/core/services/loader.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
-import { ShopService } from 'src/app/core/services/shop.service';
-import { SocketService } from 'src/app/core/services/socket.service';
-import { ToastService } from 'src/app/core/services/toast.service';
-import { UserService } from 'src/app/core/services/user.service';
-import { socketOnEvents } from 'src/app/helpers';
-
+import { InstructionComponent } from './instructon/instruction.component';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
@@ -19,19 +14,18 @@ export class CheckoutPage implements OnInit {
   shopId: string;
   shopDetailsId: string;
   shopName: string;
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private toaster: ToastService,
     public translate: TranslateService,
-    private socketService: SocketService,
+    private modalController: ModalController,
     private storageService: StorageService) {
     this.orderData = this.storageService.get('orderData');
     this.storageService.remove('orderData');
   }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-  }
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.shopDetailsId = params.shopUserId;
@@ -39,47 +33,24 @@ export class CheckoutPage implements OnInit {
       this.shopName = params.shopName;
     });
   }
-  navigateToChat() {
-    console.log(this.orderData);
-    let msg = '';
-    let arr = this.orderData.filter((x) => x.isChecked == true);
-    if (arr.length < 1) {
-      this.toaster.errorToast('Plz select at least one product');
-      return;
-    }
-    let description = '';
-    msg += `Dear ${this.shopName},\n i would like to buy \n`;
-    for (let i = 0; i < arr.length; i++) {
-      const catTitle = arr[i].title;
-      msg += `${catTitle}`;
-      if (i != arr.length - 1) {
-        msg += ` , \n `;
-      }
-      description += `${catTitle}`;
-      if (i != arr.length - 1) {
-        description += `,`;
-      }
-    }
-    let message = {
-      shopId: this.shopDetailsId,
-      message: msg,
-      description: description,
-      catalogue: this.orderData
-    };
-    this.receiveMessage();
-    this.socketService.emitEvent(socketOnEvents.CREATE_ORDER, message);
-  }
-  receiveMessage() {
-    this.socketService.listenEvent(socketOnEvents.CREATE_ORDER).subscribe({
-      next: (result: any) => {
-        this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: this.shopId, orderId: result.data._id } });
-      },
-      error: (error) => {
-        console.log(error)
-      },
-    })
-  }
+
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
+  }
+
+  async navigateTo() {
+    const modal = await this.modalController.create({
+      component: InstructionComponent,
+      cssClass: 'instruction-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {
+        orderData: this.orderData,
+        shopDetailsId: this.shopDetailsId,
+        shopId: this.shopId,
+        shopName: this.shopName
+      }
+    });
+    await modal.present();
   }
 }

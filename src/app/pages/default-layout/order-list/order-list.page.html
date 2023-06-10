@@ -38,6 +38,8 @@
           <ion-col>
             <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
               <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
+              <ion-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.lastMessage?.unreadMessageCount>0"
+                slot="start">{{item?.unreadMessageCount}}</ion-badge>
             </h2>
             <p class="text-color-2">{{ item?.orderNumber }}</p>
             <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{
@@ -66,16 +68,16 @@
         <ion-row class="ion-justify-content-between ion-align-items-center">
           <ion-col class="ion-no-padding">
             <p>
-              <span *ngIf="item?.chatMessage?.senderId === user.id">You:</span>
-              {{item?.chatMessage?.message | truncate}}
+              <span *ngIf="item?.lastMessage?.senderId === user.id">You:</span>
+              {{item?.lastMessage?.message | truncate}}
             </p>
           </ion-col>
-            <ion-col size="2" class="ion-no-padding ion-text-end" *ngIf="item?.ratingDetails?.productQuality">
-              <ion-badge color="primary" class="rating ion-text-end">
-                {{item?.ratingDetails?.productQuality}}
-                <ion-icon name="star"></ion-icon>
-              </ion-badge>
-            </ion-col>
+          <ion-col size="2" class="ion-no-padding ion-text-end" *ngIf="item?.ratingDetails?.productQuality">
+            <ion-badge color="primary" class="rating ion-text-end">
+              {{item?.ratingDetails?.productQuality}}
+              <ion-icon name="star"></ion-icon>
+            </ion-badge>
+          </ion-col>
         </ion-row>
       </ion-label>
     </ion-item>

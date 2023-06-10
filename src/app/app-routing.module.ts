@@ -115,12 +115,6 @@ const routes: Routes = [
       (m => m.OrderViewPageModule)
   },
   {
-    path: 'map',
-    canLoad: [AuthGuard],
-    loadChildren: () => import('./pages/default-layout/map/map.module').then
-      (m => m.MapPageModule)
-  },
-  {
     path: 'checkout',
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/checkout/checkout.module').then(m => m.CheckoutPageModule)

@@ -8,6 +8,7 @@ import { CheckoutPageRoutingModule } from './checkout-routing.module';
 
 import { CheckoutPage } from './checkout.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { InstructionComponent } from './instructon/instruction.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +16,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     IonicModule,
     CheckoutPageRoutingModule,SharedModule
   ],
-  declarations: [CheckoutPage]
+  declarations: [CheckoutPage,InstructionComponent]
 })
 export class CheckoutPageModule {}

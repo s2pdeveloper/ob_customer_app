@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-capitalize ion-text-wrap" color="primary">{{'instruction'|translate}}</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-button class="text-color-2" (click)="dismissModal(false)">{{ 'close' | translate}}</ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-card >
+    <ion-card-content class="ion-justify-content-center">
+      <ul class="list">
+        <li class="item">{{'instruction1' | translate}}</li>
+        <li class="item">{{'instruction2' | translate}}</li>
+        <li class="item">{{'instruction3' | translate}}</li>
+        <li class="item">{{'instruction4' | translate}}</li>
+        <li class="item">{{'instruction5' | translate}}</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer class="light">
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col>
+      <ion-button (click)="closeModal()" color="light" expand="block" class="btn-color-1 btn-height-large">
+        {{ 'back' | translate}}
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="navigateToChat()" expand="block" class="btn-height-large" type="submit" color="primary">
+        {{ 'next' | translate}}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

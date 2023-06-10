@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { LoaderService } from 'src/app/core/services/loader.service';
@@ -106,8 +106,6 @@ export class CategoryPage implements OnInit {
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
         }
-        console.log("this.subcategory", this.subCategoryList);
-
         if (isFirstLoad)
           event.target.complete();
         if (success.data.length === 0 && event) {
@@ -128,15 +126,14 @@ export class CategoryPage implements OnInit {
   }
 
   navigateToShopList(subCategory) {
-    console.log(subCategory);
-    
-    this.router.navigate(['/search-shop'], {
+   this.router.navigate(['/search-shop'], {
       queryParams: {
         subCategoryId: subCategory._id,
-        subCategoryName:subCategory.name,
+        subCategoryName: subCategory.name,
       },
     });
   }
+  
   getSubCategories(activeParentId) {
     if (this.infiniteScroll.disabled) {
       this.infiniteScroll.disabled = false;

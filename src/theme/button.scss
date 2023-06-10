@@ -115,6 +115,11 @@
     --color: var(--ion-color-8);
     --border-color: var(--ion-color-8);
 }
+.btn-color-outline-2 {
+    --background: var(--ion-color-6);
+    --color: var(--ion-color-2);
+    --border-color: var(--ion-color-2);
+  }
 
 .btn-color-danger {
     --background: var(--ion-color-danger) !important;

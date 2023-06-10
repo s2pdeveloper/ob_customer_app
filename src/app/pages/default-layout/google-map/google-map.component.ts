@@ -25,10 +25,11 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
   selectedLocation: any = {};
   private map;
   private marker;
+  key: any;
   constructor(private toastService: ToastService, private ngZone: NgZone, private modalController: ModalController, private translate: TranslateService) { }
 
   async ngOnInit() {
-  }
+    }
 
   ngAfterViewInit(): void {
     this.setCurrentLocation();
@@ -159,4 +160,5 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
       location: this.selectedLocation
     });
   }
+  
 }

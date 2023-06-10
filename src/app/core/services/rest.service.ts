@@ -32,7 +32,7 @@ export class RestService {
 		}))
 	}
 	convertToBase64(payload) {
-		return this.apiService.post(`/shared/convertToBase64`, payload).pipe(map(data => {
+		return this.apiService.get(`/shared/convertToBase64`, payload).pipe(map(data => {
 			if (data && data.result) {
 				return data.result;
 			} else {

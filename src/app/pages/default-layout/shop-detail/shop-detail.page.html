@@ -28,13 +28,14 @@
           <ion-col size="7" class="ion-text-capitalize ion-text-wrap">
             <ion-label class="ion-text-wrap"><b>{{shopUser?.shopDetails?.shopName}}</b></ion-label>
             <p class="font-larger">
-              {{shopUser?.shopDetails?.firstName}} {{shopUser?.shopDetails?.lastName}}
+              {{shopUser?.shopDetails?.firstName}}
+              {{shopUser?.shopDetails?.lastName}}
             </p>
             <ion-text class="ion-text-wrap">
               <h4>
                 {{shopUser?.address?.line1}}{{shopUser?.address?.line2}}
-                {{shopUser?.address?.city}}, {{shopUser?.address?.state}}
-                - {{shopUser?.address?.pinCode}}
+                {{shopUser?.address?.city}}, {{shopUser?.address?.state}} -
+                {{shopUser?.address?.pinCode}}
               </h4>
             </ion-text>
           </ion-col>
@@ -91,15 +92,17 @@
                         <ion-grid>
                           <ion-row>
                             <ion-col size="12">
-                              <ion-label class="heading ion-no-padding" color="primary">Web Link </ion-label>
+                              <ion-label class="heading ion-no-padding" color="primary">Web Link
+                              </ion-label>
                             </ion-col>
                           </ion-row>
-                          <ion-row>
+                          <ion-row *ngFor="let item of shopUser.shopWebLink">
                             <ion-col size="2">
                               <ion-icon name="globe-sharp" class="font fb"></ion-icon>
                             </ion-col>
                             <ion-col size="10">
-                              <ion-label (click)="openWeb()"> {{shopUser?.shopDetails?.links?.website}}
+                              <ion-label (click)="openWeb()">
+                                {{item?.webLinkName}}
                               </ion-label>
                             </ion-col>
                           </ion-row>
@@ -125,7 +128,7 @@
                               <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
                             </a>
                           </ion-card>
-                          <ion-note class=" heading ">{{'call'|translate}}</ion-note>
+                          <ion-note class="heading">{{'directCall'|translate}}</ion-note>
                         </ion-col>
                       </ion-row>
                     </ion-list>
@@ -137,12 +140,12 @@
                         </ion-col>
                         <ion-col size="7">
                           <p *ngFor="let session of item?.schedule?.session">
-                            {{session?.sessionName}} {{session?.startTime ? '-' + session?.startTime : ''}}
-                            {{session?.endTime}}
+                            {{session?.sessionName}} {{session?.startTime ? '- '
+                            + session?.startTime : ''}} {{session?.endTime ? 'to
+                            ' + session?.endTime : ''}}
                           </p>
                         </ion-col>
                       </ion-row>
-
                     </ion-list>
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">
@@ -154,7 +157,6 @@
                               <img class="gallery ion-no-padding" src="{{galleryImg}}" />
                             </ion-col>
                           </ion-row>
-
                         </ion-grid>
                         <ng-template #noDataFound>
                           <div class="noData">
@@ -163,30 +165,26 @@
                         </ng-template>
                       </ion-card>
                     </ion-list>
-
                   </div>
                 </ion-card-content>
               </ion-card>
             </ion-col>
           </ion-row>
         </ion-grid>
-
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
 
-
 <ion-footer class="ion-no-border">
-
   <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0">
-    <ion-col class=" ion-text-center">
+    <ion-col class="ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
     </ion-col>
   </ion-item>
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 ">
-    <ion-col class=" ion-text-center">
+    <ion-col class="ion-text-center">
       <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
     </ion-col>
   </ion-item>
@@ -199,5 +197,4 @@
       <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
     </ion-col>
   </ion-item>
-
 </ion-footer>
