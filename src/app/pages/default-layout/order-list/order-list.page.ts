@@ -58,6 +58,7 @@ export class OrderListPage implements OnInit {
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
+        console.log("this.datalist", this.dataList);
       },
       error: (error) => {
         console.log(error)
