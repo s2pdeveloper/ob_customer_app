@@ -439,6 +439,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     console.log(payload);
     this.shopService.userBlock(payload).subscribe(async result => {
       this.isBlocked = result?.shopData?.blockedUser.some(x => x == this.shopId);
+      this.toaster.successToast(result.message);
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
@@ -491,7 +492,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  deleteMessage(index, id) { 
+  deleteMessage(index, id) {
     this.orderService.deleteMessage(id).subscribe(
       async data => {
         this.messages.splice(index, 1);
