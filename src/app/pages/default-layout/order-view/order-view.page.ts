@@ -65,6 +65,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       backgroundcolor: 'black'
     }
   }
+  shopUserId: string;
+  blockedData: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -121,6 +123,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe(async (params) => {
       this.shopId = params.shopId;
+      this.shopUserId = params.shopUserId;
       this.shopName = params.shopName;
       if (params.orderId) {
         this.orderId = params.orderId;
@@ -137,7 +140,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success.orderDetails;
-      if (this.orderDetails.shopDetails.blockedUser.some(x => x == this.shopId)) this.isBlocked = true;
+      console.log(" this.orderDetails", this.orderDetails);
+
+      // if (this.orderDetails.shopDetails.blockedUser.some(x => x == this.shopUserId)) this.isBlocked = true;
       this.ratingDetails = success.ratingDetails;
       await this.spinner.hideLoader();
     }, async error => {
@@ -418,8 +423,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
           text: 'Yes',
           cssClass: 'alert-button-confirm',
           handler: (alertData) => {
-            alertData = this.shopId;
-            this.block(alertData, event);
+            this.block(event);
           },
         },
       ],
@@ -428,17 +432,32 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await alert.present();
     await alert.onDidDismiss();
   }
-  async block(shopId, event) {
-    console.log(shopId, event);
+  async block(event) {
+    console.log(event);
     await this.spinner.showLoader();
     let payload = {
-      blockedUser: shopId,
-      event: event,
-      shopId: shopId
+      userId: this.user._id,
+      blockedBy: this.user.role,
+      shopId: this.shopUserId
     }
     console.log(payload);
     this.shopService.userBlock(payload).subscribe(async result => {
-      this.isBlocked = result?.shopData?.blockedUser.some(x => x == this.shopId);
+      // if (event == 'block') {
+      //   this.orderDetails.shopDetails.blockedUser.push(this.shopUserId);
+      //   this.isBlocked = true;
+      // } else {
+      //   this.orderDetails.shopDetails.blockedUser = this.orderDetails.shopDetails.blockedUser.filter(x => x != this.shopUserId)
+      //   this.isBlocked = false;
+      // }
+      console.log("result", result);
+      this.blockedData = result?.data;
+      if (this.user?._id === this.blockedData?.userId) {
+        this.isBlocked = true;
+      } else {
+        this.isBlocked = false;
+      }
+
+
       this.toaster.successToast(result.message);
       await this.spinner.hideLoader();
     }, async error => {

@@ -136,8 +136,8 @@ export class ShopService {
     }
 
     userBlock(params) {
-        let url: string = `mobile/shop/block-user`;
-        return this.apiService.patch(url, params).pipe(map(
+        let url: string = `mobile/blocked-user/`;
+        return this.apiService.post(url, params).pipe(map(
             (data: any) => {
                 if (data && data.result) {
                     return data.result;

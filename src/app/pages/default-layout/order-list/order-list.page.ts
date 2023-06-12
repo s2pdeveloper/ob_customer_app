@@ -70,6 +70,7 @@ export class OrderListPage implements OnInit {
     this.router.navigate(['/order-view'], {
       queryParams: {
         shopId: item.shopId,
+        shopUserId: item.shopOwner._id,
         shopName: item.shopDetails?.shopName,
         orderId: item._id,
       },
