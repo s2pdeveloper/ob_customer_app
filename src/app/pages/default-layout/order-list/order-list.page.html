@@ -38,7 +38,7 @@
           <ion-col>
             <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
               <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
-              <ion-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.lastMessage?.unreadMessageCount>0"
+              <ion-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.unreadMessageCount>0"
                 slot="start">{{item?.unreadMessageCount}}</ion-badge>
             </h2>
             <p class="text-color-2">{{ item?.orderNumber }}</p>
