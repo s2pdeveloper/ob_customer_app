@@ -205,6 +205,13 @@
   "instruction4": "Avoid entering your UPI (Unified Payments Interface) PIN while receiving money.",
   "instruction5": "Avoid upfront payments or providing products in advance Report suspicious users to Bharat Online.",
   "back": "Back",
-  "easyOrderNote":"Simply type click and share",
-  "yoursOrders":"Your orders"
+  "easyOrderNote": "Simply type click and share",
+  "yoursOrders": "Your orders",
+  "helpHeading":"Order flow has three stages :New, Processing, Past.",
+  "helpInstruction1": "New: Newly placed orders waiting for acceptance",
+  "helpInstruction2": "Processing: Accepted Orders and fulfillment",
+  "helpInstruction3": "Past: Historical orders",
+  "helpInstruction4": " Every order will go through these stages depending on respective order status In help ?",
+  "helpInstruction5": " All order status are handled by Seller or Service Provider. ",
+  "helpInstruction6": "Bharat Online has no role in Order Management."
 }

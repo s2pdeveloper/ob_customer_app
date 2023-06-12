@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -26,7 +26,7 @@ export class OrderListPage implements OnInit {
   defaultStatus = defaultStatus;
   constructor(
     private router: Router,
-    // private change: Chang,
+    private animationCtrl: AnimationController,
     private userService: UserService,
     private socketService: SocketService,
     public translate: TranslateService
@@ -102,4 +102,34 @@ export class OrderListPage implements OnInit {
     this.segment = event.detail.value;
     this.onSearch();
   }
+
+
+  enterAnimation = (baseEl: HTMLElement) => {
+    const root = baseEl.shadowRoot;
+
+    const backdropAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('ion-backdrop')!)
+      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+    const wrapperAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('.modal-wrapper')!)
+      .keyframes([
+        { offset: 0, opacity: '0', transform: 'scale(0)' },
+        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+      ]);
+
+    return this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(500)
+      .addAnimation([backdropAnimation, wrapperAnimation]);
+  };
+
+  leaveAnimation = (baseEl: HTMLElement) => {
+    return this.enterAnimation(baseEl).direction('reverse');
+  };
+
 }
