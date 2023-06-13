@@ -121,6 +121,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
+    console.log("this.user", this.user);
+
     this.activatedRoute.queryParams.subscribe(async (params) => {
       this.shopId = params.shopId;
       this.shopUserId = params.shopUserId;
