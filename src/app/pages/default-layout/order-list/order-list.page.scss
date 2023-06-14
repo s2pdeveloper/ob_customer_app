@@ -5,3 +5,13 @@
   .list li{
     font-size: 16px;
   }
+
+  .rounded-badge {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 50%;
+    background-color:--ion-color-primary; 
+    color: white;
+  }
+
+  
