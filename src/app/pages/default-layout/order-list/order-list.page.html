@@ -4,6 +4,9 @@
       <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-capitalize">{{ 'yoursOrders' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon name="help" size="large" id="open-modal"></ion-icon>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -38,7 +41,7 @@
           <ion-col>
             <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
               <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
-              <ion-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.unreadMessageCount>0"
+              <ion-badge class="rounded-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.unreadMessageCount>0"
                 slot="start">{{item?.unreadMessageCount}}</ion-badge>
             </h2>
             <p class="text-color-2">{{ item?.orderNumber }}</p>
@@ -93,4 +96,32 @@
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+  <!-- help modal -->
+  <ion-modal #modal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-icon name="close-sharp" size="large" (click)="modal.dismiss()"></ion-icon>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-no-padding">
+        <ion-card >
+          <ion-card-content class="ion-justify-content-center">
+            <ul class="list">
+              <li>{{'helpHeading' | translate}}</li>
+              <li>{{'helpInstruction1' | translate}}</li>
+              <li>{{'helpInstruction2' | translate}}</li>
+              <li>{{'helpInstruction3' | translate}}</li>
+              <li>{{'helpInstruction4' | translate}}</li>
+              <li>{{'helpInstruction5' | translate}}</li>
+              <li>{{'helpInstruction6' | translate}}</li>
+            </ul>
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

@@ -79,7 +79,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private photoViewerService: PhotoViewerService,
     private cameraService: CameraService,
   ) {
-    this.receiveListMessages(false, "");
+    this.receiveListMessages();
   }
 
   chatForm = new FormGroup({
@@ -104,11 +104,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   scrollToBottom() {
     this.content.scrollToBottom();
-  }
-
-  doInfinite(event) {
-    this.receiveListMessages(true, event);
-    event.target.complete();
   }
 
   ionViewWillEnter() {
@@ -157,19 +152,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
   }
 
-  receiveListMessages(isFirstLoad, event) {
+  receiveListMessages() {
     this.socketService.listenEvent(socketOnEvents.LIST_MESSAGE).subscribe({
       next: (result: any) => {
         console.log('LIST_MESSAGE', result);
         for (let i = 0; i < result.data.length; i++) {
           this.messages.unshift(result.data[i]);
-        }
-        if (isFirstLoad)
-          event.target.complete();
-        if (result.data.length === 0 && event) {
-          event.target.disabled = true;
-        } else {
-          this.page += this.pageSize;
         }
       },
       error: (error) => {
@@ -446,5 +434,11 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
       })
     }
+  }
+
+  doInfinite(event) {
+    this.page++;
+    this.emitToLoadMessages();
+    event.target.complete();
   }
 }
