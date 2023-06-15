@@ -41,8 +41,8 @@
           <ion-col>
             <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
               <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
-              <ion-badge class="rounded-badge *ngIf="item?.lastMessage?.senderId !== user?.id && item?.unreadMessageCount>0"
-                slot="start">{{item?.unreadMessageCount}}</ion-badge>
+              <ion-badge class="rounded-badge" slot="start" *ngIf=" item?.lastMessage?.senderId !==user.id &&
+                item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
             </h2>
             <p class="text-color-2">{{ item?.orderNumber }}</p>
             <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{
@@ -108,7 +108,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-no-padding">
-        <ion-card >
+        <ion-card>
           <ion-card-content class="ion-justify-content-center">
             <ul class="list">
               <li>{{'helpHeading' | translate}}</li>
