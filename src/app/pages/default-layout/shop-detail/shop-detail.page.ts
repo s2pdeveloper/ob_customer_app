@@ -10,6 +10,7 @@ import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
 import { QRCodeComponent } from './qr-code/qr-code.component';
+import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -39,7 +40,7 @@ export class ShopDetailPage implements OnInit {
     private shopService: ShopService,
     private spinner: LoaderService,
     public translate: TranslateService,
-    private modalCtrl: ModalController,
+    private modalController: ModalController,
     private alertController: AlertController,
     private toaster: ToastService,
   ) { }
@@ -81,7 +82,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   async navigateToViewGalleryImages(galleryImg) {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: GalleryListComponent,
       componentProps: {
         data: galleryImg,
@@ -123,7 +124,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   async modalFilter() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: SelectFilterComponent,
       cssClass: 'modal-medium',
       swipeToClose: true,
@@ -138,6 +139,7 @@ export class ShopDetailPage implements OnInit {
       this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
     }
   }
+  
   navigateToShopOrder(item) {
     this.router.navigate(['/shop-order'], {
       queryParams: {
@@ -162,7 +164,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   async modalQrCode() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: QRCodeComponent,
       cssClass: 'modal-medium',
       swipeToClose: true,
@@ -172,4 +174,15 @@ export class ShopDetailPage implements OnInit {
     });
     await modal.present();
   }
+
+  async modalPaymentInstruction() {
+    const modal = await this.modalController.create({
+      component: PaymentInstructionComponent,
+      cssClass: 'modal-medium',
+      swipeToClose: true,
+      componentProps: { }
+    });
+    await modal.present();
+  }
+  
 }

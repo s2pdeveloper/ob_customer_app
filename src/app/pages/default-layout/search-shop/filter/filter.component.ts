@@ -9,9 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./filter.component.scss'],
 })
 export class FilterComponent implements OnInit {
-  selectedData: string = '';
   filterForm = new FormGroup({
-    geoNearestDistance: new FormControl(2, [Validators.required]),
+    geoNearestDistance: new FormControl(5, [Validators.required]),
   });
   constructor(
     private modalCtrl: ModalController,
@@ -19,7 +18,8 @@ export class FilterComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    }
 
   onSubmit() {
     this.closeModal();
@@ -38,8 +38,7 @@ export class FilterComponent implements OnInit {
   async closeModal() {
     await this.modalCtrl.dismiss({
       'dismissed': false,
-      data: this.filterForm.value,
-
+      data: this.filterForm.value
     });
   }
 }

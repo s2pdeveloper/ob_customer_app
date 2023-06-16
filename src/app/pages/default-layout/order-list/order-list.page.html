@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title class="ion-text-capitalize">{{ 'yoursOrders' | translate}}</ion-title>
     <ion-buttons slot="end">
-      <ion-icon name="help" size="large" id="open-modal"></ion-icon>
+      <ion-icon name="help-circle-outline" class="help-icon"  id="open-modal"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -34,15 +34,17 @@
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
     <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
       <ion-avatar slot="start">
+       
         <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
+        <ion-badge class="rounded-badge"  *ngIf=" item?.lastMessage?.senderId !==user.id &&
+        item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
       </ion-avatar>
       <ion-label>
         <ion-row class="ion-justify-content-between">
           <ion-col>
             <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
               <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
-              <ion-badge class="rounded-badge" slot="start" *ngIf=" item?.lastMessage?.senderId !==user.id &&
-                item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
+         
             </h2>
             <p class="text-color-2">{{ item?.orderNumber }}</p>
             <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{

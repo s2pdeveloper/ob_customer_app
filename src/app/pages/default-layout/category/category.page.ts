@@ -73,7 +73,6 @@ export class CategoryPage implements OnInit {
 
   }
   getAllCategory() {
-    this.spinner.showLoader();
     this.categoryService.getAllCategory({}).subscribe((success) => {
       this.categoryList = success;
       this.categoryList = success.map((x, index) => {
@@ -86,7 +85,6 @@ export class CategoryPage implements OnInit {
         return x;
       });
       this.getAllSubCategory(this.categoryId, false, '');
-      this.spinner.hideLoader();
     });
   }
 
