@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'paymentMethod' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon (click)="dismissModal()" size="large" name="close-sharp"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-no-padding">
+  <ion-card>
+    <ion-card-content class="ion-justify-content-center">
+      <h3 class="paymentMethod">{{'paymentMethod' | translate}}</h3>
+      <ul class="list">
+        <li>{{'cash' | translate}}</li>
+        <li>{{'UPI_QRCode_Scan_&_Pay' | translate}}</li>
+        <li>{{'COD' | translate}}</li>
+        <li>{{'payOnDelivery' | translate}}</li>
+        <li>{{'creditDebitCard' | translate}}</li>
+      </ul>
+
+      <h3 class="note ion-margin-bottom">{{'note' | translate}}</h3>
+      <ion-note class="note">
+        {{'paymentMethodNote'|translate}}
+      </ion-note>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
