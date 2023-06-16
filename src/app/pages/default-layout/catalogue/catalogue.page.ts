@@ -43,6 +43,7 @@ export class CataloguePage implements OnInit {
   shopDetailsId: any;
   productArray: any = [];
   shopName: string;
+  subCategoryId: string;
 
   constructor(
     private router: Router,
@@ -95,7 +96,7 @@ export class CataloguePage implements OnInit {
   doInfinite(event) {
     if (this.productArray.length < this.collection) {
       this.page++;
-      this.getProductBySubCategoryId(false, event);
+      this.getProductBySubCategoryId(this.subCategoryId, false, event);
     } else {
       event.target.complete();
     }
@@ -130,11 +131,13 @@ export class CataloguePage implements OnInit {
   }
 
   async getProductBySubCategoryId(item, isFirstLoad: boolean, event?: any) {
+    console.log("item...", item);
+    this.subCategoryId = item;
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
       shopId: this.shopDetailsId,
-      subCategoryId: item
+      subCategoryId: this.subCategoryId
     };
     if (this.searchText) {
       obj['search'] = this.searchText
