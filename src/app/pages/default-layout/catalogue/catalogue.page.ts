@@ -131,7 +131,6 @@ export class CataloguePage implements OnInit {
   }
 
   async getProductBySubCategoryId(item, isFirstLoad: boolean, event?: any) {
-    console.log("item...", item);
     this.subCategoryId = item;
     let obj = {
       page: this.page,
