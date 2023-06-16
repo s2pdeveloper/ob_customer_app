@@ -23,7 +23,7 @@ export class CategoryPage implements OnInit {
   searchText: string;
   activeParentId: any = null;
   parentId: number;
-
+  isData: boolean = false;
   constructor(
     private router: Router,
     private categoryService: CategoryService,
@@ -101,6 +101,7 @@ export class CategoryPage implements OnInit {
     } else {
       params['parentId'] = parentId;
     }
+    this.isData = false;
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
         await this.spinner.hideLoader();
@@ -108,6 +109,7 @@ export class CategoryPage implements OnInit {
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
         }
+
         if (isFirstLoad)
           event.target.complete();
         if (success.data.length === 0 && event) {
@@ -122,6 +124,9 @@ export class CategoryPage implements OnInit {
           return x;
         });
         await this.spinner.hideLoader();
+        if (this.subCategoryList.length == 0) {
+          this.isData = true;
+        }
       })
   }
 

@@ -30,10 +30,10 @@
           </ion-card>
         </div>
       </ion-col>
-      <ion-col size="8" class="subcategory-section" *ngIf="subCategoryList?.length > 0;else noDataFound">
+      <ion-col size="8" class="subcategory-section" *ngIf="subCategoryList?.length > 0;">
         <ion-row class="ion-margin">
           <ion-col size="6" *ngFor="let item of subCategoryList">
-            <ion-card class="ion-text-center"  (click)="navigateToShopList(item)">
+            <ion-card class="ion-text-center" (click)="navigateToShopList(item)">
               <img alt="Category Image" class="subcat-img" *ngIf="item?.image" src="{{item?.image}}" />
               <img alt="Category Image" class="subcat-img" *ngIf="!item?.image"
                 src="assets/images/placeholder_product.png" />
@@ -42,7 +42,7 @@
           </ion-col>
         </ion-row>
       </ion-col>
-      <ng-template #noDataFound>
+      <ng-template [ngIf]="isData">
         <ion-col size="8">
           <div class="noData">
             <ion-label>Coming Soon !!</ion-label>
