@@ -12,7 +12,6 @@ import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.dire
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { QRCodeComponent } from './qr-code/qr-code.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
 
 @NgModule({
   imports: [
@@ -30,7 +29,6 @@ import { PaymentInstructionComponent } from './payment-instruction/payment-instr
     SelectFilterComponent,
     ParallaxHeaderDirective,
     QRCodeComponent,
-    PaymentInstructionComponent
   ],
 })
 export class ShopDetailPageModule { }
