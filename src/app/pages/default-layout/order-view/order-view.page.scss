@@ -6,6 +6,7 @@
     overflow-y: scroll !important;
     min-height: 76%;
   }
+
   .message {
     min-height: 100%;
     position: relative;
@@ -196,6 +197,12 @@ img {
 ion-fab-button {
   height: 30px;
   width: 30px;
+}
+
+.fab-icon {
+  width: 70px;
+  height: 70px;
+  padding: 10px;
 }
 
 .video-size {
