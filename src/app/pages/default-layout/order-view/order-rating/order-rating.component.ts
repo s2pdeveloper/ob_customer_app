@@ -26,7 +26,7 @@ export class OrderRatingComponent implements OnInit {
     orderId: new FormControl('', Validators.required),
   });
   constructor(
-    private modalCtrl: ModalController,
+    private modalController: ModalController,
     private toaster: ToastService,
     public translate: TranslateService,
     private spinner: LoaderService,
@@ -34,14 +34,13 @@ export class OrderRatingComponent implements OnInit {
     private orderService: OrderService,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.formData.controls.orderId.setValue(this.ratingObj.orderId)
     this.formData.controls.shopId.setValue(this.ratingObj.shopId)
-    this.formData.controls.productQuality.patchValue(this.ratingObj.ratingDetails.productQuality)
+    this.formData.controls.productQuality.patchValue(this.ratingObj?.ratingDetails?.productQuality)
   }
 
   get form() {
@@ -69,13 +68,13 @@ export class OrderRatingComponent implements OnInit {
  * to dismiss modal
  */
   dismissModal(isDismissed: boolean = false) {
-    this.modalCtrl.dismiss({
+    this.modalController.dismiss({
       dismissed: isDismissed,
     });
   }
 
   closeModal() {
-    this.modalCtrl.dismiss({
+    this.modalController.dismiss({
       'dismissed': false,
     });
   }

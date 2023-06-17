@@ -313,6 +313,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       }
     });
     await modal.present();
+    const { data } = await modal.onWillDismiss();
     this.getOrderById();
   }
 
@@ -409,7 +410,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  deleteMessage(index, id) { 
+  deleteMessage(index, id) {
     this.orderService.deleteMessage(id).subscribe(
       async data => {
         this.messages.splice(index, 1);
