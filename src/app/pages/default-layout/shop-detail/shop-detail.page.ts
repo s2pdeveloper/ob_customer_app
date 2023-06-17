@@ -10,7 +10,6 @@ import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE, defaultStatus } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
 import { QRCodeComponent } from './qr-code/qr-code.component';
-import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -174,15 +173,5 @@ export class ShopDetailPage implements OnInit {
     });
     await modal.present();
   }
-
-  async modalPaymentInstruction() {
-    const modal = await this.modalController.create({
-      component: PaymentInstructionComponent,
-      cssClass: 'modal-medium',
-      swipeToClose: true,
-      componentProps: { }
-    });
-    await modal.present();
-  }
-  
+ 
 }
