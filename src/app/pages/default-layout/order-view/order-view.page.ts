@@ -61,7 +61,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       backgroundcolor: 'black'
     }
   }
-  orderType: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -110,7 +109,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe(async (params) => {
-      this.orderType = params.orderType;
       this.shopId = params.shopId;
       this.shopName = params.shopName;
       if (params.orderId) {

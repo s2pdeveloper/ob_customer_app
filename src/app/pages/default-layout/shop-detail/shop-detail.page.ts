@@ -118,7 +118,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   goToChat(item) {
-    let params = { shopName: this.shopName, shopId: item._id, orderType: defaultStatus.NEW };
+    let params = { shopName: this.shopName, shopId: item._id };
     this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
   }
 

@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnimationController, IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { OrderService } from 'src/app/core/services/order.service';
 import { SocketService } from 'src/app/core/services/socket.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { socketOnEvents } from 'src/app/helpers';
@@ -11,7 +12,7 @@ import { defaultStatus } from 'src/app/helpers/constants.helper';
   templateUrl: './order-list.page.html',
   styleUrls: ['./order-list.page.scss'],
 })
-export class OrderListPage implements OnInit {
+export class OrderListPage implements OnInit,OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -24,14 +25,47 @@ export class OrderListPage implements OnInit {
   dataList: any = [];
   user: any;
   defaultStatus = defaultStatus;
+  interval:any;
+
   constructor(
     private router: Router,
     private animationCtrl: AnimationController,
     private userService: UserService,
     private socketService: SocketService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private orderService: OrderService
   ) {
-    this.receiveData();
+    // this.receiveData();
+    this.interval = setInterval(()=>{
+      let params = { page: this.page, pageSize: this.pageSize, status: this.segment };
+      if (this.searchText) {
+        params['search'] = this.searchText;
+      }
+      // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
+      this.orderService.list(params).subscribe({
+        next: (result: any) => {
+          for (let i = 0; i < result.data.length; i++) {
+            let index = this.dataList.findIndex((e)=> e.id === result.data[i].id);
+            if(index > -1){
+              this.dataList[index].secondaryStatus = result.data[i].secondaryStatus;
+              this.dataList[index].lastMessage = result.data[i].lastMessage;
+              this.dataList[index].unreadMessageCount = result.data[i].unreadMessageCount;
+            }
+            else{
+              this.dataList.push(result.data[i]);
+            }
+          }
+          console.log("this.datalist", this.dataList);
+        },
+        error: (error) => {
+          console.log(error)
+        },
+      })  
+    },10000)
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.interval)
   }
 
   ngOnInit() {
@@ -48,7 +82,18 @@ export class OrderListPage implements OnInit {
     if (this.searchText) {
       params['search'] = this.searchText;
     }
-    this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
+    // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
+    this.orderService.list(params).subscribe({
+      next: (result: any) => {
+        for (let i = 0; i < result.data.length; i++) {
+          this.dataList.push(result.data[i]);
+        }
+        console.log("this.datalist", this.dataList);
+      },
+      error: (error) => {
+        console.log(error)
+      },
+    })  
   }
 
   receiveData() {
