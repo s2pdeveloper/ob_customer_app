@@ -1,13 +1,22 @@
-<ion-content class="ion-no-padding">
+<!-- <ion-content class="ion-no-padding">
   <ion-item lines="none">
     <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large" (click)="closeModal()"></ion-icon>
   </ion-item>
 
   <ion-item lines="none">
     <ion-label class="ion-text-center text-bold text-title">{{ "giveRating" | translate }}</ion-label>
-  </ion-item>
+  </ion-item> -->
 
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-title class="ion-text-capitalize ion-text-wrap" color="primary">{{'giveRating'|translate}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="primary" (click)="dismissModal(false)">{{ 'close' | translate}}</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
+  <ion-content class="ion-no-padding">
   <form [formGroup]="formData">
     <ion-item class="ion-margin-top  ion-text-center" lines="none">
       <div class="ion-text-center">
