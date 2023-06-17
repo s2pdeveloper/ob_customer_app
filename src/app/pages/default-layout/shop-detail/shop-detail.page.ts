@@ -7,7 +7,7 @@ import { GalleryListComponent } from 'src/app/shared/gallery-list/gallery-list.c
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
-import { BUSINESS_TYPE } from 'src/app/helpers/constants.helper';
+import { BUSINESS_TYPE, defaultStatus } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
 import { QRCodeComponent } from './qr-code/qr-code.component';
 import { PaymentInstructionComponent } from './payment-instruction/payment-instruction.component';
@@ -108,7 +108,7 @@ export class ShopDetailPage implements OnInit {
           text: 'New',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.goToChat();
+            this.goToChat(item);
           },
         },
       ],
@@ -118,8 +118,8 @@ export class ShopDetailPage implements OnInit {
     await alert.onDidDismiss();
   }
 
-  goToChat() {
-    let params = { shopName: this.shopName, shopId: this.shopId };
+  goToChat(item) {
+    let params = { shopName: this.shopName, shopId: item._id, orderType: defaultStatus.NEW };
     this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
   }
 

@@ -61,6 +61,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       backgroundcolor: 'black'
     }
   }
+  orderType: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -79,6 +80,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private photoViewerService: PhotoViewerService,
     private cameraService: CameraService,
   ) {
+    this.orderDetails = {};
+    this.orderId = null;
     this.receiveListMessages();
   }
 
@@ -109,6 +112,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
     this.activatedRoute.queryParams.subscribe(async (params) => {
+      this.orderType = params.orderType;
       this.shopId = params.shopId;
       this.shopName = params.shopName;
       if (params.orderId) {
@@ -133,10 +137,22 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
   sendMessage() {
-    this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
-    this.resetForm();
-    if (this.canReceiveMessage) {
+    if (this.orderType === defaultStatus.NEW) {
+      let message = {
+        shopId: this.shopId,
+        message: this.chatForm.controls.message.value,
+        description: '',
+        catalogue: ''
+      };
+      this.socketService.emitEvent(socketOnEvents.CREATE_ORDER, message);
+      this.resetForm()
       this.receiveMessage();
+    } else {
+      this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
+      this.resetForm();
+      if (this.canReceiveMessage) {
+        this.receiveMessage();
+      }
     }
   }
 
@@ -148,8 +164,17 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   emitToLoadMessages() {
-    let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
-    this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
+    //if condition will be removed after if we found best solution//
+    if (this.orderType === defaultStatus.NEW) {
+      this.orderId = null
+      this.orderDetails = {};
+      this.messages.length = 0;
+      let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
+      this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
+    } else {
+      let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
+      this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
+    }
   }
 
   receiveListMessages() {
