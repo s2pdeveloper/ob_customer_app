@@ -51,7 +51,8 @@
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
 }
-.report-modal{
+
+.report-modal {
   top: 50%;
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
@@ -62,10 +63,11 @@
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
 }
-.instruction-modal{
+
+.instruction-modal {
   top: 25%;
   border-top-right-radius: 2rem;
-  border-top-left-radius: 2rem; 
+  border-top-left-radius: 2rem;
 }
 
 .br-stars {
@@ -77,4 +79,13 @@
     font-size: 18px;
     color: var(--ion-color-7);
   }
+}
+
+.br-stars .br-unit-inner {
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 46px;
+  height: 73px;
+  filter: grayscale(1);
 }

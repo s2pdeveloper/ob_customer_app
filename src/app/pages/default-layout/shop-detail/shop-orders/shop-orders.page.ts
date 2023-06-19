@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { ToastService } from 'src/app/core/services/toast.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { defaultStatus, secondaryStatus } from 'src/app/helpers';
 
 @Component({
@@ -28,13 +26,13 @@ export class ShopOrdersPage implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService, private router: Router,
-    private modalCtrl: ModalController, private spinner: LoaderService,
-    private toastService: ToastService, private shopService: ShopService,
+    private router: Router,
+    private spinner: LoaderService,
+    private toastService: ToastService,
+    private shopService: ShopService,
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -104,10 +102,6 @@ export class ShopOrdersPage implements OnInit {
     )
   };
 
-  // goToChat() {
-  //   let params = { shopName: this.shopName, shopId: this.userTableId };
-  //   this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
-  // }
   navigateToOrder() {
     this.router.navigate(['/app/tabs/order-list'], { replaceUrl: true });
   }

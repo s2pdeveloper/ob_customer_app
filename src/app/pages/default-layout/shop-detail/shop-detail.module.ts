@@ -10,7 +10,8 @@ import { ShopDetailPage } from './shop-detail.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.directive';
 import { SelectFilterComponent } from './select-filter/select-filter.component';
-
+import { QRCodeComponent } from './qr-code/qr-code.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -19,12 +20,15 @@ import { SelectFilterComponent } from './select-filter/select-filter.component';
     ReactiveFormsModule,
     IonicModule,
     ShopDetailPageRoutingModule,
-    SharedModule
+    SharedModule,
+    PdfViewerModule
   ],
+
   declarations: [
     ShopDetailPage,
     SelectFilterComponent,
     ParallaxHeaderDirective,
+    QRCodeComponent,
   ],
 })
 export class ShopDetailPageModule { }

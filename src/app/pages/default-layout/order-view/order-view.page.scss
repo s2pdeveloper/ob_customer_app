@@ -1,10 +1,12 @@
 .message-wrap {
   padding: 0 10px;
   width: 100%;
+
   #chat-content {
     overflow-y: scroll !important;
     min-height: 76%;
   }
+
   .message {
     min-height: 100%;
     position: relative;
@@ -54,13 +56,11 @@
         margin-top: 2px;
         border-radius: 10px;
         padding: 10px;
-        border: 2px solid #ddd;
         width: auto;
-        max-width: 70%;
-        background-color: #e1dcdc;
+        // max-width: 70%;
         margin: auto;
-        // font-style: italic;
         font-size: small;
+        color: gray;
       }
     }
 
@@ -115,7 +115,6 @@
         white-space: pre-wrap;
         color: #ffffff;
         background-color: lighten($color: red, $amount: 20);
-        // background-color: #de0f3f;
         float: right;
         position: relative;
         margin-top: 2px;

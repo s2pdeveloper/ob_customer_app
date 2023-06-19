@@ -1,21 +1,28 @@
-<ion-header>
-  <ion-toolbar class="bg-color-primary" color="warning">
-    <ion-title>{{ "giveRating" | translate }}</ion-title>
-    <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large" (click)="closeModal()"></ion-icon>
-  </ion-toolbar>
-</ion-header>
+  <ion-header>
+    <ion-toolbar color="warning">
+      <ion-title class="ion-text-capitalize ion-text-wrap" color="primary">{{'giveRating'|translate}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="primary" (click)="dismissModal(false)">{{ 'close' | translate}}</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content class="ion-no-padding">
+  <ion-content class="ion-no-padding">
   <form [formGroup]="formData">
     <ion-item class="ion-margin-top  ion-text-center" lines="none">
       <div class="ion-text-center">
         <bar-rating class="bar-rating" formControlName="productQuality" [max]="5" [theme]="'stars'"></bar-rating>
       </div>
     </ion-item>
-    <div class="clearfix ion-padding-top btn" *ngIf="!ratingObj?.ratingDetails?.productQuality">
-      <ion-button (click)="onSubmit()" [disabled]="formData.invalid" expand="block" type="submit">
-        {{ "submit" | translate }}
-      </ion-button>
-    </div>
   </form>
+  <ion-item *ngIf="!ratingObj?.ratingDetails?.productQuality">
+    <ion-col size="6">
+      <ion-button size="default" class="btn" expand="block" fill="outline" (click)="closeModal()">{{ 'Ask me later' |
+        translate}}</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button size="default" class="btn" expand="block" [disabled]="formData.invalid" (click)="onSubmit()">{{
+        'submit' | translate}}</ion-button>
+    </ion-col>
+  </ion-item>
 </ion-content>

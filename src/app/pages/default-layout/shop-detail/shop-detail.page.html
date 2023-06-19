@@ -49,14 +49,22 @@
                     <ion-segment-button value="about" checked>
                       <ion-label class="ion-text-wrap">{{ 'about' | translate}}</ion-label>
                     </ion-segment-button>
+                    <ion-segment-button value="paymentMethod">
+                      <ion-label class="ion-text-wrap">{{ 'payment' | translate}}</ion-label>
+                    </ion-segment-button>
                     <ion-segment-button value="schedule">
                       <ion-label class="ion-text-wrap">{{ 'schedule' | translate}}</ion-label>
                     </ion-segment-button>
                     <ion-segment-button value="gallery">
                       <ion-label class="ion-text-wrap">{{ 'gallery' | translate}}</ion-label>
                     </ion-segment-button>
+                    <ion-segment-button value="qr-code" (click)="modalQrCode()">
+                      <ion-label class="ion-text-wrap">{{ 'qr-code' | translate}}</ion-label>
+                    </ion-segment-button>
                   </ion-segment>
                   <div [ngSwitch]="type">
+
+                    <!-- about -->
                     <ion-list *ngSwitchCase="'about'">
                       <ion-item lines="none">
                         <ion-row>
@@ -119,7 +127,6 @@
                                 (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
                             <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
-                            <p>Simply type click and share</p>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
@@ -132,6 +139,25 @@
                         </ion-col>
                       </ion-row>
                     </ion-list>
+
+                    <!-- paymentMethod -->
+                    <ion-list *ngSwitchCase="'paymentMethod'">
+                      <div class="ion-padding">
+                        <h3 class="paymentMethod">{{'paymentMethod' | translate}}</h3>
+                        <ul class="list">
+                          <li>{{'cash' | translate}}</li>
+                          <li>{{'UPI_QRCode_Scan_&_Pay' | translate}}</li>
+                          <li>{{'COD' | translate}}</li>
+                          <li>{{'payOnDelivery' | translate}}</li>
+                          <li>{{'creditDebitCard' | translate}}</li>
+                        </ul>
+                        <h3 class="paymentMethod">{{'note' | translate}}</h3>
+                        <ion-note color="dark">
+                          {{'paymentMethodNote'|translate}}
+                        </ion-note>
+                      </div>
+                    </ion-list>
+
                     <!-- schedule -->
                     <ion-list *ngSwitchCase="'schedule'">
                       <ion-row *ngFor="let item of shopUser.shopSchedule" class="schedule-class">
@@ -140,13 +166,12 @@
                         </ion-col>
                         <ion-col size="7">
                           <p *ngFor="let session of item?.schedule?.session">
-                            {{session?.sessionName}} {{session?.startTime ? '- '
-                            + session?.startTime : ''}} {{session?.endTime ? 'to
-                            ' + session?.endTime : ''}}
+                            {{session?.sessionName}} {{session?.startTime ? '- ' + session?.startTime : ''}} {{session?.endTime ? 'to ' + session?.endTime : ''}}
                           </p>
                         </ion-col>
                       </ion-row>
                     </ion-list>
+
                     <!-- gallery -->
                     <ion-list *ngSwitchCase="'gallery'">
                       <ion-card>
@@ -164,7 +189,7 @@
                           </div>
                         </ng-template>
                       </ion-card>
-                    </ion-list>
+                    </ion-list> 
                   </div>
                 </ion-card-content>
               </ion-card>
@@ -174,6 +199,7 @@
       </ion-card-content>
     </ion-card>
   </div>
+
 </ion-content>
 
 <ion-footer class="ion-no-border">
@@ -191,10 +217,12 @@
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0">
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' |
+        translate}}</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' |
+        translate}}</ion-button>
     </ion-col>
   </ion-item>
 </ion-footer>

@@ -9,6 +9,21 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   constructor(private apiService: ApiService) { }
+
+  list(params:any) {
+    let url: string = `mobile/order`;
+    return this.apiService.get(url,params).pipe(map(
+      (data: any) => {
+        if (data && data.result) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      })
+    );
+  }
+
   getOrder(id: string) {
     let url: string = `mobile/order/${id}`;
     return this.apiService.get(url).pipe(map(

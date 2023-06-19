@@ -154,7 +154,10 @@ export const fileExtension = [
     'application/doc',
     'application/docx',
     'application/txt',
-    'application/tex'
+    'application/tex',
+    'application/zip',
+
+
 ];
 
 export const videoExtension = [

@@ -7,6 +7,7 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { ToastService } from './toast.service';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 
 export const FILE_KEY = 'files';
 
@@ -110,6 +111,25 @@ export class RestService {
 
 		var blob = new Blob(byteArrays, { type: contentType });
 		return blob;
+	}
+
+	async createAndShareFiles({ title, text, files, shopName }) {
+		//2.  save file in cache
+		await Filesystem.writeFile({
+			path: `${shopName}_QR_code.pdf`,
+			data: files,
+			directory: Directory.Cache,
+		});
+		//3. get full uri of the saved image
+		let imgData = await Filesystem.getUri({
+			path: `${shopName}_QR_code.pdf`,
+			directory: Directory.Cache,
+		});
+		await Share.share({
+			title,
+			text,
+			files: [imgData.uri],
+		});
 	}
 
 }

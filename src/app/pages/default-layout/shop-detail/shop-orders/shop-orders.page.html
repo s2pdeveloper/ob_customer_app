@@ -67,11 +67,6 @@
       <ion-label class="ion-text-center ion-text-wrap text-color-5">No Order Available !!</ion-label>
     </ion-item>
   </ng-template>
-  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="bg-color-2" (click)="goToChat()">
-      <ion-icon name="add-sharp"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>

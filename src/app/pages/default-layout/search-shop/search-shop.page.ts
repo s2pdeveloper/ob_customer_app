@@ -28,7 +28,7 @@ export class SearchShopPage implements OnInit {
   user: any = {};
   shopCount: any;
   favoriteShop: any;
-  geoNearestDistance: number = 2;
+  geoNearestDistance: number = 5;
   shopId = [];
   subCategoryName: string = null;
 
@@ -45,7 +45,6 @@ export class SearchShopPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
-
       if (params.shopId) {
         this.shopId = params.shopId;
       }
@@ -152,7 +151,7 @@ export class SearchShopPage implements OnInit {
       cssClass: 'filter-modal',
       mode: 'ios',
       swipeToClose: true,
-      componentProps: {},
+      componentProps: {}
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();

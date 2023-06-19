@@ -42,6 +42,9 @@ ion-content {
     }
 
     .active {
+      ion-card-subtitle{
+        color:#de0f3f;
+      }
       border-bottom: 1px solid rgb(255, 3, 3);
       background-color: #ffffff;
       border-bottom-right-radius: 5%;

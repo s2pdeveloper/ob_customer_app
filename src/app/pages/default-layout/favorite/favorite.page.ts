@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScroll, ModalController } from '@ionic/angular';
+import { AlertController, IonInfiniteScroll, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -39,6 +39,7 @@ export class FavoritePage implements OnInit {
     private favoriteService: FavoriteService,
     private toaster: ToastService,
     private userService: UserService,
+    private alertController: AlertController,
   ) { }
 
   ngOnInit() { }
@@ -115,4 +116,20 @@ export class FavoritePage implements OnInit {
       this.getFavoriteByCustomerId(false);
     });
   }
+
+  async instructionAlert() {
+    const alert = await this.alertController.create({
+      header: '',
+      message: ' Pick any shop of your choice by clicking on heart of respective seller or service provider. Through favourites you can create your own bazar and all the favorite marked seller will be on speed dial for you.',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'Close',
+          cssClass: 'alert-button-confirm',
+        },
+      ],
+    });
+    await alert.present();
+  }
+
 }

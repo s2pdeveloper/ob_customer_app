@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'QR-Code' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon (click)="shareQRCode()" size="large" name="share-social-outline" class="ion-padding-end"></ion-icon>
+      <ion-icon (click)="dismissModal()" size="large" name="close-sharp"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <pdf-viewer [src]="shopData?.qrImage" [render-text]="true" [page]="" [show-all]="false" [original-size]="true"
+      [fit-to-page]="true" style="display: block;">
+    </pdf-viewer>
+  </div>
+</ion-content>

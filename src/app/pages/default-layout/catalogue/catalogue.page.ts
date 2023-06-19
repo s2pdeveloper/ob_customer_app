@@ -43,6 +43,7 @@ export class CataloguePage implements OnInit {
   shopDetailsId: any;
   productArray: any = [];
   shopName: string;
+  subCategoryId: string;
 
   constructor(
     private router: Router,
@@ -95,13 +96,12 @@ export class CataloguePage implements OnInit {
   doInfinite(event) {
     if (this.productArray.length < this.collection) {
       this.page++;
-      this.getProductBySubCategoryId(false, event);
+      this.getProductBySubCategoryId(this.subCategoryId, false, event);
     } else {
       event.target.complete();
     }
   }
   async getShopSubCategory(isFirstLoad: boolean, event?: any) {
-
     let obj = { page: this.page, pageSize: this.pageSize, shopId: this.shopId };
     if (this.searchText) {
       obj['search'] = this.searchText
@@ -131,17 +131,25 @@ export class CataloguePage implements OnInit {
   }
 
   async getProductBySubCategoryId(item, isFirstLoad: boolean, event?: any) {
+    this.subCategoryId = item;
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
       shopId: this.shopDetailsId,
-      subCategoryId: item
+      subCategoryId: this.subCategoryId
     };
     if (this.searchText) {
       obj['search'] = this.searchText
     }
     this.shopService.getShopCatalogueBySubCategory(obj).subscribe(async (success: any) => {
       this.collection = success.count;
+      this.subCategory.forEach((x) => {
+        if (x.subCategory._id === item) {
+          x.isActive = true;
+        } else {
+          x.isActive = false;
+        }
+      });
       for (let i = 0; i < success.data.length; i++) {
         this.productArray.push(success.data[i]);
       }
