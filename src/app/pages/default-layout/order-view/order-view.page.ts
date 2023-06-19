@@ -10,7 +10,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { SocketService } from 'src/app/core/services/socket.service';
-import { defaultStatus, messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
+import { defaultStatus, ROLES, messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
 import { forkJoin } from 'rxjs';
 import { GoogleMapComponent } from '../google-map/google-map.component';
 import { OrderService } from 'src/app/core/services/order.service';
@@ -67,6 +67,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
   shopUserId: string;
   blockedData: any = {};
+  blockedUserData: any = {};
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -116,8 +117,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   ionViewWillEnter() {
     this.user = this.userService.getCurrentUser();
-    console.log("this.user", this.user);
-
     this.activatedRoute.queryParams.subscribe(async (params) => {
       this.shopId = params.shopId;
       this.shopUserId = params.shopUserId;
@@ -137,21 +136,28 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
       this.orderDetails = success.orderDetails;
-      console.log(" this.orderDetails", this.orderDetails);
-
-      // if (this.orderDetails.shopDetails.blockedUser.some(x => x == this.shopUserId)) this.isBlocked = true;
       this.ratingDetails = success.ratingDetails;
+      this.blockedUserData = success.blockUserData;
+      if (this.blockedUserData != null) {
+        this.blockedUserData.shopId === this.shopId
+        this.isBlocked = true;
+      } else {
+        this.isBlocked = false;
+      }
       await this.spinner.hideLoader();
     }, async error => {
       await this.spinner.hideLoader();
     });
   }
   sendMessage() {
+    if (!this.isBlocked) {
       this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
       this.resetForm();
       if (this.canReceiveMessage) {
         this.receiveMessage();
+      }
     }
+
   }
 
   resetForm() {
@@ -243,7 +249,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         async (data: any) => {
           this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
             async (result: any) => {
-              console.log('after upload', result);
               this.fileData = {
                 filePath: data.filePath,
                 fileName: `${data.filePath}`.split('post/')[1],
@@ -367,10 +372,11 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       event: ev,
       translucent: true,
     });
-    console.log("popover", popover, this.isBlocked);
-    if (this.isBlocked) {
+    if (this.isBlocked && this.blockedUserData.blockedBy === ROLES.CUSTOMER) {
+      console.log("this.isBlocked", this.isBlocked);
       popover.componentProps.dataList[2] = { label: 'Unblock', event: 'unblock' };
     } else {
+      console.log("this.isBlocked", this.isBlocked);
       popover.componentProps.dataList[2] = { label: 'Block', event: 'block' };
     }
 
@@ -420,31 +426,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     await alert.onDidDismiss();
   }
   async block(event) {
-    console.log(event);
     await this.spinner.showLoader();
     let payload = {
       userId: this.user._id,
       blockedBy: this.user.role,
-      shopId: this.shopUserId
+      shopId: this.shopId
     }
-    console.log(payload);
     this.shopService.userBlock(payload).subscribe(async result => {
-      // if (event == 'block') {
-      //   this.orderDetails.shopDetails.blockedUser.push(this.shopUserId);
-      //   this.isBlocked = true;
-      // } else {
-      //   this.orderDetails.shopDetails.blockedUser = this.orderDetails.shopDetails.blockedUser.filter(x => x != this.shopUserId)
-      //   this.isBlocked = false;
-      // }
-      console.log("result", result);
-      this.blockedData = result?.data;
-      if (this.user?._id === this.blockedData?.userId) {
-        this.isBlocked = true;
-      } else {
-        this.isBlocked = false;
-      }
-
-
+      this.getOrderById();
       this.toaster.successToast(result.message);
       await this.spinner.hideLoader();
     }, async error => {
@@ -486,15 +475,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   handleExit(ev) {
     this.photoViewerConfig.images = []
-    console.log(`&&& ev: ${JSON.stringify(ev)}`);
     const keys = Object.keys(ev);
     if (keys.includes('result') && ev.result) {
       if (keys.includes('imageIndex')) {
-        console.log(`last image index: ${ev.imageIndex}`);
       }
     }
     if (keys.includes('message')) {
-      console.log(`returned message: ${ev.message}`);
     }
   }
 
