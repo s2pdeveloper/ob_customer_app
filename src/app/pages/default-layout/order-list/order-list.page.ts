@@ -12,7 +12,7 @@ import { defaultStatus } from 'src/app/helpers/constants.helper';
   templateUrl: './order-list.page.html',
   styleUrls: ['./order-list.page.scss'],
 })
-export class OrderListPage implements OnInit,OnDestroy {
+export class OrderListPage implements OnInit, OnDestroy {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
@@ -25,7 +25,7 @@ export class OrderListPage implements OnInit,OnDestroy {
   dataList: any = [];
   user: any;
   defaultStatus = defaultStatus;
-  interval:any;
+  interval: any;
 
   constructor(
     private router: Router,
@@ -36,22 +36,22 @@ export class OrderListPage implements OnInit,OnDestroy {
     private orderService: OrderService
   ) {
     // this.receiveData();
-    this.interval = setInterval(()=>{
+    this.interval = setInterval(() => {
       let params = { page: this.page, pageSize: this.pageSize, status: this.segment };
       if (this.searchText) {
-        params['search'] = this.searchText;
+        params['searchShop'] = this.searchText;
       }
       // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
       this.orderService.list(params).subscribe({
         next: (result: any) => {
           for (let i = 0; i < result.data.length; i++) {
-            let index = this.dataList.findIndex((e)=> e.id === result.data[i].id);
-            if(index > -1){
+            let index = this.dataList.findIndex((e) => e.id === result.data[i].id);
+            if (index > -1) {
               this.dataList[index].secondaryStatus = result.data[i].secondaryStatus;
               this.dataList[index].lastMessage = result.data[i].lastMessage;
               this.dataList[index].unreadMessageCount = result.data[i].unreadMessageCount;
             }
-            else{
+            else {
               this.dataList.push(result.data[i]);
             }
           }
@@ -60,8 +60,8 @@ export class OrderListPage implements OnInit,OnDestroy {
         error: (error) => {
           console.log(error)
         },
-      })  
-    },10000)
+      })
+    }, 10000)
   }
 
   ngOnDestroy(): void {
@@ -93,7 +93,7 @@ export class OrderListPage implements OnInit,OnDestroy {
       error: (error) => {
         console.log(error)
       },
-    })  
+    })
   }
 
   receiveData() {

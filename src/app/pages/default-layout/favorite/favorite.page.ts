@@ -75,7 +75,6 @@ export class FavoritePage implements OnInit {
   }
 
   async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
-    this.user = this.userService.getCurrentUser();
     await this.spinner.showLoader();
     let obj = {
       page: this.page,
