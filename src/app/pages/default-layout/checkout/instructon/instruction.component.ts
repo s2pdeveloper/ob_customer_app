@@ -48,13 +48,16 @@ export class InstructionComponent implements OnInit {
   navigateToChat() {
     let msg = '';
     let arr = this.orderData.filter((x) => x.isChecked == true);
+    let amount = 0;
     let description = '';
-    msg += `Dear ${this.shopName},\n i would like to buy \n`;
+    msg += `Dear ${this.shopName},\nI would like to buy: \n `;
+
     for (let i = 0; i < arr.length; i++) {
       const catTitle = arr[i]?.title;
-      msg += `${catTitle}`;
+      const catPrice = arr[i]?.price;
+      msg += `${catTitle} - ₹ ${catPrice}`;
       if (i != arr.length - 1) {
-        msg += ` , \n `;
+        msg += `,<br/>`;
       }
       description += `${catTitle}`;
       if (i != arr.length - 1) {
@@ -65,11 +68,13 @@ export class InstructionComponent implements OnInit {
       shopId: this.shopDetailsId,
       message: msg,
       description: description,
-      catalogue: this.orderData
+      catalogue: this.orderData,
+      amount: amount,
     };
     this.receiveMessage();
     this.socketService.emitEvent(socketOnEvents.CREATE_ORDER, message);
   }
+
 
   receiveMessage() {
     this.socketService.listenEvent(socketOnEvents.CREATE_ORDER).subscribe({
