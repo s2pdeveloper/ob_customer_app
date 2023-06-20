@@ -109,7 +109,7 @@ export class EditProfilePage implements OnInit {
     await this.spinner.hideLoader();
     console.log('readfile', realFile);
     const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
-    if (!this.uploadService.checkFileSize(realFile)) {
+    if (this.uploadService.checkFileSize(realFile)) {
       this.uploadService.getSignUrl(params).subscribe(
         async (data: any) => {
           this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
@@ -132,7 +132,7 @@ export class EditProfilePage implements OnInit {
       )
     }
     else {
-      if (this.uploadService.checkFileSize(realFile.size)) {
+      if (!this.uploadService.checkFileSize(realFile.size)) {
         this.toaster.errorToast(OPTIONS.sizeLimit);
         await this.spinner.hideLoader();
         return;
