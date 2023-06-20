@@ -50,14 +50,14 @@ export class InstructionComponent implements OnInit {
     let arr = this.orderData.filter((x) => x.isChecked == true);
     let amount = 0;
     let description = '';
-    msg += `Dear ${this.shopName},\nI would like to buy:\n`;
+    msg += `Dear ${this.shopName},\nI would like to buy: \n `;
 
     for (let i = 0; i < arr.length; i++) {
       const catTitle = arr[i]?.title;
       const catPrice = arr[i]?.price;
       msg += `${catTitle} - ₹ ${catPrice}`;
       if (i != arr.length - 1) {
-        msg += `,\n`;
+        msg += `,<br/>`;
       }
       description += `${catTitle}`;
       if (i != arr.length - 1) {
