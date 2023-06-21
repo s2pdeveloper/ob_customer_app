@@ -55,7 +55,6 @@ export class OrderListPage implements OnInit, OnDestroy {
               this.dataList.push(result.data[i]);
             }
           }
-          console.log("this.datalist", this.dataList);
         },
         error: (error) => {
           console.log(error)
@@ -64,8 +63,8 @@ export class OrderListPage implements OnInit, OnDestroy {
     }, 10000)
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.interval)
+  ionViewDidLeave(): void {
+    clearInterval(this.interval);
   }
 
   ngOnInit() {
