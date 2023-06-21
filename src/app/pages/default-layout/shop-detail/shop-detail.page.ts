@@ -138,7 +138,7 @@ export class ShopDetailPage implements OnInit {
       this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
     }
   }
-  
+
   navigateToShopOrder(item) {
     this.router.navigate(['/shop-order'], {
       queryParams: {
@@ -173,5 +173,5 @@ export class ShopDetailPage implements OnInit {
     });
     await modal.present();
   }
- 
+
 }
