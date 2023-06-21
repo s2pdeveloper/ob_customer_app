@@ -12,7 +12,7 @@ import { defaultStatus } from 'src/app/helpers/constants.helper';
   templateUrl: './order-list.page.html',
   styleUrls: ['./order-list.page.scss'],
 })
-export class OrderListPage implements OnInit, OnDestroy {
+export class OrderListPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
