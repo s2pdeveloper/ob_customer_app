@@ -19,6 +19,7 @@ export class ShopDetailPage implements OnInit {
   businessType: any = BUSINESS_TYPE;
   shopUser: any;
   shopId: string = null;
+  shopName: string;
   type: string = 'about'
   buttonSlide = {
     slidesPerView: 4,
@@ -31,7 +32,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
-  shopName: any;
+ 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -168,7 +169,8 @@ export class ShopDetailPage implements OnInit {
       cssClass: 'modal-medium',
       swipeToClose: true,
       componentProps: {
-        shopData: this.shopUser,
+        shopId: this.shopUser._id,
+        shopName: this.shopUser.shopDetails.shopName,
       }
     });
     await modal.present();

@@ -70,6 +70,7 @@ export class CataloguePage implements OnInit {
     });
 
   }
+
   ionViewDidLeave(): void {
     this.subCategory = []; this.productArray = [];
     this.page = 1;
@@ -82,7 +83,8 @@ export class CataloguePage implements OnInit {
     this.page = 1;
     this.productArray = [];
     this.subCategory = [];
-    this.getProductBySubCategoryId('', false);
+    this.getProductBySubCategoryId(this.subCategoryId, false);
+    this.getShopSubCategory(null, false);
   }
 
   doRefresh(event: any) {
@@ -94,13 +96,17 @@ export class CataloguePage implements OnInit {
   }
 
   doInfinite(event) {
-    if (this.productArray.length < this.collection) {
-      this.page++;
-      this.getProductBySubCategoryId(this.subCategoryId, false, event);
-    } else {
-      event.target.complete();
-    }
+    // if (this.productArray.length < this.collection) {
+    //   this.page++;
+    //   this.getProductBySubCategoryId(this.subCategoryId, false, event);
+    // } else {
+    //   event.target.complete();
+    // }
+    this.page++;
+    this.getProductBySubCategoryId(this.subCategoryId, false, event);
+    event.target.complete();
   }
+
   async getShopSubCategory(isFirstLoad: boolean, event?: any) {
     let obj = { page: this.page, pageSize: this.pageSize, shopId: this.shopId };
     if (this.searchText) {

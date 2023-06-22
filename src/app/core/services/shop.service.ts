@@ -93,7 +93,6 @@ export class ShopService {
         );
     }
 
-
     favoriteShop(payload: any) {
         let url: string = `mobile/favorite`;
         return this.apiService.post(url, payload).pipe(map(
@@ -134,5 +133,20 @@ export class ShopService {
             })
         );
     }
+
+   getQrImage(id) {
+        let url: string = `mobile/shop/get-qr-code/${id}`;
+        return this.apiService.get(url).pipe(map(
+            (data: any) => {
+                if (data && data.result) {
+                    return data.result;
+                }
+                else {
+                    return null;
+                }
+            })
+        );
+    }
+
 
 }
