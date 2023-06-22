@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiEndpoint: 'http://65.2.141.116/api/v1/',
-  url: 'http://65.2.141.116',
+  apiEndpoint: 'https://api-uat.bharat-online.com/api/v1/',
+  url: 'https://api-uat.bharat-online.com',
 };
