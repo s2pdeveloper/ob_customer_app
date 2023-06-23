@@ -243,11 +243,11 @@ export class LandingPagePage implements OnInit {
   getSearchText() {
     let placeholders = [
       "Search Shop",
-      // "Search Product",
-      // "Search Category"
+      "Search Product",
+      "Search Services"
     ];
     let currentIndex = 0;
-    this.dynamicText$ = interval(3005).subscribe(() => {
+    this.dynamicText$ = interval(4005).subscribe(() => {
       currentIndex = (currentIndex + 1) % placeholders.length;
       document.querySelector('ion-searchbar').placeholder = placeholders[currentIndex];
     });
