@@ -36,7 +36,7 @@
   <!-- category -->
   <ion-item lines="none">
     <ion-title class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>
-    <ion-label (click)="seeAllCategory()" slot="end">{{'See all' | translate}}</ion-label>
+    <ion-label (click)="seeAllCategory()" slot="end">{{'seeAll' | translate}}</ion-label>
   </ion-item>
   <ion-slides [options]="buttonSlide">
     <ion-slide *ngFor="let item of categoryArr" (click)="navigateToCategory(item._id)">
@@ -50,7 +50,7 @@
 
   <!-- offers -->
   <ion-item lines="none" *ngIf="offerArr.length>0">
-    <ion-title class="ion-no-padding heading" color="primary">{{'Offers' | translate}}</ion-title>
+    <ion-title class="ion-no-padding heading" color="primary">{{'offers' | translate}}</ion-title>
   </ion-item>
   <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
     <ion-slide *ngFor="let item of offerArr">
