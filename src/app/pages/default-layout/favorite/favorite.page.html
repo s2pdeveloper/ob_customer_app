@@ -35,15 +35,23 @@
           'background-size':'100% 100%'
          }" (click)="navigateToShop(s?.shopDetails._id)">
 
-          <ion-badge color="success" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
+          <ion-badge color="primary" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
             {{s?.shopDetails.avgRating |number: '1.0-2'}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>
         <div class="ion-text-end ion-margin-end ion-margin-top heart-icon">
           <ion-fab>
-            <ion-fab-button>
+            <ion-fab-button class="heart-fab">
               <ion-icon name="heart" color="primary" fill="" (click)="addToFavorite(s)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </div>
+        <div class="ion-text-end ion-margin-end ion-margin-top bell-icon">
+          <ion-fab>
+            <ion-fab-button class="bell-fab">
+              <ion-icon name="notifications-sharp" color="primary"
+                (click)="navigateToNotification(s?.ownerDetails[0]._id)"></ion-icon>
             </ion-fab-button>
           </ion-fab>
         </div>

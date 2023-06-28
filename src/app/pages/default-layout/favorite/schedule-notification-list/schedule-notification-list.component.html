@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar class="bg-color-2">
+    <ion-title class="text-color-4 ion-text-capitalize">{{ 'scheduleNotification' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal(false)">{{
+        "close" | translate
+        }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- list -->
+  <ion-grid *ngIf="dataList?.length > 0;else noData">
+  <ion-list *ngFor="let item of dataList">
+    <ion-list-header class="item-no-height">
+      <ion-label class="text-color-2 text-bold text-title">
+        {{create_human_friendly_date(item?.date, "Yesterday",
+        "Today",
+        "Tomorrow", "en")}}
+      </ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let item of item?.notification">
+      <ion-label>
+        <h2 class="text-color-1 text-sub-title">{{item?.title}}</h2>
+        <p class="text-color-2 ion-text-wrap">{{item?.message}}</p>
+        <p class="text-color-7 font-size-small">
+          {{item?.createdAt | date: 'd MMM, y h:mm a'}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  </ion-grid>
+
+  <!-- list -->
+  <ng-template #noData>
+    <div class="noData">
+      <ion-label>No Notification Found</ion-label>
+    </div>
+  </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

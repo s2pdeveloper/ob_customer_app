@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { FavoriteService } from 'src/app/core/services/favorite.service';
 import { ShopService } from 'src/app/core/services/shop.service';
+import { ScheduleNotificationListComponent } from './schedule-notification-list/schedule-notification-list.component';
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.page.html',
@@ -130,5 +131,14 @@ export class FavoritePage implements OnInit {
     });
     await alert.present();
   }
-
+  async navigateToNotification(shopId) {
+    const modal = await this.modelController.create({
+      component: ScheduleNotificationListComponent,
+      swipeToClose: true,
+      componentProps: {
+        shopId: shopId
+      }
+    });
+    await modal.present();
+  }
 }

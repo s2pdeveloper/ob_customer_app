@@ -10,6 +10,7 @@ import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE, defaultStatus } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
 import { QRCodeComponent } from './qr-code/qr-code.component';
+import { ScheduleNotificationListComponent } from '../favorite/schedule-notification-list/schedule-notification-list.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -32,7 +33,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
- 
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -59,6 +60,8 @@ export class ShopDetailPage implements OnInit {
   async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
+      console.log("   this.shopUser", this.shopUser);
+
       await this.spinner.hideLoader();
     });
   }
@@ -171,6 +174,17 @@ export class ShopDetailPage implements OnInit {
       componentProps: {
         shopId: this.shopUser._id,
         shopName: this.shopUser.shopDetails.shopName,
+      }
+    });
+    await modal.present();
+  }
+
+  async navigateToNotification(shopId) {
+    const modal = await this.modalController.create({
+      component: ScheduleNotificationListComponent,
+      swipeToClose: true,
+      componentProps: {
+        shopId: shopId
       }
     });
     await modal.present();
