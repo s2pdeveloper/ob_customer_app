@@ -35,10 +35,11 @@
           'background-size':'100% 100%'
          }" (click)="navigateToShop(s?.shopDetails._id)">
 
-          <ion-badge color="success" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
-            {{s?.shopDetails.avgRating |number: '1.0-2'}}
-            <ion-icon name="star"></ion-icon>
-          </ion-badge>
+         <ion-badge color="success" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
+          {{ roundRating(s?.shopDetails.avgRating.toFixed(2)) }}
+          <ion-icon name="star"></ion-icon>
+        </ion-badge>
+        
         </ion-card>
         <div class="ion-text-end ion-margin-end ion-margin-top heart-icon">
           <ion-fab>

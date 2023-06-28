@@ -131,4 +131,8 @@ export class FavoritePage implements OnInit {
     await alert.present();
   }
 
+  roundRating(rating: number): number {
+    return Math.round(rating);
+  }
+
 }
