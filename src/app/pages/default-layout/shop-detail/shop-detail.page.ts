@@ -10,6 +10,9 @@ import { ShopService } from 'src/app/core/services/shop.service';
 import { BUSINESS_TYPE, defaultStatus } from 'src/app/helpers/constants.helper';
 import { Browser } from '@capacitor/browser';
 import { QRCodeComponent } from './qr-code/qr-code.component';
+import { ScheduleNotificationListComponent } from '../favorite/schedule-notification-list/schedule-notification-list.component';
+import { Geolocation } from '@capacitor/geolocation';
+import { Device } from '@capacitor/device';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -21,6 +24,7 @@ export class ShopDetailPage implements OnInit {
   shopId: string = null;
   shopName: string;
   type: string = 'about'
+  deviceInfo: any;
   buttonSlide = {
     slidesPerView: 4,
     slideShadows: true,
@@ -32,7 +36,7 @@ export class ShopDetailPage implements OnInit {
     },
     spaceBetween: 1,
   };
- 
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -48,6 +52,7 @@ export class ShopDetailPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
+    this.getDeviceInfo();
     this.activatedRoute.params.subscribe((params: any) => {
       if (params.id) {
         this.shopId = params.id;
@@ -61,6 +66,9 @@ export class ShopDetailPage implements OnInit {
       this.shopUser = success;
       await this.spinner.hideLoader();
     });
+  }
+  roundRating(rating: number): number {
+    return Math.round(rating);
   }
 
   async addToFavorite(item) {
@@ -174,6 +182,38 @@ export class ShopDetailPage implements OnInit {
       }
     });
     await modal.present();
+  }
+
+  async navigateToNotification(shopId) {
+    const modal = await this.modalController.create({
+      component: ScheduleNotificationListComponent,
+      swipeToClose: true,
+      componentProps: {
+        shopId: shopId
+      }
+    });
+    await modal.present();
+  }
+
+  getDeviceInfo = async () => {
+    this.deviceInfo = await Device.getInfo();
+    this.deviceInfo.geoLocation = await (
+      await Geolocation.getCurrentPosition()
+    ).coords;
+  };
+
+
+  getLocation() {
+    let payload = {
+      shopLat: this.shopUser.shopDetails.location?.coordinates[0],
+      shopLong: this.shopUser.shopDetails.location?.coordinates[1],
+      custLat: this.deviceInfo.geoLocation?.latitude,
+      custLong: this.deviceInfo.geoLocation?.longitude
+    };
+    if (payload) {
+      window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
+    }
+    return;
   }
 
 }

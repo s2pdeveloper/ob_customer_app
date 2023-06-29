@@ -37,8 +37,8 @@
           'background-size':'100% 100%'
 
          }" (click)="navigateToShop(item.id)">
-          <ion-badge *ngIf="item?.avgRating" color="success" class="rating ion-text-end">
-            {{item?.avgRating |number: '1.0-2'}}
+          <ion-badge *ngIf="item?.avgRating" color="primary" class="rating ion-text-end">
+            {{roundRating(item?.avgRating.toFixed(2))}}
             <ion-icon name="star"></ion-icon>
           </ion-badge>
         </ion-card>

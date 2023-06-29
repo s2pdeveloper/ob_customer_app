@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="isMobileNumber" class="ion-text-capitalize">{{'updateMobileNumber'| translate}}</ion-title>
+    <ion-title *ngIf="!isMobileNumber" class="ion-text-capitalize">{{'updateEmailAddress'| translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal(false,null)">{{
+        "close" | translate
+        }}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-padding">
+
+  <div class="ion-padding" *ngIf="isMobileNumber">
+    <form [formGroup]="updateMobileForm">
+      <ion-item class="input-class" lines="none">
+        <ion-label position="stacked">
+          {{ 'otp' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input placeholder="{{ 'otpText' | translate}}" formControlName="otp"></ion-input>
+      </ion-item>
+      <div class="text-left" *ngFor="let error of errorMessages.otp">
+        <ng-container *ngIf="form.otp.hasError(error.type) && (form.otp.dirty || form.otp.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item class="input-class" lines="none">
+        <ion-label position="stacked">
+          {{ 'mobileNumber' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input formControlName="mobileNumber" type="tel" name="mobileNumber" maxlength="10"
+          placeholder="{{ 'mobileNumber' | translate}}" autocomplete="on" clearInput>
+        </ion-input>
+      </ion-item>
+      <div class="text-left" *ngFor="let error of errorMessages.mobileNumber">
+        <ng-container
+          *ngIf="form.mobileNumber.hasError(error.type) && (form.mobileNumber.dirty || form.mobileNumber.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button color="primary" expand="block" shape="round" class="btn" (click)="onSubmit()">
+          {{ 'save' | translate}}
+        </ion-button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ion-padding" *ngIf="!isMobileNumber">
+    <form [formGroup]="updateEmailForm">
+      <ion-item class="input-class" lines="none">
+        <ion-label position="stacked">
+          {{ 'otp' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input placeholder="{{ 'otpText' | translate}}" formControlName="otp"></ion-input>
+      </ion-item>
+      <div class="text-left" *ngFor="let error of emailErrorMessages.otp">
+        <ng-container *ngIf="emailForm.otp.hasError(error.type) && (emailForm.otp.dirty || emailForm.otp.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <ion-item class="input-class" lines="none">
+        <ion-label position="stacked">
+          {{ 'email' | translate}}
+          <ion-note color="danger">*</ion-note>
+        </ion-label>
+        <ion-input formControlName="email" type="email" placeholder="{{ 'enterEmail' | translate}} " autocomplete="on"
+          clearInput>
+        </ion-input>
+      </ion-item>
+      <div class="text-left" *ngFor="let error of emailErrorMessages.email">
+        <ng-container
+          *ngIf="emailForm.email.hasError(error.type) && (emailForm.email.dirty || emailForm.email.touched)">
+          <small class="text-color-danger">{{ error.message }}</small>
+        </ng-container>
+      </div>
+      <div class="ion-text-center ion-margin-vertical">
+        <ion-button color="primary" expand="block" shape="round" class="btn" (click)="onSubmit()">
+          {{ 'save' | translate}}
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>
