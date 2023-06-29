@@ -24,14 +24,22 @@
         {{ 'email' | translate}}
         <p class="text-color-7">{{user.email}}</p>
       </ion-label>
+      <ion-label slot="end" (click)="sendOtp(false)">
+        {{'updateEmail' |translate}}
+      </ion-label>
     </ion-item>
+
     <ion-item>
       <ion-icon color="primary" name="call"></ion-icon>
       <ion-label class="ion-margin-start ">
         {{ 'mobileNumber' | translate}}
         <p class="text-color-7">{{user.mobileNumber}}</p>
       </ion-label>
+      <ion-label slot="end" (click)="sendOtp(true)">
+        {{'updateMobile' |translate}}
+      </ion-label>
     </ion-item>
+
     <ion-item>
       <ion-icon color="primary" name="location"></ion-icon>
       <ion-label class="ion-margin-start ">
