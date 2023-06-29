@@ -83,4 +83,53 @@ export class SettingPage implements OnInit {
       await this.spinner.hideLoader();
     })
   }
+
+
+  async confirmDeleteAlert(shouldDelete = false) {
+    let header = 'Confirm account deletion';
+    let message = 'All data associated to your account will be deleted, do you wish to continue deletion ?';
+    if (shouldDelete) {
+      header = 'Account delete';
+      message = 'Are you sure you want to delete your account';
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => { }
+        },
+        {
+          text: 'Yes',
+          role: 'yes',
+          cssClass: 'secondary',
+          handler: () => {
+            if (shouldDelete) {
+              this.deleteAccount();
+            }
+            else {
+              this.confirmDeleteAlert(true)
+            }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  async deleteAccount() {
+    this.userService.deleteProfile().subscribe(async result => {
+      this.userService.purgeAuth();
+      this.toaster.successToast('Your account has been Deleted');
+      this.router.navigate([`/auth/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    }, async error => {
+      this.toaster.errorToast(error);
+      this.router.navigate([`/auth/login`], { replaceUrl: true });
+      await this.spinner.hideLoader();
+    })
+  }
 }
