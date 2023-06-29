@@ -144,7 +144,9 @@ export class SearchShopPage implements OnInit {
     let path = `url('${url}')`;
     return path;
   }
-
+  roundRating(rating: number): number {
+    return Math.round(rating);
+  }
   async navigateToFilter() {
     const modal = await this.modalCtrl.create({
       component: FilterComponent,

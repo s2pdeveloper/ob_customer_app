@@ -25,5 +25,21 @@ export class notificationService {
             })
         );
     }
-
+   /**
+    * get All Offer
+    * @returns 
+    */
+   getAllCustomNotification(payload) {
+    let url: string = `mobile/notifications/get`;
+    return this.http.get(url, payload).pipe(map(
+        (data: any) => {
+            if (data && data.result) {
+                return data.result;
+            }
+            else {
+                return null;
+            }
+        })
+    );
+}
 }

@@ -234,5 +234,42 @@ export class UserService {
     }));
   }
 
+  //**send mobile update otp */
+  /**
+ * @param credentials 
+ * @returns 
+ */
+  sendOtp(credentials): Observable<any> {
+    let url = `mobile/user/send-otp`;
+    return this.apiService.post(url, credentials).pipe(map(
+      data => {
+        if (data && data.result && data.result.existingUser) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      }
+    ));
+  }
+  //** mobile number update */
+  /**
+ * @param credentials 
+ * @returns 
+ */
+  updateMobile(credentials): Observable<any> {
+    let url = `mobile/user/verify-otp`;
+    return this.apiService.patch(url, credentials).pipe(map(
+      data => {
+        if (data && data.result) {
+          return data.result;
+        }
+        else {
+          return null;
+        }
+      }
+    ));
+  }
+
 }
 

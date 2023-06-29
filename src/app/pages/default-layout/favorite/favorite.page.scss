@@ -56,6 +56,13 @@ ion-content {
     z-index: 1;
     right: 7px;
   }
+
+  .bell-icon {
+    position: absolute;
+    top: 7px;
+    z-index: 1;
+    right: 7px;
+  }
 }
 
 .noData {
@@ -67,7 +74,7 @@ ion-content {
   text-align: center !important;
 }
 
-ion-fab-button {
+.heart-fab {
   --background: var(--ion-color-light);
   height: 30px;
   width: 30px;
@@ -77,6 +84,27 @@ ion-fab-button {
   right: 0px !important;
 }
 
+.bell-fab {
+  --background: var(--ion-color-light);
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 40px;
+  z-index: 1;
+  right: 0px !important;
+}
+
 .help-icon {
   font-size: 30px;
+}
+
+.rounded-badge {
+  display: inline-block;
+  padding: 5px 7px;
+  border-radius: 50%;
+  background-color: --ion-color-primary;
+  color: white;
+  position: absolute;
+  left: 2.3rem;
+  top: 2.4rem;
 }

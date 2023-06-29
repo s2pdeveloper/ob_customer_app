@@ -7,7 +7,7 @@
 .insta {
   width: 1.5rem !important;
   height: 1.5rem !important;
-  border:--ion-color-primary;
+  border: --ion-color-primary;
   padding: 0px !important;
   margin: 0px !important;
 }
@@ -16,11 +16,6 @@
   color: --ion-color-primary;
   width: 1.5rem;
   height: 1.5rem;
-}
-
-.call {
-  color: #0090d0;
-  padding: 23px;
 }
 
 .card::before {
@@ -53,42 +48,6 @@ ion-card {
   line-height: 1.5;
 }
 
-.banner-img {
-  top: 0px !important;
-  bottom: 0px !important;
-  border-radius: 5px !important;
-  width: 363px !important;
-  height: 233px !important;
-  object-fit: cover !important;
-}
-
-.background-size {
-  height: 40vh;
-  position: relative;
-  background-color: var(--cs-blandModes-secondary, #ffffff);
-  background-blend-mode: luminosity;
-
-  &::before {
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    pointer-events: none;
-    mix-blend-mode: var(--cs-mode-image);
-    background: var(--cs-gradient-linear);
-  }
-
-  img {
-    top: 10px;
-    position: relative !important;
-    object-fit: cover !important;
-    border-radius: 50%;
-  }
-}
-
 .gallery {
   border-radius: 15px !important;
   height: 6rem !important;
@@ -115,10 +74,6 @@ ion-content {
 .item-inner {
   padding-left: 0px !important;
   padding-right: 0px !important;
-}
-
-.shade-color {
-  color: darkslategray;
 }
 
 ion-button {
@@ -154,9 +109,19 @@ ion-segment-button {
   height: 3rem;
 }
 
-.link-icon {
-  display: flex;
-  align-items: center;
+.social-links {
+  margin: 0px;
+  padding: 0px;
+}
+
+.list li {
+  font-size: 13px;
+  color: black;
+}
+
+.paymentMethod {
+  font-size: 15px;
+  color: black;
 }
 
 ion-fab-button {
@@ -166,48 +131,74 @@ ion-fab-button {
   margin-top: 0.5rem;
 }
 
-
-.social-links {
-  margin: 0px;
-  padding: 0px;
+.img-div {
+  z-index: 1;
 }
 
-.bg-card {
-  border-radius: 50%;
-  background-color: transparent;
-  align-items: center;
-  width: 75px;
-  height: 75px;
-  border: 3rem;
-  overflow: hidden;
-  box-shadow: #9fb1dc 0px 25px 20px -20px;
+.top-icons {
+  width: 100vw;
+  height: 80px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+
+  .left-icon {
+    width: 10%;
+    height: 100%;
+  }
+
+  .right-icons {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    ion-fab {
+      position: relative;
+    }
+  }
 }
 
-.web {
-  margin-bottom: 5px;
-  margin-left: 3px;
+.rating {
+  display: inline-block;
+  padding: 5px 7px;
+  border-radius: 15%;
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  --background: #de0f3f;
+  --color: white;
 }
 
 .contact {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
-.schedule-class{
+.contact .ion-col {
   display: flex;
-    justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-small {
-  font-size: 85%;
-}
-
-.list li {
-  font-size: 13px;
+.contact .ion-note {
+  margin-top: 0.25rem;
+  font-size: 10px;
+  font-weight: bold;
   color: black;
 }
 
-.paymentMethod{
-  font-size: 15px;
-  color: black; 
+.bg-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fff;
 }
