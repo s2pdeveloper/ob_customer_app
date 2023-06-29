@@ -226,5 +226,6 @@
   "contactUs": "Contact us",
   "socialLinks": "Social links",
   "webLink": "Web link",
-  "instruction": "Instruction"
+  "instruction": "Instruction",
+  "direction":"Direction"
 }

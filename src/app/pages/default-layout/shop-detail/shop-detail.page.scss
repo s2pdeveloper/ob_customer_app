@@ -164,17 +164,6 @@ ion-segment-button {
   padding: 0px;
 }
 
-.bg-card {
-  border-radius: 50%;
-  background-color: transparent;
-  align-items: center;
-  width: 75px;
-  height: 75px;
-  border: 3rem;
-  overflow: hidden;
-  box-shadow: #9fb1dc 0px 25px 20px -20px;
-}
-
 .web {
   margin-bottom: 5px;
   margin-left: 3px;
@@ -230,4 +219,35 @@ ion-fab-button {
 .heart-fab{
   position: absolute;
   right: 2.7rem;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.contact .ion-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact .ion-note {
+  margin-top: 0.25rem;
+}
+
+.bg-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.chat-icon{
+  font-size: 25px !important;
 }

@@ -84,30 +84,41 @@
                           </ion-col>
                         </ion-row>
                       </ion-item>
-
                       <!-- contact us -->
                       <ion-item lines="none" class="social-links ion-no-height">
                         <ion-label class="heading ion-no-padding" color="primary">{{'contactUs' |translate}}</ion-label>
                       </ion-item>
+   
                       <ion-row class="ion-no-padding contact">
                         <ion-col size="4" class="ion-text-center">
                           <div>
                             <ion-card class="bg-card">
-                              <ion-icon name="chatbubble-ellipses-outline" size="large" class="call" color="primary"
-                                (click)="orderAlert(shopUser)"></ion-icon>
+                              <ion-icon name="chatbubble-ellipses-outline" class="chat-icon" class="call" color="primary" (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
                             <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
-                          <ion-card class="bg-card ion-text-center">
-                            <a href="tel:+91{{shopUser?.mobileNumber}}">
-                              <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
-                            </a>
-                          </ion-card>
-                          <ion-note class="heading">{{'directCall'|translate}}</ion-note>
+                          <div>
+                            <ion-card class="bg-card">
+                              <ion-icon name="location-outline" size="large" color="primary" (click)="getLocation()"></ion-icon>
+                            </ion-card>
+                            <ion-note class="heading">{{'direction'|translate}}</ion-note>
+                          </div>
+                        </ion-col>
+                        <ion-col size="4" class="ion-text-center">
+                          <div>
+                            <ion-card class="bg-card ion-text-center">
+                              <a href="tel:+91{{shopUser?.mobileNumber}}">
+                                <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
+                              </a>
+                            </ion-card>
+                            <ion-note class="heading">{{'directCall'|translate}}</ion-note>
+                          </div>
                         </ion-col>
                       </ion-row>
+                      
+                      
 
                       <!-- web link -->
                       <ion-item lines="none" class="social-links ion-no-height">
