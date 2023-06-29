@@ -51,8 +51,19 @@
       </ion-label>
     </ion-item>
     <!-- support -->
+
+    <!-- account delete -->
+    <ion-item button="true" (click)="confirmDeleteAlert()" lines="none">
+      <ion-icon name="trash-outline" color="primary"></ion-icon>
+      <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
+        {{ 'deleteAccount' | translate}}
+        <p class="text-color-7">{{'deleteAccountText' | translate}}</p>
+      </ion-label>
+    </ion-item>
+    <!-- account delete -->
+
     <ion-item button="true" (click)="logOutAlert()" lines="none">
-      <ion-icon class="text-color-2" ios="exit-outline" md="exit-sharp" color="primary">
+      <ion-icon ios="exit-outline" md="exit-sharp" color="primary">
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"logout" | translate}}
