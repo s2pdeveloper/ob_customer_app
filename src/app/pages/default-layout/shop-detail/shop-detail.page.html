@@ -1,33 +1,44 @@
-<ion-item lines="none" class="ion-no-padding bg-transparent">
-  <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
-</ion-item>
-
-<ion-fab horizontal="start" slot="fixed" class="bell-icon">
-  <ion-fab-button>
-    <ion-icon name="notifications-sharp" color="primary" (click)="navigateToNotification(shopUser?.id)"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-<ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="!shopUser?.shopFavorite" class="heart-fab">
-    <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
-<ion-fab horizontal="end" slot="fixed">
-  <ion-fab-button *ngIf="shopUser?.shopFavorite" class="heart-fab">
-    <ion-icon name="heart" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-
 <ion-content style="padding: 0" class="shadow-none ion-no-padding">
-  <img [src]="shopUser?.shopDetails?.bannerImages" class="header-image" />
+  <div>
+    <div class="img-div">
+      <img [src]="shopUser?.shopDetails?.bannerImages" class="header-image" />
+    </div>
+    <div class="top-icons">
+      <div class="left-icon">
+        <ion-item lines="none" class="ion-no-padding bg-transparent">
+          <ion-back-button color="primary" defaultHref="app/tabs/landing-page"></ion-back-button>
+        </ion-item>
+      </div>
+      <div class="right-icons">
+        <ion-fab horizontal="end" slot="fixed">
+          <ion-fab-button *ngIf="!shopUser?.shopFavorite" class="heart-fab">
+            <ion-icon name="heart-outline" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+
+        <ion-fab horizontal="end" slot="fixed">
+          <ion-fab-button *ngIf="shopUser?.shopFavorite" class="heart-fab">
+            <ion-icon name="heart" color="primary" (click)="addToFavorite(shopUser)"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+        <ion-fab horizontal="start" slot="fixed" class="bell-icon">
+          <ion-fab-button>
+            <ion-icon name="notifications-sharp" color="primary"
+              (click)="navigateToNotification(shopUser?.id)"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </div>
+    </div>
+  </div>
+
   <div id="content" class="main-content ion-padding">
     <ion-card>
       <ion-card-content>
         <ion-item>
           <ion-col size="5">
             <ion-avatar class="ion-margin-end logo-image">
-              <img alt="logo-image" *ngIf="shopUser?.profilePicture" [src]="shopUser?.profilePicture" />
+              <img class="img-badge" alt="logo-image" *ngIf="shopUser?.profilePicture"
+                [src]="shopUser?.profilePicture" />
               <ion-badge class="rating ion-text-end" *ngIf="shopUser?.shopDetails?.avgRating">
                 {{roundRating(shopUser?.shopDetails.avgRating.toFixed(2))}}
                 <ion-icon name="star"></ion-icon>
@@ -88,37 +99,39 @@
                       <ion-item lines="none" class="social-links ion-no-height">
                         <ion-label class="heading ion-no-padding" color="primary">{{'contactUs' |translate}}</ion-label>
                       </ion-item>
-   
+
                       <ion-row class="ion-no-padding contact">
                         <ion-col size="4" class="ion-text-center">
                           <div>
                             <ion-card class="bg-card">
-                              <ion-icon name="chatbubble-ellipses-outline" class="chat-icon" color="primary" (click)="orderAlert(shopUser)"></ion-icon>
+                              <ion-icon name="chatbubble-ellipses-outline" color="primary" size="large"
+                                (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
-                            <ion-note class="heading">{{'myOrders'|translate}}</ion-note>
+                            <ion-note class="contact-heading">{{'myOrders'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
                           <div>
                             <ion-card class="bg-card">
-                              <ion-icon name="location-outline" size="large" color="primary" (click)="getLocation()"></ion-icon>
+                              <ion-icon name="location-outline" size="large" color="primary"
+                                (click)="getLocation()"></ion-icon>
                             </ion-card>
-                            <ion-note class="heading">{{'direction'|translate}}</ion-note>
+                            <ion-note class="contact-heading">{{'direction'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
                           <div>
                             <ion-card class="bg-card ion-text-center">
                               <a href="tel:+91{{shopUser?.mobileNumber}}">
-                                <ion-icon name="call" size="large" class="call" color="primary"></ion-icon>
+                                <ion-icon name="call" size="large" color="primary"></ion-icon>
                               </a>
                             </ion-card>
-                            <ion-note class="heading">{{'directCall'|translate}}</ion-note>
+                            <ion-note class="contact-heading">{{'directCall'|translate}}</ion-note>
                           </div>
                         </ion-col>
                       </ion-row>
-                      
-                      
+
+
 
                       <!-- web link -->
                       <ion-item lines="none" class="social-links ion-no-height">

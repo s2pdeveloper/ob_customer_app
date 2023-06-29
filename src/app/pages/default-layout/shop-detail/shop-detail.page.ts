@@ -205,10 +205,10 @@ export class ShopDetailPage implements OnInit {
 
   getLocation() {
     let payload = {
-      shopLat: this.shopUser.shopDetails.location.coordinates[0],
-      shopLong: this.shopUser.shopDetails.location.coordinates[1],
-      custLat: this.deviceInfo.geoLocation.latitude,
-      custLong: this.deviceInfo.geoLocation.longitude
+      shopLat: this.shopUser.shopDetails.location?.coordinates[0],
+      shopLong: this.shopUser.shopDetails.location?.coordinates[1],
+      custLat: this.deviceInfo.geoLocation?.latitude,
+      custLong: this.deviceInfo.geoLocation?.longitude
     };
     if (payload) {
       window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)

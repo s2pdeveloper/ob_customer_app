@@ -18,11 +18,6 @@
   height: 1.5rem;
 }
 
-.call {
-  color: #0090d0;
-  padding: 23px;
-}
-
 .card::before {
   content: "";
   position: absolute;
@@ -53,42 +48,6 @@ ion-card {
   line-height: 1.5;
 }
 
-.banner-img {
-  top: 0px !important;
-  bottom: 0px !important;
-  border-radius: 5px !important;
-  width: 363px !important;
-  height: 233px !important;
-  object-fit: cover !important;
-}
-
-.background-size {
-  height: 40vh;
-  position: relative;
-  background-color: var(--cs-blandModes-secondary, #ffffff);
-  background-blend-mode: luminosity;
-
-  &::before {
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: absolute;
-    pointer-events: none;
-    mix-blend-mode: var(--cs-mode-image);
-    background: var(--cs-gradient-linear);
-  }
-
-  img {
-    top: 10px;
-    position: relative !important;
-    object-fit: cover !important;
-    border-radius: 50%;
-  }
-}
-
 .gallery {
   border-radius: 15px !important;
   height: 6rem !important;
@@ -115,10 +74,6 @@ ion-content {
 .item-inner {
   padding-left: 0px !important;
   padding-right: 0px !important;
-}
-
-.shade-color {
-  color: darkslategray;
 }
 
 ion-button {
@@ -154,33 +109,9 @@ ion-segment-button {
   height: 3rem;
 }
 
-.link-icon {
-  display: flex;
-  align-items: center;
-}
-
 .social-links {
   margin: 0px;
   padding: 0px;
-}
-
-.web {
-  margin-bottom: 5px;
-  margin-left: 3px;
-}
-
-.contact {
-  display: flex;
-  justify-content: space-around;
-}
-
-.schedule-class {
-  display: flex;
-  justify-content: center;
-}
-
-small {
-  font-size: 85%;
 }
 
 .list li {
@@ -200,9 +131,33 @@ ion-fab-button {
   margin-top: 0.5rem;
 }
 
-.bell-icon {
+.img-div {
+  z-index: 1;
+}
+
+.top-icons {
+  width: 100vw;
+  height: 80px;
   position: absolute;
-  left: 23rem;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+
+  .left-icon {
+    width: 10%;
+    height: 100%;
+  }
+
+  .right-icons {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    ion-fab {
+      position: relative;
+    }
+  }
 }
 
 .rating {
@@ -212,17 +167,13 @@ ion-fab-button {
   position: absolute;
   top: 17px;
   right: 10px;
-  --background:red;
+  --background: #de0f3f;
   --color: white;
-}
-
-.heart-fab{
-  position: absolute;
-  right: 2.7rem;
 }
 
 .contact {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
@@ -237,6 +188,9 @@ ion-fab-button {
 
 .contact .ion-note {
   margin-top: 0.25rem;
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
 }
 
 .bg-card {
@@ -247,7 +201,4 @@ ion-fab-button {
   height: 64px;
   border-radius: 50%;
   background-color: #fff;
-}
-.chat-icon{
-  font-size: 25px !important;
 }
