@@ -273,3 +273,20 @@ export const setShpFormError = {
 		{ type: 'required', message: "Enter shop code" }
 	],
 }
+
+export const updateMobileNumberFormErrors = {
+	otp: [{
+		type: 'required', message: "Enter OTP "
+	}],
+	mobileNumber: [{
+		type: 'required', message: "Enter Mobile Number"
+	}]
+}
+export const updateEmailFormErrors = {
+	otp: [{
+		type: 'required', message: "Enter OTP "
+	}],
+	email: [{
+		type: 'required', message: "Enter email address"
+	}]
+}

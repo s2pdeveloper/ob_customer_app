@@ -45,6 +45,7 @@
   "forgotPasswordDescription": "Enter your registered mobile number below to receive password reset instructions",
   "otp": "OTP",
   "resendOTP": "Resend OTP in",
+  "updateMobile": "Change",
   "verificationLabel": "Verify your account",
   "verificationDescription": "We have sent the verification code to your mobile number",
   "resetPasswordLabel": "Check your inbox",
@@ -62,6 +63,9 @@
   "setLanguageText": "Set app Language",
   "logoutText": "Logout from app",
   "total": "Total",
+  "updateEmail": "Change",
+  "updateMobileNumber": "Update Mobile Number",
+  "updateEmailAddress": "Update Email Address",
   "changeLanguage": "Change Language",
   "selectLanguage": "Select Language",
   "home": "Home",
@@ -227,5 +231,5 @@
   "socialLinks": "Social links",
   "webLink": "Web link",
   "instruction": "Instruction",
-  "direction":"Direction"
+  "direction": "Direction"
 }

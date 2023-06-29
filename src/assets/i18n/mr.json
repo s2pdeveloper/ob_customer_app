@@ -38,6 +38,10 @@
   "forgotPasswordDescription": "पासवर्ड रीसेट करण्याच्या सूचना प्राप्त करण्यासाठी खाली तुमचा नोंदणीकृत ईमेल एंटर करा",
   "otp": "ओटीपी",
   "orderValue": "ऑर्डर मूल्य",
+  "updateMobile": "बदला",
+  "updateEmail": "बदला",
+  "updateMobileNumber": "मोबाईल नंबर अपडेट करा",
+  "updateEmailAddress": "ईमेल पत्ता अपडेट करा",
   "report": "अहवाल",
   "resendOTP": "ओटीपी पुन्हा पाठवा",
   "verificationLabel": "आपले खाते पडताळा",
@@ -240,5 +244,5 @@
   "webLink": "वेब लिंक",
   "schedule": "वेळापत्रक",
   "instruction": "सूचना",
-  "direction":"दिशा"
+  "direction": "दिशा"
 }
