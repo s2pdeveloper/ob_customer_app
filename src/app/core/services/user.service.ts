@@ -272,7 +272,7 @@ export class UserService {
   }
 
   deleteProfile() {
-    return this.apiService.delete(`/mobile/user/profile`).pipe(map(data => {
+    return this.apiService.delete(`/mobile/user/`).pipe(map(data => {
       if (data && data.result) {
         return data.result;
       } else {
