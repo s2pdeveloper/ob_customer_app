@@ -64,6 +64,8 @@
   "logoutText": "Logout from app",
   "total": "Total",
   "updateEmail": "Change",
+  "scanUPI": "Scan UPI",
+  "qrCode": "QR-Code",
   "updateMobileNumber": "Update Mobile Number",
   "updateEmailAddress": "Update Email Address",
   "changeLanguage": "Change Language",

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ 'QR-Code'}} </ion-title>
+    <ion-title>{{ 'qrCode' | translate}} </ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,7 +10,7 @@
   <div class="scan-box" [hidden]="!scanActive"></div>
   <ion-row class="scan-button" [hidden]="!scanActive">
     <ion-col class="ion-padding">
-      <ion-button expand="full" (click)="stopScanner()">{{'scanUPI'}}</ion-button>
+      <ion-button expand="full" (click)="stopScanner()">{{'scanUPI'|translate}}</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
