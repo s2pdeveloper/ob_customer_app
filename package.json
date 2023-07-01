@@ -37,7 +37,6 @@
     "@capacitor/device": "^4.1.0",
     "@capacitor/filesystem": "^4.1.4",
     "@capacitor/geolocation": "^4.1.0",
-    "@capacitor/google-maps": "^4.5.0",
     "@capacitor/ios": "^5.0.5",
     "@capacitor/local-notifications": "^4.1.5",
     "@capacitor/network": "^4.1.0",
