@@ -48,6 +48,8 @@
   "verificationDescription": "आम्ही तुमच्या मोबाईल नंबरवर व्हेरिफिकेशन कोड पाठवला आहे",
   "resetPasswordLabel": "आपला इनबॉक्स तपासा",
   "oldPassword": "जुना पासवर्ड",
+  "deleteAccount": "खाते हटवा",
+  "deleteAccountText": "तुमचे खाते हटवा",
   "newPassword": "नवीन पासवर्ड",
   "confirmPassword": "पासवर्डची पुष्टी करा",
   "resetOtp": "ओटीपी पुन्हा पाठवा",

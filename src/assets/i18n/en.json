@@ -69,6 +69,8 @@
   "changeLanguage": "Change Language",
   "selectLanguage": "Select Language",
   "home": "Home",
+  "deleteAccount": "Delete Account",
+  "deleteAccountText": "Delete your account",
   "homeType": "Home",
   "nearBy :": "Near By",
   "workType": "Work",

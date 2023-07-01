@@ -1,6 +1,5 @@
 export const environment = {
-    production: true,
-  apiEndpoint: 'http://13.233.6.45:3000/api/v1/',
-  url: 'http://13.233.6.45:3000',
-  };
-  
+  production: true,
+  apiEndpoint: 'https://api-dev.bharat-online.com/api/v1/',
+  url: 'https://api-dev.bharat-online.com',
+};
