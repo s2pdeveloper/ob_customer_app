@@ -50,6 +50,8 @@
   "newPassword": "नया पासवर्ड",
   "confirmPassword": "पासवर्ड की पुष्टि कीजिये",
   "resetOtp": "ओटीपी फिर से भेजें",
+  "deleteAccount": "खाता हटाएँ",
+  "deleteAccountText": "अपना खाता हटाएं",
   "description": "विवरण",
   "remarks": "टिप्पणियां",
   "settings": "समायोजन",
