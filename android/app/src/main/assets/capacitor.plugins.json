@@ -4,10 +4,6 @@
 		"classpath": "com.getcapacitor.community.barcodescanner.BarcodeScanner"
 	},
 	{
-		"pkg": "@capacitor-community/date-picker",
-		"classpath": "com.getcapacitor.community.datepicker.DatePickerPlugin"
-	},
-	{
 		"pkg": "@capacitor-community/photoviewer",
 		"classpath": "com.getcapacitor.community.media.photoviewer.PhotoViewerPlugin"
 	},
@@ -38,10 +34,6 @@
 	{
 		"pkg": "@capacitor/geolocation",
 		"classpath": "com.capacitorjs.plugins.geolocation.GeolocationPlugin"
-	},
-	{
-		"pkg": "@capacitor/google-maps",
-		"classpath": "com.capacitorjs.plugins.googlemaps.CapacitorGoogleMapsPlugin"
 	},
 	{
 		"pkg": "@capacitor/local-notifications",
