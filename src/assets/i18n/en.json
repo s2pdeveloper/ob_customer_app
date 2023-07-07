@@ -100,6 +100,7 @@
   "upload": "Upload",
   "orderBy": "Order By",
   "filter": "Filter",
+  "byDistance":"(By distance)",
   "no": "No",
   "yes": "Yes",
   "or": "OR",

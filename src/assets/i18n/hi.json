@@ -246,6 +246,7 @@
   "socialLinks": "सामाजिक लिंक",
   "webLink": "वेब लिंक",
   "filter": "फ़िल्टर",
+  "byDistance":"(दूरी के अनुसार)",
   "instruction": "अनुदेश",
   "direction": "दिशा"
 }
