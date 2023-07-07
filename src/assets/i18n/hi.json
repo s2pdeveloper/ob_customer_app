@@ -27,7 +27,7 @@
   "enterEmail": "ईमेल दर्ज करें",
   "hello": "नमस्ते.",
   "email": "इमेल",
-  "myOrders": "आसान कनेक्ट",
+  "myOrders": "कनेक्ट",
   "call": "कॉल",
   "password": "पासवर्ड",
   "changePassword": "Change पासवर्ड",
@@ -196,7 +196,7 @@
   "viewCatalogue": "सूची देखें",
   "catalogue": "सूची",
   "bookNow": "अभी बुक करें",
-  "directCall": "प्रत्यक्ष कॉल",
+  "directCall": "कॉल",
   "chat": "चैट",
   "QR Code": "QR कोड",
   "favorites": "पसंदीदा",
@@ -248,6 +248,7 @@
   "socialLinks": "सामाजिक लिंक",
   "webLink": "वेब लिंक",
   "filter": "फ़िल्टर",
+  "byDistance":"(दूरी के अनुसार)",
   "instruction": "अनुदेश",
   "direction": "दिशा"
 }
