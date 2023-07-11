@@ -52,6 +52,8 @@
   "resetOtp": "ओटीपी फिर से भेजें",
   "deleteAccount": "खाता हटाएँ",
   "deleteAccountText": "अपना खाता हटाएं",
+  "scanBharatOnlineQR":"भारत ऑनलाइन क्यूआर स्कैन करें",
+  "scanQR":"QR स्कैन करें",
   "description": "विवरण",
   "remarks": "टिप्पणियां",
   "settings": "समायोजन",
