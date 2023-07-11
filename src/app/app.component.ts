@@ -12,6 +12,7 @@ import { StatusBarService } from './core/services/status-bar.service';
 import { BarcodeScannerService } from './core/services/barcode-scanner.service';
 import { UserService } from './core/services/user.service';
 import { PushNotificationService } from './core/services/push-notification.service';
+import { SendIntentService } from './core/services/send-intent.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
     private cameraService: CameraService,
     private statusBarService: StatusBarService,
     private barcodeScannerService: BarcodeScannerService,
+    private sendIntentService: SendIntentService
   ) {
     this.languageService.getLang();
     this.initializeApp();
@@ -65,6 +67,7 @@ export class AppComponent implements OnInit {
       this.statusBarService.changeColor('#de0f3f');
       this.userService.populate();
       this.appBackButton.backButtonFunc();
+      this.sendIntentService.initiateIntent();
     });
   }
 
