@@ -46,6 +46,8 @@
   "updateEmailAddress": "ईमेल पत्ता अपडेट करा",
   "report": "अहवाल",
   "resendOTP": "ओटीपी पुन्हा पाठवा",
+  "scanUPI": "यूपीआई स्कॅन करा",
+  "qrCode": "क्यू-आर कोड",
   "verificationLabel": "आपले खाते पडताळा",
   "verificationDescription": "आम्ही तुमच्या मोबाईल नंबरवर व्हेरिफिकेशन कोड पाठवला आहे",
   "resetPasswordLabel": "आपला इनबॉक्स तपासा",
