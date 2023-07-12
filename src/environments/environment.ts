@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  // apiEndpoint: 'http://192.168.1.12:3000/api/v1/',
-  // url: 'http://192.168.1.12:3000',
-  apiEndpoint: 'https://api-dev.bharat-online.com/api/v1/',
-  url: 'https://api-dev.bharat-online.com',
+  apiEndpoint: 'http://192.168.1.7:3000/api/v1/',
+  url: 'http://192.168.1.7:3000',
+  // apiEndpoint: 'https://api-dev.bharat-online.com/api/v1/',
+  // url: 'https://api-dev.bharat-online.com',
 };
 
 /*
