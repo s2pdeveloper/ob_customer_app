@@ -13,6 +13,7 @@ import { QRCodeComponent } from './qr-code/qr-code.component';
 import { ScheduleNotificationListComponent } from '../favorite/schedule-notification-list/schedule-notification-list.component';
 import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
+import { ShopLocationComponent } from './shop-location/shop-location.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -203,17 +204,33 @@ export class ShopDetailPage implements OnInit {
   };
 
 
-  getLocation() {
+  async getLocation() {
     let payload = {
       shopLat: this.shopUser.shopDetails.location?.coordinates[0],
       shopLong: this.shopUser.shopDetails.location?.coordinates[1],
       custLat: this.deviceInfo.geoLocation?.latitude,
       custLong: this.deviceInfo.geoLocation?.longitude
     };
-    if (payload) {
-      window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
-    }
-    return;
+    // if (payload) {
+    //   window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
+    // }
+    // return;
+
+    const modal = await this.modalController.create({
+      component: ShopLocationComponent,
+      cssClass: 'report-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {
+        location: payload,
+      }
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+
   }
+
+
+
 
 }

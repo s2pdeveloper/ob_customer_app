@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar class="bg-color-primary" color="primary">
+    <!-- <ion-title>{{ "selectAddress" | translate }}</ion-title> -->
+    <ion-icon name="close-outline" slot="end" class="ion-margin-end" size="large" (click)="closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-item lines="none">
+      <ion-icon name='location' color="primary" class="ion-margin-end"></ion-icon>
+      <ion-label (click)="getCurrentLocation()"><b>{{'see current location'| translate}}</b></ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-icon name='location' color="primary" class="ion-margin-end"></ion-icon>
+      <ion-label (click)="getLiveLocation()"><b>{{'see real-time location'| translate}}</b></ion-label>
+    </ion-item>
+  </div>
+</ion-content>
