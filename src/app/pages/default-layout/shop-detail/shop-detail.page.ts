@@ -101,7 +101,7 @@ export class ShopDetailPage implements OnInit {
   async orderAlert(item) {
     this.shopName = item.shopDetails.shopName;
     const alert = await this.alertController.create({
-      header: 'Do you want to add to existing order or new order?',
+      header: 'Order/Request',
       cssClass: 'custom-alert',
       mode: 'md',
       buttons: [
@@ -125,6 +125,18 @@ export class ShopDetailPage implements OnInit {
     await alert.present();
     await alert.onDidDismiss();
   }
+
+
+  public alertButtons = [
+    {
+      text: 'No',
+      cssClass: 'alert-button-cancel',
+    },
+    {
+      text: 'Yes',
+      cssClass: 'alert-button-confirm',
+    },
+  ];
 
   goToChat(item) {
     let params = { shopName: this.shopName, shopId: item._id };
