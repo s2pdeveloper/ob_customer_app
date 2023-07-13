@@ -61,6 +61,17 @@ export class UploadService {
     }))
   }
 
+  uploadBase64(params) {
+    let url = `shared/upload-base64`;
+    return this.apiService.post(url, params).pipe(map(data => {
+      if (data && data.result) {
+        return data.result;
+      } else {
+        return null;
+      }
+    }))
+  }
+
   /**
    * check the file size
    * @param file

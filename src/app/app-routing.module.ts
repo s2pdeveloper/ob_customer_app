@@ -124,6 +124,11 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/shop-detail/shop-orders/shop-orders.module').then(m => m.ShopOrdersPageModule)
   },
+  {
+    path: 'send-page-intent',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/send-page-intent/send-page-intent.module').then( m => m.SendPageIntentPageModule)
+  },
 
 
 ];

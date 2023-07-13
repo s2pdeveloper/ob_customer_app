@@ -257,5 +257,8 @@ export class LandingPagePage implements OnInit {
     this.dynamicText$.unsubscribe()
   }
 
+  async pageIntent() {
+    this.router.navigate(['/send-page-intent'])
+  }
 }
 // a:not(:focus){color: blue;}

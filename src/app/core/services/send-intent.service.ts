@@ -8,7 +8,7 @@ import { SendIntent } from "send-intent";
 })
 export class SendIntentService {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   async checkIncomingIntent() {
     try {
@@ -21,8 +21,10 @@ export class SendIntentService {
         let resultUrl = decodeURIComponent(result.url);
         const content = await Filesystem.readFile({ path: resultUrl });
         console.log('resultUrl', content.data);
-        // this.router.navigate(['/app/tabs/order-list']) //! navigate to page to select order and send message
+        this.router.navigate(['/send-page-intent']) //! navigate to page to select order and send message
+        return content.data;
       }
+
     } catch (error) {
       console.error(error)
     }
