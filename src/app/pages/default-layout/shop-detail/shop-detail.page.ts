@@ -64,6 +64,8 @@ export class ShopDetailPage implements OnInit {
   async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
+      console.log(" this.shopUser.........", this.shopUser);
+      
       await this.spinner.hideLoader();
     });
   }
@@ -170,17 +172,17 @@ export class ShopDetailPage implements OnInit {
     });
   }
 
-  openWeb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.website}` });
+  openWeb = async (url) => {
+     await Browser.open({ url: `https://${url}` });
   };
   openYouTube = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}` });
+    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.youtube}` });
   }
   openInstagram = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}` });
+    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.instagram}` });
   }
   openFb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
+    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.facebook}` });
   }
 
   async modalQrCode() {
