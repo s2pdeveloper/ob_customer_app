@@ -56,7 +56,8 @@
           </ion-fab>
         </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">{{item?.shopName}}</ion-label>
-        <ion-label (click)="navigateToShop(item.id)" class="address ion-margin-top" color="
+        <ion-label *ngIf="item?.shopOwner?.address" (click)="navigateToShop(item.id)" class="address ion-margin-top"
+          color="
             light">
           <h4 class="address-padding ion-padding-start" *ngIf="item?.shopOwner?.address">
             {{ item?.shopOwner?.address?.line1 ? item?.shopOwner?.address?.line1 : ""}},
