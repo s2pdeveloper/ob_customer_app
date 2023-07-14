@@ -139,7 +139,8 @@ export const imageExtension = [
     'image/jpg',
     'image/svg',
     'image/gif',
-    'webp'
+    'webp',
+    'image/*'
 ];
 
 export const fileExtension = [

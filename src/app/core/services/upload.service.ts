@@ -86,6 +86,18 @@ export class UploadService {
   }
 
   /**
+  * check the file size
+  * @param file
+  * @returns
+  */
+  checkSize(fileSize) {
+    let size = fileSize / (1024 * 1024);
+    if (size < OPTIONS.maxLimit) {
+      return true;
+    }
+    return false;
+  }
+  /**
    * check upload file type
    * @param file
    * @returns

@@ -13,6 +13,9 @@ import { BarcodeScannerService } from './core/services/barcode-scanner.service';
 import { UserService } from './core/services/user.service';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { SendIntentService } from './core/services/send-intent.service';
+import { SocketService } from './core/services/socket.service';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,7 +41,9 @@ export class AppComponent implements OnInit {
     private cameraService: CameraService,
     private statusBarService: StatusBarService,
     private barcodeScannerService: BarcodeScannerService,
-    private sendIntentService: SendIntentService
+    private sendIntentService: SendIntentService,
+    private socketService: SocketService,
+
   ) {
     this.languageService.getLang();
     this.initializeApp();
@@ -67,6 +72,7 @@ export class AppComponent implements OnInit {
       this.statusBarService.changeColor('#de0f3f');
       this.userService.populate();
       this.appBackButton.backButtonFunc();
+      this.socketService.connect();
       this.sendIntentService.initiateIntent();
     });
   }

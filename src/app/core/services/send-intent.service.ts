@@ -22,9 +22,13 @@ export class SendIntentService {
         const content = await Filesystem.readFile({ path: resultUrl });
         console.log('resultUrl', content.data);
         this.router.navigate(['/send-page-intent']) //! navigate to page to select order and send message
-        return content.data;
+        let fileData = {
+          base64String: content.data,
+          title: result.title,
+          type: result.type,
+        }
+        return fileData
       }
-
     } catch (error) {
       console.error(error)
     }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SocketService {
-  private socket;
+  private socket: any;
 
   constructor(private jwtService: JwtService) { }
 

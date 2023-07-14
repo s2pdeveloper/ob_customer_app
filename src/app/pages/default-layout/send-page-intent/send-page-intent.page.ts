@@ -12,6 +12,8 @@ import { UploadService } from 'src/app/core/services/upload.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-send-page-intent',
   templateUrl: './send-page-intent.page.html',
@@ -50,6 +52,7 @@ export class SendPageIntentPage implements OnInit {
     private uploadService: UploadService,
     private spinner: LoaderService,
     private toaster: ToastService,
+    private location: Location,
 
   ) { }
 
@@ -80,7 +83,6 @@ export class SendPageIntentPage implements OnInit {
   intentData() {
     this.sendIntentService.checkIncomingIntent().then(result => {
       this.intentMediaData = result;
-      console.log("this.intentMediaData...................", this.intentMediaData);
       this.uploadFiles(this.intentMediaData)
     });
   }
@@ -94,20 +96,6 @@ export class SendPageIntentPage implements OnInit {
     // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
     this.orderService.list(params).subscribe({
       next: (result: any) => {
-        for (let i = 0; i < result.data.length; i++) {
-          this.dataList.push(result.data[i]);
-        }
-      },
-      error: (error) => {
-        console.log(error)
-      },
-    })
-  }
-
-  receiveData() {
-    this.socketService.listenEvent(socketOnEvents.LIST_ORDER).subscribe({
-      next: (result: any) => {
-
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
@@ -144,40 +132,70 @@ export class SendPageIntentPage implements OnInit {
   }
 
   sendMessage() {
+    console.log("send msg form ...this.form ", this.chatForm.value);
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
+    this.location.back();
   }
 
-  async uploadFiles(base64Data) {
-    console.log("base64Data", base64Data);
-    // await this.spinner.showLoader();
-    this.uploadService.uploadBase64({ base64Data }).subscribe(
-      async (data: any) => {
-        console.log("data......line no 156.", data);
-        return
-        this.fileData = {
-          filePath: data?.result?.data?.key,
-          fileName: `${data?.result?.data.key}`.split('post/')[1],
-          fileType: data?.result?.data?.contentType,
-          fileSize: data?.result?.data?.size,
-        }
-        this.chatForm.controls.media.setValue(this.fileData);
-        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-        this.fileUploaded = true;
-        await this.spinner.hideLoader();
-        this.sendMessage();
-      },
-      async (error: any) => {
-        await this.spinner.hideLoader();
-        this.toaster.errorToast(error);
+  async uploadFiles(file) {
+    const fileSize = this.getFileSizeFromBase64(file.base64String);
+    if (this.uploadService.checkSize(fileSize)) {
+      await this.spinner.showLoader();
+      let base64Data = {
+        base64String: file.base64String,
+        title: `${Date.now()}-${file.title}`
       }
-    );
+      this.uploadService.uploadBase64({ base64Data }).subscribe(
+        async (data: any) => {
+          // const fileSize = this.getFileSizeFromBase64(file.base64String);
+          this.fileData = {
+            filePath: `post/${base64Data.title}`,
+            fileName: base64Data.title,
+            fileType: file.type,
+            fileSize: fileSize,
+          }
+          this.chatForm.controls.media.setValue(this.fileData);
+          this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+          this.fileUploaded = true;
+          await this.spinner.hideLoader();
+          // this.sendMessage();
+        },
+        async (error: any) => {
+          await this.spinner.hideLoader();
+          this.toaster.errorToast(error);
+        }
+      );
+    } else {
+      if (!this.uploadService.checkSize(fileSize)) {
+        this.toaster.errorToast(OPTIONS.sizeLimit);
+        this.spinner.hideLoader();
+        return;
+      }
+    }
+
+  }
+  // Function to get the file size from a base64 string
+  getFileSizeFromBase64(base64String: string): number {
+    // Convert the base64 string to a Blob object
+    const byteString = atob(base64String);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([arrayBuffer]);
+    // Retrieve the file size from the Blob object
+    const fileSizeInBytes = blob.size;
+    const fileSizeInKilobytes = fileSizeInBytes / 1024;
+
+    return fileSizeInKilobytes;
   }
 
-  async sendTo() {
-
+  navigateTo(item) {
+    this.chatForm.get('shopId').setValue(item.shopId);
+    this.chatForm.get('orderId').setValue(item.id);
   }
-
 
 }
 
