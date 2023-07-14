@@ -64,8 +64,6 @@ export class ShopDetailPage implements OnInit {
   async getShopData() {
     this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
       this.shopUser = success;
-      console.log(" this.shopUser.........", this.shopUser);
-      
       await this.spinner.hideLoader();
     });
   }
@@ -173,7 +171,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   openWeb = async (url) => {
-     await Browser.open({ url: `https://${url}` });
+    await Browser.open({ url: `https://${url}` });
   };
   openYouTube = async () => {
     await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.youtube}` });
