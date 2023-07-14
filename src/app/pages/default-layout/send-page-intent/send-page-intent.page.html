@@ -30,8 +30,8 @@
   </ion-refresher>
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
     <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
+      <ion-checkbox type="checkbox" (click)="isChecked($event)"></ion-checkbox>
       <ion-avatar slot="start">
-
         <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
         <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
         item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
@@ -97,7 +97,7 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-footer class="ion-no-border">
+<ion-footer class="ion-no-border" *ngIf="!isCheck">
   <div class="ion-padding-top footer-msg">
     <ion-button (click)="sendMessage()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
       {{'Send' | translate}}

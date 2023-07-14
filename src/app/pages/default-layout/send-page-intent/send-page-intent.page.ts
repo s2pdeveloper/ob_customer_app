@@ -41,6 +41,7 @@ export class SendPageIntentPage implements OnInit {
   base64Data: any;
   imageData: any;
   converted_image: string;
+  isCheck: boolean = true;
 
   constructor(
     private router: Router,
@@ -93,7 +94,6 @@ export class SendPageIntentPage implements OnInit {
     if (this.searchText) {
       params['searchShop'] = this.searchText;
     }
-    // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
     this.orderService.list(params).subscribe({
       next: (result: any) => {
         for (let i = 0; i < result.data.length; i++) {
@@ -131,11 +131,15 @@ export class SendPageIntentPage implements OnInit {
     this.onSearch();
   }
 
+  isChecked(event) {
+    this.isCheck = event.target.checked;
+  }
+
   sendMessage() {
-    console.log("send msg form ...this.form ", this.chatForm.value);
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
-    this.location.back();
+    this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
+
   }
 
   async uploadFiles(file) {
@@ -159,7 +163,6 @@ export class SendPageIntentPage implements OnInit {
           this.chatForm.controls.category.setValue(messageCategory.MEDIA);
           this.fileUploaded = true;
           await this.spinner.hideLoader();
-          // this.sendMessage();
         },
         async (error: any) => {
           await this.spinner.hideLoader();
@@ -170,6 +173,7 @@ export class SendPageIntentPage implements OnInit {
       if (!this.uploadService.checkSize(fileSize)) {
         this.toaster.errorToast(OPTIONS.sizeLimit);
         this.spinner.hideLoader();
+        this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
         return;
       }
     }
