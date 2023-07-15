@@ -171,16 +171,16 @@ export class ShopDetailPage implements OnInit {
   }
 
   openWeb = async (url) => {
-    await Browser.open({ url: `https://${url}` });
+    await Browser.open({ url: `${url}` });
   };
   openYouTube = async () => {
-    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.youtube}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}`});
   }
   openInstagram = async () => {
-    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.instagram}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}`});
   }
   openFb = async () => {
-    await Browser.open({ url: `https://${this.shopUser?.shopDetails?.links?.facebook}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}`});
   }
 
   async modalQrCode() {
