@@ -41,6 +41,8 @@ export class LocationTrackingComponent implements OnInit {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_SHOP_LOCATION).subscribe({
       next: (result: any) => {
         console.log('RECEIVE_SHOP_LOCATION', result.data);
+        this.dataList[0].location = result.data.location
+        this.calculateAndDisplayRoute(this.dataList[0])
 
       },
       error: (error) => {
@@ -106,11 +108,12 @@ export class LocationTrackingComponent implements OnInit {
   }
 
   calculateAndDisplayRoute(payload) {
+    console.log('this.currentLocation?', this.currentLocation)
     const body = {
       origin: new google.maps.LatLng(this.currentLocation?.latitude, this.currentLocation?.longitude),
       destination: new google.maps.LatLng(payload?.location?.coordinates[0], payload?.location?.coordinates[1]),
       travelMode: google.maps.TravelMode.DRIVING,
-      optimizeWaypoints: true
+      // optimizeWaypoints: true,
     }
     this.directionService.route(body, (response, status) => {
       console.log('response from direction', response)
