@@ -12,6 +12,7 @@ import { ParallaxHeaderDirective } from 'src/app/directives/parallax-header.dire
 import { SelectFilterComponent } from './select-filter/select-filter.component';
 import { QRCodeComponent } from './qr-code/qr-code.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { LocationTrackingModule } from '../../location-tracking/location-tracking.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    LocationTrackingModule,
     ShopDetailPageRoutingModule,
     SharedModule,
     PdfViewerModule

@@ -1,0 +1,10 @@
+.map-canvas {
+  height: 96vh;
+}
+.distance-duration-badge {
+  position: absolute;
+  bottom: 20px;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+}

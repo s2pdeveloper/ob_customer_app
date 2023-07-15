@@ -27,6 +27,7 @@ export class UserService {
           data => {
             if (data.result) {
               this.setAuth(data.result);
+              this.socketService.connect();
             } else {
               this.purgeAuth();
             }

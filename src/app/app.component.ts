@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
       localStorage.getItem('firstTime').match('firstTime')
     ) {
       if (this.jwtService.getToken()) {
-        this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
+        // this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
       } else {
         this.router.navigate([`/auth/login`], { replaceUrl: true });
       }

@@ -13,6 +13,7 @@ import { QRCodeComponent } from './qr-code/qr-code.component';
 import { ScheduleNotificationListComponent } from '../favorite/schedule-notification-list/schedule-notification-list.component';
 import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
+import { LocationTrackingComponent } from '../../location-tracking/location-tracking.component';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -228,4 +229,14 @@ export class ShopDetailPage implements OnInit {
     return;
   }
 
+  async showOnMap() {
+    const modal = await this.modalController.create({
+      component: LocationTrackingComponent,
+      swipeToClose: true,
+      componentProps: {
+        dataList: [this.shopUser.shopDetails]
+      }
+    });
+    await modal.present();
+  }
 }

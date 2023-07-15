@@ -99,12 +99,14 @@ export const socketOnEvents = {
     DELETE_MESSAGE: 'deleteMessage',
     LIST_MESSAGE: 'listMessages',
     LIST_ORDER: 'listOrder',
+    GET_SHOP_LOCATION: 'getShopLocation',
 };
 
 export const socketEmitEvents = {
     RECEIVE_ORDER: 'receiveOrder',
     RECEIVE_MESSAGE: 'receiveMessage',
     ERROR_MESSAGE: 'errorMessage',
+    RECEIVE_SHOP_LOCATION: 'receiveShopLocation',
 };
 
 export const notificationType = {

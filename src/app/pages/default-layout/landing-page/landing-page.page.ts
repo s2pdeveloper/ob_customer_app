@@ -106,7 +106,6 @@ export class LandingPagePage implements OnInit {
       };
       this.userService.addDeviceToken(payload).subscribe();
     }
-    this.socketService.connect();
   }
   async ionViewWillEnter() {
     this.search = '';
