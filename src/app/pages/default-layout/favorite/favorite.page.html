@@ -27,7 +27,7 @@
 
   <ion-grid *ngIf="shopFavorites?.length > 0;else noDataFound">
     <ion-row *ngFor="let s of shopFavorites">
-      <ion-col class="shadow">
+      <ion-col class="shadow" *ngIf="s.shopDetails?.status == defaultStatus.ACTIVE">
         <ion-card class="shop-card" [ngStyle]="{ 
           'background-image': getUrl(s?.shopDetails.bannerImages), 
           'background-repeat': 'no-repeat', 
@@ -35,11 +35,11 @@
           'background-size':'100% 100%'
          }" (click)="navigateToShop(s?.shopDetails._id)">
 
-         <ion-badge color="primary" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
-          {{ roundRating(s?.shopDetails.avgRating.toFixed(2)) }}
-          <ion-icon name="star"></ion-icon>
-        </ion-badge>
-        
+          <ion-badge color="primary" class="rating ion-text-end" *ngIf="s?.shopDetails.avgRating">
+            {{ roundRating(s?.shopDetails.avgRating.toFixed(2)) }}
+            <ion-icon name="star"></ion-icon>
+          </ion-badge>
+
         </ion-card>
         <div class="ion-text-end ion-margin-end ion-margin-top heart-icon">
           <ion-fab>
@@ -61,6 +61,26 @@
         <ion-label (click)="navigateToShop(s?.shopDetails._id)" class="address ion-margin-top" color="
             light">
           <h4 class="address-padding ion-padding-start">
+            {{ s.ownerDetails[0]?.address?.city ? s.ownerDetails[0]?.address?.city : ""}},
+            {{s.ownerDetails[0]?.address?.state ? s.ownerDetails[0]?.address?.state : "" }},
+            {{s.ownerDetails[0]?.address?.pinCode ? s.ownerDetails[0]?.address?.pinCode : "" }}.
+          </h4>
+        </ion-label>
+      </ion-col>
+      <ion-col class="shadow" *ngIf="s.shopDetails?.status == defaultStatus.INACTIVE">
+        <ion-card class="shop-card" [ngStyle]="{ 
+          'background-image': getUnAvailableUrl(), 
+          'background-repeat': 'no-repeat', 
+          'object-fit':'cover',
+          'background-size':'100% 100%'
+         }">
+        </ion-card>
+        <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">
+          {{s.shopDetails.shopName}}</ion-label>
+        <ion-label class="address ion-margin-top" color="
+            light">
+          <h4 class="address-padding ion-padding-start"
+            *ngIf="s.ownerDetails[0]?.address?.city || s.ownerDetails[0]?.address?.state || s.ownerDetails[0]?.address?.pinCode">
             {{ s.ownerDetails[0]?.address?.city ? s.ownerDetails[0]?.address?.city : ""}},
             {{s.ownerDetails[0]?.address?.state ? s.ownerDetails[0]?.address?.state : "" }},
             {{s.ownerDetails[0]?.address?.pinCode ? s.ownerDetails[0]?.address?.pinCode : "" }}.
