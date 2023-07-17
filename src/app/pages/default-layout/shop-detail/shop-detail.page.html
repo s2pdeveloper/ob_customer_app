@@ -52,7 +52,7 @@
               {{shopUser?.shopDetails?.lastName}}
             </p>
             <ion-text class="ion-text-wrap">
-              <h4>
+              <h4 *ngIf="shopUser?.address?.line1">
                 {{shopUser?.address?.line1}}{{shopUser?.address?.line2}}
                 {{shopUser?.address?.city}}, {{shopUser?.address?.state}} -
                 {{shopUser?.address?.pinCode}}

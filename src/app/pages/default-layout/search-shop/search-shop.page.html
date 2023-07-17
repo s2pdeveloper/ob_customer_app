@@ -59,7 +59,7 @@
         <ion-label *ngIf="item?.shopOwner?.address" (click)="navigateToShop(item.id)" class="address ion-margin-top"
           color="
             light">
-          <h4 class="address-padding ion-padding-start" *ngIf="item?.shopOwner?.address">
+          <h4 class="address-padding ion-padding-start" *ngIf="item?.shopOwner?.address?.line1">
             {{ item?.shopOwner?.address?.line1 ? item?.shopOwner?.address?.line1 : ""}},
             {{ item?.shopOwner?.address?.city ? item?.shopOwner?.address?.city : ""}}, {{item?.shopOwner?.address?.state
             ?
