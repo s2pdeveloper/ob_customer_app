@@ -133,8 +133,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
   sendMessage() {
-    console.log("send msg", this.chatForm.value);
-
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
     if (this.canReceiveMessage) {

@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Location } from '@angular/common';
+import { CameraService } from 'src/app/core/services/camera.service';
 
 @Component({
   selector: 'app-send-page-intent',
@@ -54,6 +55,7 @@ export class SendPageIntentPage implements OnInit {
     private spinner: LoaderService,
     private toaster: ToastService,
     private location: Location,
+    private cameraService: CameraService,
 
   ) { }
 
@@ -84,7 +86,7 @@ export class SendPageIntentPage implements OnInit {
   intentData() {
     this.sendIntentService.checkIncomingIntent().then(result => {
       this.intentMediaData = result;
-      this.uploadFiles(this.intentMediaData)
+      this.uploadFile(this.intentMediaData)
     });
   }
 
@@ -139,61 +141,49 @@ export class SendPageIntentPage implements OnInit {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
     this.resetForm();
     this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
-
+    this.sendIntentService.finishIntent();
   }
 
-  async uploadFiles(file) {
-    const fileSize = this.getFileSizeFromBase64(file.base64String);
-    if (this.uploadService.checkSize(fileSize)) {
-      await this.spinner.showLoader();
-      let base64Data = {
-        base64String: file.base64String,
-        title: `${Date.now()}-${file.title}`
-      }
-      this.uploadService.uploadBase64({ base64Data }).subscribe(
+  async uploadFile(file) {
+    const lastDotIndex = file.title.lastIndexOf('.');
+    const fileType = file.title.substring(lastDotIndex + 1);
+    const realFile = this.cameraService.b64toBlob(file.base64String, `image/${fileType}`);
+    await this.spinner.hideLoader();
+    const params = { fileName: file.title, fileType: `image/${fileType}` };
+    if (this.uploadService.checkFileSize(realFile)) {
+      this.uploadService.getSignUrl(params).subscribe(
         async (data: any) => {
-          // const fileSize = this.getFileSizeFromBase64(file.base64String);
-          this.fileData = {
-            filePath: `post/${base64Data.title}`,
-            fileName: base64Data.title,
-            fileType: file.type,
-            fileSize: fileSize,
-          }
-          this.chatForm.controls.media.setValue(this.fileData);
-          this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-          this.fileUploaded = true;
-          await this.spinner.hideLoader();
-        },
-        async (error: any) => {
-          await this.spinner.hideLoader();
+          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
+            async (result: any) => {
+              console.log('after upload', result);
+              this.fileData = {
+                filePath: `${data.filePath}`.split('.net/')[1],
+                fileName: `${data.filePath}`.split('post/')[1],
+                fileType: `image/${fileType}`,
+                fileSize: realFile.size,
+              }
+              this.chatForm.controls.media.setValue(this.fileData);
+              this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+              this.fileUploaded = true;
+              await this.spinner.hideLoader();
+            }, async (error: any) => {
+              this.toaster.errorToast(error);
+              await this.spinner.hideLoader();
+            }
+          );
+        }, async (error: any) => {
           this.toaster.errorToast(error);
+          await this.spinner.hideLoader();
         }
-      );
-    } else {
-      if (!this.uploadService.checkSize(fileSize)) {
+      )
+    }
+    else {
+      if (!this.uploadService.checkFileSize(realFile.size)) {
         this.toaster.errorToast(OPTIONS.sizeLimit);
-        this.spinner.hideLoader();
-        this.router.navigate([`/app/tabs/home`], { replaceUrl: true });
+        await this.spinner.hideLoader();
         return;
       }
     }
-
-  }
-  // Function to get the file size from a base64 string
-  getFileSizeFromBase64(base64String: string): number {
-    // Convert the base64 string to a Blob object
-    const byteString = atob(base64String);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const uint8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([arrayBuffer]);
-    // Retrieve the file size from the Blob object
-    const fileSizeInBytes = blob.size;
-    const fileSizeInKilobytes = fileSizeInBytes / 1024;
-
-    return fileSizeInKilobytes;
   }
 
   navigateTo(item) {
