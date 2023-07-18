@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,7 +14,6 @@ import { LoaderService } from 'src/app/core/services/loader.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { Location } from '@angular/common';
 import { CameraService } from 'src/app/core/services/camera.service';
-
 @Component({
   selector: 'app-send-page-intent',
   templateUrl: './send-page-intent.page.html',
@@ -43,7 +42,7 @@ export class SendPageIntentPage implements OnInit {
   imageData: any;
   converted_image: string;
   isCheck: boolean = true;
-
+  selectedItem: any = [];
   constructor(
     private router: Router,
     private userService: UserService,
@@ -57,7 +56,10 @@ export class SendPageIntentPage implements OnInit {
     private location: Location,
     private cameraService: CameraService,
 
-  ) { }
+  ) {
+    console.log(" this.selectedItem = 'item1';", this.selectedItem);
+
+  }
 
   chatForm = new FormGroup({
     message: new FormControl('', [Validators.required]),
@@ -133,9 +135,16 @@ export class SendPageIntentPage implements OnInit {
     this.onSearch();
   }
 
-  isChecked(event) {
-    this.isCheck = event.target.checked;
+  selectItem(item) {
+    console.log("item........", item);
+    // this.isCheck = event.target.checked;
+    if (this.selectedItem === item) {
+      this.selectedItem = null;
+    } else {
+      this.selectedItem = item;
+    }
   }
+
 
   sendMessage() {
     this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());

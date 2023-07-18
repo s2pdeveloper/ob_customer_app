@@ -29,60 +29,64 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
-    <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
-      <ion-checkbox type="checkbox" (click)="isChecked($event)"></ion-checkbox>
-      <ion-avatar slot="start">
-        <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
-        <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
+    <ion-radio-group value="custom-checked">
+      <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
+        <ion-radio value="item.value" aria-label="Custom checkbox"></ion-radio>
+        <!-- <ion-checkbox type="checkbox" [checked]="selectedItem === dataList"
+          (ionChange)="selectItem(item)"></ion-checkbox> -->
+        <ion-avatar slot="start">
+          <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
+          <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
         item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
-      </ion-avatar>
-      <ion-label>
-        <ion-row class="ion-justify-content-between">
-          <ion-col>
-            <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
-              <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
+        </ion-avatar>
+        <ion-label>
+          <ion-row class="ion-justify-content-between">
+            <ion-col>
+              <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
+                <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
 
-            </h2>
-            <p class="text-color-2">{{ item?.orderNumber }}</p>
-            <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{
-              item?.amount }}</p>
-            <small class="text-color-7 ion-text-wrap">{{ item?.createdAt | date:'d MMM, y h:mm a' }}</small>
-          </ion-col>
-          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.NEW">
-            <ion-chip>
-              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
-                :'Waiting'}}</ion-text>
-            </ion-chip>
-          </ion-col>
-          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.ACTIVE">
-            <ion-chip>
-              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
-                :'Accept'}}</ion-text>
-            </ion-chip>
-          </ion-col>
-          <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.COMPLETED">
-            <ion-chip>
-              <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
-                :'Completed'}}</ion-text>
-            </ion-chip>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-justify-content-between ion-align-items-center">
-          <ion-col class="ion-no-padding">
-            <p>
-              <span *ngIf="item?.lastMessage?.senderId === user.id">You:</span>
-              {{item?.lastMessage?.message | truncate}}
-            </p>
-          </ion-col>
-          <ion-col size="2" class="ion-no-padding ion-text-end" *ngIf="item?.ratingDetails?.productQuality">
-            <ion-badge color="primary" class="rating ion-text-end">
-              {{item?.ratingDetails?.productQuality}}
-              <ion-icon name="star"></ion-icon>
-            </ion-badge>
-          </ion-col>
-        </ion-row>
-      </ion-label>
-    </ion-item>
+              </h2>
+              <p class="text-color-2">{{ item?.orderNumber }}</p>
+              <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{
+                item?.amount }}</p>
+              <small class="text-color-7 ion-text-wrap">{{ item?.createdAt | date:'d MMM, y h:mm a' }}</small>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.NEW">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Waiting'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.ACTIVE">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Accept'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.COMPLETED">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Completed'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-between ion-align-items-center">
+            <ion-col class="ion-no-padding">
+              <p>
+                <span *ngIf="item?.lastMessage?.senderId === user.id">You:</span>
+                {{item?.lastMessage?.message | truncate}}
+              </p>
+            </ion-col>
+            <ion-col size="2" class="ion-no-padding ion-text-end" *ngIf="item?.ratingDetails?.productQuality">
+              <ion-badge color="primary" class="rating ion-text-end">
+                {{item?.ratingDetails?.productQuality}}
+                <ion-icon name="star"></ion-icon>
+              </ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </ion-radio-group>
   </ion-list>
 
   <ng-template #noDataFound>
@@ -96,6 +100,7 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
+
 
 <ion-footer class="ion-no-border" *ngIf="!isCheck">
   <div class="ion-padding-top footer-msg">
