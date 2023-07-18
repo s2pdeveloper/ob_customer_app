@@ -78,7 +78,6 @@ export class FavoritePage implements OnInit {
   }
 
   async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
-    await this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
@@ -89,8 +88,6 @@ export class FavoritePage implements OnInit {
       for (let i = 0; i < success.data.length; i++) {
         this.shopFavorites.push(success.data[i]);
       }
-      console.log("this.shopfavorites", this.shopFavorites);
-
       if (isFirstLoad)
         event.target.complete();
       if (success.data.length === 0 && event) {

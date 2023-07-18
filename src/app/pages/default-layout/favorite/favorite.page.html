@@ -75,6 +75,13 @@
           'background-size':'100% 100%'
          }">
         </ion-card>
+         <div class="ion-text-end ion-margin-end ion-margin-top heart-icon">
+          <ion-fab>
+            <ion-fab-button class="heart-fab">
+              <ion-icon name="heart" color="primary" fill="" (click)="addToFavorite(s)"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </div>
         <ion-label class="shop-name ion-margin-top ion-text-wrap ion-text-capitalize">
           {{s.shopDetails.shopName}}</ion-label>
         <ion-label class="address ion-margin-top" color="
