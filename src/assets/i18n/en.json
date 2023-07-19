@@ -216,7 +216,7 @@
   "instruction4": "Avoid entering your UPI (Unified Payments Interface) PIN while receiving money.",
   "instruction5": "Avoid upfront payments or providing products in advance Report suspicious users to Bharat Online.",
   "back": "Back",
-  "yoursOrders": "Your orders",
+  "yoursOrders": "Your Orders/Request",
   "helpHeading": "Order flow has three stages :New, Processing, Past.",
   "helpInstruction1": "New: Newly placed orders waiting for acceptance",
   "helpInstruction2": "Processing: Accepted Orders and fulfillment",
