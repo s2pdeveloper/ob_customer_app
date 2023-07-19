@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { OrderService } from 'src/app/core/services/order.service';
 import { SocketService } from 'src/app/core/services/socket.service';
@@ -41,8 +41,7 @@ export class SendPageIntentPage implements OnInit {
   base64Data: any;
   imageData: any;
   converted_image: string;
-  isCheck: boolean = true;
-  selectedItem: any = [];
+  isCheck: boolean = false;
   constructor(
     private router: Router,
     private userService: UserService,
@@ -57,8 +56,6 @@ export class SendPageIntentPage implements OnInit {
     private cameraService: CameraService,
 
   ) {
-    console.log(" this.selectedItem = 'item1';", this.selectedItem);
-
   }
 
   chatForm = new FormGroup({
@@ -135,13 +132,13 @@ export class SendPageIntentPage implements OnInit {
     this.onSearch();
   }
 
-  selectItem(item) {
-    console.log("item........", item);
-    // this.isCheck = event.target.checked;
-    if (this.selectedItem === item) {
-      this.selectedItem = null;
+  onRadioChange(event) {
+    if (event.target.value) {
+      this.chatForm.get('shopId').setValue(event.target.value.shopId);
+      this.chatForm.get('orderId').setValue(event.target.value.id);
+      this.isCheck = true;
     } else {
-      this.selectedItem = item;
+      this.isCheck = false;
     }
   }
 

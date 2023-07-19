@@ -29,11 +29,9 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
-    <ion-radio-group value="custom-checked">
+    <ion-radio-group (ionChange)="onRadioChange($event)">
       <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
-        <ion-radio value="item.value" aria-label="Custom checkbox"></ion-radio>
-        <!-- <ion-checkbox type="checkbox" [checked]="selectedItem === dataList"
-          (ionChange)="selectItem(item)"></ion-checkbox> -->
+        <ion-radio [value]="item" aria-label="Custom checkbox"></ion-radio>
         <ion-avatar slot="start">
           <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
           <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
@@ -102,7 +100,7 @@
 </ion-content>
 
 
-<ion-footer class="ion-no-border" *ngIf="!isCheck">
+<ion-footer class="ion-no-border" *ngIf="isCheck">
   <div class="ion-padding-top footer-msg">
     <ion-button (click)="sendMessage()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
       {{'Send' | translate}}
