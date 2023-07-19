@@ -125,9 +125,9 @@ const routes: Routes = [
     loadChildren: () => import('./pages/default-layout/shop-detail/shop-orders/shop-orders.module').then(m => m.ShopOrdersPageModule)
   },
   {
-    path: 'send-page-intent',
+    path: 'shared-content',
     canLoad: [AuthGuard],
-    loadChildren: () => import('./pages/default-layout/send-page-intent/send-page-intent.module').then( m => m.SendPageIntentPageModule)
+    loadChildren: () => import('./pages/default-layout/shared-content/shared-content.module').then( m => m.SharedContentPageModule)
   },
 
 

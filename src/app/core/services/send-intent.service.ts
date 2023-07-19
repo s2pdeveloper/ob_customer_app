@@ -20,8 +20,8 @@ export class SendIntentService {
       if (result?.url) {
         let resultUrl = decodeURIComponent(result.url);
         const content = await Filesystem.readFile({ path: resultUrl });
-        console.log('resultUrl', content.data);
-        this.router.navigate(['/send-page-intent']) //! navigate to page to select order and send message
+        // console.log('resultUrl', content.data);
+        this.router.navigate(['/shared-content']) //! navigate to page to select order and send message
         let fileData = {
           base64String: content.data,
           title: result.title,

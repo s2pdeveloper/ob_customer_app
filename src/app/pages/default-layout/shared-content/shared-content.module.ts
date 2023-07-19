@@ -4,18 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SendPageIntentPageRoutingModule } from './send-page-intent-routing.module';
+import { SharedContentPageRoutingModule } from './shared-content-routing.module';
 
-import { SendPageIntentPage } from './send-page-intent.page';
+import { SharedContentPage } from './shared-content.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SendPageIntentPageRoutingModule,
+    SharedContentPageRoutingModule,
     SharedModule
   ],
-  declarations: [SendPageIntentPage]
+  declarations: [SharedContentPage]
 })
-export class SendPageIntentPageModule { }
+export class SharedContentPageModule { }

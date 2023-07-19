@@ -15,11 +15,11 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { Location } from '@angular/common';
 import { CameraService } from 'src/app/core/services/camera.service';
 @Component({
-  selector: 'app-send-page-intent',
-  templateUrl: './send-page-intent.page.html',
-  styleUrls: ['./send-page-intent.page.scss'],
+  selector: 'app-shared-content',
+  templateUrl: './shared-content.page.html',
+  styleUrls: ['./shared-content.page.scss'],
 })
-export class SendPageIntentPage implements OnInit {
+export class SharedContentPage implements OnInit {
   @ViewChild(IonInfiniteScroll, { static: false })
   infiniteScroll: IonInfiniteScroll;
   disabledScroll = false;
