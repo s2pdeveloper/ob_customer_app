@@ -191,11 +191,5 @@ export class SharedContentPage implements OnInit {
       }
     }
   }
-
-  navigateTo(item) {
-    this.chatForm.get('shopId').setValue(item.shopId);
-    this.chatForm.get('orderId').setValue(item.id);
-  }
-
 }
 

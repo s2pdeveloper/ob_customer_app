@@ -30,7 +30,7 @@
   </ion-refresher>
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
     <ion-radio-group (ionChange)="onRadioChange($event)">
-      <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
+      <ion-item class="animation-normal" *ngFor="let item of dataList">
         <ion-radio [value]="item" aria-label="Custom checkbox"></ion-radio>
         <ion-avatar slot="start">
           <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
