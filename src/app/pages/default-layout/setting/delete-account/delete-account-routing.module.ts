@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SettingPage } from './setting.page';
+
+import { DeleteAccountPage } from './delete-account.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: SettingPage
-  },
-
+    component: DeleteAccountPage
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SettingPageRoutingModule { }
+export class DeleteAccountPageRoutingModule {}
