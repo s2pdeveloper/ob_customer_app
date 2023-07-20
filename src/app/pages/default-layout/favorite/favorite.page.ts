@@ -105,7 +105,7 @@ export class FavoritePage implements OnInit {
     return path;
   }
   getUnAvailableUrl() {
-    let path = `url('${'assets/images/unavailble.png'}')`;
+    let path = `url('${'assets/images/unavalilableshop.jpeg'}')`;
     return path;
   }
   async addToFavorite(item) {
