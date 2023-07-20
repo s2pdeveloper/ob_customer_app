@@ -70,14 +70,23 @@ export class PushNotificationService {
   redirection(notification: PushNotificationSchema) {
     let additional = JSON.parse(notification.data.additional);
     if (notificationType.ORDER === notification.data.type) {
-      this.router.navigate([`/orders/request-booking`], {
+      this.router.navigate([`/order-view`], {
         queryParams: {
           id: additional.id
         }
       });
-    }
-    else if (notificationType.CHAT_MESSAGE === notification.data.type) {
-      this.router.navigate([`/chat-view/${additional.id}`]);
+    } else if (notificationType.CHAT_MESSAGE === notification.data.type) {
+      this.router.navigate([`/order-view/${additional.id}`]);
+    } else if (notificationType.PROFILE === notification.data.type) {
+      this.router.navigate([`/view-profile`], {
+        queryParams: {
+          id: additional.id
+        }
+      });
+    } else if (notificationType.ORDER === notification.data.type) {
+      this.router.navigate([`/order-view/${additional.id}`]);
+    } else if (notificationType.SHOP === notification.data.type) {
+      this.router.navigate([`/app/tabs/favorite/${additional.id}`]);
     }
   }
 }
