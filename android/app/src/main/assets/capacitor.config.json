@@ -31,7 +31,6 @@
 		}
 	},
 	"server": {
-		"cleartext": true,
-		"url": "http://192.168.1.13:8101"
+		"cleartext": true
 	}
 }
