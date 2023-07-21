@@ -26,6 +26,7 @@ export class SendIntentService {
           base64String: content.data,
           title: result.title,
           type: result.type,
+          fileUrl: result.url
         }
         return fileData
       }

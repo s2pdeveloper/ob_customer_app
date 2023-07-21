@@ -151,8 +151,8 @@ export class SharedContentPage implements OnInit {
   }
 
   async uploadFile(file) {
-    const lastDotIndex = file.title.lastIndexOf('.');
-    const fileType = file.title.substring(lastDotIndex + 1);
+    const lastDotIndex = file.fileUrl.lastIndexOf('.');
+    const fileType = file.fileUrl.substring(lastDotIndex + 1);
     const realFile = this.cameraService.b64toBlob(file.base64String, `image/${fileType}`);
     await this.spinner.hideLoader();
     const params = { fileName: file.title, fileType: `image/${fileType}` };
