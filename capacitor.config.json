@@ -23,7 +23,11 @@
     "PushNotifications": {
       "smallIcon": "ic_launcher_rounded",
       "icon": "ic_launcher_rounded",
-      "presentationOptions": ["badge", "sound", "alert"]
+      "presentationOptions": [
+        "badge",
+        "sound",
+        "alert"
+      ]
     }
   },
   "server": {

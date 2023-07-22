@@ -13,6 +13,7 @@ import { BarcodeScannerService } from './core/services/barcode-scanner.service';
 import { UserService } from './core/services/user.service';
 import { PushNotificationService } from './core/services/push-notification.service';
 import { SendIntentService } from './core/services/send-intent.service';
+import { Plugins } from '@capacitor/core';
 
 
 @Component({
@@ -71,6 +72,15 @@ export class AppComponent implements OnInit {
       this.userService.populate();
       this.appBackButton.backButtonFunc();
       this.sendIntentService.initiateIntent();
+      window.addEventListener("sendIntentReceived", () => {
+        Plugins.SendIntent.checkSendIntentReceived().then((result: any) => {
+            if (result) {
+                // ...
+                console.log("result sendIntentReceived ios",result);
+                
+            }
+        });
+    })
     });
   }
 
