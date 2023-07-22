@@ -8,6 +8,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { FavoriteService } from 'src/app/core/services/favorite.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { ScheduleNotificationListComponent } from './schedule-notification-list/schedule-notification-list.component';
+import { defaultStatus } from 'src/app/helpers/constants.helper';
+
 @Component({
   selector: 'app-favorite',
   templateUrl: './favorite.page.html',
@@ -30,7 +32,7 @@ export class FavoritePage implements OnInit {
   shopDetails: any;
   user: any;
   isFavorite: any = {};
-
+  defaultStatus = defaultStatus;
   constructor(
     private router: Router,
     private spinner: LoaderService,
@@ -76,7 +78,6 @@ export class FavoritePage implements OnInit {
   }
 
   async getFavoriteByCustomerId(isFirstLoad: boolean, event?: any) {
-    await this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
@@ -101,6 +102,10 @@ export class FavoritePage implements OnInit {
   }
   getUrl(url) {
     let path = `url('${url}')`;
+    return path;
+  }
+  getUnAvailableUrl() {
+    let path = `url('${'assets/images/currentlyUnavailable.jpeg'}')`;
     return path;
   }
   async addToFavorite(item) {

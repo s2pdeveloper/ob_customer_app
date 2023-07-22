@@ -124,6 +124,16 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadChildren: () => import('./pages/default-layout/shop-detail/shop-orders/shop-orders.module').then(m => m.ShopOrdersPageModule)
   },
+  {
+    path: 'shared-content',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/shared-content/shared-content.module').then( m => m.SharedContentPageModule)
+  },
+  {
+    path: 'account-delete',
+    canLoad: [AuthGuard],
+    loadChildren: () => import('./pages/default-layout/setting/delete-account/delete-account.module').then( m => m.DeleteAccountPageModule)
+  },
 
 
 ];

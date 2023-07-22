@@ -101,7 +101,7 @@ export class ShopDetailPage implements OnInit {
   async orderAlert(item) {
     this.shopName = item.shopDetails.shopName;
     const alert = await this.alertController.create({
-      header: 'Do you want to add to existing order or new order?',
+      header: 'Order/Request',
       cssClass: 'custom-alert',
       mode: 'md',
       buttons: [
@@ -125,6 +125,18 @@ export class ShopDetailPage implements OnInit {
     await alert.present();
     await alert.onDidDismiss();
   }
+
+
+  public alertButtons = [
+    {
+      text: 'No',
+      cssClass: 'alert-button-cancel',
+    },
+    {
+      text: 'Yes',
+      cssClass: 'alert-button-confirm',
+    },
+  ];
 
   goToChat(item) {
     let params = { shopName: this.shopName, shopId: item._id };
@@ -158,17 +170,17 @@ export class ShopDetailPage implements OnInit {
     });
   }
 
-  openWeb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.website}` });
+  openWeb = async (url) => {
+    await Browser.open({ url: `${url}` });
   };
   openYouTube = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}`});
   }
   openInstagram = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}`});
   }
   openFb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}`});
   }
 
   async modalQrCode() {

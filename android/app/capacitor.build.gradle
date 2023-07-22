@@ -10,7 +10,6 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-community-barcode-scanner')
-    implementation project(':capacitor-community-date-picker')
     implementation project(':capacitor-community-photoviewer')
     implementation project(':capacitor-app')
     implementation project(':capacitor-browser')
@@ -19,7 +18,6 @@ dependencies {
     implementation project(':capacitor-device')
     implementation project(':capacitor-filesystem')
     implementation project(':capacitor-geolocation')
-    implementation project(':capacitor-google-maps')
     implementation project(':capacitor-local-notifications')
     implementation project(':capacitor-network')
     implementation project(':capacitor-preferences')
@@ -27,6 +25,7 @@ dependencies {
     implementation project(':capacitor-share')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
+    implementation project(':send-intent')
     implementation "com.android.support:support-v4:27.+"
 }
 

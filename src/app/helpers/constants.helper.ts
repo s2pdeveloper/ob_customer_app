@@ -5,6 +5,7 @@ export const OPTIONS = {
     documentType: 'Please upload the file in jpeg, png and pdf format',
     sizeLimit: 'Please upload the file that is less then 10 mb',
     maxLimit: 10,
+    maxSize: 10000,
     noInternet: "Please check your internet connection and try again!"
 };
 
@@ -111,6 +112,8 @@ export const notificationType = {
     ORDER: "order",
     PRODUCT_REQUEST: "product_request",
     CHAT_MESSAGE: `chat_message`,
+    PROFILE: `profile`,
+    SHOP: `SHOP`,
 };
 
 export const secondaryStatus = {
@@ -139,7 +142,8 @@ export const imageExtension = [
     'image/jpg',
     'image/svg',
     'image/gif',
-    'webp'
+    'webp',
+    'image/*'
 ];
 
 export const fileExtension = [

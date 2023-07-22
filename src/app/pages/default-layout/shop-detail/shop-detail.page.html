@@ -52,7 +52,7 @@
               {{shopUser?.shopDetails?.lastName}}
             </p>
             <ion-text class="ion-text-wrap">
-              <h4>
+              <h4 *ngIf="shopUser?.address?.line1">
                 {{shopUser?.address?.line1}}{{shopUser?.address?.line2}}
                 {{shopUser?.address?.city}}, {{shopUser?.address?.state}} -
                 {{shopUser?.address?.pinCode}}
@@ -107,7 +107,7 @@
                               <ion-icon name="chatbubble-ellipses-outline" color="primary" size="large"
                                 (click)="orderAlert(shopUser)"></ion-icon>
                             </ion-card>
-                            <ion-note class="contact-heading">{{'myOrders'|translate}}</ion-note>
+                            <ion-note color="dark">{{'myOrders'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
@@ -116,7 +116,7 @@
                               <ion-icon name="location-outline" size="large" color="primary"
                                 (click)="getLocation()"></ion-icon>
                             </ion-card>
-                            <ion-note class="contact-heading">{{'direction'|translate}}</ion-note>
+                            <ion-note color="dark">{{'direction'|translate}}</ion-note>
                           </div>
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
@@ -126,7 +126,7 @@
                                 <ion-icon name="call" size="large" color="primary"></ion-icon>
                               </a>
                             </ion-card>
-                            <ion-note class="contact-heading">{{'directCall'|translate}}</ion-note>
+                            <ion-note color="dark">{{'directCall'|translate}}</ion-note>
                           </div>
                         </ion-col>
                       </ion-row>
@@ -144,7 +144,7 @@
                               <ion-icon name="globe-sharp" class="font fb"></ion-icon>
                             </ion-col>
                             <ion-col size="10">
-                              <ion-label (click)="openWeb()">
+                              <ion-label (click)="openWeb(item.url)">
                                 {{item?.webLinkName}}
                               </ion-label>
                             </ion-col>
@@ -242,24 +242,22 @@
 <ion-footer class="ion-no-border">
   <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0">
     <ion-col class="ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">Catalogue</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' | translate}}</ion-button>
     </ion-col>
   </ion-item>
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 ">
     <ion-col class="ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">Book Now</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' | translate}}</ion-button>
     </ion-col>
   </ion-item>
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0">
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' |
-        translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' | translate}}</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' |
-        translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' | translate}}</ion-button>
     </ion-col>
   </ion-item>
 </ion-footer>
