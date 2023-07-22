@@ -206,3 +206,34 @@ ion-fab-button {
   border-radius: 50%;
   background-color: #fff;
 }
+.icon-center{
+  display: flex;
+  flex-direction: column;
+  /* justify-items: center; */
+  align-items: center;
+}
+@media (max-width:470px){
+  .bg-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #fff;
+
+    ion-icon{
+      width: 20px;
+      height: 20px;
+    }
+  }
+  ion-note{
+    font-size: 14px;
+  }
+  ion-card{
+    margin: 0 !important;
+  }
+  .card-content-ios{
+    padding: 0 !important;
+  }
+}

@@ -26,7 +26,7 @@
         <img class="advertiseImage" src="{{item.image}} " /><br />
       </div>
       <div class="advertise" *ngIf="item.contentType=='.mp4'">
-        <video class="advertiseImage" type="video/mp4" loop [muted]="true" [autoplay]="true">
+        <video class="advertiseImage" type="video/mp4" loop [muted]="true" [autoplay]="true" playsinline>
           <source src="{{item.image}} " type='video/mp4' />
         </video>
       </div>

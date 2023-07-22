@@ -151,14 +151,13 @@ ion-footer {
       border-radius: 3rem;
       --background: white !important;
     }
-
     ion-textarea {
-      margin-top: 18px;
+      margin: auto 0;
       margin-left: 9px;
     }
-
+  
     ion-button {
-      margin-top: 13px;
+      margin: auto 0;
       margin-left: 10px !important;
       margin-right: 0 !important;
     }
@@ -190,7 +189,7 @@ img {
 
 .attach-btn {
   position: absolute;
-  bottom: -66px;
+  bottom: -10%;
   right: 58px;
 }
 

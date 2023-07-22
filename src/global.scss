@@ -20,7 +20,11 @@
 * {
   --ion-font-family: "Open Sans", sans-serif !important;
 }
-
+body{
+  margin-top: env(safe-area-inset-top);
+  background-color: var(--ion-color-primary);
+  color: white;
+}
 .swiper-pagination-bullet {
   background: --ion-color-primary;
 }
@@ -88,4 +92,16 @@
   width: 46px;
   height: 73px;
   filter: grayscale(1);
+}
+ion-toolbar{
+  padding: 0 !important;
+}
+  .alert-button-confirm,.alert-button-cancel{
+    color: var(--ion-color-primary) !important;
+  }
+ion-footer{
+  margin-bottom: env(safe-area-inset-top);
+}
+.alert-button{
+  color: var(--ion-color-primary) !important;
 }

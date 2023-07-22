@@ -1,5 +1,5 @@
 .map-canvas {
-  height: 96vh;
+  height: calc(96vh - env(safe-area-inset-top));
 }
 .input-search {
   position: absolute;
@@ -22,7 +22,7 @@
 }
 .save-button {
   position: absolute;
-  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-top));
   z-index: 9999;
   display: flex;
   justify-content: center;
