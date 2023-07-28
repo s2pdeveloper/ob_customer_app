@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IonInfiniteScroll, IonContent, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, ModalController, AlertController } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { FilterComponent } from './filter/filter.component';
+import { defaultStatus } from 'src/app/helpers/constants.helper';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-search-shop',
@@ -40,7 +42,8 @@ export class SearchShopPage implements OnInit {
     private toaster: ToastService,
     private activatedRoute: ActivatedRoute,
     private modalCtrl: ModalController,
-
+    private userService: UserService,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -56,6 +59,9 @@ export class SearchShopPage implements OnInit {
       this.subCategoryId = params.subCategoryId ?? '';
       this.subCategoryName = params.subCategoryName ?? '';
     });
+
+    this.user = this.userService.getCurrentUser();
+
   }
 
   ionViewWillEnter(): void {
@@ -126,15 +132,40 @@ export class SearchShopPage implements OnInit {
 
 
   async addToFavorite(item) {
-    let payload = {
-      shopId: item?._id,
-    };
-    this.shopService.favoriteShop(payload).subscribe((success) => {
-      this.toaster.successToast(success.message);
-      item.shopFavorite = success.data
-    });
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("please complete your profile first")
+      this.presentAlert();
+    } else {
+      let payload = {
+        shopId: item?._id,
+      };
+      this.shopService.favoriteShop(payload).subscribe((success) => {
+        this.toaster.successToast(success.message);
+        item.shopFavorite = success.data
+      });
+    }
   }
-
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'Please Complete Your Profile First !!!',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+  navigateToProfile() {
+    const path: string = `/edit-profile`;
+    this.router.navigate([path]);
+  }
   navigateToShop(id: string) {
     const path: string = `/shop-detail/${id}`;
     this.router.navigate([path]);

@@ -102,7 +102,7 @@ export class UserService {
    * @returns 
    */
   sendMobileOtp(credentials): Observable<any> {
-    let url = `mobile/user/send-mobile-otp`;
+    let url = `mobile/user/customer-login`;
     return this.apiService.post(url, credentials).pipe(map(
       data => {
         if (data && data.result && data.result.existingUser) {
@@ -212,7 +212,7 @@ export class UserService {
   updateProfile(updatePayload: any) {
     return this.apiService.put('mobile/user/update', updatePayload).pipe(map(data => {
       if (data && data.result) {
-        // this.currentUserSubject.next(data.result);
+        this.currentUserSubject.next(data.result);
         this.populate();
         return data.result;
       } else {
