@@ -244,7 +244,7 @@
   "paymentMethodNote": "Please first ensure the amount printed on the invoice.Ask Merchant’s delivery agent/Service provider to provide a UPI QR code for your shipment or your service order.Scan that QR code using Scan & Pay option from your favourite RBI approved UPI payment service operators Bharat Online provided QR code is NOT meant for any kinds of payment transaction and platform no role in any monetary transaction.",
   "contactUs": "Contact us",
   "socialLinks": "Social links",
-  "webLink": "Web link",
+  "webLinks": "Web links",
   "instruction": "Instruction",
   "direction": "Direction"
 }
