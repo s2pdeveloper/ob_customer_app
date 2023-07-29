@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       Validators.pattern('^[7-9][0-9]{9}$'),
       Validators.maxLength(10),
     ]),
-    role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
+    // role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
     status: new FormControl(defaultStatus.PENDING, [Validators.required])
   });
 
