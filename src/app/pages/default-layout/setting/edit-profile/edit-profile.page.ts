@@ -107,16 +107,16 @@ export class EditProfilePage implements OnInit {
   }
 
   async uploadFile() {
-    const image = await this.camerService.openCamera();
+    const image: any = await this.camerService.openPhoto();
     console.log('image', JSON.stringify(image))
-    const realFile = this.camerService.b64toBlob(image.base64String, `image/${image.format}`);
+    // const realFile = this.camerService.b64toBlob(image.base64String, `image/${image.format}`);
     await this.spinner.hideLoader();
-    console.log('readfile', realFile);
+    // console.log('readfile', realFile);
     const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
-    if (this.uploadService.checkFileSize(realFile)) {
+    if (this.uploadService.checkFileSize(image)) {
       this.uploadService.getSignUrl(params).subscribe(
         async (data: any) => {
-          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
+          this.uploadService.uploadFileUsingSignedUrl(data.url, image.file).subscribe(
             async (result: any) => {
               console.log('after upload', result);
               this.filePath = data.filePath
@@ -136,7 +136,7 @@ export class EditProfilePage implements OnInit {
       )
     }
     else {
-      if (!this.uploadService.checkFileSize(realFile.size)) {
+      if (!this.uploadService.checkFileSize(image.size)) {
         this.toaster.errorToast(OPTIONS.sizeLimit);
         await this.spinner.hideLoader();
         return;
