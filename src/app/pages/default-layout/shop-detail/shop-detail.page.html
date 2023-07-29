@@ -121,10 +121,8 @@
                         </ion-col>
                         <ion-col size="4" class="ion-text-center">
                           <div>
-                            <ion-card class="bg-card ion-text-center">
-                              <a href="tel:+91{{shopUser?.mobileNumber}}">
-                                <ion-icon name="call" size="large" color="primary"></ion-icon>
-                              </a>
+                            <ion-card class="bg-card ion-text-center" (click)="call()">
+                              <ion-icon name="call" size="large" color="primary"></ion-icon>
                             </ion-card>
                             <ion-note color="dark">{{'directCall'|translate}}</ion-note>
                           </div>
@@ -242,22 +240,26 @@
 <ion-footer class="ion-no-border">
   <ion-item *ngIf="!shopUser?.shopDetails?.isBookingService && shopUser?.catalogue>0">
     <ion-col class="ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' | translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' |
+        translate}}</ion-button>
     </ion-col>
   </ion-item>
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue<1 ">
     <ion-col class="ion-text-center">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' | translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' |
+        translate}}</ion-button>
     </ion-col>
   </ion-item>
 
   <ion-item *ngIf="shopUser?.shopDetails?.isBookingService && shopUser?.catalogue >0">
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' | translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="navigateTo('/catalogue')">{{ 'catalogue' |
+        translate}}</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' | translate}}</ion-button>
+      <ion-button shape="round" class="btn" expand="block" (click)="modalFilter()">{{ 'bookNow' |
+        translate}}</ion-button>
     </ion-col>
   </ion-item>
 </ion-footer>

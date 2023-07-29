@@ -12,6 +12,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
 import { LanguageService } from 'src/app/core/services/language.service';
 import { Browser } from '@capacitor/browser';
+import { defaultStatus } from 'src/app/helpers/constants.helper';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   deviceInfo: any;
   errorMessages = authFieldsErrors;
   selectedLanguage: string = '';
-
+  defaultStatus = defaultStatus;
 
   constructor(
     private router: Router,
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
       Validators.maxLength(10),
     ]),
     role: new FormControl(ROLES.CUSTOMER, [Validators.required]),
+    status: new FormControl(defaultStatus.PENDING, [Validators.required])
   });
 
   get form() {
@@ -84,7 +86,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate([`/auth/signup`]);
   }
 
-  
+
   languages = [
     {
       label: 'English',

@@ -7,14 +7,16 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { StorageService } from 'src/app/core/services/local-storage.service';
-
+import { OPTIONS } from 'src/app/helpers';
+import { defaultStatus } from 'src/app/helpers';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-catalogue',
   templateUrl: './catalogue.page.html',
   styleUrls: ['./catalogue.page.scss'],
 })
 export class CataloguePage implements OnInit {
-
+  defaultStatus = defaultStatus;
   loaded: boolean = false;
   user: any;
   shopId: string;
@@ -53,7 +55,8 @@ export class CataloguePage implements OnInit {
     private userService: UserService,
     private spinner: LoaderService,
     public translate: TranslateService,
-    private storageService: StorageService
+    private alertController: AlertController,
+    private storageService: StorageService,
   ) { }
 
   ngOnInit() {
@@ -170,15 +173,41 @@ export class CataloguePage implements OnInit {
   }
 
   navigateToCheckout() {
-    let filteredData = this.productArray.filter(x => x.isChecked);
-    if (filteredData.length > 0) {
-      this.storageService.set("orderData", filteredData)
-      this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId, shopUserId: this.shopDetailsId, shopName: this.shopName } });
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("To process your order please complete your profile first.");
+      this.checkOutAlert();
     } else {
-      this.toaster.warningToast("please select at least one product")
+      let filteredData = this.productArray.filter(x => x.isChecked);
+      if (filteredData.length > 0) {
+        this.storageService.set("orderData", filteredData)
+        this.router.navigate(['/checkout'], { queryParams: { shopId: this.shopId, shopUserId: this.shopDetailsId, shopName: this.shopName } });
+      } else {
+        this.toaster.warningToast("please select at least one product")
+      }
     }
   }
+  async checkOutAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'To process your order please complete your profile first !!!',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
 
+  navigateToProfile() {
+    const path: string = `/edit-profile`;
+    this.router.navigate([path]);
+  }
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
   }
