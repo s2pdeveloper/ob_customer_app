@@ -77,6 +77,7 @@ export class SelectFilterComponent implements OnInit {
   navigateToProfile() {
     const path: string = `/edit-profile`;
     this.router.navigate([path]);
+    this.dismissModal(false, null);
   }
   receiveMessage() {
     this.socketService.listenEvent(socketOnEvents.CREATE_ORDER).subscribe({
