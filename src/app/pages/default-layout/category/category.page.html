@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{'category' | translate}}</ion-title>
+    <ion-title mode="md">{{'category' | translate}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button mode="md" defaultHref="app/tabs/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
+<ion-searchbar mode="md" class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
   showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
   placeholder="{{ 'searchSubCategory' | translate}}">
 </ion-searchbar>
