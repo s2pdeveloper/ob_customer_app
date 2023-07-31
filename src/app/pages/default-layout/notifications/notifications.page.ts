@@ -16,6 +16,8 @@ export class NotificationsPage implements OnInit {
   dataList: any = [];
   page: number = 1;
   pageSize: number = 10;
+  loaded: boolean = false;
+
   constructor(
     private notificationService: notificationService,
     private router: Router,
@@ -66,7 +68,8 @@ export class NotificationsPage implements OnInit {
         if (data.length === 0 && event) {
           event.target.disabled = true;
         }
-        await this.spinnerService.hideLoader();
+        // await this.spinnerService.hideLoader();
+        this.loaded = true;
       }, async error => {
         await this.spinnerService.hideLoader();
         this.toastService.errorToast(error);

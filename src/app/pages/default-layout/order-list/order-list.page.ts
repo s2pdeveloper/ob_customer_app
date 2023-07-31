@@ -26,6 +26,7 @@ export class OrderListPage implements OnInit {
   user: any;
   defaultStatus = defaultStatus;
   interval: any;
+  public loaded = false;
 
   constructor(
     private router: Router,
@@ -87,7 +88,7 @@ export class OrderListPage implements OnInit {
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
-        console.log("this.datalist", this.dataList);
+      this.loaded = true;
       },
       error: (error) => {
         console.log(error)

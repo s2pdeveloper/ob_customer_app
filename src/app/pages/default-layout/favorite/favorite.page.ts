@@ -93,7 +93,8 @@ export class FavoritePage implements OnInit {
       if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+      this.loaded = true;
+      // await this.spinner.hideLoader();
     });
   }
   navigateToShop(id: string) {

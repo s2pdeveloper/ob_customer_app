@@ -25,7 +25,6 @@ export class SearchShopPage implements OnInit {
   categoryId: string = '';
   subCategoryId: string = '';
   shopList: any = [];
-  loaded: boolean = false;
   shopDetails: any;
   user: any = {};
   shopCount: any;
@@ -33,6 +32,8 @@ export class SearchShopPage implements OnInit {
   geoNearestDistance: number = 5;
   shopId = [];
   subCategoryName: string = null;
+  isData: boolean = false;
+  public loaded = false;
 
   constructor(
     private router: Router,
@@ -97,6 +98,7 @@ export class SearchShopPage implements OnInit {
   }
 
   async getAllShop(isFirstLoad: boolean, event?: any) {
+    // await this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
@@ -110,6 +112,7 @@ export class SearchShopPage implements OnInit {
       obj['search'] = this.search,
         obj['geoNearestDistance'] = this.geoNearestDistance
     }
+    // this.isData = false;
     this.shopService.list(obj).subscribe(async (success) => {
       this.collection = success.count;
       if (this.shopList.length < this.collection) {
@@ -122,7 +125,11 @@ export class SearchShopPage implements OnInit {
       if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+      this.loaded = true;
+      // await this.spinner.hideLoader();
+      // if (this.shopList.length == 0) {
+      //   this.isData = true;
+      // }
     }, error => {
       this.spinner.hideLoader();
       this.toaster.errorToast(error);
