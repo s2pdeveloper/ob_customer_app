@@ -118,6 +118,9 @@ export class LandingPagePage implements OnInit {
     this.getAllSeasonalOffer();
     this.getCurrentLocation();
   }
+  trackByFn(index: number, item: any) {
+    return item?._id;
+  }
 
   async getCurrentLocation() {
     this.geolocation = await (await Geolocation.getCurrentPosition()).coords;

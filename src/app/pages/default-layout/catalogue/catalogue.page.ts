@@ -128,6 +128,7 @@ export class CataloguePage implements OnInit {
       if (this.subCategory.length > 0) {
         this.getProductBySubCategoryId(this.subCategory[0].subCategory._id, false)
       }
+      // this.loaded = true;
       await this.spinner.hideLoader();
     });
   }
@@ -168,7 +169,8 @@ export class CataloguePage implements OnInit {
       if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+      this.loaded = true;
+      // await this.spinner.hideLoader();
     });
   }
 
