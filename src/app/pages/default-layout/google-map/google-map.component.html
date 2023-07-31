@@ -1,11 +1,14 @@
 <ion-header>
-  <ion-toolbar class="bg-color-2">
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
       <ion-button class="text-color-4" (click)="saveLocation()">
         <ion-icon name="arrow-back-outline"></ion-icon>
       </ion-button>
+    </ion-buttons> -->
+    <ion-title slot="start" class="ion-text-capitalize">{{ 'selectAddress' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="closeModal()">{{ 'close' | translate}}</ion-button>
     </ion-buttons>
-    <ion-title class="text-color-4 ion-text-capitalize">{{ 'selectAddress' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +16,8 @@
 
   <div class="input-search">
     <input class="form-control bg-outline-primary" (keydown.enter)="$event.preventDefault()"
-      placeholder="{{'searchLocation'| translate}}" autocorrect="off" autocapitalize="off" spellcheck="off" type="search"
-      #locationSearch>
+      placeholder="{{'searchLocation'| translate}}" autocorrect="off" autocapitalize="off" spellcheck="off"
+      type="search" #locationSearch>
   </div>
   <div>
     <div id="map-canvas" class="map-canvas"></div>
