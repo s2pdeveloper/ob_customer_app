@@ -39,7 +39,6 @@ export class ShopDetailPage implements OnInit {
     spaceBetween: 1,
   };
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -55,7 +54,6 @@ export class ShopDetailPage implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getCurrentUser();
-
   }
 
   ionViewWillEnter() {
@@ -135,9 +133,9 @@ export class ShopDetailPage implements OnInit {
     } else {
       this.shopName = item.shopDetails.shopName;
       const alert = await this.alertController.create({
-        header: 'Order/Request',
+        header: 'Order / Request',
         cssClass: 'custom-alert',
-        mode: 'md',
+        mode: 'ios',
         buttons: [
           {
             text: 'Existing',
@@ -155,11 +153,11 @@ export class ShopDetailPage implements OnInit {
           },
         ],
       });
-
       await alert.present();
       await alert.onDidDismiss();
     }
   }
+
   async ezConnectAlert() {
     const alert = await this.alertController.create({
       header: 'Profile Incomplete',
@@ -269,7 +267,6 @@ export class ShopDetailPage implements OnInit {
     ).coords;
   };
 
-
   getLocation() {
     if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
       // this.toaster.warningToast("To see shop location please complete your profile first.");
@@ -287,6 +284,7 @@ export class ShopDetailPage implements OnInit {
       return;
     }
   }
+
   async getLocationAlert() {
     const alert = await this.alertController.create({
       header: 'Profile Incomplete',
