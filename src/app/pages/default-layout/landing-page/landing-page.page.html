@@ -21,7 +21,7 @@
 
   <!-- advertise -->
   <ion-slides [options]="buttonSlide2" class="ion-margin-bottom" autoplay="true" loop="true" pager>
-    <ion-slide *ngFor="let item of advertiseArr">
+    <ion-slide *ngFor="let item of advertiseArr; trackBy: trackByFn">
       <div class="advertise" *ngIf="item.contentType!='.mp4'">
         <img class="advertiseImage" src="{{item.image}} " /><br />
       </div>
@@ -32,7 +32,6 @@
       </div>
     </ion-slide>
   </ion-slides>
-
   <!-- category -->
   <ion-item lines="none">
     <ion-title mode="md" class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>

@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar class="bg-color-primary">
+    <ion-buttons shape="round" slot="start">
+      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{ 'send to' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+  <ion-segment-button [id]="'new'" value="new" layout="icon-end">
+    <ion-label class="ion-text-wrap">{{ 'new'| translate }}</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [id]="'active'" value="active" layout="icon-end">
+    <ion-label class="ion-text-wrap">{{ 'active'| translate }}</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [id]="'completed'" value="completed" layout="icon-end">
+    <ion-label class="ion-text-wrap">{{ 'completed'| translate }}</ion-label>
+  </ion-segment-button>
+</ion-segment> -->
+
+<ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
+  showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
+  placeholder="{{ 'Search' | translate}}">
+</ion-searchbar>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list *ngIf="dataList?.length > 0;else noDataFound">
+    <ion-radio-group (ionChange)="onRadioChange($event)">
+      <ion-item class="animation-normal" *ngFor="let item of dataList">
+        <ion-radio [value]="item" aria-label="Custom checkbox"></ion-radio>
+        <ion-avatar slot="start">
+          <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
+          <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
+        item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
+        </ion-avatar>
+        <ion-label>
+          <ion-row class="ion-justify-content-between">
+            <ion-col>
+              <h2 class="text-color-2 ion-text-capitalize text-bold ion-text-wrap">
+                <span class="text-bold">{{item?.shopDetails?.shopName | truncate}}</span>
+
+              </h2>
+              <p class="text-color-2">{{ item?.orderNumber }}</p>
+              <p class="text-color-2" *ngIf="item.status=== defaultStatus.COMPLETED">{{'orderValue'|translate}} : ₹{{
+                item?.amount }}</p>
+              <small class="text-color-7 ion-text-wrap">{{ item?.createdAt | date:'d MMM, y h:mm a' }}</small>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.NEW">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Waiting'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.ACTIVE">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Accept'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+            <ion-col class="ion-text-end" *ngIf="item.status=== defaultStatus.COMPLETED">
+              <ion-chip>
+                <ion-text class="ion-text-uppercase">{{item.secondaryStatus ? item.secondaryStatus
+                  :'Completed'}}</ion-text>
+              </ion-chip>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-between ion-align-items-center">
+            <ion-col class="ion-no-padding">
+              <p>
+                <span *ngIf="item?.lastMessage?.senderId === user.id">You:</span>
+                {{item?.lastMessage?.message | truncate}}
+              </p>
+            </ion-col>
+            <ion-col size="2" class="ion-no-padding ion-text-end" *ngIf="item?.ratingDetails?.productQuality">
+              <ion-badge color="primary" class="rating ion-text-end">
+                {{item?.ratingDetails?.productQuality}}
+                <ion-icon name="star"></ion-icon>
+              </ion-badge>
+            </ion-col>
+          </ion-row>
+        </ion-label>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ng-template #noDataFound>
+    <div class="noData">
+      <ion-label>No Data Found</ion-label>
+    </div>
+  </ng-template>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+
+<ion-footer class="ion-no-border search-box" *ngIf="isCheck">
+  <div class="ion-padding-top footer-msg">
+    <ion-button (click)="sendMessage()" shape="round" expand="block" class="btn-color-1 btn-height-large" type="submit">
+      {{'Send' | translate}}
+    </ion-button>
+  </div>
+</ion-footer>

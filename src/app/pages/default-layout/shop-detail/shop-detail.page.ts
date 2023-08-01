@@ -13,6 +13,7 @@ import { QRCodeComponent } from './qr-code/qr-code.component';
 import { ScheduleNotificationListComponent } from '../favorite/schedule-notification-list/schedule-notification-list.component';
 import { Geolocation } from '@capacitor/geolocation';
 import { Device } from '@capacitor/device';
+import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-shop-detail',
   templateUrl: './shop-detail.page.html',
@@ -21,6 +22,7 @@ import { Device } from '@capacitor/device';
 export class ShopDetailPage implements OnInit {
   businessType: any = BUSINESS_TYPE;
   shopUser: any;
+  user: any;
   shopId: string = null;
   shopName: string;
   type: string = 'about'
@@ -37,7 +39,6 @@ export class ShopDetailPage implements OnInit {
     spaceBetween: 1,
   };
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -47,9 +48,13 @@ export class ShopDetailPage implements OnInit {
     private modalController: ModalController,
     private alertController: AlertController,
     private toaster: ToastService,
+    private userService: UserService,
+
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.user = this.userService.getCurrentUser();
+  }
 
   ionViewWillEnter() {
     this.getDeviceInfo();
@@ -72,14 +77,37 @@ export class ShopDetailPage implements OnInit {
   }
 
   async addToFavorite(item) {
-    let payload = {
-      shopId: item?.shopDetails?._id,
-    };
-    this.shopService.favoriteShop(payload).subscribe((success) => {
-      this.toaster.successToast(success.message);
-      item.shopFavorite = success.data
-    });
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("please complete your profile first")
+      this.presentAlert();
+    } else {
+      let payload = {
+        shopId: item?.shopDetails?._id,
+      };
+      this.shopService.favoriteShop(payload).subscribe((success) => {
+        this.toaster.successToast(success.message);
+        item.shopFavorite = success.data
+      });
+    }
   }
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'Please Complete Your Profile First !!!',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
   navigateTo(path) {
     let params = { shopId: this.shopId, shopUserId: this.shopUser.id, shopName: this.shopUser.shopDetails.shopName };
     this.router.navigate([path], { queryParams: params });
@@ -99,33 +127,58 @@ export class ShopDetailPage implements OnInit {
     await modal.present();
   }
   async orderAlert(item) {
-    this.shopName = item.shopDetails.shopName;
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("To connect your EZ-Order please complete your profile first.")
+      this.ezConnectAlert();
+    } else {
+      this.shopName = item.shopDetails.shopName;
+      const alert = await this.alertController.create({
+        header: 'Order / Request',
+        cssClass: 'custom-alert',
+        mode: 'ios',
+        buttons: [
+          {
+            text: 'Existing',
+            cssClass: 'alert-button-cancel',
+            handler: () => {
+              this.navigateToShopOrder(item);
+            },
+          },
+          {
+            text: 'New',
+            cssClass: 'alert-button-confirm',
+            handler: () => {
+              this.goToChat(item);
+            },
+          },
+        ],
+      });
+      await alert.present();
+      await alert.onDidDismiss();
+    }
+  }
+
+  async ezConnectAlert() {
     const alert = await this.alertController.create({
-      header: 'Order/Request',
+      header: 'Profile Incomplete',
+      message: 'To connect your EZ-Order please complete your profile first !!!',
       cssClass: 'custom-alert',
-      mode: 'md',
       buttons: [
         {
-          text: 'Existing',
-          cssClass: 'alert-button-cancel',
-          handler: () => {
-            this.navigateToShopOrder(item);
-          },
-        },
-        {
-          text: 'New',
+          text: 'OK',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.goToChat(item);
+            this.navigateToProfile();
           },
         },
       ],
     });
-
     await alert.present();
-    await alert.onDidDismiss();
   }
-
+  navigateToProfile() {
+    const path: string = `/edit-profile`;
+    this.router.navigate([path]);
+  }
 
   public alertButtons = [
     {
@@ -174,13 +227,13 @@ export class ShopDetailPage implements OnInit {
     await Browser.open({ url: `${url}` });
   };
   openYouTube = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}`});
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}` });
   }
   openInstagram = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}`});
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}` });
   }
   openFb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}`});
+    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
   }
 
   async modalQrCode() {
@@ -214,18 +267,67 @@ export class ShopDetailPage implements OnInit {
     ).coords;
   };
 
-
   getLocation() {
-    let payload = {
-      shopLat: this.shopUser.shopDetails.location?.coordinates[0],
-      shopLong: this.shopUser.shopDetails.location?.coordinates[1],
-      custLat: this.deviceInfo.geoLocation?.latitude,
-      custLong: this.deviceInfo.geoLocation?.longitude
-    };
-    if (payload) {
-      window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("To see shop location please complete your profile first.");
+      this.getLocationAlert();
+    } else {
+      let payload = {
+        shopLat: this.shopUser.shopDetails.location?.coordinates[0],
+        shopLong: this.shopUser.shopDetails.location?.coordinates[1],
+        custLat: this.deviceInfo.geoLocation?.latitude,
+        custLong: this.deviceInfo.geoLocation?.longitude
+      };
+      if (payload) {
+        window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
+      }
+      return;
     }
-    return;
+  }
+
+  async getLocationAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'To see shop location please complete your profile first !!!',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  call() {
+    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
+      // this.toaster.warningToast("To connect with this shop please complete your profile first.");
+      this.callAlert();
+    } else {
+      window.open('tel:' + this.shopUser?.mobileNumber);
+    }
+  }
+
+  async callAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'To connect with this shop please complete your profile first !!!',
+      cssClass: 'custom-alert',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
 }

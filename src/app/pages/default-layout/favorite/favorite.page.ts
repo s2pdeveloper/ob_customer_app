@@ -93,7 +93,8 @@ export class FavoritePage implements OnInit {
       if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+      this.loaded = true;
+      // await this.spinner.hideLoader();
     });
   }
   navigateToShop(id: string) {
@@ -105,7 +106,7 @@ export class FavoritePage implements OnInit {
     return path;
   }
   getUnAvailableUrl() {
-    let path = `url('${'assets/images/unavailble.png'}')`;
+    let path = `url('${'assets/images/currentlyUnavailable.jpeg'}')`;
     return path;
   }
   async addToFavorite(item) {

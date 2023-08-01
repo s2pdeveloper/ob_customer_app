@@ -29,7 +29,7 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
   constructor(private toastService: ToastService, private ngZone: NgZone, private modalController: ModalController, private translate: TranslateService) { }
 
   async ngOnInit() {
-    }
+  }
 
   ngAfterViewInit(): void {
     this.setCurrentLocation();
@@ -160,5 +160,12 @@ export class GoogleMapComponent implements OnInit, AfterViewInit, OnChanges, OnD
       location: this.selectedLocation
     });
   }
-  
+
+
+  async closeModal() {
+    await this.modalController.dismiss({
+      'dismissed': false,
+    });
+  }
+
 }

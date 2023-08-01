@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
- <div class="img">
+  <div class="img">
     <ion-avatar class="avatar border-color-7" (click)="uploadFile()">
       <img src="assets/images/placeholder_profile.png" *ngIf="!fileUploaded">
       <img [src]="form.path.value" *ngIf="fileUploaded">
@@ -20,7 +20,6 @@
     </ion-text>
   </div>
   <form [formGroup]="profileForm">
-
     <ion-item class="input-class" lines="none">
       <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
           class="span-color">*</span></ion-label>
@@ -28,6 +27,12 @@
         placeholder="{{ 'enter first Name' | translate}} " autocomplete="on" clearInput>
       </ion-input>
     </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.firstName">
+      <ng-container *ngIf="form.firstName.hasError(error.type) && (form.firstName.dirty || form.firstName.touched)">
+        <small class="text-color-danger">{{ error.message }}</small>
+      </ng-container>
+    </div>
+
     <ion-item class="input-class" lines="none">
       <ion-label class="text-color-2" position="stacked">{{ 'LastName' | translate}} <span
           class="span-color">*</span></ion-label>
@@ -35,6 +40,12 @@
         placeholder="{{ 'enter last name' | translate}} " autocomplete="on" clearInput>
       </ion-input>
     </ion-item>
+    <div class="text-left" *ngFor="let error of errorMessages.lastName">
+      <ng-container *ngIf="form.lastName.hasError(error.type) && (form.lastName.dirty || form.lastName.touched)">
+        <small class="text-color-danger">{{ error.message }}</small>
+      </ng-container>
+    </div>
+
     <!-- <ion-item class="input-class" lines="none">
       <ion-label class="text-color-2" position="stacked">{{ 'mobileNumber' | translate}} <span
           class="span-color">*</span></ion-label>
