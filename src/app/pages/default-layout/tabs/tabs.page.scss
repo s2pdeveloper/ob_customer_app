@@ -34,5 +34,8 @@ ion-margin-bottom {
   border: 50px !important;
 }
 ion-fab {
-  margin-bottom: 1rem;
+  margin-bottom: calc(1rem + env(safe-area-inset-top));
+}
+.tab-bar{
+  margin-bottom: env(safe-area-inset-bottom);
 }

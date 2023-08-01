@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{ 'favoritesShop' | translate}} </ion-title>
+    <ion-title mode="md"> {{ 'favoritesShop' | translate}} </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+      <ion-back-button mode="md" defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon name="help-circle-outline" size="large" (click)="instructionAlert()"></ion-icon>
@@ -18,7 +18,7 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding ion-margin-bottom" inputmode="search" searchIcon animated
+      <ion-searchbar mode="md" class="search-box ion-no-padding ion-margin-bottom" inputmode="search" searchIcon animated
         type="text" debounce="900" showCancelButton="never" placeholder="{{ 'searchShop' | translate}}"
         autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>

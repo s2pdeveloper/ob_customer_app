@@ -1,6 +1,6 @@
 <!-- tab bar -->
 <ion-tabs>
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar slot="bottom" class="tab-bar">
     <ion-tab-button *ngFor="let item of tabPages" tab="{{ item?.tab}}">
       <ng-container *ngIf="item.value != 'qr-code'">
         <ion-icon [ios]="item.icon + '-outline'" [md]="item.icon"></ion-icon>

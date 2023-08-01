@@ -20,7 +20,7 @@ export class TabsPage {
       title: 'orders',
       value: 'order',
       tab: 'order-list',
-      icon: 'chatbubble-sharp',
+      icon: 'chatbubble',
     },
     {
       title: 'QR Code',
@@ -38,7 +38,7 @@ export class TabsPage {
       title: 'profile',
       value: 'settings',
       tab: 'settings',
-      icon: 'person-sharp',
+      icon: 'person',
     },
   ];
 

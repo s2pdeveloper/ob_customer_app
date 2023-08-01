@@ -9,7 +9,7 @@
   </ion-item>
 
   <ion-item lines="none" class="search-animation">
-    <ion-searchbar class="search-box " [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
+    <ion-searchbar mode="md" class="search-box " [(ngModel)]="search" searchIcon animated type="text" showCancelButton="never"
       placeholder="{{ 'Search' | translate}}" autocomplete="on" cancelable=false autocorrect="on"
       (keyup.enter)="navigateToSearchShop(search)">
     </ion-searchbar>
@@ -26,8 +26,7 @@
         <img class="advertiseImage" src="{{item.image}} " /><br />
       </div>
       <div class="advertise" *ngIf="item.contentType=='.mp4'">
-        <video class="advertiseImage" type="video/mp4" loop [muted]="true" [autoplay]="true"
-          poster="assets/images/fire_login.jpg">
+        <video class="advertiseImage" type="video/mp4" loop [muted]="true" [autoplay]="true" playsinline>
           <source src="{{item.image}} " type='video/mp4' />
         </video>
       </div>
@@ -35,8 +34,10 @@
   </ion-slides>
   <!-- category -->
   <ion-item lines="none">
-    <ion-title class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>
-    <ion-label (click)="seeAllCategory()" slot="end">{{'seeAll' | translate}}</ion-label>
+    <ion-title mode="md" class="ion-no-padding heading" color="primary">{{'Category' | translate}}</ion-title>
+    <ion-text class="seeAll" slot="end" (click)="seeAllCategory()">
+      <ion-label>{{'seeAll' | translate}}</ion-label>
+    </ion-text>
   </ion-item>
   <ion-slides [options]="buttonSlide">
     <ion-slide *ngFor="let item of categoryArr" (click)="navigateToCategory(item._id)">
@@ -50,7 +51,7 @@
 
   <!-- offers -->
   <ion-item lines="none" *ngIf="offerArr.length>0">
-    <ion-title class="ion-no-padding heading" color="primary">{{'offers' | translate}}</ion-title>
+    <ion-title mode="md" class="ion-no-padding heading" color="primary">{{'offers' | translate}}</ion-title>
   </ion-item>
   <ion-slides [options]="buttonSlide1" autoplay="true" loop="true" class="ion-margin-bottom" pager>
     <ion-slide *ngFor="let item of offerArr">
@@ -65,7 +66,7 @@
   <!-- Seasonal offers -->
   <ion-grid *ngFor="let item of seasonalOffer" class=" ion-no-padding ">
     <ion-item lines="none">
-      <ion-title class="ion-no-padding heading" color="primary"> {{item.heading}}</ion-title>
+      <ion-title mode="md" class="ion-no-padding heading" color="primary"> {{item.heading}}</ion-title>
     </ion-item>
     <ion-row>
       <ion-col size="6" size-lg="4" size-md="5" *ngFor="let img of item.media ; let i=index" style="display: flex;">

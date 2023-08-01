@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar class="bg-color-primary">
     <ion-buttons shape="round" slot="start">
-      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+      <ion-back-button mode="md" defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-capitalize">{{ 'yoursOrders' | translate}}</ion-title>
+    <ion-title mode="md" class="ion-text-capitalize">{{ 'yoursOrders' | translate}}</ion-title>
     <ion-buttons slot="end">
       <ion-icon name="help-circle-outline" class="help-icon" id="open-modal"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
+<ion-segment mode="md" [(ngModel)]="segment" (ionChange)="segmentChanged($event)">
   <ion-segment-button [id]="'new'" value="new" layout="icon-end">
     <ion-label class="ion-text-wrap">{{ 'new'| translate }}</ion-label>
   </ion-segment-button>
@@ -22,7 +22,7 @@
   </ion-segment-button>
 </ion-segment>
 
-<ion-searchbar class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
+<ion-searchbar mode="md" class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
   showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
   placeholder="{{ 'Search' | translate}}">
 </ion-searchbar>

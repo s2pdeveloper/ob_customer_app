@@ -16,7 +16,8 @@ export class StatusBarService {
 	}
 
 	async changeColor(color: string) {
-		await StatusBar.setStyle({ style: Style.Default });
+		// await StatusBar.setStyle({ style: Style.Default });
+		await StatusBar.setStyle({ style: Style.Dark });
 		await StatusBar.setBackgroundColor({ color });
 		this.showStatusBar();
 	}
