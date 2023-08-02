@@ -1,0 +1,33 @@
+<ion-content>
+   <ion-grid>
+    <ion-icon name="close-outline"  class="ion-margin-start" (click)="closeModal()"></ion-icon>
+    <ion-row>
+      <ion-col size="4">
+        <div class="ion-padding">
+          <ion-fab-button (click)="uploadFileAWS()">
+            <ion-icon color="light" name="camera-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-note>Camera</ion-note>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="ion-padding">
+          <ion-fab-button (click)="fileInput1.click()">
+            <ion-icon color="light" name="image-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-note>Image</ion-note>
+        </div>
+      </ion-col>
+      <ion-col size="4">
+        <div class="ion-padding">
+          <ion-fab-button (click)="address()">
+            <ion-icon color="light" name="location"></ion-icon>
+          </ion-fab-button>
+          <ion-note>Location</ion-note>
+        </div>
+      </ion-col>
+    </ion-row>
+    <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+    (change)="uploadFiles($event)" required />
+  </ion-grid>
+</ion-content>
