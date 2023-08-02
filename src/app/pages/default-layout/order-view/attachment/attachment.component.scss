@@ -1,0 +1,20 @@
+ion-content {
+    height: 120px;
+    .ion-padding {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+
+        ion-fab-button {
+            width: 40px;
+            height: 40px;
+
+            ion-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    }
+}

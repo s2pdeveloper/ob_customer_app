@@ -14,6 +14,7 @@ import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoviewerComponentModule } from 'src/app/shared/photoviewer/photoviewer.module';
 import { MyAddressesPageModule } from '../setting/my-addresses/my-addresses.module';
+import { AttachmentComponent } from './attachment/attachment.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -25,7 +26,7 @@ import { MyAddressesPageModule } from '../setting/my-addresses/my-addresses.modu
     PhotoviewerComponentModule,
     MyAddressesPageModule
   ],
-  declarations: [OrderViewPage, OrderRatingComponent, ReportComponent, AddressComponent],
+  declarations: [OrderViewPage, OrderRatingComponent, ReportComponent, AddressComponent,AttachmentComponent],
   providers: [UploadService],
 })
 export class OrderViewPageModule { }

@@ -75,9 +75,9 @@
   </div>
   <ion-fab class="attach-btn" size="small" fill="clear" slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
     <ion-fab-button size="small">
-      <ion-icon name="attach"></ion-icon>
+      <ion-icon name="attach" (click)="openAttachmentModal()"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
+    <!-- <ion-fab-list side="top">
       <ion-fab-button (click)="uploadFileAWS()">
         <ion-icon color="primary" name="camera-outline"></ion-icon>
       </ion-fab-button>
@@ -87,7 +87,7 @@
       <ion-fab-button (click)="address()">
         <ion-icon color="primary" name="location"></ion-icon>
       </ion-fab-button>
-    </ion-fab-list>
+    </ion-fab-list> -->
   </ion-fab>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
@@ -104,8 +104,8 @@
             autocorrect="true" maxlength="500" type="text" placeholder="{{'typeYourMessage'| translate}}"
             (keyup.enter)="sendMessage()">
           </ion-textarea>
-          <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-            (change)="uploadFiles($event)" required />
+          <!-- <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+            (change)="uploadFiles($event)" required /> -->
           <ng-container class="footer-btns">
             <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
               <ion-icon name="send-sharp"></ion-icon>
