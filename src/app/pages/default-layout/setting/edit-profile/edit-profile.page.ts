@@ -29,8 +29,8 @@ export class EditProfilePage implements OnInit {
   profileForm = new FormGroup(
     {
       id: new FormControl(),
-      firstName: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
       // email: new FormControl(''),
       // countryCode: new FormControl('IN'),
       // mobileNumber: new FormControl(''),
