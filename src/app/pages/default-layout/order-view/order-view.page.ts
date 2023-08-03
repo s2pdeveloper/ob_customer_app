@@ -1,16 +1,33 @@
-import { Component, OnDestroy, OnInit, ViewChild, AfterViewChecked, Input } from '@angular/core';
+
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  AfterViewChecked,
+  Input,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IonContent, IonInfiniteScroll, PopoverController } from '@ionic/angular';
+import {
+  IonContent,
+  IonInfiniteScroll,
+  PopoverController,
+} from '@ionic/angular';
 import { UploadService } from 'src/app/core/services/upload.service';
 import { ModalController } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { RestService } from 'src/app/core/services/rest.service';
 import { SocketService } from 'src/app/core/services/socket.service';
-import { defaultStatus, messageCategory, socketEmitEvents, socketOnEvents } from 'src/app/helpers';
+import {
+  defaultStatus,
+  messageCategory,
+  socketEmitEvents,
+  socketOnEvents,
+} from 'src/app/helpers';
 import { forkJoin } from 'rxjs';
 import { GoogleMapComponent } from '../google-map/google-map.component';
 import { OrderService } from 'src/app/core/services/order.service';
@@ -20,7 +37,13 @@ import { ReportComponent } from './report/report.component';
 import { AddressComponent } from './address/address.component';
 import { PhotoViewerService } from 'src/app/core/services/photo-viewer.service';
 import { CameraService } from 'src/app/core/services/camera.service';
-import { OPTIONS, videoExtension, fileExtension, imageExtension } from 'src/app/helpers';
+import {
+  OPTIONS,
+  videoExtension,
+  fileExtension,
+  imageExtension,
+} from 'src/app/helpers';
+import { AttachmentComponent } from './attachment/attachment.component';
 @Component({
   selector: 'app-order-view',
   templateUrl: './order-view.page.html',
@@ -58,9 +81,10 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       title: false,
       share: false,
       transformer: 'depth',
-      backgroundcolor: 'black'
-    }
-  }
+      backgroundcolor: 'black',
+    },
+  };
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -77,7 +101,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private orderService: OrderService,
     public popoverController: PopoverController,
     private photoViewerService: PhotoViewerService,
-    private cameraService: CameraService,
+    private cameraService: CameraService
   ) {
     this.receiveListMessages();
   }
@@ -91,11 +115,13 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     media: new FormControl(),
   });
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   ngOnDestroy(): void {
-    forkJoin([this.socketService.removeListeners(socketOnEvents.LIST_MESSAGE), this.socketService.removeListeners(socketEmitEvents.RECEIVE_MESSAGE)]).subscribe();
+    forkJoin([
+      this.socketService.removeListeners(socketOnEvents.LIST_MESSAGE),
+      this.socketService.removeListeners(socketEmitEvents.RECEIVE_MESSAGE),
+    ]).subscribe();
   }
 
   ngAfterViewChecked() {
@@ -119,21 +145,27 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       this.chatForm.get('shopId').setValue(this.shopId);
       this.emitToLoadMessages();
       if (!this.canReceiveMessage) {
-        this.canReceiveMessage = true
+        this.canReceiveMessage = true;
       }
     });
   }
   async getOrderById() {
-    this.orderService.getOrder(this.orderId).subscribe(async (success: any) => {
-      this.orderDetails = success.orderDetails;
-      this.ratingDetails = success.ratingDetails;
-      await this.spinner.hideLoader();
-    }, async error => {
-      await this.spinner.hideLoader();
-    });
+    this.orderService.getOrder(this.orderId).subscribe(
+      async (success: any) => {
+        this.orderDetails = success.orderDetails;
+        this.ratingDetails = success.ratingDetails;
+        await this.spinner.hideLoader();
+      },
+      async (error) => {
+        await this.spinner.hideLoader();
+      }
+    );
   }
   sendMessage() {
-    this.socketService.emitEvent(socketOnEvents.SEND_MESSAGE, this.chatForm.getRawValue());
+    this.socketService.emitEvent(
+      socketOnEvents.SEND_MESSAGE,
+      this.chatForm.getRawValue()
+    );
     this.resetForm();
     if (this.canReceiveMessage) {
       this.receiveMessage();
@@ -148,8 +180,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   emitToLoadMessages() {
-    let params = { page: this.page, pageSize: this.pageSize, orderId: this.orderId };
-    this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params)
+    let params = {
+      page: this.page,
+      pageSize: this.pageSize,
+      orderId: this.orderId,
+    };
+    this.socketService.emitEvent(socketOnEvents.LIST_MESSAGE, params);
   }
 
   receiveListMessages() {
@@ -161,109 +197,36 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         }
       },
       error: (error) => {
-        console.log(error)
+        console.log(error);
       },
-    })
+    });
   }
 
   receiveMessage() {
     this.socketService.listenEvent(socketEmitEvents.RECEIVE_MESSAGE).subscribe({
       next: (result: any) => {
         this.canReceiveMessage = false;
-        console.log('RECEIVE_MESSAGE', result.data)
+        console.log('RECEIVE_MESSAGE', result.data);
         this.messages.push(result.data);
         if (!this.orderId) {
           this.orderId = result.data.orderId;
           this.chatForm.get('orderId').setValue(this.orderId);
           this.getOrderById();
-          console.log('no order id')
+          console.log('no order id');
         }
       },
       error: (error) => {
-        console.log(error)
+        console.log(error);
       },
-    })
+    });
   }
 
-  async uploadFiles($event) {
-    let file = $event.target.files[0];
-    if (this.uploadService.checkFileSize(file)) {
-      await this.spinner.showLoader();
-      let formData = new FormData();
-      formData.append('file', file);
-      this.uploadService.uploadFile(formData).subscribe(
-        async (data: any) => {
-          this.fileData = {
-            filePath: data?.result?.data?.key,
-            fileName: `${data?.result?.data.key}`.split('post/')[1],
-            fileType: data?.result?.data?.contentType,
-            fileSize: data?.result?.data?.size,
-          }
-          this.chatForm.controls.media.setValue(this.fileData);
-          this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-          this.fileUploaded = true;
-          await this.spinner.hideLoader();
-          this.sendMessage();
-        },
-        async (error: any) => {
-          await this.spinner.hideLoader();
-          this.toaster.errorToast(error);
-        }
-      );
-    } else {
-      if (!this.uploadService.checkFileSize(file)) {
-        this.toaster.errorToast(OPTIONS.sizeLimit);
-        this.spinner.hideLoader();
-        return;
-      }
-    }
-  }
-
-  async uploadFileAWS() {
-    const image = await this.cameraService.openCamera();
-    const realFile = this.cameraService.b64toBlob(image.base64String, `image/${image.format}`);
-    await this.spinner.hideLoader();
-    const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
-    if (this.uploadService.checkFileSize(realFile)) {
-      this.uploadService.getSignUrl(params).subscribe(
-        async (data: any) => {
-          this.uploadService.uploadFileUsingSignedUrl(data.url, realFile).subscribe(
-            async (result: any) => {
-              console.log('after upload', result);
-              this.fileData = {
-                filePath: data.filePath,
-                fileName: `${data.filePath}`.split('post/')[1],
-                fileType: `image/${image.format}`,
-                fileSize: realFile.size,
-              }
-              this.chatForm.controls.media.setValue(this.fileData);
-              this.chatForm.controls.category.setValue(messageCategory.MEDIA);
-              this.fileUploaded = true;
-              this.sendMessage();
-              await this.spinner.hideLoader();
-            }, async (error: any) => {
-              this.toaster.errorToast(error);
-              await this.spinner.hideLoader();
-            }
-          );
-        }, async (error: any) => {
-          this.toaster.errorToast(error);
-          await this.spinner.hideLoader();
-        }
-      )
-    }
-    else {
-      if (!this.uploadService.checkFileSize(realFile.size)) {
-        this.toaster.errorToast(OPTIONS.sizeLimit);
-        await this.spinner.hideLoader();
-        return;
-      }
-    }
-  }
   async openGoogleMap(location) {
     if (location) {
       const destination = `${location.coordinates[0]},${location.coordinates[1]}`;
-      window.open("https://www.google.com/maps/search/?api=1&query=" + destination)
+      window.open(
+        'https://www.google.com/maps/search/?api=1&query=' + destination
+      );
     }
     return;
   }
@@ -273,20 +236,12 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.sendMessage();
   }
 
-  navigateTo(shopId) {
-    this.router.navigate(['/shop-detail'], {
-      queryParams: {
-        shopId: this.shopId,
-      },
-    });
-  }
-
   async openMap() {
     const modal = await this.modalController.create({
       component: GoogleMapComponent,
       mode: 'ios',
       swipeToClose: true,
-      componentProps: {}
+      componentProps: {},
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
@@ -309,8 +264,8 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
           shopId: this.shopId,
           orderId: this.orderId,
           ratingDetails: this.ratingDetails,
-        }
-      }
+        },
+      },
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
@@ -326,9 +281,9 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       componentProps: {
         reportData: {
           shopId: this.shopId,
-          orderId: this.orderId
-        }
-      }
+          orderId: this.orderId,
+        },
+      },
     });
     await modal.present();
   }
@@ -345,7 +300,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
         dataList: [
           { label: 'Rating', event: 'rating' },
           { label: 'Report', event: 'report' },
-        ]
+        ],
       },
       cssClass: 'my-custom-class',
       event: ev,
@@ -353,51 +308,32 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     });
     await popover.present();
     const { data } = await popover.onDidDismiss();
-    if (data.event === 'rating' && this.orderDetails?.status != defaultStatus.COMPLETED) {
-      this.toaster.errorToast("Your rating will active in past")
+    if (
+      data.event === 'rating' &&
+      this.orderDetails?.status != defaultStatus.COMPLETED
+    ) {
+      this.toaster.errorToast('Your rating will active in past');
     }
-    if (data.event === 'rating' && this.orderDetails?.status === defaultStatus.COMPLETED) {
-      this.modalRating()
+    if (
+      data.event === 'rating' &&
+      this.orderDetails?.status === defaultStatus.COMPLETED
+    ) {
+      this.modalRating();
     }
     if (data.event === 'report') {
       this.modalReport();
     }
   }
 
-  async address() {
-    const modal = await this.modalCtrl.create({
-      component: AddressComponent,
-      cssClass: '',
-      mode: 'ios',
-      swipeToClose: true,
-      componentProps: {},
-    });
-    await modal.present();
-    const { data } = await modal.onWillDismiss();
-    if (data?.data?.data?.coordinates) {
-      let coordinates = data.data.data.coordinates
-      this.chatForm.controls.message.setValue('Location');
-      this.chatForm.controls.category.setValue(messageCategory.LOCATION);
-      this.chatForm.controls.location.setValue(coordinates);
-      this.sendMessage();
-    } else if (data.data == null) {
-      return
-    }
-    else {
-      this.chatForm.controls.message.setValue(`Address : ${data.data}`);
-      this.sendMessage();
-    }
-  }
-
   async previewImage(message) {
     this.photoViewerConfig.images.push({
       url: message.filePath,
-      title: ''
+      title: '',
     });
   }
 
   handleExit(ev) {
-    this.photoViewerConfig.images = []
+    this.photoViewerConfig.images = [];
     console.log(`&&& ev: ${JSON.stringify(ev)}`);
     const keys = Object.keys(ev);
     if (keys.includes('result') && ev.result) {
@@ -412,28 +348,28 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
 
   deleteMessage(index, id) {
     this.orderService.deleteMessage(id).subscribe(
-      async data => {
+      async (data) => {
         this.messages.splice(index, 1);
         this.toaster.successToast(data.message);
-      }, async error => {
+      },
+      async (error) => {
         await this.spinner.hideLoader();
         this.toaster.errorToast(error);
       }
-    )
+    );
   }
 
   async downloadFile(data) {
     if (data.filePath) {
       await this.spinner.showLoader();
-      this.restService.convertToBase64(data).subscribe(async response => {
+      this.restService.convertToBase64(data).subscribe(async (response) => {
         let file = {
           ...data,
-          fileName: data.fileName
-        }
+          fileName: data.fileName,
+        };
         await this.restService.saveFile(file, response.src);
         await this.spinner.hideLoader();
-
-      })
+      });
     }
   }
 
@@ -441,5 +377,37 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     this.page++;
     this.emitToLoadMessages();
     event.target.complete();
+  }
+
+  async openAttachmentModal() {
+    const modal = await this.modalCtrl.create({
+      component: AttachmentComponent,
+      cssClass: 'attachment-modal',
+      mode: 'ios',
+      swipeToClose: true,
+      componentProps: {},
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      if (data.fileData) {
+        this.chatForm.controls.media.setValue(data.fileData);
+        this.chatForm.controls.category.setValue(messageCategory.MEDIA);
+        this.sendMessage();
+      } else {
+        if (data?.data?.data?.data?.data?.coordinates) {
+          let coordinates = data?.data?.data?.data?.data?.coordinates;
+          this.chatForm.controls.message.setValue('Location');
+          this.chatForm.controls.category.setValue(messageCategory.LOCATION);
+          this.chatForm.controls.location.setValue(coordinates);
+          this.sendMessage();
+        } else if (data?.data?.data?.data == null) {
+          return;
+        } else {
+          this.chatForm.controls.message.setValue(`Address : ${data?.data?.data?.data}`);
+          this.sendMessage();
+        }
+      }
+    }
   }
 }

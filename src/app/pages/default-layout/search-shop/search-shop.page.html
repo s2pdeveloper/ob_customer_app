@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title *ngIf="!subCategoryName"> {{ 'allShops' | translate}} </ion-title>
-    <ion-title *ngIf="subCategoryName" class="ion-text-capitalize">
+    <ion-title  mode="md" *ngIf="!subCategoryName"> {{ 'allShops' | translate}} </ion-title>
+    <ion-title  mode="md" *ngIf="subCategoryName" class="ion-text-capitalize">
       {{subCategoryName}}
     </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/tabs/category"></ion-back-button>
+      <ion-back-button mode="md" defaultHref="/app/tabs/category"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon size="large" name="filter-outline" (click)="navigateToFilter()"></ion-icon>
@@ -20,7 +20,7 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text" debounce="600"
+      <ion-searchbar mode="md" class="search-box ion-no-padding" inputmode="search" searchIcon animated type="text" debounce="600"
         showCancelButton="never" placeholder="{{ 'searchShop' | translate}}" autocomplete="on" autocorrect="on"
         [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>

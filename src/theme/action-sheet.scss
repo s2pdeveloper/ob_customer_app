@@ -1,5 +1,3 @@
-// .action-sheet-group {
-//   border-top-left-radius: 10px;
-//   border-top-right-radius: 10px;
-//   align-items: center;
-// }
+.action-sheet-group.sc-ion-action-sheet-ios:last-child {
+  margin-bottom: calc(10px + env(safe-area-inset-bottom));
+}
