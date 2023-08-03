@@ -15,7 +15,7 @@ export class CameraService {
 
   requestPermission = async () => {
     let permStatus = await Camera.checkPermissions();
-
+    await Camera.requestPermissions({ permissions: ['camera', 'photos'] });
     if (permStatus.camera === 'denied') {
       permStatus = await Camera.requestPermissions({ permissions: ['camera', 'photos'] });
     }
