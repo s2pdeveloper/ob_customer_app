@@ -22,7 +22,7 @@ export class EditProfilePage implements OnInit {
   errorMessages = authFieldsErrors;
   submitted: boolean = false;
   loaded: boolean = true;
-  user: any;
+  user: any = {};
   fileUploaded: boolean = false;
   filePath: string = "";
 
@@ -40,7 +40,6 @@ export class EditProfilePage implements OnInit {
       path: new FormControl(),
     },
   );
-
 
   constructor(
     private router: Router,
@@ -84,14 +83,12 @@ export class EditProfilePage implements OnInit {
     })
   }
 
-
   async updateProfile() {
     if (this.profileForm.invalid) {
       validateField(this.profileForm);
       return;
     }
     await this.spinner.hideLoader();
-    console.log("this.profileform", this.profileForm.value);
     this.userService.updateProfile(this.profileForm.value).subscribe(async success => {
       await this.spinner.hideLoader();
       this.toaster.successToast(success.message);
@@ -111,7 +108,6 @@ export class EditProfilePage implements OnInit {
     console.log('image', JSON.stringify(image))
     // const realFile = this.camerService.b64toBlob(image.base64String, `image/${image.format}`);
     await this.spinner.hideLoader();
-    // console.log('readfile', realFile);
     const params = { fileName: `file.${image.format}`, fileType: `image/${image.format}` };
     if (this.uploadService.checkFileSize(image)) {
       this.uploadService.getSignUrl(params).subscribe(

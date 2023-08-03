@@ -28,6 +28,12 @@ export class CataloguePage implements OnInit {
   selectAll: boolean;
   subCategoryArr: any = [];
   collection: number = 0;
+  shopCatalogue: any = [];
+  subCategory: any = [];
+  shopDetailsId: any;
+  productArray: any = [];
+  shopName: string;
+  subCategoryId: string;
 
   buttonSlide = {
     slidesPerView: 4,
@@ -40,12 +46,6 @@ export class CataloguePage implements OnInit {
     },
     spaceBetween: 3,
   };
-  shopCatalogue: any = [];
-  subCategory: any = [];
-  shopDetailsId: any;
-  productArray: any = [];
-  shopName: string;
-  subCategoryId: string;
 
   constructor(
     private router: Router,
@@ -59,7 +59,9 @@ export class CataloguePage implements OnInit {
     private storageService: StorageService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewWillEnter() {
     this.subCategory = []; this.productArray = [];
     this.page = 1;
     this.user = this.userService.getCurrentUser();
@@ -71,7 +73,6 @@ export class CataloguePage implements OnInit {
         this.getShopSubCategory(false, '');
       }
     });
-
   }
 
   ionViewDidLeave(): void {
@@ -80,7 +81,14 @@ export class CataloguePage implements OnInit {
     this.searchText = '';
   }
 
-  ionViewWillEnter() { }
+  // to remove ₹ from dynamic data
+  removeCurrencySymbol(price: string): string {
+    if (typeof price === 'string') {
+      return price.replace(/^₹/, '');
+    } else {
+      return price;
+    }
+  }
 
   onSearch() {
     this.page = 1;
@@ -190,9 +198,10 @@ export class CataloguePage implements OnInit {
   }
   async checkOutAlert() {
     const alert = await this.alertController.create({
-      header: 'Profile Incomplete',
+ header: 'Profile Incomplete',
       message: 'To process your order please complete your profile first !!!',
       cssClass: 'custom-alert',
+      mode:'ios',
       buttons: [
         {
           text: 'OK',
@@ -210,9 +219,8 @@ export class CataloguePage implements OnInit {
     const path: string = `/edit-profile`;
     this.router.navigate([path]);
   }
+
   navigateToHome() {
     this.router.navigate(['/app/tabs/home']);
   }
-
-
 }

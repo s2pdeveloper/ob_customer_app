@@ -24,7 +24,7 @@
       <ion-label class="text-color-2" position="stacked">{{ 'firstName' | translate}} <span
           class="span-color">*</span></ion-label>
       <ion-input formControlName="firstName" type="text" name="firstName"
-        placeholder="{{ 'enter first Name' | translate}} " autocomplete="on" clearInput>
+        placeholder="{{ 'firstNameText' | translate}} " autocomplete="on" clearInput>
       </ion-input>
     </ion-item>
     <div class="text-left" *ngFor="let error of errorMessages.firstName">
@@ -37,7 +37,7 @@
       <ion-label class="text-color-2" position="stacked">{{ 'LastName' | translate}} <span
           class="span-color">*</span></ion-label>
       <ion-input formControlName="lastName" type="text" name="lastName"
-        placeholder="{{ 'enter last name' | translate}} " autocomplete="on" clearInput>
+        placeholder="{{ 'lastNameText' | translate}} " autocomplete="on" clearInput>
       </ion-input>
     </ion-item>
     <div class="text-left" *ngFor="let error of errorMessages.lastName">

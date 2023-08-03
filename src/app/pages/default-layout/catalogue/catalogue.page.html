@@ -18,7 +18,7 @@
     showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
     placeholder="{{ 'searchProduct' | translate}}">
   </ion-searchbar>
-  
+
   <ion-slides [options]="buttonSlide" class="ion-padding">
     <ion-slide *ngFor="let item of subCategory;let i=index">
       <div [ngClass]="item.isActive ? 'subCategoryActive':null" (click)="getProduct(item.subCategory._id)">
@@ -42,7 +42,7 @@
               <ion-note class="cat-title ion-text-capitalize ion-text-wrap">{{item.title}}</ion-note>
               <p class="ion-text-wrap">{{ item.description | truncate:24 }}</p>
               <ion-label class="cat-price" color="primary">
-                ₹ {{item.price}}
+                ₹ {{ removeCurrencySymbol(item.price) }}
                 <ion-checkbox [(ngModel)]="item.isChecked"></ion-checkbox>
               </ion-label>
             </ion-card-content>

@@ -59,9 +59,10 @@ export class SelectFilterComponent implements OnInit {
   }
   async bookAppointmentAlert() {
     const alert = await this.alertController.create({
-      header: 'Profile Incomplete',
+ header: 'Profile Incomplete',
       message: 'To process your order please complete your profile first !!!',
       cssClass: 'custom-alert',
+      mode:'ios',
       buttons: [
         {
           text: 'OK',

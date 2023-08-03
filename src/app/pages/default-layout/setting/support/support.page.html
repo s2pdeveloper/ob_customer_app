@@ -15,7 +15,7 @@
           {{ 'firstName' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="firstName"></ion-input>
+        <ion-input type="text" placeholder="{{ 'firstNameText' | translate}}" formControlName="firstName"></ion-input>
       </ion-item>
       <div class="text-left" *ngFor="let error of errorMessages.firstName">
         <ng-container *ngIf="form.firstName.hasError(error.type) && (form.firstName.dirty || form.firstName.touched)">
@@ -27,7 +27,7 @@
           {{ 'lastName' | translate}}
           <ion-note color="danger">*</ion-note>
         </ion-label>
-        <ion-input type="text" placeholder="{{ 'enter' | translate}}" formControlName="lastName"></ion-input>
+        <ion-input type="text" placeholder="{{ 'lastNameText' | translate}}" formControlName="lastName"></ion-input>
       </ion-item>
       <div class="text-left" *ngFor="let error of errorMessages.lastName">
         <ng-container *ngIf="form.lastName.hasError(error.type) && (form.lastName.dirty || form.lastName.touched)">
@@ -38,7 +38,7 @@
         <ion-label position="stacked">
           {{ 'email' | translate}}
         </ion-label>
-        <ion-input type="email" placeholder="{{ 'enterEmail' | translate}}" formControlName="email"></ion-input>
+        <ion-input type="email" placeholder="{{ 'emailText' | translate}}" formControlName="email"></ion-input>
       </ion-item>
 
       <ion-item class="input-class" lines="none">

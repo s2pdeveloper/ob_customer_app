@@ -126,8 +126,9 @@ export class FavoritePage implements OnInit {
   async instructionAlert() {
     const alert = await this.alertController.create({
       header: '',
-      message: ' Pick any shop of your choice by clicking on heart of respective seller or service provider. Through favourites you can create your own bazar and all the favorite marked seller will be on speed dial for you.',
+      message: 'Pick any shop of your choice by clicking on heart of respective seller or service provider. Through favourites you can create your own bazar and all the favorite marked seller will be on speed dial for you.',
       cssClass: 'custom-alert',
+      mode:'ios',
       buttons: [
         {
           text: 'Close',

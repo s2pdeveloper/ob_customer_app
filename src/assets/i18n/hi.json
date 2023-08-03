@@ -260,5 +260,10 @@
   "filter": "फ़िल्टर",
   "byDistance": "(दूरी के अनुसार)",
   "instruction": "अनुदेश",
-  "direction": "दिशा"
+  "direction": "दिशा",
+  "firstNameText":"प्रथम नाम दर्ज करें",
+  "lastNameText":"अंतिम नाम दर्ज करो",
+  "emailText":"अपना ईमेल दर्ज करें",
+  "mobileNumberText":"अपना मोबाइल संख्या दर्ज करे",
+  "writeReason": "कारण दर्ज करें"
 }

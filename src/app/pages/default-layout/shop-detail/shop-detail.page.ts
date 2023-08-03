@@ -95,6 +95,7 @@ export class ShopDetailPage implements OnInit {
       header: 'Profile Incomplete',
       message: 'Please Complete Your Profile First !!!',
       cssClass: 'custom-alert',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',
@@ -163,6 +164,7 @@ export class ShopDetailPage implements OnInit {
       header: 'Profile Incomplete',
       message: 'To connect your EZ-Order please complete your profile first !!!',
       cssClass: 'custom-alert',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',
@@ -180,16 +182,7 @@ export class ShopDetailPage implements OnInit {
     this.router.navigate([path]);
   }
 
-  public alertButtons = [
-    {
-      text: 'No',
-      cssClass: 'alert-button-cancel',
-    },
-    {
-      text: 'Yes',
-      cssClass: 'alert-button-confirm',
-    },
-  ];
+
 
   goToChat(item) {
     let params = { shopName: this.shopName, shopId: item._id };
@@ -287,9 +280,10 @@ export class ShopDetailPage implements OnInit {
 
   async getLocationAlert() {
     const alert = await this.alertController.create({
-      header: 'Profile Incomplete',
+     header: 'Profile Incomplete',
       message: 'To see shop location please complete your profile first !!!',
       cssClass: 'custom-alert',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',
@@ -317,6 +311,7 @@ export class ShopDetailPage implements OnInit {
       header: 'Profile Incomplete',
       message: 'To connect with this shop please complete your profile first !!!',
       cssClass: 'custom-alert',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',

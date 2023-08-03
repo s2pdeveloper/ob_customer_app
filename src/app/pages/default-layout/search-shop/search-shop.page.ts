@@ -157,6 +157,7 @@ export class SearchShopPage implements OnInit {
       header: 'Profile Incomplete',
       message: 'Please Complete Your Profile First !!!',
       cssClass: 'custom-alert',
+      mode:'ios',
       buttons: [
         {
           text: 'OK',

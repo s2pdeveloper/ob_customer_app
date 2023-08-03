@@ -35,8 +35,8 @@
   "enterEmail": "enter email",
   "report": "Report",
   "reason": "Reason",
-  "writeNote": "write your note up to 250 character",
-  "writeReason": "enter reason ",
+  "writeNote": "Write your note up to 250 character",
+  "writeReason": "Enter reason",
   "privacy": "Privacy Policy",
   "support": "Support",
   "logout": "Logout",
@@ -246,5 +246,9 @@
   "socialLinks": "Social links",
   "webLinks": "Web links",
   "instruction": "Instruction",
-  "direction": "Direction"
+  "direction": "Direction",
+  "firstNameText":"Enter first name",
+  "lastNameText":"Enter last name",
+  "emailText":"Enter your email",
+  "mobileNumberText":"Enter your mobile number"
 }
