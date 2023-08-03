@@ -33,7 +33,7 @@
   </ion-refresher>
   <ion-list *ngIf="dataList?.length > 0;else noDataFound">
     <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" class="badge">
 
         <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
         <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&

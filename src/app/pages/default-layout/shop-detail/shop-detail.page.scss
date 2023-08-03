@@ -163,14 +163,16 @@ ion-fab-button {
     }
   }
 }
-
+.logo-image{
+  position: relative;
+}
 .rating {
   display: inline-block;
   padding: 5px 7px;
   border-radius: 15%;
   position: absolute;
-  top: 17px;
-  right: 10px;
+  top: 9%;
+  right: -15%;
   --background: #de0f3f;
   --color: white;
 }
