@@ -52,14 +52,16 @@ export class CataloguePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private toaster: ToastService,
     private shopService: ShopService,
-    private userService: UserService,
+    public userService: UserService,
     private spinner: LoaderService,
     public translate: TranslateService,
     private alertController: AlertController,
     private storageService: StorageService,
-  ) { }
+  ) {
+    this.userService.populate();
+  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.subCategory = []; this.productArray = [];
@@ -183,8 +185,7 @@ export class CataloguePage implements OnInit {
   }
 
   navigateToCheckout() {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("To process your order please complete your profile first.");
+    if (!this.userService.currentUserSubject.value.firstName || !this.userService.currentUserSubject.value.lastName || this.userService.currentUserSubject.value.status == defaultStatus.PENDING) {
       this.checkOutAlert();
     } else {
       let filteredData = this.productArray.filter(x => x.isChecked);
@@ -198,10 +199,10 @@ export class CataloguePage implements OnInit {
   }
   async checkOutAlert() {
     const alert = await this.alertController.create({
- header: 'Profile Incomplete',
+      header: 'Profile Incomplete',
       message: 'To process your order please complete your profile first !!!',
       cssClass: 'custom-alert',
-      mode:'ios',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',

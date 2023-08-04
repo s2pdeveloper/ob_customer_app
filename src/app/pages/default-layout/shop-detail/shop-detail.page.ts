@@ -25,7 +25,7 @@ export class ShopDetailPage implements OnInit {
   user: any;
   shopId: string = null;
   shopName: string;
-  type: string = 'about'
+  type: string = 'about';
   deviceInfo: any;
   buttonSlide = {
     slidesPerView: 4,
@@ -48,9 +48,10 @@ export class ShopDetailPage implements OnInit {
     private modalController: ModalController,
     private alertController: AlertController,
     private toaster: ToastService,
-    private userService: UserService,
-
-  ) { }
+    private userService: UserService
+  ) {
+    this.userService.populate();
+  }
 
   ngOnInit() {
     this.user = this.userService.getCurrentUser();
@@ -67,18 +68,23 @@ export class ShopDetailPage implements OnInit {
   }
 
   async getShopData() {
-    this.shopService.getShopProfile(this.shopId).subscribe(async (success: any) => {
-      this.shopUser = success;
-      await this.spinner.hideLoader();
-    });
+    this.shopService
+      .getShopProfile(this.shopId)
+      .subscribe(async (success: any) => {
+        this.shopUser = success;
+        await this.spinner.hideLoader();
+      });
   }
   roundRating(rating: number): number {
     return Math.round(rating);
   }
 
   async addToFavorite(item) {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("please complete your profile first")
+    if (
+      !this.userService.currentUserSubject.value.firstName ||
+      !this.userService.currentUserSubject.value.lastName ||
+      this.userService.currentUserSubject.value.status == defaultStatus.PENDING
+    ) {
       this.presentAlert();
     } else {
       let payload = {
@@ -86,7 +92,7 @@ export class ShopDetailPage implements OnInit {
       };
       this.shopService.favoriteShop(payload).subscribe((success) => {
         this.toaster.successToast(success.message);
-        item.shopFavorite = success.data
+        item.shopFavorite = success.data;
       });
     }
   }
@@ -110,7 +116,11 @@ export class ShopDetailPage implements OnInit {
   }
 
   navigateTo(path) {
-    let params = { shopId: this.shopId, shopUserId: this.shopUser.id, shopName: this.shopUser.shopDetails.shopName };
+    let params = {
+      shopId: this.shopId,
+      shopUserId: this.shopUser.id,
+      shopName: this.shopUser.shopDetails.shopName,
+    };
     this.router.navigate([path], { queryParams: params });
   }
   goToMap(address: string) {
@@ -127,9 +137,106 @@ export class ShopDetailPage implements OnInit {
     });
     await modal.present();
   }
+
+  navigateToProfile() {
+    const path: string = `/edit-profile`;
+    this.router.navigate([path]);
+  }
+
+  goToChat(item) {
+    let params = { shopName: this.shopName, shopId: item._id };
+    this.router.navigate(['/order-view'], {
+      replaceUrl: true,
+      queryParams: params,
+    });
+  }
+
+  async modalFilter() {
+    const modal = await this.modalController.create({
+      component: SelectFilterComponent,
+      cssClass: 'modal-medium',
+      swipeToClose: true,
+      componentProps: {
+        shopDetail: this.shopUser,
+      },
+    });
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    if (data && data.dismissed) {
+      console.log(data);
+      this.router.navigate(['/order-view'], {
+        replaceUrl: true,
+        queryParams: { shopId: data.shopId, orderId: data.orderId },
+      });
+    }
+  }
+
+  navigateToShopOrder(item) {
+    this.router.navigate(['/shop-order'], {
+      queryParams: {
+        shopUserId: item.shopDetailsId,
+        shopName: item.shopDetails.shopName,
+        shopId: item.id,
+      },
+    });
+  }
+
+  openWeb = async (url) => {
+    await Browser.open({ url: `${url}` });
+  };
+  openYouTube = async () => {
+    await Browser.open({
+      url: `${this.shopUser?.shopDetails?.links?.youtube}`,
+    });
+  };
+  openInstagram = async () => {
+    await Browser.open({
+      url: `${this.shopUser?.shopDetails?.links?.instagram}`,
+    });
+  };
+  openFb = async () => {
+    await Browser.open({
+      url: `${this.shopUser?.shopDetails?.links?.facebook}`,
+    });
+  };
+
+  async modalQrCode() {
+    const modal = await this.modalController.create({
+      component: QRCodeComponent,
+      cssClass: 'modal-medium',
+      swipeToClose: true,
+      componentProps: {
+        shopId: this.shopUser._id,
+        shopName: this.shopUser.shopDetails.shopName,
+      },
+    });
+    await modal.present();
+  }
+
+  async navigateToNotification(shopId) {
+    const modal = await this.modalController.create({
+      component: ScheduleNotificationListComponent,
+      swipeToClose: true,
+      componentProps: {
+        shopId: shopId,
+      },
+    });
+    await modal.present();
+  }
+
+  getDeviceInfo = async () => {
+    this.deviceInfo = await Device.getInfo();
+    this.deviceInfo.geoLocation = await (
+      await Geolocation.getCurrentPosition()
+    ).coords;
+  };
+
   async orderAlert(item) {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("To connect your EZ-Order please complete your profile first.")
+    if (
+      !this.userService.currentUserSubject.value.firstName ||
+      !this.userService.currentUserSubject.value.lastName ||
+      this.userService.currentUserSubject.value.status == defaultStatus.PENDING
+    ) {
       this.ezConnectAlert();
     } else {
       this.shopName = item.shopDetails.shopName;
@@ -162,7 +269,8 @@ export class ShopDetailPage implements OnInit {
   async ezConnectAlert() {
     const alert = await this.alertController.create({
       header: 'Profile Incomplete',
-      message: 'To connect your EZ-Order please complete your profile first !!!',
+      message:
+        'To connect your EZ-Order please complete your profile first !!!',
       cssClass: 'custom-alert',
       mode: 'ios',
       buttons: [
@@ -177,110 +285,33 @@ export class ShopDetailPage implements OnInit {
     });
     await alert.present();
   }
-  navigateToProfile() {
-    const path: string = `/edit-profile`;
-    this.router.navigate([path]);
-  }
-
-
-
-  goToChat(item) {
-    let params = { shopName: this.shopName, shopId: item._id };
-    this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: params });
-  }
-
-  async modalFilter() {
-    const modal = await this.modalController.create({
-      component: SelectFilterComponent,
-      cssClass: 'modal-medium',
-      swipeToClose: true,
-      componentProps: {
-        shopDetail: this.shopUser,
-      }
-    });
-    await modal.present();
-    const { data } = await modal.onWillDismiss();
-    if (data && data.dismissed) {
-      console.log(data)
-      this.router.navigate(['/order-view'], { replaceUrl: true, queryParams: { shopId: data.shopId, orderId: data.orderId } });
-    }
-  }
-
-  navigateToShopOrder(item) {
-    this.router.navigate(['/shop-order'], {
-      queryParams: {
-        shopUserId: item.shopDetailsId,
-        shopName: item.shopDetails.shopName,
-        shopId: item.id
-      },
-    });
-  }
-
-  openWeb = async (url) => {
-    await Browser.open({ url: `${url}` });
-  };
-  openYouTube = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.youtube}` });
-  }
-  openInstagram = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.instagram}` });
-  }
-  openFb = async () => {
-    await Browser.open({ url: `${this.shopUser?.shopDetails?.links?.facebook}` });
-  }
-
-  async modalQrCode() {
-    const modal = await this.modalController.create({
-      component: QRCodeComponent,
-      cssClass: 'modal-medium',
-      swipeToClose: true,
-      componentProps: {
-        shopId: this.shopUser._id,
-        shopName: this.shopUser.shopDetails.shopName,
-      }
-    });
-    await modal.present();
-  }
-
-  async navigateToNotification(shopId) {
-    const modal = await this.modalController.create({
-      component: ScheduleNotificationListComponent,
-      swipeToClose: true,
-      componentProps: {
-        shopId: shopId
-      }
-    });
-    await modal.present();
-  }
-
-  getDeviceInfo = async () => {
-    this.deviceInfo = await Device.getInfo();
-    this.deviceInfo.geoLocation = await (
-      await Geolocation.getCurrentPosition()
-    ).coords;
-  };
 
   getLocation() {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("To see shop location please complete your profile first.");
-      this.getLocationAlert();
+    if (
+      !this.userService.currentUserSubject.value.firstName ||
+      !this.userService.currentUserSubject.value.lastName ||
+      this.userService.currentUserSubject.value.status == defaultStatus.PENDING
+    ) {
+      this.locationAlert();
     } else {
       let payload = {
         shopLat: this.shopUser.shopDetails.location?.coordinates[0],
         shopLong: this.shopUser.shopDetails.location?.coordinates[1],
         custLat: this.deviceInfo.geoLocation?.latitude,
-        custLong: this.deviceInfo.geoLocation?.longitude
+        custLong: this.deviceInfo.geoLocation?.longitude,
       };
       if (payload) {
-        window.open(`https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`)
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&origin=${payload.custLat},${payload.custLong}&destination=${payload.shopLat},${payload.shopLong}`
+        );
       }
       return;
     }
   }
 
-  async getLocationAlert() {
+  async locationAlert() {
     const alert = await this.alertController.create({
-     header: 'Profile Incomplete',
+      header: 'Profile Incomplete',
       message: 'To see shop location please complete your profile first !!!',
       cssClass: 'custom-alert',
       mode: 'ios',
@@ -298,8 +329,7 @@ export class ShopDetailPage implements OnInit {
   }
 
   call() {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("To connect with this shop please complete your profile first.");
+    if (!this.userService.currentUserSubject.value.firstName || !this.userService.currentUserSubject.value.lastName || this.userService.currentUserSubject.value.status == defaultStatus.PENDING) {
       this.callAlert();
     } else {
       window.open('tel:' + this.shopUser?.mobileNumber);
@@ -309,7 +339,8 @@ export class ShopDetailPage implements OnInit {
   async callAlert() {
     const alert = await this.alertController.create({
       header: 'Profile Incomplete',
-      message: 'To connect with this shop please complete your profile first !!!',
+      message:
+        'To connect with this shop please complete your profile first !!!',
       cssClass: 'custom-alert',
       mode: 'ios',
       buttons: [
@@ -324,5 +355,4 @@ export class ShopDetailPage implements OnInit {
     });
     await alert.present();
   }
-
 }

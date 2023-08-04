@@ -13,7 +13,6 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 })
 export class CategoryPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-
   categoryId: number;
   categoryList: any = [];
   subCategoryList: any = [];
@@ -25,6 +24,7 @@ export class CategoryPage implements OnInit {
   parentId: number;
   isData: boolean = false;
   public loaded = false;
+
   constructor(
     private router: Router,
     private categoryService: CategoryService,
@@ -71,8 +71,8 @@ export class CategoryPage implements OnInit {
     } else {
       event.target.complete();
     }
-
   }
+
   getAllCategory() {
     this.categoryService.getAllCategory({}).subscribe((success) => {
       this.categoryList = success;
@@ -87,11 +87,9 @@ export class CategoryPage implements OnInit {
       });
       this.getAllSubCategory(this.categoryId, false, '');
     });
-    // this.loaded = true;
   }
 
   async getAllSubCategory(parentId, isFirstLoad, event) {
-    // await this.spinner.showLoader();
     this.parentId = parentId,
       this.activeParentId = parentId
     let params = { page: this.page, pageSize: this.pageSize, };
@@ -101,10 +99,8 @@ export class CategoryPage implements OnInit {
     } else {
       params['parentId'] = parentId;
     }
-    // this.isData = false;
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
-        // await this.spinner.hideLoader();
         this.collection = success.count;
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
@@ -127,7 +123,6 @@ export class CategoryPage implements OnInit {
         //   this.isData = true;
         // }
         this.loaded = true;
-
       })
   }
 

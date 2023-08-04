@@ -45,7 +45,9 @@ export class SearchShopPage implements OnInit {
     private modalCtrl: ModalController,
     private userService: UserService,
     private alertController: AlertController
-  ) { }
+  ) {
+    this.userService.populate();
+   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -139,8 +141,7 @@ export class SearchShopPage implements OnInit {
 
 
   async addToFavorite(item) {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("please complete your profile first")
+    if (!this.userService.currentUserSubject.value.firstName || !this.userService.currentUserSubject.value.lastName || this.userService.currentUserSubject.value.status == defaultStatus.PENDING) {
       this.presentAlert();
     } else {
       let payload = {
@@ -157,7 +158,7 @@ export class SearchShopPage implements OnInit {
       header: 'Profile Incomplete',
       message: 'Please Complete Your Profile First !!!',
       cssClass: 'custom-alert',
-      mode:'ios',
+      mode: 'ios',
       buttons: [
         {
           text: 'OK',

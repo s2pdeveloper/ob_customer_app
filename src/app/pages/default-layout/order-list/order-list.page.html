@@ -22,19 +22,18 @@
   </ion-segment-button>
 </ion-segment>
 
-<ion-searchbar mode="md" class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text" debounce="600"
-  showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText" (ionChange)="onSearch()"
-  placeholder="{{ 'Search' | translate}}">
+<ion-searchbar mode="md" class="search-box ion-padding-top" inputmode="search" searchIcon animated type="text"
+  debounce="600" showCancelButton="never" autocomplete="on" autocorrect="on" [(ngModel)]="searchText"
+  (ionChange)="onSearch()" placeholder="{{ 'Search' | translate}}">
 </ion-searchbar>
 
 <ion-content class="ion-no-padding" *ngIf="loaded">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list *ngIf="dataList?.length > 0;else noDataFound">
+  <ion-list *ngIf="dataList?.length > 0">
     <ion-item class="animation-normal" (click)="navigateTo(item)" *ngFor="let item of dataList">
       <ion-avatar slot="start" class="badge">
-
         <img [src]="item?.shopOwner?.profilePicture || 'assets/images/placeholder_profile.png'" alt="" />
         <ion-badge class="rounded-badge" *ngIf=" item?.lastMessage?.senderId !==user.id &&
         item?.unreadMessageCount> 0">{{item?.unreadMessageCount}}</ion-badge>
@@ -88,7 +87,7 @@
     </ion-item>
   </ion-list>
 
-  <ng-template #noDataFound>
+  <ng-template [ngIf]="isData">
     <div class="noData">
       <ion-label>No Data Found</ion-label>
     </div>

@@ -26,8 +26,9 @@ export class SelectFilterComponent implements OnInit {
     private toastService: ToastService,
     private toaster: ToastService,
     private alertController: AlertController,
-
-  ) { }
+  ) {
+    this.userService.populate();
+  }
 
   ngOnInit() { }
 
@@ -43,8 +44,7 @@ export class SelectFilterComponent implements OnInit {
   }
 
   navigateTo() {
-    if (!this.user.firstName || !this.user.lastName || this.user.status == defaultStatus.PENDING) {
-      // this.toaster.warningToast("To process your order please complete your profile first.");
+    if (!this.userService.currentUserSubject.value.firstName || !this.userService.currentUserSubject.value.lastName || this.userService.currentUserSubject.value.status == defaultStatus.PENDING) {
       this.bookAppointmentAlert();
     } else {
       const msg = `Dear ${this.shopDetail.shopDetails.shopName},\n please book an appointment ${moment(this.dateTime).format('hh:mm a, DD MMM YYYY')}\n`;

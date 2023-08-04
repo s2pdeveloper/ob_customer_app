@@ -22,6 +22,7 @@ export class OrderListPage implements OnInit {
   collection: number = 0;
   searchText: string;
   segment: string = 'new';
+  isData: boolean = false;
   dataList: any = [];
   user: any;
   defaultStatus = defaultStatus;
@@ -82,6 +83,7 @@ export class OrderListPage implements OnInit {
     if (this.searchText) {
       params['search'] = this.searchText;
     }
+    this.isData = false;
     // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
     this.orderService.list(params).subscribe({
       next: (result: any) => {
@@ -89,6 +91,9 @@ export class OrderListPage implements OnInit {
           this.dataList.push(result.data[i]);
         }
         this.loaded = true;
+        if (this.dataList.length == 0) {
+          this.isData = true;
+        }
       },
       error: (error) => {
         console.log(error)
