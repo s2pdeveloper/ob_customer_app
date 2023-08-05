@@ -95,7 +95,6 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
     private spinner: LoaderService,
     private userService: UserService,
     private uploadService: UploadService,
-    private modalCtrl: ModalController,
     private socketService: SocketService,
     private restService: RestService,
     private orderService: OrderService,
@@ -116,6 +115,14 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   });
 
   ngOnInit() { }
+
+  ionViewDidLeave() {
+    this.modalController.dismiss().then(() => {
+      console.log('Modal dismissed.');
+    }).catch((error) => {
+      console.error('Error dismissing modal:', error);
+    });
+  }
 
   ngOnDestroy(): void {
     forkJoin([
@@ -149,6 +156,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
       }
     });
   }
+
   async getOrderById() {
     this.orderService.getOrder(this.orderId).subscribe(
       async (success: any) => {
@@ -254,7 +262,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async modalRating() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: OrderRatingComponent,
       cssClass: 'rating-modal',
       mode: 'ios',
@@ -273,7 +281,7 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async modalReport() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: ReportComponent,
       cssClass: 'report-modal',
       mode: 'ios',
@@ -380,11 +388,11 @@ export class OrderViewPage implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   async openAttachmentModal() {
-    const modal = await this.modalCtrl.create({
+    const modal = await this.modalController.create({
       component: AttachmentComponent,
       cssClass: 'attachment-modal',
-      mode: 'ios',
       swipeToClose: true,
+      backdropDismiss: false,
       componentProps: {},
     });
     await modal.present();
