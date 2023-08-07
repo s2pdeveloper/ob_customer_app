@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
-import { catchError } from 'rxjs/operators';
+import { catchError,shareReplay } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
@@ -14,7 +14,7 @@ export class ApiService {
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http.get(`${this.api_url}${path}`, { params })
-      .pipe(catchError(this.formatErrors));
+      .pipe(shareReplay (), catchError(this.formatErrors));
   }
 
   put(path: string, body: Object = {}): Observable<any> {

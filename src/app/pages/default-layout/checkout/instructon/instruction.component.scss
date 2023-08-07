@@ -6,3 +6,6 @@
   font-size: 16px;
   line-height: 1.4;
 }
+ion-row{
+  margin-bottom: env(safe-area-inset-bottom);
+}

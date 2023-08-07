@@ -13,7 +13,6 @@ import { SubCategoryService } from 'src/app/core/services/sub-category.service';
 })
 export class CategoryPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-
   categoryId: number;
   categoryList: any = [];
   subCategoryList: any = [];
@@ -24,6 +23,8 @@ export class CategoryPage implements OnInit {
   activeParentId: any = null;
   parentId: number;
   isData: boolean = false;
+  public loaded = false;
+
   constructor(
     private router: Router,
     private categoryService: CategoryService,
@@ -70,8 +71,8 @@ export class CategoryPage implements OnInit {
     } else {
       event.target.complete();
     }
-
   }
+
   getAllCategory() {
     this.categoryService.getAllCategory({}).subscribe((success) => {
       this.categoryList = success;
@@ -89,7 +90,6 @@ export class CategoryPage implements OnInit {
   }
 
   async getAllSubCategory(parentId, isFirstLoad, event) {
-    await this.spinner.showLoader();
     this.parentId = parentId,
       this.activeParentId = parentId
     let params = { page: this.page, pageSize: this.pageSize, };
@@ -99,15 +99,12 @@ export class CategoryPage implements OnInit {
     } else {
       params['parentId'] = parentId;
     }
-    this.isData = false;
     this.subCategoryService.getAll(params).subscribe(
       async (success) => {
-        await this.spinner.hideLoader();
         this.collection = success.count;
         for (let i = 0; i < success.data.length; i++) {
           this.subCategoryList.push(success.data[i]);
         }
-
         if (isFirstLoad)
           event.target.complete();
         if (success.data.length === 0 && event) {
@@ -121,15 +118,16 @@ export class CategoryPage implements OnInit {
           }
           return x;
         });
-        await this.spinner.hideLoader();
-        if (this.subCategoryList.length == 0) {
-          this.isData = true;
-        }
+        // await this.spinner.hideLoader();
+        // if (this.subCategoryList.length == 0) {
+        //   this.isData = true;
+        // }
+        this.loaded = true;
       })
   }
 
   navigateToShopList(subCategory) {
-    this.router.navigate(['/search-shop'], {
+    this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
         subCategoryId: subCategory._id,
         subCategoryName: subCategory.name,

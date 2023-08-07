@@ -37,9 +37,33 @@ export class AppBackButtonService {
         await isModal.dismiss();
       }
       const url = this.router.url;
-      if (['/app/tabs/home', '/auth/login', '/auth/onboarding'].includes(url)) {
-        navigator['app'].exitApp();
-      } else {
+      if (['/app/tabs/home', '/auth/login'].includes(url)) {
+        const alert = await this.alertController.create({
+          header: 'App termination',
+          message: 'Do you want to exit from App ?',
+          backdropDismiss: true,
+          mode: 'ios',
+          cssClass: 'my-custom-alert',
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel',
+              cssClass: 'secondary',
+            },
+            {
+              text: 'Yes',
+              cssClass: 'primary',
+              handler: () => {
+                // navigator['app'].exitApp();
+                App.exitApp();
+              },
+            },
+          ],
+        });
+        await alert.dismiss();
+        return await alert.present();
+      }
+      else {
         this.location.back();
       }
     });

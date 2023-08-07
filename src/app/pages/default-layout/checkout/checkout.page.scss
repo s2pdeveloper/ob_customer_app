@@ -1,6 +1,9 @@
 ion-footer {
-    .footer-msg {
-        padding: 10px;
-        background-color: white;
+  .footer-msg {
+    padding: 10px;
+    background-color: white;
+    p {
+      color: var(--ion-color-primary);
     }
+  }
 }

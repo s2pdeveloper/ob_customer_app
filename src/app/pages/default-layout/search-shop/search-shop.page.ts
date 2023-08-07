@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IonInfiniteScroll, IonContent, ModalController } from '@ionic/angular';
+import { IonInfiniteScroll, IonContent, ModalController, AlertController } from '@ionic/angular';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { ShopService } from 'src/app/core/services/shop.service';
 import { FilterComponent } from './filter/filter.component';
+import { defaultStatus } from 'src/app/helpers/constants.helper';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-search-shop',
@@ -23,7 +25,6 @@ export class SearchShopPage implements OnInit {
   categoryId: string = '';
   subCategoryId: string = '';
   shopList: any = [];
-  loaded: boolean = false;
   shopDetails: any;
   user: any = {};
   shopCount: any;
@@ -31,6 +32,8 @@ export class SearchShopPage implements OnInit {
   geoNearestDistance: number = 5;
   shopId = [];
   subCategoryName: string = null;
+  isData: boolean = false;
+  public loaded = false;
 
   constructor(
     private router: Router,
@@ -40,8 +43,11 @@ export class SearchShopPage implements OnInit {
     private toaster: ToastService,
     private activatedRoute: ActivatedRoute,
     private modalCtrl: ModalController,
-
-  ) { }
+    private userService: UserService,
+    private alertController: AlertController
+  ) {
+    this.userService.populate();
+   }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -56,6 +62,9 @@ export class SearchShopPage implements OnInit {
       this.subCategoryId = params.subCategoryId ?? '';
       this.subCategoryName = params.subCategoryName ?? '';
     });
+
+    this.user = this.userService.getCurrentUser();
+
   }
 
   ionViewWillEnter(): void {
@@ -91,6 +100,7 @@ export class SearchShopPage implements OnInit {
   }
 
   async getAllShop(isFirstLoad: boolean, event?: any) {
+    // await this.spinner.showLoader();
     let obj = {
       page: this.page,
       pageSize: this.pageSize,
@@ -104,6 +114,7 @@ export class SearchShopPage implements OnInit {
       obj['search'] = this.search,
         obj['geoNearestDistance'] = this.geoNearestDistance
     }
+    // this.isData = false;
     this.shopService.list(obj).subscribe(async (success) => {
       this.collection = success.count;
       if (this.shopList.length < this.collection) {
@@ -116,7 +127,11 @@ export class SearchShopPage implements OnInit {
       if (success.data.length === 0 && event) {
         event.target.disabled = true;
       }
-      await this.spinner.hideLoader();
+      this.loaded = true;
+      // await this.spinner.hideLoader();
+      // if (this.shopList.length == 0) {
+      //   this.isData = true;
+      // }
     }, error => {
       this.spinner.hideLoader();
       this.toaster.errorToast(error);
@@ -126,15 +141,40 @@ export class SearchShopPage implements OnInit {
 
 
   async addToFavorite(item) {
-    let payload = {
-      shopId: item?._id,
-    };
-    this.shopService.favoriteShop(payload).subscribe((success) => {
-      this.toaster.successToast(success.message);
-      item.shopFavorite = success.data
-    });
+    if (!this.userService.currentUserSubject.value.firstName || !this.userService.currentUserSubject.value.lastName || this.userService.currentUserSubject.value.status == defaultStatus.PENDING) {
+      this.presentAlert();
+    } else {
+      let payload = {
+        shopId: item?._id,
+      };
+      this.shopService.favoriteShop(payload).subscribe((success) => {
+        this.toaster.successToast(success.message);
+        item.shopFavorite = success.data
+      });
+    }
   }
-
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Profile Incomplete',
+      message: 'Please Complete Your Profile First !!!',
+      cssClass: 'custom-alert',
+      mode: 'ios',
+      buttons: [
+        {
+          text: 'OK',
+          cssClass: 'alert-button-confirm',
+          handler: () => {
+            this.navigateToProfile();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+  navigateToProfile() {
+    const path: string = `/edit-profile`;
+    this.router.navigate([path]);
+  }
   navigateToShop(id: string) {
     const path: string = `/shop-detail/${id}`;
     this.router.navigate([path]);

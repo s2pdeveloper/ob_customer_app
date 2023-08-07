@@ -1,8 +1,8 @@
 <ion-header *ngIf="!isPreview">
   <ion-toolbar class="bg-color-primary">
-    <ion-title class="ion-text-capitalize">#{{orderDetails?.orderNumber}}</ion-title>
+    <ion-title mode="md" class="ion-text-capitalize">#{{orderDetails?.orderNumber}}</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="catalogue"></ion-back-button>
+      <ion-back-button mode="md" defaultHref="catalogue"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon (click)="presentPopover($event)" slot="icon-only" name="ellipsis-vertical"></ion-icon>
@@ -73,7 +73,7 @@
   <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px">
     <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px"></div>
   </div>
-  <ion-fab class="attach-btn" size="small" fill="clear" slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
+  <!-- <ion-fab class="attach-btn" size="small" fill="clear" slot="fixed" vertical="bottom" horizontal="end" [edge]="true">
     <ion-fab-button size="small">
       <ion-icon name="attach"></ion-icon>
     </ion-fab-button>
@@ -88,7 +88,7 @@
         <ion-icon color="primary" name="location"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab> -->
   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)" [disabled]="disabledScroll">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
@@ -99,17 +99,34 @@
   <div class="footer-msg">
     <ion-toolbar>
       <form [formGroup]="chatForm">
-        <ion-item lines="none" id="chatInput" class="ion-align-items-center">
+        <ion-item lines="none" id="chatInput" class="ion-align-items-center fab-attach">
           <ion-textarea class="ion-no-padding" formControlName="message" spellcheck="true" rows="1" autoComplete=" true"
             autocorrect="true" maxlength="500" type="text" placeholder="{{'typeYourMessage'| translate}}"
             (keyup.enter)="sendMessage()">
           </ion-textarea>
-          <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
-            (change)="uploadFiles($event)" required />
+            <ion-fab class="attach-item" size="small" fill="clear" [edge]="true">
+              <ion-fab-button size="small">
+                <ion-icon name="attach" (click)="openAttachmentModal()"></ion-icon>
+              </ion-fab-button>
+              <!-- <ion-fab-list side="top">
+                <ion-fab-button (click)="uploadFileAWS()">
+                  <ion-icon color="primary" name="camera-outline"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button (click)="fileInput1.click()">
+                  <ion-icon color="primary" name="image-outline"></ion-icon>
+                </ion-fab-button>
+                <ion-fab-button (click)="address()">
+                  <ion-icon color="primary" name="location"></ion-icon>
+                </ion-fab-button>
+              </ion-fab-list> -->
+            </ion-fab>
+          <!-- <input hidden autocapitalize="on" #fileInput1 autocomplete="on" type="file" name="file"
+            (change)="uploadFiles($event)" required /> -->
           <ng-container class="footer-btns">
             <ion-button (click)="sendMessage()" [disabled]="chatForm.invalid">
               <ion-icon name="send-sharp"></ion-icon>
             </ion-button>
+
           </ng-container>
         </ion-item>
       </form>

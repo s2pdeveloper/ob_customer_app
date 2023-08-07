@@ -99,6 +99,8 @@ export class LandingPagePage implements OnInit {
   async ngOnInit() {
     this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
+    console.log("this.deviceInfo ",this.deviceInfo );
+    
     if (this.deviceInfo?.platform === 'android' && localStorage.getItem('deviceToken') != null) {
       let payload = {
         deviceToken: localStorage.getItem('deviceToken'),
@@ -117,6 +119,9 @@ export class LandingPagePage implements OnInit {
     this.getAllCategory();
     this.getAllSeasonalOffer();
     this.getCurrentLocation();
+  }
+  trackByFn(index: number, item: any) {
+    return item?._id;
   }
 
   async getCurrentLocation() {
@@ -140,7 +145,7 @@ export class LandingPagePage implements OnInit {
     });
   };
   seeAllCategory() {
-    this.router.navigate(['/category']);
+    this.router.navigate(['/app/tabs/category']);
   }
   async getAllAdvertise() {
     this.advertiseService.getAll({}).subscribe(
@@ -172,7 +177,7 @@ export class LandingPagePage implements OnInit {
 
   navigateToShopList(item) {
     let id = item;
-    this.router.navigate(['/search-shop'], {
+    this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
         shopId: id,
       },
@@ -197,7 +202,7 @@ export class LandingPagePage implements OnInit {
     )
   }
   navigateToSearchShop(search) {
-    this.router.navigate(['/search-shop'], {
+    this.router.navigate(['/app/tabs/search-shop'], {
       queryParams: {
         search: this.search,
       },
@@ -229,7 +234,7 @@ export class LandingPagePage implements OnInit {
   }
 
   navigateToCategory(c) {
-    this.router.navigate(['/category'], {
+    this.router.navigate(['/app/tabs/category'], {
       queryParams: {
         categoryId: c,
       },

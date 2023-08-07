@@ -46,6 +46,7 @@ export class SettingPage implements OnInit {
       header: '',
       message: 'Log out of your account?',
       cssClass: 'custom-alert',
+      mode:'ios',
       buttons: [
         {
           text: 'No',
