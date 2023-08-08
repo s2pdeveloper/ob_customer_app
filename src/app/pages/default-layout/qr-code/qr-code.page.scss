@@ -26,3 +26,9 @@ app-qr-code {
     color: var(--ion-color-primary) !important;
   }
 }
+.qr-header {
+  ion-toolbar {
+    padding-top: env(safe-area-inset-top) !important;
+    // --padding-top: env(safe-area-inset-top) !important;
+  }
+}
