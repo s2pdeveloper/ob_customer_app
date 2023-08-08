@@ -99,7 +99,7 @@ export class LandingPagePage implements OnInit {
   async ngOnInit() {
     this.userDetails = this.userService.getCurrentUser();
     this.deviceInfo = await Device.getInfo();
-    if ((this.deviceInfo?.platform === 'android'||this.deviceInfo?.platform === 'ios' ) && localStorage.getItem('deviceToken') != null) {
+    if (localStorage.getItem('deviceToken') != null) {
       let payload = {
         deviceToken: localStorage.getItem('deviceToken'),
         platform: this.deviceInfo?.platform
