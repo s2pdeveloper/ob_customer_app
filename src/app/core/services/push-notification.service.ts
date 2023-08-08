@@ -24,7 +24,7 @@ export class PushNotificationService {
     });
 
     await PushNotifications.addListener('pushNotificationReceived', notification => {
-      const randomId = Math.floor(Math.random() * 10000) + 1;
+      const randomId = Math.floor(Math.random() * 10000) + 1;      
       LocalNotifications.schedule({
         notifications: [
           {
