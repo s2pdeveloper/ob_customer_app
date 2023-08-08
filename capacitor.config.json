@@ -31,5 +31,6 @@
     }
   },
   "server": {
-    "cleartext": true  }
+    "cleartext": true
+  }
 }
