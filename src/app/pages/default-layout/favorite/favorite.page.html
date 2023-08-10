@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{ 'favoritesShop' | translate}} </ion-title>
+    <ion-title mode="md"> {{ 'favoritesShop' | translate}} </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/app/tabs/home"></ion-back-button>
+      <ion-back-button mode="md" defaultHref="/app/tabs/home"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-icon name="help-circle-outline" size="large" (click)="instructionAlert()"></ion-icon>
@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="loaded">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content> </ion-refresher-content>
   </ion-refresher>
@@ -18,7 +18,7 @@
   <!-- search bar -->
   <ion-row>
     <ion-col size="12">
-      <ion-searchbar class="search-box ion-no-padding ion-margin-bottom" inputmode="search" searchIcon animated
+      <ion-searchbar mode="md" class="search-box ion-no-padding ion-margin-bottom" inputmode="search" searchIcon animated
         type="text" debounce="900" showCancelButton="never" placeholder="{{ 'searchShop' | translate}}"
         autocomplete="on" autocorrect="on" [(ngModel)]="search" (ionChange)="onSearch()">
       </ion-searchbar>
@@ -28,9 +28,9 @@
   <ion-grid *ngIf="shopFavorites?.length > 0;else noDataFound">
     <ion-row *ngFor="let s of shopFavorites">
       <ion-col class="shadow" *ngIf="s.shopDetails?.status == defaultStatus.ACTIVE">
-        <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUrl(s?.shopDetails.bannerImages), 
-          'background-repeat': 'no-repeat', 
+        <ion-card class="shop-card" [ngStyle]="{
+          'background-image': getUrl(s?.shopDetails.bannerImages),
+          'background-repeat': 'no-repeat',
           'object-fit':'cover',
           'background-size':'100% 100%'
          }" (click)="navigateToShop(s?.shopDetails._id)">
@@ -68,9 +68,9 @@
         </ion-label>
       </ion-col>
       <ion-col class="shadow" *ngIf="s.shopDetails?.status == defaultStatus.INACTIVE">
-        <ion-card class="shop-card" [ngStyle]="{ 
-          'background-image': getUnAvailableUrl(), 
-          'background-repeat': 'no-repeat', 
+        <ion-card class="shop-card" [ngStyle]="{
+          'background-image': getUnAvailableUrl(),
+          'background-repeat': 'no-repeat',
           'object-fit':'cover',
           'background-size':'100% 100%'
          }">
@@ -111,4 +111,100 @@
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+</ion-content>
+
+<ion-content *ngIf="!loaded">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 60%;"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text [animated]="true" style="width: 30%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -22,10 +22,12 @@ export class OrderListPage implements OnInit {
   collection: number = 0;
   searchText: string;
   segment: string = 'new';
+  isData: boolean = false;
   dataList: any = [];
   user: any;
   defaultStatus = defaultStatus;
   interval: any;
+  public loaded = false;
 
   constructor(
     private router: Router,
@@ -81,13 +83,17 @@ export class OrderListPage implements OnInit {
     if (this.searchText) {
       params['search'] = this.searchText;
     }
+    this.isData = false;
     // this.socketService.emitEvent(socketOnEvents.LIST_ORDER, params)
     this.orderService.list(params).subscribe({
       next: (result: any) => {
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
-        console.log("this.datalist", this.dataList);
+        this.loaded = true;
+        if (this.dataList.length == 0) {
+          this.isData = true;
+        }
       },
       error: (error) => {
         console.log(error)
@@ -98,7 +104,6 @@ export class OrderListPage implements OnInit {
   receiveData() {
     this.socketService.listenEvent(socketOnEvents.LIST_ORDER).subscribe({
       next: (result: any) => {
-
         for (let i = 0; i < result.data.length; i++) {
           this.dataList.push(result.data[i]);
         }
@@ -147,15 +152,13 @@ export class OrderListPage implements OnInit {
     this.onSearch();
   }
 
-
+  // for msg model
   enterAnimation = (baseEl: HTMLElement) => {
     const root = baseEl.shadowRoot;
-
     const backdropAnimation = this.animationCtrl
       .create()
       .addElement(root.querySelector('ion-backdrop')!)
       .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-
     const wrapperAnimation = this.animationCtrl
       .create()
       .addElement(root.querySelector('.modal-wrapper')!)
@@ -163,7 +166,6 @@ export class OrderListPage implements OnInit {
         { offset: 0, opacity: '0', transform: 'scale(0)' },
         { offset: 1, opacity: '0.99', transform: 'scale(1)' },
       ]);
-
     return this.animationCtrl
       .create()
       .addElement(baseEl)

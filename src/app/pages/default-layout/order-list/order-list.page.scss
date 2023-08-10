@@ -6,7 +6,9 @@
   font-size: 16px;
   color: black;
 }
-
+.badge{
+  position: relative;
+}
 .rounded-badge {
   display: inline-block;
   padding: 5px 7px;
@@ -14,10 +16,16 @@
   background-color: --ion-color-primary;
   color: white;
   position: absolute;
-  left: 2.3rem;
-  top: 2.4rem;
+  left: 56%;
+  top: 2%;
 }
 
 .help-icon {
   font-size: 30px;
+}
+
+ion-skeleton-text {
+  --border-radius: 9999px;
+  --background: rgba(188, 0, 255, 0.065);
+  --background-rgb: 188, 0, 255;
 }

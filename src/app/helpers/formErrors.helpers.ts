@@ -137,7 +137,7 @@ export const supportFormErrors = {
 		{ type: 'required', message: "Enter last name" }
 	],
 	description: [
-		{ type: 'required', message: "please enter note here" }
+		{ type: 'required', message: "Please enter note here" }
 	],
 };
 export const feedBackFormErrors = {

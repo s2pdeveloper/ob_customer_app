@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar class="bg-color-primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button mode="md"></ion-back-button>
     </ion-buttons>
-    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap">{{ 'selectLanguage' | translate}}
+    <ion-title mode="md" class="text-color-4 ion-text-capitalize ion-text-wrap">{{ 'selectLanguage' | translate}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -16,10 +16,10 @@
           <ion-item class="animation-normal">
             <ion-radio-group [(ngModel)]="selectedLanguage" (ionChange)="setLanguage($event)">
               <ion-item *ngFor="let item of languages">
-                <ion-label class="ion-text-capitalize ion-text-wrap" color="black">
+                <ion-label mode="md" class="ion-text-capitalize ion-text-wrap" color="black">
                   {{item.label}}
                 </ion-label>
-                <ion-radio slot="start" class="btn-radio-color-1" [value]="item.value" color="primary"></ion-radio>
+                <ion-radio mode="md" slot="start" class="btn-radio-color-1" [value]="item.value" color="primary"></ion-radio>
               </ion-item>
             </ion-radio-group>
           </ion-item>

@@ -14,19 +14,35 @@ const routes: Routes = [
       },
       {
         path: 'home',
-        loadChildren: () => import('../../default-layout/landing-page/landing-page.module').then(m => m.LandingPagePageModule)
+        loadChildren: () => import('../../default-layout/landing-page/landing-page.module').then
+          (m => m.LandingPagePageModule)
       },
       {
         path: 'order-list',
-        loadChildren: () => import('../order-list/order-list.module').then(m => m.OrderListPageModule)
+        loadChildren: () => import('../order-list/order-list.module').then
+          (m => m.OrderListPageModule)
       },
       {
         path: 'favorite',
-        loadChildren: () => import('../favorite/favorite.module').then(m => m.FavoritePageModule)
+        loadChildren: () => import('../favorite/favorite.module').then
+          (m => m.FavoritePageModule)
       },
       {
         path: 'settings',
-        loadChildren: () => import('../../default-layout/setting/setting.module').then(m => m.SettingPageModule)
+        loadChildren: () => import('../../default-layout/setting/setting.module').then
+          (m => m.SettingPageModule)
+      },
+      {
+        path: 'category',
+        loadChildren: () => import('../../default-layout/category/category.module').then
+          (m => m.CategoryPageModule)
+      },
+      {
+        path: 'search-shop',
+        loadChildren: () =>
+          import('../../default-layout/search-shop/search-shop.module').then(
+            (m) => m.SearchShopPageModule
+          ),
       },
     ]
   },

@@ -1,0 +1,20 @@
+<ion-toolbar color="primary">
+  <ion-title>Crop Image</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="dismiss()">{{ 'save' | translate}}</ion-button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content>
+  <image-cropper [imageBase64]="myImage" [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="myImage.aspectRatio ? true : false"
+    [aspectRatio]="myImage.aspectRatio ? myImage.aspectRatio : 1"
+    [resizeToWidth]="myImage.resizeTo ? myImage.resizeTo : 1200" format="png" [allowMoveImage]="true"
+    alignImage="center" outputType="base64" (imageCropped)="imageCropped($event)"></image-cropper>
+</ion-content>
+
+<!-- <ion-footer class="ion-no-border">
+  <div class="ion-padding-top">
+    <ion-button shape="round" expand="full" (click)="dismiss()">
+      Submit</ion-button>
+  </div>
+</ion-footer> -->
