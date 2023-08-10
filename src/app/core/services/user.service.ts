@@ -8,7 +8,7 @@ import { StorageService } from './local-storage.service';
 
 @Injectable()
 export class UserService {
-  private currentUserSubject = new BehaviorSubject<any>({} as any);
+  public currentUserSubject = new BehaviorSubject<any>({} as any);
   public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
@@ -57,20 +57,20 @@ export class UserService {
     this.currentUserSubject.next({});
     // Set auth status to false
     this.isAuthenticatedSubject.next(false);
-    //clear local storage 
+    //clear local storage
     this.storageService.clear();
   }
 
   /**
    * set rememberMe in local storage
-   * @param value 
+   * @param value
    */
   setRememberMe(value) {
     localStorage.setItem('rememberMe', value);
   }
   /**
    * get the rememberMe value
-   * @returns 
+   * @returns
    */
   getRememberMe() {
     return localStorage.getItem('rememberMe');
@@ -98,11 +98,11 @@ export class UserService {
 
   /**
    * login to app
-   * @param credentials 
-   * @returns 
+   * @param credentials
+   * @returns
    */
   sendMobileOtp(credentials): Observable<any> {
-    let url = `mobile/user/send-mobile-otp`;
+    let url = `mobile/user/user-login`;
     return this.apiService.post(url, credentials).pipe(map(
       data => {
         if (data && data.result && data.result.existingUser) {
@@ -135,8 +135,8 @@ export class UserService {
   }
   /**
    * set fcm token
-   * @param payload 
-   * @returns 
+   * @param payload
+   * @returns
    */
   addDeviceToken(payload): Observable<any> {
     let url = `mobile/user/set-fcm-token`;
@@ -152,8 +152,8 @@ export class UserService {
   }
   /**
  * remove fcm token
- * @param payload 
- * @returns 
+ * @param payload
+ * @returns
  */
   removeDeviceToken(payload): Observable<any> {
     let url = `mobile/user/clear-fcm-token`;
@@ -169,8 +169,8 @@ export class UserService {
   }
   /**
    * send verification token from backend to reset password
-   * @param credentials 
-   * @returns 
+   * @param credentials
+   * @returns
    */
   sendToken(credentials) {
     return this.apiService.post('mobile/user/send-token', credentials).pipe(map(
@@ -212,7 +212,7 @@ export class UserService {
   updateProfile(updatePayload: any) {
     return this.apiService.put('mobile/user/update', updatePayload).pipe(map(data => {
       if (data && data.result) {
-        // this.currentUserSubject.next(data.result);
+        this.currentUserSubject.next(data.result);
         this.populate();
         return data.result;
       } else {
@@ -237,8 +237,8 @@ export class UserService {
 
   //**send mobile update otp */
   /**
- * @param credentials 
- * @returns 
+ * @param credentials
+ * @returns
  */
   sendOtp(credentials): Observable<any> {
     let url = `mobile/user/send-otp`;
@@ -255,8 +255,8 @@ export class UserService {
   }
   //** mobile number update */
   /**
- * @param credentials 
- * @returns 
+ * @param credentials
+ * @returns
  */
   updateMobile(credentials): Observable<any> {
     let url = `mobile/user/verify-otp`;

@@ -1,8 +1,8 @@
-<ion-header>
+<ion-header [ngClass]="scanActive ? 'qr-header' : null">
   <ion-toolbar>
     <ion-title>{{ 'scanBharatOnlineQR'|translate}} </ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button mode="md"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

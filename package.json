@@ -53,6 +53,8 @@
     "moment": "^2.29.4",
     "ng2-pdf-viewer": "6.4.1",
     "ngx-bar-rating": "^3.0.0",
+    "ngx-image-cropper": "^6.2.2",
+    "image-conversion": "^2.1.1",
     "plugin": "^0.3.3",
     "rxjs": "~6.6.0",
     "send-intent": "^5.0.0",

@@ -256,8 +256,13 @@
   "byDistance": "(अंतराने)",
   "contactUs": "आमच्याशी संपर्क साधा",
   "socialLinks": "सामाजिक लिंक",
-  "webLink": "वेब लिंक",
+  "webLinks": "वेब लिंक",
   "schedule": "वेळापत्रक",
   "instruction": "सूचना",
-  "direction": "दिशा"
+  "direction": "दिशा",
+  "firstNameText":"प्रथम नाव प्रविष्ट करा",
+  "lastNameText":"आडनाव प्रविष्ट करा",
+  "emailText":"तुमचा ईमेल टाका",
+  "mobileNumberText":"तुमचा भ्रमणध्वनी क्रमांक टाका",
+  "writeReason": "कारण प्रविष्ट करा"
 }

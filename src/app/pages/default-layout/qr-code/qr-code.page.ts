@@ -26,11 +26,15 @@ export class QrCodePage implements OnInit {
   }
 
   ionViewWillLeave() {
+    document.body.style.backgroundColor =  'var(--ion-color-primary)';
+    document.body.style.marginTop =  'env(safe-area-inset-top)';
     this.barcodeScannerService.stopScan()
   }
 
   async startScan() {
     this.scanActive = true;
+    document.body.style.backgroundColor = "transparent";
+    document.body.style.marginTop = '0';
     this.scanResult = await this.barcodeScannerService.startScan();
     this.scanActive = false;
     console.log('scan Result', this.scanResult)
@@ -39,6 +43,8 @@ export class QrCodePage implements OnInit {
 
   stopScanner() {
     this.scanActive = false;
+    document.body.style.backgroundColor =  'var(--ion-color-primary)';
+    document.body.style.marginTop =  'env(safe-area-inset-top)';
     this.barcodeScannerService.stopScan()
   }
 

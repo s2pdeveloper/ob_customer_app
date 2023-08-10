@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar class="bg-color-primary" class="bg-color-2">
-    <ion-back-button class="text-color-4" slot="start"></ion-back-button>
-    <ion-title class="text-color-4 ion-text-capitalize ion-text-wrap">{{'Settings' | translate}}</ion-title>
+    <ion-back-button mode="md" class="text-color-4" slot="start"></ion-back-button>
+    <ion-title mode="md" class="text-color-4 ion-text-capitalize ion-text-wrap">{{'Settings' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -11,7 +11,7 @@
       <ion-icon class="text-color-2" name="person-circle" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"myProfile" | translate}}
-        <p class="text-color-7">{{"View Your Profile" | translate}}</p>
+        <!-- <p class="text-color-7">{{"View Your Profile" | translate}}</p> -->
       </ion-label>
     </ion-item>
 
@@ -19,7 +19,7 @@
       <ion-icon class="text-color-2" name="text" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'changeLanguage' | translate }}
-        <p class="text-color-7">{{'Set App Language' | translate}}</p>
+        <!-- <p class="text-color-7">{{'Set App Language' | translate}}</p> -->
       </ion-label>
     </ion-item>
 
@@ -28,7 +28,7 @@
       <ion-icon name="document-text-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'terms' | translate }}
-        <p class="text-color-7">{{'viewTerms' | translate}}</p>
+        <!-- <p class="text-color-7">{{'viewTerms' | translate}}</p> -->
       </ion-label>
     </ion-item>
     <!-- Terms of Use -->
@@ -38,7 +38,7 @@
       <ion-icon name="people-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'privacy' | translate }}
-        <p class="text-color-7">{{'viewPrivacy' | translate}}</p>
+        <!-- <p class="text-color-7">{{'viewPrivacy' | translate}}</p> -->
       </ion-label>
     </ion-item>
     <!-- Privacy Policy  -->
@@ -47,27 +47,27 @@
       <ion-icon name="build" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'support' | translate }}
-        <p class="text-color-7">{{'support' | translate}}</p>
+        <!-- <p class="text-color-7">{{'support' | translate}}</p> -->
       </ion-label>
     </ion-item>
     <!-- support -->
 
     <!-- account delete -->
-    <ion-item button="true" (click)="navigateTo('/account-delete')" lines="none">
+    <ion-item button="true" (click)="navigateTo('/account-delete')">
       <ion-icon name="trash-outline" color="primary"></ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{ 'deleteAccount' | translate}}
-        <p class="text-color-7">{{'deleteAccountText' | translate}}</p>
+        <!-- <p class="text-color-7">{{'deleteAccountText' | translate}}</p> -->
       </ion-label>
     </ion-item>
     <!-- account delete -->
 
-    <ion-item button="true" (click)="logOutAlert()" lines="none">
+    <ion-item button="true" (click)="logOutAlert()">
       <ion-icon ios="exit-outline" md="exit-sharp" color="primary">
       </ion-icon>
       <ion-label class="ion-margin-start ion-text-capitalize ion-text-wrap text-color-9">
         {{"logout" | translate}}
-        <p class="text-color-7">{{"logoutText" | translate}}</p>
+        <!-- <p class="text-color-7">{{"logoutText" | translate}}</p> -->
       </ion-label>
     </ion-item>
 

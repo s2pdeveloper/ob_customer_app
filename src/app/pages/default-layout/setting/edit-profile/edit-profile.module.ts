@@ -6,7 +6,8 @@ import { EditProfilePageRoutingModule } from './edit-profile-routing.module';
 import { EditProfilePage } from './edit-profile.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UploadService } from 'src/app/core/services/upload.service';
-
+import { CropImagePage } from 'src/app/shared/crop-image/crop-image.page';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,8 +16,10 @@ import { UploadService } from 'src/app/core/services/upload.service';
     EditProfilePageRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    ImageCropperModule
+
   ],
-  declarations: [EditProfilePage],
+  declarations: [EditProfilePage, CropImagePage],
   providers: [
     { provide: UploadService },
   ],
