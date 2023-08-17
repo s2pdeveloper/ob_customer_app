@@ -25,7 +25,7 @@
 	<key>MKDirectionsApplicationSupportedModes</key>
 	<array/>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow access to camera to click photos and upload them</string>
+	<string>Access to the camera allow you to take photos and upload to the feed</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Turing on location services allows to show you near by shops for purchasing</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
